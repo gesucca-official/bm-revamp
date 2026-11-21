@@ -2492,3 +2492,59 @@ Edit the attached dialogue portrait. Keep everything exactly the same: the same 
 
 Avoid: any other change; mirroring; a different head position or size; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
 ~~~
+
+## Secondo giro
+
+21 novembre 2026. Per ciascun blocco un primo risultato e un solo nuovo tentativo, con il solo allegato della tabella verificato. I due scontorni successivi non sono usati e sono stati eliminati su indicazione della regia. Le misure della regia accettano i residui alfa 1–5 lontani dalla figura, invisibili e inferiori a quelli del ritratto approvato di Spazienzio (circa 1.800 pixel fino ad alfa 5).
+
+### spazienzio-furioso-bocca-3
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato, modello e versione non esposti |
+| Data e ora originale | 21/11/2026; 12:31:34 +0100 |
+| Modalità | modifica guidata dal riferimento; secondo tentativo, un risultato; trasparenza richiesta; seed e parametri non esposti |
+| Commit preventivo / prompt | `6a50774`; [secondo giro](../../prompt-bocche.md#secondo-giro); testo integrale sotto |
+| Allegato unico | `originali/spazienzio-furioso-2.png`; SHA-256 `07d791e1d6470ccaf97e43786a55a76404652f495afc333e33b6a4c7648cd9c3` |
+| Originale restituito | `originali/spazienzio-furioso-bocca-3.png`; PNG RGBA 1024×1536; SHA-256 `3371f1f33f5357ed56aa456701c731af72db9f43b0a34678b15e231b6f695f4f` |
+| Consegna | [spazienzio-furioso-bocca.webp](ritratti/spazienzio-furioso-bocca.webp); WebP RGBA 1024×1536; SHA-256 `a077c2ca5e29fe5acfedff1993e56dc3950790a94205eec8d43a24528b345b81` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; alfa conservato, metadati non conservati |
+| Alfa | Angoli del WebP, ordine alto-sinistra, alto-destra, basso-sinistra, basso-destra: 1, 0, 0, 0; campioni di fondo (100,100) e (100,400): 0, 0. Residui 1–5 lontani dalla figura accettati dalla regia. |
+| Allineamento | IoU della sagoma 0,997 rispetto a `ritratti/spazienzio-furioso.webp`; scarto del centro della testa 0,1 px. Misure comunicate dalla regia tramite confronto delle sagome e dei centri sulla stessa tela: testa e corpo allineati secondo il criterio indicato. La differenza evidenzia anche cambiamenti fuori dalla bocca; eventuale maschera da valutare. |
+| Differenza | [d-spazienzio-furioso-bocca.webp](composizioni/d-spazienzio-furioso-bocca.webp); differenza assoluta RGBA con alfa incorporato, amplificata 4×; WebP qualità 90; SHA-256 `77843f752b48ea8cbbee831c3603049c955c60352e42374054d4ee1f5b494f4d` |
+| Termini / C2PA | termini non verificati in questa sessione; originale conservato, C2PA non verificato |
+| Esito | consegnato per giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style and the transparent background. Do not move, rescale, re-centre or crop anything: the head and the body must keep exactly the same size and exactly the same position on the canvas, pixel for pixel, because the two images will alternate quickly while the character speaks. Change only the mouth: his mouth half closed between two shouts, teeth still bared.
+
+Avoid: any change outside the mouth; a different head position, angle or size; zooming in or out; a different expression of the eyes or eyebrows; a dark veil, halo or shadow around the figure; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-esasperata-2
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato, modello e versione non esposti |
+| Data e ora originale | 21/11/2026; 12:32:07 +0100 |
+| Modalità | modifica guidata dal riferimento; secondo tentativo, un risultato; trasparenza richiesta; seed e parametri non esposti |
+| Commit preventivo / prompt | `6a50774`; [secondo giro](../../prompt-bocche.md#secondo-giro); testo integrale sotto |
+| Allegato unico | `originali/mara-neutra-1.png`; SHA-256 `a2a629d0e1d229ae794990b6863a5f165b4f84e766aaf9a4e790bad880ea7f40` |
+| Originale restituito | `originali/mara-esasperata-2.png`; PNG RGBA 1024×1536; SHA-256 `6cf575c28f9088c754f38059b83e9fb6923770224d27bfb3dcb56104a39c5e77` |
+| Consegna | [mara-esasperata.webp](ritratti/mara-esasperata.webp); WebP RGBA 1024×1536; SHA-256 `4ab69b452c822fa37f44047e1f9772b2cf52ab1b916fdf41e5bd12fe5edde763` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; alfa conservato, metadati non conservati |
+| Alfa | Angoli del WebP, ordine alto-sinistra, alto-destra, basso-sinistra, basso-destra: 0, 0, 0, 0; campioni di fondo (100,100) e (100,400): 0, 0. Residui 1–5 lontani dalla figura accettati dalla regia. |
+| Allineamento | IoU della sagoma 0,982 rispetto a `ritratti/mara-neutra.webp`, misura comunicata dalla regia; figura allineata secondo il criterio indicato. |
+| Differenza | [d-mara-esasperata.webp](composizioni/d-mara-esasperata.webp); differenza assoluta RGBA con alfa incorporato, amplificata 4×; WebP qualità 90; SHA-256 `0a775c5f8478e6d705a40e67e77692dca6854decab0dabaf2cfa9b972538f9e2` |
+| Termini / C2PA | termini non verificati in questa sessione; originale conservato, C2PA non verificato |
+| Esito | consegnato per giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, hair, body, clothes, colours, hand-inked European comic style, framing, size and position on the canvas. Change only her facial expression: exasperated while listening to someone who will not stop talking: eyes rolled up towards the ceiling, a long silent sigh, mouth closed in a flat line. Keep her hands and pose as they are. The background must stay fully transparent: no dark veil, halo, shadow or tint around the figure.
+
+Avoid: any other change; mirroring; a different head position or size; a dark or semi-transparent background; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
