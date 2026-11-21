@@ -1,5 +1,7 @@
 # SB-22 — Guida alla prova umana
 
+**Esito (21 novembre 2026, [D163](../../set-base-decisioni.md#decisioni-del-proprietario)):** prova fatta dal proprietario, set approvato («mi piace molto il set»), costruiti non ottimali ma non bloccanti, SB-22 chiuso senza correzioni.
+
 Preparata dalla regia il 21 novembre 2026, dopo [D162](../../set-base-decisioni.md#decisioni-del-proprietario). La bozza è il candidato z2 di [SB-21z](sb-21z-report.md), congelato. Non si fanno altri giri di misura: si gioca, si annota e si correggono solo le cose notate al tavolo.
 
 ## Avvio

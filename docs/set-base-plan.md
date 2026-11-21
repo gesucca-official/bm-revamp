@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 20 novembre 2026, dopo D162). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 21 novembre 2026, dopo D163). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101) con le correzioni di D139, D149 e D152 (Estasi GEN-24, Giro secco in PIN-AR2), set a 124 carte (D152, D155).
-> - **In corso:** **[SB-22](#sb-22--prova-umana-con-mazzi-costruiti)**, prova umana sulla bozza congelata ([guida](reports/set-base/sb-22-prova.md): avvio, partite in ordine, cosa annotare; i sette costruiti in `server/src/test/resources/set-base/sb-22/costruiti.json`). SB-21z è chiuso ([D162](#decisioni-del-proprietario), [report](reports/set-base/sb-21z-report.md)): il candidato z2 è `bozza.json` (starter nei criteri di D161: 21/21 nel 35–65%, 8,52 turni, patte 4,10%, specchi ≤ 13,81 turni; numeri belli; bound entro +10); i costruiti restano fuori criterio (12 scontri oltre il 70%, forza che segue la salute) e si giudicano al tavolo, con le liste di `docs/reports/set-base/sb-21z/liste-z2.json`.
-> - **Prossimo:** la prova del proprietario (Q12 compresa; costruiti e Spazienzio da guardare) e chiusura di SB-22; niente più giri di misura, solo correzioni notate al tavolo (D162). Per le prove al tavolo, `tools/print-cards/generate.py --bozza`. B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura. La lettura delle x nel client va con SB-28 ([rapporto](reports/set-base/sb-client-reston-report.md#fix-1-rimandato)).
-> - **Decisioni da leggere:** D162, D161, D160, D159, D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D162).
+> - **In corso:** nessun blocco. **SB-22 chiuso** ([D163](#decisioni-del-proprietario)): al proprietario il set «piace molto»; i costruiti non sono ottimali ma non bloccano, i mazzi li costruisce ciascun giocatore; nessuna correzione, la bozza di D162 resta in vigore ([guida della prova](reports/set-base/sb-22-prova.md)). SB-21z è chiuso ([D162](#decisioni-del-proprietario), [report](reports/set-base/sb-21z-report.md)): il candidato z2 è `bozza.json` (starter nei criteri di D161: 21/21 nel 35–65%, 8,52 turni, patte 4,10%, specchi ≤ 13,81 turni; numeri belli; bound entro +10); i costruiti restano fuori criterio (12 scontri oltre il 70%, forza che segue la salute) e si giudicano al tavolo, con le liste di `docs/reports/set-base/sb-21z/liste-z2.json`.
+> - **Prossimo:** [SB-23](#sb-23--valutazione-delle-varianti-del-formato), conferma del formato 20/2 sul set intero (anticipato in SB-16h, D81 e D94), poi [SB-24](#sb-24--flavour-finale-e-congelamento). Q12 resta aperta. Per le prove al tavolo, `tools/print-cards/generate.py --bozza`. B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura. La lettura delle x nel client va con SB-28 ([rapporto](reports/set-base/sb-client-reston-report.md#fix-1-rimandato)).
+> - **Decisioni da leggere:** D163, D162, D161, D160, D159, D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D163).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -299,7 +299,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-19 | Resto del pool e giro di blocco | SB-18 | Proposte A e A2 approvate ([D129](#decisioni-del-proprietario), [D130](#decisioni-del-proprietario)); Fasi B1 e B1b fatte e accettate ([D131](#decisioni-del-proprietario), [D132](#decisioni-del-proprietario)); Fase B2 ferma al passo 2 ([rapporto](reports/set-base/sb-19-b2-report.md)); Fase B2a dei bot fatta, patch assorbita, set a 123 ([rapporto](reports/set-base/sb-19-b2a-report.md)); ripresa della B2 fatta: oggetti tenuti coi valori di M1 ([D134](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 18 novembre 2026 ([D135](#decisioni-del-proprietario)) |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 | STOP 4, budget esaurito: porta verde, matrice completa, ricerca 4/7 ([rapporto](reports/set-base/sb-20-report.md)); **chiuso** il 19 novembre 2026 con la fotografia parziale ([D145](#decisioni-del-proprietario)) |
 | | SB-21 | Giri di correzione | SB-20 | Giri 1, 2, 3a, 3a bis e 3b fatti ([rapporto 3a bis](reports/set-base/sb-21-giro-3a-bis-report.md), [rapporto 3b](reports/set-base/sb-21-giro-3b-report.md)); **chiuso** il 19 novembre 2026 con la bozza di D149; SB-21t sul tetto di Estasi chiuso senza tetto ([D151](#decisioni-del-proprietario)) |
-| | SB-22 | Prova umana con mazzi costruiti | SB-21 |  |
+| | SB-22 | Prova umana con mazzi costruiti | SB-21 | **chiuso** il 21 novembre 2026 ([D163](#decisioni-del-proprietario)): il set piace, i costruiti non bloccano ([guida](reports/set-base/sb-22-prova.md)) |
 | | SB-23 | Valutazione delle varianti del formato | SB-21 |  |
 | Congelamento | SB-24 | Flavour finale e congelamento | SB-22, SB-23 |  |
 | | SB-25 | Testi delle carte per i giocatori | SB-24 |  |
@@ -667,6 +667,8 @@ Massimo: 3 giri prima di tornare dal proprietario, i primi due da 5.500 s, il te
 **Perimetro.** Partite umane con mazzi costruiti, compresi quelli trovati dalla ricerca, e qualche FFA. Eventuali correzioni tornano a SB-21.
 
 **Completamento verificabile.** **Giudizio del proprietario** registrato: è il criterio decisivo.
+
+**Chiuso il 21 novembre 2026** ([D163](#decisioni-del-proprietario)): «mi piace molto il set»; i costruiti non sono ottimali, ma ogni giocatore si costruirà i suoi mazzi. Nessuna correzione alla bozza di D162.
 
 **Rischi.** Pochi giocatori: il giudizio resta soggettivo, ed è dichiarato come tale.
 
