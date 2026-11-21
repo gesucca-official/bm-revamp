@@ -174,7 +174,7 @@ export function zonaBocca(diff: ArrayLike<number>, w: number, h: number, z: Zona
 
 /**
  * Fase G: la versione «-bocca» è allineata al ritratto? Fuori dalla zona dove si cerca la bocca, dentro la sagoma, le due immagini devono
- * essere quasi uguali; se più dell'1% dei punti cambia (sulla griglia piccola), la seconda versione è spostata o ridimensionata (spazienzio-furioso, 1,5%; le altre al più 0,3%) e la bocca che
+ * essere quasi uguali; se più dell'1% dei punti cambia (sulla griglia piccola), la seconda versione è spostata o ridimensionata (il vecchio spazienzio-furioso, 1,5%; dal secondo giro, approvato il 21 novembre 2026, spazienzio-furioso-bocca cambia lo 0,0% fuori dalla zona della bocca) e la bocca che
  * se ne prenderebbe non combacia: meglio non muoverla. `diff` è quella di `differenza` (0 fuori dalla sagoma).
  */
 export function boccaAllineata(diff: ArrayLike<number>, w: number, h: number, z: ZonaBocca, soglia = 40, massimo = 0.01): boolean {

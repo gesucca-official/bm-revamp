@@ -193,7 +193,8 @@ test('nel cast: la sagoma presa da un\'altra espressione esiste, è dello stesso
     assert.ok([...p.espressioni ?? [], ...p.espressioniFuture ?? []].includes(espressione), `${chi}: ${espressione}`);
     assert.ok(p.espressioni?.includes(da), `${chi}: la sagoma di ${espressione} viene da ${da}, un'espressione con il ritratto`);
   }
-  assert.equal(cast.personaggi.mara.alfa?.esasperata, 'neutra', 'mara-esasperata ha il fondo sporco: la sagoma di neutra');
+  // Secondo giro delle bocche, approvato dal proprietario il 21 novembre 2026 (prompt-bocche.md, «Esiti del secondo giro»): mara-esasperata ha il fondo trasparente, niente sagoma presa da neutra.
+  assert.equal(cast.personaggi.mara.alfa?.esasperata, undefined, 'mara-esasperata usa la propria alfa');
 });
 
 test('nel cast: chi ascolta Piera ha un\'espressione esasperata prevista, Spazienzio sta più in alto in verticale', () => {
