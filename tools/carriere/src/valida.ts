@@ -67,7 +67,6 @@ export function valida(dati: unknown, cast: Cast): string[] {
     switch (chiave) {
       case 'visto': case 'vinto': case 'perso': case 'esplorato': return rifNodo(x, `${dove}.${chiave}`);
       case 'achievement': testo(x, `${dove}.achievement`); if (typeof x === 'string' && !achievementIds.has(x)) err(`${dove}.achievement`, `achievement sconosciuto: ${x}`); return;
-      case 'giri': return intero(x, `${dove}.giri`);
       case 'finale': testo(x, `${dove}.finale`, ID); if (typeof x === 'string' && !finali.has(x)) err(`${dove}.finale`, `finale sconosciuto: ${x}`); return;
       case 'non': return condizione(x, `${dove}.non`);
       case 'tutti': case 'uno': if (lista(x, `${dove}.${chiave}`)) { if (x.length < 2) err(`${dove}.${chiave}`, 'attese almeno due condizioni'); x.forEach((y, i) => condizione(y, `${dove}.${chiave}[${i}]`)); } return;

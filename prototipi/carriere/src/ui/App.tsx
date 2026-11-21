@@ -1,7 +1,7 @@
 // CA-0a: il prototipo delle carriere. Elenco → mappa → nodo (scena, scelte, partite simulate) → mappa → … → fine del giro.
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {LIVELLI, type Livello} from '../animazione.ts';
-import type {Carriera} from '../formato.ts';
+import type {Carriera} from '../../../../tools/carriere/src/formato.ts';
 import {nuovoAccount, nuovoGiro, vista, type Evento, type Stato} from '../motore.ts';
 import {carriere, nomeSblocco} from './dati.ts';
 import {Gioco} from './Gioco.tsx';

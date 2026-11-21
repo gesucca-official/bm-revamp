@@ -1,9 +1,9 @@
 // CA-0a: controllo del grafo di una carriera, come check-rules.py per le carte (punto 7 del perimetro).
 // Esplora gli stati raggiungibili di un giro (nodo, segni, nodi visti, partite vinte e perse, sblocchi presi) con le condizioni valutate
-// davvero. Gli atomi dell'account (esplorato, achievement, finale, giri) dipendono da altri giri: valgono «forse», cioè tutte e due le
+// davvero. Gli atomi dell'account (esplorato, achievement, finale) dipendono da altri giri: valgono «forse», cioè tutte e due le
 // possibilità (decisione T6 della regia), con un tetto di 200 000 stati.
 import {usciteDi, type Carriera, type Condizione, type Destinazione, type Esito, type Passo} from './formato.ts';
-import {idFinale} from './motore.ts';
+import {idFinale} from './converti.ts';
 
 export const TETTO_STATI = 200_000;
 
@@ -65,7 +65,7 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
   const chiaveFine = (e: Esito, finale: string, l: Locale) => `fine:${e}:${finale}` + JSON.stringify([[...l.sblocchi].sort(), segniLetti(l)]);
   const fineVista = new Set<string>();
 
-  // Logica a tre valori: gli atomi dell'account sono «forse», salvo giri 0 che vale sempre.
+  // Logica a tre valori: gli atomi dell'account sono «forse».
   const val = (cond: Condizione | undefined, l: Locale): Tre => {
     if (!cond) return 'v';
     if ('non' in cond) { const x = val(cond.non, l); return x === '?' ? '?' : x === 'v' ? 'f' : 'v'; }
@@ -76,7 +76,6 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
     if ('visto' in cond) return b(l.visti.includes(cond.visto));
     if ('vinto' in cond) return b(l.vinti.includes(cond.vinto));
     if ('perso' in cond) return b(l.persi.includes(cond.perso));
-    if ('giri' in cond) return cond.giri <= 0 ? 'v' : '?';
     return '?';  // esplorato, achievement, finale
   };
 
@@ -219,7 +218,6 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
   const valA = (cond: Condizione | undefined, l: Locale): Tre => {
     if (!cond) return 'v';
     if ('esplorato' in cond) return raggiunti.has(cond.esplorato) ? '?' : 'f';
-    if ('giri' in cond) return cond.giri <= 0 ? 'v' : fini.length ? '?' : 'f';
     if ('finale' in cond) return fini.some(f => f.finale === cond.finale) ? '?' : 'f';
     if ('non' in cond) { const x = valA(cond.non, l); return x === '?' ? '?' : x === 'v' ? 'f' : 'v'; }
     if ('tutti' in cond) { const xs = cond.tutti.map(y => valA(y, l)); return xs.includes('f') ? 'f' : xs.every(y => y === 'v') ? 'v' : '?'; }

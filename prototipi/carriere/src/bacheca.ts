@@ -1,7 +1,7 @@
 // CA-0a, Fase C: composizione della mappa come bacheca a lettere (docs/design/carriere/bacheca.md). Funzioni pure: dalle caselle della
 // mappa e dal loro stato ai punti della bacheca (righe di lettere nelle scanalature, ciascuna con il suo spillo), alle cordicelle fra gli
 // spilli e ai finali in fondo, con le imperfezioni di ogni lettera decise dai dati (stesso nodo, stessa «e» storta).
-import type {Carriera} from './formato.ts';
+import type {Carriera} from '../../../tools/carriere/src/formato.ts';
 import {caselle, archi, disposizione, statiMappa, idCasellaFine, type StatoNodo} from './mappa.ts';
 import {entra, finali, nuovoAccount, nuovoGiro, perdi, salta, scegli, vinci, type Stato} from './motore.ts';
 

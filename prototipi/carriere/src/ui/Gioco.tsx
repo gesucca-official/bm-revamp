@@ -1,6 +1,6 @@
 // Il lettore di scene: sfondo, sprite, un personaggio alla volta, finestra di dialogo, e sopra le scelte, la partita simulata e la fine.
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
-import type {Carriera} from '../formato.ts';
+import type {Carriera} from '../../../../tools/carriere/src/formato.ts';
 import {scegliCatena, scegliGiocatore, avanti, conNome, finali, nodo, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../motore.ts';
 import {cast, espressioneStacco, nomeDi, nomeSblocco, ritratto, ritrattoAlfa, ritrattoBocca, sfondo, sprite} from './dati.ts';
 import {pagine, useTesto} from './testo.ts';

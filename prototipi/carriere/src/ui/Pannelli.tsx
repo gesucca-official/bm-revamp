@@ -1,5 +1,5 @@
 // Elenco delle carriere, achievement e pannello dello stato per le prove.
-import type {Carriera} from '../formato.ts';
+import type {Carriera} from '../../../../tools/carriere/src/formato.ts';
 import {finali, indizio, vista, type Stato} from '../motore.ts';
 import {nomeSblocco} from './dati.ts';
 import {LIVELLI, type Livello} from '../animazione.ts';

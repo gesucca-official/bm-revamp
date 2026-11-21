@@ -2,8 +2,8 @@
 // le stesse le usano l'interfaccia e le prove. Le regole sono quelle della proposta (prototipo-fase-a.md, «Il formato dei dati»),
 // con le risposte del proprietario P2 (battute di ritento a turno), P3 (la sconfitta che apre un ramo porta lì da sola) e P7 (finali).
 import {usciteDi, type Achievement, type Battuta, type Carriera, type Catena, type Condizione, type Destinazione, type Esito, type Nodo, type Opzione, type Partita,
-  type Passo, type Rif, type Scelta} from './formato.ts';
-import {slug} from './converti.ts';
+  type Passo, type Rif, type Scelta} from '../../../tools/carriere/src/formato.ts';
+import {idFinale, slug} from '../../../tools/carriere/src/converti.ts';
 
 export type Scena = {sfondo?: string; variante?: string; sprite: Record<string, string>};  // sprite: id -> posa ('' = la prima)
 
@@ -71,7 +71,7 @@ export function completa(s: Stato): Stato {
 }
 
 /** Id di un finale: il suo titolo, o l'esito per una fine senza nome. */
-export const idFinale = (d: {fine: Esito; finale?: string}) => d.finale ? slug(d.finale) : d.fine;
+export {idFinale};
 
 /** I finali della carriera, dalle destinazioni (P7). */
 export function finali(c: Carriera): Finale[] {
@@ -106,8 +106,7 @@ export function valuta(cond: Condizione | undefined, s: Stato): boolean {
   if ('perso' in cond) return s.giro.persi.includes(cond.perso);
   if ('esplorato' in cond) return s.account.esplorati.includes(cond.esplorato);
   if ('achievement' in cond) return s.account.achievement.includes(cond.achievement);
-  if ('finale' in cond) return s.account.finali.includes(cond.finale);
-  return s.account.giri >= cond.giri;
+  return s.account.finali.includes(cond.finale);
 }
 
 export const risolvi = (r: Rif, s: Stato): string => 'personaggio' in r ? r.personaggio

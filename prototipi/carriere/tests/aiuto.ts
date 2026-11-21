@@ -1,7 +1,7 @@
 // Carriere convertite per le prove: il tutorial e la mini-carriera.
 import fs from 'node:fs';
-import {converti} from '../src/converti.ts';
-import type {Carriera, Cast} from '../src/formato.ts';
+import {converti} from '../../../tools/carriere/src/converti.ts';
+import type {Carriera, Cast} from '../../../tools/carriere/src/formato.ts';
 
 const leggi = (p: string) => fs.readFileSync(new URL(p, import.meta.url), 'utf8');
 export const cast = JSON.parse(leggi('../dati/cast.json')) as Cast;

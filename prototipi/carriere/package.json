@@ -9,7 +9,7 @@
   },
   "scripts": {
     "convert": "node --experimental-strip-types strumenti/converti.ts --tutti",
-    "check": "node --experimental-strip-types strumenti/controlla.ts",
+    "check": "node --experimental-strip-types ../../tools/carriere/strumenti/controlla.ts",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "build": "tsc --noEmit && vite build",
     "start": "vite",

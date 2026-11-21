@@ -5,7 +5,7 @@ import {AMPIEZZE_TESTA, avvicina, CHI_REAGISCE, comparsa, DURATA_ENTRATA, gradiT
   type Posto} from '../src/animazione.ts';
 import {componiPixel, erodi, pesoEllisse} from '../src/ui/maglia.ts';
 import {FERMA, LIVELLI, zonaCast, boccaAllineata, boccaAltra, cambiatiFuoriBocca, deforma, modo, movimento, trasformazione, zonaBocca} from '../src/animazione.ts';
-import type {Cast} from '../src/formato.ts';
+import type {Cast} from '../../../tools/carriere/src/formato.ts';
 import castJson from '../dati/cast.json' with {type: 'json'};
 
 const cast = castJson as unknown as Cast;

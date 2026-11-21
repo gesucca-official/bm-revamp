@@ -144,7 +144,6 @@ export type Condizione =
   | {perso: string}                    // partita persa almeno una volta in questo giro
   | {esplorato: string}                // in un giro qualsiasi (dato dell'account)
   | {achievement: string}
-  | {giri: number}                     // giri completati sull'account, almeno n
   | {finale: string}                   // finale visto in un giro qualsiasi (id: il titolo in minuscolo con trattini, o l'esito)
   | {non: Condizione}
   | {tutti: Condizione[]}

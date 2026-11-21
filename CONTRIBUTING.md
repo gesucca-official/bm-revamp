@@ -24,6 +24,16 @@ Il contesto completo verifica anche l'avvio e gli scenari applicativi; i soli
 unit test non lo sostituiscono. Nella proposta descrivere problema, risultato e
 verifiche realmente eseguite, indicando eventuali limiti.
 
+Per le carriere (storie, cast, formato o strumento, [tabella delle aree](docs/aree-protette.md#carriere)):
+
+```powershell
+./tools/carriere/run.ps1 -Task Check
+./tools/carriere/run.ps1 -Task Test
+```
+
+`Check` converte e controlla ogni storia del serbatoio e la prova del prototipo contro il cast: per storia nodi, stati, finali, errori
+e avvisi (esce con 1 se c'è un errore). Per le sole prove del prototipo: `./prototipi/carriere/run.ps1 -Task Test`.
+
 Per il client web le verifiche e le misure ufficiali sono nel [README del client](client-web/README.md#lancio-unico-c4-1-o23)
 e nel [piano C4](docs/client-c4-plan.md#obiettivo-e-regole-comuni): 1366×768 e 844×390 per tutte, e dal 10 novembre 2026
 anche **1920×1080 per `Verify` e `VerifyLayout`** (C4-11). Da C4-1c il giro predefinito la include per queste due sole verifiche.

@@ -5,7 +5,7 @@
 // sopra, in uno strato a parte, cordicelle, puntine, le aree da toccare e i pezzi che si muovono, così il movimento non ridisegna il feltro.
 // Un orologio solo, che si ferma mentre si legge un cartoncino o la legenda; con il movimento ridotto del sistema niente si muove.
 import {useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode} from 'react';
-import type {Carriera} from '../formato.ts';
+import type {Carriera} from '../../../../tools/carriere/src/formato.ts';
 import {avversari, entra, finali, nodo as trovaNodo, ottieniAchievement, risolvi, type Evento, type Stato} from '../motore.ts';
 import {caso, catenaria, CARATTERE_LETTERA, componi, disponi, latoPuntina, SCALA, seiQui as dovePuntina, sporco, spilloDi, LEGENDA, ROSSO_SEI_QUI, type Pt, type Punto} from '../bacheca.ts';
 import {cerchioEvidenziatore, inizioRisalto, TEMPI_RISALTO} from '../movimentiBacheca.ts';

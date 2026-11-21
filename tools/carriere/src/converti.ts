@@ -2,7 +2,7 @@
 // Serve a mostrare che il formato proposto regge su docs/design/carriere/tutorial-dialoghi.md; in Fase B si completa,
 // con il controllo di validità dello schema e il controllo del grafo per esplorazione degli stati.
 // Sintassi del markdown: docs/design/carriere/prototipo-fase-a.md, «Come si scrive nel markdown».
-import {usciteDi, type Achievement, type Battuta, type Carriera, type Catena, type Cast, type Condizione, type Destinazione, type Nodo, type Opzione, type Partita,
+import {usciteDi, type Achievement, type Battuta, type Carriera, type Catena, type Cast, type Condizione, type Destinazione, type Esito, type Nodo, type Opzione, type Partita,
   type Passo, type Problema, type Rif, type Scelta} from './formato.ts';
 
 export type Risultato = {carriera: Carriera; problemi: Problema[]};
@@ -12,6 +12,9 @@ type Rinvio = {grezzo: string; riga: number; applica: (d: Destinazione) => void}
 
 export const slug = (s: string): string => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
   .replace(/['’]/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+/** L'id di un finale: il titolo in minuscolo con trattini, o l'esito se non ha titolo. */
+export const idFinale = (d: {fine: Esito; finale?: string}) => d.finale ? slug(d.finale) : d.fine;
 
 /** L'espressione da mostrare al posto di una senza ritratto, se il cast la dichiara (mockup 0.3.7): prima la voce esatta, poi «*». */
 const ripiego = (p: Cast['personaggi'][string], e: string): string | undefined => {
@@ -453,6 +456,10 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
     const idn = perNome.get(slug(r.grezzo));
     if (idn) r.applica({nodo: idn}); else errore(r.riga, `destinazione sconosciuta: «${r.grezzo}»`);
   }
+  // Formato 0.1: con una [Sconfitta: …] si va lì da soli, senza ritento (P3): il ritento della stessa partita non si vede mai.
+  for (const n of nodi) for (const p of n.passi) {
+    if (p.tipo === 'partita' && p.sconfitta && p.ritento?.length) avviso(p.riga, `la partita ha un ritento e una [Sconfitta: …]: dopo una sconfitta si va al ramo, il ritento non si vede mai`);
+  }
   // Una scelta chiude il nodo solo se tutte le opzioni hanno destinazione. Una scelta «se c'è» non chiude mai il nodo: le sue opzioni
   // senza destinazione proseguono fino alle uscite (mockup della principale 0.3).
   for (const n of nodi) n.passi.forEach((p, i) => {
@@ -485,7 +492,6 @@ export function leggiCondizione(testo: string, riga: number, errore: (r: number,
     if ((m = /^segno\s+([\w-]+)\s*(?:=\s*(.+))?$/.exec(s))) return m[2] ? {segno: m[1], uguale: slug(m[2])} : {segno: m[1]};
     if ((m = /^(visto|vinto|perso|esplorato)\s+(.+)$/.exec(s))) return {[m[1]]: m[2].trim()} as Condizione;
     if ((m = /^achievement\s+(.+)$/.exec(s))) return {achievement: slug(m[1])};
-    if ((m = /^giri\s+(\d+)$/.exec(s))) return {giri: Number(m[1])};
     if ((m = /^finale\s+(.+)$/.exec(s))) return {finale: slug(m[1])};
     errore(riga, `condizione non riconosciuta: «${s}»`);
     return undefined;

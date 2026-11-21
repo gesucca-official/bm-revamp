@@ -5,7 +5,7 @@ import {caso, catenaria, componi, type Composizione} from '../src/bacheca.ts';
 import {entra, nuovoAccount, nuovoGiro, perdi, ritenta, salta, scegli, vinci, vista, type Stato} from '../src/motore.ts';
 import {statiMappa} from '../src/mappa.ts';
 import {filiDaRiprendere, filoPenzolante, scoperti, tempiFilo, TEMPI, TEMPI_FILO} from '../src/movimentiBacheca.ts';
-import type {Carriera} from '../src/formato.ts';
+import type {Carriera} from '../../../tools/carriere/src/formato.ts';
 import {prova, tutorial} from './aiuto.ts';
 
 /** Una bacheca vista: lo stato, la composizione e il «sei qui» dell'apertura prima (da dove parte la puntina rossa). */

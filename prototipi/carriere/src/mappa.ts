@@ -1,6 +1,6 @@
 // CA-0a: la mappa dei rami. Archi, disposizione a colonne e stato di ogni casella per il giro e l'account correnti.
 // Le caselle sono i nodi e i finali (P7): un finale è una casella «fine:<id>», «???» finché non lo si è visto in un giro.
-import {usciteDi, type Carriera, type Destinazione} from './formato.ts';
+import {usciteDi, type Carriera, type Destinazione} from '../../../tools/carriere/src/formato.ts';
 import {entrabile, finali, idFinale, valuta, type Stato} from './motore.ts';
 
 export type Arco = {da: string; a: string; tipo: 'uscita' | 'scelta' | 'sconfitta'; indietro: boolean};

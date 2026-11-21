@@ -108,6 +108,15 @@ le regole di non regressione ([1–9](client-c3-plan.md#regole-di-non-regression
 | fine di una tappa del client, o quando il piano lo chiede | la matrice completa: `./client-web/run.ps1 -Task VerifyAll -Parallel 4 -Split 'resolution,ffa'` | come stabilisce il piano della tappa |
 | server, regolamento o set, prima di una verifica del client | `./scripts/build.ps1 -Task Server -Offline` | jar rifatto |
 
+## Carriere
+
+**Percorsi:** `tools/carriere/`, `prototipi/carriere/`, `docs/carriere/` e le storie del serbatoio (`docs/design/carriere/*-dialoghi.md`). **Protetto:**
+il [formato delle carriere](carriere/formato.md) e i numeri del controllo sulle storie (nodi, stati, finali, avvisi). Il prototipo non è parte del prodotto.
+
+| Se cambia | Esegui | Prosegui se |
+|---|---|---|
+| una storia, il cast (`prototipi/carriere/dati/cast.json`), il formato o lo strumento | il controllo delle carriere: `./tools/carriere/run.ps1 -Task Check`; per lo strumento anche `-Task Test`, e per il prototipo `./prototipi/carriere/run.ps1 -Task Test` e `-Task Check` | 0 errori; numeri uguali a prima, o ogni differenza spiegata nel rapporto |
+
 ## Client di debug
 
 **Percorsi:** `client-debug/`. **Protetto:** la parità delle funzioni e le copie delle regole.

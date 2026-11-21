@@ -7,7 +7,7 @@ import {caratteriDelFont} from './cmap.ts';
 import {CARATTERE} from '../src/ui/font.ts';
 import {componi, statoBozzetto} from '../src/bacheca.ts';
 import {prova, tutorial} from './aiuto.ts';
-import type {Carriera} from '../src/formato.ts';
+import type {Carriera} from '../../../tools/carriere/src/formato.ts';
 
 const qui = new URL('../', import.meta.url);
 /** Tutto il testo che il lettore mostra nei dialoghi: battute, nomi, narrazioni, messaggi, opzioni. */

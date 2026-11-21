@@ -7,9 +7,9 @@ import {converti, leggiCondizione} from '../src/converti.ts';
 import type {Cast, Nodo, Passo} from '../src/formato.ts';
 
 const leggi = (p: string) => fs.readFileSync(new URL(p, import.meta.url), 'utf8');
-const cast = JSON.parse(leggi('../dati/cast.json')) as Cast;
+const cast = JSON.parse(leggi('../../../prototipi/carriere/dati/cast.json')) as Cast;
 const tutorial = leggi('../../../docs/design/carriere/tutorial-dialoghi.md');
-const prova = leggi('../storie/prova.md');
+const prova = leggi('../../../prototipi/carriere/storie/prova.md');
 const errori = (md: string) => converti(md, cast, 'prova').problemi.filter(p => p.livello === 'errore').map(p => p.messaggio);
 const passi = (n: Nodo, tipo: Passo['tipo']) => n.passi.filter(p => p.tipo === tipo);
 
@@ -91,7 +91,9 @@ test('condizioni: «o» lega meno di «e», «non» vale per un atomo', () => {
   const no = () => assert.fail('errore inatteso');
   assert.deepEqual(leggiCondizione('segno a = x e visto Nodo B o non achievement Fiuto', 1, no),
     {uno: [{tutti: [{segno: 'a', uguale: 'x'}, {visto: 'Nodo B'}]}, {non: {achievement: 'fiuto'}}]});
-  assert.deepEqual(leggiCondizione('giri 2', 1, no), {giri: 2});
+  let giri = '';
+  leggiCondizione('giri 2', 1, (_r, m) => { giri = m; });
+  assert.match(giri, /condizione non riconosciuta/, '«giri n» non è nel formato 0.1');
   let msg = '';
   leggiCondizione('quando piove', 1, (_r, m) => { msg = m; });
   assert.match(msg, /condizione non riconosciuta/);
@@ -110,4 +112,12 @@ test('fine con nome (P7): «→ Fine: completata, titolo»', () => {
   assert.deepEqual(h.uscita, {verso: {fine: 'completata', finale: 'Grappino scappa di nuovo'}});
   assert.ok(errori(prova.replace('[Quando: finale Grappino è tornato e', '[Quando: finale Grappino in vacanza e'))
     .includes('finale sconosciuto nella condizione: grappino-in-vacanza'));
+});
+
+test('un ritento accanto a una [Sconfitta: …] è un avviso: il ritento non si vede mai (discrepanza 4 di CA-0b)', () => {
+  const md = prova.replace('[Sconfitta: → Nodo E]\n', '[Sconfitta: → Nodo E]\n\n**Ritento.** **Spazienzio** (furioso): STAVOLTA LA CONSEGNIAMO NOI.\n');
+  const avvisi = converti(md, cast, 'prova').problemi.filter(p => p.livello === 'avviso').map(p => p.messaggio);
+  assert.equal(avvisi.length, 1);
+  assert.match(avvisi[0], /ritento non si vede mai/);
+  assert.equal(converti(prova, cast, 'prova').problemi.length, 0, 'la prova, senza il ritento morto, non ha avvisi');
 });

@@ -4,7 +4,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {avanti, completa, entra, finali, indizio, nuovoAccount, nuovoGiro, ottieniAchievement, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../src/motore.ts';
 import {fermate} from '../src/ui/testo.ts';
-import type {Carriera} from '../src/formato.ts';
+import type {Carriera} from '../../../tools/carriere/src/formato.ts';
 import {prova, tutorial} from './aiuto.ts';
 
 /** Una piccola partita scritta: ogni mossa è una funzione del motore; gli eventi si accumulano. */
@@ -134,7 +134,7 @@ test('achievement con condizione sull\'account e indizi progressivi', () => {
   assert.equal(giro1.v.tipo, 'fine');
   const fiuto = c.achievement.find(a => a.id === 'fiuto-da-segugio')!;
   assert.equal(indizio(fiuto, nuovoGiro(c, nuovoAccount())), 'Certe sconfitte portano lontano.');
-  assert.match(indizio(fiuto, giro1.s)!, /retrobottega/, 'dopo un giro completato arriva l\'indizio chiaro');
+  assert.match(indizio(fiuto, {...giro1.s, account: {...giro1.s.account, esplorati: [...giro1.s.account.esplorati, 'nodo-e']}})!, /retrobottega/, 'dopo aver esplorato il retrobottega arriva l\'indizio chiaro');
   const finali2 = c.achievement.find(a => a.id === 'cane-che-va-cane-che-torna')!;
   assert.match(indizio(finali2, giro1.s)!, /porta aperta/, 'dopo il primo finale, l\'indizio sul secondo');
   assert.ok(!giro1.s.account.achievement.includes('due-padroni'));

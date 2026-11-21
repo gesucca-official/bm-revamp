@@ -3,8 +3,8 @@ import castJson from '../../dati/cast.json';
 import tutorialJson from '../../dati/generati/tutorial.json';
 import provaJson from '../../dati/generati/prova.json';
 import principaleJson from '../../dati/generati/principale.json';
-import type {Carriera, Cast} from '../formato.ts';
-import {comeCarriera} from '../valida.ts';
+import type {Carriera, Cast} from '../../../../tools/carriere/src/formato.ts';
+import {comeCarriera} from '../../../../tools/carriere/src/valida.ts';
 import {PREMIO_LETTERE} from '../movimentiBacheca.ts';
 
 export const cast = castJson as unknown as Cast;

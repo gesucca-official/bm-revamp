@@ -4,16 +4,16 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {converti} from '../src/converti.ts';
-import {valida} from '../src/valida.ts';
-import {controllaGrafo} from '../src/grafo.ts';
+import {converti} from '../../../tools/carriere/src/converti.ts';
+import {valida} from '../../../tools/carriere/src/valida.ts';
+import {controllaGrafo} from '../../../tools/carriere/src/grafo.ts';
 import {disposizione, statiMappa} from '../src/mappa.ts';
 import {componi, seiQui} from '../src/bacheca.ts';
 import {avanti, entra, nodo, nuovoAccount, nuovoGiro, perdi, salta, scegli, scegliCatena, scegliGiocatore, valuta, vinci, vista, type Stato} from '../src/motore.ts';
 import {numeri, percorsi} from '../src/percorsi.ts';
 import {ritenta as ritentaS} from '../src/motore.ts';
 import {carriera, cast} from './aiuto.ts';
-import type {Carriera, Cast} from '../src/formato.ts';
+import type {Carriera, Cast} from '../../../tools/carriere/src/formato.ts';
 
 const md = fs.readFileSync(new URL('../../../docs/design/carriere/principale-dialoghi.md', import.meta.url), 'utf8');
 const principale = () => carriera(md);

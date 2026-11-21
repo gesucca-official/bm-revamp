@@ -2,7 +2,7 @@
 // domande che il controllo del grafo non misura: quanti nodi con partita ha ogni percorso (minimo e massimo), e in che punto del giro arriva
 // il PvP (lo sblocco «pvp»: deve stare prima di metà di ogni giro). Le partite si vincono, salvo dove una sconfitta apre un ramo: lì si
 // provano tutte e due. Le scelte si provano tutte; le scelte «a scelta» che non cambiano strada si contano una volta sola.
-import type {Carriera} from './formato.ts';
+import type {Carriera} from '../../../tools/carriere/src/formato.ts';
 import {statiMappa} from './mappa.ts';
 import {avanti, entra, nuovoAccount, nuovoGiro, perdi, salta, scegli, scegliCatena, scegliGiocatore, vinci, vista, type Account, type Stato} from './motore.ts';
 

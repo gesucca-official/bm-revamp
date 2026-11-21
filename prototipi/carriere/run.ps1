@@ -15,7 +15,8 @@ try {
     'Lock' {& npm run lock}
     'Test' {& npm run test}
     'Convert' {& npm run convert}
-    'Check' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run check}}
+    # Check: il controllo è quello dello strumento (tools/carriere, CA-0c), che converte da sé le stesse storie.
+    'Check' {& npm run check}
     'Build' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run build}}
     'Dev' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run start}}
     # Phone: only on request (T5). Serves the prototype and the repository assets on one private LAN address, no access code.

@@ -1,5 +1,5 @@
 // Il progresso sta nel browser (prototipo.md, «Fuori»: niente server né account). Una chiave per carriera, con la versione del formato.
-import type {Carriera} from '../formato.ts';
+import type {Carriera} from '../../../../tools/carriere/src/formato.ts';
 import {completa, nuovoAccount, nuovoGiro, type Stato} from '../motore.ts';
 
 const PREFISSO = 'bm-carriere-prototipo-v1:';

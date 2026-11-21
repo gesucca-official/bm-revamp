@@ -5,13 +5,14 @@ Scritto il 20 novembre 2026, a banco fra il proprietario e la regia delle carrie
 regole attive (R00 del [regolamento](game-rules.md)). Il metodo è quello di [orchestrazione-lavoro.md](orchestrazione-lavoro.md); le
 verifiche si scelgono dalla [tabella delle aree](aree-protette.md).
 
-> **Ripartenza** (aggiornata il 20 novembre 2026). La aggiorna chi chiude un blocco e la regia a ogni decisione.
+> **Ripartenza** (aggiornata il 21 novembre 2026). La aggiorna chi chiude un blocco e la regia a ogni decisione.
 >
 > - **In vigore:** confini di [DC1](#decisioni): niente `client-web`, `server`, regolamento e documenti di set fino a C5 e SB-28. Le storie
 >   restano nel [serbatoio](design/carriere/README.md), senza valore normativo ([DC4](#decisioni)). Il [prototipo](design/carriere/prototipo.md)
 >   (CA-0a) resta il posto dove provare le storie; il formato è il [formato delle carriere 0.1](carriere/formato.md) (CA-0b).
 > - **In attesa:** nulla.
-> - **Prossimo:** [CA-0c](#ca-0c--strumento-delle-carriere), lo strumento delle carriere sul [formato 0.1](carriere/formato.md).
+> - **Prossimo:** CA-0d, il pacchetto JSON con versione e impronte, controllato come `check-rules.py` controlla le carte. CA-0c è chiuso: lo strumento è
+>   in `tools/carriere/` (`./tools/carriere/run.ps1 -Task Check`), il prototipo lo usa ([rapporto](reports/ca/ca-0c.md)).
 > - **Fuori dal piano, nel serbatoio:** le illustrazioni della campagna principale, approvate il 21 novembre 2026
 >   ([prompt](design/carriere/prompt-principale.md)), entrate nel prototipo il 21 novembre 2026 (CA-0a: ritratti, sfondi e sagoma del padrone; restano i ripieghi dell'elenco); il secondo giro delle bocche è approvato e adottato
 >   ([riga di CA-0a](product-roadmap.md#lavori-anticipati)).
@@ -44,7 +45,7 @@ contro computer, progressi e achievement salvati lato server. Il tutorial vero �
 |---|---|---|---|---|
 | CA-0a | Prototipo delle carriere | — | a fasi | **Chiuso** il 12 novembre 2026 ([chiusura](design/carriere/prototipo.md#chiusura)) |
 | [CA-0b](#ca-0b--formato-delle-carriere-01) | Formato delle carriere 0.1, documento normativo | subito | con proposta | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0b.md), [formato 0.1](carriere/formato.md)) |
-| [CA-0c](#ca-0c--strumento-delle-carriere) | Strumento: convertitore, validazione, controllo del grafo | dopo CA-0b | diretto | — |
+| [CA-0c](#ca-0c--strumento-delle-carriere) | Strumento: convertitore, validazione, controllo del grafo | dopo CA-0b | diretto | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0c.md)) |
 | CA-0d | Pacchetto JSON con versione e impronte, controllato come `check-rules.py` controlla le carte | dopo CA-0c | diretto | — |
 | CA-0e | Modificatori di incontro nel regolamento, con la precedenza di R00 | dopo SB-28 | con proposta | — |
 | CA-0f | Motore lato server: progressi, segni, achievement, ricompense protette dal farming | dopo SB-30 ed EC-0 | con proposta | — |
@@ -91,6 +92,9 @@ del prototipo prima dell'estrazione; le prove del prototipo verdi. **Dal formato
 n»); un `**Ritento.**` che dopo una `[Sconfitta: …]` non si vede mai è un avviso candidato ([discrepanza 4 di CA-0b](reports/ca/ca-0b.md)).
 **Fatto quando:** il comando dello strumento dà gli stessi numeri del
 prototipo, il prototipo li ottiene passando dallo strumento, e la tabella delle aree ha la riga nuova.
+
+**Stato:** chiuso il 21 novembre 2026. [Rapporto](reports/ca/ca-0c.md): `tools/carriere/` senza dipendenze proprie (solo il Node isolato), 22 prove
+dello strumento e 117 del prototipo verdi, stessi numeri di prima sulle tre storie, avviso nuovo per il ritento dopo una `[Sconfitta: …]`.
 
 ## Decisioni
 

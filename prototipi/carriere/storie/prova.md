@@ -56,8 +56,6 @@
 
 [Sconfitta: → Nodo E]
 
-**Ritento.** **Spazienzio** (furioso): STAVOLTA LA CONSEGNIAMO NOI.
-
 → Vai a: Nodo D
 
 ## Nodo D — Di nuovo al bancone
@@ -155,7 +153,7 @@
 Hai trovato Grappino nel vicolo.
 
 - Indizio: Certe sconfitte portano lontano.
-- Indizio, se giri 1: Quando Spazienzio perde, va a calmarsi nel retrobottega. E il retrobottega puzza di cane.
+- Indizio, se esplorato Nodo E: Quando Spazienzio perde, va a calmarsi nel retrobottega. E il retrobottega puzza di cane.
 
 ### Due padroni
 

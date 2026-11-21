@@ -1,0 +1,14 @@
+{
+  "name": "bm-strumento-carriere",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.13.0",
+    "npm": "11.6.2"
+  },
+  "scripts": {
+    "check": "node --experimental-strip-types strumenti/controlla.ts",
+    "test": "node --experimental-strip-types --test tests/*.test.ts"
+  }
+}

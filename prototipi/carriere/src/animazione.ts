@@ -1,8 +1,8 @@
 // CA-0a, Fase E e F: ritratti animati senza un asset per fotogramma (prototipo.md). Funzioni pure del tempo: le usa il lettore a ogni
 // fotogramma e le provano le prove. Due modi: «movimento» (trasformazioni dell'immagine intera) e «maglia» (l'immagine piegata con pochi
 // punti di controllo). Fase F: il cast dice quale per personaggio ed espressione; il movimento è più morbido; la bocca si apre e si chiude.
-import type {AnimazioneCast, Controlli, ModoAnimazione, ZonaBocca, BoccaCast} from './formato.ts';
-export type {Controlli} from './formato.ts';
+import type {AnimazioneCast, Controlli, ModoAnimazione, ZonaBocca, BoccaCast} from '../../../tools/carriere/src/formato.ts';
+export type {Controlli} from '../../../tools/carriere/src/formato.ts';
 
 /** L'interruttore: come dice il cast (predefinito), tutti fermi, tutti a movimento, tutti a maglia (per confrontare). */
 export type Livello = 'cast' | 'fermo' | 'movimento' | 'maglia';

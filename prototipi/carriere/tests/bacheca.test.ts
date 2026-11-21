@@ -59,7 +59,7 @@ test('puntine e spilli tutti diversi, scelti dai dati; «sei qui» è una puntin
 import {catenaria, disponi, pendenza, sporco, FORME, DI_PLASTICA} from '../src/bacheca.ts';
 import {entra, nuovoAccount, nuovoGiro, salta, scegli, vinci, type Stato} from '../src/motore.ts';
 import {tutorial} from './aiuto.ts';
-import type {Carriera} from '../src/formato.ts';
+import type {Carriera} from '../../../tools/carriere/src/formato.ts';
 
 test('cordicelle: la tesa è dritta, la lenta pende di più se è lunga, più che in proporzione', () => {
   assert.ok(pendenza(300, 'tesa') <= 2);
