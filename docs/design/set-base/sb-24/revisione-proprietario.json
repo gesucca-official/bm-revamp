@@ -1,6 +1,55 @@
 {
  "formato": "sb-24-revisione-proprietario/1",
- "proposta": null,
- "aggiornato": null,
- "voci": {}
+ "proposta": "a758e3ee4cc7",
+ "aggiornato": "2026-11-21T21:03:53.275Z",
+ "voci": {
+  "PG-SPA": {
+   "nome": "SPAZIENZIO DE LA UCCISO",
+   "flavour": "«LA VIOLENZA É UN'APOSTROFO ROSSO SANGUE FRA LE PAROLE T'AMMAZZO:::»",
+   "aggiornato": "2026-11-21T20:43:18.390Z"
+  },
+  "SPA-AR1": {
+   "flavour": "«BWAAARGH! ACCOGLI LA MORTE CHE DISPENSO SUL TU!»",
+   "aggiornato": "2026-11-21T20:57:22.454Z"
+  },
+  "SPA-AR2": {
+   "flavour": "«MALVIAGGIO, E NON SCRIVERMI QUANDO ATTERRI.»",
+   "aggiornato": "2026-11-21T20:58:16.999Z"
+  },
+  "SPA-AR3": {
+   "flavour": "«PAZIENZA E SOLDI, MAI AVUTI. IN COMPENSO, HO TANTE VITE DA CESSARE NEL FUTURO PROSSIMO.»",
+   "aggiornato": "2026-11-21T20:59:20.826Z"
+  },
+  "SPA-AR4": {
+   "flavour": "«CARINO QUETO TUO BASTONCINO, LO FANNO ANCHE DA UOMO O SOLO DA BAMBINO?»",
+   "aggiornato": "2026-11-21T21:01:57.690Z"
+  },
+  "SPA-AR5": {
+   "flavour": "«BASTA NON È UNA DOMANDA. LA VIOLENZA È UNA DOMANDA, E LA RISPOSTA È Sì.»",
+   "aggiornato": "2026-11-21T21:02:41.073Z"
+  },
+  "SPA-AR6": {
+   "nome": "SGROMRIAMOVI",
+   "flavour": "«MOSÈ APRì LE ACQUE, E IO APRIRò VOIALTRI.»",
+   "aggiornato": "2026-11-21T21:03:53.275Z"
+  },
+  "SPA-BA": {
+   "flavour": "«OGNI COSA HA IL SUO IMPIEGO. QUESTA, NELLA FATTISPECIE, TI FARÀ SMETTERE LA VITA:::»",
+   "aggiornato": "2026-11-21T20:46:14.254Z"
+  },
+  "SPA-BO1": {
+   "flavour": "«IRRITARMI NON FARÀ ALTRO CHE ACCORCIARTI L'ESISTENZA - CHE DI PER SÈ É UN NOBILE OBIETTIVO.»",
+   "aggiornato": "2026-11-21T20:48:58.859Z"
+  },
+  "SPA-BO2": {
+   "nome": "SVEGLIAMOCI - MA TU NO",
+   "flavour": "«ORSU' SVEGLIAMOCI - MA TU NO.»",
+   "aggiornato": "2026-11-21T20:53:10.052Z"
+  },
+  "SPA-BO3": {
+   "nome": "VIOLENZAZIONE",
+   "flavour": "«SE I GABBIANI PRATICANO L'AUTOEROTISMO, IO PRATICO L'AUTOVIOLENZA.»",
+   "aggiornato": "2026-11-21T20:56:31.719Z"
+  }
+ }
 }
