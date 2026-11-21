@@ -1,5 +1,8 @@
 # Campagna principale — prompt delle illustrazioni
 
+> **Chiuso il 21 novembre 2026:** le 25 immagini dei tre giri sono approvate dal proprietario, due dopo un ritocco (Beppe scocciato e la
+> cantina). Le imperfezioni accettate sono annotate negli esiti.
+
 21 novembre 2026. Il materiale visivo che manca alla [campagna principale](principale-dialoghi.md) dopo il tutorial, con le liste
 approvate dal proprietario lo stesso giorno («si», alla domanda «Approvi le liste della principale e scrivo i prompt?»). L'elenco e i
 ripieghi sono in [illustrazioni.md](illustrazioni.md#campagna-principale). Tre giri, perché il giudizio non diventi un muro di immagini:
@@ -266,7 +269,7 @@ Avoid: any other change to the character, her framing or her position on the can
 | celestina-triste | [WebP](asset/tutorial/ritratti/celestina-triste.webp) | [Scheda](asset/tutorial/registro.md#celestina-triste-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 | beppe-contento | [WebP](asset/tutorial/ritratti/beppe-contento.webp) | [Scheda](asset/tutorial/registro.md#beppe-contento-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 | beppe-pensieroso | [WebP](asset/tutorial/ritratti/beppe-pensieroso.webp) | [Scheda](asset/tutorial/registro.md#beppe-pensieroso-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
-| beppe-scocciato | [WebP](asset/tutorial/ritratti/beppe-scocciato.webp) | [Scheda](asset/tutorial/registro.md#beppe-scocciato-3) | |
+| beppe-scocciato | [WebP](asset/tutorial/ritratti/beppe-scocciato.webp) | [Scheda](asset/tutorial/registro.md#beppe-scocciato-3) | **Approvato** (21 novembre 2026), dopo il [ritocco](#ritocchi): «Approvo» |
 | beppe-serio | [WebP](asset/tutorial/ritratti/beppe-serio.webp) | [Scheda](asset/tutorial/registro.md#beppe-serio-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 | duccio-dolorante | [WebP](asset/tutorial/ritratti/duccio-dolorante.webp) | [Scheda](asset/tutorial/registro.md#duccio-dolorante-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 | duccio-offeso | [WebP](asset/tutorial/ritratti/duccio-offeso.webp) | [Scheda](asset/tutorial/registro.md#duccio-offeso-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
@@ -354,7 +357,7 @@ Avoid: faces, eyes, features, inner lines, colours, gradients or highlights insi
 | s1-esterno-di-giorno | [WebP](asset/tutorial/sfondi/s1-esterno-di-giorno.webp) | [Scheda](asset/tutorial/registro.md#s1-esterno-di-giorno-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 | s2-interno-al-buio | [WebP](asset/tutorial/sfondi/s2-interno-al-buio.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-al-buio-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 | s3-esterno | [WebP](asset/tutorial/sfondi/s3-esterno.webp) | [Scheda](asset/tutorial/registro.md#s3-esterno-2) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia (paletti dorati invece che cromati) |
-| s4-cantina | [WebP](asset/tutorial/sfondi/s4-cantina.webp) | [Scheda](asset/tutorial/registro.md#s4-cantina-3) | |
+| s4-cantina | [WebP](asset/tutorial/sfondi/s4-cantina.webp) | [Scheda](asset/tutorial/registro.md#s4-cantina-3) | **Approvato** (21 novembre 2026), dopo il [ritocco](#ritocchi): «Approvo» |
 | padrone-in-ombra | [WebP](asset/tutorial/sprite/padrone-in-ombra.webp) | [Scheda](asset/tutorial/registro.md#padrone-in-ombra-2) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 
 ## Ritocchi

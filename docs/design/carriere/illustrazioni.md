@@ -79,3 +79,4 @@ indicate fra parentesi, con i ripieghi del cast del prototipo. Le versioni con l
 | S4 | La cantina del Serraglio, col nascondiglio di Grappino | nuovo |
 
 **Totale della campagna principale:** 4 ritratti base, 16 espressioni, 2 varianti di sfondo, 2 sfondi nuovi e una sagoma: 25 immagini.
+**Completo e approvato il 21 novembre 2026.** Resta da farle entrare nel prototipo (cast, ripieghi, sfondi).
