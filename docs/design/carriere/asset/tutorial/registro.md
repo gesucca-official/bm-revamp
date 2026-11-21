@@ -2548,3 +2548,1035 @@ Edit the attached dialogue portrait. Keep everything exactly the same: the same 
 
 Avoid: any other change; mirroring; a different head position or size; a dark or semi-transparent background; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
 ~~~
+
+## Campagna principale — giri E, F, G
+
+21 novembre 2026. Candidati per il giudizio del proprietario. I quattro secondi tentativi del giro E sono stati eseguiti erroneamente: il visualizzatore mostrava scuro il colore sotto alpha e la verifica successiva ha confermato la trasparenza. Le espressioni F usano i secondi originali, registrati prima degli allegati.
+
+### celestina-furba-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 12:56:35 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 3055961 byte; SHA-256 `6193fcc94db9f7cd74ec047d9606cedc6ae3a25341c16f2a22b334636b9a8992` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/celestina.png` SHA-256 `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/celestina-furba-1.png`; SHA-256 `6193fcc94db9f7cd74ec047d9606cedc6ae3a25341c16f2a22b334636b9a8992` |
+| Consegna | non selezionato |
+| Conversione | nessuna |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 1, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | nessuna |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | tentativo precedente; ripetuto erroneamente per valutazione visiva dell’alpha |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same young woman for a visual-novel dialogue scene. Keep her face, thin body, red hair shaved at the sides with a longer bleached tuft, the slouchy tracksuit, the bum bag full of stuff, colours and hand-inked European comic style exactly as in the reference; do not redesign her. Keep the tracksuit a washed-out plum purple, clearly purple and not burgundy. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: no longer crouching, she stands hunched and crooked, all angles; her whole shoulders and both arms fit inside the canvas with a small empty margin on both sides; from the top of her hair, with a small empty margin above it, down to her waist or a little below at the bottom edge; her eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: sly and calculating, a crooked little smirk, sharp alert eyes, the only healthy thing about her, one eyebrow up, holding up between two fingers the wrapped sweet she found under the counter and examining it like a jeweller examines a stone.
+
+Avoid: any other change to the character; syringes, powders, pills or any recognizable drug paraphernalia; making her look older than about twenty-three; a burgundy or green tracksuit; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### celestina-furba-2
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 12:57:36 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 3014975 byte; SHA-256 `2c15ff3c9b099f414a1769831f63e313d7155f3f241ef4b43af88d8b6ee21b2f` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/celestina.png` SHA-256 `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/celestina-furba-2.png`; SHA-256 `2c15ff3c9b099f414a1769831f63e313d7155f3f241ef4b43af88d8b6ee21b2f` |
+| Consegna | [celestina-furba.webp](ritratti/celestina-furba.webp); 1024×1536 px, WEBP, RGBA, 506152 byte; SHA-256 `dd4bca95ddc747e0048463a3a27a60d0bb5819d97c1a7a7a3586c947439c17d3` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [e-celestina-furba.webp](composizioni/e-celestina-furba.webp); 1366×768 px, WEBP, RGB, 266668 byte; SHA-256 `7f62fcc371548b1df9a6e9f596420a8d2bef71e2bea640ddf7b1ac41de303995` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same young woman for a visual-novel dialogue scene. Keep her face, thin body, red hair shaved at the sides with a longer bleached tuft, the slouchy tracksuit, the bum bag full of stuff, colours and hand-inked European comic style exactly as in the reference; do not redesign her. Keep the tracksuit a washed-out plum purple, clearly purple and not burgundy. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: no longer crouching, she stands hunched and crooked, all angles; her whole shoulders and both arms fit inside the canvas with a small empty margin on both sides; from the top of her hair, with a small empty margin above it, down to her waist or a little below at the bottom edge; her eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: sly and calculating, a crooked little smirk, sharp alert eyes, the only healthy thing about her, one eyebrow up, holding up between two fingers the wrapped sweet she found under the counter and examining it like a jeweller examines a stone.
+
+Avoid: any other change to the character; syringes, powders, pills or any recognizable drug paraphernalia; making her look older than about twenty-three; a burgundy or green tracksuit; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### beppe-tranquillo-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:00:16 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2810195 byte; SHA-256 `08f42460d9a81cf924c1b01f10f15429c19a9cef5c5abbd01001135f423d1505` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/beppe.png` SHA-256 `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/beppe-tranquillo-1.png`; SHA-256 `08f42460d9a81cf924c1b01f10f15429c19a9cef5c5abbd01001135f423d1505` |
+| Consegna | non selezionato |
+| Conversione | nessuna |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 1, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | nessuna |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | tentativo precedente; ripetuto erroneamente per valutazione visiva dell’alpha |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same man for a visual-novel dialogue scene. Keep his face, long full beard, long hair tied in a bun, the tobacco-brown canvas overalls with both straps up and grease stains, the black band T-shirt with its illegible spiky invented logo, the forearm tattoo, empty pockets, colours and hand-inked European comic style exactly as in the reference; do not redesign him. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: his whole shoulders and both arms, crossed on his chest, fit inside the canvas with a small empty margin on both sides; from the top of his bun, with a small empty margin above it, down to his waist or a little below at the bottom edge; his eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: calm and unbothered, the quiet look of someone who has seen it all, a faint easy half smile under the beard, arms crossed.
+
+Avoid: any other change to the character; tools in his pockets or hands; readable writing or real band names or logos on the T-shirt or tattoo; a caricatured look; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### beppe-tranquillo-2
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:01:20 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2725329 byte; SHA-256 `450612d9d45c58cbadeb324c24cdb1e77f23df149aab40343a3f6507039d95a4` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/beppe.png` SHA-256 `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/beppe-tranquillo-2.png`; SHA-256 `450612d9d45c58cbadeb324c24cdb1e77f23df149aab40343a3f6507039d95a4` |
+| Consegna | [beppe-tranquillo.webp](ritratti/beppe-tranquillo.webp); 1024×1536 px, WEBP, RGBA, 484840 byte; SHA-256 `931207bbb87530cac3962756561d851ecd44b24d71e0504e5c30bb551be9b1ad` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [e-beppe-tranquillo.webp](composizioni/e-beppe-tranquillo.webp); 1366×768 px, WEBP, RGB, 273706 byte; SHA-256 `4f58668772ef3660c6e6795a82b2d2c7b07bd0725b5377b1762c332be6cfee7f` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same man for a visual-novel dialogue scene. Keep his face, long full beard, long hair tied in a bun, the tobacco-brown canvas overalls with both straps up and grease stains, the black band T-shirt with its illegible spiky invented logo, the forearm tattoo, empty pockets, colours and hand-inked European comic style exactly as in the reference; do not redesign him. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: his whole shoulders and both arms, crossed on his chest, fit inside the canvas with a small empty margin on both sides; from the top of his bun, with a small empty margin above it, down to his waist or a little below at the bottom edge; his eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: calm and unbothered, the quiet look of someone who has seen it all, a faint easy half smile under the beard, arms crossed.
+
+Avoid: any other change to the character; tools in his pockets or hands; readable writing or real band names or logos on the T-shirt or tattoo; a caricatured look; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### duccio-fiero-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 12:58:43 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 3037892 byte; SHA-256 `d7355fa97e0a3a62e7778a3d436c9e4bb8b6bea7f8be9c78a8a8d2c149bbb95c` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/duccio.png` SHA-256 `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/duccio-fiero-1.png`; SHA-256 `d7355fa97e0a3a62e7778a3d436c9e4bb8b6bea7f8be9c78a8a8d2c149bbb95c` |
+| Consegna | non selezionato |
+| Conversione | nessuna |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | nessuna |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | tentativo precedente; ripetuto erroneamente per valutazione visiva dell’alpha |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same young man for a visual-novel dialogue scene. Keep his face, shaved head with a little regrowth and a receding hairline, stocky soft body with a small belly, the tight black short-sleeved T-shirt with the cracked, badly printed white eagle with spread wings, the question-mark tattoo on his neck, the pink sweet cocktail with a paper umbrella, a cherry and a spiral straw, colours and hand-inked European comic style exactly as in the reference; do not redesign him. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: his whole shoulders and both arms, the cocktail included, fit inside the canvas with a small empty margin on both sides; from the top of his head, with a small empty margin above it, down to his waist or a little below at the bottom edge; his eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: solemn heroic pride, chin up, chest puffed out, a proud gaze into the distance, one hand on his heart and the other holding the pink cocktail with the little finger raised. It must look ridiculous and satirical.
+
+Avoid: any other change to the character; raised-arm salutes, flags, runes, swastikas, fasces, complete or real Celtic crosses, or any real political symbol; extra tattoos; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### duccio-fiero-2
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:02:07 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2980969 byte; SHA-256 `b1dcb3f114a3af147d9fac33e9435128e7d407ecc09e88f333257e786179e83e` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/duccio.png` SHA-256 `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/duccio-fiero-2.png`; SHA-256 `b1dcb3f114a3af147d9fac33e9435128e7d407ecc09e88f333257e786179e83e` |
+| Consegna | [duccio-fiero.webp](ritratti/duccio-fiero.webp); 1024×1536 px, WEBP, RGBA, 526012 byte; SHA-256 `ef830c0abbdd6c01533dd9a76151da07ba09906a1c1ef6c1267da3175eb2d932` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [e-duccio-fiero.webp](composizioni/e-duccio-fiero.webp); 1366×768 px, WEBP, RGB, 271958 byte; SHA-256 `facafe2a5a25a61a3df27775e1139abd336deda7bff11343d90bea68c9a181a8` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same young man for a visual-novel dialogue scene. Keep his face, shaved head with a little regrowth and a receding hairline, stocky soft body with a small belly, the tight black short-sleeved T-shirt with the cracked, badly printed white eagle with spread wings, the question-mark tattoo on his neck, the pink sweet cocktail with a paper umbrella, a cherry and a spiral straw, colours and hand-inked European comic style exactly as in the reference; do not redesign him. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: his whole shoulders and both arms, the cocktail included, fit inside the canvas with a small empty margin on both sides; from the top of his head, with a small empty margin above it, down to his waist or a little below at the bottom edge; his eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: solemn heroic pride, chin up, chest puffed out, a proud gaze into the distance, one hand on his heart and the other holding the pink cocktail with the little finger raised. It must look ridiculous and satirical.
+
+Avoid: any other change to the character; raised-arm salutes, flags, runes, swastikas, fasces, complete or real Celtic crosses, or any real political symbol; extra tattoos; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### sergio-annoiato-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 12:59:31 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2476702 byte; SHA-256 `19958f00a1e22f4809774cb0eb0018692810391d6bed3fb26ab500b16119ac45` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/sergio.png` SHA-256 `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/sergio-annoiato-1.png`; SHA-256 `19958f00a1e22f4809774cb0eb0018692810391d6bed3fb26ab500b16119ac45` |
+| Consegna | non selezionato |
+| Conversione | nessuna |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 1, 1, 0, 0; intervallo alpha (0, 254) |
+| Composizione | nessuna |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | tentativo precedente; ripetuto erroneamente per valutazione visiva dell’alpha |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same man for a visual-novel dialogue scene. Keep his sharp face with pointed cheekbones and chin, thin nose, short brown hair, the elegant petrol-blue suit with no tie and no waistcoat over a white shirt with an open collar, the thin lit cigarette, colours and hand-inked European comic style exactly as in the reference; do not redesign him. Keep the suit clearly petrol blue, not slate grey. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: he is tall and lean; his whole shoulders and both arms fit inside the canvas with a small empty margin on both sides; from the top of his head, with a small empty margin above it, down to his waist or a little below at the bottom edge; his eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: bored and superior, heavy-lidded eyes looking down at the viewer, a faint sarcastic half smile, one eyebrow slightly raised, one hand in his trouser pocket and the other holding the thin cigarette with disdain.
+
+Avoid: any other change to the character; a bunch of keys on his belt; a cigarette pack or anything with writing; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### sergio-annoiato-2
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:02:49 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2594684 byte; SHA-256 `1be33a0624ec81aee2cdda743a297b471ef1182c4d24591809a2f501c022cf38` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/sergio.png` SHA-256 `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/sergio-annoiato-2.png`; SHA-256 `1be33a0624ec81aee2cdda743a297b471ef1182c4d24591809a2f501c022cf38` |
+| Consegna | [sergio-annoiato.webp](ritratti/sergio-annoiato.webp); 1024×1536 px, WEBP, RGBA, 373994 byte; SHA-256 `c5dcc8c5573521276a2be37c9b69c7bcd3be8e3596b523ec47340f947c1d8ce2` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [e-sergio-annoiato.webp](composizioni/e-sergio-annoiato.webp); 1366×768 px, WEBP, RGB, 258604 byte; SHA-256 `34730b6b4c42e9e2da163c6083c83d8355a29d00ccb8a3dc5c7272f489c198bd` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same man for a visual-novel dialogue scene. Keep his sharp face with pointed cheekbones and chin, thin nose, short brown hair, the elegant petrol-blue suit with no tie and no waistcoat over a white shirt with an open collar, the thin lit cigarette, colours and hand-inked European comic style exactly as in the reference; do not redesign him. Keep the suit clearly petrol blue, not slate grey. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: he is tall and lean; his whole shoulders and both arms fit inside the canvas with a small empty margin on both sides; from the top of his head, with a small empty margin above it, down to his waist or a little below at the bottom edge; his eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: bored and superior, heavy-lidded eyes looking down at the viewer, a faint sarcastic half smile, one eyebrow slightly raised, one hand in his trouser pocket and the other holding the thin cigarette with disdain.
+
+Avoid: any other change to the character; a bunch of keys on his belt; a cigarette pack or anything with writing; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### celestina-assonnata-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:05:20 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2993280 byte; SHA-256 `433b95fd81148465d5fd57f8692f941e75edb8c42b45596b9a961a74ab7b18c8` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/celestina-furba-2.png` SHA-256 `2c15ff3c9b099f414a1769831f63e313d7155f3f241ef4b43af88d8b6ee21b2f`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/celestina-assonnata-1.png`; SHA-256 `433b95fd81148465d5fd57f8692f941e75edb8c42b45596b9a961a74ab7b18c8` |
+| Consegna | [celestina-assonnata.webp](ritratti/celestina-assonnata.webp); 1024×1536 px, WEBP, RGBA, 468610 byte; SHA-256 `b83a19ebecdfd037ebe42bb888009a887973f53a8ca05cc88d552ddd52afd5b3` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-celestina-assonnata.webp](composizioni/f-celestina-assonnata.webp); 1366×768 px, WEBP, RGB, 270852 byte; SHA-256 `7ecabe4c06310991f138c7ac705148152c864f22f62b462cd166356578714e57` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same young woman, her face, red hair shaved at the sides with the bleached tuft, the plum-purple tracksuit, the bum bag, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, her hands and head: just woken up, eyes barely open and squinting at a light, hair squashed flat on one side, rubbing one eye with the back of her hand, mouth half open in a groggy mumble. The sweet is gone from her hand.
+
+Avoid: any other change to the character; syringes, powders, pills or any recognizable drug paraphernalia; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### celestina-contenta-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:04:27 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2909605 byte; SHA-256 `5d6378d845b2dadf9200449cd32fb104ab0a92e5b0f2397a89eccc7d990c5d94` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/celestina-furba-2.png` SHA-256 `2c15ff3c9b099f414a1769831f63e313d7155f3f241ef4b43af88d8b6ee21b2f`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/celestina-contenta-1.png`; SHA-256 `5d6378d845b2dadf9200449cd32fb104ab0a92e5b0f2397a89eccc7d990c5d94` |
+| Consegna | [celestina-contenta.webp](ritratti/celestina-contenta.webp); 1024×1536 px, WEBP, RGBA, 437928 byte; SHA-256 `e0d13c96a72eaad33d44009225b62e247cadd8dc1c3990dea682e539839b53df` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-celestina-contenta.webp](composizioni/f-celestina-contenta.webp); 1366×768 px, WEBP, RGB, 270534 byte; SHA-256 `3005be7148b44a80717ccc4ec801dc47031f9a0ec13dfe976fe5f313f3a88822` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same young woman, her face, red hair shaved at the sides with the bleached tuft, the plum-purple tracksuit, the bum bag, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, her hands: genuinely happy for once, a wide crooked grin with slightly uneven teeth, bright eyes, one fist raised to her chest as if joining a gang. The sweet is gone from her hand.
+
+Avoid: any other change to the character; syringes, powders, pills or any recognizable drug paraphernalia; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### celestina-arrabbiata-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:11:07 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2740003 byte; SHA-256 `6679a54133ff69b691cb2a7303e04156a55727ab75222a652784fbfda0e1343f` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/celestina-furba-2.png` SHA-256 `2c15ff3c9b099f414a1769831f63e313d7155f3f241ef4b43af88d8b6ee21b2f`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/celestina-arrabbiata-1.png`; SHA-256 `6679a54133ff69b691cb2a7303e04156a55727ab75222a652784fbfda0e1343f` |
+| Consegna | [celestina-arrabbiata.webp](ritratti/celestina-arrabbiata.webp); 1024×1536 px, WEBP, RGBA, 406512 byte; SHA-256 `69e1c32761e4e764afc213ef0d24b4d5a22f6c367791a9b6c28909b573277fd6` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-celestina-arrabbiata.webp](composizioni/f-celestina-arrabbiata.webp); 1366×768 px, WEBP, RGB, 266918 byte; SHA-256 `b69d5f31ea2eeeaf9302a6ca1a36125df65dde10faaf5b1a891d380edd49a0ab` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same young woman, her face, red hair shaved at the sides with the bleached tuft, the plum-purple tracksuit, the bum bag, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, her hands: sulky and annoyed, eyebrows pulled down, eyes narrowed, lips twisted in a grudging scowl, arms crossed tight. The sweet is gone from her hand.
+
+Avoid: any other change to the character; syringes, powders, pills or any recognizable drug paraphernalia; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### celestina-triste-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:06:02 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2819380 byte; SHA-256 `741a46d9b7694bc0622edb5eb9ff90d5ad7222e8dc761691440fcefe206aa5d5` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/celestina-furba-2.png` SHA-256 `2c15ff3c9b099f414a1769831f63e313d7155f3f241ef4b43af88d8b6ee21b2f`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/celestina-triste-1.png`; SHA-256 `741a46d9b7694bc0622edb5eb9ff90d5ad7222e8dc761691440fcefe206aa5d5` |
+| Consegna | [celestina-triste.webp](ritratti/celestina-triste.webp); 1024×1536 px, WEBP, RGBA, 431276 byte; SHA-256 `a9ca56cf52012048fabc63a7a56390b9f6a5a5c8ff0b810eeba0cf7d2c13edea` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-celestina-triste.webp](composizioni/f-celestina-triste.webp); 1366×768 px, WEBP, RGB, 264496 byte; SHA-256 `8ef77c1b90c255d6e24252c21a0a0725360c8c9af9f352d7144d28604bf9489a` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same young woman, her face, red hair shaved at the sides with the bleached tuft, the plum-purple tracksuit, the bum bag, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, her hands: quietly sad, eyes lowered, eyebrows tilted up in the middle, mouth a small downturned line, hugging her own arms. Melancholic, not tragic. The sweet is gone from her hand.
+
+Avoid: any other change to the character; tears streaming down; syringes, powders, pills or any recognizable drug paraphernalia; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### beppe-contento-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:11:44 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2844076 byte; SHA-256 `f30180e300b120494fb060c85af922bf5e44955ba57672f037b47ac3a8de975c` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/beppe-tranquillo-2.png` SHA-256 `450612d9d45c58cbadeb324c24cdb1e77f23df149aab40343a3f6507039d95a4`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/beppe-contento-1.png`; SHA-256 `f30180e300b120494fb060c85af922bf5e44955ba57672f037b47ac3a8de975c` |
+| Consegna | [beppe-contento.webp](ritratti/beppe-contento.webp); 1024×1536 px, WEBP, RGBA, 495482 byte; SHA-256 `70bb7b82131f6fea6df54b7fb342461ba9d820ecba3c2b82fe8baf21a70c070b` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-beppe-contento.webp](composizioni/f-beppe-contento.webp); 1366×768 px, WEBP, RGB, 280008 byte; SHA-256 `a0a9c95348da47c7684b5fd1aa911222537d172989abad052e601c83edec4751` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his face, long beard, hair in a bun, tobacco-brown overalls, black band T-shirt with the illegible logo, the forearm tattoo, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and the pose of his arms and hands: cheerful and pleased with an easy job, a broad grin that lifts the beard, eyes crinkled, arms uncrossed, giving a thumbs up with one hand.
+
+Avoid: any other change to the character; tools in his pockets or hands; readable writing or real band names or logos; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### beppe-pensieroso-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:07:22 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2679592 byte; SHA-256 `d258d97da0420f4b1e2cd341dea4fb37d6edacfa6d7fc82aa30925e407149aed` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/beppe-tranquillo-2.png` SHA-256 `450612d9d45c58cbadeb324c24cdb1e77f23df149aab40343a3f6507039d95a4`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/beppe-pensieroso-1.png`; SHA-256 `d258d97da0420f4b1e2cd341dea4fb37d6edacfa6d7fc82aa30925e407149aed` |
+| Consegna | [beppe-pensieroso.webp](ritratti/beppe-pensieroso.webp); 1024×1536 px, WEBP, RGBA, 437766 byte; SHA-256 `434f72269d6dee0f81f862eb8bde6ca31af7eb1e4c50a9a7704027749eb96da9` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-beppe-pensieroso.webp](composizioni/f-beppe-pensieroso.webp); 1366×768 px, WEBP, RGB, 272956 byte; SHA-256 `20d7a168e5cece88a9e6455507275146f9c6ff3784f9c573d606d9ce555a9c4a` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his face, long beard, hair in a bun, tobacco-brown overalls, black band T-shirt with the illegible logo, the forearm tattoo, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and the pose of his arms and hands: puzzled and thinking, one eyebrow up, eyes narrowed and turned aside, scratching his beard with one hand, the other arm across his chest.
+
+Avoid: any other change to the character; tools in his pockets or hands; readable writing or real band names or logos; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### beppe-scocciato-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:13:57 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2844696 byte; SHA-256 `df6a0c7b644c8a64d8b5f00259433a4b84c3c1d99d97b2193668e2b5835f20fd` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/beppe-tranquillo-2.png` SHA-256 `450612d9d45c58cbadeb324c24cdb1e77f23df149aab40343a3f6507039d95a4`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/beppe-scocciato-1.png`; SHA-256 `df6a0c7b644c8a64d8b5f00259433a4b84c3c1d99d97b2193668e2b5835f20fd` |
+| Consegna | non selezionato |
+| Conversione | nessuna |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | nessuna |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | tentativo precedente; Il sospiro è una nuvoletta visibile, modifica non richiesta anche nel secondo tentativo. |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his face, long beard, hair in a bun, tobacco-brown overalls, black band T-shirt with the illegible logo, the forearm tattoo, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and the pose of his arms and hands: fed up and irritated, rolling his eyes, a deep sigh puffing out his moustache, arms crossed more tightly, shoulders slumped.
+
+Avoid: any other change to the character; tools in his pockets or hands; readable writing or real band names or logos; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### beppe-scocciato-2
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:17:36 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2869152 byte; SHA-256 `717a2e3b7a0eb052e1b0bffc5a8ac37ab8707b0808f83d274de4f58d391f9c25` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/beppe-tranquillo-2.png` SHA-256 `450612d9d45c58cbadeb324c24cdb1e77f23df149aab40343a3f6507039d95a4`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/beppe-scocciato-2.png`; SHA-256 `717a2e3b7a0eb052e1b0bffc5a8ac37ab8707b0808f83d274de4f58d391f9c25` |
+| Consegna | [beppe-scocciato.webp](ritratti/beppe-scocciato.webp); 1024×1536 px, WEBP, RGBA, 489440 byte; SHA-256 `309dc85907e446aa2a00c445580eef2b821fc8e3bcfe93c8741cee4af5cf41e4` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-beppe-scocciato.webp](composizioni/f-beppe-scocciato.webp); 1366×768 px, WEBP, RGB, 275630 byte; SHA-256 `11f8ec08a4f13620f524f693eb877dd55cb925f28fb2650c30efb0794691651b` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; Il sospiro è una nuvoletta visibile, modifica non richiesta anche nel secondo tentativo. |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his face, long beard, hair in a bun, tobacco-brown overalls, black band T-shirt with the illegible logo, the forearm tattoo, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and the pose of his arms and hands: fed up and irritated, rolling his eyes, a deep sigh puffing out his moustache, arms crossed more tightly, shoulders slumped.
+
+Avoid: any other change to the character; tools in his pockets or hands; readable writing or real band names or logos; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### beppe-serio-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:09:37 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2807389 byte; SHA-256 `8de3a28da6838ee42bb48a7ec96b8a0dd7fbe3e0a271e0a2d407f565401d30d9` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/beppe-tranquillo-2.png` SHA-256 `450612d9d45c58cbadeb324c24cdb1e77f23df149aab40343a3f6507039d95a4`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/beppe-serio-1.png`; SHA-256 `8de3a28da6838ee42bb48a7ec96b8a0dd7fbe3e0a271e0a2d407f565401d30d9` |
+| Consegna | [beppe-serio.webp](ritratti/beppe-serio.webp); 1024×1536 px, WEBP, RGBA, 482384 byte; SHA-256 `10b7ded3d2a374f778d716ef109d6f660258cc5eb5e8c06419bdd49af890aa07` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-beppe-serio.webp](composizioni/f-beppe-serio.webp); 1366×768 px, WEBP, RGB, 277832 byte; SHA-256 `4a62274471735dbf9b79ec86e80009066871e152a2b700a809c47647e1adaac3` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his face, long beard, hair in a bun, tobacco-brown overalls, black band T-shirt with the illegible logo, the forearm tattoo, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and the pose of his arms and hands: serious and matter-of-fact, eyebrows low, mouth a straight line under the beard, a slight grave nod, one hand raised with the palm down as if saying «listen to me».
+
+Avoid: any other change to the character; tools in his pockets or hands; readable writing or real band names or logos; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### duccio-dolorante-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:13:24 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2914935 byte; SHA-256 `f787dd2a03d363e1a47bc89d9cca5133794910992c96b27003262f41d532e4d0` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/duccio-fiero-2.png` SHA-256 `b1dcb3f114a3af147d9fac33e9435128e7d407ecc09e88f333257e786179e83e`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/duccio-dolorante-1.png`; SHA-256 `f787dd2a03d363e1a47bc89d9cca5133794910992c96b27003262f41d532e4d0` |
+| Consegna | [duccio-dolorante.webp](ritratti/duccio-dolorante.webp); 1024×1536 px, WEBP, RGBA, 456360 byte; SHA-256 `9219eb868912fc7644a62feb4017172fa1fcde5b937a486f3adf6687398614fe` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-duccio-dolorante.webp](composizioni/f-duccio-dolorante.webp); 1366×768 px, WEBP, RGB, 273616 byte; SHA-256 `8b979f7f49df58fd5e357dc609d3b148b3a5dc9f23c6155e6cab50ff32446af2` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same young man, his face, shaved head with regrowth, stocky soft body, the black T-shirt with the cracked white eagle, the question-mark tattoo on his neck, the pink cocktail, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and the pose of his arms: in comical pain and humiliated, wincing with one eye shut, a red bump on his forehead, the hand that was on his heart now pressed to his bruised cheek, still clutching the pink cocktail upright with the little finger raised, not a drop spilled.
+
+Avoid: any other change to the character; blood or wounds; raised-arm salutes, flags, runes, swastikas, fasces, complete or real Celtic crosses, or any real political symbol; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### duccio-offeso-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:08:01 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2897706 byte; SHA-256 `70a73c5246ebe73790f53377812cc18a6277937cdbefe67d0d20fdb78a795ee2` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/duccio-fiero-2.png` SHA-256 `b1dcb3f114a3af147d9fac33e9435128e7d407ecc09e88f333257e786179e83e`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/duccio-offeso-1.png`; SHA-256 `70a73c5246ebe73790f53377812cc18a6277937cdbefe67d0d20fdb78a795ee2` |
+| Consegna | [duccio-offeso.webp](ritratti/duccio-offeso.webp); 1024×1536 px, WEBP, RGBA, 456334 byte; SHA-256 `060d8c25c63027388b625e23bd039110477c956a6136f315157df0208fecec0f` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-duccio-offeso.webp](composizioni/f-duccio-offeso.webp); 1366×768 px, WEBP, RGB, 270984 byte; SHA-256 `53d9169c53c67cfaeaf881f72e76b78999bf678b3ac5eda18a6d3ac003c8e85d` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same young man, his face, shaved head with regrowth, stocky soft body, the black T-shirt with the cracked white eagle, the question-mark tattoo on his neck, the pink cocktail, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and the pose of his arms: indignant and pouting, face red, lips pushed out, nostrils flared, chin jutting, jabbing a thumb over his shoulder as if telling someone to get lost, the pink cocktail held close to his chest.
+
+Avoid: any other change to the character; raised-arm salutes, flags, runes, swastikas, fasces, complete or real Celtic crosses, or any real political symbol; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### duccio-serio-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:08:46 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2909546 byte; SHA-256 `d17152a285a425da976bfa791eb422977991aadeec18036cda8a0e85ebf24cca` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/duccio-fiero-2.png` SHA-256 `b1dcb3f114a3af147d9fac33e9435128e7d407ecc09e88f333257e786179e83e`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/duccio-serio-1.png`; SHA-256 `d17152a285a425da976bfa791eb422977991aadeec18036cda8a0e85ebf24cca` |
+| Consegna | non selezionato |
+| Conversione | nessuna |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 43, 57, 3, 7, 17, 5; intervallo alpha (0, 254) |
+| Composizione | nessuna |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | tentativo precedente: alpha agli angoli 43 e 57, alone semitrasparente; ripetuto |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same young man, his face, shaved head with regrowth, stocky soft body, the black T-shirt with the cracked white eagle, the question-mark tattoo on his neck, the pink cocktail, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and the pose of his arms: a bouncer trying to look tough, eyes narrowed, jaw set, frowning, looking the viewer up and down, his free arm crossed over his belly, the pink cocktail still in the other hand.
+
+Avoid: any other change to the character; raised-arm salutes, flags, runes, swastikas, fasces, complete or real Celtic crosses, or any real political symbol; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### duccio-beato-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:10:23 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2926916 byte; SHA-256 `9b2a859968f82206e5f29d416193db75cbe9fcb0c9cb969e556a9f263a79494a` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/duccio-fiero-2.png` SHA-256 `b1dcb3f114a3af147d9fac33e9435128e7d407ecc09e88f333257e786179e83e`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/duccio-beato-1.png`; SHA-256 `9b2a859968f82206e5f29d416193db75cbe9fcb0c9cb969e556a9f263a79494a` |
+| Consegna | [duccio-beato.webp](ritratti/duccio-beato.webp); 1024×1536 px, WEBP, RGBA, 461076 byte; SHA-256 `88a6c0dca69add4a1d45f4706574197357b0d528f5803c5f5da0ffabb8455a8d` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 253; intervallo alpha (0, 254) |
+| Composizione | [f-duccio-beato.webp](composizioni/f-duccio-beato.webp); 1366×768 px, WEBP, RGB, 276026 byte; SHA-256 `3e9855af3b217e174f614040265f1a0fee1981a11f4b5e7e22bcf89a9ee9708f` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same young man, his face, shaved head with regrowth, stocky soft body, the black T-shirt with the cracked white eagle, the question-mark tattoo on his neck, the pink cocktail, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and the pose of his arms: blissful, eyes closed, sipping the pink cocktail through the spiral straw with the little finger raised, while with his other arm he flexes a bicep that is not there.
+
+Avoid: any other change to the character; raised-arm salutes, flags, runes, swastikas, fasces, complete or real Celtic crosses, or any real political symbol; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### sergio-strafottente-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:06:42 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2505287 byte; SHA-256 `3906fdb743467def3ab835b9cb9c3f52947c32d50e3c90331652200f749aaad7` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/sergio-annoiato-2.png` SHA-256 `1be33a0624ec81aee2cdda743a297b471ef1182c4d24591809a2f501c022cf38`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/sergio-strafottente-1.png`; SHA-256 `3906fdb743467def3ab835b9cb9c3f52947c32d50e3c90331652200f749aaad7` |
+| Consegna | [sergio-strafottente.webp](ritratti/sergio-strafottente.webp); 1024×1536 px, WEBP, RGBA, 340210 byte; SHA-256 `97b3a19c50d41077343bab1b078ed74dd3f8330031698187fd3649951e449d8a` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 1, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-sergio-strafottente.webp](composizioni/f-sergio-strafottente.webp); 1366×768 px, WEBP, RGB, 251486 byte; SHA-256 `58a6098c957479bd096ffb3dc65b1576adc3b46bc3cd3ba3b21d2e6fd3331744` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his sharp face, short brown hair, petrol-blue suit, white shirt with an open collar, the thin cigarette, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and, where needed, the pose of his arms: openly contemptuous, head tilted back, looking down his nose, a wide mocking smirk, one eyebrow high, flicking the ash off the thin cigarette toward the viewer.
+
+Avoid: any other change to the character; a bunch of keys on his belt; a cigarette pack or anything with writing; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### sergio-malvagio-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:12:33 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2415379 byte; SHA-256 `739ed401062c23b2a8791a658d626498ccf58a81fdadad9db133f4c9a428bdda` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/sergio-annoiato-2.png` SHA-256 `1be33a0624ec81aee2cdda743a297b471ef1182c4d24591809a2f501c022cf38`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/sergio-malvagio-1.png`; SHA-256 `739ed401062c23b2a8791a658d626498ccf58a81fdadad9db133f4c9a428bdda` |
+| Consegna | [sergio-malvagio.webp](ritratti/sergio-malvagio.webp); 1024×1536 px, WEBP, RGBA, 307644 byte; SHA-256 `beed81a8dafb2789378393637e982e1da711c7efc9f3b28831c6baeeb92dd029` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 1, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-sergio-malvagio.webp](composizioni/f-sergio-malvagio.webp); 1366×768 px, WEBP, RGB, 255102 byte; SHA-256 `37df0efd319f2cd6deb63bc8141111fd54911c4f8d5625b6dc9ce5d3db9a4882` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his sharp face, short brown hair, petrol-blue suit, white shirt with an open collar, the thin cigarette, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and, where needed, the pose of his arms: coldly menacing, eyes narrowed to slits, a thin cruel smile, his face slightly lowered so that he looks up at the viewer from under his brows, a curl of cigarette smoke drifting across his face. Sinister but restrained, a villain who never raises his voice.
+
+Avoid: any other change to the character; a bunch of keys on his belt; a cigarette pack or anything with writing; weapons; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### sergio-pensieroso-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:14:37 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2395120 byte; SHA-256 `7c7604e9466d14a4c625958ed8423d083b76d67b5c2e8e595bf8fad5906d2d7a` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/sergio-annoiato-2.png` SHA-256 `1be33a0624ec81aee2cdda743a297b471ef1182c4d24591809a2f501c022cf38`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/sergio-pensieroso-1.png`; SHA-256 `7c7604e9466d14a4c625958ed8423d083b76d67b5c2e8e595bf8fad5906d2d7a` |
+| Consegna | [sergio-pensieroso.webp](ritratti/sergio-pensieroso.webp); 1024×1536 px, WEBP, RGBA, 305534 byte; SHA-256 `f7f97e2e21c8c316842cddd0977267e6fb8c23649aa2c939b68436c78e900761` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-sergio-pensieroso.webp](composizioni/f-sergio-pensieroso.webp); 1366×768 px, WEBP, RGB, 251412 byte; SHA-256 `62339e84c392c0c96ee2a0e2ca70737bc191cc20308e5e4389ae728a8913d5d5` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his sharp face, short brown hair, petrol-blue suit, white shirt with an open collar, the thin cigarette, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and, where needed, the pose of his arms: calculating, eyes turned aside as if weighing a move several steps ahead, lips pressed around the thin cigarette, the other hand still in his pocket.
+
+Avoid: any other change to the character; a bunch of keys on his belt; a cigarette pack or anything with writing; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### mara-seria-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:15:19 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2933742 byte; SHA-256 `346b15232e8557ea8d8672f277f777a47699e671099a0cf9b35a0b100326ee5c` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/mara-neutra-1.png` SHA-256 `a2a629d0e1d229ae794990b6863a5f165b4f84e766aaf9a4e790bad880ea7f40`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/mara-seria-1.png`; SHA-256 `346b15232e8557ea8d8672f277f777a47699e671099a0cf9b35a0b100326ee5c` |
+| Consegna | [mara-seria.webp](ritratti/mara-seria.webp); 1024×1536 px, WEBP, RGBA, 455780 byte; SHA-256 `e2bee645d03dd02843e6e25ffce2383d8d4a3e59b47f8e7ff3b41f4d83515fc2` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-mara-seria.webp](composizioni/f-mara-seria.webp); 1366×768 px, WEBP, RGB, 268046 byte; SHA-256 `0eed7dca859e2bc8f004665a37b4aa77345da7fc176a3a50e85a2b32867e17d0` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same woman, her face, long black hair with the badly self-cut fringe, headphones, teal reflective vest over the dark hoodie, backpack straps, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, her free hand: dead serious and determined, eyes fixed on the viewer, eyebrows low and straight, mouth a firm line, her free hand held out with the palm up, demanding something be handed over.
+
+Avoid: any other change to the character, her framing or her position on the canvas; mirroring; any text, letters, numbers, logos, brand names or recognizable branding of any real delivery company, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### s1-esterno-di-giorno-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:19:22 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1536×1024 |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGB, 3401876 byte; SHA-256 `411416e2ff3d26d779a829aae34347d47fa78a7aea583a4e3c8f99be475400a1` |
+| Parametri / seed | opaco richiesto; qualité e seed non esposti |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/s1-esterno-1.png` SHA-256 `e6d852489fec118e8983be58132b75130c0c2ce1f27cc0b673ee5a6272bdf139`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/s1-esterno-di-giorno-1.png`; SHA-256 `411416e2ff3d26d779a829aae34347d47fa78a7aea583a4e3c8f99be475400a1` |
+| Consegna | [s1-esterno-di-giorno.webp](sfondi/s1-esterno-di-giorno.webp); 1536×1024 px, WEBP, RGB, 578920 byte; SHA-256 `93f678528aa0dd8ca4fbbff317d565a781e8b8b46cd17d5e8c84a59a9e2012fe` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | opaco; verifica alpha non applicabile |
+| Composizione | [g-s1-esterno-di-giorno.webp](composizioni/g-s1-esterno-di-giorno.webp); 1366×768 px, WEBP, RGB, 402376 byte; SHA-256 `f498da2b76bb5678f994f91f0cf3b94b7491648c09d62e292523e548ccb5a536` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached background illustration. Keep everything exactly the same: the street, the bar front, the door frame, the shop window, the wall, the drainpipe, the street lamp, the hand-inked European comic style and the composition. Change only this: it is now an overcast weekday morning, with flat grey daylight instead of the night lighting; the street lamp is off; the rectangular sign panel above the door is switched off, dark and dull; a dented, graffiti-free metal roller shutter is pulled all the way down over the door and the shop window, closed with a padlock at the bottom. The place looks even shabbier in daylight.
+
+Avoid: any other change to the image; any text, letters, numbers, graffiti, logos, brands, signatures or watermarks; people; photographic or 3D-rendered style.
+~~~
+
+### s2-interno-al-buio-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:20:02 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1536×1024 |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGB, 2216770 byte; SHA-256 `faff89693d1f3e2b8c0bd7d90d10848750049be30fcfecc968a82e4426080d0a` |
+| Parametri / seed | opaco richiesto; qualité e seed non esposti |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/s2-interno-2.png` SHA-256 `d91fe39d1891e0f32edce7b667e46d0df6a6d2b11ba0108f83d1b54ccc9bc74a`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/s2-interno-al-buio-1.png`; SHA-256 `faff89693d1f3e2b8c0bd7d90d10848750049be30fcfecc968a82e4426080d0a` |
+| Consegna | [s2-interno-al-buio.webp](sfondi/s2-interno-al-buio.webp); 1536×1024 px, WEBP, RGB, 240386 byte; SHA-256 `3bf55dc12e696fd6e6b7fecd68f454f6097ea11707f7cb44e5e3a4640e33bc41` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | opaco; verifica alpha non applicabile |
+| Composizione | [g-s2-interno-al-buio.webp](composizioni/g-s2-interno-al-buio.webp); 1366×768 px, WEBP, RGB, 160312 byte; SHA-256 `ca1ada02fd5ca6a0993fd7a57ee50567a151df81a6db24c50e4b75f52dd7f06c` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; nessuna violazione oggettiva annotata |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached background illustration. Keep everything exactly the same: the room, the counter, the shelves and bottles, the espresso machine, the walls, the hand-inked European comic style and the composition. Change only this: the bar is closed for the night. All the wall lamps are off; the only light is a single small lamp hanging above the counter, casting a weak warm pool of light, with the rest of the room in deep blue-brown shadow. The chairs are upside down on the tables. The centre behind where a character will stand stays readable in the dim light, and the lower quarter stays without important details.
+
+Avoid: any other change to the image; people, faces, hands, silhouettes; any text, letters, numbers, signs, labels, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### s3-esterno-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:18:41 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1536×1024 |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGB, 2432761 byte; SHA-256 `909c2cbe3209d5b49bfc0e25bc2d19a6bb1f7f8d83dccf0979d39a3963b81368` |
+| Parametri / seed | opaco richiesto; qualité e seed non esposti |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`<br>2. `docs/design/carriere/asset/tutorial/originali/s3-dimmi-di-si-1.png` SHA-256 `82445de8c48d34295bed429253e10940edd22a69196aad6caf9f56c6237432f7`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/s3-esterno-1.png`; SHA-256 `909c2cbe3209d5b49bfc0e25bc2d19a6bb1f7f8d83dccf0979d39a3963b81368` |
+| Consegna | non selezionato |
+| Conversione | nessuna |
+| Alpha | opaco; verifica alpha non applicabile |
+| Composizione | nessuna |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | tentativo precedente; Nel primo tentativo i paletti sono dorati invece che cromati; nel secondo restano di colore caldo. |
+
+Testo inviato integralmente:
+
+~~~text
+Background illustration for a visual-novel dialogue scene in the original card game Botte Micidiali. One opaque landscape image, 1536 x 1024 pixels, aspect ratio 3:2. Use image 1 only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Use image 2, the approved interior of the same trendy cocktail bar, only as the reference for drawing style, level of detail and its cleaner, cooler colours, so that the two backgrounds belong together; do not copy its content.
+
+The scene: the outside of an expensive, pretentious disco pub at night, seen at eye level from the street, nobody around. In the central third of the width: a sleek entrance with a glossy black door, brass handles, a short red carpet, two chrome posts with a velvet rope between them, and above the door a plain rectangular lit sign panel with no lettering at all. Towards the sides: a dark glass front with cold indirect light, potted topiary plants, a polished pavement, as disposable side context. It must feel snobbish and overpriced, the exact opposite of a grimy neighbourhood dive bar, still drawn in the same hand-inked comic style. The lower quarter is plain pavement with no important details, because a dialogue box will cover it, and the centre stays uncluttered, because a character portrait will stand in front of it. Everything important must stay inside the central third.
+
+Avoid: any text, letters, numbers, signs with writing, labels, logos, brands, signatures or watermarks; neon writing; people, faces, hands, silhouettes; playing cards, game interface, frames or borders; photographic or 3D-rendered style; dominant yellow-and-black colours.
+~~~
+
+### s3-esterno-2
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:21:50 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1536×1024 |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGB, 2571210 byte; SHA-256 `2853d55df1841dbcf7ceb4fdf009d3f846a680d2e55d951979be9242c1b36496` |
+| Parametri / seed | opaco richiesto; qualité e seed non esposti |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`<br>2. `docs/design/carriere/asset/tutorial/originali/s3-dimmi-di-si-1.png` SHA-256 `82445de8c48d34295bed429253e10940edd22a69196aad6caf9f56c6237432f7`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/s3-esterno-2.png`; SHA-256 `2853d55df1841dbcf7ceb4fdf009d3f846a680d2e55d951979be9242c1b36496` |
+| Consegna | [s3-esterno.webp](sfondi/s3-esterno.webp); 1536×1024 px, WEBP, RGB, 347394 byte; SHA-256 `82af22a33d5375853aa71ebdb52eb4e556acfd6522d5afe2f709a5be18ed3a66` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | opaco; verifica alpha non applicabile |
+| Composizione | [g-s3-esterno.webp](composizioni/g-s3-esterno.webp); 1366×768 px, WEBP, RGB, 176844 byte; SHA-256 `651f693eac30162143e7fb4831561627687ead02bc42f1a4cf2d00cf635508e3` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; Nel primo tentativo i paletti sono dorati invece che cromati; nel secondo restano di colore caldo. |
+
+Testo inviato integralmente:
+
+~~~text
+Background illustration for a visual-novel dialogue scene in the original card game Botte Micidiali. One opaque landscape image, 1536 x 1024 pixels, aspect ratio 3:2. Use image 1 only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Use image 2, the approved interior of the same trendy cocktail bar, only as the reference for drawing style, level of detail and its cleaner, cooler colours, so that the two backgrounds belong together; do not copy its content.
+
+The scene: the outside of an expensive, pretentious disco pub at night, seen at eye level from the street, nobody around. In the central third of the width: a sleek entrance with a glossy black door, brass handles, a short red carpet, two chrome posts with a velvet rope between them, and above the door a plain rectangular lit sign panel with no lettering at all. Towards the sides: a dark glass front with cold indirect light, potted topiary plants, a polished pavement, as disposable side context. It must feel snobbish and overpriced, the exact opposite of a grimy neighbourhood dive bar, still drawn in the same hand-inked comic style. The lower quarter is plain pavement with no important details, because a dialogue box will cover it, and the centre stays uncluttered, because a character portrait will stand in front of it. Everything important must stay inside the central third.
+
+Avoid: any text, letters, numbers, signs with writing, labels, logos, brands, signatures or watermarks; neon writing; people, faces, hands, silhouettes; playing cards, game interface, frames or borders; photographic or 3D-rendered style; dominant yellow-and-black colours.
+~~~
+
+### s4-cantina-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:18:45 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1536×1024 |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGB, 3117774 byte; SHA-256 `a5185aeea5d6443d5962885dd9e1e6171904023186fc2c189dc06102bc150cbd` |
+| Parametri / seed | opaco richiesto; qualité e seed non esposti |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`<br>2. `docs/design/carriere/asset/tutorial/originali/s2-interno-2.png` SHA-256 `d91fe39d1891e0f32edce7b667e46d0df6a6d2b11ba0108f83d1b54ccc9bc74a`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/s4-cantina-1.png`; SHA-256 `a5185aeea5d6443d5962885dd9e1e6171904023186fc2c189dc06102bc150cbd` |
+| Consegna | non selezionato |
+| Conversione | nessuna |
+| Alpha | opaco; verifica alpha non applicabile |
+| Composizione | nessuna |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | tentativo precedente; Il bottino si estende fuori dal terzo centrale e in parte nel quarto inferiore, anche nel secondo tentativo. |
+
+Testo inviato integralmente:
+
+~~~text
+Background illustration for a visual-novel dialogue scene in the original card game Botte Micidiali. One opaque landscape image, 1536 x 1024 pixels, aspect ratio 3:2. Use image 1 only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Use image 2, the approved interior of the same dive bar, only as the reference for drawing style, level of detail and mood, so that the two backgrounds belong together; do not copy its content.
+
+The scene: the cellar under a run-down neighbourhood dive bar, seen at eye level, nobody in it. A low vaulted ceiling with damp patches, a single bare light bulb hanging from a wire, rough brick walls. Towards the sides: stacks of empty bottle crates, metal beer kegs, a steep wooden staircase going up in a corner, cobwebs, as disposable side context. In the central third, on the floor a little left of the centre and just above the lower quarter, a small dog's secret hoard: a bottle cap, a worn black furry slipper, a few thin cigarette butts and some greasy scraps of paper, piled on an old rag. The lower quarter is plain dusty floor with no important details, because a dialogue box will cover it, and the centre stays uncluttered. Everything important must stay inside the central third.
+
+Avoid: any text, letters, numbers, labels on crates or kegs, logos, brands, signatures or watermarks; people, animals, faces, hands, silhouettes; playing cards, game interface, frames or borders; photographic or 3D-rendered style; dominant yellow-and-black colours.
+~~~
+
+### s4-cantina-2
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:21:18 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione/modifica guidata dagli allegati; un risultato |
+| Dimensioni richieste | 1536×1024 |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGB, 3195579 byte; SHA-256 `d76ceb6d55ec3461f91925c9752cc6895cf5d6d89478ad4259b8107de6324048` |
+| Parametri / seed | opaco richiesto; qualité e seed non esposti |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`<br>2. `docs/design/carriere/asset/tutorial/originali/s2-interno-2.png` SHA-256 `d91fe39d1891e0f32edce7b667e46d0df6a6d2b11ba0108f83d1b54ccc9bc74a`; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/s4-cantina-2.png`; SHA-256 `d76ceb6d55ec3461f91925c9752cc6895cf5d6d89478ad4259b8107de6324048` |
+| Consegna | [s4-cantina.webp](sfondi/s4-cantina.webp); 1536×1024 px, WEBP, RGB, 531394 byte; SHA-256 `1839411709098d7318f2b27931da6421301714d084c307a6e7428de34b39414c` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | opaco; verifica alpha non applicabile |
+| Composizione | [g-s4-cantina.webp](composizioni/g-s4-cantina.webp); 1366×768 px, WEBP, RGB, 352670 byte; SHA-256 `14926246519a8d213b5fb6fc099cba5332c30a87b31ef900feaee3099e5482ac` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; Il bottino si estende fuori dal terzo centrale e in parte nel quarto inferiore, anche nel secondo tentativo. |
+
+Testo inviato integralmente:
+
+~~~text
+Background illustration for a visual-novel dialogue scene in the original card game Botte Micidiali. One opaque landscape image, 1536 x 1024 pixels, aspect ratio 3:2. Use image 1 only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Use image 2, the approved interior of the same dive bar, only as the reference for drawing style, level of detail and mood, so that the two backgrounds belong together; do not copy its content.
+
+The scene: the cellar under a run-down neighbourhood dive bar, seen at eye level, nobody in it. A low vaulted ceiling with damp patches, a single bare light bulb hanging from a wire, rough brick walls. Towards the sides: stacks of empty bottle crates, metal beer kegs, a steep wooden staircase going up in a corner, cobwebs, as disposable side context. In the central third, on the floor a little left of the centre and just above the lower quarter, a small dog's secret hoard: a bottle cap, a worn black furry slipper, a few thin cigarette butts and some greasy scraps of paper, piled on an old rag. The lower quarter is plain dusty floor with no important details, because a dialogue box will cover it, and the centre stays uncluttered. Everything important must stay inside the central third.
+
+Avoid: any text, letters, numbers, labels on crates or kegs, logos, brands, signatures or watermarks; people, animals, faces, hands, silhouettes; playing cards, game interface, frames or borders; photographic or 3D-rendered style; dominant yellow-and-black colours.
+~~~
+
+### padrone-in-ombra-1
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:19:17 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 850970 byte; SHA-256 `1ca677dc425eda76873128da1a85adf9e28e765c99b368ee11b924ff94700bf2` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | nessuno; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/padrone-in-ombra-1.png`; SHA-256 `1ca677dc425eda76873128da1a85adf9e28e765c99b368ee11b924ff94700bf2` |
+| Consegna | non selezionato |
+| Conversione | nessuna |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | nessuna |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | tentativo precedente; La sagoma contiene sfumature e linee interne, anche nel secondo tentativo. |
+
+Testo inviato integralmente:
+
+~~~text
+Draw one man as a solid, uniform, very dark charcoal silhouette, with no face, no internal details, no clothing details and no colours, for a visual-novel scene where a mysterious character stays anonymous. Canvas 1024 x 1536 pixels, portrait 2:3. The whole figure, standing, fits inside the canvas with a small empty margin around it, feet near the bottom edge. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF). Recognizable only by his outline and pose: a slim businessman in a sharply tailored suit and a long coat, slicked-back hair, standing very straight and composed, holding a thin document folder under one arm and, in the other hand, a small rectangular paper slip, a cheque, held up between two fingers.
+
+Avoid: faces, eyes, features, inner lines, colours, gradients or highlights inside the silhouette; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; photographic or 3D-rendered style.
+~~~
+
+### padrone-in-ombra-2
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:22:24 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | generazione |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 851940 byte; SHA-256 `c983ef2371587a23a2ad5c86dc2c2bf290e9335e400a786a22937fa605fed7e2` |
+| Parametri / seed | trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | nessuno; impronte controllate prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/padrone-in-ombra-2.png`; SHA-256 `c983ef2371587a23a2ad5c86dc2c2bf290e9335e400a786a22937fa605fed7e2` |
+| Consegna | [padrone-in-ombra.webp](sprite/padrone-in-ombra.webp); 1024×1536 px, WEBP, RGBA, 48414 byte; SHA-256 `ae9498c2118de2be99858cdbbcbd1eb675d5fe474457dd7c80ccc41073a03ea5` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [g-padrone-in-ombra.webp](composizioni/g-padrone-in-ombra.webp); 1366×768 px, WEBP, RGB, 262158 byte; SHA-256 `e82561f64369febc2a42529c7ebc6692940a5dfde78665ffe92d963c83cf629a` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; La sagoma contiene sfumature e linee interne, anche nel secondo tentativo. |
+
+Testo inviato integralmente:
+
+~~~text
+Draw one man as a solid, uniform, very dark charcoal silhouette, with no face, no internal details, no clothing details and no colours, for a visual-novel scene where a mysterious character stays anonymous. Canvas 1024 x 1536 pixels, portrait 2:3. The whole figure, standing, fits inside the canvas with a small empty margin around it, feet near the bottom edge. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF). Recognizable only by his outline and pose: a slim businessman in a sharply tailored suit and a long coat, slicked-back hair, standing very straight and composed, holding a thin document folder under one arm and, in the other hand, a small rectangular paper slip, a cheque, held up between two fingers.
+
+Avoid: faces, eyes, features, inner lines, colours, gradients or highlights inside the silhouette; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; photographic or 3D-rendered style.
+~~~
+
+### duccio-serio-2
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:30:25 +0100 |
+| Commit preventivo / prompt | `b30f32c`; [prompt-principale.md](../../prompt-principale.md); testo integrale sotto |
+| Modalità | secondo tentativo; modifica guidata dal riferimento; un risultato |
+| Dimensioni richieste | 1024×1536 |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2843337 byte; SHA-256 `f36d823f95c4314fe9b048906efe6243c5d82c4af369341b2fbc44cf92c14e14` |
+| Parametri / seed | trasparenza richiesta; qualità e seed non esposti |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/duccio-fiero-2.png` SHA-256 `b1dcb3f114a3af147d9fac33e9435128e7d407ecc09e88f333257e786179e83e`; impronta controllata prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `originali/duccio-serio-2.png`; SHA-256 `f36d823f95c4314fe9b048906efe6243c5d82c4af369341b2fbc44cf92c14e14` |
+| Consegna | [duccio-serio.webp](ritratti/duccio-serio.webp); 1024×1536 px, WEBP, RGBA, 427158 byte; SHA-256 `49f0dad72c3d48853c4cb9a708dbd02123b4721dd2aae33d005f12a711878210` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione, alpha conservato; metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 0, 0, 0, 0, 0, 0; intervallo alpha (0, 254) |
+| Composizione | [f-duccio-serio.webp](composizioni/f-duccio-serio.webp); 1366×768 px, WEBP, RGB, 270326 byte; SHA-256 `f4832acf6b552034b27dc558423a5c0d96ea5a5341cf3fbd37589c0e163388ec` |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio; alone ai campioni rimosso |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same young man, his face, shaved head with regrowth, stocky soft body, the black T-shirt with the cracked white eagle, the question-mark tattoo on his neck, the pink cocktail, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and the pose of his arms: a bouncer trying to look tough, eyes narrowed, jaw set, frowning, looking the viewer up and down, his free arm crossed over his belly, the pink cocktail still in the other hand.
+
+Avoid: any other change to the character; raised-arm salutes, flags, runes, swastikas, fasces, complete or real Celtic crosses, or any real political symbol; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~

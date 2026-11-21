@@ -91,10 +91,10 @@ Avoid: any other change to the character; a bunch of keys on his belt; a cigaret
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| celestina-furba | | | |
-| beppe-tranquillo | | | |
-| duccio-fiero | | | |
-| sergio-annoiato | | | |
+| celestina-furba | [WebP](asset/tutorial/ritratti/celestina-furba.webp) | [Scheda](asset/tutorial/registro.md#celestina-furba-2) | |
+| beppe-tranquillo | [WebP](asset/tutorial/ritratti/beppe-tranquillo.webp) | [Scheda](asset/tutorial/registro.md#beppe-tranquillo-2) | |
+| duccio-fiero | [WebP](asset/tutorial/ritratti/duccio-fiero.webp) | [Scheda](asset/tutorial/registro.md#duccio-fiero-2) | |
+| sergio-annoiato | [WebP](asset/tutorial/ritratti/sergio-annoiato.webp) | [Scheda](asset/tutorial/registro.md#sergio-annoiato-2) | |
 
 ## Giro F — le altre espressioni
 
@@ -103,10 +103,10 @@ ritratto neutro, come le espressioni del tutorial.
 
 | Prompt | Allegato | SHA-256 |
 |---|---|---|
-| Celestina, tutti | `docs/design/carriere/asset/tutorial/originali/celestina-furba-<n>.png`, il tentativo approvato | da registrare prima di allegarlo |
-| Beppe, tutti | `docs/design/carriere/asset/tutorial/originali/beppe-tranquillo-<n>.png`, il tentativo approvato | da registrare prima di allegarlo |
-| Duccio, tutti | `docs/design/carriere/asset/tutorial/originali/duccio-fiero-<n>.png`, il tentativo approvato | da registrare prima di allegarlo |
-| Sergio, tutti | `docs/design/carriere/asset/tutorial/originali/sergio-annoiato-<n>.png`, il tentativo approvato | da registrare prima di allegarlo |
+| Celestina, tutti | `docs/design/carriere/asset/tutorial/originali/celestina-furba-2.png`, candidato generato nel giro E | 2c15ff3c9b099f414a1769831f63e313d7155f3f241ef4b43af88d8b6ee21b2f |
+| Beppe, tutti | `docs/design/carriere/asset/tutorial/originali/beppe-tranquillo-2.png`, candidato generato nel giro E | 450612d9d45c58cbadeb324c24cdb1e77f23df149aab40343a3f6507039d95a4 |
+| Duccio, tutti | `docs/design/carriere/asset/tutorial/originali/duccio-fiero-2.png`, candidato generato nel giro E | b1dcb3f114a3af147d9fac33e9435128e7d407ecc09e88f333257e786179e83e |
+| Sergio, tutti | `docs/design/carriere/asset/tutorial/originali/sergio-annoiato-2.png`, candidato generato nel giro E | 1be33a0624ec81aee2cdda743a297b471ef1182c4d24591809a2f501c022cf38 |
 | mara-seria | `docs/design/carriere/asset/tutorial/originali/mara-neutra-1.png` | a2a629d0e1d229ae794990b6863a5f165b4f84e766aaf9a4e790bad880ea7f40 |
 
 | Asset | Battuta per la composizione, su S2 |
@@ -260,22 +260,22 @@ Avoid: any other change to the character, her framing or her position on the can
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| celestina-assonnata | | | |
-| celestina-contenta | | | |
-| celestina-arrabbiata | | | |
-| celestina-triste | | | |
-| beppe-contento | | | |
-| beppe-pensieroso | | | |
-| beppe-scocciato | | | |
-| beppe-serio | | | |
-| duccio-dolorante | | | |
-| duccio-offeso | | | |
-| duccio-serio | | | |
-| duccio-beato | | | |
-| sergio-strafottente | | | |
-| sergio-malvagio | | | |
-| sergio-pensieroso | | | |
-| mara-seria | | | |
+| celestina-assonnata | [WebP](asset/tutorial/ritratti/celestina-assonnata.webp) | [Scheda](asset/tutorial/registro.md#celestina-assonnata-1) | |
+| celestina-contenta | [WebP](asset/tutorial/ritratti/celestina-contenta.webp) | [Scheda](asset/tutorial/registro.md#celestina-contenta-1) | |
+| celestina-arrabbiata | [WebP](asset/tutorial/ritratti/celestina-arrabbiata.webp) | [Scheda](asset/tutorial/registro.md#celestina-arrabbiata-1) | |
+| celestina-triste | [WebP](asset/tutorial/ritratti/celestina-triste.webp) | [Scheda](asset/tutorial/registro.md#celestina-triste-1) | |
+| beppe-contento | [WebP](asset/tutorial/ritratti/beppe-contento.webp) | [Scheda](asset/tutorial/registro.md#beppe-contento-1) | |
+| beppe-pensieroso | [WebP](asset/tutorial/ritratti/beppe-pensieroso.webp) | [Scheda](asset/tutorial/registro.md#beppe-pensieroso-1) | |
+| beppe-scocciato | [WebP](asset/tutorial/ritratti/beppe-scocciato.webp) | [Scheda](asset/tutorial/registro.md#beppe-scocciato-2) | |
+| beppe-serio | [WebP](asset/tutorial/ritratti/beppe-serio.webp) | [Scheda](asset/tutorial/registro.md#beppe-serio-1) | |
+| duccio-dolorante | [WebP](asset/tutorial/ritratti/duccio-dolorante.webp) | [Scheda](asset/tutorial/registro.md#duccio-dolorante-1) | |
+| duccio-offeso | [WebP](asset/tutorial/ritratti/duccio-offeso.webp) | [Scheda](asset/tutorial/registro.md#duccio-offeso-1) | |
+| duccio-serio | [WebP](asset/tutorial/ritratti/duccio-serio.webp) | [Scheda](asset/tutorial/registro.md#duccio-serio-2) | |
+| duccio-beato | [WebP](asset/tutorial/ritratti/duccio-beato.webp) | [Scheda](asset/tutorial/registro.md#duccio-beato-1) | |
+| sergio-strafottente | [WebP](asset/tutorial/ritratti/sergio-strafottente.webp) | [Scheda](asset/tutorial/registro.md#sergio-strafottente-1) | |
+| sergio-malvagio | [WebP](asset/tutorial/ritratti/sergio-malvagio.webp) | [Scheda](asset/tutorial/registro.md#sergio-malvagio-1) | |
+| sergio-pensieroso | [WebP](asset/tutorial/ritratti/sergio-pensieroso.webp) | [Scheda](asset/tutorial/registro.md#sergio-pensieroso-1) | |
+| mara-seria | [WebP](asset/tutorial/ritratti/mara-seria.webp) | [Scheda](asset/tutorial/registro.md#mara-seria-1) | |
 
 ## Giro G — sfondi, varianti e il padrone
 
@@ -351,11 +351,11 @@ Avoid: faces, eyes, features, inner lines, colours, gradients or highlights insi
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| s1-esterno-di-giorno | | | |
-| s2-interno-al-buio | | | |
-| s3-esterno | | | |
-| s4-cantina | | | |
-| padrone-in-ombra | | | |
+| s1-esterno-di-giorno | [WebP](asset/tutorial/sfondi/s1-esterno-di-giorno.webp) | [Scheda](asset/tutorial/registro.md#s1-esterno-di-giorno-1) | |
+| s2-interno-al-buio | [WebP](asset/tutorial/sfondi/s2-interno-al-buio.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-al-buio-1) | |
+| s3-esterno | [WebP](asset/tutorial/sfondi/s3-esterno.webp) | [Scheda](asset/tutorial/registro.md#s3-esterno-2) | |
+| s4-cantina | [WebP](asset/tutorial/sfondi/s4-cantina.webp) | [Scheda](asset/tutorial/registro.md#s4-cantina-2) | |
+| padrone-in-ombra | [WebP](asset/tutorial/sprite/padrone-in-ombra.webp) | [Scheda](asset/tutorial/registro.md#padrone-in-ombra-2) | |
 
 ## Dopo i giri
 
