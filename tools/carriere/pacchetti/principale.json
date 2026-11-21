@@ -1,0 +1,5147 @@
+{
+ "pacchetto": 1,
+ "formato": "0.1",
+ "id": "principale",
+ "versione": 1,
+ "impronte": {
+  "storia": "dce4b53c92df6a79ce3fadddd12162f474c225aa410cbb83fbc23d91a0e73d86",
+  "cast": "6402beb9541a788f88b73404e5313ba3a8416b706d23dff42feb842239011ffd"
+ },
+ "carriera": {
+  "formato": "0.1",
+  "id": "principale",
+  "titolo": "Il Serraglio chiude",
+  "fonte": "docs/design/carriere/principale-dialoghi.md",
+  "inizio": "i1",
+  "obbligatori": [
+   "starter-celestina",
+   "starter-piera",
+   "starter-beppe",
+   "pvp"
+  ],
+  "nodi": [
+   {
+    "id": "i1",
+    "etichetta": "I1",
+    "titolo": "Il cartello",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S1",
+      "riga": 42
+     },
+     {
+      "tipo": "regia",
+      "nota": "di sera. la serranda del Serraglio è abbassata; sopra, un cartello stampato bene, troppo bene per quella strada.",
+      "riga": 42
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "CHIUSO PER CESSIONE ATTIVITÀ. NUOVA GESTIONE: DIMMI DI SÌ DISCO PUB.",
+      "riga": 44
+     },
+     {
+      "tipo": "suono",
+      "suono": "frenata",
+      "riga": 46
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "bici-mara",
+      "azione": "entra",
+      "riga": 46
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "neutra",
+      "testo": "Sei tu che hai ordinato… ah, ma sei {giocatore}!",
+      "riga": 48
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Che guardi? Il cartello? Lo so, è molto sospetto. Cessione a chi? Ma che vuoi saperne tu, con la discendenza Sioux che ti ritrovi.",
+      "riga": 50
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "BWAAARGH!",
+      "riga": 52
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "pensierosa",
+      "testo": "Buonasera anche a te.",
+      "riga": 54
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "MALASERA A VOI. PERCHÉ NON SIETE A BERE?",
+      "riga": 56
+     },
+     {
+      "tipo": "regia",
+      "nota": "Spazienzio vede il cartello.",
+      "riga": 58
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "CHE STORIA È QUESTA?",
+      "riga": 60
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "ORDUNQUE QUALCUNO ANELA LE MIE TESTATE! CHI È CHE SI È PRESO IL NOSTRO BAR?",
+      "riga": 62
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "pensierosa",
+      "testo": "Dimmi Di Sì…",
+      "riga": 64
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Non è quel posto dove vanno i tuoi amici, {giocatore}? Non è una coincidenza.",
+      "riga": 66
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "CHIUNQUE SIANO VERRANNO CAROTATI MALE COME COMPETE LORO.",
+      "riga": 68
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "MA INTANTO… IL SERRAGLIO NON PUÒ SERRARSI. APRIAMOTI HO DETTO!",
+      "riga": 70
+     },
+     {
+      "tipo": "regia",
+      "nota": "Spazienzio solleva la serranda a mani nude. Dentro è buio; sul pavimento qualcosa si muove e tossisce.",
+      "riga": 72
+     },
+     {
+      "tipo": "effetto",
+      "effetto": "scossa",
+      "riga": 72
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "assonnata",
+      "testo": "Mmmmmh… Ancora cinque minuti… Cos'è questa luce?",
+      "riga": 74
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "E TU CHI CAZZO SEI?",
+      "riga": 76
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "ASPETTA, IO TI CONOSCO.",
+      "riga": 78
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "neutra",
+      "testo": "Certo che la conosci, è Celestina. È sempre nel bar, accasciata al bancone o distesa per terra. In pratica vive nel Serraglio.",
+      "riga": 80
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "assonnata",
+      "testo": "Anche in teoria.",
+      "riga": 82
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Che ci fate qui? Il Serraglio è chiuso. Siete venuti a saccheggiare il saccheggiabile prima che arrivi la nuova gestione a ristrutturare?",
+      "riga": 84
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "FINTANTO CHE CI SONO IO, NESSUNO QUI RISTRUTTURA PROPRIO NIENTE A PARTE IL TU! RISTRUTTURIAMOTI HO DETTO!",
+      "riga": 86
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Tu, «ristrutturare» me? Tsk. Sei solo un ciccione pelato.",
+      "riga": 88
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "AH SÌ, EH? E TU VIVI PER TERRA. CALPESTIAMOTI!",
+      "riga": 90
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-i1",
+      "modo": "duello",
+      "giocatore": {
+       "personaggio": "spazienzio"
+      },
+      "avversari": [
+       {
+        "personaggio": "celestina"
+       }
+      ],
+      "riga": 92,
+      "sconfitta": {
+       "nodo": "i1s"
+      }
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "arrabbiata",
+      "testo": "Va bene, va bene. Scusami se ti ho provocato.",
+      "riga": 96
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Fatto sta che qui fra poco diventa un disco pub da fighetti, e voi dovrete trovarvi un nuovo posto per marcire.",
+      "riga": 98
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "triste",
+      "testo": "E io una nuova casa.",
+      "riga": 100
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "pensierosa",
+      "testo": "No, questo non lo faremo succedere. Qui c'è un complotto, come dappertutto. Io e {giocatore} ne verremo a capo.",
+      "riga": 102
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "serio",
+      "testo": "SONO D'ACCORDO, MA PREFERISCO UN APPROCCIO PIÙ DIRETTO. VIENI FACCIA NUOVA, ANDIAMO AL DIMMI DI SÌ. SPIEGHIAMOGLI LE NOSTRE RAGIONI…",
+      "riga": 104
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "…A MODO NOSTRO!",
+      "riga": 106
+     },
+     {
+      "tipo": "scelta",
+      "modo": "muta",
+      "opzioni": [
+       {
+        "etichetta": "con Mara, a scoprire chi vuole vendere",
+        "segni": {
+         "via-atto-1": "mara"
+        },
+        "chi": "mara",
+        "verso": {
+         "nodo": "i2a"
+        }
+       },
+       {
+        "etichetta": "con Spazienzio, a spiegarlo al Dimmi Di Sì",
+        "segni": {
+         "via-atto-1": "spazienzio"
+        },
+        "chi": "spazienzio",
+        "verso": {
+         "nodo": "i2b"
+        }
+       }
+      ],
+      "riga": 108,
+      "domanda": "chi segui?"
+     }
+    ],
+    "uscita": {
+     "scelta": true
+    },
+    "riga": 40
+   },
+   {
+    "id": "i1s",
+    "etichetta": "I1s",
+    "titolo": "Il pavimento",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "variante": "al-buio",
+      "riga": 117
+     },
+     {
+      "tipo": "regia",
+      "nota": "Spazienzio è per terra, lungo disteso. Celestina gli si accoccola accanto come a un cuscino.",
+      "riga": 117
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Sarai anche grande e grosso, ma sei proprio tonto.",
+      "riga": 119
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "assonnata",
+      "testo": "Però sei comodo… mi concili proprio il sonno.",
+      "riga": 121
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Sai che quaggiù nessuno ti nota, ma si vede e si sente tutto? Io lo sapevo da tempo che il proprietario voleva vendere.",
+      "riga": 123
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "PROPRIETARIO? PERCHÉ, QUESTO POSTO HA PURE UN PROPRIETARIO?",
+      "riga": 125
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Beh, sì, certo. Viene di notte, quando è chiuso. Si siede al bancone e guarda. Io faccio finta di dormire.",
+      "riga": 127
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "assonnata",
+      "testo": "La faccia non gliel'ho mai vista, da quaggiù. Solo le scarpe. A punta, lucide.",
+      "riga": 129
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "serio",
+      "testo": "QUESTA STORIA NON MI PIACE. MI È VENUTA VOGLIA DI PICCHIARE QUALCUNO.",
+      "riga": 131
+     },
+     {
+      "tipo": "segno",
+      "segno": "celestina",
+      "valore": "si",
+      "riga": 133
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "i1",
+      "da": "scelta"
+     }
+    },
+    "riga": 113,
+    "segreto": true,
+    "tasca": true
+   },
+   {
+    "id": "i2a",
+    "etichetta": "I2a",
+    "titolo": "Il fabbro",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S1",
+      "variante": "di-giorno",
+      "riga": 139
+     },
+     {
+      "tipo": "regia",
+      "nota": "davanti alla serranda Beppe, in salopette, cambia la serratura; ha le cuffie e la testa che va a tempo.",
+      "riga": 139
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "neutra",
+      "testo": "Ehm… ciao? Sei tu che hai ordinato la pizza?",
+      "riga": 141
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "No, ma la mangio comunque volentieri. Cambiare una serratura è un lavoraccio, uno spuntino è proprio quello che ci vuole.",
+      "riga": 143
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Cambiare la serratura? E per conto di chi la stai cambiando, questa serratura? Per quelli del Dimmi Di Sì?",
+      "riga": 145
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Macché, magari! Loro almeno mi avrebbero pagato in contanti. Mi ha incaricato una certa Apri e Chiudi GmbH, con sede in Svizzera. Con una lettera.",
+      "riga": 147
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Apri e Chiudi? Svizzera? Una lettera? È ovvio, è un messaggio in codice.",
+      "riga": 149
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Tu ne sai qualcosa. Tu sei parte di questo codice. Sei per caso un Navaho?",
+      "riga": 151
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "scocciato",
+      "testo": "Eh? Io sono un tornitore. L'unico codice che ho è il PIN del bancomat, e neanche lo uso perché preferisco il contante.",
+      "riga": 153
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Sei parte del codice, lo sapevo! Non ci sto, non mi farai fessa!",
+      "riga": 155
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "seria",
+      "testo": "Ora mi darai le chiavi della nuova serratura. Con le buone, o con le maniere di Spazienzio.",
+      "riga": 157
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-i2a",
+      "modo": "duello",
+      "giocatore": {
+       "personaggio": "mara"
+      },
+      "avversari": [
+       {
+        "personaggio": "beppe"
+       }
+      ],
+      "riga": 159,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "beppe",
+        "espressione": "contento",
+        "testo": "Questa qua è tutta matta… però è stato divertente.",
+        "riga": 161
+       }
+      ]
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "scocciato",
+      "testo": "Va bene, va bene. Sai vero che se ti do la chiave commetto un reato?",
+      "riga": 163
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "In effetti ne commetto tanti per conto mio, quindi non è che sia chissà che sforzo. Tieni. Ne tengo sempre una copia in più, per… motivi personali.",
+      "riga": 165
+     },
+     {
+      "tipo": "segno",
+      "segno": "chiave",
+      "valore": "si",
+      "riga": 167
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "i3a"
+     }
+    },
+    "riga": 137
+   },
+   {
+    "id": "i3a",
+    "etichetta": "I3a",
+    "titolo": "La bici",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S1",
+      "variante": "di-giorno",
+      "riga": 173
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "bici-mara",
+      "azione": "entra",
+      "riga": 173
+     },
+     {
+      "tipo": "regia",
+      "nota": "la catena della bici di Mara è a terra.",
+      "riga": 175
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Ehi, rider complottara! Ti è uscita la catena! Se vuoi te la sistemo. Sono anche meccanico di biciclette.",
+      "riga": 177
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Non eri già un fabbro, un tornitore e un topo d'appartamento? Da quando ti occupi di biciclette?",
+      "riga": 179
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "contento",
+      "testo": "È una bici, che ci vorrà mai! Dieci euro in contanti e te la metto a posto.",
+      "riga": 181
+     },
+     {
+      "tipo": "regia",
+      "nota": "rumore di ferraglia; la bici torna con il manubrio girato all'indietro.",
+      "riga": 183
+     },
+     {
+      "tipo": "suono",
+      "suono": "ferraglia",
+      "riga": 183
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Che diavolo hai combinato!? Il manubrio è al contrario! Mi hai sabotato!",
+      "riga": 185
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Beh, ecco… è una miglioria! Col manubrio al contrario, puoi vedere chi ti segue.",
+      "riga": 187
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "CHE CI FATE QUI A PERDERE TEMPO? IL SERRAGLIO HA BISOGNO DI NOI!",
+      "riga": 189
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "AH, GIOCATE AD AGGIUSTARE LA BICI, EH? COLLAUDIAMOLA ORDUNQUE!",
+      "riga": 191
+     },
+     {
+      "tipo": "regia",
+      "nota": "Spazienzio si siede sulla bici; la bici smette di esistere.",
+      "riga": 193
+     },
+     {
+      "tipo": "effetto",
+      "effetto": "scossa",
+      "riga": 193
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "bici-mara",
+      "azione": "esce",
+      "riga": 193
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Spazienzio, anche tu cerchi di sabotarmi! Ti sei per caso venduto alla massoneria come questo qua?",
+      "riga": 195
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Io non mi faccio ingannare dai poteri forti!",
+      "riga": 197
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-i3a",
+      "modo": "ffa",
+      "giocatore": {
+       "personaggio": "mara"
+      },
+      "avversari": [
+       {
+        "personaggio": "beppe"
+       },
+       {
+        "personaggio": "spazienzio"
+       }
+      ],
+      "riga": 199,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "mara",
+        "espressione": "agitata",
+        "testo": "Senza bici mi toccherà consegnare a piedi. È questo che vuole la mafia dei rider?",
+        "riga": 201
+       }
+      ]
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "i4"
+     }
+    },
+    "riga": 171
+   },
+   {
+    "id": "i2b",
+    "etichetta": "I2b",
+    "titolo": "La porta",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S3",
+      "variante": "esterno",
+      "riga": 207
+     },
+     {
+      "tipo": "regia",
+      "nota": "di sera. davanti al Dimmi Di Sì una fila di fighetti in ombra; alla porta Duccio, braccia conserte, l'aquila sulla maglietta.",
+      "riga": 207
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "VIA, VIA! GABBIANI MALEDETTI, VIA! DEVO SPIEGARE UNA COSA AL PADRONE.",
+      "riga": 209
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "Fermo lì. Dove ti credi di andare, zecca che non sei altro, eh?",
+      "riga": 211
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "serio",
+      "testo": "DENTRO.",
+      "riga": 213
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "serio",
+      "testo": "Beh, e con quale diritto vorresti farlo? Qui entrano solo clienti paganti, e tu l'aria del cliente pagante proprio non ce l'hai.",
+      "riga": 215
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "Faresti bene a stare attento, perché io sono di destra.",
+      "riga": 217
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "serio",
+      "testo": "NON TE L'HO MAI CHIESTO.",
+      "riga": 219
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "Nessuno me lo chiede mai, per questo lo dico io. Onore, ordine, rispetto! E qui non entra chi è vestito male.",
+      "riga": 221
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "IO NON SONO VESTITO.",
+      "riga": 223
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "offeso",
+      "testo": "Appunto. Smamma, zecca comunista!",
+      "riga": 225
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "HO UN'ALTRA IDEA: ADESSO RIVERSERÒ SUL TU L'IMMENSA QUANTITÀ DI VIOLENZA CHE MI ISPIRI!",
+      "riga": 227
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-i2b",
+      "modo": "duello",
+      "giocatore": {
+       "personaggio": "spazienzio"
+      },
+      "avversari": [
+       {
+        "personaggio": "duccio"
+       }
+      ],
+      "riga": 229,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "spazienzio",
+        "espressione": "furioso",
+        "testo": "ZECCA A ME! COME OSI? IO SONO DEMOCRISTIANO!",
+        "riga": 231
+       }
+      ]
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "dolorante",
+      "testo": "Davanti a tutta la fila! Questa non la dimentico: il rancore è una cosa di destra.",
+      "riga": 233
+     },
+     {
+      "tipo": "segno",
+      "segno": "duccio",
+      "valore": "si",
+      "riga": 235
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "i3b"
+     }
+    },
+    "riga": 205
+   },
+   {
+    "id": "i3b",
+    "etichetta": "I3b",
+    "titolo": "Virgin Cuba Libre",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S3",
+      "riga": 241
+     },
+     {
+      "tipo": "regia",
+      "nota": "dentro il Dimmi Di Sì. luci basse, divanetti bianchi, una musica che non è musica.",
+      "riga": 241
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "serio",
+      "testo": "SEDICI EURO PER UN BICCHIERE SENZA ALCOL. QUI DENTRO SONO TUTTI MATTI.",
+      "riga": 243
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "beato",
+      "testo": "A voi zecche piacerà anche sbronzarvi con le birre marce, ma il vero uomo di destra beve con stile.",
+      "riga": 245
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Consegna! Stinco di maiale con doppie patate... di chi è?",
+      "riga": 247
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Mio! Ci voleva proprio.",
+      "riga": 249
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "pensieroso",
+      "testo": "Toh, c'è il gigante incazzoso del Serraglio. Che ci fai qua?",
+      "riga": 251
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "TOH, LA BICICLETTAIA PAZZA E IL METALMECCANICO. CHE CI FATE VOI QUA? TRADITORI!",
+      "riga": 253
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Ma che vuoi? Io sto lavorando.",
+      "riga": 255
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "serio",
+      "testo": "Anche io. Un signore mi ha chiamato per farsi riattaccare un braccetto dello sterzo del Mercedes, e io non rifiuto mai un lavoro in nero.",
+      "riga": 257
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "E CHI È QUESTO SIGNORE CHE ROMPE IL MERCEDES VICINO A QUESTA CLOACA?",
+      "riga": 259
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "serio",
+      "testo": "Quello là. Credo che ti abbia sentito, sta venendo da noi.",
+      "riga": 261
+     },
+     {
+      "tipo": "regia",
+      "nota": "entra Sergio, con il suo ritratto; il riquadro della battuta dice solo «Un signore». Il nome arriva nell'atto II.",
+      "riga": 263
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "nome": "Un signore",
+      "espressione": "strafottente",
+      "testo": "Guarda guarda... gli scappati di casa del Serraglio.",
+      "riga": 265
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "nome": "Un signore",
+      "espressione": "strafottente",
+      "testo": "Ho saputo che siete riusciti ad aprire la serranda. Sapete che rischiate una denuncia, vero? Ah, ma che volete che importi a dei buzzurri come voi?",
+      "riga": 267
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "nome": "Un signore",
+      "espressione": "malvagio",
+      "testo": "Vi immaginavo a godervi la vostra bettola per il poco tempo che le resta. Avete le ore contate: lunedì mattina verrà firmato il passaggio di proprietà, e gli operai cominceranno la ristrutturazione.",
+      "riga": 269
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "nome": "Un signore",
+      "espressione": "strafottente",
+      "testo": "Che c'è, siete venuti a vedere come diventerà la vostra bettola? Non abituatevi: è già un miracolo che vi abbiano fatto entrare.",
+      "riga": 271
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "Infatti, credo sia il caso di buttare tutti fuori. Avrebbero dovuto capirlo che sono...",
+      "riga": 273
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "nome": "Un signore",
+      "espressione": "annoiato",
+      "testo": "Sì, Duccio, lo hanno capito tutti che sei di destra. Fa' quello che devi fare, ma in silenzio.",
+      "riga": 275
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "No, no, non serve! Ce ne andiamo!",
+      "riga": 277
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "CE NE ANDIAMO!? NESSUNO VA DA NESSUNA PARTE! IO DANNEGGIO TUTTO! VI FACCIO FUORI! VI ESPLODO! VI RISTRUTTURO LA VITA!!!",
+      "riga": 279
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "contento",
+      "testo": "Bravo, una bella rissa è proprio quello che ci vuole! Datemi solo il tempo di mettere in cuffia un bel pezzo dei Pantera, per darmi la carica…",
+      "riga": 281
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-i3b",
+      "modo": "ffa",
+      "giocatore": {
+       "personaggio": "spazienzio"
+      },
+      "avversari": [
+       {
+        "personaggio": "duccio"
+       },
+       {
+        "personaggio": "mara"
+       },
+       {
+        "personaggio": "beppe"
+       }
+      ],
+      "riga": 283,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "spazienzio",
+        "espressione": "furioso",
+        "testo": "GRRRAAARGH!",
+        "riga": 285
+       }
+      ]
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "i4"
+     }
+    },
+    "riga": 239
+   },
+   {
+    "id": "i4",
+    "etichetta": "I4",
+    "titolo": "Venite voi qui!",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 291
+     },
+     {
+      "tipo": "regia",
+      "nota": "Regia: il Serraglio aperto fino a domenica, con uno striscione storto: «SALVIAMO IL SERRAGLIO», le lettere di stagnola.",
+      "riga": 291
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Una società svizzera fa cambiare la serratura da un metalmeccanico tuttofare. Qui ci sono di mezzo i poteri forti! Forza, {giocatore}, dobbiamo mobilitare l'opinione pubblica!",
+      "se": {
+       "segno": "via-atto-1",
+       "uguale": "mara"
+      },
+      "riga": 293
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "LUNEDÌ RISTRUTTURANO, EH? DOVRANNO PASSARE SUI NOSTRI CADAVERI! ORDUNQUE {giocatore}, CHIAMA PIÙ GENTE CHE PUOI.",
+      "se": {
+       "segno": "via-atto-1",
+       "uguale": "spazienzio"
+      },
+      "riga": 295
+     },
+     {
+      "tipo": "messaggio",
+      "testo": "Cos'è questa storia della serata \"Salviamo il Serraglio\"? Arriviamo.",
+      "riga": 299,
+      "da": "combriccola"
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "combriccola",
+      "posa": "davanti-alla-porta",
+      "azione": "entra",
+      "riga": 301
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un amico",
+      "testo": "Questo posto è veramente inquietante.",
+      "riga": 303
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un altro amico",
+      "testo": "Al Dimmi Di Sì dicono che la prossima settimana qui cambierà tutto.",
+      "riga": 305
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Non se riusciremo a impedirlo.",
+      "riga": 307
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "contenta",
+      "testo": "Ascolta, {giocatore}. Questo posto è la mia casa, e non metaforicamente. Io sto con voi!",
+      "riga": 309
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "E che ce ne facciamo di te? Dobbiamo combattere i poteri forti, non elemosinare due spicci per il treno!",
+      "se": {
+       "segno": "via-atto-1",
+       "uguale": "mara"
+      },
+      "riga": 311
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "serio",
+      "testo": "E CHE CE NE FACCIAMO DI TE? DOBBIAMO SPACCARE DELLE TESTE, NON ELEMOSINARE DUE SPICCI PER IL TRENO!",
+      "se": {
+       "segno": "via-atto-1",
+       "uguale": "spazienzio"
+      },
+      "riga": 313
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Ah sì, eh? Forza, mettetemi alla prova.",
+      "riga": 315
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-i4",
+      "modo": "ffa",
+      "giocatore": {
+       "personaggio": "celestina"
+      },
+      "avversari": [
+       {
+        "personaggio": "mara"
+       },
+       {
+        "personaggio": "spazienzio"
+       }
+      ],
+      "riga": 317,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "celestina",
+        "espressione": "arrabbiata",
+        "testo": "Sarò anche una tossica che dorme per terra in un bar, ma anche io valgo qualcosa!",
+        "riga": 319
+       }
+      ]
+     },
+     {
+      "tipo": "sblocco",
+      "sblocco": "starter-celestina",
+      "riga": 321
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un amico",
+      "testo": "Santo cielo, {giocatore}… questo posto è assurdo!",
+      "riga": 323
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un altro amico",
+      "testo": "È fantastico! Il bere fa schifo, ma qui si fa a botte continuamente!",
+      "riga": 325
+     },
+     {
+      "tipo": "sblocco",
+      "sblocco": "pvp",
+      "riga": 327
+     },
+     {
+      "tipo": "regia",
+      "nota": "sblocco del PvP e del mazzo costruito, con la busta in regalo e il negozio delle buste.",
+      "riga": 329
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "FINALMENTE FACCE NUOVE DA ODIARE. ORA SIAMO TANTI E INCAZZATI. NESSUNO CI TOGLIERÀ IL NOSTRO BAR!",
+      "riga": 331
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "contenta",
+      "testo": "Lo faremo vedere noi al cosiddetto popolo eletto dei Navaho!",
+      "riga": 333
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "ii1"
+     }
+    },
+    "riga": 289
+   },
+   {
+    "id": "ii1",
+    "etichetta": "II1",
+    "titolo": "Le voci",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 339
+     },
+     {
+      "tipo": "regia",
+      "nota": "Regia: il Serraglio aperto, lo striscione storto; sul bancone un foglio a quadretti: «PETIZIONE CONTRO LA CHIUSURA», tre firme, una è una macchia.",
+      "riga": 339
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "ASPETTARE MI INNERVOSISCE! CHE FACCIAMO? ANDIAMO A SPACCARE IL DIMMI DI SÌ! È TUTTA COLPA LORO!",
+      "riga": 341
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Il Dimmi Di Sì compra, ma non è l'unico responsabile. Se qualcuno può comprare, è perché qualcun altro sta vendendo.",
+      "riga": 343
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "pensierosa",
+      "testo": "Ha senso... ma chi è che sta vendendo il Serraglio? La gente qua si serve da sola, non c'è mai stato neanche un barista, figuriamoci un proprietario.",
+      "riga": 345
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Ho ristretto il campo dei sospetti: siete tutti voi!",
+      "riga": 347
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "ANCHE IO?!",
+      "riga": 349
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Soprattutto tu. Usa il cervello, Mohawk che non sei altro!",
+      "riga": 351
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Questo casino del bar che viene venduto ti sta facendo menare le mani a più non posso, e tu adori menare le mani!",
+      "riga": 353
+     },
+     {
+      "tipo": "regia",
+      "nota": "dal fondo del bancone, uno sgabello che nessuno aveva mai guardato. Sergio si alza, la sigaretta sottile spenta fra le dita.",
+      "riga": 355
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Ma vi sentite quando parlate? Siete patetici.",
+      "riga": 357
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "TU SEI QUELLO CHE SI È FATTO AGGIUSTARE IL MERCEDES DAL MECCANICO METALLARO! CHE CI FAI NEL NOSTRO BAR?",
+      "se": {
+       "visto": "i3b"
+      },
+      "riga": 359
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Quello che fate voialtri: bevo. Tutte le sere, da molti anni. Non mi stupisce che non mi abbiate mai notato, rintronati come siete.",
+      "se": {
+       "visto": "i3b"
+      },
+      "riga": 361
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "E tu chi sei?",
+      "se": {
+       "non": {
+        "visto": "i3b"
+       }
+      },
+      "riga": 363
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Stai calma, lui è Sergio. Sta quasi sempre per conto suo…",
+      "se": {
+       "non": {
+        "visto": "i3b"
+       }
+      },
+      "riga": 365
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "…ma a volte sospetto che torni anche dopo la chiusura, per incontrarsi con tutta una serie di persone… difficili da inquadrare.",
+      "se": {
+       "non": {
+        "visto": "i3b"
+       }
+      },
+      "riga": 367
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Sergio Sommerso, piacere mio.",
+      "riga": 369
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Volete davvero salvare questo posto? Cominciate a bere il triplo, allora, e soprattutto cominciate a pagare le bevute! Questa baracca ha debiti con chiunque, è spacciata.",
+      "riga": 371
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "E tu come fai a saperlo?",
+      "riga": 373
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "Ho i miei metodi per sapere le cose. Siete voi che non sapete niente, anzi, non valete niente. Mi verrebbe quasi voglia di insegnarvi come funziona il mondo…",
+      "riga": 375
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-ii1",
+      "modo": "duello",
+      "giocatore": {
+       "sceltaFra": [
+        "celestina",
+        "mara",
+        "spazienzio"
+       ]
+      },
+      "avversari": [
+       {
+        "personaggio": "sergio"
+       }
+      ],
+      "riga": 377,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "sergio",
+        "espressione": "strafottente",
+        "testo": "Ancora? E perché mai dovrebbe andare diversamente?",
+        "riga": 379
+       }
+      ]
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Bene, sfogare vi siete sfogati. Direi che possiamo andare avanti con le nostre vite. Buona serata, perdenti!",
+      "riga": 381
+     },
+     {
+      "tipo": "regia",
+      "nota": "Sergio torna al suo sgabello in fondo, come se niente fosse.",
+      "riga": 383
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Quello là sa troppe cose. Lavora per loro, per i poteri forti!",
+      "riga": 385
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Oppure ha qualche informatore. Che lavoro fa, esattamente?",
+      "riga": 387
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Non ne ho la minima idea. Io credo che sia pagato dal Dimmi Di Sì.",
+      "riga": 389
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "assonnata",
+      "testo": "No, non avrebbe senso. Però… non si sa mai. Se fosse davvero così, avrebbe lasciato qualche traccia. Tracce che io so dove trovare.",
+      "riga": 391
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "serio",
+      "testo": "IO DICO CHE CONVIENE ANDARE A FARLO PARLARE.",
+      "riga": 393
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Non gli caveremo niente. Però… questo bar è frequentato sempre dalla stessa gente. Forse qualcuno degli altri avventori sa qualcosa che io non so.",
+      "riga": 395
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "{giocatore}, tu che dici? Che facciamo?",
+      "riga": 397
+     },
+     {
+      "tipo": "scelta",
+      "modo": "muta",
+      "opzioni": [
+       {
+        "etichetta": "con Piera, che si ricorda di dieci anni fa",
+        "segni": {
+         "pista": "piera"
+        },
+        "chi": "piera",
+        "verso": {
+         "nodo": "ii2a"
+        }
+       },
+       {
+        "etichetta": "con Beppe, che sa chi pagava in contanti",
+        "segni": {
+         "pista": "beppe"
+        },
+        "chi": "beppe",
+        "verso": {
+         "nodo": "ii2b"
+        }
+       },
+       {
+        "etichetta": "con Celestina, che fruga nel bidone",
+        "segni": {
+         "pista": "celestina"
+        },
+        "chi": "celestina",
+        "verso": {
+         "nodo": "ii2c"
+        }
+       }
+      ],
+      "riga": 399,
+      "domanda": "quale pista?"
+     }
+    ],
+    "uscita": {
+     "scelta": true
+    },
+    "riga": 337
+   },
+   {
+    "id": "ii2a",
+    "etichetta": "II2a",
+    "titolo": "La frase di Piera",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 407
+     },
+     {
+      "tipo": "regia",
+      "nota": "Regia: Piera al suo posto al bancone, Grappino ai suoi piedi; davanti a lei un bicchierino.",
+      "riga": 407
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "posa": "seduto",
+      "azione": "entra",
+      "riga": 407
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Piera, tu vieni in questo posto da quasi quindici anni. Tu sai qualcosa. Forse stai coprendo qualcuno.",
+      "riga": 409
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Io... non copro... nessuno... al massimo... il Grappino... quando ha freddo...",
+      "riga": 411
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "brilla",
+      "testo": "Però... dieci anni fa... il Serraglio... stava per chiudere... che il vecchio padrone... aveva i debiti... fino a qui... e poi... è arrivato...",
+      "riga": 413,
+      "stacchi": [
+       {
+        "chi": "mara",
+        "espressione": "neutra"
+       },
+       {
+        "chi": "spazienzio",
+        "espressione": "fumante"
+       }
+      ]
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "brilla",
+      "testo": "...un signore...",
+      "riga": 417,
+      "stacchi": [
+       {
+        "chi": "spazienzio",
+        "espressione": "fumante"
+       }
+      ],
+      "interrotta": true
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "UN SIGNORE CHI? CONCLUDIAMOTI!",
+      "riga": 421
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Se... mi interrompi... ricomincio... da capo... allora… dicevo…",
+      "riga": 423
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "NO! DA CAPO NO! TACCIAMOCI TUTTI!",
+      "riga": 425
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Mi stai ancora… interrompendo…",
+      "riga": 427
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "posa": "ringhia",
+      "azione": "posa",
+      "riga": 429
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "contenta",
+      "testo": "{giocatore}, se vogliamo farle dire quello che ha da dire, qualcuno deve far stare zitto Spazienzio.",
+      "riga": 431
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "MA SONO ZITTO!",
+      "riga": 433
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Non… abbastanza…",
+      "riga": 435
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "IO STO ZITTO SOLO QUANDO SPACCO OSSA, VA BENE?",
+      "riga": 437
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "SE CI TIENI AL SILENZIO, LO RICEVERAI A MODO MIO!",
+      "riga": 439
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-ii2a",
+      "modo": "duello",
+      "giocatore": {
+       "personaggio": "piera"
+      },
+      "avversari": [
+       {
+        "personaggio": "spazienzio"
+       }
+      ],
+      "riga": 441,
+      "sconfitta": {
+       "nodo": "ii2s"
+      }
+     },
+     {
+      "tipo": "regia",
+      "nota": "Spazienzio è seduto, zitto, con Grappino in braccio che gli lecca la mano. Silenzio.",
+      "riga": 445
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "contenta",
+      "testo": "Allora... come dicevo... un signore... alto...",
+      "riga": 447,
+      "stacchi": [
+       {
+        "chi": "mara",
+        "espressione": "neutra"
+       },
+       {
+        "chi": "spazienzio",
+        "espressione": "quasi-calmo"
+       }
+      ]
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "contenta",
+      "testo": "...alto... e secco...",
+      "riga": 451,
+      "interrotta": true
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Alto e secco. Un lampione! Ma certo: i lampioni vedono tutto, hanno le telecamere. Il Serraglio l'ha salvato il Comune!",
+      "riga": 455
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Ma... chi ha... parlato... di lampioni...",
+      "riga": 457
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "contenta",
+      "testo": "Comunque... tu, {giocatore}... non mi hai... interrotta... mai... Mi vai a genio… io… sono con te…",
+      "riga": 459
+     },
+     {
+      "tipo": "segno",
+      "segno": "frase",
+      "valore": "si",
+      "riga": 461
+     },
+     {
+      "tipo": "sblocco",
+      "sblocco": "starter-piera",
+      "riga": 463
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "ii3"
+     }
+    },
+    "riga": 405
+   },
+   {
+    "id": "ii2s",
+    "etichetta": "II2s",
+    "titolo": "Piera non parla più",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 471
+     },
+     {
+      "tipo": "regia",
+      "nota": "Regia: Piera ha girato lo sgabello verso il muro. Grappino seduto davanti a lei, le orecchie dritte.",
+      "riga": 471
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "posa": "seduto",
+      "azione": "entra",
+      "riga": 471
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Io... con voi... non parlo più... Parlo solo... col Grappino... che lui... non interrompe mai...",
+      "riga": 473
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "GRAZIE AL CIELO.",
+      "riga": 475
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Grappino... a te... lo dico... dieci anni fa... un signore...",
+      "riga": 477
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "Il resto Piera lo sussurra al cane. Grappino, per la cronaca, ascolta tutto.",
+      "riga": 479
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "ii3"
+     }
+    },
+    "riga": 467,
+    "segreto": true,
+    "tasca": true
+   },
+   {
+    "id": "ii2b",
+    "etichetta": "II2b",
+    "titolo": "Contanti",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 485
+     },
+     {
+      "tipo": "regia",
+      "nota": "Regia: Beppe al bancone, cuffie al collo, un panino in mano; sul tavolo la cassetta degli attrezzi.",
+      "riga": 485
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Beppe, il tuttofare della mafia dei meccanici. Proprio te cercavamo.",
+      "riga": 487
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "pensieroso",
+      "testo": "Non mi definirei proprio così, ma…",
+      "riga": 489
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Sì, è lui. Ma non è solo un meccanico, è anche idraulico, carpentiere, imbianchino… dico bene?",
+      "riga": 491
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Beh, non dico mai di no a un bel lavoretto in nero.",
+      "riga": 493
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "E chi lo farebbe? Comunque… diversi anni fa hai fatto dei lavori proprio qui al Serraglio. Ricordi chi ti ha pagato?",
+      "riga": 495
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Mi ricordo benissimo come mi hanno pagato, e ve lo dirò volentieri…",
+      "riga": 497
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "contento",
+      "testo": "…per, uhm… diciamo venti euro. Ovviamente, in contanti.",
+      "riga": 499
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Venti euro? Io ne ho dieci, e sono le mance di tutto il mese!",
+      "riga": 501
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "IO NON HO SOLDI, PERÒ HO LE MANI. VOGLIAMO USARLE?",
+      "riga": 503
+     },
+     {
+      "tipo": "regia",
+      "nota": "la porta si apre; entra Duccio, con un blocchetto delle ricevute.",
+      "riga": 505
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "Guarda chi c'è, la zecca dell'altra volta. Verrà il giorno in cui potrò darti quello che ti meriti, ma non è oggi. Oggi sono qui per lavoro.",
+      "se": {
+       "segno": "duccio"
+      },
+      "riga": 507
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "serio",
+      "testo": "Beppe, il Dimmi Di Sì ti ha dato l'anticipo per ristrutturare questo cesso, e tu ancora non hai fatto niente.",
+      "riga": 509
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Mi avevano anche detto di aspettare fino al passaggio di proprietà.",
+      "riga": 511
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "L'anticipo per ristrutturare il Serraglio? Tu lavori per loro!",
+      "riga": 513
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Sì.",
+      "riga": 515
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Lavoreresti anche per noi, se ti pagassimo?",
+      "riga": 517
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Certo. Io lavoro per chiunque, soprattutto per chi mi paga in nero.",
+      "riga": 519
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "Basta chiacchiere. Restituisci l'anticipo che ti è stato dato, o te la vedrai con me. Ti avverto: io sono di destra!",
+      "riga": 521
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "scocciato",
+      "testo": "Sentite, voialtri, facciamo così: tenetemi il panino, a questo idiota ci penso io. Voi fate il tifo, e se lo sistemo vi dirò quello che volete sapere.",
+      "riga": 523
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-ii2b",
+      "modo": "duello",
+      "giocatore": {
+       "personaggio": "beppe"
+      },
+      "avversari": [
+       {
+        "personaggio": "duccio"
+       }
+      ],
+      "riga": 525,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "beppe",
+        "espressione": "tranquillo",
+        "testo": "Aspetta, mi metto in cuffia un po' di metal per caricarmi!",
+        "riga": 527
+       },
+       {
+        "tipo": "battuta",
+        "chi": "duccio",
+        "espressione": "fiero",
+        "testo": "Non sei tu che sei scarso, sono io che sono di destra!",
+        "riga": 527
+       }
+      ]
+     },
+     {
+      "tipo": "regia",
+      "nota": "Duccio se ne va zoppicando, il blocchetto delle ricevute stropicciato.",
+      "riga": 529
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "contento",
+      "testo": "Bel tifo, gente. Allora: i lavori qui al Serraglio, giusto? È passato tanto tempo, ma ricordo una valigetta di pelle piena di contanti che mi aspettava proprio sul bancone a lavoro finito.",
+      "riga": 531
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "pensieroso",
+      "testo": "Mi ricordo anche un'altra cosa, però: nel barattolo di vernice che usavo come portacenere mentre lavoravo, ogni tanto comparivano dei mozziconi di sigarette molto sottili. Mi sono sempre chiesto chi fosse a fumarle.",
+      "riga": 533
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Sigarette sottili, eh? È roba da uomini raffinati, roba da poteri forti. Torna tutto.",
+      "riga": 535
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Sentite, io qua dovrei davvero montare almeno la serratura nuova, se no la prossima volta mi sparano invece di mandare solo quel coglione a menarmi. Ce l'ho già nel furgone: la monto adesso, due minuti. E visto che per ora vi autogestite il bar, tenete: questa è una delle sue chiavi.",
+      "se": {
+       "non": {
+        "segno": "chiave"
+       }
+      },
+      "riga": 537
+     },
+     {
+      "tipo": "segno",
+      "segno": "chiave",
+      "valore": "si",
+      "riga": 539,
+      "se": {
+       "non": {
+        "segno": "chiave"
+       }
+      }
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "contento",
+      "testo": "E comunque, sapete come divertirvi: mi piacete. Sto dalla vostra parte!",
+      "riga": 541
+     },
+     {
+      "tipo": "sblocco",
+      "sblocco": "starter-beppe",
+      "riga": 543
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "ii3"
+     }
+    },
+    "riga": 483
+   },
+   {
+    "id": "ii2c",
+    "etichetta": "II2c",
+    "titolo": "Il bidone",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S1",
+      "riga": 549
+     },
+     {
+      "tipo": "regia",
+      "nota": "di sera. dietro il bar, Celestina è dentro il bidone fino alla vita; spuntano solo le gambe.",
+      "riga": 549
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Celestina, tutto a posto?",
+      "riga": 551
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Sì, va tutto a meraviglia. È incredibile quanta roba la gente butti via…",
+      "riga": 553
+     },
+     {
+      "tipo": "regia",
+      "nota": "Celestina riemerge con un foglio stropicciato e unto, mezzo rosicchiato.",
+      "riga": 555
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "contenta",
+      "testo": "Guardate un po' qua. Carta buona, intestata alla «Apri e Chiudi GmbH». Sembra una specie di bilancio… è del Serraglio!",
+      "riga": 557
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Ha ragione quel tizio insopportabile: il Serraglio perde soldi da ogni parte. Chi terrebbe aperto un bar del genere? Uno scemo, o uno che in fondo gli vuole bene.",
+      "riga": 559
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Fammi vedere! Quella è la prova del complotto dei poteri forti! Va dritto sul mio muro dei complotti!",
+      "riga": 561
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "LASCIA PERDERE, DAMMELO A ME. È CARTA, E LA CARTA È FATTA PER BRUCIARE!",
+      "riga": 563
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "arrabbiata",
+      "testo": "L'ho trovato io!",
+      "riga": 565
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-ii2c",
+      "modo": "ffa",
+      "giocatore": {
+       "personaggio": "celestina"
+      },
+      "avversari": [
+       {
+        "personaggio": "mara"
+       },
+       {
+        "personaggio": "spazienzio"
+       }
+      ],
+      "riga": 567,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "celestina",
+        "espressione": "assonnata",
+        "testo": "Sempre a fare a cazzotti, ma che vita di merda è?",
+        "riga": 569
+       }
+      ]
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "In fondo al foglio, dove dovrebbe esserci la firma, manca un pezzo. Non l'ha strappato Celestina: i segni sono di denti piccoli, di un cane piccolo.",
+      "riga": 571
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "assonnata",
+      "testo": "Tanta confusione per niente. Proprio dove dovrebbe esserci il nome di chi l'ha redatto, è strappato!",
+      "riga": 573
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Celestina, apri la bocca. Te la sei mangiata apposta, la firma! Chi stai coprendo?",
+      "riga": 575
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Io mordo di lato. Questi sono morsi di fronte.",
+      "riga": 577
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Non importa, non importa! Questo è il tassello che mi mancava! Venite con me, presto!",
+      "riga": 579
+     },
+     {
+      "tipo": "segno",
+      "segno": "bilancio",
+      "valore": "si",
+      "riga": 581
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "ii3"
+     }
+    },
+    "riga": 547
+   },
+   {
+    "id": "ii3",
+    "etichetta": "II3",
+    "titolo": "Il muro dei complotti",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 587
+     },
+     {
+      "tipo": "regia",
+      "nota": "Regia: Mara stringe al petto il casco di stagnola. Sul muro del bagno, la parete dei complotti di Mara: fogli, fili di lana rossa, stagnola dappertutto. Tutti i fili finiscono su un tovagliolo con scritto «SERGIO».",
+      "riga": 587
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Guardate e ammirate. Ho capito tutto!",
+      "riga": 589
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Speriamo solo che non mi leggano i pensieri… presto! Il mio casco di stagnola!",
+      "riga": 591
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "COS'È TUTTA QUESTA ROBA? CHE DIAVOLO HAI FATTO AL MIO BAGNO?",
+      "riga": 593
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "seria",
+      "testo": "Lascia perdere il bagno, guarda! È tutto pianificato, tutto studiato da chi ci controlla… Guardate tutti questi elementi! Torna tutto!",
+      "riga": 595
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "seria",
+      "testo": "Chi controlla il Dimmi Di Sì sapeva che il Serraglio perde soldi da ogni parte. E chi ha un bar che perde soldi da ogni parte, prima o poi lo vende!",
+      "se": {
+       "segno": "bilancio"
+      },
+      "riga": 597
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "seria",
+      "testo": "E il signore di Piera, quello di dieci anni fa: alto e secco. Chi è alto e secco, qui dentro?",
+      "se": {
+       "segno": "frase"
+      },
+      "riga": 599
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "seria",
+      "testo": "Chi ha finanziato i lavori al Serraglio anni fa? Chi è che ha giri loschi e fuma delle sigarette sottili?",
+      "se": {
+       "segno": "pista",
+       "uguale": "beppe"
+      },
+      "riga": 601
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "seria",
+      "testo": "Sergio!",
+      "riga": 603
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "seria",
+      "testo": "Lui lavora per il Dimmi Di Sì: è il loro uomo qui dentro, quello che convince il proprietario a vendere!",
+      "riga": 605
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "QUEL GABBIANO RIVESTITO FA IL GALOPPINO DEI FIGHETTI?",
+      "riga": 607
+     },
+     {
+      "tipo": "regia",
+      "nota": "al bancone. Sergio sul suo sgabello, Duccio accanto a lui con un cocktail con l'ombrellino.",
+      "riga": 609
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Guarda, guarda… il gruppo del disagio. Che volete da me?",
+      "riga": 611
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "State ancora cercando di salvare questa topaia? Risparmiatevi pure la fatica. Lunedì mattina si firma, e sarà tutto finito.",
+      "se": {
+       "segno": "via-atto-1",
+       "uguale": "mara"
+      },
+      "riga": 613
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "AMMETTI ORDUNQUE LA TUA COLPA? ESPIAMOTI ALLORA!",
+      "se": {
+       "segno": "via-atto-1",
+       "uguale": "mara"
+      },
+      "riga": 615
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Vi presento Duccio, il buttafuori del Dimmi Di Sì. Fa anche da guardia del corpo, quando pago io.",
+      "se": {
+       "non": {
+        "segno": "duccio"
+       }
+      },
+      "riga": 617
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "Frena, piccolo sindacalista bastardo. Lui è protetto da me. Io sto dalla parte di chi ha i soldi: è una cosa di destra.",
+      "riga": 619
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Visto? Sono d'accordo! Ve l'avevo detto!",
+      "riga": 621
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "contento",
+      "testo": "Avverto nell'aria una certa voglia di schiaffi. Posso unirmi? Ho proprio voglia di sfogarmi un po'.",
+      "se": {
+       "segno": "frase"
+      },
+      "riga": 623
+     },
+     {
+      "tipo": "segno",
+      "segno": "ii3",
+      "valore": "beppe",
+      "riga": 625,
+      "se": {
+       "segno": "frase"
+      }
+     },
+     {
+      "tipo": "sblocco",
+      "sblocco": "starter-beppe",
+      "riga": 625,
+      "se": {
+       "segno": "frase"
+      }
+     },
+     {
+      "tipo": "segno",
+      "segno": "ii3",
+      "valore": "piera",
+      "riga": 627,
+      "se": {
+       "non": {
+        "segno": "frase"
+       }
+      }
+     },
+     {
+      "tipo": "sblocco",
+      "sblocco": "starter-piera",
+      "riga": 627,
+      "se": {
+       "non": {
+        "segno": "frase"
+       }
+      }
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Grappino... digli che... gioco anche io... per te... mica per loro...",
+      "se": {
+       "visto": "ii2s"
+      },
+      "riga": 629
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "brilla",
+      "testo": "Quello lì... in dieci anni... non ha mai offerto... un giro... a nessuno... e io... sto con te...",
+      "se": {
+       "segno": "pista",
+       "uguale": "beppe"
+      },
+      "riga": 631
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "brilla",
+      "testo": "Quello lì... in dieci anni... non ha mai offerto... un giro... a nessuno... e io... sto con te...",
+      "se": {
+       "segno": "pista",
+       "uguale": "celestina"
+      },
+      "riga": 633
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-ii3",
+      "modo": "duello",
+      "giocatore": {
+       "segno": "ii3"
+      },
+      "avversari": [
+       {
+        "personaggio": "duccio"
+       }
+      ],
+      "riga": 635,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "sergio",
+        "espressione": "annoiato",
+        "testo": "Di nuovo? Va bene. La storia mi darà ragione!",
+        "riga": 637
+       }
+      ]
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "dolorante",
+      "testo": "Mi dispiace, capo. Forse non sono abbastanza di destra…",
+      "riga": 639
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Sparisci, idiota. Me ne vado anche io… non vorrei farmi attaccare la povertà da questi quattro scemi.",
+      "riga": 641
+     },
+     {
+      "tipo": "regia",
+      "nota": "Sergio lascia i soldi sul bancone, esattamente il conto, e se ne va. Duccio lo segue zoppicando.",
+      "riga": 643
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "iii1"
+     }
+    },
+    "riga": 585
+   },
+   {
+    "id": "iii1",
+    "etichetta": "III1",
+    "titolo": "Domenica sera",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 649
+     },
+     {
+      "tipo": "regia",
+      "nota": "di sera. l'ultima sera del Serraglio. Lo striscione «SALVIAMO IL SERRAGLIO» pende da un lato solo. In fondo al bancone Sergio, la sigaretta sottile accesa sopra un posacenere di latta; Piera al suo posto.",
+      "riga": 649
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "posa": "seduto",
+      "azione": "entra",
+      "riga": 649
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "È già domenica sera. Domani mattina firmano il passaggio di proprietà, e Beppe comincerà a smantellare tutto!",
+      "riga": 651
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "pensierosa",
+      "testo": "Non abbiamo risolto un bel niente. È finita... i poteri forti vinceranno!",
+      "riga": 653
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "serio",
+      "testo": "TEMO TU ABBIA RAGIONE, GRACILE BICICLETTAIA. QUESTO NON È UN PROBLEMA CHE POSSO RISOLVERE CON LE BOTTE...",
+      "riga": 655
+     },
+     {
+      "tipo": "regia",
+      "nota": "la porta si spalanca. Entra Duccio, un rotolo di nastro bianco e rosso in una mano e il cocktail nell'altra.",
+      "riga": 657
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "Forza, forza! Il Dimmi Di Sì vuole tutto libero entro domani. Fuori di qui, con quelle facce da centro sociale!",
+      "riga": 659
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "Anche tu, energumeno sinistro. Non sei più tanto arrabbiato, eh? Smamma! Qui è arrivata la destra!",
+      "se": {
+       "segno": "duccio"
+      },
+      "riga": 661
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "serio",
+      "testo": "A TE PUZZA PROPRIO LA VITA, EH? PURTROPPO ADESSO NON SONO DELL'UMORE PER TOGLIERTELA...",
+      "se": {
+       "segno": "duccio"
+      },
+      "riga": 663
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Per quanto sia fastidioso, il fascistello ha ragione. Forza, finiamo di bere e leviamoci tutti di torno.",
+      "riga": 665
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Domani sarà un altro giorno, e molti problemi verranno risolti.",
+      "riga": 667
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "scocciato",
+      "testo": "Non certo i miei: il Dimmi Di Sì vuole la fattura per la ristrutturazione. Non me ne vado senza opporre resistenza!",
+      "se": {
+       "tutti": [
+        {
+         "non": {
+          "segno": "pista",
+          "uguale": "beppe"
+         }
+        },
+        {
+         "non": {
+          "segno": "ii3",
+          "uguale": "beppe"
+         }
+        }
+       ]
+      },
+      "riga": 669
+     },
+     {
+      "tipo": "segno",
+      "segno": "iii1",
+      "valore": "beppe",
+      "riga": 671,
+      "se": {
+       "tutti": [
+        {
+         "non": {
+          "segno": "pista",
+          "uguale": "beppe"
+         }
+        },
+        {
+         "non": {
+          "segno": "ii3",
+          "uguale": "beppe"
+         }
+        }
+       ]
+      }
+     },
+     {
+      "tipo": "sblocco",
+      "sblocco": "starter-beppe",
+      "riga": 671,
+      "se": {
+       "tutti": [
+        {
+         "non": {
+          "segno": "pista",
+          "uguale": "beppe"
+         }
+        },
+        {
+         "non": {
+          "segno": "ii3",
+          "uguale": "beppe"
+         }
+        }
+       ]
+      }
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "RISOLTI? RISOLTI??? IL MIO BAR, ANZI IL NOSTRO BAR, DIVENTERÀ UN CONCENTRATO DI STRANOSESSUALITÀ SPILLASOLDI!",
+      "riga": 673
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "SAI CHE TI DICO? MI È TORNATA VOGLIA DI CESSARE VITE CON LE MANI...",
+      "riga": 675
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-iii1",
+      "modo": "duello",
+      "giocatore": {
+       "sceltaFra": [
+        "mara",
+        "spazienzio",
+        "celestina",
+        "piera",
+        "beppe"
+       ],
+       "segno": "iii1"
+      },
+      "avversari": [
+       {
+        "personaggio": "duccio"
+       }
+      ],
+      "riga": 677,
+      "sconfitta": {
+       "nodo": "iii1s"
+      }
+     },
+     {
+      "tipo": "regia",
+      "nota": "Duccio esce zoppicando, il nastro bianco e rosso avvolto intorno a una gamba.",
+      "riga": 681
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "dolorante",
+      "testo": "Voi straccioni siete proprio intrattabili. Ma non finisce qui: domani torniamo con le ruspe!",
+      "riga": 683
+     },
+     {
+      "tipo": "regia",
+      "nota": "Sergio spegne la sigaretta nel posacenere, lascia sul bancone esattamente il conto ed esce senza fretta.",
+      "riga": 685
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Lo ammetto: come ultima rissa del Serraglio, è stata notevole. Vi lascio al vostro lutto, ho da fare. Buonanotte.",
+      "riga": 687
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Ha da fare la domenica a mezzanotte? Certo, come no. Va a prendere ordini dai suoi amici massoni! Io lo seguo.",
+      "riga": 689
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "pensieroso",
+      "testo": "Scusate, ho un'idea. Il problema del Serraglio sono i debiti, no? Facciamo una bella bisca. Anzi, un bel torneo di botte!",
+      "riga": 691
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "MENARCI A PAGAMENTO? DOVE DEVO FIRMARE?",
+      "riga": 693
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "pensieroso",
+      "testo": "Un po' di gente, iscrizione rigorosamente in contanti, un giro di scommesse... In quattro e quattr'otto il Serraglio ce lo compriamo noi.",
+      "riga": 695
+     },
+     {
+      "tipo": "regia",
+      "nota": "Grappino trotta fino al posacenere di Sergio, lo annusa a lungo, poi guarda la porta da cui Sergio è uscito.",
+      "riga": 697
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "brilla",
+      "testo": "Grappino... ma che fai... il tuo bicchiere... è di qua...",
+      "riga": 699
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "Grappino tira fuori da sotto lo sgabello di Sergio un pezzo di carta unta, se lo mette in bocca e scappa giù per le scale della cantina.",
+      "riga": 701,
+      "se": {
+       "segno": "bilancio"
+      }
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Quel cane ha trovato qualcosa. Per quanto scemo possa essere.",
+      "se": {
+       "segno": "bilancio"
+      },
+      "riga": 703
+     },
+     {
+      "tipo": "scelta",
+      "modo": "muta",
+      "opzioni": [
+       {
+        "etichetta": "con Beppe, a raccogliere i soldi per comprarlo noi",
+        "segni": {
+         "via-atto-3": "torneo",
+         "alleato": "beppe"
+        },
+        "chi": "beppe",
+        "verso": {
+         "nodo": "iii2a"
+        }
+       },
+       {
+        "etichetta": "con Mara, a pedinare Sergio",
+        "segni": {
+         "via-atto-3": "pedinamento",
+         "alleato": "mara"
+        },
+        "chi": "mara",
+        "verso": {
+         "nodo": "iii2b"
+        }
+       },
+       {
+        "etichetta": "con Celestina, dietro a Grappino",
+        "se": {
+         "segno": "bilancio"
+        },
+        "segni": {
+         "via-atto-3": "grappino",
+         "alleato": "celestina"
+        },
+        "chi": "celestina",
+        "verso": {
+         "nodo": "s1"
+        }
+       }
+      ],
+      "riga": 705,
+      "domanda": "ultima occasione per salvare il Serraglio. Che si fa?"
+     }
+    ],
+    "uscita": {
+     "scelta": true
+    },
+    "riga": 647
+   },
+   {
+    "id": "iii1s",
+    "etichetta": "III1s",
+    "titolo": "Sgomberati",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S1",
+      "variante": "insegna-spenta",
+      "riga": 715
+     },
+     {
+      "tipo": "regia",
+      "nota": "di notte. il marciapiede davanti al Serraglio. Duccio abbassa la serranda e ci incrocia sopra il nastro bianco e rosso. Il gruppo è fuori, al freddo.",
+      "riga": 715
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "beato",
+      "testo": "Aaah, finalmente! La bettola chiusa e gli avanzi del centro sociale sbattuti per strada. Questa sì che è destra!",
+      "riga": 717
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "Capito, zecca enorme? Il tuo posto è per terra! Così impari a mettermi in imbarazzo davanti alla gente per bene.",
+      "se": {
+       "segno": "duccio"
+      },
+      "riga": 719
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "VERRÀ IL GIORNO IN CUI METTERÒ FINE ALLE TUE BAGGIANATE CON LA MORTE... OH SÌ, SARÀ UN GIORNO BELLISSIMO...",
+      "se": {
+       "segno": "duccio"
+      },
+      "riga": 721
+     },
+     {
+      "tipo": "regia",
+      "nota": "Duccio se ne va col suo cocktail. Sul marciapiede, avvolta in una coperta presa chissà dove, c'è anche Celestina.",
+      "riga": 723
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "NO, NO! NON PUÒ FINIRE COSÌ! IO A CASA NON CI TORNO. ACCAMPIAMOCI!",
+      "riga": 725
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "triste",
+      "testo": "Tornare a casa, eh? Ad averla... Avevo un pavimento al coperto, e mi hanno portato via anche quello.",
+      "riga": 727
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Ma che stiamo facendo? Avranno pure cambiato la serratura, ma la chiave ce l'abbiamo noi.",
+      "se": {
+       "segno": "chiave"
+      },
+      "riga": 729
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Una notte in più al coperto non mi farà certo male...",
+      "se": {
+       "segno": "chiave"
+      },
+      "riga": 731
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "All'addiaccio non ci dormo. Conosco questo posto come le mie tasche: la finestra del bagno si apre anche da fuori.",
+      "se": {
+       "non": {
+        "segno": "chiave"
+       }
+      },
+      "riga": 733
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "E IO COME CI PASSO???",
+      "se": {
+       "non": {
+        "segno": "chiave"
+       }
+      },
+      "riga": 735
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Smurala, per quel che mi riguarda.",
+      "se": {
+       "non": {
+        "segno": "chiave"
+       }
+      },
+      "riga": 737
+     },
+     {
+      "tipo": "segno",
+      "segno": "via-atto-3",
+      "valore": "sgombero",
+      "riga": 739
+     },
+     {
+      "tipo": "segno",
+      "segno": "alleato",
+      "valore": "celestina",
+      "riga": 739
+     },
+     {
+      "tipo": "achievement",
+      "achievement": "rientro-abusivo",
+      "riga": 741
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "iii3b"
+     }
+    },
+    "riga": 711,
+    "segreto": true
+   },
+   {
+    "id": "iii2a",
+    "etichetta": "III2a",
+    "titolo": "Il torneo",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 747
+     },
+     {
+      "tipo": "regia",
+      "nota": "di sera. i tavolini messi in fila. Su una lavagna, a gesso: «TORNEO DEL SERRAGLIO — ISCRIZIONE 10 € — SCOMMESSE LIBERE». Beppe ha le cuffie al collo e una scatola di latta per i soldi.",
+      "riga": 747
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "contento",
+      "testo": "Venghino, signori! Dieci euro per menare o farsi menare: chi comincia? Il ricavato va tutto a salvare il Serraglio!",
+      "riga": 749
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "E il ricavato lo tieni tu? La stessa persona che farà i lavori per il Dimmi Di Sì?",
+      "riga": 751
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Se è per questo gioco anch'io, e spero pure di vincere. Tranquilla: parte del mio premio la do al Serraglio.",
+      "riga": 753
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "CHE ASPETTIAMO? ORDUNQUE ISCRIVIAMOTI!",
+      "riga": 755
+     },
+     {
+      "tipo": "regia",
+      "nota": "Celestina rovescia il marsupio sul bancone: monetine, un bottone, una caramella incartata.",
+      "riga": 757
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "triste",
+      "testo": "Qualcuno mi sponsorizza l'iscrizione? Sarei un po' a corto di liquidi...",
+      "riga": 759
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "brilla",
+      "testo": "Ci penso io... tranquilla... e gioco pure io... e scommetto... su di me... che c'ho una rabbia... da spaccarvi... tutti i denti...",
+      "riga": 761,
+      "stacchi": [
+       {
+        "chi": "spazienzio",
+        "espressione": "fumante"
+       },
+       {
+        "chi": "mara",
+        "espressione": "neutra"
+       }
+      ],
+      "interrotta": true
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "contento",
+      "testo": "Bene: Spazienzio, Celestina e Piera dentro, e Piera punta su Piera. Venghino, signori, che intanto si comincia!",
+      "riga": 765
+     },
+     {
+      "tipo": "regia",
+      "nota": "Beppe si mette le cuffie; ne esce un metal piccolissimo e cattivo.",
+      "riga": 767
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-iii2a",
+      "modo": "ffa",
+      "giocatore": {
+       "personaggio": "beppe"
+      },
+      "avversari": [
+       {
+        "personaggio": "mara"
+       },
+       {
+        "personaggio": "spazienzio"
+       },
+       {
+        "personaggio": "celestina"
+       },
+       {
+        "personaggio": "piera"
+       }
+      ],
+      "riga": 769,
+      "sconfitta": {
+       "nodo": "iii3c"
+      }
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "contento",
+      "testo": "Aaah, che soddisfazione! Come promesso, parte del premio va nel fondo per comprarci questa baracca!",
+      "riga": 773
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "iii3a"
+     }
+    },
+    "riga": 745
+   },
+   {
+    "id": "iii3c",
+    "etichetta": "III3c",
+    "titolo": "I debiti",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "variante": "disordine",
+      "riga": 781
+     },
+     {
+      "tipo": "regia",
+      "nota": "di sera. i tavolini rovesciati. Beppe guarda dentro la scatola di latta: è vuota.",
+      "riga": 781
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "scocciato",
+      "testo": "Ho perso, quindi devo coprire anche la mia scommessa. Accidenti, mezzo bar ha puntato contro di me!",
+      "riga": 783
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "scocciato",
+      "testo": "Anche con la percentuale del banco, non resta quasi niente...",
+      "riga": 785
+     },
+     {
+      "tipo": "regia",
+      "nota": "la porta si apre. Entra Duccio, con il blocchetto delle ricevute.",
+      "riga": 787
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "Ancora qui, branco di sinistroidi? Beppe, o cominci a ristrutturare, o ti faccio risputare l'anticipo del Dimmi Di Sì.",
+      "riga": 789
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "serio",
+      "testo": "Ho un'altra proposta: gioca al nostro torneo. Se perdi, smetti di rompermi le palle con l'anticipo.",
+      "riga": 791
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "serio",
+      "testo": "Se per disgrazia vinci... lavoro gratis per tutti. Per una settimana, eh!",
+      "riga": 793
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "serio",
+      "testo": "Lavoro gratis? Col lavoro gratis sì che si fa impresa! Questa è roba di destra. Ci sto!",
+      "riga": 795
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "contenta",
+      "testo": "Mi aggrego anch'io. Se vinco, mi costruisci un comodino basso. Sai, dormo per terra...",
+      "riga": 797
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-iii3c",
+      "modo": "ffa",
+      "giocatore": {
+       "personaggio": "beppe"
+      },
+      "avversari": [
+       {
+        "personaggio": "duccio"
+       },
+       {
+        "personaggio": "celestina"
+       }
+      ],
+      "riga": 799,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "beppe",
+        "espressione": "scocciato",
+        "testo": "Dannazione! Qui ci vuole un pezzo più pesante. Gli Slayer, forse?",
+        "riga": 801
+       }
+      ]
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "dolorante",
+      "testo": "E va bene, va bene! Tieniti quel maledetto anticipo.",
+      "riga": 803
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Me lo tengo volentieri, e una parte va nel fondo per il Serraglio. Non prendertela: l'importante è partecipare.",
+      "riga": 805
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "dolorante",
+      "testo": "Tsk! Partecipare... E parteciperemo!",
+      "riga": 807
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "iii3a"
+     }
+    },
+    "riga": 777,
+    "segreto": true
+   },
+   {
+    "id": "iii3a",
+    "etichetta": "III3a",
+    "titolo": "I conti",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "variante": "al-buio",
+      "riga": 813
+     },
+     {
+      "tipo": "regia",
+      "nota": "di notte. sul bancone la scatola di latta aperta: monetine in pile storte, banconote stropicciate, un bottone. Duccio appoggiato al bancone che squadra tutti in cagnesco; Sergio è tornato sul suo sgabello, come se non se ne fosse mai andato.",
+      "riga": 813
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "pensierosa",
+      "testo": "Trecentoquaranta... trecentoquarantacinque... Ne mancano dieci. Li avevo appena contati.",
+      "riga": 815
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "scocciato",
+      "testo": "Direi che è andata bene, se ne mancano solo dieci...",
+      "se": {
+       "visto": "iii3c"
+      },
+      "riga": 817
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "pensieroso",
+      "testo": "Comunque sono pochi. Con questi forse ci compriamo gli sgabelli... usati, s'intende.",
+      "riga": 819
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "Al Dimmi Di Sì spetta qualcosa per il disturbo... diciamo il dieci per cento.",
+      "riga": 821
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "PER IL DISTURBO? TI DISTURBO IO, GRATIS. DISTURBIAMOTI!",
+      "riga": 823
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "offeso",
+      "testo": "Fermo, zecca! Ne ho prese abbast... cioè, ho manganellato abbastanza comunisti per stasera.",
+      "riga": 825
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "E questa sarebbe la colletta per comprarvi il bar? Per favore... Ci avete messo pure gli spicci trovati per terra.",
+      "riga": 827
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Quelli li ho messi io. Pecunia non olet, si dice così, no?",
+      "riga": 829
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "Siete patetici. Vi mancano dieci euro, dicevate? Ce li metto io. Se qualcuno mi batte, ovviamente.",
+      "riga": 831
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-iii3a",
+      "modo": "duello",
+      "giocatore": {
+       "sceltaFra": [
+        "beppe",
+        "mara",
+        "spazienzio",
+        "celestina",
+        "piera"
+       ]
+      },
+      "avversari": [
+       {
+        "personaggio": "sergio"
+       }
+      ],
+      "riga": 833,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "sergio",
+        "espressione": "annoiato",
+        "testo": "Siete patetici come sembrate, allora. Forza: nessun altro?",
+        "riga": 835
+       }
+      ]
+     },
+     {
+      "tipo": "regia",
+      "nota": "Sergio posa sul bancone una banconota da dieci euro piegata in quattro. Duccio la prende al volo.",
+      "riga": 837
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "beato",
+      "testo": "Il mio dieci per cento. Per il disturbo.",
+      "riga": 839
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Dieci euro non sono il dieci per cento di trecentocinquanta, imbecille. Lasciali lì: per ridicoli che siano, li hanno vinti.",
+      "riga": 841
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "iii4"
+     }
+    },
+    "riga": 811
+   },
+   {
+    "id": "iii2b",
+    "etichetta": "III2b",
+    "titolo": "Il pedinamento",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S1",
+      "variante": "insegna-spenta",
+      "riga": 847
+     },
+     {
+      "tipo": "regia",
+      "nota": "di notte. la strada dietro al Serraglio. Mara rasente il muro, il casco di stagnola stretto in mano come una torcia; più avanti una sagoma alta e la brace di una sigaretta sottile.",
+      "riga": 847
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Stai giù, {giocatore}. Non dobbiamo farci vedere! Quello va dritto al Dimmi Di Sì.",
+      "riga": 849
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Se si gira, fai il lampione. I Sioux come te sono bravissimi a mimetizzarsi, e nessuno guarda mai i lampioni.",
+      "riga": 851
+     },
+     {
+      "tipo": "regia",
+      "nota": "Sergio si ferma sotto un lampione, senza voltarsi.",
+      "riga": 853
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Qualcuno dovrebbe dirvi che non siete furtivi come credete.",
+      "riga": 855
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Ci ha scoperto! Maledizione! La massoneria ha poteri divinatori che non immaginavamo.",
+      "riga": 857
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Oppure ha delle orecchie che funzionano, e tu non ti sei chetata un attimo.",
+      "riga": 859
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Credi davvero alle idiozie che dici, o è un modo per proiettare la tua inutilità sul resto del mondo?",
+      "riga": 861
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "Comunque sia, mi sa che vi serve proprio una lezione...",
+      "riga": 863
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-iii2b",
+      "modo": "duello",
+      "giocatore": {
+       "personaggio": "mara"
+      },
+      "avversari": [
+       {
+        "personaggio": "sergio"
+       }
+      ],
+      "riga": 865,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "mara",
+        "espressione": "agitata",
+        "testo": "No, no! Senza il casco di stagnola mi legge i pensieri!",
+        "riga": 867
+       }
+      ]
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Saprai anche cavartela, ma adesso non ho più tempo per te.",
+      "riga": 869
+     },
+     {
+      "tipo": "regia",
+      "nota": "Sergio si sistema la giacca, si gira e sparisce nel buio, verso il Serraglio.",
+      "riga": 871
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Ma... perché torna al Serraglio? Voleva solo depistarci e aspettare che ce ne andassimo tutti? Che avrà da fare lì, da solo?",
+      "riga": 873
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "contenta",
+      "testo": "Anche se si chiude dentro, la chiave ce l'abbiamo noi. Presto, smascheriamo l'ennesimo complotto dei poteri forti!",
+      "se": {
+       "segno": "chiave"
+      },
+      "riga": 875
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "pensierosa",
+      "testo": "Si chiuderà dentro di sicuro, e senza fare rumore non possiamo stanarlo. Non resta che aspettare domattina...",
+      "se": {
+       "non": {
+        "segno": "chiave"
+       }
+      },
+      "riga": 877
+     }
+    ],
+    "uscita": {
+     "condizionate": [
+      {
+       "verso": {
+        "nodo": "iii3b"
+       },
+       "se": {
+        "segno": "chiave"
+       }
+      },
+      {
+       "verso": {
+        "nodo": "iii4"
+       }
+      }
+     ]
+    },
+    "riga": 845
+   },
+   {
+    "id": "iii3b",
+    "etichetta": "III3b",
+    "titolo": "Di notte al Serraglio",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "variante": "al-buio",
+      "riga": 885
+     },
+     {
+      "tipo": "regia",
+      "nota": "il bar chiuso, le sedie sui tavoli. L'unica luce è la brace di una sigaretta sottile in fondo al bancone: Sergio è già lì, sul suo sgabello, e guarda il locale vuoto. Non si accorge di nessuno.",
+      "riga": 885
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "La chiave di Beppe gira nella serratura nuova senza un rumore. Per terra, dietro al bancone, due occhi svegli: Celestina.",
+      "riga": 887,
+      "se": {
+       "segno": "via-atto-3",
+       "uguale": "pedinamento"
+      }
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "La chiave di Beppe gira nella serratura nuova senza un rumore. Celestina sguscia dentro per prima.",
+      "riga": 889,
+      "se": {
+       "tutti": [
+        {
+         "segno": "via-atto-3",
+         "uguale": "sgombero"
+        },
+        {
+         "segno": "chiave"
+        }
+       ]
+      }
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "La finestra del bagno si apre da fuori, come aveva detto Celestina. Spazienzio resta in strada.",
+      "riga": 891,
+      "se": {
+       "tutti": [
+        {
+         "segno": "via-atto-3",
+         "uguale": "sgombero"
+        },
+        {
+         "non": {
+          "segno": "chiave"
+         }
+        }
+       ]
+      }
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Che ci fate voi qui? Presto, giù! Non fatevi vedere, e silenzio!",
+      "se": {
+       "segno": "via-atto-3",
+       "uguale": "pedinamento"
+      },
+      "riga": 893
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Presto, giù dietro al bancone! Non fatevi vedere, e silenzio!",
+      "se": {
+       "segno": "via-atto-3",
+       "uguale": "sgombero"
+      },
+      "riga": 895
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Ve l'avevo detto che da quaggiù si vede tutto. Eccolo lì, quello che viene spesso a bere di notte.",
+      "se": {
+       "segno": "celestina"
+      },
+      "riga": 897
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "C'è qualcuno seduto al bancone. Sta bevendo, credo.",
+      "se": {
+       "non": {
+        "segno": "celestina"
+       }
+      },
+      "riga": 899
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "È lui, è Sergio! Che ci fa seduto al buio? Dimmi tu se uno che viene solo a bere spegne anche la luce.",
+      "riga": 901
+     },
+     {
+      "tipo": "regia",
+      "nota": "la serranda si alza a metà con uno strattone. Entra Duccio, piegato in due, con una busta gialla chiusa.",
+      "riga": 903
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "serio",
+      "testo": "Capo, fuori ci sono ancora l'energumeno comunista e gli altri ubriaconi. Li ho lasciati stare, come mi aveva detto.",
+      "riga": 905
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "serio",
+      "testo": "Il padrone, intanto, le manda un piccolo incentivo per domattina.",
+      "riga": 907
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Lascialo pure sul bancone, Duccio. Puoi andare.",
+      "riga": 909
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Avete sentito? Un incentivo! È una bustarella, per corromperlo!",
+      "riga": 911
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "serio",
+      "testo": "Capo, qua sotto c'è qualcuno! Ci spiano!",
+      "riga": 913
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Queste pantegane del Serraglio sono peggio di un dito in un occhio... Che devo fare per starmene un attimo in pace?",
+      "riga": 915
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Mio caro Duccio, mi sa che dovrai farmi vedere di nuovo quanto sei di destra. Forza, leviamoceli di torno!",
+      "riga": 917
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-iii3b",
+      "modo": "ffa",
+      "giocatore": {
+       "segno": "alleato"
+      },
+      "avversari": [
+       {
+        "personaggio": "sergio"
+       },
+       {
+        "personaggio": "duccio"
+       }
+      ],
+      "riga": 919,
+      "modificatori": [
+       "ce-l-hanno-tutti-con-te"
+      ],
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "sergio",
+        "espressione": "annoiato",
+        "testo": "Duccio, se le pantegane tornano sempre dallo stesso buco, sarà il caso di chiuderlo, no?",
+        "riga": 923
+       },
+       {
+        "tipo": "battuta",
+        "chi": "duccio",
+        "espressione": "fiero",
+        "testo": "Certo, capo! Chiudere i buchi è una cosa di destra!",
+        "riga": 923
+       }
+      ]
+     },
+     {
+      "tipo": "regia",
+      "nota": "Duccio scappa dalla serranda, zoppicando. Sergio si infila la busta in tasca senza aprirla e va verso l'uscita.",
+      "riga": 925
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Siete testardi, ve lo riconosco.",
+      "riga": 927
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "pensieroso",
+      "testo": "Ci vediamo qui domattina. Io vado a casa: devo dormire qualche ora, se non voglio ridurmi alla vostra solita stupidità.",
+      "riga": 929
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "assonnata",
+      "testo": "Sì, anch'io vorrei dormire. Per fortuna non devo andare da nessuna parte...",
+      "riga": 931
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "iii4"
+     }
+    },
+    "riga": 883
+   },
+   {
+    "id": "s1",
+    "etichetta": "S1",
+    "titolo": "Il cane sa",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S4",
+      "riga": 939
+     },
+     {
+      "tipo": "regia",
+      "nota": "Regia: la cantina del Serraglio, fra casse vuote e fusti di birra. In un angolo il nascondiglio di Grappino: un tappo, una ciabatta nera col pelo, mozziconi di sigarette sottili, carte unte. Grappino ci sta seduto sopra, il suo pezzo di carta fra le zampe.",
+      "riga": 939
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "posa": "seduto",
+      "azione": "entra",
+      "riga": 939
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Guarda un po' quanta roba ha accumulato questo cane!",
+      "riga": 941
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Il cane. Certo! Chi perquisisce un cane? È il corriere perfetto.",
+      "riga": 943
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "posa": "ringhia",
+      "azione": "posa",
+      "riga": 945
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Grappino, tu c'entri qualcosa. Non negarlo! Un abbaio se lavori per Sergio. Due se lavori per il Dimmi Di Sì.",
+      "riga": 947
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "Grappino guarda Mara. Mara guarda Grappino. Vince Grappino.",
+      "riga": 949
+     },
+     {
+      "tipo": "regia",
+      "nota": "dalle scale scende Piera, lentissima, il bicchierino in mano.",
+      "riga": 951
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Lascialo... che è bono... e s'è messo... tutta la roba... in ordine...",
+      "riga": 953
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Piera, prendi il foglio che si è portato nella cuccia. Se l'ha perso Sergio, magari c'è scritto qualcosa di utile.",
+      "riga": 955
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Togliere il foglio... al Grappino... nemmeno... per idea... l'ha preso lui... è suo...",
+      "riga": 957,
+      "stacchi": [
+       {
+        "chi": "mara",
+        "espressione": "neutra"
+       }
+      ],
+      "interrotta": true
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "contenta",
+      "testo": "Va bene. Allora ce lo prendiamo con le cattive.",
+      "riga": 961
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-s1",
+      "modo": "duello",
+      "giocatore": {
+       "personaggio": "celestina"
+      },
+      "avversari": [
+       {
+        "personaggio": "piera"
+       }
+      ],
+      "riga": 963,
+      "modificatori": [
+       "il-cane-difende-le-sue-cose",
+       "la-cantina-e-buia"
+      ],
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "piera",
+        "espressione": "brilla",
+        "testo": "Grappino... il foglio... non glielo dare...",
+        "riga": 967
+       }
+      ]
+     },
+     {
+      "tipo": "regia",
+      "nota": "Piera alza il bicchierino. Grappino molla tutto e corre da lei.",
+      "riga": 969
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "contenta",
+      "testo": "Grappino... vieni... un altro... grappino...",
+      "riga": 971
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "È l'altra metà del bilancio della Apri e Chiudi GmbH. Sul bordo i segni dei denti di Grappino. In fondo «S. Sommerso».",
+      "riga": 973
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "assonnata",
+      "testo": "S. Sommerso. Mara, la Apri e Chiudi GmbH è di Sergio. E il bar che vi date tanta pena a salvare... il Serraglio è suo.",
+      "riga": 975
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "No, non ci casco! Gli Illuminati ne sanno una più del diavolo: lui è solo un prestanome!",
+      "riga": 977
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "E a chi farebbe da prestanome? Al Dimmi Di Sì? Si comprano il Serraglio da soli? Facciamo i seri, per favore.",
+      "riga": 979
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "contenta",
+      "testo": "{giocatore}, conserva questo foglio. Domattina mettiamo Sergio davanti alle sue responsabilità!",
+      "riga": 981
+     },
+     {
+      "tipo": "achievement",
+      "achievement": "il-cane-sa",
+      "riga": 983
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "iii4"
+     }
+    },
+    "riga": 935,
+    "segreto": true
+   },
+   {
+    "id": "iii4",
+    "etichetta": "III4",
+    "titolo": "La firma",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S1",
+      "variante": "di-giorno",
+      "riga": 989
+     },
+     {
+      "tipo": "regia",
+      "nota": "lunedì mattina, le nove meno cinque. Davanti alla serranda chiusa: il padrone del Dimmi Di Sì, in ombra, con una cartellina e un assegno; Duccio dietro di lui, il cocktail anche a quest'ora; tutto il Serraglio sul marciapiede.",
+      "riga": 989
+     },
+     {
+      "tipo": "battuta",
+      "chi": "padrone",
+      "testo": "Buongiorno. Chi viene a firmare per la Apri e Chiudi GmbH? Mi hanno detto che ha le chiavi.",
+      "riga": 991
+     },
+     {
+      "tipo": "regia",
+      "nota": "arriva Sergio, senza fretta, la sigaretta sottile accesa. Tira fuori di tasca un mazzo di chiavi vecchio e pesante e apre la serratura nuova al primo colpo.",
+      "riga": 993
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "pensieroso",
+      "testo": "Tu? E allora perché la chiave della serratura nuova me l'hai fatta spedire fino in Svizzera? Non potevo dartela di persona?",
+      "riga": 995
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "pensieroso",
+      "testo": "Trenta euro di spedizione assicurata, per niente...",
+      "riga": 997
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "In Svizzera? Lo sapevo, lo sapevo! È un agente svizzero!",
+      "riga": 999
+     },
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 1001
+     },
+     {
+      "tipo": "regia",
+      "nota": "di giorno. Al centro un tavolino con due sedie, una di fronte all'altra. Il padrone si siede da una parte e posa l'assegno.",
+      "riga": 1001
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "Prima che Sergio si sieda, {giocatore} posa sul tavolo l'altra metà del bilancio, quella con la firma. Senza dire niente.",
+      "riga": 1003,
+      "se": {
+       "segno": "via-atto-3",
+       "uguale": "grappino"
+      }
+     },
+     {
+      "tipo": "regia",
+      "nota": "Sergio si siede dall'altra parte del tavolo: dalla parte di chi vende.",
+      "riga": 1005
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Il pezzo con la firma. Pensavo che quel cane le mie carte se le mangiasse, non che le portasse in giro.",
+      "se": {
+       "segno": "via-atto-3",
+       "uguale": "grappino"
+      },
+      "riga": 1007
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "contenta",
+      "testo": "...dieci anni fa... il signore... che ha salvato... il Serraglio... era alto... e secco...",
+      "se": {
+       "segno": "frase"
+      },
+      "riga": 1009,
+      "stacchi": [
+       {
+        "chi": "spazienzio",
+        "espressione": "quasi-calmo"
+       },
+       {
+        "chi": "mara",
+        "espressione": "neutra"
+       }
+      ]
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "contenta",
+      "testo": "...e antipatico. Era lui.",
+      "se": {
+       "segno": "frase"
+      },
+      "riga": 1013
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Dieci anni per finire una frase. Complimenti, Piera.",
+      "se": {
+       "segno": "frase"
+      },
+      "riga": 1015
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "brilla",
+      "testo": "Dieci anni fa... il signore... che ha salvato...",
+      "se": {
+       "non": {
+        "segno": "frase"
+       }
+      },
+      "riga": 1017,
+      "stacchi": [
+       {
+        "chi": "spazienzio",
+        "espressione": "fumante"
+       }
+      ],
+      "interrotta": true
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Santo cielo, donna! Vuoi arrivare al punto?",
+      "se": {
+       "non": {
+        "segno": "frase"
+       }
+      },
+      "riga": 1021
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "CI ARRIVO IO: IL SERRAGLIO È TUO! PERCHÉ? COME OSI VENDERLO A QUESTI GABBIANI MALEDETTI???",
+      "riga": 1023
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Sul serio, non servivano tutti questi indizi. Era chiaro dal primo momento.",
+      "se": {
+       "segno": "celestina"
+      },
+      "riga": 1025
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "offeso",
+      "testo": "Scusate... sono confuso. Capo... e capo? Ma allora io per chi lavoro?",
+      "riga": 1027
+     },
+     {
+      "tipo": "battuta",
+      "chi": "padrone",
+      "testo": "Per me.",
+      "riga": 1029
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Sei di destra, no? Lavori per chi paga, Duccio. Forza, datemi una penna e vendiamo questo colabrodo di bar.",
+      "riga": 1031
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "NON CI PENSARE NEANCHE! RIBALTIAMOTI!!!",
+      "riga": 1033
+     },
+     {
+      "tipo": "regia",
+      "nota": "Spazienzio ribalta il tavolino. Il bicchierino di Piera vola, Grappino morde la prima caviglia che trova, ed è la rissa.",
+      "riga": 1035
+     },
+     {
+      "tipo": "effetto",
+      "effetto": "scossa",
+      "riga": 1035
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Siete proprio... delle persone... cattive... io...",
+      "riga": 1037
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "contento",
+      "testo": "{giocatore}, mettiti gli Helloween in cuffia! Chi siamo noi per dire no a una scazzottata di prima mattina?",
+      "se": {
+       "segno": "alleato",
+       "uguale": "beppe"
+      },
+      "riga": 1039
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "seria",
+      "testo": "{giocatore}, è la nostra occasione! Approfittiamo del parapiglia e veniamo a capo di questo mistero!",
+      "se": {
+       "segno": "alleato",
+       "uguale": "mara"
+      },
+      "riga": 1041
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "contenta",
+      "testo": "{giocatore}, è la nostra occasione! Approfittiamo del parapiglia e rubiamogli un po' di spiccioli!",
+      "se": {
+       "segno": "alleato",
+       "uguale": "celestina"
+      },
+      "riga": 1043
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-iii4",
+      "modo": "ffa",
+      "giocatore": {
+       "segno": "alleato"
+      },
+      "avversari": [
+       {
+        "personaggio": "sergio"
+       },
+       {
+        "personaggio": "duccio"
+       },
+       {
+        "personaggio": "spazienzio"
+       },
+       {
+        "personaggio": "piera"
+       }
+      ],
+      "riga": 1045,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "spazienzio",
+        "espressione": "furioso",
+        "testo": "RIMETTETE IN PIEDI IL TAVOLO, CHE LO RI-RIBALTO!",
+        "riga": 1047
+       },
+       {
+        "tipo": "battuta",
+        "chi": "sergio",
+        "espressione": "annoiato",
+        "testo": "Mi lascerete mai vendere questo posto in pace?",
+        "riga": 1047
+       }
+      ]
+     },
+     {
+      "tipo": "regia",
+      "nota": "la rissa finisce. Il padrone del Dimmi Di Sì aspetta in un angolo, l'assegno in mano, intatto.",
+      "riga": 1049
+     },
+     {
+      "tipo": "battuta",
+      "chi": "padrone",
+      "testo": "È tutto molto pittoresco, ma comincio a stufarmi. Mettetevi d'accordo fra voi, entro oggi, o la vendita salta.",
+      "riga": 1051
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "iii5"
+     }
+    },
+    "riga": 987
+   },
+   {
+    "id": "iii5",
+    "etichetta": "III5",
+    "titolo": "Rientrare",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 1057
+     },
+     {
+      "tipo": "regia",
+      "nota": "di sera. a bancone chiuso, le sedie sui tavoli, l'assegno sul bancone. Sergio sul suo sgabello in fondo; tutti gli altri in piedi davanti a lui.",
+      "riga": 1057
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Siete proprio una combriccola ostinata. Vi importa davvero tanto di questo postaccio?",
+      "riga": 1059
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Importa anche a te, o non l'avresti salvato dieci anni fa.",
+      "riga": 1061
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Può darsi. Sapete, il mio lavoro è piuttosto... peculiare.",
+      "riga": 1063
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "In certi periodi mi ritrovo qualche società con un'eccedenza di imponibile, e colgo ogni occasione per abbatterlo.",
+      "riga": 1065
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Dieci anni fa questa baracca cadeva a pezzi. Non come ora: proprio a pezzi, letteralmente.",
+      "riga": 1067
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Con un po' di guadagni non ancora tassati l'ho comprata e rimessa in condizioni decenti.",
+      "riga": 1069
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Ma ora siamo punto e a capo! Come clienti siete terribili, e gli incassi non coprono neanche le spese.",
+      "riga": 1071
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "Il Dimmi Di Sì mi offre l'occasione di rientrare dell'investimento: sarei stupido a non coglierla. È solo business.",
+      "riga": 1073
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Sarà solo business, ma tutte le notti vieni qui a goderti pace e solitudine. E sai che dormo qui: me lo lasci fare apposta.",
+      "riga": 1075
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "E che dovrei fare, chiederti l'affitto?",
+      "riga": 1077
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "contenta",
+      "testo": "Potresti. Se non l'hai mai fatto, un motivo c'è.",
+      "riga": 1079
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "serio",
+      "testo": "Sergio, capisco che tu voglia vendere, ma perché non a noi? Abbiamo raccolto dei soldi. Vediamo quanto ti possiamo dare.",
+      "se": {
+       "segno": "via-atto-3",
+       "uguale": "torneo"
+      },
+      "riga": 1081
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Avete la minima idea di quanto costa un bar? No, eh?",
+      "se": {
+       "segno": "via-atto-3",
+       "uguale": "torneo"
+      },
+      "riga": 1083
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Sapete che c'è? Forse avete ragione. Questo posto fatiscente in fondo è casa vostra... e forse, almeno un po', anche casa mia.",
+      "riga": 1085
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "Vi faccio una proposta nelle vostre corde. Volete che il Serraglio resti quello che è? Benissimo: fate quello che sapete fare meglio.",
+      "riga": 1087
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "Qui.",
+      "riga": 1089
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "ORA.",
+      "riga": 1091
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "DATEMI UN MOTIVO PER NON VENDERE, FORZA!",
+      "riga": 1093
+     },
+     {
+      "tipo": "catena",
+      "id": "partita-iii5",
+      "avversario": {
+       "personaggio": "sergio"
+      },
+      "giocatori": [
+       {
+        "personaggio": "mara",
+        "prima": {
+         "tipo": "battuta",
+         "chi": "sergio",
+         "espressione": "strafottente",
+         "testo": "La ciclista dei complotti. Chi ti manda stavolta, gli Illuminati o i satelliti?",
+         "riga": 1101
+        }
+       },
+       {
+        "personaggio": "spazienzio",
+        "prima": {
+         "tipo": "battuta",
+         "chi": "sergio",
+         "espressione": "annoiato",
+         "testo": "Spazienzio. Cerca di non ribaltare il bancone: è ancora mio.",
+         "riga": 1103
+        }
+       },
+       {
+        "personaggio": "celestina",
+        "prima": {
+         "tipo": "battuta",
+         "chi": "sergio",
+         "espressione": "strafottente",
+         "testo": "Pure tu? Dieci anni a dormire gratis sul mio pavimento, ed ecco come mi ripaghi.",
+         "riga": 1105
+        },
+        "sblocco": "starter-celestina"
+       },
+       {
+        "personaggio": "piera",
+        "prima": {
+         "tipo": "battuta",
+         "chi": "sergio",
+         "espressione": "annoiato",
+         "testo": "Piera. Se aspetto che finisci una frase, chiudo per vecchiaia. Gioca.",
+         "riga": 1107
+        },
+        "sblocco": "starter-piera"
+       },
+       {
+        "personaggio": "beppe",
+        "prima": {
+         "tipo": "battuta",
+         "chi": "sergio",
+         "espressione": "malvagio",
+         "testo": "Beppe. Se vinco io, la ristrutturazione la fai gratis. In nero, come piace a te.",
+         "riga": 1109
+        },
+        "sblocco": "starter-beppe"
+       }
+      ],
+      "sconfitta": {
+       "nodo": "f3"
+      },
+      "riga": 1095
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "Devo proprio dirlo: sapete come divertirvi, voialtri. Soprattutto tu, {giocatore}. Complimenti.",
+      "riga": 1111
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "Chissà... forse un giorno vi farò vedere quanto valgo davvero.",
+      "riga": 1113
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "CE L'HAI GIÀ FATTO VEDERE, E HAI PERSO! GIUBILIAMOCI! MENARE LE MANI È LA CAUSA DI TUTTI I PROBLEMI DELLA VITA. E LA SOLUZIONE!",
+      "riga": 1115
+     },
+     {
+      "tipo": "scelta",
+      "modo": "muta",
+      "opzioni": [
+       {
+        "etichetta": "con Sergio, che crede di saper fare di meglio",
+        "se": {
+         "finale": "il-serraglio-resta"
+        },
+        "chi": "sergio",
+        "verso": {
+         "nodo": "s2"
+        }
+       },
+       {
+        "etichetta": "con Spazienzio, che è contento di aver vinto",
+        "se": {
+         "finale": "il-serraglio-resta"
+        },
+        "chi": "spazienzio"
+       }
+      ],
+      "riga": 1117,
+      "facoltativa": true,
+      "domanda": "con chi sei d'accordo?"
+     }
+    ],
+    "uscita": {
+     "condizionate": [
+      {
+       "verso": {
+        "nodo": "f2"
+       },
+       "se": {
+        "segno": "via-atto-3",
+        "uguale": "torneo"
+       }
+      },
+      {
+       "verso": {
+        "nodo": "f1"
+       }
+      }
+     ]
+    },
+    "riga": 1055
+   },
+   {
+    "id": "f1",
+    "etichetta": "F1",
+    "titolo": "Il Serraglio resta",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 1128
+     },
+     {
+      "tipo": "regia",
+      "nota": "di sera. Sergio prende l'assegno dal bancone, lo guarda, lo straccia in quattro e lo lascia cadere nel posacenere.",
+      "riga": 1128
+     },
+     {
+      "tipo": "battuta",
+      "chi": "padrone",
+      "testo": "Lei ha fatto un grave errore. Ne prendo atto.",
+      "riga": 1130
+     },
+     {
+      "tipo": "battuta",
+      "chi": "padrone",
+      "testo": "Duccio, mi sei costato un sacco di soldi e non sei servito a niente. Sparisci!",
+      "riga": 1132
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "offeso",
+      "testo": "Cosa? Mi licenzia? Ma io... io sono di destra!",
+      "riga": 1134
+     },
+     {
+      "tipo": "battuta",
+      "chi": "padrone",
+      "testo": "Ormai lo sanno anche i muri, Duccio.",
+      "riga": 1136
+     },
+     {
+      "tipo": "regia",
+      "nota": "il padrone esce. Duccio resta in mezzo al bar, con il cocktail in mano e l'ombrellino storto.",
+      "riga": 1138
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "dolorante",
+      "testo": "Licenziato, che vergogna... Il licenziamento è una cosa di sinistra! E adesso? Vado da un sindacato?",
+      "riga": 1140
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "La sera dopo.",
+      "riga": 1142
+     },
+     {
+      "tipo": "regia",
+      "nota": "il Serraglio aperto, come sempre. Sergio sul suo sgabello in fondo al bancone. Tutti fanno finta di niente.",
+      "riga": 1144
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "MALASERA... SIGNOR PROPRIETARIO.",
+      "riga": 1146
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Lasciami in pace, Spazienzio.",
+      "riga": 1148
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "pensierosa",
+      "testo": "Avete mai visto un lampione spegnersi proprio quando ci passate sotto? Un po' sospetto, non trovate?",
+      "riga": 1150
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "brilla",
+      "testo": "Grappino... lo vedi... il signore... è sempre alto... e secco... e antipatico... come dieci anni fa...",
+      "riga": 1152
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "contento",
+      "testo": "Domani rimetto la serratura vecchia. Così la chiave non devo più spedirla in Svizzera.",
+      "riga": 1154
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "assonnata",
+      "testo": "Sì, come no... Voi bevete e complottate, io mi faccio un pisolino. Buonanotte.",
+      "riga": 1156
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "Tutto è bene quel che finisce bene, eh? Che noia. Un po' mi pento di non aver fatto sul serio. Ma forse è meglio così.",
+      "se": {
+       "non": {
+        "visto": "s2"
+       }
+      },
+      "riga": 1158
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Tutto è bene quel che finisce bene, eh? Che noia. Godetevi la vostra normalità, debosciati che non siete altro.",
+      "se": {
+       "visto": "s2"
+      },
+      "riga": 1160
+     }
+    ],
+    "uscita": {
+     "condizionate": [
+      {
+       "verso": {
+        "fine": "completata",
+        "finale": "Il Serraglio è di tutti"
+       },
+       "se": {
+        "segno": "via-atto-3",
+        "uguale": "torneo"
+       }
+      },
+      {
+       "verso": {
+        "fine": "completata",
+        "finale": "Il Serraglio resta"
+       }
+      }
+     ]
+    },
+    "riga": 1126
+   },
+   {
+    "id": "f2",
+    "etichetta": "F2",
+    "titolo": "Il Serraglio è di tutti",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 1168
+     },
+     {
+      "tipo": "regia",
+      "nota": "di sera. sul bancone la scatola di latta della colletta, rovesciata. Sergio conta con due dita, come si tocca una cosa sporca.",
+      "riga": 1168
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Trecento e rotti, un bottone e una caramella. La caramella la conto?",
+      "riga": 1170
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Dai, non fare così. È un acconto. Una rata a settimana, in contanti, ovviamente.",
+      "riga": 1172
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Di questo passo, in quarant'anni copriamo mezzo debito col fornitore.",
+      "riga": 1174
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "D'accordo, anticipo io con la Apri e Chiudi GmbH.",
+      "riga": 1176
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "Però la caramella me la prendo, come garanzia.",
+      "riga": 1178
+     },
+     {
+      "tipo": "achievement",
+      "achievement": "monetine",
+      "riga": 1180
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "f1"
+     }
+    },
+    "riga": 1166
+   },
+   {
+    "id": "f3",
+    "etichetta": "F3",
+    "titolo": "Disco pub",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 1186
+     },
+     {
+      "tipo": "regia",
+      "nota": "di sera. subito dopo l'ultima partita, Sergio raccoglie le carte.",
+      "riga": 1186
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Patetici. Avete dimostrato quanto valete: niente.",
+      "riga": 1188
+     },
+     {
+      "tipo": "sfondo",
+      "sfondo": "S1",
+      "riga": 1190
+     },
+     {
+      "tipo": "regia",
+      "nota": "di sera. La stessa strada, una settimana dopo. Al posto dell'insegna del Serraglio, il neon «DIMMI DI SÌ DISCO PUB»; un cordone di velluto, una fila di fighetti in ombra. Gli habitué sono seduti fuori, sul marciapiede, con le birre del supermercato.",
+      "riga": 1190
+     },
+     {
+      "tipo": "battuta",
+      "chi": "duccio",
+      "espressione": "fiero",
+      "testo": "La fila è a destra! Ovviamente a destra!",
+      "riga": 1192
+     },
+     {
+      "tipo": "regia",
+      "nota": "con l'ombrellino del cocktail, Duccio indica la fila di sinistra. Metà dei fighetti si sposta.",
+      "riga": 1194
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "SEDICI EURO PER UN VIRGIN CUBA LIBRE. BEVIAMOTI. MA CON INFINITA TRISTEZZA.",
+      "riga": 1196
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "pensierosa",
+      "testo": "Il neon frigge. Sentite? Anche il mio telefono ha cominciato a farlo.",
+      "riga": 1198
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "brilla",
+      "testo": "A me... m'hanno detto... «Prego». Poi hanno visto... il Grappino... e hanno tirato... il cordone.",
+      "riga": 1200
+     },
+     {
+      "tipo": "battuta",
+      "chi": "beppe",
+      "espressione": "tranquillo",
+      "testo": "Io domani passo dal retro. Ci sono già due prese che non vanno. Mi pagano in nero.",
+      "riga": 1202
+     },
+     {
+      "tipo": "regia",
+      "nota": "dietro al cordone di velluto, sul pavimento nuovo e lucido, una sagoma accoccolata: Celestina.",
+      "riga": 1204
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "assonnata",
+      "testo": "Il pavimento è più freddo. Però finalmente ci hanno dato lo straccio.",
+      "riga": 1206
+     },
+     {
+      "tipo": "regia",
+      "nota": "dietro la vetrina, su un divanetto bianco, Sergio con un Virgin Cuba Libre in mano.",
+      "riga": 1208
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Sedici euro. Fa schifo uguale.",
+      "riga": 1210
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "combriccola",
+      "posa": "davanti-alla-porta",
+      "azione": "entra",
+      "riga": 1212
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un amico",
+      "testo": "{giocatore}! Sei qui fuori? Dai, entra. Il primo giro lo offriamo noi.",
+      "riga": 1214
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un altro amico",
+      "testo": "È fantastico! Il bere è buonissimo e pensa che qui non si fa mai a botte!",
+      "riga": 1216
+     },
+     {
+      "tipo": "achievement",
+      "achievement": "sedici-euro",
+      "riga": 1218
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "fine": "completata",
+      "finale": "Disco pub"
+     }
+    },
+    "riga": 1184
+   },
+   {
+    "id": "s2",
+    "etichetta": "S2",
+    "titolo": "Sergio fa sul serio",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "variante": "al-buio",
+      "riga": 1226
+     },
+     {
+      "tipo": "regia",
+      "nota": "di notte. le sedie sui tavoli, una sola lampada sopra il bancone. Sergio si è tolto la giacca. Davanti a lui, un mazzo nuovo ancora incellofanato.",
+      "riga": 1226
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Volete davvero vedere di cosa sono capace? L'avete voluto voi.",
+      "riga": 1228
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "C'è un detto cinese che mi piace molto: se puoi barare, non è barare. Non siete d'accordo? Bwahahahaha!",
+      "riga": 1230
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Cosa? No di certo! Non puoi abusare del tuo status di massone per barare.",
+      "riga": 1232
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "CHI SE NE IMPORTA SE BARA! BASTERÀ PICCHIARLO PIÙ FORTE!",
+      "riga": 1234
+     },
+     {
+      "tipo": "battuta",
+      "chi": "celestina",
+      "espressione": "furba",
+      "testo": "Barare, eh? Interessante. E che cosa sai fare, esattamente?",
+      "riga": 1236
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "malvagio",
+      "testo": "Oh, un sacco di cose, cara la mia tossichella! Vediamo un po'...",
+      "riga": 1238
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "pensieroso",
+      "testo": "Ho informatori dappertutto, che mi riferiscono ogni vostra mossa. E sono pieno di soldi, quindi ho più possibilità di voi.",
+      "riga": 1240
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "pensieroso",
+      "testo": "E poi ho un sacco di società da far fallire e riaprire quando voglio, quindi...",
+      "riga": 1242,
+      "interrotta": true
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "NON ME NE IMPORTA NIENTE! SPACCHIAMOTI, HO DETTO!",
+      "riga": 1246
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-s2",
+      "modo": "duello",
+      "giocatore": {
+       "sceltaFra": [
+        "mara",
+        "spazienzio",
+        "celestina",
+        "piera",
+        "beppe"
+       ]
+      },
+      "avversari": [
+       {
+        "personaggio": "sergio"
+       }
+      ],
+      "riga": 1248,
+      "modificatori": [
+       "ha-letto-i-tuoi-messaggi",
+       "ha-comprato-il-mazzo",
+       "societa-apri-e-chiudi"
+      ],
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "sergio",
+        "espressione": "strafottente",
+        "testo": "Tsk! Non sarei un superboss, se mi battessi al primo tentativo. O al decimo... Mwahahahaha!",
+        "riga": 1252
+       }
+      ]
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "annoiato",
+      "testo": "Questo era davvero il meglio che potevo fare. Ve lo riconosco: siete in gamba.",
+      "riga": 1254
+     },
+     {
+      "tipo": "battuta",
+      "chi": "sergio",
+      "espressione": "strafottente",
+      "testo": "Beh, che fate ancora qui? Forza, sciò: andate a bere.",
+      "riga": 1256
+     },
+     {
+      "tipo": "achievement",
+      "achievement": "superboss",
+      "riga": 1258
+     }
+    ],
+    "uscita": {
+     "condizionate": [
+      {
+       "verso": {
+        "nodo": "f2"
+       },
+       "se": {
+        "segno": "via-atto-3",
+        "uguale": "torneo"
+       }
+      },
+      {
+       "verso": {
+        "nodo": "f1"
+       }
+      }
+     ]
+    },
+    "riga": 1222,
+    "segreto": true,
+    "condizione": {
+     "finale": "il-serraglio-resta"
+    }
+   }
+  ],
+  "achievement": [
+   {
+    "id": "ve-l-avevo-detto",
+    "titolo": "Ve l'avevo detto",
+    "descrizione": "Mara ha accusato tutti, nessuno escluso: Sergio, Piera, Beppe, Celestina e Grappino, in giri diversi.",
+    "indizi": [
+     {
+      "testo": "Mara ha sospetti su tutti. Proprio su tutti?"
+     },
+     {
+      "testo": "Manca ancora qualcuno. Qualcuno con quattro zampe.",
+      "se": {
+       "tutti": [
+        {
+         "esplorato": "ii2a"
+        },
+        {
+         "esplorato": "ii2b"
+        },
+        {
+         "esplorato": "ii2c"
+        }
+       ]
+      }
+     }
+    ],
+    "quando": {
+     "tutti": [
+      {
+       "esplorato": "ii1"
+      },
+      {
+       "esplorato": "ii2a"
+      },
+      {
+       "esplorato": "ii2b"
+      },
+      {
+       "esplorato": "ii2c"
+      },
+      {
+       "esplorato": "s1"
+      }
+     ]
+    }
+   },
+   {
+    "id": "lasciatela-finire",
+    "titolo": "Lasciatela finire",
+    "descrizione": "Hai difeso la frase di Piera, e lei l'ha finita alla firma.",
+    "indizi": [
+     {
+      "testo": "Qualcuno interrompe sempre Piera."
+     },
+     {
+      "testo": "Se nessuno la interrompe, una frase di Piera arriva fino a lunedì.",
+      "se": {
+       "esplorato": "ii2a"
+      }
+     }
+    ],
+    "quando": {
+     "tutti": [
+      {
+       "vinto": "ii2a"
+      },
+      {
+       "visto": "iii4"
+      }
+     ]
+    }
+   },
+   {
+    "id": "lo-diceva-celestina",
+    "titolo": "Lo diceva Celestina",
+    "descrizione": "Hai dato retta a Celestina sul pavimento e hai fatto ritorno al Serraglio di notte, nello stesso giro.",
+    "indizi": [
+     {
+      "testo": "Celestina parla nel sonno. Qualcuno l'ha ascoltata?"
+     },
+     {
+      "testo": "Certe sconfitte ti mettono all'altezza del pavimento.",
+      "se": {
+       "esplorato": "iii3b"
+      }
+     }
+    ],
+    "quando": {
+     "tutti": [
+      {
+       "visto": "i1s"
+      },
+      {
+       "visto": "iii3b"
+      }
+     ]
+    }
+   },
+   {
+    "id": "rientro-abusivo",
+    "titolo": "Rientro abusivo",
+    "descrizione": "Dopo lo sgombero, Celestina ti ha riportato dentro di notte: con la chiave o dalla finestra del bagno.",
+    "indizi": [
+     {
+      "testo": "Dal Serraglio non ti cacciano così facilmente."
+     },
+     {
+      "testo": "Se Duccio ti butta fuori, segui Celestina.",
+      "se": {
+       "esplorato": "iii3b"
+      }
+     }
+    ]
+   },
+   {
+    "id": "monetine",
+    "titolo": "Monetine",
+    "descrizione": "Il Serraglio è di tutti, a rate.",
+    "indizi": [
+     {
+      "testo": "Il Serraglio potrebbe essere di tutti."
+     },
+     {
+      "testo": "Vinci l'ultima partita dopo il torneo di Beppe.",
+      "se": {
+       "esplorato": "iii2a"
+      }
+     }
+    ]
+   },
+   {
+    "id": "sedici-euro",
+    "titolo": "Sedici euro",
+    "descrizione": "Il Serraglio è diventato il Dimmi Di Sì Disco Pub.",
+    "indizi": [
+     {
+      "testo": "A volte perdere è il finale più caro."
+     },
+     {
+      "testo": "Contro Sergio basta che uno solo perda.",
+      "se": {
+       "esplorato": "iii5"
+      }
+     }
+    ],
+    "nascosto": true
+   },
+   {
+    "id": "il-cane-sa",
+    "titolo": "Il cane sa",
+    "descrizione": "Hai seguito Grappino in cantina.",
+    "indizi": [
+     {
+      "testo": "Grappino guarda Sergio in un modo strano."
+     },
+     {
+      "testo": "Chi ha strappato la firma del bilancio? Uno con i denti piccoli.",
+      "se": {
+       "esplorato": "ii2c"
+      }
+     }
+    ]
+   },
+   {
+    "id": "tre-vie",
+    "titolo": "Tre vie",
+    "descrizione": "Hai seguito tutte e tre le piste dell'atto II, in giri diversi.",
+    "indizi": [
+     {
+      "testo": "Ogni pista porta a Sergio, ma ognuna da un'altra parte."
+     },
+     {
+      "testo": "Nell'atto II le piste sono tre: la memoria di Piera, i soldi di Beppe, il bidone di Celestina.",
+      "se": {
+       "esplorato": "ii1"
+      }
+     }
+    ],
+    "quando": {
+     "tutti": [
+      {
+       "esplorato": "ii2a"
+      },
+      {
+       "esplorato": "ii2b"
+      },
+      {
+       "esplorato": "ii2c"
+      }
+     ]
+    }
+   },
+   {
+    "id": "superboss",
+    "titolo": "Superboss",
+    "descrizione": "Hai battuto Sergio quando faceva sul serio.",
+    "indizi": [
+     {
+      "testo": "Sergio non sopporta di perdere in casa sua."
+     },
+     {
+      "testo": "Vinta l'ultima partita, dai ragione a Sergio.",
+      "se": {
+       "finale": "il-serraglio-resta"
+      }
+     }
+    ],
+    "nascosto": true
+   }
+  ]
+ }
+}

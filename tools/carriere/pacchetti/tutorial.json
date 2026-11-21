@@ -1,0 +1,842 @@
+{
+ "pacchetto": 1,
+ "formato": "0.1",
+ "id": "tutorial",
+ "versione": 1,
+ "impronte": {
+  "storia": "d55154c7e390f9b7d35da6bbdbe86fdd253c93b9be072578903264bd9fb7e7cd",
+  "cast": "d910ce2c033e02102fef694fa8b25391f23045720e464401beef0ed6108cb594"
+ },
+ "carriera": {
+  "formato": "0.1",
+  "id": "tutorial",
+  "titolo": "Tutorial",
+  "fonte": "docs/design/carriere/tutorial-dialoghi.md",
+  "inizio": "scena-0",
+  "obbligatori": [
+   "starter-mara",
+   "starter-spazienzio",
+   "carriera-principale"
+  ],
+  "nodi": [
+   {
+    "id": "scena-0",
+    "etichetta": "Scena 0",
+    "titolo": "Davanti al bar",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S1",
+      "riga": 23
+     },
+     {
+      "tipo": "regia",
+      "nota": "esterno di sera. l'insegna «BAR IL SERRAGLIO» sfarfalla; la combriccola, in ombra, esita sulla porta.",
+      "riga": 23
+     },
+     {
+      "tipo": "effetto",
+      "effetto": "sfarfallio",
+      "variante": "insegna-spenta",
+      "riga": 25
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "combriccola",
+      "posa": "davanti-alla-porta",
+      "azione": "entra",
+      "riga": 25
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un amico",
+      "testo": "...ma siamo sicuri che il posto sia questo?",
+      "riga": 27
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un altro amico",
+      "testo": "Sì, sull'insegna c'è scritto BAR. Dai, che fanno gli shottini a due euro.",
+      "riga": 29
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un amico",
+      "testo": "E ci sarà un motivo, no? Io non ci entro, ho paura di prendere il tetano.",
+      "riga": 31
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un amico",
+      "testo": "Dai, {giocatore}, digli qualcosa! Andiamo via e torniamo al Dimmi Di Sì a berci il nostro Virgin Cuba Libre a sedici euro.",
+      "riga": 33
+     },
+     {
+      "tipo": "regia",
+      "nota": "frenata; Mara entra in bici e inchioda a un palmo dai piedi del giocatore.",
+      "riga": 35
+     },
+     {
+      "tipo": "suono",
+      "suono": "frenata",
+      "riga": 37
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "bici-mara",
+      "azione": "entra",
+      "riga": 37
+     },
+     {
+      "tipo": "effetto",
+      "effetto": "scossa",
+      "riga": 37
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Tutti Navaho qua. Eccone altri, sempre pronti a tutto pur di non stare nella loro terra promessa.",
+      "riga": 39
+     },
+     {
+      "tipo": "regia",
+      "nota": "la combriccola se la dà a gambe e lascia indietro il giocatore.",
+      "riga": 41
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "combriccola",
+      "posa": "in-fuga",
+      "azione": "esce",
+      "riga": 43
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Tu. Kebab tripla cipolla, triplo piccante. È tuo. Dimmi il codice... anzi, non importa: lo so io e lo sa il kebab.",
+      "riga": 45
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "E scommetto che la mancia non me la vuoi dare. Ce l'hai scritto in faccia.",
+      "riga": 47
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Aspetta. Quegli zigomi. Tu non sei Navaho, sei Sioux.",
+      "riga": 49
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "I Sioux non scappano dal Kazakistan con i contanti nascosti nelle suole delle scarpe, come i Navaho. I Sioux la mancia la lasciano sempre.",
+      "riga": 51
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "scena-1"
+     }
+    },
+    "riga": 21
+   },
+   {
+    "id": "scena-1",
+    "etichetta": "Scena 1",
+    "titolo": "Il trambusto",
+    "passi": [
+     {
+      "tipo": "regia",
+      "nota": "dal bar un fracasso: vetri, una sedia, un urlo.",
+      "riga": 56
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "contenta",
+      "testo": "Ah, allora non sei tu, Sioux della malora che non sei altro. Ho capito chi ha ordinato questo kebab. Vieni, andiamo a portarglielo.",
+      "riga": 58
+     },
+     {
+      "tipo": "regia",
+      "nota": "Mara trascina dentro il giocatore per la manica.",
+      "riga": 61
+     },
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 63
+     },
+     {
+      "tipo": "regia",
+      "nota": "interno del bar. Spazienzio rovescia un tavolino; lo schermo trema.",
+      "riga": 63
+     },
+     {
+      "tipo": "effetto",
+      "effetto": "scossa",
+      "riga": 65
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "UCCIDIAMOTI...! UCCIDIAMOTI, HO DETTO! FERMI, LASCIATEVI CAROTARE... AAARGH!",
+      "riga": 67
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "E VOI CHI SIETE? FACCE NUOVE. ODIO LE FACCE NUOVE.",
+      "riga": 69
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "ODIO ANCHE QUELLE VECCHIE. UCCIDIAMOVI ORDUNQUE.",
+      "riga": 71
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "neutra",
+      "testo": "Lui è Spazienzio. Ha finito la pazienza nel 2019, e da allora non gli è più tornata.",
+      "riga": 73
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "contenta",
+      "testo": "Tieni il kebab. No, tienilo e basta. A lui ci penso io.",
+      "riga": 75
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-1",
+      "modo": "duello",
+      "giocatore": {
+       "personaggio": "mara"
+      },
+      "avversari": [
+       {
+        "personaggio": "spazienzio"
+       }
+      ],
+      "riga": 77,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "mara",
+        "espressione": "agitata",
+        "testo": "Di nuovo. Più veloce, o il suo kebab si fredda.",
+        "riga": 79
+       },
+       {
+        "tipo": "battuta",
+        "chi": "spazienzio",
+        "espressione": "fumante",
+        "testo": "ANCORA VOI? ANNICHILIAMOVI.",
+        "riga": 79
+       }
+      ]
+     },
+     {
+      "tipo": "sblocco",
+      "sblocco": "starter-mara",
+      "riga": 81
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "scena-2"
+     }
+    },
+    "riga": 54
+   },
+   {
+    "id": "scena-2",
+    "etichetta": "Scena 2",
+    "titolo": "Il cane di Piera",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 85
+     },
+     {
+      "tipo": "regia",
+      "nota": "Regia: Spazienzio si rialza, fumante come prima.",
+      "riga": 85
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "VA BENE. VA BENE. SONO CALMO.",
+      "riga": 87
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "QUESTO È IL MIO ESSERE CALMO.",
+      "riga": 89
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "neutra",
+      "testo": "Che avevi da agitarti tanto?",
+      "riga": 91
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "IL CANE, È SEMPRE QUEL MALEDETTO CANE. MI HA LECCATO LA MANO, HO SENTITO BAGNATO E D'ISTINTO HO PROVATO A BERLO.",
+      "riga": 93
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "E FACEVA SCHIFO!!!",
+      "riga": 95
+     },
+     {
+      "tipo": "regia",
+      "nota": "abbaio. Piera si gira dal bancone, molto lentamente, con Grappino accanto.",
+      "riga": 97
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "posa": "seduto",
+      "azione": "entra",
+      "riga": 99
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Ma chi è... che ce l'ha... col mio Grappino... che lui è bono... che se lo toccavi a me... a me mi... che quando ero piccola io... la mia nonna... che lei diceva sempre...",
+      "riga": 101,
+      "stacchi": [
+       {
+        "chi": "mara",
+        "espressione": "neutra"
+       },
+       {
+        "chi": "spazienzio",
+        "espressione": "quasi-calmo"
+       }
+      ],
+      "interrotta": true
+     },
+     {
+      "tipo": "regia",
+      "nota": "testo lentissimo, a pezzi. Fra un pezzo e l'altro stacchi su chi ascolta: Mara che si guarda le unghie, poi l'orologio; Spazienzio che tamburella sempre più forte. Spazienzio interrompe prima che la frase finisca.",
+      "riga": 104
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "AAAAARGH!!!",
+      "riga": 109
+     },
+     {
+      "tipo": "regia",
+      "nota": "ringhio; Grappino punta la caviglia del giocatore.",
+      "riga": 111
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "posa": "ringhia",
+      "azione": "posa",
+      "riga": 113
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Ma che vuoi... sei te che hai... detto di aver...",
+      "riga": 115
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "serio",
+      "testo": "EHI, FACCIA NUOVA, DICO A TE. TU LO SOPPORTI COME PARLA QUESTA?",
+      "riga": 117
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "NO, EH?",
+      "riga": 119
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "ALLORA VIENI CON ME.",
+      "riga": 121
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "ORSÙ, VELOCIZZIAMOLA!",
+      "riga": 123
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-2",
+      "modo": "duello",
+      "giocatore": {
+       "personaggio": "spazienzio"
+      },
+      "avversari": [
+       {
+        "personaggio": "piera"
+       }
+      ],
+      "riga": 125,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "spazienzio",
+        "espressione": "furioso",
+        "testo": "ANDAVA QUASI BENE. ORA PERÒ PIÙ FORTE.",
+        "riga": 127
+       },
+       {
+        "tipo": "battuta",
+        "chi": "piera",
+        "espressione": "brilla",
+        "testo": "Ancora te... che mi fai... venire sete...",
+        "riga": 127
+       }
+      ]
+     },
+     {
+      "tipo": "sblocco",
+      "sblocco": "starter-spazienzio",
+      "riga": 129
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "scena-3"
+     }
+    },
+    "riga": 83
+   },
+   {
+    "id": "scena-3",
+    "etichetta": "Scena 3",
+    "titolo": "Con chi stai?",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "variante": "disordine",
+      "riga": 133
+     },
+     {
+      "tipo": "regia",
+      "nota": "con lo strato del disordine dopo la rissa. Piera seduta per terra; Grappino le lecca il bicchiere.",
+      "riga": 133
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "assonnata",
+      "testo": "Va bene... facciamo che... il prossimo giro... lo offro io... così... si calmeranno... gli animi e...",
+      "riga": 135,
+      "stacchi": [
+       {
+        "chi": "mara",
+        "espressione": "neutra"
+       },
+       {
+        "chi": "spazienzio",
+        "espressione": "quasi-calmo"
+       }
+      ],
+      "interrotta": true
+     },
+     {
+      "tipo": "regia",
+      "nota": "stessa lentezza e stessi stacchi su chi ascolta. Mara interrompe.",
+      "riga": 137
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "pensierosa",
+      "testo": "Il cane. Era tutto calcolato. Ha provato a farsi bere da Spazienzio per somministrargli qualcosa. È un cane addestrato. Da chi? Pensateci.",
+      "riga": 141
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "QUEL CANE, ADDESTRATO. QUESTA POI. QUEL CANE È SCEMO! ADDESTRIAMOLO ALLORA!",
+      "riga": 144
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Scemo... sarai te... che io...",
+      "riga": 146
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Visto? Adesso ce l'hanno con me. Ce l'hanno sempre con me. Mi ascoltano, mi seguono...",
+      "riga": 148
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Tu sei dalla mia parte, vero? I Sioux stanno sempre dalla parte di chi porta loro il cibo.",
+      "riga": 150
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Anche se il cibo in effetti non era per te...",
+      "riga": 152
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "LA FACCIA NUOVA STARÀ CON ME. IMPARERÀ A FAR SMETTERE LE BAGGIANATE CON LA MORTE.",
+      "riga": 154
+     },
+     {
+      "tipo": "scelta",
+      "modo": "muta",
+      "opzioni": [
+       {
+        "etichetta": "con Mara",
+        "segni": {
+         "tutorial_con": "mara"
+        },
+        "chi": "mara"
+       },
+       {
+        "etichetta": "con Spazienzio",
+        "segni": {
+         "tutorial_con": "spazienzio"
+        },
+        "chi": "spazienzio"
+       }
+      ],
+      "riga": 156
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "MI MOLLI PER QUELLA CHE PORTA I KEBAB? AFFETTIAMOTI ALLORA!",
+      "se": {
+       "segno": "tutorial_con",
+       "uguale": "mara"
+      },
+      "riga": 158
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Ah. Dovevo immaginarlo. Anche tu hai sentito i miei pensieri alla radio, vero?",
+      "se": {
+       "segno": "tutorial_con",
+       "uguale": "spazienzio"
+      },
+      "riga": 160
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-3",
+      "modo": "ffa",
+      "giocatore": {
+       "segno": "tutorial_con"
+      },
+      "avversari": {
+       "altriFra": [
+        "mara",
+        "spazienzio",
+        "piera"
+       ]
+      },
+      "riga": 162,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "mara",
+        "espressione": "agitata",
+        "testo": "No... questo non l'ho mai detto a nessuno...",
+        "riga": 164
+       },
+       {
+        "tipo": "battuta",
+        "chi": "spazienzio",
+        "espressione": "furioso",
+        "testo": "STAVOLTA CESSERETE LA VITA.",
+        "riga": 164
+       }
+      ]
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "scena-4"
+     }
+    },
+    "riga": 131
+   },
+   {
+    "id": "scena-4",
+    "etichetta": "Scena 4",
+    "titolo": "Chiusura",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "variante": "disordine",
+      "riga": 168
+     },
+     {
+      "tipo": "regia",
+      "nota": "con il disordine. silenzio; Grappino russa.",
+      "riga": 168
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "posa": "russa",
+      "azione": "posa",
+      "riga": 170
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "NON È MALE, LA FACCIA NUOVA. LA GENTE SA FARLA SMETTERE, È UNA QUALITÀ CHE APPREZZO.",
+      "riga": 172
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "contenta",
+      "testo": "Tutta questa vivacità... mi ha messo sonno, quindi... mi sa che... prendo un altro... Grappino!",
+      "riga": 174,
+      "interrotta": true
+     },
+     {
+      "tipo": "regia",
+      "nota": "Grappino abbaia. Mara interrompe.",
+      "riga": 176
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "contenta",
+      "testo": "Il kebab! Me lo stavo dimenticando.",
+      "riga": 180
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "È FREDDO, FA SCHIFO. MANGIALO TE.",
+      "riga": 182
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Mangiarlo? No, no... ma se posso usare la stagnola dell'incarto, forse smetterete di leggere i miei pensieri.",
+      "riga": 184
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "assonnata",
+      "testo": "Leggere i... pensieri? Se fai come me... non te li legge... nessuno...",
+      "riga": 186
+     },
+     {
+      "tipo": "regia",
+      "nota": "notifica sul telefono del giocatore, dalla combriccola.",
+      "riga": 188
+     },
+     {
+      "tipo": "messaggio",
+      "testo": "Sei ancora tra i vivi? Noi siamo tutti al Dimmi Di Sì.",
+      "riga": 192,
+      "da": "combriccola"
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "MOLLA QUEL TELEFONO E COMINCIA A BERE, ALTRIMENTI DOVRÒ SBRONZARTI DI BOTTE.",
+      "riga": 194
+     },
+     {
+      "tipo": "scelta",
+      "modo": "messaggio",
+      "opzioni": [
+       {
+        "etichetta": "Me la sono cavata per un pelo, arrivo.",
+        "verso": {
+         "nodo": "epilogo-del-fallimento"
+        }
+       },
+       {
+        "etichetta": "Sticazzi di quel posto da fighetti, venite voi qui! È fantastico.",
+        "sblocchi": [
+         "carriera-principale"
+        ],
+        "verso": {
+         "fine": "completata"
+        }
+       }
+      ],
+      "riga": 196,
+      "domanda": "la risposta alla combriccola"
+     }
+    ],
+    "uscita": {
+     "scelta": true
+    },
+    "riga": 166
+   },
+   {
+    "id": "epilogo-del-fallimento",
+    "etichetta": "Epilogo del fallimento",
+    "titolo": "Il Virgin Cuba Libre",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S3",
+      "riga": 204
+     },
+     {
+      "tipo": "regia",
+      "nota": "il Dimmi Di Sì. musica che non è musica; il giocatore con la combriccola, in ombra, intorno a un tavolino bianco, davanti a un Virgin Cuba Libre a sedici euro con l'ombrellino.",
+      "riga": 204
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "combriccola",
+      "posa": "davanti-alla-porta",
+      "azione": "entra",
+      "riga": 207
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un amico",
+      "testo": "{giocatore}! Allora sei ancora tra i vivi. Niente tetano?",
+      "riga": 209
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un altro amico",
+      "testo": "Racconta, racconta! Anzi no, prima ordina. Qui il Virgin Cuba Libre costa sedici euro, ma il ghiaccio è d'importazione.",
+      "riga": 211
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un amico",
+      "testo": "Norvegese. C'è scritto sul menù.",
+      "riga": 213
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un altro amico",
+      "testo": "E là dentro com'era? Gente strana?",
+      "riga": 215
+     },
+     {
+      "tipo": "battuta",
+      "chi": "combriccola",
+      "nome": "Un amico",
+      "testo": "Sssh, parte la playlist. Stasera fanno quella rilassante, ma più rilassante.",
+      "riga": 217
+     },
+     {
+      "tipo": "regia",
+      "nota": "nessuno aspetta la risposta. Il giocatore guarda il bicchiere; l'ombrellino si chiude da solo.",
+      "riga": 219
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "Il ghiaccio norvegese si scioglie piano. Da qualche parte, lontano, qualcuno sta urlando «UCCIDIAMOTI».",
+      "riga": 221
+     },
+     {
+      "tipo": "achievement",
+      "achievement": "amici-del-dimmi-di-si",
+      "riga": 223
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "scena-4",
+      "da": "scelta"
+     }
+    },
+    "riga": 202
+   }
+  ],
+  "achievement": [
+   {
+    "id": "amici-del-dimmi-di-si",
+    "titolo": "Amici del Dimmi Di Sì",
+    "descrizione": "Hai preferito un Virgin Cuba Libre a sedici euro.",
+    "indizi": [
+     {
+      "testo": "Certi amici scrivono sempre al momento sbagliato."
+     },
+     {
+      "testo": "E se alla combriccola rispondessi come vorrebbe lei?",
+      "se": {
+       "esplorato": "scena-4"
+      }
+     }
+    ],
+    "nascosto": true
+   }
+  ]
+ }
+}

@@ -1,0 +1,617 @@
+{
+ "pacchetto": 1,
+ "formato": "0.1",
+ "id": "prova",
+ "versione": 1,
+ "impronte": {
+  "storia": "ca4b15c8e58eaa38131b9707016434129e28f16b0a31682c2da17d3c32b78c10",
+  "cast": "e08e5b421d4379714bb01db65b1a0d82db5078b4cd91a9a288fc39cd625a41d4"
+ },
+ "carriera": {
+  "formato": "0.1",
+  "id": "prova",
+  "titolo": "Dov'è Grappino?",
+  "fonte": "prototipi/carriere/storie/prova.md",
+  "inizio": "nodo-a",
+  "obbligatori": [
+   "starter-piera"
+  ],
+  "nodi": [
+   {
+    "id": "nodo-a",
+    "etichetta": "Nodo A",
+    "titolo": "Il bancone vuoto",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 16
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Grappino... non c'è più... era qui... col suo bicchierino... e adesso... c'è solo... il bicchierino...",
+      "riga": 18,
+      "stacchi": [
+       {
+        "chi": "mara",
+        "espressione": "neutra"
+       },
+       {
+        "chi": "spazienzio",
+        "espressione": "quasi-calmo"
+       }
+      ],
+      "interrotta": true
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "illuminata",
+      "testo": "Rapito. È chiaro. Vieni con me, {giocatore}: conosco ogni vicolo, li ho consegnati tutti.",
+      "riga": 22
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "serio",
+      "testo": "FACCIA NUOVA, IL CANE LO TROVIAMO NOI. A MODO MIO. CERCHIAMOLO A SBERLE.",
+      "riga": 24
+     },
+     {
+      "tipo": "scelta",
+      "modo": "muta",
+      "opzioni": [
+       {
+        "etichetta": "con Mara",
+        "segni": {
+         "alleato": "mara"
+        },
+        "chi": "mara",
+        "verso": {
+         "nodo": "nodo-b"
+        }
+       },
+       {
+        "etichetta": "con Spazienzio",
+        "segni": {
+         "alleato": "spazienzio"
+        },
+        "chi": "spazienzio",
+        "verso": {
+         "nodo": "nodo-c"
+        }
+       }
+      ],
+      "riga": 26,
+      "domanda": "con chi cerchi Grappino?"
+     }
+    ],
+    "uscita": {
+     "scelta": true
+    },
+    "riga": 14
+   },
+   {
+    "id": "nodo-b",
+    "etichetta": "Nodo B",
+    "titolo": "Sulle tracce in bici",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S1",
+      "riga": 33
+     },
+     {
+      "tipo": "regia",
+      "nota": "la strada davanti al bar.",
+      "riga": 33
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "bici-mara",
+      "azione": "entra",
+      "riga": 35
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Impronte di cane. E di ciabatte. Ciabatte enormi.",
+      "riga": 37
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "CHE AVETE DA GUARDARE LE MIE CIABATTE? CALPESTIAMOVI!",
+      "riga": 39
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-1",
+      "modo": "duello",
+      "giocatore": {
+       "personaggio": "mara"
+      },
+      "avversari": [
+       {
+        "personaggio": "spazienzio"
+       }
+      ],
+      "riga": 41,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "mara",
+        "espressione": "agitata",
+        "testo": "Le ciabatte non mentono. Di nuovo.",
+        "riga": 43
+       }
+      ]
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "nodo-d"
+     }
+    },
+    "riga": 31
+   },
+   {
+    "id": "nodo-c",
+    "etichetta": "Nodo C",
+    "titolo": "In cucina",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 49
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "furioso",
+      "testo": "IL CANE È FINITO NEL KEBAB! LO SAPEVO! RESTITUIAMOLO!",
+      "riga": 51
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "Ma che dici? Il kebab è di pollo. Credo.",
+      "riga": 53
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-2",
+      "modo": "duello",
+      "giocatore": {
+       "personaggio": "spazienzio"
+      },
+      "avversari": [
+       {
+        "personaggio": "mara"
+       }
+      ],
+      "riga": 55,
+      "sconfitta": {
+       "nodo": "nodo-e"
+      }
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "nodo-d"
+     }
+    },
+    "riga": 47
+   },
+   {
+    "id": "nodo-d",
+    "etichetta": "Nodo D",
+    "titolo": "Di nuovo al bancone",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "variante": "disordine",
+      "riga": 63
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "contenta",
+      "testo": "Mara... che porta sempre... il cibo... e adesso... anche le notizie...",
+      "se": {
+       "segno": "alleato",
+       "uguale": "mara"
+      },
+      "riga": 65
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "offesa",
+      "testo": "Te... che urli... al mio Grappino... da quando era... piccolo così...",
+      "se": {
+       "segno": "alleato",
+       "uguale": "spazienzio"
+      },
+      "riga": 67
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "brilla",
+      "testo": "Basta... adesso... ci penso io...",
+      "riga": 69
+     },
+     {
+      "tipo": "partita",
+      "id": "partita-3",
+      "modo": "duello",
+      "giocatore": {
+       "personaggio": "piera"
+      },
+      "avversari": [
+       {
+        "segno": "alleato"
+       }
+      ],
+      "riga": 71,
+      "ritento": [
+       {
+        "tipo": "battuta",
+        "chi": "piera",
+        "espressione": "assonnata",
+        "testo": "Aspetta... che mi siedo... e riproviamo...",
+        "riga": 73
+       }
+      ]
+     },
+     {
+      "tipo": "sblocco",
+      "sblocco": "starter-piera",
+      "riga": 75
+     },
+     {
+      "tipo": "scelta",
+      "modo": "muta",
+      "opzioni": [
+       {
+        "etichetta": "con Piera",
+        "chi": "piera",
+        "verso": {
+         "nodo": "nodo-g"
+        }
+       },
+       {
+        "etichetta": "con Spazienzio, che fiuta qualcosa",
+        "se": {
+         "visto": "nodo-e"
+        },
+        "chi": "spazienzio",
+        "verso": {
+         "nodo": "nodo-f"
+        }
+       },
+       {
+        "etichetta": "con Mara, che ha una consegna proprio lì fuori",
+        "chi": "mara",
+        "verso": {
+         "nodo": "nodo-h"
+        }
+       }
+      ],
+      "riga": 77,
+      "domanda": "con chi continui a cercare?"
+     }
+    ],
+    "uscita": {
+     "scelta": true
+    },
+    "riga": 61
+   },
+   {
+    "id": "nodo-e",
+    "etichetta": "Nodo E",
+    "titolo": "Il retrobottega",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "variante": "disordine",
+      "riga": 87
+     },
+     {
+      "tipo": "regia",
+      "nota": "il retro del bar.",
+      "riga": 87
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "HO PERSO. VADO DI LÀ A ESSERE CALMO.",
+      "riga": 89
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "Nel retrobottega c'è puzza di cane bagnato. E di grappa.",
+      "riga": 91
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "serio",
+      "testo": "QUESTA PUZZA LA CONOSCO. TENIAMOLA A MENTE.",
+      "riga": 93
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "nodo-d"
+     }
+    },
+    "riga": 83,
+    "segreto": true
+   },
+   {
+    "id": "nodo-f",
+    "etichetta": "Nodo F",
+    "titolo": "Il vicolo",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S1",
+      "variante": "insegna-spenta",
+      "riga": 101
+     },
+     {
+      "tipo": "regia",
+      "nota": "il vicolo dietro il bar.",
+      "riga": 101
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "posa": "russa",
+      "azione": "entra",
+      "riga": 103
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "ECCOLO. DORME SUI CARTONI. SVEGLIAMOLO A CALCI.",
+      "riga": 105
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "quasi-calmo",
+      "testo": "...NO. LASCIAMOLO DORMIRE. PER STAVOLTA.",
+      "riga": 107
+     },
+     {
+      "tipo": "achievement",
+      "achievement": "fiuto-da-segugio",
+      "riga": 109
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "nodo": "nodo-g"
+     }
+    },
+    "riga": 97,
+    "segreto": true
+   },
+   {
+    "id": "nodo-g",
+    "etichetta": "Nodo G",
+    "titolo": "Grappino è tornato",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S2",
+      "riga": 115
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "posa": "seduto",
+      "azione": "entra",
+      "riga": 117
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "contenta",
+      "testo": "Grappino... nel vicolo... a dormire... come me...",
+      "se": {
+       "visto": "nodo-f"
+      },
+      "riga": 119
+     },
+     {
+      "tipo": "battuta",
+      "chi": "piera",
+      "espressione": "contenta",
+      "testo": "Grappino! ...È tornato... da solo... come me...",
+      "se": {
+       "non": {
+        "visto": "nodo-f"
+       }
+      },
+      "riga": 121
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "sospettosa",
+      "testo": "Tornato da solo. Certo. Come no.",
+      "se": {
+       "segno": "alleato",
+       "uguale": "mara"
+      },
+      "riga": 123
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "soddisfatto",
+      "testo": "IL CANE È TORNATO. FESTEGGIAMOLO A BOTTE.",
+      "se": {
+       "segno": "alleato",
+       "uguale": "spazienzio"
+      },
+      "riga": 125
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "fine": "completata",
+      "finale": "Grappino è tornato"
+     }
+    },
+    "riga": 113
+   },
+   {
+    "id": "nodo-h",
+    "etichetta": "Nodo H",
+    "titolo": "La porta aperta",
+    "passi": [
+     {
+      "tipo": "sfondo",
+      "sfondo": "S1",
+      "riga": 131
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "bici-mara",
+      "azione": "entra",
+      "riga": 133
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "posa": "seduto",
+      "azione": "entra",
+      "riga": 133
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "contenta",
+      "testo": "Consegna lampo: kebab tripla cipolla per il civico accanto. Torno subito, {giocatore}, tienimi la porta.",
+      "riga": 135
+     },
+     {
+      "tipo": "narrazione",
+      "testo": "La porta resta aperta. Grappino annusa l'aria, annusa il kebab, annusa la libertà.",
+      "riga": 137
+     },
+     {
+      "tipo": "sprite",
+      "sprite": "grappino",
+      "azione": "esce",
+      "riga": 139
+     },
+     {
+      "tipo": "battuta",
+      "chi": "mara",
+      "espressione": "agitata",
+      "testo": "No. No no no. Il cane. Era qui un secondo fa. Lo sapevo, è addestrato a scappare dalle porte aperte.",
+      "riga": 141
+     },
+     {
+      "tipo": "battuta",
+      "chi": "spazienzio",
+      "espressione": "fumante",
+      "testo": "ORA LO CERCHIAMO DI NUOVO. CERCHIAMOLO PIÙ FORTE.",
+      "se": {
+       "segno": "alleato",
+       "uguale": "spazienzio"
+      },
+      "riga": 143
+     }
+    ],
+    "uscita": {
+     "verso": {
+      "fine": "completata",
+      "finale": "Grappino scappa di nuovo"
+     }
+    },
+    "riga": 129
+   }
+  ],
+  "achievement": [
+   {
+    "id": "fiuto-da-segugio",
+    "titolo": "Fiuto da segugio",
+    "descrizione": "Hai trovato Grappino nel vicolo.",
+    "indizi": [
+     {
+      "testo": "Certe sconfitte portano lontano."
+     },
+     {
+      "testo": "Quando Spazienzio perde, va a calmarsi nel retrobottega. E il retrobottega puzza di cane.",
+      "se": {
+       "esplorato": "nodo-e"
+      }
+     }
+    ],
+    "nascosto": true
+   },
+   {
+    "id": "due-padroni",
+    "titolo": "Due padroni",
+    "descrizione": "Hai cercato Grappino sia con Mara sia con Spazienzio.",
+    "indizi": [
+     {
+      "testo": "Chi ti accompagna la prima volta non è l'unico che poteva farlo."
+     }
+    ],
+    "quando": {
+     "tutti": [
+      {
+       "esplorato": "nodo-b"
+      },
+      {
+       "esplorato": "nodo-c"
+      }
+     ]
+    }
+   },
+   {
+    "id": "cane-che-va-cane-che-torna",
+    "titolo": "Cane che va, cane che torna",
+    "descrizione": "Hai visto Grappino tornare e Grappino scappare di nuovo.",
+    "indizi": [
+     {
+      "testo": "Non tutte le storie di cani finiscono sul divano."
+     },
+     {
+      "testo": "Chi porta i kebab lascia sempre qualche porta aperta.",
+      "se": {
+       "finale": "grappino-e-tornato"
+      }
+     }
+    ],
+    "quando": {
+     "tutti": [
+      {
+       "finale": "grappino-e-tornato"
+      },
+      {
+       "finale": "grappino-scappa-di-nuovo"
+      }
+     ]
+    }
+   }
+  ]
+ }
+}

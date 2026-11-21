@@ -8,15 +8,14 @@ import type {Carriera, Cast, Problema} from './formato.ts';
 
 export const radice = new URL('../../../', import.meta.url);
 
-export type Voce = {file: URL; fonte: string};
-const voce = (fonte: string): Voce => ({file: new URL(fonte, radice), fonte});
-export const CARRIERE: Voce[] = [
-  voce('docs/design/carriere/tutorial-dialoghi.md'),
-  voce('prototipi/carriere/storie/prova.md'),
-  // La campagna principale con i dialoghi veri (scaletta 0.3.7, docs/design/carriere/principale.md): le espressioni senza ritratto
-  // ripiegano su quelle del cast (cast.json, «ripieghi»).
-  voce('docs/design/carriere/principale-dialoghi.md'),
-];
+export type Voce = {file: URL; fonte: string; id: string; versione: number};
+// Il manifest: per ogni carriera la storia da cui viene e la sua versione (intera, da 1). Il markdown non la dichiara (F13).
+export const FILE_MANIFEST = 'tools/carriere/carriere.json';
+export type Manifest = Record<string, {storia: string; versione: number}>;
+export const leggiManifest = (): Manifest => JSON.parse(fs.readFileSync(new URL(FILE_MANIFEST, radice), 'utf8')) as Manifest;
+// Le carriere (tutorial, prova del prototipo, campagna principale con i dialoghi veri): l'elenco è il manifest.
+export const CARRIERE: Voce[] = Object.entries(leggiManifest()).map(([id, m]) =>
+  ({file: new URL(m.storia, radice), fonte: m.storia, id, versione: m.versione}));
 export const FILE_CAST = 'prototipi/carriere/dati/cast.json';
 
 export const leggiCast = (): Cast => JSON.parse(fs.readFileSync(new URL(FILE_CAST, radice), 'utf8')) as Cast;

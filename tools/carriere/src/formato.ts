@@ -2,9 +2,12 @@
 // Questi tipi sono lo schema leggibile; in Fase B diventano anche un controllo di validità con messaggi per percorso.
 // Tutti i nomi sono in italiano come i documenti delle carriere; gli identificativi sono minuscoli con trattini.
 
+/** La versione del formato (docs/carriere/formato.md): la scrive ogni carriera convertita e ogni pacchetto. */
+export const FORMATO = '0.1';
+
 /** Una carriera convertita: un grafo di nodi (le tappe della mappa) con achievement e sblocchi obbligatori. */
 export type Carriera = {
-  formato: 1;
+  formato: typeof FORMATO;
   id: string;
   titolo: string;
   fonte: string;               // file markdown da cui viene

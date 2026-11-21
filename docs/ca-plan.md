@@ -11,8 +11,8 @@ verifiche si scelgono dalla [tabella delle aree](aree-protette.md).
 >   restano nel [serbatoio](design/carriere/README.md), senza valore normativo ([DC4](#decisioni)). Il [prototipo](design/carriere/prototipo.md)
 >   (CA-0a) resta il posto dove provare le storie; il formato è il [formato delle carriere 0.1](carriere/formato.md) (CA-0b).
 > - **In attesa:** nulla.
-> - **Prossimo:** CA-0d, il pacchetto JSON con versione e impronte, controllato come `check-rules.py` controlla le carte. CA-0c è chiuso: lo strumento è
->   in `tools/carriere/` (`./tools/carriere/run.ps1 -Task Check`), il prototipo lo usa ([rapporto](reports/ca/ca-0c.md)).
+> - **Prossimo:** la parte di strumento di CA-0 è finita (CA-0c: `tools/carriere/`; CA-0d: pacchetti versionati con impronte in
+>   `tools/carriere/pacchetti/`, [rapporto](reports/ca/ca-0d.md)). CA-0e aspetta SB-28; CA-0f, CA-0g aspettano SB-30, EC-0 e C5.
 > - **Fuori dal piano, nel serbatoio:** le illustrazioni della campagna principale, approvate il 21 novembre 2026
 >   ([prompt](design/carriere/prompt-principale.md)), entrate nel prototipo il 21 novembre 2026 (CA-0a: ritratti, sfondi e sagoma del padrone; restano i ripieghi dell'elenco); il secondo giro delle bocche è approvato e adottato
 >   ([riga di CA-0a](product-roadmap.md#lavori-anticipati)).
@@ -46,7 +46,7 @@ contro computer, progressi e achievement salvati lato server. Il tutorial vero �
 | CA-0a | Prototipo delle carriere | — | a fasi | **Chiuso** il 12 novembre 2026 ([chiusura](design/carriere/prototipo.md#chiusura)) |
 | [CA-0b](#ca-0b--formato-delle-carriere-01) | Formato delle carriere 0.1, documento normativo | subito | con proposta | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0b.md), [formato 0.1](carriere/formato.md)) |
 | [CA-0c](#ca-0c--strumento-delle-carriere) | Strumento: convertitore, validazione, controllo del grafo | dopo CA-0b | diretto | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0c.md)) |
-| CA-0d | Pacchetto JSON con versione e impronte, controllato come `check-rules.py` controlla le carte | dopo CA-0c | diretto | — |
+| [CA-0d](#ca-0d--pacchetto-delle-carriere) | Pacchetto JSON con versione e impronte, controllato come `check-rules.py` controlla le carte | dopo CA-0c | diretto | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0d.md)) |
 | CA-0e | Modificatori di incontro nel regolamento, con la precedenza di R00 | dopo SB-28 | con proposta | — |
 | CA-0f | Motore lato server: progressi, segni, achievement, ricompense protette dal farming | dopo SB-30 ed EC-0 | con proposta | — |
 | CA-0g | Scena di dialogo e bacheca nella shell React, banco della fluidità nel client | dopo C5 | a fasi | — |
@@ -95,6 +95,17 @@ prototipo, il prototipo li ottiene passando dallo strumento, e la tabella delle 
 
 **Stato:** chiuso il 21 novembre 2026. [Rapporto](reports/ca/ca-0c.md): `tools/carriere/` senza dipendenze proprie (solo il Node isolato), 22 prove
 dello strumento e 117 del prototipo verdi, stessi numeri di prima sulle tre storie, avviso nuovo per il ritento dopo una `[Sconfitta: …]`.
+
+## CA-0d — Pacchetto delle carriere
+
+**Risultato:** ogni carriera (tutorial, prova, principale) è un file JSON committato in `tools/carriere/pacchetti/<id>.json`, prodotto dallo
+strumento: forma del pacchetto, `formato: "0.1"`, id, `versione`, le impronte (storia e cast usato) e la carriera convertita. La versione di
+ogni carriera è in `tools/carriere/carriere.json`, perché il markdown non la dichiara ([F13](carriere/formato.md#f13--versioni)).
+`run.ps1 -Task Package` scrive i pacchetti; `-Task Check` li confronta in sola lettura con quello che si genererebbe e fallisce se mancano,
+sono in più, sono fuori data, o se storia o cast usato sono cambiati senza alzare la versione.
+
+**Stato:** chiuso il 21 novembre 2026. [Rapporto](reports/ca/ca-0d.md): 3 pacchetti riproducibili, 27 prove dello strumento (5 nuove) e 117 del
+prototipo verdi, numeri delle tre storie invariati. Il convertitore ora ignora BOM e CRLF della storia.
 
 ## Decisioni
 

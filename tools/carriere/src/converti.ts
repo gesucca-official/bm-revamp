@@ -2,7 +2,7 @@
 // Serve a mostrare che il formato proposto regge su docs/design/carriere/tutorial-dialoghi.md; in Fase B si completa,
 // con il controllo di validità dello schema e il controllo del grafo per esplorazione degli stati.
 // Sintassi del markdown: docs/design/carriere/prototipo-fase-a.md, «Come si scrive nel markdown».
-import {usciteDi, type Achievement, type Battuta, type Carriera, type Catena, type Cast, type Condizione, type Destinazione, type Esito, type Nodo, type Opzione, type Partita,
+import {FORMATO, usciteDi, type Achievement, type Battuta, type Carriera, type Catena, type Cast, type Condizione, type Destinazione, type Esito, type Nodo, type Opzione, type Partita,
   type Passo, type Problema, type Rif, type Scelta} from './formato.ts';
 
 export type Risultato = {carriera: Carriera; problemi: Problema[]};
@@ -45,6 +45,7 @@ function blocchi(righe: {testo: string; riga: number}[]): Blocco[] {
 }
 
 export function converti(md: string, cast: Cast, fonte: string): Risultato {
+  md = md.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');  // come si fotografa la storia per l'impronta (pacchetto.ts): BOM e CRLF non contano
   const problemi: Problema[] = [];
   const errore = (riga: number, messaggio: string) => problemi.push({riga, livello: 'errore', messaggio});
   const avviso = (riga: number, messaggio: string) => problemi.push({riga, livello: 'avviso', messaggio});
@@ -472,7 +473,7 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
   for (const {c, riga} of condizioniDaRisolvere) risolviNodi(c, perNome, riga, errore);
   for (const a of achievementCitati) if (!achievement.some(x => x.id === slug(a.nome))) errore(a.riga, `achievement non definito: «${a.nome}»`);
 
-  const carriera: Carriera = {formato: 1, id, titolo: titoloFile.split(' — ')[0].trim(), fonte, inizio: nodi[0]?.id ?? '', obbligatori, nodi, achievement};
+  const carriera: Carriera = {formato: FORMATO, id, titolo: titoloFile.split(' — ')[0].trim(), fonte, inizio: nodi[0]?.id ?? '', obbligatori, nodi, achievement};
   controllaStruttura(carriera, cast, errore);
   return {carriera, problemi: problemi.sort((a, b) => a.riga - b.riga)};
 }

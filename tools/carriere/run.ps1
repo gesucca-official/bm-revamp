@@ -1,4 +1,4 @@
-param([ValidateSet('Test','Check')][string]$Task='Check')
+param([ValidateSet('Test','Check','Package')][string]$Task='Check')
 # CA-0c, strumento delle carriere (docs/carriere/formato.md): stesso Node isolato e senza dipendenze proprie (solo Node: le sue tipizzazioni le controlla `tsc` del prototipo, che lo importa).
 $ErrorActionPreference='Stop'
 $repo=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
@@ -11,6 +11,7 @@ try {
   switch($Task){
     'Test' {& npm run test}
     'Check' {& npm run check}
+    'Package' {& npm run pacchetti}
   }
   if($LASTEXITCODE -ne 0){throw "strumento carriere $Task exited with code $LASTEXITCODE"}
 } finally {Pop-Location;$env:Path=$savedPath}

@@ -29,10 +29,11 @@ Per le carriere (storie, cast, formato o strumento, [tabella delle aree](docs/ar
 ```powershell
 ./tools/carriere/run.ps1 -Task Check
 ./tools/carriere/run.ps1 -Task Test
+./tools/carriere/run.ps1 -Task Package
 ```
 
 `Check` converte e controlla ogni storia del serbatoio e la prova del prototipo contro il cast: per storia nodi, stati, finali, errori
-e avvisi (esce con 1 se c'è un errore). Per le sole prove del prototipo: `./prototipi/carriere/run.ps1 -Task Test`.
+e avvisi (esce con 1 se c'è un errore) e confronta i pacchetti JSON committati (`tools/carriere/pacchetti/`) con quelli che si genererebbero: dopo una modifica a una storia o al cast che usa, alzare la `versione` in `tools/carriere/carriere.json` e rigenerarli con `-Task Package`. Per le sole prove del prototipo: `./prototipi/carriere/run.ps1 -Task Test`.
 
 Per il client web le verifiche e le misure ufficiali sono nel [README del client](client-web/README.md#lancio-unico-c4-1-o23)
 e nel [piano C4](docs/client-c4-plan.md#obiettivo-e-regole-comuni): 1366×768 e 844×390 per tutte, e dal 10 novembre 2026

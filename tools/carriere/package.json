@@ -8,6 +8,7 @@
     "npm": "11.6.2"
   },
   "scripts": {
+    "pacchetti": "node --experimental-strip-types strumenti/pacchetti.ts",
     "check": "node --experimental-strip-types strumenti/controlla.ts",
     "test": "node --experimental-strip-types --test tests/*.test.ts"
   }

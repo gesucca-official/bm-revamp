@@ -1,6 +1,6 @@
 // CA-0a: controllo di validità dei dati di una carriera, scritto a mano (decisione T1 della regia; il JSON Schema arriva in CA-0).
 // Controlla forma e riferimenti del JSON, anche se non viene dal convertitore: ogni errore dice il percorso del campo.
-import type {Carriera, Cast} from './formato.ts';
+import {FORMATO, type Carriera, type Cast} from './formato.ts';
 import {slug} from './converti.ts';
 
 type Oggetto = Record<string, unknown>;
@@ -29,7 +29,7 @@ export function valida(dati: unknown, cast: Cast): string[] {
   if (!ogg(dati, 'carriera')) return errori;
   const c = dati;
   campi(c, 'carriera', ['formato', 'id', 'titolo', 'fonte', 'inizio', 'obbligatori', 'nodi', 'achievement'], []);
-  if (c.formato !== 1) err('carriera.formato', 'atteso 1');
+  if (c.formato !== FORMATO) err('carriera.formato', `atteso «${FORMATO}»`);
   testo(c.id, 'carriera.id', ID); testo(c.titolo, 'carriera.titolo'); testo(c.fonte, 'carriera.fonte');
   const nodi = lista(c.nodi, 'carriera.nodi') ? c.nodi : [];
   const ids = new Set<string>();
