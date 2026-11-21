@@ -246,5 +246,5 @@ Avoid: any other change; mirroring; a different head position or size; a dark or
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| spazienzio-furioso-bocca | [spazienzio-furioso-bocca.webp](asset/tutorial/ritratti/spazienzio-furioso-bocca.webp) | [spazienzio-furioso-bocca-3](asset/tutorial/registro.md#spazienzio-furioso-bocca-3) |  |
-| mara-esasperata | [mara-esasperata.webp](asset/tutorial/ritratti/mara-esasperata.webp) | [mara-esasperata-2](asset/tutorial/registro.md#mara-esasperata-2) |  |
+| spazienzio-furioso-bocca | [spazienzio-furioso-bocca.webp](asset/tutorial/ritratti/spazienzio-furioso-bocca.webp) | [spazienzio-furioso-bocca-3](asset/tutorial/registro.md#spazienzio-furioso-bocca-3) | **Approvato** (21 novembre 2026): «Approvo» |
+| mara-esasperata | [mara-esasperata.webp](asset/tutorial/ritratti/mara-esasperata.webp) | [mara-esasperata-2](asset/tutorial/registro.md#mara-esasperata-2) | **Approvato** (21 novembre 2026): «Approvo» |

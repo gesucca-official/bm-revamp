@@ -12,8 +12,9 @@ verifiche si scelgono dalla [tabella delle aree](aree-protette.md).
 >   (CA-0a) resta il posto dove provare le storie; il formato è il [formato delle carriere 0.1](carriere/formato.md) (CA-0b).
 > - **In attesa:** nulla.
 > - **Prossimo:** [CA-0c](#ca-0c--strumento-delle-carriere), lo strumento delle carriere sul [formato 0.1](carriere/formato.md).
-> - **Fuori dal piano, nel serbatoio:** le due immagini del secondo giro delle bocche, quando torna lo strumento di generazione
->   ([riga di CA-0a](product-roadmap.md#lavori-anticipati)).
+> - **Fuori dal piano, nel serbatoio:** le illustrazioni della campagna principale, tre giri da generare
+>   ([prompt](design/carriere/prompt-principale.md)); il secondo giro delle bocche è approvato (21 novembre 2026) e il prototipo deve
+>   ancora adottarlo ([riga di CA-0a](product-roadmap.md#lavori-anticipati)).
 > - **Decisioni da leggere:** DC1–DC4.
 
 ## Obiettivo e chiusura
