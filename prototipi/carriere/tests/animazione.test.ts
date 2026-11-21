@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {AMPIEZZE_TESTA, avvicina, CHI_REAGISCE, comparsa, DURATA_ENTRATA, gradiTesta, IN_SCENA, latoDi, MASSIMO_TESTA, scalaDiChiReagisce, SCIVOLA, spostamento,
   type Posto} from '../src/animazione.ts';
 import {componiPixel, erodi, pesoEllisse} from '../src/ui/maglia.ts';
-import {FERMA, LIVELLI, boccaAllineata, boccaAltra, cambiatiFuoriBocca, deforma, modo, movimento, trasformazione, zonaBocca} from '../src/animazione.ts';
+import {FERMA, LIVELLI, zonaCast, boccaAllineata, boccaAltra, cambiatiFuoriBocca, deforma, modo, movimento, trasformazione, zonaBocca} from '../src/animazione.ts';
 import type {Cast} from '../src/formato.ts';
 import castJson from '../dati/cast.json' with {type: 'json'};
 
@@ -186,6 +186,16 @@ test('la versione «-bocca» si usa solo se è allineata al ritratto: fuori dall
   const poco = d.slice(); poco[3 * w + 3] = 200; poco[50 * w + 30] = 200;
   assert.ok(boccaAllineata(poco, w, h, z));
   assert.ok(boccaAllineata(new Uint8Array(w * h).fill(39), w, h, z), 'sotto la soglia di differenza non conta');
+});
+
+test('la zona della bocca per espressione: solo Spazienzio furioso ha la sua, gli altri usano quella del personaggio', () => {
+  const b = cast.personaggi.spazienzio.bocca!;
+  assert.deepEqual(zonaCast(b, 'furioso'), {u: 0.457, v: 0.395, ru: 0.1, rv: 0.075});
+  for (const e of ['fumante', 'quasi-calmo', 'serio', 'soddisfatto', undefined]) assert.equal(zonaCast(b, e), b, `spazienzio ${e}: la zona del personaggio`);
+  assert.deepEqual({u: b.u, v: b.v, ru: b.ru, rv: b.rv}, {u: 0.5, v: 0.28, ru: 0.08, rv: 0.06});
+  for (const [chi, p] of conRitratto) if (chi !== 'spazienzio') assert.equal(p.bocca?.espressioni, undefined, `${chi}: nessuna zona per espressione`);
+  const f = zonaCast(b, 'furioso');
+  assert.ok(Math.abs(f.u - cast.personaggi.spazienzio.animazione!.maglia!.testa.u) < 0.17, 'la bocca di furioso sta nella testa');
 });
 
 test('nel cast: la sagoma presa da un\'altra espressione esiste, è dello stesso personaggio e ha un ritratto vero', () => {

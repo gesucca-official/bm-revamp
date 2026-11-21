@@ -23,7 +23,7 @@
       "ripieghi": {"normale": "quasi-calmo", "eccitato": "soddisfatto", "arrabbiato": "furioso", "estremamente-furioso": "fumante", "dubbioso": "serio", "spaventato": "quasi-calmo", "malvagio": "soddisfatto"},
       "animazione": {"modo": "maglia",
         "maglia": {"perno": {"u": 0.47, "v": 0.47}, "testa": {"u": 0.47, "raggio": 0.17, "sopra": 0.4, "sotto": 0.5}, "busto": {"da": 0.48, "a": 0.88}, "aspetto": 1.5}},
-      "bocca": {"u": 0.457, "v": 0.395, "ru": 0.1, "rv": 0.075},
+      "bocca": {"u": 0.5, "v": 0.28, "ru": 0.08, "rv": 0.06, "espressioni": {"furioso": {"u": 0.457, "v": 0.395, "ru": 0.1, "rv": 0.075}}},
       "verticale": {"alza": 0.08}
     },
     "piera": {

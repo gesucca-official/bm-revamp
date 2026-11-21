@@ -145,7 +145,7 @@ export function Gioco({c, s, nome, eventi, azione, livello, onLivello, onMappa, 
       if (p.tipo !== 'battuta' || p.fuoriCampo) continue;
       for (const q of [{chi: p.chi, espressione: p.espressione}, ...(p.stacchi ?? []).map(x => ({chi: x.chi, espressione: espressioneStacco(x.chi, x.espressione)}))]) {
         const src = q.espressione ? ritratto(q.chi, q.espressione) : null;
-        if (src) preparaRitratto(q.chi, src, ritrattoBocca(q.chi, q.espressione), ritrattoAlfa(q.chi, q.espressione)).catch(() => {});
+        if (src) preparaRitratto(q.chi, src, ritrattoBocca(q.chi, q.espressione), ritrattoAlfa(q.chi, q.espressione), q.espressione).catch(() => {});
       }
     }
   }, [n]);

@@ -7,7 +7,7 @@
 // (senza WebGL o con i ritratti fermi) mostra solo immagini già decodificate. Le immagini composte (bocca, sagoma) si calcolano una volta
 // per espressione e restano in memoria. Il personaggio entra in scena quando il suo ritratto è pronto, nel modo voluto dalla scena.
 import {useEffect, useRef, useState} from 'react';
-import {avvicina, boccaAllineata, boccaAltra, CHI_REAGISCE, comparsa, IN_SCENA, latoDi, modo as modoDi, movimento, SCIVOLA, spostamento,
+import {avvicina, boccaAllineata, zonaCast, boccaAltra, CHI_REAGISCE, comparsa, IN_SCENA, latoDi, modo as modoDi, movimento, SCIVOLA, spostamento,
   trasformazione, zonaBocca, FERMA, type Comparsa, type Livello, type Posto} from '../animazione.ts';
 import {cast} from './dati.ts';
 import {componiBocca, conAlfaDi, controllaComposta, differenza, Maglia, type Sorgente} from './maglia.ts';
@@ -36,7 +36,7 @@ const conWebGL = (): boolean => {
 /** Le immagini pronte per la tela, una volta per espressione: il ritratto (con la sagoma, se serve) e la versione con la bocca. */
 type Pronte = {base: Sorgente; altra: HTMLCanvasElement | null};
 const pronte = new Map<string, Promise<Pronte>>();
-export function preparaRitratto(chi: string, src: string, srcBocca: string | null, srcAlfa: string | null): Promise<Pronte> {
+export function preparaRitratto(chi: string, src: string, srcBocca: string | null, srcAlfa: string | null, espressione?: string): Promise<Pronte> {
   const chiave = `${src}|${srcBocca}|${srcAlfa}`;
   if (!pronte.has(chiave)) {
     pronte.set(chiave, Promise.all([carica(src), srcBocca ? carica(srcBocca).catch(() => null) : null, srcAlfa ? carica(srcAlfa).catch(() => null) : null])
@@ -45,8 +45,8 @@ export function preparaRitratto(chi: string, src: string, srcBocca: string | nul
         const base = sagoma ? conAlfaDi(img, sagoma) : img;
         let altra: HTMLCanvasElement | null = null, zona = null;
         if (bocca && p?.bocca) {
-          const diff = differenza(base, bocca);
-          zona = boccaAllineata(diff, 128, 192, p.bocca) ? zonaBocca(diff, 128, 192, p.bocca) : null;
+          const diff = differenza(base, bocca), z = zonaCast(p.bocca, espressione);
+          zona = boccaAllineata(diff, 128, 192, z) ? zonaBocca(diff, 128, 192, z) : null;
           if (zona) altra = componiBocca(base, bocca, zona);
         }
         // Con il banco della fluidità acceso, il controllo delle immagini composte (bordo, zona della bocca, pixel scuri).
@@ -120,7 +120,7 @@ export function Ritratto({src, srcBocca, srcAlfa, alt, chi, espressione, ascolta
     if (modo === 'fermo' || !tela.current) return;
     const t = tela.current;
     let vivo = true;
-    preparaRitratto(chi, src, srcBocca, srcAlfa ?? null).then(({base, altra}) => {
+    preparaRitratto(chi, src, srcBocca, srcAlfa ?? null, espressione).then(({base, altra}) => {
       if (!vivo) return;
       maglia.current ??= Maglia.crea(t);
       if (!maglia.current) return;

@@ -19,7 +19,7 @@ try {
   const page = await browser.newPage({viewport: {width: 1300, height: 560}});
   await page.goto(`http://127.0.0.1:${porta}/`);
   const esiti = await page.evaluate(async ([ritratti, R]) => {
-    const {boccaAllineata, cambiatiFuoriBocca, zonaBocca} = await import('/src/animazione.ts');
+    const {boccaAllineata, cambiatiFuoriBocca, zonaBocca, zonaCast} = await import('/src/animazione.ts');
     const {componiBocca, differenza} = await import('/src/ui/maglia.ts');
     const cast = (await import('/dati/cast.json')).default;
     const carica = src => { const i = new Image(); i.src = src; return i.decode().then(() => i); };
@@ -27,7 +27,7 @@ try {
     const pixel = s => { const c = Object.assign(document.createElement('canvas'), {width: 1024, height: 1536}); const g = c.getContext('2d', {willReadFrequently: true}); g.drawImage(s, 0, 0, 1024, 1536); return g.getImageData(0, 0, 1024, 1536).data; };
     const fogli = [], righe = [];
     for (const nome of ritratti) {
-      const chi = nome.split('-')[0], b = cast.personaggi[chi].bocca;
+      const chi = nome.split('-')[0], b = zonaCast(cast.personaggi[chi].bocca, nome.split('-').slice(1).join('-'));
       const base = await carica(url(nome));
       let bocca = await carica(url(nome + '-bocca')).catch(() => null), finta = false;
       if (!bocca) {

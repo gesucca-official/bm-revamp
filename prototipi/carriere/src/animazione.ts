@@ -1,7 +1,7 @@
 // CA-0a, Fase E e F: ritratti animati senza un asset per fotogramma (prototipo.md). Funzioni pure del tempo: le usa il lettore a ogni
 // fotogramma e le provano le prove. Due modi: «movimento» (trasformazioni dell'immagine intera) e «maglia» (l'immagine piegata con pochi
 // punti di controllo). Fase F: il cast dice quale per personaggio ed espressione; il movimento è più morbido; la bocca si apre e si chiude.
-import type {AnimazioneCast, Controlli, ModoAnimazione, ZonaBocca} from './formato.ts';
+import type {AnimazioneCast, Controlli, ModoAnimazione, ZonaBocca, BoccaCast} from './formato.ts';
 export type {Controlli} from './formato.ts';
 
 /** L'interruttore: come dice il cast (predefinito), tutti fermi, tutti a movimento, tutti a maglia (per confrontare). */
@@ -152,6 +152,11 @@ export const SILLABE_AL_SECONDO = 1.75;
 export function boccaAltra(t: number, scrive: boolean, ultimo: string | undefined): boolean {
   if (!scrive || (ultimo !== undefined && /[.,;:!?…»—]/.test(ultimo))) return false;
   return Math.floor(t * SILLABE_AL_SECONDO * 2) % 2 === 0;
+}
+
+/** La zona dove cercare la bocca: quella dell'espressione se il cast ne ha una sua, altrimenti quella del personaggio. */
+export function zonaCast(b: BoccaCast, espressione?: string): ZonaBocca {
+  return (espressione !== undefined ? b.espressioni?.[espressione] : undefined) ?? b;
 }
 
 /**

@@ -166,6 +166,8 @@ export type Controlli = {perno: {u: number; v: number}; testa: {u: number; raggi
 export type AnimazioneCast = {modo: ModoAnimazione; espressioni?: Record<string, ModoAnimazione>; maglia?: Controlli};
 /** Dove cercare la bocca: un'ellisse in frazioni del ritratto (centro u, v e semiassi). */
 export type ZonaBocca = {u: number; v: number; ru: number; rv: number};
+/** La bocca del cast: la zona del personaggio e, se un'espressione ha la bocca altrove, la sua zona (solo per quella). */
+export type BoccaCast = ZonaBocca & {espressioni?: Record<string, ZonaBocca>};
 
 /** Cast condiviso fra le carriere (dati/cast.json), scritto dalla regia: nomi, espressioni, velocità, asset. */
 export type Cast = {
@@ -178,7 +180,7 @@ export type Cast = {
   // alzare il ritratto in verticale, in frazioni dell'altezza dello schermo).
   personaggi: Record<string, {nome: string; alias?: string[]; ombra?: true; espressioni?: string[]; espressioniFuture?: string[];
     ripieghi?: Record<string, string>;
-    velocita?: number; ritratto?: string; sprite?: string; animazione?: AnimazioneCast; bocca?: ZonaBocca; stacco?: string;
+    velocita?: number; ritratto?: string; sprite?: string; animazione?: AnimazioneCast; bocca?: BoccaCast; stacco?: string;
     verticale?: {alza: number};
     // Fase G: per un'espressione consegnata con il fondo sporco, l'espressione dello stesso personaggio da cui prendere la trasparenza.
     alfa?: Record<string, string>;
