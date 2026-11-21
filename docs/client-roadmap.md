@@ -1,6 +1,6 @@
 # Roadmap del client web animato
 
-**12 novembre 2026 — versione 62. C0, C1, C2, C3 e C4 sono chiuse; la prossima tappa è C5.** C4 è stata chiusa dal proprietario l'11 novembre 2026 («Approvo, chiudi C4»; [piano C4](client-c4-plan.md), [Fase B di C4-9](reports/client-c4/c4-9.md#fase-b-11-novembre-2026)). C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**21 novembre 2026 — versione 63. C0, C1, C2, C3 e C4 sono chiuse; la prossima tappa è C5.** C4 è stata chiusa dal proprietario l'11 novembre 2026 («Approvo, chiudi C4»; [piano C4](client-c4-plan.md), [Fase B di C4-9](reports/client-c4/c4-9.md#fase-b-11-novembre-2026)). C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -718,6 +718,15 @@ modifica a regole, server o catalogo è già decisa.
 | O26 | Nella scelta dello scarto la carta legata resta ingrandita e copre le candidate. | C4-5a-bis, approvata il 5 novembre 2026 | Decisione successiva del proprietario: tutte le carte in anteprima lasciano vuoto il proprio posto nella mano e vi tornano con ×. Prima del bersaglio legata a riposo; non scartabili attenuate e indicate in testo solo mentre manca lo scarto. Stessi tocchi, server giudice e conferma C4-2. [Rapporto](reports/client-c4/c4-5a-bis.md#c4-5a-bis); verifiche riprese dopo il via libera e concluse; risultati nel rapporto. |
 | O27 | In duello gli oggetti propri coprono il posacenere anche con spazio a destra del personaggio. | C4-5a-bis, approvato il 5 novembre 2026 | Scelta del proprietario: A con passo pieno, ripiego 0,75, poi sopra; C esclusa, posacenere fermo. 236 unità verdi, FFA identica e nessun peggioramento dei fattori o di 750×292; giri ufficiali verdi sul jar pre-SB-3/SB-4 e limite del nuovo jar accettato dal proprietario; contesto corrente verde. [Stato e verifiche](reports/client-c4/c4-5a-bis.md#c4-5a-bis). |
 
+## Osservazioni registrate durante SB-22
+
+21 novembre 2026, dal proprietario durante la prova umana del Set Base ([SB-22](set-base-plan.md#sb-22--prova-umana-con-mazzi-costruiti)), giocando col server della bozza. **Registrate, non assegnate a un blocco:** si affrontano quando si lavora sul client.
+
+| ID | Osservazione | Tappa | Note e vincoli |
+|---|---|---|---|
+| O33 | **La priorità diversa dalla normale si vede sulla carta**: un segno P+ o P− sulla faccia, senza aprire la (i). | Da assegnare, con il prossimo lavoro sul client | Oggi la priorità sta solo nella (i) (C3-5: al suo posto sulla faccia è andato il danno nominale). Il segno compare solo quando la priorità non è quella normale; serve un testo consultabile per chi non vede il segno. |
+| O34 | **Un personaggio morto non mostra la propria mossa annullata**: oggi, almeno in duello, la sequenza fa vedere l'animazione della sua mossa come annullata, che non ha senso se è già eliminato. FFA da controllare. | Da assegnare, con il prossimo lavoro sul client | Riguarda la sequenza di risoluzione (C3, C4-12). La mossa resta annullata nel resoconto del turno; cambia solo l'animazione. |
+
 ## Verifiche proporzionate
 
 Conservare test del motore e scenari CLI già acquisiti. Aggiungere prove
@@ -774,6 +783,7 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 63 — 21 novembre 2026:** nuove osservazioni [O33 e O34](#osservazioni-registrate-durante-sb-22) dalla prova SB-22 del Set Base (segno P+/P− sulla carta; nessuna mossa annullata animata per un personaggio morto), da assegnare.
 - **Versione 62 — 12 novembre 2026:** nuova osservazione [O32](#osservazioni-registrate-durante-c4) (quantità di danno e barriera sull'impatto), dopo C5 con eventi strutturati dal server.
 - **Versione 61 — 11 novembre 2026:** **C4 chiusa dal proprietario** («Approvo, chiudi C4», dopo il controllo dal vivo di [C4-12](client-c4-plan.md#c4-12--eliminazione-ed-esito-dopo-la-sequenza)); matrice completa di fine C4 24/25 con il solo rosso R5 dello script di `VerifyAim`; residui e rimandi in [C4-9 Fase B](reports/client-c4/c4-9.md#fase-b-11-novembre-2026). Prossima tappa: C5.
 - **Versione 60 — 11 novembre 2026:** prova del proprietario di [C4-9](reports/client-c4/c4-9.md#prova-del-proprietario-11-novembre-2026): nuova osservazione O31 (risorse sui sottobicchieri, dopo C5 con il mockup VE-1); eliminazione ed esito che anticipano la sequenza vanno al blocco [C4-12](client-c4-plan.md#c4-12--eliminazione-ed-esito-dopo-la-sequenza), prima della Fase B di C4-9.
