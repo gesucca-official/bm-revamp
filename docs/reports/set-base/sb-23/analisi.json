@@ -1,0 +1,912 @@
+{
+ "20-2": {
+  "partite": 403200,
+  "secondi": 520.5214639,
+  "criteri": {
+   "passa": true,
+   "turni": 8.462746913580247,
+   "patte": 3.937830687830688,
+   "fuori": [],
+   "specchi": [
+    [
+     "starter-spazienzio",
+     7.6,
+     1.32
+    ],
+    [
+     "starter-mara",
+     7.56,
+     3.2
+    ],
+    [
+     "starter-tossico",
+     13.34,
+     10.2
+    ],
+    [
+     "starter-pino",
+     10.13,
+     7.69
+    ],
+    [
+     "starter-gigi",
+     5.61,
+     11.28
+    ],
+    [
+     "prova-sergio",
+     13.91,
+     0.98
+    ],
+    [
+     "prova-duccio",
+     6.36,
+     6.75
+    ]
+   ],
+   "violazioni": {
+    "quota": [],
+    "turniMedi": false,
+    "patte": false,
+    "specchiTurni": [],
+    "specchiPatte": []
+   },
+   "coppie": [
+    {
+     "a": "starter-spazienzio",
+     "b": "starter-spazienzio",
+     "quota": 55.73626923558113,
+     "turni": 7.604320987654321,
+     "patte": 1.3209876543209877,
+     "partite": 8100
+    },
+    {
+     "a": "starter-spazienzio",
+     "b": "starter-mara",
+     "quota": 48.410910910910914,
+     "turni": 7.247654320987654,
+     "patte": 1.3333333333333333,
+     "partite": 8100
+    },
+    {
+     "a": "starter-spazienzio",
+     "b": "starter-tossico",
+     "quota": 53.36469358421534,
+     "turni": 9.348765432098766,
+     "patte": 5.518518518518518,
+     "partite": 8100
+    },
+    {
+     "a": "starter-spazienzio",
+     "b": "starter-pino",
+     "quota": 53.18908038747012,
+     "turni": 8.194814814814816,
+     "patte": 1.8641975308641976,
+     "partite": 8100
+    },
+    {
+     "a": "starter-spazienzio",
+     "b": "starter-gigi",
+     "quota": 59.51993999249906,
+     "turni": 6.399259259259259,
+     "patte": 1.2469135802469136,
+     "partite": 8100
+    },
+    {
+     "a": "starter-spazienzio",
+     "b": "prova-sergio",
+     "quota": 43.8191079637222,
+     "turni": 8.663456790123456,
+     "patte": 0.6296296296296297,
+     "partite": 8100
+    },
+    {
+     "a": "starter-spazienzio",
+     "b": "prova-duccio",
+     "quota": 41.53595181327645,
+     "turni": 6.369506172839507,
+     "patte": 1.617283950617284,
+     "partite": 8100
+    },
+    {
+     "a": "starter-mara",
+     "b": "starter-mara",
+     "quota": 49.75130723122051,
+     "turni": 7.559753086419753,
+     "patte": 3.197530864197531,
+     "partite": 8100
+    },
+    {
+     "a": "starter-mara",
+     "b": "starter-tossico",
+     "quota": 63.110522832561216,
+     "turni": 8.99172839506173,
+     "patte": 6.728395061728395,
+     "partite": 8100
+    },
+    {
+     "a": "starter-mara",
+     "b": "starter-pino",
+     "quota": 55.682547836137154,
+     "turni": 8.601481481481482,
+     "patte": 3.8641975308641974,
+     "partite": 8100
+    },
+    {
+     "a": "starter-mara",
+     "b": "starter-gigi",
+     "quota": 43.055383471688764,
+     "turni": 6.282345679012345,
+     "patte": 0.35802469135802467,
+     "partite": 8100
+    },
+    {
+     "a": "starter-mara",
+     "b": "prova-sergio",
+     "quota": 35.709802937115604,
+     "turni": 10.098148148148148,
+     "patte": 1.6419753086419753,
+     "partite": 8100
+    },
+    {
+     "a": "starter-mara",
+     "b": "prova-duccio",
+     "quota": 58.90393459376597,
+     "turni": 6.542469135802469,
+     "patte": 3.3580246913580245,
+     "partite": 8100
+    },
+    {
+     "a": "starter-tossico",
+     "b": "starter-tossico",
+     "quota": 47.89661809183393,
+     "turni": 13.344197530864198,
+     "patte": 10.197530864197532,
+     "partite": 8100
+    },
+    {
+     "a": "starter-tossico",
+     "b": "starter-pino",
+     "quota": 56.467220934987054,
+     "turni": 10.758641975308642,
+     "patte": 9.419753086419753,
+     "partite": 8100
+    },
+    {
+     "a": "starter-tossico",
+     "b": "starter-gigi",
+     "quota": 39.96523599411686,
+     "turni": 7.988148148148148,
+     "patte": 7.666666666666667,
+     "partite": 8100
+    },
+    {
+     "a": "starter-tossico",
+     "b": "prova-sergio",
+     "quota": 55.99319549856059,
+     "turni": 11.144444444444444,
+     "patte": 5.654320987654321,
+     "partite": 8100
+    },
+    {
+     "a": "starter-tossico",
+     "b": "prova-duccio",
+     "quota": 47.973684210526315,
+     "turni": 7.179012345679013,
+     "patte": 6.172839506172839,
+     "partite": 8100
+    },
+    {
+     "a": "starter-pino",
+     "b": "starter-pino",
+     "quota": 47.34519192189381,
+     "turni": 10.127037037037036,
+     "patte": 7.691358024691358,
+     "partite": 8100
+    },
+    {
+     "a": "starter-pino",
+     "b": "starter-gigi",
+     "quota": 52.76142767689418,
+     "turni": 7.037654320987654,
+     "patte": 1.4197530864197532,
+     "partite": 8100
+    },
+    {
+     "a": "starter-pino",
+     "b": "prova-sergio",
+     "quota": 60.253485424588085,
+     "turni": 11.414320987654321,
+     "patte": 2.5925925925925926,
+     "partite": 8100
+    },
+    {
+     "a": "starter-pino",
+     "b": "prova-duccio",
+     "quota": 49.99361837906828,
+     "turni": 7.843827160493827,
+     "patte": 3.271604938271605,
+     "partite": 8100
+    },
+    {
+     "a": "starter-gigi",
+     "b": "starter-gigi",
+     "quota": 50.918452546618425,
+     "turni": 5.605802469135803,
+     "patte": 11.283950617283951,
+     "partite": 8100
+    },
+    {
+     "a": "starter-gigi",
+     "b": "prova-sergio",
+     "quota": 42.35544964254358,
+     "turni": 7.878148148148148,
+     "patte": 1.5679012345679013,
+     "partite": 8100
+    },
+    {
+     "a": "starter-gigi",
+     "b": "prova-duccio",
+     "quota": 43.2381902031659,
+     "turni": 6.005061728395062,
+     "patte": 0.9506172839506173,
+     "partite": 8100
+    },
+    {
+     "a": "prova-sergio",
+     "b": "prova-sergio",
+     "quota": 48.16107717242239,
+     "turni": 13.91358024691358,
+     "patte": 0.9753086419753086,
+     "partite": 8100
+    },
+    {
+     "a": "prova-sergio",
+     "b": "prova-duccio",
+     "quota": 63.53104143055031,
+     "turni": 8.456296296296296,
+     "patte": 1.962962962962963,
+     "partite": 8100
+    },
+    {
+     "a": "prova-duccio",
+     "b": "prova-duccio",
+     "quota": 53.29008341056534,
+     "turni": 6.357037037037037,
+     "patte": 6.753086419753086,
+     "partite": 8100
+    }
+   ],
+   "min": 35.709802937115604,
+   "max": 63.53104143055031
+  },
+  "contatori": {
+   "gruppi": {
+    "com": {
+     "postiPartita": 50400,
+     "turni": 11.147619047619047,
+     "esauriti": 0.2836904761904762,
+     "annunci": 0.9507936507936507,
+     "ricerche": 47920,
+     "ricercheFallite": 0.21137312186978297,
+     "finaliLastResort": 0.17575396825396825,
+     "finaliLastResortScelta": 0.18615079365079365,
+     "dopoLastResort": 0.19218253968253968,
+     "regolariNonScelteAPartita": 24.76125,
+     "quotaMano": 0.8128203658569946
+    },
+    "tutti": {
+     "postiPartita": 806400,
+     "turni": 8.938338293650794,
+     "esauriti": 0.14914806547619047,
+     "annunci": 0.8808159722222222,
+     "ricerche": 710290,
+     "ricercheFallite": 0.1763603598530178,
+     "finaliLastResort": 0.09883432539682539,
+     "finaliLastResortScelta": 0.10514880952380952,
+     "dopoLastResort": 0.10373015873015873,
+     "regolariNonScelteAPartita": 19.019549851190476,
+     "quotaMano": 0.7689051951978584
+    },
+    "heur": {
+     "postiPartita": 453600,
+     "turni": 8.462746913580247,
+     "esauriti": 0.12543430335097003,
+     "annunci": 0.8762433862433863,
+     "ricerche": 397464,
+     "ricercheFallite": 0.16923293681943521,
+     "finaliLastResort": 0.08405643738977073,
+     "finaliLastResortScelta": 0.08966490299823633,
+     "dopoLastResort": 0.08745149911816578,
+     "regolariNonScelteAPartita": 17.594298941798943,
+     "quotaMano": 0.7515848851161354
+    },
+    "mixed": {
+     "postiPartita": 302400,
+     "turni": 9.283511904761905,
+     "esauriti": 0.16229497354497355,
+     "annunci": 0.8760119047619047,
+     "ricerche": 264906,
+     "ricercheFallite": 0.18072070847772417,
+     "finaliLastResort": 0.10818121693121693,
+     "finaliLastResortScelta": 0.11487433862433863,
+     "dopoLastResort": 0.11340608465608465,
+     "regolariNonScelteAPartita": 20.20047619047619,
+     "quotaMano": 0.7838533466271957
+    }
+   },
+   "perMazzoHeur": {
+    "prova-duccio": {
+     "postiPartita": 64800,
+     "turni": 6.888780864197531,
+     "esauriti": 0.006296296296296296,
+     "annunci": 0.7136728395061729,
+     "ricerche": 46246,
+     "ricercheFallite": 0.04971240755957272,
+     "finaliLastResort": 0.01205246913580247,
+     "finaliLastResortScelta": 0.013503086419753086,
+     "dopoLastResort": 0.012978395061728395,
+     "regolariNonScelteAPartita": 13.592962962962963,
+     "quotaMano": 0.69387308171929
+    },
+    "prova-sergio": {
+     "postiPartita": 64800,
+     "turni": 10.685246913580247,
+     "esauriti": 0.22314814814814815,
+     "annunci": 0.7417283950617284,
+     "ricerche": 48064,
+     "ricercheFallite": 0.07281957390146471,
+     "finaliLastResort": 0.17487654320987656,
+     "finaliLastResortScelta": 0.1852777777777778,
+     "dopoLastResort": 0.18084876543209877,
+     "regolariNonScelteAPartita": 22.52962962962963,
+     "quotaMano": 0.789985038162156
+    },
+    "starter-gigi": {
+     "postiPartita": 64800,
+     "turni": 6.6002777777777775,
+     "esauriti": 0.08112654320987654,
+     "annunci": 1.5904475308641974,
+     "ricerche": 103061,
+     "ricercheFallite": 0.2034329183687331,
+     "finaliLastResort": 0.0349537037037037,
+     "finaliLastResortScelta": 0.035138888888888886,
+     "dopoLastResort": 0.03601851851851852,
+     "regolariNonScelteAPartita": 13.250061728395062,
+     "quotaMano": 0.7102140144606377
+    },
+    "starter-mara": {
+     "postiPartita": 64800,
+     "turni": 7.860416666666667,
+     "esauriti": 0.09183641975308642,
+     "annunci": 0.5574382716049383,
+     "ricerche": 36122,
+     "ricercheFallite": 0.23248989535463152,
+     "finaliLastResort": 0.041712962962962966,
+     "finaliLastResortScelta": 0.046358024691358024,
+     "dopoLastResort": 0.04365740740740741,
+     "regolariNonScelteAPartita": 15.421049382716049,
+     "quotaMano": 0.7174331950088307
+    },
+    "starter-pino": {
+     "postiPartita": 64800,
+     "turni": 9.263101851851852,
+     "esauriti": 0.2014969135802469,
+     "annunci": 0.9361728395061728,
+     "ricerche": 60664,
+     "ricercheFallite": 0.28016616114994064,
+     "finaliLastResort": 0.11439814814814815,
+     "finaliLastResortScelta": 0.12373456790123456,
+     "dopoLastResort": 0.11953703703703704,
+     "regolariNonScelteAPartita": 19.862916666666667,
+     "quotaMano": 0.7665416807117053
+    },
+    "starter-spazienzio": {
+     "postiPartita": 64800,
+     "turni": 7.679012345679013,
+     "esauriti": 0.03493827160493827,
+     "annunci": 1.1135956790123456,
+     "ricerche": 72161,
+     "ricercheFallite": 0.11093249816382811,
+     "finaliLastResort": 0.018256172839506174,
+     "finaliLastResortScelta": 0.019830246913580245,
+     "dopoLastResort": 0.018780864197530864,
+     "regolariNonScelteAPartita": 15.853333333333333,
+     "quotaMano": 0.7355039363539253
+    },
+    "starter-tossico": {
+     "postiPartita": 64800,
+     "turni": 10.262391975308642,
+     "esauriti": 0.23919753086419754,
+     "annunci": 0.48064814814814816,
+     "ricerche": 31146,
+     "ricercheFallite": 0.22795864637513646,
+     "finaliLastResort": 0.19214506172839507,
+     "finaliLastResortScelta": 0.20381172839506173,
+     "dopoLastResort": 0.2003395061728395,
+     "regolariNonScelteAPartita": 22.65013888888889,
+     "quotaMano": 0.8049036898596313
+    }
+   }
+  }
+ },
+ "25-3": {
+  "partite": 403200,
+  "secondi": 382.1149796,
+  "criteri": {
+   "passa": false,
+   "turni": 8.191261022927689,
+   "patte": 3.1922398589065257,
+   "fuori": [
+    [
+     "starter-mara",
+     "prova-duccio",
+     67.2
+    ],
+    [
+     "starter-tossico",
+     "starter-gigi",
+     30.7
+    ],
+    [
+     "starter-pino",
+     "prova-sergio",
+     72.3
+    ],
+    [
+     "starter-pino",
+     "prova-duccio",
+     68.8
+    ]
+   ],
+   "specchi": [
+    [
+     "starter-spazienzio",
+     7.42,
+     2.19
+    ],
+    [
+     "starter-mara",
+     7.12,
+     2.17
+    ],
+    [
+     "starter-tossico",
+     12.87,
+     4.72
+    ],
+    [
+     "starter-pino",
+     8.63,
+     4.44
+    ],
+    [
+     "starter-gigi",
+     5.67,
+     16.12
+    ],
+    [
+     "prova-sergio",
+     14.96,
+     0.46
+    ],
+    [
+     "prova-duccio",
+     5.73,
+     6.33
+    ]
+   ],
+   "violazioni": {
+    "quota": [
+     [
+      "starter-mara",
+      "prova-duccio",
+      67.2
+     ],
+     [
+      "starter-tossico",
+      "starter-gigi",
+      30.7
+     ],
+     [
+      "starter-pino",
+      "prova-sergio",
+      72.3
+     ],
+     [
+      "starter-pino",
+      "prova-duccio",
+      68.8
+     ]
+    ],
+    "turniMedi": false,
+    "patte": false,
+    "specchiTurni": [],
+    "specchiPatte": [
+     [
+      "starter-gigi",
+      5.67,
+      16.12
+     ]
+    ]
+   },
+   "coppie": [
+    {
+     "a": "starter-spazienzio",
+     "b": "starter-spazienzio",
+     "quota": 47.88590180487189,
+     "turni": 7.416419753086419,
+     "patte": 2.185185185185185,
+     "partite": 8100
+    },
+    {
+     "a": "starter-spazienzio",
+     "b": "starter-mara",
+     "quota": 44.883258817685046,
+     "turni": 6.905925925925926,
+     "patte": 0.5925925925925926,
+     "partite": 8100
+    },
+    {
+     "a": "starter-spazienzio",
+     "b": "starter-tossico",
+     "quota": 55.48220064724919,
+     "turni": 9.243333333333334,
+     "patte": 4.62962962962963,
+     "partite": 8100
+    },
+    {
+     "a": "starter-spazienzio",
+     "b": "starter-pino",
+     "quota": 43.35751813860395,
+     "turni": 7.7528395061728395,
+     "patte": 1.308641975308642,
+     "partite": 8100
+    },
+    {
+     "a": "starter-spazienzio",
+     "b": "starter-gigi",
+     "quota": 63.22596691953737,
+     "turni": 6.281481481481482,
+     "patte": 0.7283950617283951,
+     "partite": 8100
+    },
+    {
+     "a": "starter-spazienzio",
+     "b": "prova-sergio",
+     "quota": 41.23839009287926,
+     "turni": 9.358888888888888,
+     "patte": 0.30864197530864196,
+     "partite": 8100
+    },
+    {
+     "a": "starter-spazienzio",
+     "b": "prova-duccio",
+     "quota": 39.704955238935824,
+     "turni": 6.23395061728395,
+     "patte": 2.0864197530864197,
+     "partite": 8100
+    },
+    {
+     "a": "starter-mara",
+     "b": "starter-mara",
+     "quota": 49.46996466431096,
+     "turni": 7.120987654320988,
+     "patte": 2.1728395061728394,
+     "partite": 8100
+    },
+    {
+     "a": "starter-mara",
+     "b": "starter-tossico",
+     "quota": 62.065386611312924,
+     "turni": 8.157407407407407,
+     "patte": 4.839506172839506,
+     "partite": 8100
+    },
+    {
+     "a": "starter-mara",
+     "b": "starter-pino",
+     "quota": 52.18718209562564,
+     "turni": 7.778148148148148,
+     "patte": 2.9135802469135803,
+     "partite": 8100
+    },
+    {
+     "a": "starter-mara",
+     "b": "starter-gigi",
+     "quota": 51.24860231084607,
+     "turni": 6.034691358024691,
+     "patte": 0.6296296296296297,
+     "partite": 8100
+    },
+    {
+     "a": "starter-mara",
+     "b": "prova-sergio",
+     "quota": 51.5046439628483,
+     "turni": 10.329135802469136,
+     "patte": 0.30864197530864196,
+     "partite": 8100
+    },
+    {
+     "a": "starter-mara",
+     "b": "prova-duccio",
+     "quota": 67.1587181428211,
+     "turni": 6.360246913580247,
+     "patte": 2.1481481481481484,
+     "partite": 8100
+    },
+    {
+     "a": "starter-tossico",
+     "b": "starter-tossico",
+     "quota": 60.71521119461,
+     "turni": 12.871358024691357,
+     "patte": 4.716049382716049,
+     "partite": 8100
+    },
+    {
+     "a": "starter-tossico",
+     "b": "starter-pino",
+     "quota": 39.55213992314827,
+     "turni": 9.830987654320987,
+     "patte": 6.827160493827161,
+     "partite": 8100
+    },
+    {
+     "a": "starter-tossico",
+     "b": "starter-gigi",
+     "quota": 30.694128661227765,
+     "turni": 7.533950617283951,
+     "patte": 7.691358024691358,
+     "partite": 8100
+    },
+    {
+     "a": "starter-tossico",
+     "b": "prova-sergio",
+     "quota": 52.14977404777276,
+     "turni": 11.040740740740741,
+     "patte": 4.382716049382716,
+     "partite": 8100
+    },
+    {
+     "a": "starter-tossico",
+     "b": "prova-duccio",
+     "quota": 39.371413667188314,
+     "turni": 6.699876543209877,
+     "patte": 5.333333333333333,
+     "partite": 8100
+    },
+    {
+     "a": "starter-pino",
+     "b": "starter-pino",
+     "quota": 53.514211886304906,
+     "turni": 8.627037037037036,
+     "patte": 4.444444444444445,
+     "partite": 8100
+    },
+    {
+     "a": "starter-pino",
+     "b": "starter-gigi",
+     "quota": 56.24534392848274,
+     "turni": 6.449753086419753,
+     "patte": 0.5679012345679012,
+     "partite": 8100
+    },
+    {
+     "a": "starter-pino",
+     "b": "prova-sergio",
+     "quota": 72.3340417552194,
+     "turni": 11.224074074074075,
+     "patte": 1.2469135802469136,
+     "partite": 8100
+    },
+    {
+     "a": "starter-pino",
+     "b": "prova-duccio",
+     "quota": 68.79495268138801,
+     "turni": 7.431851851851852,
+     "patte": 2.1604938271604937,
+     "partite": 8100
+    },
+    {
+     "a": "starter-gigi",
+     "b": "starter-gigi",
+     "quota": 50.61819252281425,
+     "turni": 5.665679012345679,
+     "patte": 16.123456790123456,
+     "partite": 8100
+    },
+    {
+     "a": "starter-gigi",
+     "b": "prova-sergio",
+     "quota": 42.47391952309985,
+     "turni": 8.293703703703704,
+     "patte": 0.5925925925925926,
+     "partite": 8100
+    },
+    {
+     "a": "starter-gigi",
+     "b": "prova-duccio",
+     "quota": 45.21329365079365,
+     "turni": 5.677530864197531,
+     "patte": 0.4444444444444444,
+     "partite": 8100
+    },
+    {
+     "a": "prova-sergio",
+     "b": "prova-sergio",
+     "quota": 52.41225350365869,
+     "turni": 14.956172839506173,
+     "patte": 0.4567901234567901,
+     "partite": 8100
+    },
+    {
+     "a": "prova-sergio",
+     "b": "prova-duccio",
+     "quota": 59.515306122448976,
+     "turni": 8.353703703703705,
+     "patte": 3.2098765432098766,
+     "partite": 8100
+    },
+    {
+     "a": "prova-duccio",
+     "b": "prova-duccio",
+     "quota": 53.156715434295506,
+     "turni": 5.725432098765432,
+     "patte": 6.333333333333333,
+     "partite": 8100
+    }
+   ],
+   "min": 30.694128661227765,
+   "max": 72.3340417552194
+  },
+  "contatori": {
+   "gruppi": {
+    "com": {
+     "postiPartita": 50400,
+     "turni": 10.712301587301587,
+     "esauriti": 0.0860515873015873,
+     "annunci": 0.9577976190476191,
+     "ricerche": 48273,
+     "ricercheFallite": 0.0828413398794357,
+     "finaliLastResort": 0.04746031746031746,
+     "finaliLastResortScelta": 0.05015873015873016,
+     "dopoLastResort": 0.05452380952380952,
+     "regolariNonScelteAPartita": 23.504662698412698,
+     "quotaMano": 0.803610373770216
+    },
+    "tutti": {
+     "postiPartita": 806400,
+     "turni": 8.67766617063492,
+     "esauriti": 0.03909226190476191,
+     "annunci": 0.8620399305555555,
+     "ricerche": 695149,
+     "ricercheFallite": 0.05510904856368922,
+     "finaliLastResort": 0.024211309523809524,
+     "finaliLastResortScelta": 0.025637400793650792,
+     "dopoLastResort": 0.025736607142857144,
+     "regolariNonScelteAPartita": 17.72598586309524,
+     "quotaMano": 0.7583074922933108
+    },
+    "heur": {
+     "postiPartita": 453600,
+     "turni": 8.191261022927689,
+     "esauriti": 0.0326168430335097,
+     "annunci": 0.848097442680776,
+     "ricerche": 384697,
+     "ricercheFallite": 0.04912177635905661,
+     "finaliLastResort": 0.02062169312169312,
+     "finaliLastResortScelta": 0.021807760141093476,
+     "dopoLastResort": 0.021538800705467372,
+     "regolariNonScelteAPartita": 16.251033950617284,
+     "quotaMano": 0.7399813244652316
+    },
+    "mixed": {
+     "postiPartita": 302400,
+     "turni": 9.06816798941799,
+     "esauriti": 0.040978835978835976,
+     "annunci": 0.8669940476190476,
+     "ricerche": 262179,
+     "ricercheFallite": 0.058788079899610574,
+     "finaliLastResort": 0.02572089947089947,
+     "finaliLastResortScelta": 0.027294973544973546,
+     "dopoLastResort": 0.027235449735449734,
+     "regolariNonScelteAPartita": 18.975300925925925,
+     "quotaMano": 0.7739227438266302
+    }
+   },
+   "perMazzoHeur": {
+    "prova-duccio": {
+     "postiPartita": 64800,
+     "turni": 6.526003086419753,
+     "esauriti": 0.0,
+     "annunci": 0.8035956790123456,
+     "ricerche": 52073,
+     "ricercheFallite": 0.014249227046646055,
+     "finaliLastResort": 0.0004938271604938272,
+     "finaliLastResortScelta": 0.0005401234567901234,
+     "dopoLastResort": 0.0004938271604938272,
+     "regolariNonScelteAPartita": 11.907175925925927,
+     "quotaMano": 0.678050628061437
+    },
+    "prova-sergio": {
+     "postiPartita": 64800,
+     "turni": 11.064074074074075,
+     "esauriti": 0.10564814814814814,
+     "annunci": 0.8760956790123456,
+     "ricerche": 56771,
+     "ricercheFallite": 0.0432439097426503,
+     "finaliLastResort": 0.07106481481481482,
+     "finaliLastResortScelta": 0.07444444444444444,
+     "dopoLastResort": 0.0732716049382716,
+     "regolariNonScelteAPartita": 23.228996913580247,
+     "quotaMano": 0.7921610089213165
+    },
+    "starter-gigi": {
+     "postiPartita": 64800,
+     "turni": 6.450308641975309,
+     "esauriti": 0.01726851851851852,
+     "annunci": 1.6143518518518518,
+     "ricerche": 104610,
+     "ricercheFallite": 0.061017111174839885,
+     "finaliLastResort": 0.009444444444444445,
+     "finaliLastResortScelta": 0.009583333333333333,
+     "dopoLastResort": 0.009722222222222222,
+     "regolariNonScelteAPartita": 12.117793209876544,
+     "quotaMano": 0.6958139493668642
+    },
+    "starter-mara": {
+     "postiPartita": 64800,
+     "turni": 7.475941358024691,
+     "esauriti": 0.010864197530864197,
+     "annunci": 0.380679012345679,
+     "ricerche": 24668,
+     "ricercheFallite": 0.057077995784011674,
+     "finaliLastResort": 0.005617283950617284,
+     "finaliLastResortScelta": 0.00566358024691358,
+     "dopoLastResort": 0.005756172839506172,
+     "regolariNonScelteAPartita": 13.650108024691358,
+     "quotaMano": 0.6936792029637902
+    },
+    "starter-pino": {
+     "postiPartita": 64800,
+     "turni": 8.465216049382716,
+     "esauriti": 0.019737654320987653,
+     "annunci": 0.665679012345679,
+     "ricerche": 43136,
+     "ricercheFallite": 0.06866654302670623,
+     "finaliLastResort": 0.008703703703703703,
+     "finaliLastResortScelta": 0.008842592592592593,
+     "dopoLastResort": 0.008703703703703703,
+     "regolariNonScelteAPartita": 17.15881172839506,
+     "quotaMano": 0.7411697498440192
+    },
+    "starter-spazienzio": {
+     "postiPartita": 64800,
+     "turni": 7.576157407407408,
+     "esauriti": 0.005354938271604938,
+     "annunci": 1.0655555555555556,
+     "ricerche": 69048,
+     "ricercheFallite": 0.03535221874637933,
+     "finaliLastResort": 0.0027314814814814814,
+     "finaliLastResortScelta": 0.002916666666666667,
+     "dopoLastResort": 0.002777777777777778,
+     "regolariNonScelteAPartita": 14.993827160493828,
+     "quotaMano": 0.7288335587496408
+    },
+    "starter-tossico": {
+     "postiPartita": 64800,
+     "turni": 9.781126543209876,
+     "esauriti": 0.06944444444444445,
+     "annunci": 0.5307253086419753,
+     "ricerche": 34391,
+     "ricercheFallite": 0.07286790148585386,
+     "finaliLastResort": 0.046296296296296294,
+     "finaliLastResortScelta": 0.05066358024691358,
+     "dopoLastResort": 0.0500462962962963,
+     "regolariNonScelteAPartita": 20.700524691358023,
+     "quotaMano": 0.7952889560822328
+    }
+   }
+  }
+ }
+}
