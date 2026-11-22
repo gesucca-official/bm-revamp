@@ -69,6 +69,15 @@ class SetBaseDraftTest {
         throw new IllegalArgumentException(binding);
     }
 
+    /** SB-25 B1 (D169 (5)): the slot code of every entry of the draft, no longer at the start of the description but in its own file. */
+    static Map<String, String> slots() throws java.io.IOException {
+        JsonNode file = new com.fasterxml.jackson.databind.ObjectMapper().readTree(
+                java.nio.file.Path.of("..", "docs/design/set-base/testi/slot.json").toFile());
+        Map<String, String> out = new LinkedHashMap<>();
+        file.get("slot").fields().forEachRemaining(e -> out.put(e.getKey(), e.getValue().asText()));
+        return out;
+    }
+
     private static Map<String, BotPolicy> heuristic() {
         Map<String, BotPolicy> styles = new LinkedHashMap<>(PlaygroundTest.styles());
         styles.remove("com");
@@ -200,8 +209,10 @@ class SetBaseDraftTest {
             for (String list : List.of("self", "target"))
                 if (c.has(list)) for (JsonNode step : c.get(list)) {
                     if (!step.get("op").asText().equals("status") || !step.has("turns")) continue;
-                    Matcher m = turns.matcher(description);
-                    int expected = m.find() ? Integer.parseInt(m.group(1)) - 1 : description.toLowerCase(java.util.Locale.ROOT).contains("in questo turno") ? 0 : -1; // D82: «In questo turno» a inizio frase
+                    String lower = description.toLowerCase(java.util.Locale.ROOT);
+                    Matcher m = turns.matcher(lower); // SB-25 B1: «Per 4 turni» può aprire il testo
+                    // D82: «In questo turno» a inizio frase; SB-25 B1 (D169): «in questo turno e nel prossimo» è turns 1.
+                    int expected = m.find() ? Integer.parseInt(m.group(1)) - 1 : lower.contains("in questo turno e nel prossimo") ? 1 : lower.contains("in questo turno") ? 0 : -1;
                     assertEquals(expected, step.get("turns").asInt(), c.get("binding").asText() + ": " + description);
                     checked++;
                 }
@@ -221,11 +232,11 @@ class SetBaseDraftTest {
 
     /** Decisione del proprietario (SB-11b): Spazienzio ha perso la pazienza e urla, quindi le sue carte si mostrano in maiuscolo. */
     @Test
-    void spazienziosCardsShoutTheirNames() {
+    void spazienziosCardsShoutTheirNames() throws Exception {
         int shouting = 0;
+        Map<String, String> slots = slots();
         for (JsonNode c : json.get("cards")) {
-            String description = c.get("gui").path("description").asText("");
-            if (!description.startsWith("SPA-")) continue;
+            if (!slots.get(c.get("binding").asText()).startsWith("SPA-")) continue;
             String name = c.get("gui").get("name").asText();
             assertEquals(name.toUpperCase(Locale.ITALIAN), name, c.get("binding").asText());
             shouting++;
@@ -250,12 +261,12 @@ class SetBaseDraftTest {
         alertnessCosts.forEach((binding, cost) -> {
             JsonNode c = card(binding);
             assertEquals(cost, c.get("cost").get("ALERTNESS").asInt(), binding);
-            assertTrue(c.get("gui").get("description").asText().contains("· " + cost + " [[A]]:"), binding + ": costo nel testo (D142)");
+            assertTrue(c.get("gui").get("description").asText().startsWith(cost + " [[A]]: "), binding + ": costo nel testo (D142, SB-25)");
         });
         JsonNode sgommata = card("base.mara.Sgommata");
         assertEquals(25, sgommata.get("target").get(0).get("amount").asInt());
         assertEquals("CUT 25", sgommata.get("gui").get("damageAmount").asText());
-        assertTrue(sgommata.get("gui").get("description").asText().contains("25 CUT"));
+        assertTrue(sgommata.get("gui").get("description").asText().contains("25 [[CUT]]"));
         // B2 approvata dal proprietario dopo SB-12a: Cambio marcia +6 A (circa 3,3 HEALTH equivalenti per uso invece di 4,5).
         JsonNode cambio = card("base.mara.bound.CambioMarcia");
         assertEquals(5, cambio.get("self").get(0).get("amount").asInt(), "SB-21z (D162), prima 6");
@@ -306,7 +317,7 @@ class SetBaseDraftTest {
      * SB-16e/D38/D53 aggiorna salute e T iniziale a 70/15, senza cambiare le meccaniche qui provate.
      */
     @Test
-    void theToxicStarterFollowsTheGridWithTheSb13Corrections() {
+    void theToxicStarterFollowsTheGridWithTheSb13Corrections() throws Exception {
         JsonNode tossico = character(TOSSICO);
         Map<String, Integer> resources = new TreeMap<>();
         tossico.get("resources").fields().forEachRemaining(e -> resources.put(e.getKey(), e.getValue().asInt()));
@@ -341,25 +352,26 @@ class SetBaseDraftTest {
         assertTrue(raschiare.get("self").get(0).get("amount").asInt() <= 10);
         assertEquals(2, raschiare.get("self").get(0).get("amount").asInt(), "SB-21z (D162), prima 6 (D158)");
         assertEquals("+2 T", raschiare.get("gui").get("gains").asText());
-        assertTrue(raschiare.get("gui").get("description").asText().contains("+2 [[T]] a sé"));
+        assertTrue(raschiare.get("gui").get("description").asText().startsWith("+2 [[T]]. "));
         // D55: MethDrivenRage diventa un caricamento gratuito; le altre tre carte restano a 10 T.
         assertTrue(draft.card("junkie.MethDrivenRage").getCost().isEmpty());
         for (String binding : List.of("junkie.Cough", "junkie.AmphetamineReflexes", "junkie.ToxicBloodDrain")) {
             JsonNode c = card(binding);
             assertEquals(1, c.get("cost").size(), binding);
             assertEquals(10, c.get("cost").get("TOXICITY").asInt(), binding);
-            assertTrue(c.get("gui").get("description").asText().contains("· 10 [[T]]:"), binding + ": costo nel testo");
+            assertTrue(c.get("gui").get("description").asText().startsWith("10 [[T]]: "), binding + ": costo nel testo");
         }
         // SB-21g: Tossicone Scatarrante sale da 18 a 20 POISON, testi compresi.
         JsonNode cough = card("junkie.Cough");
         assertEquals(20, cough.get("target").get(0).get("amount").asInt());
         assertEquals("POISON 20", cough.get("gui").get("damageAmount").asText());
-        assertTrue(cough.get("gui").get("description").asText().contains("20 POISON al bersaglio; +5 [[T]] al bersaglio."));
+        assertTrue(cough.get("gui").get("description").asText().contains("20 [[POISON]] all'avversario. L'avversario guadagna 5 [[T]]."));
         // Lo slot apre la descrizione delle dieci carte del Tossico.
-        Pattern slot = Pattern.compile("^(TOS-(BA|BO\\d|AR\\d)|LR-TOS) · .*");
+        Pattern slot = Pattern.compile("^(TOS-(BA|BO\\d|AR\\d)|LR-TOS)$"); // SB-25 B1: lo slot è in slot.json
         int slots = 0;
+        Map<String, String> slotOf = slots();
         for (JsonNode c : json.get("cards"))
-            if (slot.matcher(c.get("gui").path("description").asText("")).matches()) slots++;
+            if (slot.matcher(slotOf.get(c.get("binding").asText())).matches()) slots++;
         assertEquals(11, slots, "basic, tre bound, last resort e cinque carte d'archetipo");
     }
 
@@ -434,7 +446,7 @@ class SetBaseDraftTest {
      * (griglia, «L e Pino»). Testi compresi, perché i bot leggono costi, guadagni e danno nominale.
      */
     @Test
-    void thePinoStarterFollowsTheGrid() {
+    void thePinoStarterFollowsTheGrid() throws Exception {
         JsonNode pino = character(PINO);
         Map<String, Integer> resources = new TreeMap<>();
         pino.get("resources").fields().forEachRemaining(e -> resources.put(e.getKey(), e.getValue().asInt()));
@@ -473,7 +485,7 @@ class SetBaseDraftTest {
         }
         for (String binding : List.of("base.pino.TestataDaUltimoGiro", "base.pino.RuttoADistanzaSociale")) {
             assertEquals(Map.of(Resource.ALCOHOL, 5), draft.card(binding).getCost(), binding);
-            assertTrue(card(binding).get("gui").get("description").asText().contains("· 5 [[L]]:"), binding + ": costo nel testo");
+            assertTrue(card(binding).get("gui").get("description").asText().startsWith("5 [[L]]: "), binding + ": costo nel testo");
         }
         // Le due carte che spendono tutta la L sono gratuite (B1, D33).
         assertTrue(draft.card("base.pino.GoingBerserk").getCost().isEmpty());
@@ -485,25 +497,26 @@ class SetBaseDraftTest {
         assertEquals(1, berserk.get("params").get("perAlcohol").asInt(), "D156");
         assertEquals(0, berserk.get("params").get("selfHit").asInt());
         assertEquals("HIT 10+x", berserk.get("gui").get("damageAmount").asText(), "D149");
-        assertTrue(berserk.get("gui").get("description").asText().contains("Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più la [[L]] spesa."), "D156");
+        assertTrue(berserk.get("gui").get("description").asText().contains("Spendi tutta la tua [[L]]. [[HIT]] all'avversario pari a 10 più la [[L]] spesa."), "D156");
         assertEquals(10, last.get("params").get("base").asInt(), "SB-21z (D162), prima 12");
         assertEquals(2, last.get("params").get("selfHit").asInt(), "SB-16e2, D56/D38");
         assertEquals("HIT 10+x", last.get("gui").get("damageAmount").asText());
-        assertTrue(last.get("gui").get("description").asText().contains("2 HIT a sé. Spendi tutta la tua [[L]] residua. 10 HIT al bersaglio, più la [[L]] spesa."));
+        assertTrue(last.get("gui").get("description").asText().contains("Subisci 2 [[HIT]]. Spendi tutta la tua [[L]]. [[HIT]] all'avversario pari a 10 più la [[L]] spesa."));
         assertEquals(35, testata.get("target").get(0).get("amount").asInt(), "SB-21f: compenso starter D149 (4), D153");
         assertEquals("HIT 35", testata.get("gui").get("damageAmount").asText());
-        assertTrue(testata.get("gui").get("description").asText().contains("5 HIT a sé; 35 HIT al bersaglio"));
+        assertTrue(testata.get("gui").get("description").asText().contains("subisci 5 [[HIT]]. 35 [[HIT]] all'avversario"));
         // D34, punto 7: la bound di L dà al massimo +10, testi compresi.
         JsonNode cinque = card("base.pino.bound.CinqueMinutiEVado");
         int alcohol = cinque.get("self").get(0).get("amount").asInt();
         assertTrue(alcohol <= 10);
         assertEquals("+" + alcohol + " L", cinque.get("gui").get("gains").asText());
-        assertTrue(cinque.get("gui").get("description").asText().contains("+" + alcohol + " [[L]] a sé"));
+        assertTrue(cinque.get("gui").get("description").asText().startsWith("+" + alcohol + " [[L]]. "));
         // Lo slot apre la descrizione delle dieci carte di Pino.
-        Pattern slot = Pattern.compile("^(PIN-(BA|BO\\d|AR\\d)|LR-PIN) · .*");
+        Pattern slot = Pattern.compile("^(PIN-(BA|BO\\d|AR\\d)|LR-PIN)$"); // SB-25 B1: lo slot è in slot.json
         int slots = 0;
+        Map<String, String> slotOf = slots();
         for (JsonNode c : json.get("cards"))
-            if (slot.matcher(c.get("gui").path("description").asText("")).matches()) slots++;
+            if (slot.matcher(slotOf.get(c.get("binding").asText())).matches()) slots++;
         assertEquals(11, slots, "basic, tre bound, last resort e cinque carte d'archetipo");
     }
 
@@ -665,7 +678,7 @@ class SetBaseDraftTest {
      * nel vocabolario di R07. Lo slot si legge all'inizio della descrizione delle carte. Le rare negli starter sono 1 o 2 (griglia, «Per rarità»).
      */
     @Test
-    void everyCardAndCharacterHasTheGridRarity() {
+    void everyCardAndCharacterHasTheGridRarity() throws Exception {
         assertEquals(Draft.FORMAT_SETS, draft.format);
         assertEquals(List.of("base"), new ArrayList<>(draft.sets().keySet()));
         Draft.SetInfo base = draft.sets().get("base");
@@ -673,11 +686,12 @@ class SetBaseDraftTest {
         assertEquals("1.7", base.version, "SB-24 (D166 (5)): la bozza congelata 1.7, non il Set Base 0.1 del documento di set");
         assertTrue(base.requires.isEmpty());
 
-        Pattern slot = Pattern.compile("^([A-Z]{2,3}-[A-Z0-9]+) · .*");
+        Pattern slot = Pattern.compile("^([A-Z]{2,3}-[A-Z0-9]+)$"); // SB-25 B1: lo slot è in slot.json
+        Map<String, String> slots = slots();
         Map<String, Integer> counts = new TreeMap<>();
         for (String binding : draft.cardBindings()) {
-            Matcher m = slot.matcher(card(binding).get("gui").path("description").asText(""));
-            assertTrue(m.matches(), binding + ": lo slot apre la descrizione");
+            Matcher m = slot.matcher(slots.getOrDefault(binding, ""));
+            assertTrue(m.matches(), binding + ": la carta ha il suo slot in slot.json");
             String rarity = draft.rarityOf(binding);
             assertTrue(Draft.RARITIES.contains(rarity), binding + ": rarità " + rarity + " fuori dal vocabolario di R07");
             assertEquals(gridRarity(m.group(1)), rarity, binding + " (" + m.group(1) + ")");
@@ -719,7 +733,7 @@ class SetBaseDraftTest {
 
         assertEquals(Map.of(Resource.TOXICITY, 10, Resource.ALCOHOL, 10), estasi.getCost());
         assertEquals(Set.of(Card.CardTarget.OPPONENT), estasi.getCanTarget());
-        assertEquals("GEN-24 · 10 [[T]] + 10 [[L]]: 40 HIT al bersaglio.", estasi.getEffect());
+        assertEquals("10 [[T]] + 10 [[L]]: 40 [[HIT]] all'avversario.", estasi.getEffect(), "SB-25 B1: il testo breve, senza slot");
         Map<Resource, Integer> own = celestina.getCharacter().getResources();
         own.putAll(estasi.getCost());
         for (Resource missing : estasi.getCost().keySet()) {
@@ -758,7 +772,7 @@ class SetBaseDraftTest {
      * bene» a 5 V invece di 10, Chiave da tredici a 12 CUT invece di 10 (la linea della fascia F1).
      */
     @Test
-    void theGigiStarterFollowsTheGrid() {
+    void theGigiStarterFollowsTheGrid() throws Exception {
         JsonNode gigi = character(GIGI);
         Map<String, Integer> resources = new TreeMap<>();
         gigi.get("resources").fields().forEachRemaining(e -> resources.put(e.getKey(), e.getValue().asInt()));
@@ -795,7 +809,7 @@ class SetBaseDraftTest {
                 "base.gigi.LavoroFattoBene", 10); // D82: Chiave e Lavoro 10 V, erano 5
         violence.forEach((binding, cost) -> {
             assertEquals(Map.of(Resource.VIOLENCE, cost), draft.card(binding).getCost(), binding);
-            assertTrue(card(binding).get("gui").get("description").asText().contains("· " + cost + " [[V]]:"), binding + ": costo nel testo");
+            assertTrue(card(binding).get("gui").get("description").asText().startsWith(cost + " [[V]]: "), binding + ": costo nel testo");
         });
         assertTrue(draft.card("base.gigi.ColpoDiChiaveInglese").getCost().isEmpty());
         assertEquals(1, draft.card("bruiser.BreakYourToy").getPriority());
@@ -804,7 +818,7 @@ class SetBaseDraftTest {
         JsonNode chiave = card("base.gigi.ChiaveDaTredici"), colpo = card("base.gigi.ColpoDiChiaveInglese"), lavoro = card("base.gigi.LavoroFattoBene");
         assertEquals(20, chiave.get("target").get(0).get("amount").asInt(), "SB-21z (D162), prima 18 (D90), 22 in D82 e 12 prima");
         assertEquals("CUT 20", chiave.get("gui").get("damageAmount").asText());
-        assertTrue(chiave.get("gui").get("description").asText().contains("20 CUT al bersaglio."));
+        assertTrue(chiave.get("gui").get("description").asText().contains("20 [[CUT]] all'avversario."));
         // D55: il piccolo HIT diventa Preparo il lavoro, generatore con ricerca; D82: +15 V e 4 CUT a un avversario anche se non trova.
         assertEquals(15, colpo.get("self").get(0).get("foundGains").get("VIOLENCE").asInt());
         assertEquals(5, colpo.get("self").get(0).get("missedGains").get("VIOLENCE").asInt(), "D72");
@@ -814,7 +828,7 @@ class SetBaseDraftTest {
         assertEquals(15, base, "SB-21z (D162), prima 14 (D82), era 6");
         assertEquals(4, perItem, "D90 (correzione 1.5), era 7 in D82 e 4 prima");
         assertEquals("HIT " + base + "+x", lavoro.get("gui").get("damageAmount").asText());
-        assertTrue(lavoro.get("gui").get("description").asText().contains("Infliggi danni da colpo pari a " + base + " più " + perItem + " per ogni tuo oggetto"));
+        assertTrue(lavoro.get("gui").get("description").asText().contains("[[HIT]] all'avversario pari a " + base + " più " + perItem + " per ogni tuo oggetto"));
         // Le bound: +5 V e +2 V con 2 HIT nello starter, Lima (equip, HIT convertito in CUT) nella collezione (SB-21z, D162); nessuna tocca gli oggetti.
         assertEquals(5, card("base.gigi.bound.UnaStrettaEPassa").get("self").get(0).get("amount").asInt());
         assertEquals("+5 V", card("base.gigi.bound.UnaStrettaEPassa").get("gui").get("gains").asText());
@@ -833,10 +847,11 @@ class SetBaseDraftTest {
         assertEquals("INPUT", casco.get("flow").asText());
         assertEquals(0.75, casco.get("factor").asDouble());
         // Lo slot apre la descrizione delle nove carte di Gigi (Struggle è generica).
-        Pattern slot = Pattern.compile("^GIG-(BA|BO\\d|AR\\d) · .*");
+        Pattern slot = Pattern.compile("^GIG-(BA|BO\\d|AR\\d)$"); // SB-25 B1: lo slot è in slot.json
         int slots = 0;
+        Map<String, String> slotOf = slots();
         for (JsonNode c : json.get("cards"))
-            if (slot.matcher(c.get("gui").path("description").asText("")).matches()) slots++;
+            if (slot.matcher(slotOf.get(c.get("binding").asText())).matches()) slots++;
         assertEquals(10, slots, "basic, tre bound e cinque carte d'archetipo");
     }
 

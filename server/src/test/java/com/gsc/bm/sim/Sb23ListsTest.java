@@ -39,10 +39,10 @@ class Sb23ListsTest {
     }
 
     /** The tutor of a character is its sixth action (xxx-AR6): it announces the rare or the hit and stays a single copy. */
-    private static boolean isTutor(JsonNode draft, String binding) {
+    private static boolean isTutor(JsonNode draft, String binding) throws Exception {
         for (JsonNode card : draft.path("cards"))
             if (card.path("binding").asText().equals(binding))
-                return card.path("gui").path("description").asText().matches("^[A-Z]{3}-AR6 ·.*");
+                return SetBaseDraftTest.slots().getOrDefault(binding, "").matches("^[A-Z]{3}-AR6$"); // SB-25 B1: the slot is in slot.json
         return false;
     }
 

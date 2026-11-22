@@ -1,0 +1,46 @@
+{
+ "blocco": "SB-25 Fase B1",
+ "banco": "Sb19MeasureTest#round via docs/reports/set-base/sb-21z/run.ps1 -Phase feasibility (banco di SB-21z, SB-23 e del passo 0 di SB-24): d50, sette mazzi di riferimento, 4 semi per cella dal 7.000.000, 8 thread; stesso codice (server/src/main non cambia)",
+ "corse": {
+  "base": "bozza di dce3733 (1.7, SHA-256 65bc46cf…)",
+  "b1": "bozza della Fase B1"
+ },
+ "nota": "Il banco non scrive un file observations.json: le uscite sono matrix.json, matrix.md, deck-observations.json, draft.json, in-play.json e seconds.txt.",
+ "impronte": {
+  "deck-observations.json": {
+   "base": "d9db45344652db9028edb1a1e1b822b36a77476f2edffb917899cc18a967b6ff",
+   "b1": "d9db45344652db9028edb1a1e1b822b36a77476f2edffb917899cc18a967b6ff"
+  },
+  "draft.json": {
+   "base": "1de770753d8d55cf7cd5d16c4b8e9d1aa304bdad535df5d1760a2a339c72cdff",
+   "b1": "610871be25f1f6fe267111b19bcbdeade6bb30c80e9a29baebf8debc905f7c8c"
+  },
+  "in-play.json": {
+   "base": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+   "b1": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  },
+  "matrix.json": {
+   "base": "d9e97c04eb742274f8b472063f66cae1983aa6a6d4f211f2306aaf608642a1cb",
+   "b1": "1455ad0858f83704e6839cbcd2bb65a719e6012fc51ee634265ca7b2cb6706ba"
+  },
+  "matrix.md": {
+   "base": "b4b3eb896ede87b7cfebb36ea6a299298f1ca2f7e343c65d0392c9fa7e14414b",
+   "b1": "f5a1f9b7f084344819a7103d8b7d972214034bc7f87470632a96896873f36dcb"
+  },
+  "seconds.txt": {
+   "base": "ceaa75663f78f7ddaf82a6d550569676cfcf858c2cb8391418c00e9e72c92b54",
+   "b1": "0116f3139319b9b153f69ca0abdf7024db98557f4e44845059d9357f3ed34acc"
+  }
+ },
+ "secondi": {
+  "base": 32.5374751,
+  "b1": 32.4910422
+ },
+ "esito": {
+  "deck-observations.json, in-play.json": "identici byte per byte",
+  "matrix.json": "stesse righe; diversi solo intestazione (percorso e SHA-256 della bozza) e, in tettoBound, la nota diagnostica di base.gigi.bound.Lima che stampa il nome dello stato: «equip AFFILO L'ATTREZZO» -> «equip Affilare gli Utensili». Tutti gli altri campi, partite e numeri compresi, identici",
+  "matrix.md": "stesse righe; diverse solo la riga 1 (nome del file della bozza), le righe 7-8 (percorso e SHA-256) e la riga 875 (la stessa nota di Lima)",
+  "draft.json": "una riga; identico dopo aver tolto gui.description e nome e descrizione degli stati (numeri-invariati.py, spoglia)",
+  "seconds.txt": "tempo di parete, diverso per natura"
+ }
+}

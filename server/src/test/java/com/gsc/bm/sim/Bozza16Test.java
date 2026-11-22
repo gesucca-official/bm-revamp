@@ -65,7 +65,13 @@ class Bozza16Test {
     private static JsonNode withoutPrintedText(JsonNode card) {
         ObjectNode comparable = card.deepCopy();
         ((ObjectNode) comparable.get("gui")).remove(List.of("description", "gains", "damageAmount"));
+        withoutStatusText(comparable); // SB-25 B1 (D169 (4)): the statuses' name and description come from the generator too.
         return comparable;
+    }
+
+    private static void withoutStatusText(JsonNode node) {
+        if (node.isObject() && node.path("op").asText().equals("status")) ((ObjectNode) node).remove(List.of("name", "description"));
+        for (JsonNode child : node) withoutStatusText(child);
     }
 
     @Test

@@ -115,7 +115,7 @@ class Sb19CardsTest {
     // ---- the cards ----
 
     @Test
-    void theNineCardsArePricedAsTheProposalWritesThem() {
+    void theNineCardsArePricedAsTheProposalWritesThem() throws Exception {
         // binding -> slot, rarity, cost, priority
         Map<String, Object[]> expected = new LinkedHashMap<>();
         expected.put(Sb19.ELEMOSINA, new Object[]{"GEN-04", "RARE", Map.of(Resource.ALERTNESS, 0), 0});
@@ -131,7 +131,7 @@ class Sb19CardsTest {
         for (Map.Entry<String, Object[]> e : expected.entrySet()) {
             String binding = e.getKey();
             Object[] want = e.getValue();
-            assertTrue(json(binding).get("gui").get("description").asText().startsWith(want[0] + " · "), binding + ": the slot opens the description");
+            assertEquals(want[0], SetBaseDraftTest.slots().get(binding), binding + ": the slot, in slot.json since SB-25 B1 (D169 (5))");
             assertEquals(want[1], draft.rarityOf(binding), binding);
             Card card = draft.card(binding);
             if (want[2] != null) {
@@ -196,7 +196,8 @@ class Sb19CardsTest {
         Card card = draft.card(Sb19.NON_SENTO_NIENTE);
         Character self = character("x", res(Resource.VIOLENCE, 10), 2);
         ((AbstractCard) card).applyEffectOnSelf(self);
-        Status s = self.getStatuses().stream().filter(x -> x.getName().equals("NON SENTO NIENTE")).findFirst().orElseThrow();
+        // SB-25 B1 (D169 (4)): the status takes the card's name.
+        Status s = self.getStatuses().stream().filter(x -> x.getName().equals("GENTILE IL TUO CAREZZO")).findFirst().orElseThrow();
         assertEquals(StatusType.GOOD, s.getType());
         assertEquals(StatusFlow.INPUT, s.getFlow());
         assertEquals(25f, s.getAmountFunction().apply(100f), 1e-3, "HIT ×0,25");
@@ -210,10 +211,16 @@ class Sb19CardsTest {
         Card card = draft.card(Sb19.SECONDO_FIATO);
         Character self = character("x", res(Resource.HEALTH, 40), 2);
         ((AbstractCard) card).applyEffectOnSelf(self);
-        Map<String, Status> byName = new LinkedHashMap<>();
-        for (Status s : self.getStatuses()) byName.put(s.getName(), s);
-        assertEquals(Set.of("SECONDO FIATO - HIT", "SECONDO FIATO - CUT"), byName.keySet(), "HIT and CUT, not POISON: against the poison the malus is nil");
-        for (Status s : byName.values()) {
+        // SB-25 B1 (D169 (4)): both statuses take the card's name, so they are told apart by their description.
+        Map<String, Status> byDescription = new LinkedHashMap<>();
+        for (Status s : self.getStatuses()) {
+            assertEquals("Riprendere Fiato", s.getName());
+            byDescription.put(s.getDescription(), s);
+        }
+        assertEquals(Set.of("Chi lo ha subisce una volta e un quarto i [[HIT]] che subirebbe.",
+                "Chi lo ha subisce una volta e un quarto i [[CUT]] che subirebbe."), byDescription.keySet(),
+                "HIT and CUT, not POISON: against the poison the malus is nil");
+        for (Status s : byDescription.values()) {
             assertEquals(StatusType.BAD, s.getType(), s.getName());
             assertEquals(StatusFlow.INPUT, s.getFlow(), s.getName());
             assertEquals(125f, s.getAmountFunction().apply(100f), 1e-3, s.getName() + ": ×1,25");
@@ -225,7 +232,7 @@ class Sb19CardsTest {
     void cocciodiBottigliaEquipsASingleUseHitToCut() throws Exception {
         Game g = turn(res(Resource.VIOLENCE, 5), res(), Sb19.COCCIO, true, x -> { });
         assertEquals(0, res(g, "a", Resource.VIOLENCE), "5 V");
-        Status s = status(g, "a", "COCCIO DI BOTTIGLIA");
+        Status s = status(g, "a", "Coccio di Bottiglia"); // SB-25 B1 (D169 (4)): the card's name
         assertNotNull(s);
         assertTrue(s.isEquip() && s.isSingleUse(), "an equip, single use");
         assertEquals(StatusFlow.OUTPUT, s.getFlow());

@@ -39,7 +39,7 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `65bc46cf0b33…`). Formato `sb-6b/1`, set `base` versione «1.7»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `ea5f77b6b36a…`). Formato `sb-6b/1`, set `base` versione «1.7»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
 Il file contiene 117 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 7 personaggi, 5 starter e, di prova, 21 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
 
@@ -49,23 +49,23 @@ Personaggio: **SPAZIENZIO DE LA UCCISO** (P), salute 70, A 20, V 25; oggetti 1; 
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **ADOPERIAMOTI** (`com.basic.BruiserGrab`) | C | SPA-BA · Basic: consuma un proprio oggetto. |
-| bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | SPA-BO1 · Bound: +5 [[V]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| bound | **SVEGLIAMOCI - MA TU NO** (`bruiser.character.LittleSmack`) | C | SPA-BO2 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 [[V]]: 35 HIT al bersaglio. |
-| 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | SPA-AR2 · 10 [[V]]: HIT al bersaglio pari a 6 più metà della tua [[V]] residua, arrotondata per difetto. |
-| 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | SPA-AR3 · Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO». Se lo trovi: +25 [[V]], +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]], +5 [[A]]. |
-| 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | SPA-AR4 · CUT ricevuto ×0,5 per 4 turni; +10 [[V]] a sé. |
-| 2 | **FAI BASTA** (`bruiser.YouStop`) | NC | SPA-AR5 · 5 [[V]]: Annulla la mossa del bersaglio se arriva dopo. Niente [[A]] al bersaglio. |
-| 2 | **GABBIANO, DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | GEN-05 · 10 [[V]]: 20 HIT al bersaglio; dell'autore valgono solo gli stati GOOD. |
-| 2 | **Tecnica del Carapace Mentale** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +2 [[H]] a sé. |
-| 1 | **Foratone da 28** (`base.com.MattoneDelCantiere`) | C | GEN-06 · 15 [[V]]: 25 HIT al bersaglio. |
-| 1 | **ORMALE GUARIAMOTI** (`bruiser.HealingBlow`) | NC | GEN-07 · 20 [[V]]: 30 HIT al bersaglio; Azzera [[T]] del bersaglio; Azzera [[L]] del bersaglio. |
-| 1 | **Denti Stretti** (`base.com.DentiStretti`) | C | GEN-14 · −5 [[A]] a sé; +10 [[V]] a sé. |
-| 2 | **Negroni Trovato per Terra** (`com.items.CocktailOnTheGround`) | C | OGG-01 · Consumato: +10 [[V]]; +10 [[L]]; +2 [[T]]. |
-| 1 | **Posacenere di Vetro** (`base.items.PosacenereDiVetro`) | NC | OGG-13 · Consumato: equip, HIT inflitto ×1,5, uso singolo (resta fino a fine turno dopo l'uso). |
-| 1 | **SGOMBERIAMOVI** (`base.bruiser.TiFaccioSpazio`) | NC | SPA-AR6 · Annuncia «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU». Se lo trovi: +15 [[V]], +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]], +5 [[A]]. |
+| basic | **ADOPERIAMOTI** (`com.basic.BruiserGrab`) | C | Consumi un tuo oggetto. |
+| bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | +5 [[V]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| bound | **SVEGLIAMOCI - MA TU NO** (`bruiser.character.LittleSmack`) | C | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | 25 [[V]]: 35 [[HIT]] all'avversario. |
+| 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | 10 [[V]]: [[HIT]] all'avversario pari a 6 più metà della [[V]] che ti resta. |
+| 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO». Se lo trovi: +25 [[V]], +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]], +5 [[A]]. |
+| 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | Per 4 turni, contando questo, subisci metà dei [[CUT]] che subiresti. +10 [[V]]. |
+| 2 | **FAI BASTA** (`bruiser.YouStop`) | NC | 5 [[V]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. |
+| 2 | **GABBIANO, DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | 10 [[V]]: 20 [[HIT]] all'avversario. Su questo danno contano solo i tuoi stati positivi. |
+| 2 | **Tecnica del Carapace Mentale** (`base.com.TartarugaSulMarciapiede`) | C | 5 [[A]]: in questo turno subisci metà dei [[HIT]] e [[CUT]] che subiresti. +2 [[H]]. |
+| 1 | **Foratone da 28** (`base.com.MattoneDelCantiere`) | C | 15 [[V]]: 25 [[HIT]] all'avversario. |
+| 1 | **ORMALE GUARIAMOTI** (`bruiser.HealingBlow`) | NC | 20 [[V]]: 30 [[HIT]] all'avversario. Azzeri la [[T]] e la [[L]] dell'avversario. |
+| 1 | **Denti Stretti** (`base.com.DentiStretti`) | C | Perdi 5 [[A]]. +10 [[V]]. |
+| 2 | **Negroni Trovato per Terra** (`com.items.CocktailOnTheGround`) | C | Quando lo consumi: +10 [[V]], +10 [[L]], +2 [[T]]. |
+| 1 | **Posacenere di Vetro** (`base.items.PosacenereDiVetro`) | NC | Quando lo consumi: infliggi una volta e mezza i [[HIT]] che infliggeresti (equipaggiamento). Dopo il primo uso dura solo fino a fine turno. |
+| 1 | **SGOMBERIAMOVI** (`base.bruiser.TiFaccioSpazio`) | NC | Annuncia «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU». Se lo trovi: +15 [[V]], +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]], +5 [[A]]. |
 
 ### Starter di Mara Contromano — `starter-mara`
 
@@ -73,23 +73,23 @@ Personaggio: **Mara Contromano** (P), salute 65, A 45; oggetti 2; immunità: nes
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Requisire al Volo** (`base.mara.PresoAlVolo`) | C | MAR-BA · Basic: −5 [[A]] a sé; consuma un proprio oggetto. |
-| bound | **Sventare l'Assassinio** (`base.mara.bound.PassoStretto`) | C | MAR-BO1 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 CUT al bersaglio. |
-| bound | **Semaforo Rosso** (`base.mara.bound.CambioMarcia`) | C | MAR-BO2 · Bound: +5 [[A]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 1 | **Lazo del Rider** (`base.mara.CinghiataDiTraverso`) | R | MAR-AR1 · 20 [[A]]: CUT al bersaglio pari a 20 più metà della tua [[A]] residua, arrotondata per difetto. Gioca d'anticipo: 5 CUT al bersaglio. |
-| 2 | **Sgommata** (`base.mara.Sgommata`) | NC | MAR-AR2 · 15 [[A]]: 25 CUT al bersaglio. Gioca d'anticipo: Il bersaglio: HIT, CUT e POISON inflitti ×0,75 in questo turno. |
-| 2 | **Agilità Innaturale** (`base.mara.SorpassoInCurva`) | C | MAR-AR3 · Gioca d'anticipo: +4 [[A]] a sé. −8 [[A]] al bersaglio; 4 CUT al bersaglio. |
-| 2 | **Unta e Bisunta** (`base.mara.TraDueParaurti`) | NC | MAR-AR4 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +5 [[A]] a sé. |
-| 2 | **Slalom d'Avvicinamento** (`base.mara.Slalom`) | NC | MAR-AR5 · Annuncia «Sgommata» o «Lazo del Rider». Se lo trovi: +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[A]]. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
-| 2 | **Sputo nel Posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 [[A]]: 10 POISON al bersaglio. |
-| 1 | **Tecnica del Carapace Mentale** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +2 [[H]] a sé. |
-| 2 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 [[A]]. |
-| 2 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +10 [[H]]; +2 [[T]]. |
-| 1 | **Giubbotto di Finta Pelle** (`base.items.GiubbottoDiFintaPelle`) | C | OGG-10 · Consumato: equip, CUT ricevuto ×0,75 per 3 turni. |
-| 1 | **Traiettoria Imprevedibile** (`base.mara.TiStringoLaCurva`) | NC | MAR-AR6 · Annuncia «Lazo del Rider» o «Sgommata». Se lo trovi: +20 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[A]]. |
-| 1 | **Ghiaccio nel Tovagliolo** (`base.items.GhiaccioNelTovagliolo`) | NC | OGG-14 · Consumato: +10 [[H]]; Azzera [[T]]. |
+| basic | **Requisire al Volo** (`base.mara.PresoAlVolo`) | C | Perdi 5 [[A]]. Consumi un tuo oggetto. |
+| bound | **Sventare l'Assassinio** (`base.mara.bound.PassoStretto`) | C | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[CUT]] all'avversario. |
+| bound | **Semaforo Rosso** (`base.mara.bound.CambioMarcia`) | C | +5 [[A]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 1 | **Lazo del Rider** (`base.mara.CinghiataDiTraverso`) | R | 20 [[A]]: [[CUT]] all'avversario pari a 20 più metà della [[A]] che ti resta. Gioca d'anticipo: 5 [[CUT]] all'avversario. |
+| 2 | **Sgommata** (`base.mara.Sgommata`) | NC | 15 [[A]]: 25 [[CUT]] all'avversario. Gioca d'anticipo: in questo turno l'avversario infligge tre quarti dei danni che infliggerebbe. |
+| 2 | **Agilità Innaturale** (`base.mara.SorpassoInCurva`) | C | L'avversario perde 8 [[A]]. 4 [[CUT]] all'avversario. Gioca d'anticipo: +4 [[A]]. |
+| 2 | **Unta e Bisunta** (`base.mara.TraDueParaurti`) | NC | 5 [[A]]: in questo turno subisci metà dei [[HIT]] e [[CUT]] che subiresti. +5 [[A]]. |
+| 2 | **Slalom d'Avvicinamento** (`base.mara.Slalom`) | NC | Annuncia «Sgommata» o «Lazo del Rider». Se lo trovi: +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[A]]. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | 8 [[HIT]] all'avversario. |
+| 2 | **Sputo nel Posacenere** (`base.com.SputoDaPosacenere`) | C | 5 [[A]]: 10 [[POISON]] all'avversario. |
+| 1 | **Tecnica del Carapace Mentale** (`base.com.TartarugaSulMarciapiede`) | C | 5 [[A]]: in questo turno subisci metà dei [[HIT]] e [[CUT]] che subiresti. +2 [[H]]. |
+| 2 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | Quando lo consumi: +15 [[A]]. |
+| 2 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | Quando lo consumi: +10 [[H]], +2 [[T]]. |
+| 1 | **Giubbotto di Finta Pelle** (`base.items.GiubbottoDiFintaPelle`) | C | Quando lo consumi: per 3 turni, contando questo, subisci tre quarti dei [[CUT]] che subiresti (equipaggiamento). |
+| 1 | **Traiettoria Imprevedibile** (`base.mara.TiStringoLaCurva`) | NC | Annuncia «Lazo del Rider» o «Sgommata». Se lo trovi: +20 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[A]]. |
+| 1 | **Ghiaccio nel Tovagliolo** (`base.items.GhiaccioNelTovagliolo`) | NC | Quando lo consumi: +10 [[H]]. Azzeri la tua [[T]]. |
 
 ### Starter di Celestina Bucatina — `starter-tossico`
 
@@ -97,23 +97,23 @@ Personaggio: **Celestina Bucatina** (P), salute 65, A 35, T 20; oggetti 2; immun
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 [[T]] a sé; consuma un proprio oggetto. |
-| bound | **Fondo del Posacenere** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: +2 [[T]] a sé; 2 CUT al bersaglio. |
-| bound | **Rintanarsi nel Cappotto** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +2 [[T]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **L'Ultimo Tiro** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 8 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5. |
-| 2 | **Fare l'Inventario** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel». Se lo trovi: +10 [[T]], +5 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 20 POISON al bersaglio; +5 [[T]] al bersaglio. |
-| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagno di [[H]] a sé pari a metà della tua [[T]] residua, arrotondata per difetto; Perdita di [[T]] a sé pari a [[T]] residua. |
-| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 [[T]]: Annulla le mosse dirette a sé che arrivano dopo. |
-| 1 | **Trascinare nel Tunnel** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 [[T]]: Trasferisci tutta la tua [[T]] residua al bersaglio e togligli l'immunità a [[T]]. 10 POISON al bersaglio. A fine turno ottieni l'immunità a [[T]]. |
-| 2 | **Afferrare** (`com.Grab`) | C | GEN-01 · consuma un proprio oggetto. |
-| 1 | **Estrema Fretta di Alcolizzarsi** (`base.com.RincorsaDalMarciapiede`) | C | GEN-12 · 10 [[A]]: +5 [[V]] a sé; 10 HIT al bersaglio. |
-| 1 | **Furto con Destrezza** (`com.Steal`) | C | GEN-02 · 10 [[A]]: Ruba un oggetto lontano e lo mette vicino a sé. |
-| 1 | **Fasciatura d'Emergenza** (`base.com.FasciaturaColFazzolettaccio`) | C | GEN-16 · −5 [[A]] a sé; +8 [[H]] a sé. |
-| 2 | **Pasticca Abbandonata** (`base.items.PasticcaTrovataSulBancone`) | C | OGG-12 · Consumato: +10 [[T]]. |
-| 2 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +10 [[H]]; +2 [[T]]. |
-| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | OGG-04 · Consumato: immunità a [[T]] e [[L]]; +20 [[L]], +20 [[T]]; timer 5 che toglie tutte le immunità e gli stati, poi 20 POISON. |
-| 1 | **Un Assaggino** (`base.tossico.UnAssaggino`) | NC | TOS-AR6 · Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante». Se lo trovi: +20 [[T]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
+| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | +5 [[T]]. Consumi un tuo oggetto. |
+| bound | **Fondo del Posacenere** (`junkie.character.PatheticBlade`) | C | +2 [[T]]. 2 [[CUT]] all'avversario. |
+| bound | **Rintanarsi nel Cappotto** (`base.tossico.bound.RaschiareIlFondo`) | C | +2 [[T]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **L'Ultimo Tiro** (`junkie.LethalHeroinDose`) | NC | Subisci 2 [[HIT]]. 8 [[POISON]] all'avversario. L'avversario guadagna 4 [[T]]. Rincara 5. |
+| 2 | **Fare l'Inventario** (`junkie.MethDrivenRage`) | NC | Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel». Se lo trovi: +10 [[T]], +5 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[T]]. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | 10 [[T]]: 20 [[POISON]] all'avversario. L'avversario guadagna 5 [[T]]. |
+| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | Guadagni [[H]] pari a metà della tua [[T]]. Perdi tutta la tua [[T]]. |
+| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | 10 [[T]]: annulli le mosse contro di te che si risolvono dopo la tua. |
+| 1 | **Trascinare nel Tunnel** (`junkie.ToxicBloodDrain`) | R | 10 [[T]]: dai all'avversario tutta la [[T]] che ti resta e togligli l'immunità a [[T]]. 10 [[POISON]] all'avversario. A fine turno diventi immune a [[T]]. |
+| 2 | **Afferrare** (`com.Grab`) | C | Consumi un tuo oggetto. |
+| 1 | **Estrema Fretta di Alcolizzarsi** (`base.com.RincorsaDalMarciapiede`) | C | 10 [[A]]: +5 [[V]]. 10 [[HIT]] all'avversario. |
+| 1 | **Furto con Destrezza** (`com.Steal`) | C | 10 [[A]]: prendi un oggetto dell'avversario e mettilo accanto a te. |
+| 1 | **Fasciatura d'Emergenza** (`base.com.FasciaturaColFazzolettaccio`) | C | Perdi 5 [[A]]. +8 [[H]]. |
+| 2 | **Pasticca Abbandonata** (`base.items.PasticcaTrovataSulBancone`) | C | Quando lo consumi: +10 [[T]]. |
+| 2 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | Quando lo consumi: +10 [[H]], +2 [[T]]. |
+| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | Quando lo consumi: diventi immune a [[T]] e [[L]]; +20 [[L]], +20 [[T]]. Alla fine del quinto turno, contando questo, perdi tutte le immunità e tutti gli stati, poi subisci 20 [[POISON]]. |
+| 1 | **Un Assaggino** (`base.tossico.UnAssaggino`) | NC | Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante». Se lo trovi: +20 [[T]] e diventi Vulnerabile. Se non lo trovi: +5 [[T]]. |
 
 ### Starter di Piera Pinot — `starter-pino`
 
@@ -121,23 +121,23 @@ Personaggio: **Piera Pinot** (P), salute 80, A 15, L 15; oggetti 2; immunità: n
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Fino all'Ultima Goccia** (`base.pino.QuestoLoFiniscoIo`) | NC | PIN-BA · Basic: +15 [[L]] a sé; consuma un proprio oggetto. |
-| bound | **Posto Fisso** (`base.pino.bound.CinqueMinutiEVado`) | C | PIN-BO1 · Bound: +5 [[L]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| bound | **Violenta Spruzzata di Seltz** (`base.pino.bound.SpallataAlBancone`) | C | PIN-BO2 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| last resort | **Ultimo Giro** (`base.pino.UltimoGiro`) | NC | LR-PIN · Last resort: 2 HIT a sé. Spendi tutta la tua [[L]] residua. 10 HIT al bersaglio, più la [[L]] spesa. Rincara 4 (2 a sé). |
-| 2 | **Scompenso da Ultimo Giro** (`base.pino.TestataDaUltimoGiro`) | C | PIN-AR1 · 5 [[L]]: 5 HIT a sé; 35 HIT al bersaglio. |
-| 2 | **Alla Goccia** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più la [[L]] spesa. |
-| 2 | **Avamposto Fortificato al Bancone** (`base.pino.IlBanconeRegge`) | C | PIN-AR3 · HIT ricevuto ×0,75 in questo turno; POISON ricevuto ×0,5 in questo turno; +5 [[L]] a sé. |
-| 2 | **Un Altro e Arrivo** (`base.pino.OffroIo`) | NC | PIN-AR4 · Annuncia «Alla Goccia» o «Rutto a Bruciapelo». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
-| 1 | **Rutto a Bruciapelo** (`base.pino.RuttoADistanzaSociale`) | R | PIN-AR5 · 5 [[L]]: Spendi tutta la tua [[L]] residua. Il bersaglio perde [[A]] pari alla [[L]] spesa. Infliggi danni da colpo pari a 15 più il doppio della [[L]] spesa. |
-| 1 | **Afferrare** (`com.Grab`) | C | GEN-01 · consuma un proprio oggetto. |
-| 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
-| 1 | **Fasciatura d'Emergenza** (`base.com.FasciaturaColFazzolettaccio`) | C | GEN-16 · −5 [[A]] a sé; +8 [[H]] a sé. |
-| 2 | **Amaro nel Bicchiere di Plastica** (`base.items.AmaroNelBicchiereDiPlastica`) | C | OGG-05 · Consumato: +20 [[L]]; −5 [[A]]. |
-| 2 | **Bionda da 66, Calda** (`com.items.RottenBeer`) | C | OGG-02 · Consumato: +10 [[L]]. |
-| 1 | **Doppio Malto da Discount** (`com.items.AnotherRottenBeer`) | NC | OGG-03 · Consumato: +10 [[L]]; crea il token «Bottiglia Spaccata» vicino a sé. |
-| 1 | **Un Altro... Grappino...** (`base.pino.PrimaIlBrindisi`) | NC | PIN-AR6 · Annuncia «Rutto a Bruciapelo» o «Alla Goccia». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
-| 1 | **Due Dita in Gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; Azzera [[T]] a sé; Azzera [[L]] a sé. |
+| basic | **Fino all'Ultima Goccia** (`base.pino.QuestoLoFiniscoIo`) | NC | +15 [[L]]. Consumi un tuo oggetto. |
+| bound | **Posto Fisso** (`base.pino.bound.CinqueMinutiEVado`) | C | +5 [[L]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| bound | **Violenta Spruzzata di Seltz** (`base.pino.bound.SpallataAlBancone`) | C | Perdi un quarto della tua [[T]]. 2 [[HIT]] all'avversario. |
+| last resort | **Ultimo Giro** (`base.pino.UltimoGiro`) | NC | Subisci 2 [[HIT]]. Spendi tutta la tua [[L]]. [[HIT]] all'avversario pari a 10 più la [[L]] spesa. Rincara 4 (2 a te). |
+| 2 | **Scompenso da Ultimo Giro** (`base.pino.TestataDaUltimoGiro`) | C | 5 [[L]]: subisci 5 [[HIT]]. 35 [[HIT]] all'avversario. |
+| 2 | **Alla Goccia** (`base.pino.GoingBerserk`) | NC | Spendi tutta la tua [[L]]. [[HIT]] all'avversario pari a 10 più la [[L]] spesa. |
+| 2 | **Avamposto Fortificato al Bancone** (`base.pino.IlBanconeRegge`) | C | In questo turno subisci tre quarti dei [[HIT]] e metà dei [[POISON]] che subiresti. +5 [[L]]. |
+| 2 | **Un Altro e Arrivo** (`base.pino.OffroIo`) | NC | Annuncia «Alla Goccia» o «Rutto a Bruciapelo». Se lo trovi: +15 [[L]], +35 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[L]], +10 [[A]]. |
+| 1 | **Rutto a Bruciapelo** (`base.pino.RuttoADistanzaSociale`) | R | 5 [[L]]: spendi tutta la [[L]] che ti resta. L'avversario perde [[A]] pari alla [[L]] spesa. [[HIT]] all'avversario pari a 15 più il doppio della [[L]] spesa. |
+| 1 | **Afferrare** (`com.Grab`) | C | Consumi un tuo oggetto. |
+| 2 | **Spintone** (`base.com.Spintone`) | C | 8 [[HIT]] all'avversario. |
+| 1 | **Fasciatura d'Emergenza** (`base.com.FasciaturaColFazzolettaccio`) | C | Perdi 5 [[A]]. +8 [[H]]. |
+| 2 | **Amaro nel Bicchiere di Plastica** (`base.items.AmaroNelBicchiereDiPlastica`) | C | Quando lo consumi: +20 [[L]]. Perdi 5 [[A]]. |
+| 2 | **Bionda da 66, Calda** (`com.items.RottenBeer`) | C | Quando lo consumi: +10 [[L]]. |
+| 1 | **Doppio Malto da Discount** (`com.items.AnotherRottenBeer`) | NC | Quando lo consumi: +10 [[L]]. Accanto a te compare una Bottiglia Spaccata. |
+| 1 | **Un Altro... Grappino...** (`base.pino.PrimaIlBrindisi`) | NC | Annuncia «Rutto a Bruciapelo» o «Alla Goccia». Se lo trovi: +15 [[L]], +35 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[L]], +10 [[A]]. |
+| 1 | **Due Dita in Gola** (`base.com.DueDitaInGola`) | NC | Subisci 5 [[HIT]]. Azzeri la tua [[T]] e la tua [[L]]. |
 
 ### Starter di Beppe Bulletta — `starter-gigi`
 
@@ -145,24 +145,24 @@ Personaggio: **Beppe Bulletta** (P), salute 75, A 25, V 25; oggetti 3; immunità
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Questo Torna Utile** (`base.gigi.QuestoTornaUtile`) | NC | GIG-BA · Basic: +4 [[V]] a sé; consuma un proprio oggetto. |
-| bound | **Cuffie e Testa Bassa** (`base.gigi.bound.UnaStrettaEPassa`) | C | GIG-BO1 · Bound: +5 [[V]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| bound | **Colpo col Cacciavite** (`base.gigi.bound.ColpoDiCacciavite`) | C | GIG-BO2 · Bound: +2 [[V]] a sé; 2 HIT al bersaglio. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Disassemblare** (`bruiser.BreakYourToy`) | NC | GIG-AR1 · 5 [[V]]: Distrugge un oggetto lontano. |
-| 2 | **Chiave da Tredici** (`base.gigi.ChiaveDaTredici`) | NC | GIG-AR2 · 10 [[V]]: 20 CUT al bersaglio. |
-| 2 | **Preparare il Lavoro** (`base.gigi.ColpoDiChiaveInglese`) | NC | GIG-AR3 · 4 CUT al bersaglio. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15 [[V]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]]. |
-| 1 | **Secondo Bagagliaio** (`base.gigi.SottoIlCofano`) | C | GIG-AR4 · 5 [[V]]: HIT ricevuto ×0,5 in questo turno; CUT ricevuto ×0,75 in questo turno; +5 [[V]] a sé; +5 [[A]] a sé. |
-| 1 | **Lavoro Fatto Bene** (`base.gigi.LavoroFattoBene`) | R | GIG-AR5 · 10 [[V]]: Infliggi danni da colpo pari a 15 più 4 per ogni tuo oggetto sul campo. |
-| 1 | **Furto con Destrezza** (`com.Steal`) | C | GEN-02 · 10 [[A]]: Ruba un oggetto lontano e lo mette vicino a sé. |
-| 1 | **GABBIANO, DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | GEN-05 · 10 [[V]]: 20 HIT al bersaglio; dell'autore valgono solo gli stati GOOD. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
-| 2 | **Guanti da Officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
-| 2 | **Giubbotto di Finta Pelle** (`base.items.GiubbottoDiFintaPelle`) | C | OGG-10 · Consumato: equip, CUT ricevuto ×0,75 per 3 turni. |
-| 2 | **Casco da Cantiere** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,75 per 3 turni. |
-| 1 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 [[A]]. |
-| 1 | **Metodo Empirico** (`base.gigi.UnaStrettaDiProva`) | NC | GIG-AR6 · 4 CUT al bersaglio. Annuncia «Lavoro Fatto Bene» o «Chiave da Tredici». Se lo trovi: +10 [[V]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]]. |
-| 1 | **Due Dita in Gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; Azzera [[T]] a sé; Azzera [[L]] a sé. |
+| basic | **Questo Torna Utile** (`base.gigi.QuestoTornaUtile`) | NC | +4 [[V]]. Consumi un tuo oggetto. |
+| bound | **Cuffie e Testa Bassa** (`base.gigi.bound.UnaStrettaEPassa`) | C | +5 [[V]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| bound | **Colpo col Cacciavite** (`base.gigi.bound.ColpoDiCacciavite`) | C | +2 [[V]]. 2 [[HIT]] all'avversario. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **Disassemblare** (`bruiser.BreakYourToy`) | NC | 5 [[V]]: distruggi un oggetto dell'avversario. |
+| 2 | **Chiave da Tredici** (`base.gigi.ChiaveDaTredici`) | NC | 10 [[V]]: 20 [[CUT]] all'avversario. |
+| 2 | **Preparare il Lavoro** (`base.gigi.ColpoDiChiaveInglese`) | NC | 4 [[CUT]] all'avversario. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15 [[V]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]]. |
+| 1 | **Secondo Bagagliaio** (`base.gigi.SottoIlCofano`) | C | 5 [[V]]: in questo turno subisci metà dei [[HIT]] e tre quarti dei [[CUT]] che subiresti. +5 [[V]], +5 [[A]]. |
+| 1 | **Lavoro Fatto Bene** (`base.gigi.LavoroFattoBene`) | R | 10 [[V]]: [[HIT]] all'avversario pari a 15 più 4 per ogni tuo oggetto in campo. |
+| 1 | **Furto con Destrezza** (`com.Steal`) | C | 10 [[A]]: prendi un oggetto dell'avversario e mettilo accanto a te. |
+| 1 | **GABBIANO, DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | 10 [[V]]: 20 [[HIT]] all'avversario. Su questo danno contano solo i tuoi stati positivi. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | 8 [[HIT]] all'avversario. |
+| 2 | **Guanti da Officina** (`base.items.GuantiDaOfficina`) | NC | Quando lo consumi: per 3 turni, contando questo, infliggi una volta e un quarto i [[HIT]] che infliggeresti (equipaggiamento). |
+| 2 | **Giubbotto di Finta Pelle** (`base.items.GiubbottoDiFintaPelle`) | C | Quando lo consumi: per 3 turni, contando questo, subisci tre quarti dei [[CUT]] che subiresti (equipaggiamento). |
+| 2 | **Casco da Cantiere** (`base.items.CascoDaLavoro`) | C | Quando lo consumi: per 3 turni, contando questo, subisci tre quarti dei [[HIT]] che subiresti (equipaggiamento). |
+| 1 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | Quando lo consumi: +15 [[A]]. |
+| 1 | **Metodo Empirico** (`base.gigi.UnaStrettaDiProva`) | NC | 4 [[CUT]] all'avversario. Annuncia «Lavoro Fatto Bene» o «Chiave da Tredici». Se lo trovi: +10 [[V]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]]. |
+| 1 | **Due Dita in Gola** (`base.com.DueDitaInGola`) | NC | Subisci 5 [[HIT]]. Azzeri la tua [[T]] e la tua [[L]]. |
 
 ### Mazzo di prova di Sergio Sommerso — `prova-sergio`
 
@@ -170,23 +170,23 @@ Personaggio: **Sergio Sommerso** (P), salute 85, A 35, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Messo in Conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +8 [[A]] a sé; consuma un proprio oggetto. |
-| bound | **Tecnica Manipolatoria** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| bound | **Fare il Vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Opportuna Distrazione** (`base.cesira.OhGuardaLa`) | NC | CES-AR1 · 5 [[A]]: −10 [[A]] al bersaglio; 4 HIT al bersaglio. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[A]]. |
-| 2 | **Buon Vecchio Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
-| 1 | **Copione Già Visto** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 [[A]]: Annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
-| 2 | **Conto Salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 [[A]]: 8 HIT al bersaglio. Se il bersaglio ha un gettone di vulnerabilità: 6 HIT al bersaglio. |
-| 2 | **Segreto di Pulcinella** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 25 HIT al bersaglio. |
-| 1 | **Scherzo Oltre il Limite** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto. |
-| 1 | **STORDIAMOTI HO DETTO** (`bruiser.StunningBlow`) | NC | GEN-09 · 10 [[V]]: −10 [[A]] al bersaglio; 10 HIT al bersaglio. |
-| 2 | **Tecnica del Carapace Mentale** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +2 [[H]] a sé. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
-| 1 | **Santino di San Briaco** (`base.items.SantinoDellaPortinaia`) | R | OGG-15 · Consumato: immunità all'effetto periodico di [[L]] per 3 turni. |
-| 2 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 [[A]]. |
-| 1 | **Svegliaaah!** (`base.com.AcquaInFaccia`) | NC | GEN-22 · 5 [[A]]: Azzera [[L]] del bersaglio; 4 HIT al bersaglio. |
-| 2 | **Fiuto per gli Affari** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 [[H]] a sé. Se l'oggetto non c'è più, niente. |
+| basic | **Messo in Conto** (`base.cesira.LoMettoInConto`) | R | +8 [[A]]. Consumi un tuo oggetto. |
+| bound | **Tecnica Manipolatoria** (`base.cesira.bound.Battutina`) | NC | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario. |
+| bound | **Fare il Vago** (`base.cesira.bound.FareIlVago`) | NC | In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **Opportuna Distrazione** (`base.cesira.OhGuardaLa`) | NC | 5 [[A]]: l'avversario perde 10 [[A]]. 4 [[HIT]] all'avversario. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[A]]. |
+| 2 | **Buon Vecchio Ricatto** (`base.cesira.Ricatto`) | NC | 15 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se era un attacco, gli rimandi metà dei danni fissi scritti sulla sua carta, dello stesso tipo. |
+| 1 | **Copione Già Visto** (`base.cesira.LoSapevo`) | NC | 10 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se annulli la carta che aveva annunciato, l'avversario resta Vulnerabile. |
+| 2 | **Conto Salato** (`base.cesira.ContoSalato`) | NC | 5 [[A]]: 8 [[HIT]] all'avversario. Se l'avversario è Vulnerabile: 6 [[HIT]] all'avversario. |
+| 2 | **Segreto di Pulcinella** (`base.cesira.LoSannoTutti`) | C | 15 [[A]]: 25 [[HIT]] all'avversario. |
+| 1 | **Scherzo Oltre il Limite** (`base.cesira.Malelingue`) | R | 10 [[A]]: l'avversario perde [[A]] pari a metà della [[A]] che ti resta. [[HIT]] all'avversario pari a 5 più metà della [[A]] che ti resta. |
+| 1 | **STORDIAMOTI HO DETTO** (`bruiser.StunningBlow`) | NC | 10 [[V]]: l'avversario perde 10 [[A]]. 10 [[HIT]] all'avversario. |
+| 2 | **Tecnica del Carapace Mentale** (`base.com.TartarugaSulMarciapiede`) | C | 5 [[A]]: in questo turno subisci metà dei [[HIT]] e [[CUT]] che subiresti. +2 [[H]]. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | 8 [[HIT]] all'avversario. |
+| 1 | **Santino di San Briaco** (`base.items.SantinoDellaPortinaia`) | R | Quando lo consumi: diventi immune a [[L]] per 3 turni. |
+| 2 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | Quando lo consumi: +15 [[A]]. |
+| 1 | **Svegliaaah!** (`base.com.AcquaInFaccia`) | NC | 5 [[A]]: azzeri la [[L]] dell'avversario. 4 [[HIT]] all'avversario. |
+| 2 | **Fiuto per gli Affari** (`base.cesira.LoRivendo`) | NC | Vendi il tuo oggetto scelto, che esce senza il suo effetto: +8 [[H]]. Se non c'è più, niente. |
 
 ### Mazzo di prova di Duccio Braccio Teso — `prova-duccio`
 
@@ -194,22 +194,22 @@ Personaggio: **Duccio Braccio Teso** (P), salute 115, A 15; oggetti 2; immunità
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Prima gli Italiani** (`base.rocco.PrimaIo`) | R | ROC-BA · Basic: consuma un proprio oggetto; +4 [[H]] a sé. |
-| bound | **Rinfrescata Arrogante** (`base.rocco.bound.Colpetto`) | NC | ROC-BO1 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| bound | **(Dis)onore alla Bandiera** (`base.rocco.bound.AlzoLaVoce`) | NC | ROC-BO3 · Bound: +8 [[A]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **Non Mi Hai Fatto Niente** (`base.rocco.NeHoPreseDiPeggio`) | R | LR-ROC · Last resort: 6 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **La Storia la Scrivono i Vincitori** (`base.rocco.TeLoSpiegoIo`) | NC | ROC-AR5 · 4 HIT al bersaglio. Annuncia «Craniata Patriottica» o «Testa Dura». Se lo trovi: +6 [[H]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +2 [[H]]. |
-| 2 | **Craniata Patriottica** (`base.rocco.Capocciata`) | NC | ROC-AR4 · 30 [[H]]: 25 HIT al bersaglio. |
-| 1 | **Testa Dura** (`base.rocco.TestaDura`) | R | ROC-AR6 · 35 [[H]]: 30 HIT al bersaglio. |
-| 2 | **Nocche Sbucciate** (`base.rocco.NoccheSbucciate`) | C | ROC-AR1 · 15 [[H]]: 20 HIT al bersaglio. |
-| 2 | **Stoico come un Busto di Bronzo** (`base.rocco.Incassare`) | C | ROC-AR2 · HIT ricevuto ×0,5 in questo turno; +4 [[H]] a sé. |
-| 2 | **E Allora...?** (`base.rocco.EAllora`) | NC | ROC-AR3 · 10 [[H]]: HIT ricevuto ×0,5 in questo turno; 8 HIT al bersaglio. |
-| 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
-| 2 | **Sputo nel Posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 [[A]]: 10 POISON al bersaglio. |
-| 1 | **Tecnica del Carapace Mentale** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +2 [[H]] a sé. |
-| 1 | **Fasciatura d'Emergenza** (`base.com.FasciaturaColFazzolettaccio`) | C | GEN-16 · −5 [[A]] a sé; +8 [[H]] a sé. |
-| 2 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +10 [[H]]; +2 [[T]]. |
-| 1 | **Ghiaccio nel Tovagliolo** (`base.items.GhiaccioNelTovagliolo`) | NC | OGG-14 · Consumato: +10 [[H]]; Azzera [[T]]. |
+| basic | **Prima gli Italiani** (`base.rocco.PrimaIo`) | R | Consumi un tuo oggetto. +4 [[H]]. |
+| bound | **Rinfrescata Arrogante** (`base.rocco.bound.Colpetto`) | NC | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario. |
+| bound | **(Dis)onore alla Bandiera** (`base.rocco.bound.AlzoLaVoce`) | NC | +8 [[A]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **Non Mi Hai Fatto Niente** (`base.rocco.NeHoPreseDiPeggio`) | R | Subisci 6 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **La Storia la Scrivono i Vincitori** (`base.rocco.TeLoSpiegoIo`) | NC | 4 [[HIT]] all'avversario. Annuncia «Craniata Patriottica» o «Testa Dura». Se lo trovi: +6 [[H]] e diventi Vulnerabile. Se non lo trovi: +2 [[H]]. |
+| 2 | **Craniata Patriottica** (`base.rocco.Capocciata`) | NC | 30 [[H]]: 25 [[HIT]] all'avversario. |
+| 1 | **Testa Dura** (`base.rocco.TestaDura`) | R | 35 [[H]]: 30 [[HIT]] all'avversario. |
+| 2 | **Nocche Sbucciate** (`base.rocco.NoccheSbucciate`) | C | 15 [[H]]: 20 [[HIT]] all'avversario. |
+| 2 | **Stoico come un Busto di Bronzo** (`base.rocco.Incassare`) | C | In questo turno subisci metà dei [[HIT]] che subiresti. +4 [[H]]. |
+| 2 | **E Allora...?** (`base.rocco.EAllora`) | NC | 10 [[H]]: in questo turno subisci metà dei [[HIT]] che subiresti. 8 [[HIT]] all'avversario. |
+| 2 | **Spintone** (`base.com.Spintone`) | C | 8 [[HIT]] all'avversario. |
+| 2 | **Sputo nel Posacenere** (`base.com.SputoDaPosacenere`) | C | 5 [[A]]: 10 [[POISON]] all'avversario. |
+| 1 | **Tecnica del Carapace Mentale** (`base.com.TartarugaSulMarciapiede`) | C | 5 [[A]]: in questo turno subisci metà dei [[HIT]] e [[CUT]] che subiresti. +2 [[H]]. |
+| 1 | **Fasciatura d'Emergenza** (`base.com.FasciaturaColFazzolettaccio`) | C | Perdi 5 [[A]]. +8 [[H]]. |
+| 2 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | Quando lo consumi: +10 [[H]], +2 [[T]]. |
+| 1 | **Ghiaccio nel Tovagliolo** (`base.items.GhiaccioNelTovagliolo`) | NC | Quando lo consumi: +10 [[H]]. Azzeri la tua [[T]]. |
 
 ### Mazzo di prova di SPAZIENZIO DE LA UCCISO — `prova-b1-spazienzio`
 
@@ -217,22 +217,22 @@ Personaggio: **SPAZIENZIO DE LA UCCISO** (P), salute 70, A 20, V 25; oggetti 1; 
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **ADOPERIAMOTI** (`com.basic.BruiserGrab`) | C | SPA-BA · Basic: consuma un proprio oggetto. |
-| bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | SPA-BO1 · Bound: +5 [[V]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| bound | **SVEGLIAMOCI - MA TU NO** (`bruiser.character.LittleSmack`) | C | SPA-BO2 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 [[V]]: 35 HIT al bersaglio. |
-| 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | SPA-AR2 · 10 [[V]]: HIT al bersaglio pari a 6 più metà della tua [[V]] residua, arrotondata per difetto. |
-| 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | SPA-AR3 · Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO». Se lo trovi: +25 [[V]], +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]], +5 [[A]]. |
-| 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | SPA-AR4 · CUT ricevuto ×0,5 per 4 turni; +10 [[V]] a sé. |
-| 2 | **FAI BASTA** (`bruiser.YouStop`) | NC | SPA-AR5 · 5 [[V]]: Annulla la mossa del bersaglio se arriva dopo. Niente [[A]] al bersaglio. |
-| 1 | **Denti Stretti** (`base.com.DentiStretti`) | C | GEN-14 · −5 [[A]] a sé; +10 [[V]] a sé. |
-| 2 | **Negroni Trovato per Terra** (`com.items.CocktailOnTheGround`) | C | OGG-01 · Consumato: +10 [[V]]; +10 [[L]]; +2 [[T]]. |
-| 1 | **Posacenere di Vetro** (`base.items.PosacenereDiVetro`) | NC | OGG-13 · Consumato: equip, HIT inflitto ×1,5, uso singolo (resta fino a fine turno dopo l'uso). |
-| 1 | **SGOMBERIAMOVI** (`base.bruiser.TiFaccioSpazio`) | NC | SPA-AR6 · Annuncia «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU». Se lo trovi: +15 [[V]], +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]], +5 [[A]]. |
-| 2 | **GENTILE IL TUO CAREZZO** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 [[V]]: HIT ricevuto ×0,25 in questo turno; +5 [[A]] a sé. |
-| 2 | **AMMALIAMOTI DI BOTTE** (`bruiser.SickeningBlow`) | C | GEN-08 · 15 [[V]]: 10 HIT al bersaglio; +10 [[T]] al bersaglio. |
-| 2 | **Coccio di Bottiglia** (`base.com.CoccioDiBottiglia`) | R | GEN-21 · 5 [[V]]: equip, HIT inflitto ×1,5 e convertito in CUT, uso singolo (resta fino a fine turno dopo l'uso). |
+| basic | **ADOPERIAMOTI** (`com.basic.BruiserGrab`) | C | Consumi un tuo oggetto. |
+| bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | +5 [[V]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| bound | **SVEGLIAMOCI - MA TU NO** (`bruiser.character.LittleSmack`) | C | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | 25 [[V]]: 35 [[HIT]] all'avversario. |
+| 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | 10 [[V]]: [[HIT]] all'avversario pari a 6 più metà della [[V]] che ti resta. |
+| 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO». Se lo trovi: +25 [[V]], +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]], +5 [[A]]. |
+| 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | Per 4 turni, contando questo, subisci metà dei [[CUT]] che subiresti. +10 [[V]]. |
+| 2 | **FAI BASTA** (`bruiser.YouStop`) | NC | 5 [[V]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. |
+| 1 | **Denti Stretti** (`base.com.DentiStretti`) | C | Perdi 5 [[A]]. +10 [[V]]. |
+| 2 | **Negroni Trovato per Terra** (`com.items.CocktailOnTheGround`) | C | Quando lo consumi: +10 [[V]], +10 [[L]], +2 [[T]]. |
+| 1 | **Posacenere di Vetro** (`base.items.PosacenereDiVetro`) | NC | Quando lo consumi: infliggi una volta e mezza i [[HIT]] che infliggeresti (equipaggiamento). Dopo il primo uso dura solo fino a fine turno. |
+| 1 | **SGOMBERIAMOVI** (`base.bruiser.TiFaccioSpazio`) | NC | Annuncia «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU». Se lo trovi: +15 [[V]], +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]], +5 [[A]]. |
+| 2 | **GENTILE IL TUO CAREZZO** (`bruiser.CantFeelAnything`) | NC | 5 [[V]]: in questo turno subisci un quarto dei [[HIT]] che subiresti. +5 [[A]]. |
+| 2 | **AMMALIAMOTI DI BOTTE** (`bruiser.SickeningBlow`) | C | 15 [[V]]: 10 [[HIT]] all'avversario. L'avversario guadagna 10 [[T]]. |
+| 2 | **Coccio di Bottiglia** (`base.com.CoccioDiBottiglia`) | R | 5 [[V]]: i tuoi [[HIT]] diventano [[CUT]] e ne infliggi una volta e mezza (equipaggiamento). Dopo il primo uso dura solo fino a fine turno. |
 
 ### Mazzo di prova di Mara Contromano — `prova-b1-mara`
 
@@ -240,22 +240,22 @@ Personaggio: **Mara Contromano** (P), salute 65, A 45; oggetti 2; immunità: nes
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Requisire al Volo** (`base.mara.PresoAlVolo`) | C | MAR-BA · Basic: −5 [[A]] a sé; consuma un proprio oggetto. |
-| bound | **Sventare l'Assassinio** (`base.mara.bound.PassoStretto`) | C | MAR-BO1 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 CUT al bersaglio. |
-| bound | **Semaforo Rosso** (`base.mara.bound.CambioMarcia`) | C | MAR-BO2 · Bound: +5 [[A]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 1 | **Lazo del Rider** (`base.mara.CinghiataDiTraverso`) | R | MAR-AR1 · 20 [[A]]: CUT al bersaglio pari a 20 più metà della tua [[A]] residua, arrotondata per difetto. Gioca d'anticipo: 5 CUT al bersaglio. |
-| 2 | **Sgommata** (`base.mara.Sgommata`) | NC | MAR-AR2 · 15 [[A]]: 25 CUT al bersaglio. Gioca d'anticipo: Il bersaglio: HIT, CUT e POISON inflitti ×0,75 in questo turno. |
-| 2 | **Agilità Innaturale** (`base.mara.SorpassoInCurva`) | C | MAR-AR3 · Gioca d'anticipo: +4 [[A]] a sé. −8 [[A]] al bersaglio; 4 CUT al bersaglio. |
-| 2 | **Unta e Bisunta** (`base.mara.TraDueParaurti`) | NC | MAR-AR4 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +5 [[A]] a sé. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
-| 2 | **Sputo nel Posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 [[A]]: 10 POISON al bersaglio. |
-| 2 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 [[A]]. |
-| 1 | **Traiettoria Imprevedibile** (`base.mara.TiStringoLaCurva`) | NC | MAR-AR6 · Annuncia «Lazo del Rider» o «Sgommata». Se lo trovi: +20 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[A]]. |
-| 1 | **Ghiaccio nel Tovagliolo** (`base.items.GhiaccioNelTovagliolo`) | NC | OGG-14 · Consumato: +10 [[H]]; Azzera [[T]]. |
-| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | GEN-19 · +5 [[A]] a sé; −5 [[A]] al bersaglio. |
-| 2 | **Ce l'Hai Due Spicci?** (`base.com.BeggingMoney`) | R | GEN-04 · Copia vicino a te un oggetto casuale del bersaglio. |
-| 2 | **Riprendere Fiato** (`base.com.SecondoFiato`) | R | GEN-20 · HIT e CUT ricevuti ×1,25 per 2 turni; +10 [[H]] a sé. |
+| basic | **Requisire al Volo** (`base.mara.PresoAlVolo`) | C | Perdi 5 [[A]]. Consumi un tuo oggetto. |
+| bound | **Sventare l'Assassinio** (`base.mara.bound.PassoStretto`) | C | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[CUT]] all'avversario. |
+| bound | **Semaforo Rosso** (`base.mara.bound.CambioMarcia`) | C | +5 [[A]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 1 | **Lazo del Rider** (`base.mara.CinghiataDiTraverso`) | R | 20 [[A]]: [[CUT]] all'avversario pari a 20 più metà della [[A]] che ti resta. Gioca d'anticipo: 5 [[CUT]] all'avversario. |
+| 2 | **Sgommata** (`base.mara.Sgommata`) | NC | 15 [[A]]: 25 [[CUT]] all'avversario. Gioca d'anticipo: in questo turno l'avversario infligge tre quarti dei danni che infliggerebbe. |
+| 2 | **Agilità Innaturale** (`base.mara.SorpassoInCurva`) | C | L'avversario perde 8 [[A]]. 4 [[CUT]] all'avversario. Gioca d'anticipo: +4 [[A]]. |
+| 2 | **Unta e Bisunta** (`base.mara.TraDueParaurti`) | NC | 5 [[A]]: in questo turno subisci metà dei [[HIT]] e [[CUT]] che subiresti. +5 [[A]]. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | 8 [[HIT]] all'avversario. |
+| 2 | **Sputo nel Posacenere** (`base.com.SputoDaPosacenere`) | C | 5 [[A]]: 10 [[POISON]] all'avversario. |
+| 2 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | Quando lo consumi: +15 [[A]]. |
+| 1 | **Traiettoria Imprevedibile** (`base.mara.TiStringoLaCurva`) | NC | Annuncia «Lazo del Rider» o «Sgommata». Se lo trovi: +20 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[A]]. |
+| 1 | **Ghiaccio nel Tovagliolo** (`base.items.GhiaccioNelTovagliolo`) | NC | Quando lo consumi: +10 [[H]]. Azzeri la tua [[T]]. |
+| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | +5 [[A]]. L'avversario perde 5 [[A]]. |
+| 2 | **Ce l'Hai Due Spicci?** (`base.com.BeggingMoney`) | R | Copia accanto a te un oggetto a caso dell'avversario. |
+| 2 | **Riprendere Fiato** (`base.com.SecondoFiato`) | R | In questo turno e nel prossimo subisci una volta e un quarto i [[HIT]] e [[CUT]] che subiresti. +10 [[H]]. |
 
 ### Mazzo di prova di Celestina Bucatina — `prova-b1-celestina`
 
@@ -263,23 +263,23 @@ Personaggio: **Celestina Bucatina** (P), salute 65, A 35, T 20; oggetti 2; immun
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 [[T]] a sé; consuma un proprio oggetto. |
-| bound | **Fondo del Posacenere** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: +2 [[T]] a sé; 2 CUT al bersaglio. |
-| bound | **Rintanarsi nel Cappotto** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +2 [[T]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **L'Ultimo Tiro** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 8 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5. |
-| 2 | **Fare l'Inventario** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel». Se lo trovi: +10 [[T]], +5 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 20 POISON al bersaglio; +5 [[T]] al bersaglio. |
-| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagno di [[H]] a sé pari a metà della tua [[T]] residua, arrotondata per difetto; Perdita di [[T]] a sé pari a [[T]] residua. |
-| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 [[T]]: Annulla le mosse dirette a sé che arrivano dopo. |
-| 1 | **Trascinare nel Tunnel** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 [[T]]: Trasferisci tutta la tua [[T]] residua al bersaglio e togligli l'immunità a [[T]]. 10 POISON al bersaglio. A fine turno ottieni l'immunità a [[T]]. |
-| 1 | **Afferrare** (`com.Grab`) | C | GEN-01 · consuma un proprio oggetto. |
-| 1 | **Estrema Fretta di Alcolizzarsi** (`base.com.RincorsaDalMarciapiede`) | C | GEN-12 · 10 [[A]]: +5 [[V]] a sé; 10 HIT al bersaglio. |
-| 2 | **Pasticca Abbandonata** (`base.items.PasticcaTrovataSulBancone`) | C | OGG-12 · Consumato: +10 [[T]]. |
-| 1 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +10 [[H]]; +2 [[T]]. |
-| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | OGG-04 · Consumato: immunità a [[T]] e [[L]]; +20 [[L]], +20 [[T]]; timer 5 che toglie tutte le immunità e gli stati, poi 20 POISON. |
-| 1 | **Un Assaggino** (`base.tossico.UnAssaggino`) | NC | TOS-AR6 · Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante». Se lo trovi: +20 [[T]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Ce l'Hai Due Spicci?** (`base.com.BeggingMoney`) | R | GEN-04 · Copia vicino a te un oggetto casuale del bersaglio. |
-| 2 | **Riprendere Fiato** (`base.com.SecondoFiato`) | R | GEN-20 · HIT e CUT ricevuti ×1,25 per 2 turni; +10 [[H]] a sé. |
+| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | +5 [[T]]. Consumi un tuo oggetto. |
+| bound | **Fondo del Posacenere** (`junkie.character.PatheticBlade`) | C | +2 [[T]]. 2 [[CUT]] all'avversario. |
+| bound | **Rintanarsi nel Cappotto** (`base.tossico.bound.RaschiareIlFondo`) | C | +2 [[T]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **L'Ultimo Tiro** (`junkie.LethalHeroinDose`) | NC | Subisci 2 [[HIT]]. 8 [[POISON]] all'avversario. L'avversario guadagna 4 [[T]]. Rincara 5. |
+| 2 | **Fare l'Inventario** (`junkie.MethDrivenRage`) | NC | Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel». Se lo trovi: +10 [[T]], +5 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[T]]. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | 10 [[T]]: 20 [[POISON]] all'avversario. L'avversario guadagna 5 [[T]]. |
+| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | Guadagni [[H]] pari a metà della tua [[T]]. Perdi tutta la tua [[T]]. |
+| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | 10 [[T]]: annulli le mosse contro di te che si risolvono dopo la tua. |
+| 1 | **Trascinare nel Tunnel** (`junkie.ToxicBloodDrain`) | R | 10 [[T]]: dai all'avversario tutta la [[T]] che ti resta e togligli l'immunità a [[T]]. 10 [[POISON]] all'avversario. A fine turno diventi immune a [[T]]. |
+| 1 | **Afferrare** (`com.Grab`) | C | Consumi un tuo oggetto. |
+| 1 | **Estrema Fretta di Alcolizzarsi** (`base.com.RincorsaDalMarciapiede`) | C | 10 [[A]]: +5 [[V]]. 10 [[HIT]] all'avversario. |
+| 2 | **Pasticca Abbandonata** (`base.items.PasticcaTrovataSulBancone`) | C | Quando lo consumi: +10 [[T]]. |
+| 1 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | Quando lo consumi: +10 [[H]], +2 [[T]]. |
+| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | Quando lo consumi: diventi immune a [[T]] e [[L]]; +20 [[L]], +20 [[T]]. Alla fine del quinto turno, contando questo, perdi tutte le immunità e tutti gli stati, poi subisci 20 [[POISON]]. |
+| 1 | **Un Assaggino** (`base.tossico.UnAssaggino`) | NC | Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante». Se lo trovi: +20 [[T]] e diventi Vulnerabile. Se non lo trovi: +5 [[T]]. |
+| 2 | **Ce l'Hai Due Spicci?** (`base.com.BeggingMoney`) | R | Copia accanto a te un oggetto a caso dell'avversario. |
+| 2 | **Riprendere Fiato** (`base.com.SecondoFiato`) | R | In questo turno e nel prossimo subisci una volta e un quarto i [[HIT]] e [[CUT]] che subiresti. +10 [[H]]. |
 
 ### Mazzo di prova di Piera Pinot — `prova-b1-piera`
 
@@ -287,22 +287,22 @@ Personaggio: **Piera Pinot** (P), salute 80, A 15, L 15; oggetti 2; immunità: n
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Fino all'Ultima Goccia** (`base.pino.QuestoLoFiniscoIo`) | NC | PIN-BA · Basic: +15 [[L]] a sé; consuma un proprio oggetto. |
-| bound | **Posto Fisso** (`base.pino.bound.CinqueMinutiEVado`) | C | PIN-BO1 · Bound: +5 [[L]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| bound | **Violenta Spruzzata di Seltz** (`base.pino.bound.SpallataAlBancone`) | C | PIN-BO2 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| last resort | **Ultimo Giro** (`base.pino.UltimoGiro`) | NC | LR-PIN · Last resort: 2 HIT a sé. Spendi tutta la tua [[L]] residua. 10 HIT al bersaglio, più la [[L]] spesa. Rincara 4 (2 a sé). |
-| 2 | **Scompenso da Ultimo Giro** (`base.pino.TestataDaUltimoGiro`) | C | PIN-AR1 · 5 [[L]]: 5 HIT a sé; 35 HIT al bersaglio. |
-| 2 | **Alla Goccia** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più la [[L]] spesa. |
-| 2 | **Avamposto Fortificato al Bancone** (`base.pino.IlBanconeRegge`) | C | PIN-AR3 · HIT ricevuto ×0,75 in questo turno; POISON ricevuto ×0,5 in questo turno; +5 [[L]] a sé. |
-| 2 | **Un Altro e Arrivo** (`base.pino.OffroIo`) | NC | PIN-AR4 · Annuncia «Alla Goccia» o «Rutto a Bruciapelo». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
-| 1 | **Rutto a Bruciapelo** (`base.pino.RuttoADistanzaSociale`) | R | PIN-AR5 · 5 [[L]]: Spendi tutta la tua [[L]] residua. Il bersaglio perde [[A]] pari alla [[L]] spesa. Infliggi danni da colpo pari a 15 più il doppio della [[L]] spesa. |
-| 2 | **Amaro nel Bicchiere di Plastica** (`base.items.AmaroNelBicchiereDiPlastica`) | C | OGG-05 · Consumato: +20 [[L]]; −5 [[A]]. |
-| 1 | **Doppio Malto da Discount** (`com.items.AnotherRottenBeer`) | NC | OGG-03 · Consumato: +10 [[L]]; crea il token «Bottiglia Spaccata» vicino a sé. |
-| 1 | **Un Altro... Grappino...** (`base.pino.PrimaIlBrindisi`) | NC | PIN-AR6 · Annuncia «Rutto a Bruciapelo» o «Alla Goccia». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
-| 1 | **Due Dita in Gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; Azzera [[T]] a sé; Azzera [[L]] a sé. |
-| 2 | **Grappa della Casa** (`base.items.GrappaDellaCasa`) | R | OGG-16 · Consumato: +25 [[L]]; −5 [[A]]. |
-| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | GEN-19 · +5 [[A]] a sé; −5 [[A]] al bersaglio. |
-| 2 | **Acqua Minerale Sgasata** (`base.items.MezzaMineraleSgasata`) | NC | OGG-08 · Consumato: Azzera [[L]]; +20 [[A]]. |
+| basic | **Fino all'Ultima Goccia** (`base.pino.QuestoLoFiniscoIo`) | NC | +15 [[L]]. Consumi un tuo oggetto. |
+| bound | **Posto Fisso** (`base.pino.bound.CinqueMinutiEVado`) | C | +5 [[L]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| bound | **Violenta Spruzzata di Seltz** (`base.pino.bound.SpallataAlBancone`) | C | Perdi un quarto della tua [[T]]. 2 [[HIT]] all'avversario. |
+| last resort | **Ultimo Giro** (`base.pino.UltimoGiro`) | NC | Subisci 2 [[HIT]]. Spendi tutta la tua [[L]]. [[HIT]] all'avversario pari a 10 più la [[L]] spesa. Rincara 4 (2 a te). |
+| 2 | **Scompenso da Ultimo Giro** (`base.pino.TestataDaUltimoGiro`) | C | 5 [[L]]: subisci 5 [[HIT]]. 35 [[HIT]] all'avversario. |
+| 2 | **Alla Goccia** (`base.pino.GoingBerserk`) | NC | Spendi tutta la tua [[L]]. [[HIT]] all'avversario pari a 10 più la [[L]] spesa. |
+| 2 | **Avamposto Fortificato al Bancone** (`base.pino.IlBanconeRegge`) | C | In questo turno subisci tre quarti dei [[HIT]] e metà dei [[POISON]] che subiresti. +5 [[L]]. |
+| 2 | **Un Altro e Arrivo** (`base.pino.OffroIo`) | NC | Annuncia «Alla Goccia» o «Rutto a Bruciapelo». Se lo trovi: +15 [[L]], +35 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[L]], +10 [[A]]. |
+| 1 | **Rutto a Bruciapelo** (`base.pino.RuttoADistanzaSociale`) | R | 5 [[L]]: spendi tutta la [[L]] che ti resta. L'avversario perde [[A]] pari alla [[L]] spesa. [[HIT]] all'avversario pari a 15 più il doppio della [[L]] spesa. |
+| 2 | **Amaro nel Bicchiere di Plastica** (`base.items.AmaroNelBicchiereDiPlastica`) | C | Quando lo consumi: +20 [[L]]. Perdi 5 [[A]]. |
+| 1 | **Doppio Malto da Discount** (`com.items.AnotherRottenBeer`) | NC | Quando lo consumi: +10 [[L]]. Accanto a te compare una Bottiglia Spaccata. |
+| 1 | **Un Altro... Grappino...** (`base.pino.PrimaIlBrindisi`) | NC | Annuncia «Rutto a Bruciapelo» o «Alla Goccia». Se lo trovi: +15 [[L]], +35 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[L]], +10 [[A]]. |
+| 1 | **Due Dita in Gola** (`base.com.DueDitaInGola`) | NC | Subisci 5 [[HIT]]. Azzeri la tua [[T]] e la tua [[L]]. |
+| 2 | **Grappa della Casa** (`base.items.GrappaDellaCasa`) | R | Quando lo consumi: +25 [[L]]. Perdi 5 [[A]]. |
+| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | +5 [[A]]. L'avversario perde 5 [[A]]. |
+| 2 | **Acqua Minerale Sgasata** (`base.items.MezzaMineraleSgasata`) | NC | Quando lo consumi: azzeri la tua [[L]]. +20 [[A]]. |
 
 ### Mazzo di prova di Beppe Bulletta — `prova-b1-beppe`
 
@@ -310,23 +310,23 @@ Personaggio: **Beppe Bulletta** (P), salute 75, A 25, V 25; oggetti 3; immunità
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Questo Torna Utile** (`base.gigi.QuestoTornaUtile`) | NC | GIG-BA · Basic: +4 [[V]] a sé; consuma un proprio oggetto. |
-| bound | **Cuffie e Testa Bassa** (`base.gigi.bound.UnaStrettaEPassa`) | C | GIG-BO1 · Bound: +5 [[V]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| bound | **Colpo col Cacciavite** (`base.gigi.bound.ColpoDiCacciavite`) | C | GIG-BO2 · Bound: +2 [[V]] a sé; 2 HIT al bersaglio. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Disassemblare** (`bruiser.BreakYourToy`) | NC | GIG-AR1 · 5 [[V]]: Distrugge un oggetto lontano. |
-| 2 | **Chiave da Tredici** (`base.gigi.ChiaveDaTredici`) | NC | GIG-AR2 · 10 [[V]]: 20 CUT al bersaglio. |
-| 2 | **Preparare il Lavoro** (`base.gigi.ColpoDiChiaveInglese`) | NC | GIG-AR3 · 4 CUT al bersaglio. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15 [[V]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]]. |
-| 1 | **Secondo Bagagliaio** (`base.gigi.SottoIlCofano`) | C | GIG-AR4 · 5 [[V]]: HIT ricevuto ×0,5 in questo turno; CUT ricevuto ×0,75 in questo turno; +5 [[V]] a sé; +5 [[A]] a sé. |
-| 1 | **Lavoro Fatto Bene** (`base.gigi.LavoroFattoBene`) | R | GIG-AR5 · 10 [[V]]: Infliggi danni da colpo pari a 15 più 4 per ogni tuo oggetto sul campo. |
-| 1 | **Furto con Destrezza** (`com.Steal`) | C | GEN-02 · 10 [[A]]: Ruba un oggetto lontano e lo mette vicino a sé. |
-| 2 | **Guanti da Officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
-| 1 | **Casco da Cantiere** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,75 per 3 turni. |
-| 1 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 [[A]]. |
-| 1 | **Metodo Empirico** (`base.gigi.UnaStrettaDiProva`) | NC | GIG-AR6 · 4 CUT al bersaglio. Annuncia «Lavoro Fatto Bene» o «Chiave da Tredici». Se lo trovi: +10 [[V]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]]. |
-| 2 | **AMMALIAMOTI DI BOTTE** (`bruiser.SickeningBlow`) | C | GEN-08 · 15 [[V]]: 10 HIT al bersaglio; +10 [[T]] al bersaglio. |
-| 2 | **PERMESSO SCUSA PUOI SMETTERLA** (`bruiser.BadEducation`) | NC | GEN-10 · 5 [[V]]: Toglie gli equip al bersaglio; 8 HIT al bersaglio. |
-| 2 | **Coccio di Bottiglia** (`base.com.CoccioDiBottiglia`) | R | GEN-21 · 5 [[V]]: equip, HIT inflitto ×1,5 e convertito in CUT, uso singolo (resta fino a fine turno dopo l'uso). |
+| basic | **Questo Torna Utile** (`base.gigi.QuestoTornaUtile`) | NC | +4 [[V]]. Consumi un tuo oggetto. |
+| bound | **Cuffie e Testa Bassa** (`base.gigi.bound.UnaStrettaEPassa`) | C | +5 [[V]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| bound | **Colpo col Cacciavite** (`base.gigi.bound.ColpoDiCacciavite`) | C | +2 [[V]]. 2 [[HIT]] all'avversario. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **Disassemblare** (`bruiser.BreakYourToy`) | NC | 5 [[V]]: distruggi un oggetto dell'avversario. |
+| 2 | **Chiave da Tredici** (`base.gigi.ChiaveDaTredici`) | NC | 10 [[V]]: 20 [[CUT]] all'avversario. |
+| 2 | **Preparare il Lavoro** (`base.gigi.ColpoDiChiaveInglese`) | NC | 4 [[CUT]] all'avversario. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15 [[V]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]]. |
+| 1 | **Secondo Bagagliaio** (`base.gigi.SottoIlCofano`) | C | 5 [[V]]: in questo turno subisci metà dei [[HIT]] e tre quarti dei [[CUT]] che subiresti. +5 [[V]], +5 [[A]]. |
+| 1 | **Lavoro Fatto Bene** (`base.gigi.LavoroFattoBene`) | R | 10 [[V]]: [[HIT]] all'avversario pari a 15 più 4 per ogni tuo oggetto in campo. |
+| 1 | **Furto con Destrezza** (`com.Steal`) | C | 10 [[A]]: prendi un oggetto dell'avversario e mettilo accanto a te. |
+| 2 | **Guanti da Officina** (`base.items.GuantiDaOfficina`) | NC | Quando lo consumi: per 3 turni, contando questo, infliggi una volta e un quarto i [[HIT]] che infliggeresti (equipaggiamento). |
+| 1 | **Casco da Cantiere** (`base.items.CascoDaLavoro`) | C | Quando lo consumi: per 3 turni, contando questo, subisci tre quarti dei [[HIT]] che subiresti (equipaggiamento). |
+| 1 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | Quando lo consumi: +15 [[A]]. |
+| 1 | **Metodo Empirico** (`base.gigi.UnaStrettaDiProva`) | NC | 4 [[CUT]] all'avversario. Annuncia «Lavoro Fatto Bene» o «Chiave da Tredici». Se lo trovi: +10 [[V]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]]. |
+| 2 | **AMMALIAMOTI DI BOTTE** (`bruiser.SickeningBlow`) | C | 15 [[V]]: 10 [[HIT]] all'avversario. L'avversario guadagna 10 [[T]]. |
+| 2 | **PERMESSO SCUSA PUOI SMETTERLA** (`bruiser.BadEducation`) | NC | 5 [[V]]: togli all'avversario i suoi equipaggiamenti. 8 [[HIT]] all'avversario. |
+| 2 | **Coccio di Bottiglia** (`base.com.CoccioDiBottiglia`) | R | 5 [[V]]: i tuoi [[HIT]] diventano [[CUT]] e ne infliggi una volta e mezza (equipaggiamento). Dopo il primo uso dura solo fino a fine turno. |
 
 ### Mazzo di prova di Sergio Sommerso — `prova-b1-sergio`
 
@@ -334,21 +334,21 @@ Personaggio: **Sergio Sommerso** (P), salute 85, A 35, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Messo in Conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +8 [[A]] a sé; consuma un proprio oggetto. |
-| bound | **Tecnica Manipolatoria** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| bound | **Fare il Vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Opportuna Distrazione** (`base.cesira.OhGuardaLa`) | NC | CES-AR1 · 5 [[A]]: −10 [[A]] al bersaglio; 4 HIT al bersaglio. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[A]]. |
-| 2 | **Buon Vecchio Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
-| 1 | **Copione Già Visto** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 [[A]]: Annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
-| 2 | **Conto Salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 [[A]]: 8 HIT al bersaglio. Se il bersaglio ha un gettone di vulnerabilità: 6 HIT al bersaglio. |
-| 2 | **Segreto di Pulcinella** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 25 HIT al bersaglio. |
-| 1 | **Scherzo Oltre il Limite** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto. |
-| 2 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 [[A]]. |
-| 2 | **Fiuto per gli Affari** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 [[H]] a sé. Se l'oggetto non c'è più, niente. |
-| 2 | **GENTILE IL TUO CAREZZO** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 [[V]]: HIT ricevuto ×0,25 in questo turno; +5 [[A]] a sé. |
-| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | GEN-19 · +5 [[A]] a sé; −5 [[A]] al bersaglio. |
-| 2 | **Ce l'Hai Due Spicci?** (`base.com.BeggingMoney`) | R | GEN-04 · Copia vicino a te un oggetto casuale del bersaglio. |
+| basic | **Messo in Conto** (`base.cesira.LoMettoInConto`) | R | +8 [[A]]. Consumi un tuo oggetto. |
+| bound | **Tecnica Manipolatoria** (`base.cesira.bound.Battutina`) | NC | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario. |
+| bound | **Fare il Vago** (`base.cesira.bound.FareIlVago`) | NC | In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **Opportuna Distrazione** (`base.cesira.OhGuardaLa`) | NC | 5 [[A]]: l'avversario perde 10 [[A]]. 4 [[HIT]] all'avversario. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[A]]. |
+| 2 | **Buon Vecchio Ricatto** (`base.cesira.Ricatto`) | NC | 15 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se era un attacco, gli rimandi metà dei danni fissi scritti sulla sua carta, dello stesso tipo. |
+| 1 | **Copione Già Visto** (`base.cesira.LoSapevo`) | NC | 10 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se annulli la carta che aveva annunciato, l'avversario resta Vulnerabile. |
+| 2 | **Conto Salato** (`base.cesira.ContoSalato`) | NC | 5 [[A]]: 8 [[HIT]] all'avversario. Se l'avversario è Vulnerabile: 6 [[HIT]] all'avversario. |
+| 2 | **Segreto di Pulcinella** (`base.cesira.LoSannoTutti`) | C | 15 [[A]]: 25 [[HIT]] all'avversario. |
+| 1 | **Scherzo Oltre il Limite** (`base.cesira.Malelingue`) | R | 10 [[A]]: l'avversario perde [[A]] pari a metà della [[A]] che ti resta. [[HIT]] all'avversario pari a 5 più metà della [[A]] che ti resta. |
+| 2 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | Quando lo consumi: +15 [[A]]. |
+| 2 | **Fiuto per gli Affari** (`base.cesira.LoRivendo`) | NC | Vendi il tuo oggetto scelto, che esce senza il suo effetto: +8 [[H]]. Se non c'è più, niente. |
+| 2 | **GENTILE IL TUO CAREZZO** (`bruiser.CantFeelAnything`) | NC | 5 [[V]]: in questo turno subisci un quarto dei [[HIT]] che subiresti. +5 [[A]]. |
+| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | +5 [[A]]. L'avversario perde 5 [[A]]. |
+| 2 | **Ce l'Hai Due Spicci?** (`base.com.BeggingMoney`) | R | Copia accanto a te un oggetto a caso dell'avversario. |
 
 ### Mazzo di prova di Duccio Braccio Teso — `prova-b1-duccio`
 
@@ -356,21 +356,21 @@ Personaggio: **Duccio Braccio Teso** (P), salute 115, A 15; oggetti 2; immunità
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Prima gli Italiani** (`base.rocco.PrimaIo`) | R | ROC-BA · Basic: consuma un proprio oggetto; +4 [[H]] a sé. |
-| bound | **Rinfrescata Arrogante** (`base.rocco.bound.Colpetto`) | NC | ROC-BO1 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| bound | **(Dis)onore alla Bandiera** (`base.rocco.bound.AlzoLaVoce`) | NC | ROC-BO3 · Bound: +8 [[A]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **Non Mi Hai Fatto Niente** (`base.rocco.NeHoPreseDiPeggio`) | R | LR-ROC · Last resort: 6 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 1 | **La Storia la Scrivono i Vincitori** (`base.rocco.TeLoSpiegoIo`) | NC | ROC-AR5 · 4 HIT al bersaglio. Annuncia «Craniata Patriottica» o «Testa Dura». Se lo trovi: +6 [[H]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +2 [[H]]. |
-| 2 | **Craniata Patriottica** (`base.rocco.Capocciata`) | NC | ROC-AR4 · 30 [[H]]: 25 HIT al bersaglio. |
-| 1 | **Testa Dura** (`base.rocco.TestaDura`) | R | ROC-AR6 · 35 [[H]]: 30 HIT al bersaglio. |
-| 2 | **Nocche Sbucciate** (`base.rocco.NoccheSbucciate`) | C | ROC-AR1 · 15 [[H]]: 20 HIT al bersaglio. |
-| 2 | **Stoico come un Busto di Bronzo** (`base.rocco.Incassare`) | C | ROC-AR2 · HIT ricevuto ×0,5 in questo turno; +4 [[H]] a sé. |
-| 2 | **E Allora...?** (`base.rocco.EAllora`) | NC | ROC-AR3 · 10 [[H]]: HIT ricevuto ×0,5 in questo turno; 8 HIT al bersaglio. |
-| 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
-| 2 | **Sputo nel Posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 [[A]]: 10 POISON al bersaglio. |
-| 2 | **Riprendere Fiato** (`base.com.SecondoFiato`) | R | GEN-20 · HIT e CUT ricevuti ×1,25 per 2 turni; +10 [[H]] a sé. |
-| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | GEN-19 · +5 [[A]] a sé; −5 [[A]] al bersaglio. |
-| 2 | **Acqua Minerale Sgasata** (`base.items.MezzaMineraleSgasata`) | NC | OGG-08 · Consumato: Azzera [[L]]; +20 [[A]]. |
+| basic | **Prima gli Italiani** (`base.rocco.PrimaIo`) | R | Consumi un tuo oggetto. +4 [[H]]. |
+| bound | **Rinfrescata Arrogante** (`base.rocco.bound.Colpetto`) | NC | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario. |
+| bound | **(Dis)onore alla Bandiera** (`base.rocco.bound.AlzoLaVoce`) | NC | +8 [[A]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **Non Mi Hai Fatto Niente** (`base.rocco.NeHoPreseDiPeggio`) | R | Subisci 6 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 1 | **La Storia la Scrivono i Vincitori** (`base.rocco.TeLoSpiegoIo`) | NC | 4 [[HIT]] all'avversario. Annuncia «Craniata Patriottica» o «Testa Dura». Se lo trovi: +6 [[H]] e diventi Vulnerabile. Se non lo trovi: +2 [[H]]. |
+| 2 | **Craniata Patriottica** (`base.rocco.Capocciata`) | NC | 30 [[H]]: 25 [[HIT]] all'avversario. |
+| 1 | **Testa Dura** (`base.rocco.TestaDura`) | R | 35 [[H]]: 30 [[HIT]] all'avversario. |
+| 2 | **Nocche Sbucciate** (`base.rocco.NoccheSbucciate`) | C | 15 [[H]]: 20 [[HIT]] all'avversario. |
+| 2 | **Stoico come un Busto di Bronzo** (`base.rocco.Incassare`) | C | In questo turno subisci metà dei [[HIT]] che subiresti. +4 [[H]]. |
+| 2 | **E Allora...?** (`base.rocco.EAllora`) | NC | 10 [[H]]: in questo turno subisci metà dei [[HIT]] che subiresti. 8 [[HIT]] all'avversario. |
+| 2 | **Spintone** (`base.com.Spintone`) | C | 8 [[HIT]] all'avversario. |
+| 2 | **Sputo nel Posacenere** (`base.com.SputoDaPosacenere`) | C | 5 [[A]]: 10 [[POISON]] all'avversario. |
+| 2 | **Riprendere Fiato** (`base.com.SecondoFiato`) | R | In questo turno e nel prossimo subisci una volta e un quarto i [[HIT]] e [[CUT]] che subiresti. +10 [[H]]. |
+| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | +5 [[A]]. L'avversario perde 5 [[A]]. |
+| 2 | **Acqua Minerale Sgasata** (`base.items.MezzaMineraleSgasata`) | NC | Quando lo consumi: azzeri la tua [[L]]. +20 [[A]]. |
 
 ### Mazzo di prova di Beppe Bulletta — `prova-b1-equip`
 
@@ -378,23 +378,23 @@ Personaggio: **Beppe Bulletta** (P), salute 75, A 25, V 25; oggetti 3; immunità
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Questo Torna Utile** (`base.gigi.QuestoTornaUtile`) | NC | GIG-BA · Basic: +4 [[V]] a sé; consuma un proprio oggetto. |
-| bound | **Cuffie e Testa Bassa** (`base.gigi.bound.UnaStrettaEPassa`) | C | GIG-BO1 · Bound: +5 [[V]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| bound | **Colpo col Cacciavite** (`base.gigi.bound.ColpoDiCacciavite`) | C | GIG-BO2 · Bound: +2 [[V]] a sé; 2 HIT al bersaglio. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Disassemblare** (`bruiser.BreakYourToy`) | NC | GIG-AR1 · 5 [[V]]: Distrugge un oggetto lontano. |
-| 2 | **Chiave da Tredici** (`base.gigi.ChiaveDaTredici`) | NC | GIG-AR2 · 10 [[V]]: 20 CUT al bersaglio. |
-| 2 | **Preparare il Lavoro** (`base.gigi.ColpoDiChiaveInglese`) | NC | GIG-AR3 · 4 CUT al bersaglio. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15 [[V]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]]. |
-| 1 | **Secondo Bagagliaio** (`base.gigi.SottoIlCofano`) | C | GIG-AR4 · 5 [[V]]: HIT ricevuto ×0,5 in questo turno; CUT ricevuto ×0,75 in questo turno; +5 [[V]] a sé; +5 [[A]] a sé. |
-| 1 | **Lavoro Fatto Bene** (`base.gigi.LavoroFattoBene`) | R | GIG-AR5 · 10 [[V]]: Infliggi danni da colpo pari a 15 più 4 per ogni tuo oggetto sul campo. |
-| 1 | **GABBIANO, DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | GEN-05 · 10 [[V]]: 20 HIT al bersaglio; dell'autore valgono solo gli stati GOOD. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
-| 2 | **Guanti da Officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
-| 1 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 [[A]]. |
-| 1 | **Metodo Empirico** (`base.gigi.UnaStrettaDiProva`) | NC | GIG-AR6 · 4 CUT al bersaglio. Annuncia «Lavoro Fatto Bene» o «Chiave da Tredici». Se lo trovi: +10 [[V]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]]. |
-| 2 | **Coccio di Bottiglia** (`base.com.CoccioDiBottiglia`) | R | GEN-21 · 5 [[V]]: equip, HIT inflitto ×1,5 e convertito in CUT, uso singolo (resta fino a fine turno dopo l'uso). |
-| 2 | **Posacenere di Vetro** (`base.items.PosacenereDiVetro`) | NC | OGG-13 · Consumato: equip, HIT inflitto ×1,5, uso singolo (resta fino a fine turno dopo l'uso). |
-| 2 | **PERMESSO SCUSA PUOI SMETTERLA** (`bruiser.BadEducation`) | NC | GEN-10 · 5 [[V]]: Toglie gli equip al bersaglio; 8 HIT al bersaglio. |
+| basic | **Questo Torna Utile** (`base.gigi.QuestoTornaUtile`) | NC | +4 [[V]]. Consumi un tuo oggetto. |
+| bound | **Cuffie e Testa Bassa** (`base.gigi.bound.UnaStrettaEPassa`) | C | +5 [[V]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| bound | **Colpo col Cacciavite** (`base.gigi.bound.ColpoDiCacciavite`) | C | +2 [[V]]. 2 [[HIT]] all'avversario. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **Disassemblare** (`bruiser.BreakYourToy`) | NC | 5 [[V]]: distruggi un oggetto dell'avversario. |
+| 2 | **Chiave da Tredici** (`base.gigi.ChiaveDaTredici`) | NC | 10 [[V]]: 20 [[CUT]] all'avversario. |
+| 2 | **Preparare il Lavoro** (`base.gigi.ColpoDiChiaveInglese`) | NC | 4 [[CUT]] all'avversario. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15 [[V]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]]. |
+| 1 | **Secondo Bagagliaio** (`base.gigi.SottoIlCofano`) | C | 5 [[V]]: in questo turno subisci metà dei [[HIT]] e tre quarti dei [[CUT]] che subiresti. +5 [[V]], +5 [[A]]. |
+| 1 | **Lavoro Fatto Bene** (`base.gigi.LavoroFattoBene`) | R | 10 [[V]]: [[HIT]] all'avversario pari a 15 più 4 per ogni tuo oggetto in campo. |
+| 1 | **GABBIANO, DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | 10 [[V]]: 20 [[HIT]] all'avversario. Su questo danno contano solo i tuoi stati positivi. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | 8 [[HIT]] all'avversario. |
+| 2 | **Guanti da Officina** (`base.items.GuantiDaOfficina`) | NC | Quando lo consumi: per 3 turni, contando questo, infliggi una volta e un quarto i [[HIT]] che infliggeresti (equipaggiamento). |
+| 1 | **Espresso della Macchinetta** (`base.items.EspressoDelDistributore`) | C | Quando lo consumi: +15 [[A]]. |
+| 1 | **Metodo Empirico** (`base.gigi.UnaStrettaDiProva`) | NC | 4 [[CUT]] all'avversario. Annuncia «Lavoro Fatto Bene» o «Chiave da Tredici». Se lo trovi: +10 [[V]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]]. |
+| 2 | **Coccio di Bottiglia** (`base.com.CoccioDiBottiglia`) | R | 5 [[V]]: i tuoi [[HIT]] diventano [[CUT]] e ne infliggi una volta e mezza (equipaggiamento). Dopo il primo uso dura solo fino a fine turno. |
+| 2 | **Posacenere di Vetro** (`base.items.PosacenereDiVetro`) | NC | Quando lo consumi: infliggi una volta e mezza i [[HIT]] che infliggeresti (equipaggiamento). Dopo il primo uso dura solo fino a fine turno. |
+| 2 | **PERMESSO SCUSA PUOI SMETTERLA** (`bruiser.BadEducation`) | NC | 5 [[V]]: togli all'avversario i suoi equipaggiamenti. 8 [[HIT]] all'avversario. |
 
 ### Mazzo di prova di Beppe Bulletta — `prova-b1-estasi`
 
@@ -402,23 +402,23 @@ Personaggio: **Beppe Bulletta** (P), salute 75, A 25, V 25; oggetti 3; immunità
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Questo Torna Utile** (`base.gigi.QuestoTornaUtile`) | NC | GIG-BA · Basic: +4 [[V]] a sé; consuma un proprio oggetto. |
-| bound | **Cuffie e Testa Bassa** (`base.gigi.bound.UnaStrettaEPassa`) | C | GIG-BO1 · Bound: +5 [[V]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| bound | **Colpo col Cacciavite** (`base.gigi.bound.ColpoDiCacciavite`) | C | GIG-BO2 · Bound: +2 [[V]] a sé; 2 HIT al bersaglio. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Disassemblare** (`bruiser.BreakYourToy`) | NC | GIG-AR1 · 5 [[V]]: Distrugge un oggetto lontano. |
-| 2 | **Preparare il Lavoro** (`base.gigi.ColpoDiChiaveInglese`) | NC | GIG-AR3 · 4 CUT al bersaglio. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15 [[V]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]]. |
-| 1 | **Secondo Bagagliaio** (`base.gigi.SottoIlCofano`) | C | GIG-AR4 · 5 [[V]]: HIT ricevuto ×0,5 in questo turno; CUT ricevuto ×0,75 in questo turno; +5 [[V]] a sé; +5 [[A]] a sé. |
-| 1 | **Lavoro Fatto Bene** (`base.gigi.LavoroFattoBene`) | R | GIG-AR5 · 10 [[V]]: Infliggi danni da colpo pari a 15 più 4 per ogni tuo oggetto sul campo. |
-| 1 | **Furto con Destrezza** (`com.Steal`) | C | GEN-02 · 10 [[A]]: Ruba un oggetto lontano e lo mette vicino a sé. |
-| 1 | **GABBIANO, DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | GEN-05 · 10 [[V]]: 20 HIT al bersaglio; dell'autore valgono solo gli stati GOOD. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
-| 2 | **Guanti da Officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
-| 2 | **Giubbotto di Finta Pelle** (`base.items.GiubbottoDiFintaPelle`) | C | OGG-10 · Consumato: equip, CUT ricevuto ×0,75 per 3 turni. |
-| 2 | **Casco da Cantiere** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,75 per 3 turni. |
-| 1 | **Due Dita in Gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; Azzera [[T]] a sé; Azzera [[L]] a sé. |
-| 2 | **Alla Goccia** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più la [[L]] spesa. |
-| 2 | **Grappa della Casa** (`base.items.GrappaDellaCasa`) | R | OGG-16 · Consumato: +25 [[L]]; −5 [[A]]. |
+| basic | **Questo Torna Utile** (`base.gigi.QuestoTornaUtile`) | NC | +4 [[V]]. Consumi un tuo oggetto. |
+| bound | **Cuffie e Testa Bassa** (`base.gigi.bound.UnaStrettaEPassa`) | C | +5 [[V]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| bound | **Colpo col Cacciavite** (`base.gigi.bound.ColpoDiCacciavite`) | C | +2 [[V]]. 2 [[HIT]] all'avversario. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **Disassemblare** (`bruiser.BreakYourToy`) | NC | 5 [[V]]: distruggi un oggetto dell'avversario. |
+| 2 | **Preparare il Lavoro** (`base.gigi.ColpoDiChiaveInglese`) | NC | 4 [[CUT]] all'avversario. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15 [[V]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]]. |
+| 1 | **Secondo Bagagliaio** (`base.gigi.SottoIlCofano`) | C | 5 [[V]]: in questo turno subisci metà dei [[HIT]] e tre quarti dei [[CUT]] che subiresti. +5 [[V]], +5 [[A]]. |
+| 1 | **Lavoro Fatto Bene** (`base.gigi.LavoroFattoBene`) | R | 10 [[V]]: [[HIT]] all'avversario pari a 15 più 4 per ogni tuo oggetto in campo. |
+| 1 | **Furto con Destrezza** (`com.Steal`) | C | 10 [[A]]: prendi un oggetto dell'avversario e mettilo accanto a te. |
+| 1 | **GABBIANO, DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | 10 [[V]]: 20 [[HIT]] all'avversario. Su questo danno contano solo i tuoi stati positivi. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | 8 [[HIT]] all'avversario. |
+| 2 | **Guanti da Officina** (`base.items.GuantiDaOfficina`) | NC | Quando lo consumi: per 3 turni, contando questo, infliggi una volta e un quarto i [[HIT]] che infliggeresti (equipaggiamento). |
+| 2 | **Giubbotto di Finta Pelle** (`base.items.GiubbottoDiFintaPelle`) | C | Quando lo consumi: per 3 turni, contando questo, subisci tre quarti dei [[CUT]] che subiresti (equipaggiamento). |
+| 2 | **Casco da Cantiere** (`base.items.CascoDaLavoro`) | C | Quando lo consumi: per 3 turni, contando questo, subisci tre quarti dei [[HIT]] che subiresti (equipaggiamento). |
+| 1 | **Due Dita in Gola** (`base.com.DueDitaInGola`) | NC | Subisci 5 [[HIT]]. Azzeri la tua [[T]] e la tua [[L]]. |
+| 2 | **Alla Goccia** (`base.pino.GoingBerserk`) | NC | Spendi tutta la tua [[L]]. [[HIT]] all'avversario pari a 10 più la [[L]] spesa. |
+| 2 | **Grappa della Casa** (`base.items.GrappaDellaCasa`) | R | Quando lo consumi: +25 [[L]]. Perdi 5 [[A]]. |
 
 ### Mazzo di prova di SPAZIENZIO DE LA UCCISO — `prova-b2-spazienzio`
 
@@ -426,22 +426,22 @@ Personaggio: **SPAZIENZIO DE LA UCCISO** (P), salute 70, A 20, V 25; oggetti 1; 
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **ADOPERIAMOTI** (`com.basic.BruiserGrab`) | C | SPA-BA · Basic: consuma un proprio oggetto. |
-| bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | SPA-BO1 · Bound: +5 [[V]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| bound | **SVEGLIAMOCI - MA TU NO** (`bruiser.character.LittleSmack`) | C | SPA-BO2 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 [[V]]: 35 HIT al bersaglio. |
-| 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | SPA-AR2 · 10 [[V]]: HIT al bersaglio pari a 6 più metà della tua [[V]] residua, arrotondata per difetto. |
-| 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | SPA-AR3 · Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO». Se lo trovi: +25 [[V]], +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]], +5 [[A]]. |
-| 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | SPA-AR4 · CUT ricevuto ×0,5 per 4 turni; +10 [[V]] a sé. |
-| 2 | **FAI BASTA** (`bruiser.YouStop`) | NC | SPA-AR5 · 5 [[V]]: Annulla la mossa del bersaglio se arriva dopo. Niente [[A]] al bersaglio. |
-| 1 | **Denti Stretti** (`base.com.DentiStretti`) | C | GEN-14 · −5 [[A]] a sé; +10 [[V]] a sé. |
-| 1 | **Posacenere di Vetro** (`base.items.PosacenereDiVetro`) | NC | OGG-13 · Consumato: equip, HIT inflitto ×1,5, uso singolo (resta fino a fine turno dopo l'uso). |
-| 1 | **SGOMBERIAMOVI** (`base.bruiser.TiFaccioSpazio`) | NC | SPA-AR6 · Annuncia «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU». Se lo trovi: +15 [[V]], +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]], +5 [[A]]. |
-| 2 | **GENTILE IL TUO CAREZZO** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 [[V]]: HIT ricevuto ×0,25 in questo turno; +5 [[A]] a sé. |
-| 2 | **AMMALIAMOTI DI BOTTE** (`bruiser.SickeningBlow`) | C | GEN-08 · 15 [[V]]: 10 HIT al bersaglio; +10 [[T]] al bersaglio. |
-| 2 | **Coccio di Bottiglia** (`base.com.CoccioDiBottiglia`) | R | GEN-21 · 5 [[V]]: equip, HIT inflitto ×1,5 e convertito in CUT, uso singolo (resta fino a fine turno dopo l'uso). |
-| 2 | **Conto del Tavolo Sei** (`base.items.ContoDelTavoloSei`) | NC | OGG-17 · In campo: a fine turno −4 [[A]]. Consumato: +15 [[V]]. |
+| basic | **ADOPERIAMOTI** (`com.basic.BruiserGrab`) | C | Consumi un tuo oggetto. |
+| bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | +5 [[V]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| bound | **SVEGLIAMOCI - MA TU NO** (`bruiser.character.LittleSmack`) | C | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | 25 [[V]]: 35 [[HIT]] all'avversario. |
+| 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | 10 [[V]]: [[HIT]] all'avversario pari a 6 più metà della [[V]] che ti resta. |
+| 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO». Se lo trovi: +25 [[V]], +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]], +5 [[A]]. |
+| 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | Per 4 turni, contando questo, subisci metà dei [[CUT]] che subiresti. +10 [[V]]. |
+| 2 | **FAI BASTA** (`bruiser.YouStop`) | NC | 5 [[V]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. |
+| 1 | **Denti Stretti** (`base.com.DentiStretti`) | C | Perdi 5 [[A]]. +10 [[V]]. |
+| 1 | **Posacenere di Vetro** (`base.items.PosacenereDiVetro`) | NC | Quando lo consumi: infliggi una volta e mezza i [[HIT]] che infliggeresti (equipaggiamento). Dopo il primo uso dura solo fino a fine turno. |
+| 1 | **SGOMBERIAMOVI** (`base.bruiser.TiFaccioSpazio`) | NC | Annuncia «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU». Se lo trovi: +15 [[V]], +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]], +5 [[A]]. |
+| 2 | **GENTILE IL TUO CAREZZO** (`bruiser.CantFeelAnything`) | NC | 5 [[V]]: in questo turno subisci un quarto dei [[HIT]] che subiresti. +5 [[A]]. |
+| 2 | **AMMALIAMOTI DI BOTTE** (`bruiser.SickeningBlow`) | C | 15 [[V]]: 10 [[HIT]] all'avversario. L'avversario guadagna 10 [[T]]. |
+| 2 | **Coccio di Bottiglia** (`base.com.CoccioDiBottiglia`) | R | 5 [[V]]: i tuoi [[HIT]] diventano [[CUT]] e ne infliggi una volta e mezza (equipaggiamento). Dopo il primo uso dura solo fino a fine turno. |
+| 2 | **Conto del Tavolo Sei** (`base.items.ContoDelTavoloSei`) | NC | In campo, a fine turno: perdi 4 [[A]]. Quando lo consumi: +15 [[V]]. |
 
 ### Mazzo di prova di Beppe Bulletta — `prova-b2-beppe`
 
@@ -449,22 +449,22 @@ Personaggio: **Beppe Bulletta** (P), salute 75, A 25, V 25; oggetti 3; immunità
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Questo Torna Utile** (`base.gigi.QuestoTornaUtile`) | NC | GIG-BA · Basic: +4 [[V]] a sé; consuma un proprio oggetto. |
-| bound | **Cuffie e Testa Bassa** (`base.gigi.bound.UnaStrettaEPassa`) | C | GIG-BO1 · Bound: +5 [[V]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| bound | **Colpo col Cacciavite** (`base.gigi.bound.ColpoDiCacciavite`) | C | GIG-BO2 · Bound: +2 [[V]] a sé; 2 HIT al bersaglio. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Disassemblare** (`bruiser.BreakYourToy`) | NC | GIG-AR1 · 5 [[V]]: Distrugge un oggetto lontano. |
-| 2 | **Chiave da Tredici** (`base.gigi.ChiaveDaTredici`) | NC | GIG-AR2 · 10 [[V]]: 20 CUT al bersaglio. |
-| 2 | **Preparare il Lavoro** (`base.gigi.ColpoDiChiaveInglese`) | NC | GIG-AR3 · 4 CUT al bersaglio. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15 [[V]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]]. |
-| 1 | **Secondo Bagagliaio** (`base.gigi.SottoIlCofano`) | C | GIG-AR4 · 5 [[V]]: HIT ricevuto ×0,5 in questo turno; CUT ricevuto ×0,75 in questo turno; +5 [[V]] a sé; +5 [[A]] a sé. |
-| 1 | **Lavoro Fatto Bene** (`base.gigi.LavoroFattoBene`) | R | GIG-AR5 · 10 [[V]]: Infliggi danni da colpo pari a 15 più 4 per ogni tuo oggetto sul campo. |
-| 1 | **Furto con Destrezza** (`com.Steal`) | C | GEN-02 · 10 [[A]]: Ruba un oggetto lontano e lo mette vicino a sé. |
-| 2 | **Guanti da Officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
-| 1 | **Casco da Cantiere** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,75 per 3 turni. |
-| 2 | **AMMALIAMOTI DI BOTTE** (`bruiser.SickeningBlow`) | C | GEN-08 · 15 [[V]]: 10 HIT al bersaglio; +10 [[T]] al bersaglio. |
-| 2 | **PERMESSO SCUSA PUOI SMETTERLA** (`bruiser.BadEducation`) | NC | GEN-10 · 5 [[V]]: Toglie gli equip al bersaglio; 8 HIT al bersaglio. |
-| 2 | **Coccio di Bottiglia** (`base.com.CoccioDiBottiglia`) | R | GEN-21 · 5 [[V]]: equip, HIT inflitto ×1,5 e convertito in CUT, uso singolo (resta fino a fine turno dopo l'uso). |
-| 2 | **Conto del Tavolo Sei** (`base.items.ContoDelTavoloSei`) | NC | OGG-17 · In campo: a fine turno −4 [[A]]. Consumato: +15 [[V]]. |
+| basic | **Questo Torna Utile** (`base.gigi.QuestoTornaUtile`) | NC | +4 [[V]]. Consumi un tuo oggetto. |
+| bound | **Cuffie e Testa Bassa** (`base.gigi.bound.UnaStrettaEPassa`) | C | +5 [[V]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| bound | **Colpo col Cacciavite** (`base.gigi.bound.ColpoDiCacciavite`) | C | +2 [[V]]. 2 [[HIT]] all'avversario. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **Disassemblare** (`bruiser.BreakYourToy`) | NC | 5 [[V]]: distruggi un oggetto dell'avversario. |
+| 2 | **Chiave da Tredici** (`base.gigi.ChiaveDaTredici`) | NC | 10 [[V]]: 20 [[CUT]] all'avversario. |
+| 2 | **Preparare il Lavoro** (`base.gigi.ColpoDiChiaveInglese`) | NC | 4 [[CUT]] all'avversario. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15 [[V]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]]. |
+| 1 | **Secondo Bagagliaio** (`base.gigi.SottoIlCofano`) | C | 5 [[V]]: in questo turno subisci metà dei [[HIT]] e tre quarti dei [[CUT]] che subiresti. +5 [[V]], +5 [[A]]. |
+| 1 | **Lavoro Fatto Bene** (`base.gigi.LavoroFattoBene`) | R | 10 [[V]]: [[HIT]] all'avversario pari a 15 più 4 per ogni tuo oggetto in campo. |
+| 1 | **Furto con Destrezza** (`com.Steal`) | C | 10 [[A]]: prendi un oggetto dell'avversario e mettilo accanto a te. |
+| 2 | **Guanti da Officina** (`base.items.GuantiDaOfficina`) | NC | Quando lo consumi: per 3 turni, contando questo, infliggi una volta e un quarto i [[HIT]] che infliggeresti (equipaggiamento). |
+| 1 | **Casco da Cantiere** (`base.items.CascoDaLavoro`) | C | Quando lo consumi: per 3 turni, contando questo, subisci tre quarti dei [[HIT]] che subiresti (equipaggiamento). |
+| 2 | **AMMALIAMOTI DI BOTTE** (`bruiser.SickeningBlow`) | C | 15 [[V]]: 10 [[HIT]] all'avversario. L'avversario guadagna 10 [[T]]. |
+| 2 | **PERMESSO SCUSA PUOI SMETTERLA** (`bruiser.BadEducation`) | NC | 5 [[V]]: togli all'avversario i suoi equipaggiamenti. 8 [[HIT]] all'avversario. |
+| 2 | **Coccio di Bottiglia** (`base.com.CoccioDiBottiglia`) | R | 5 [[V]]: i tuoi [[HIT]] diventano [[CUT]] e ne infliggi una volta e mezza (equipaggiamento). Dopo il primo uso dura solo fino a fine turno. |
+| 2 | **Conto del Tavolo Sei** (`base.items.ContoDelTavoloSei`) | NC | In campo, a fine turno: perdi 4 [[A]]. Quando lo consumi: +15 [[V]]. |
 
 ### Mazzo di prova di Sergio Sommerso — `prova-b2-sergio-conto`
 
@@ -472,21 +472,21 @@ Personaggio: **Sergio Sommerso** (P), salute 85, A 35, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Messo in Conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +8 [[A]] a sé; consuma un proprio oggetto. |
-| bound | **Tecnica Manipolatoria** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| bound | **Fare il Vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Opportuna Distrazione** (`base.cesira.OhGuardaLa`) | NC | CES-AR1 · 5 [[A]]: −10 [[A]] al bersaglio; 4 HIT al bersaglio. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[A]]. |
-| 2 | **Buon Vecchio Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
-| 1 | **Copione Già Visto** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 [[A]]: Annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
-| 2 | **Conto Salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 [[A]]: 8 HIT al bersaglio. Se il bersaglio ha un gettone di vulnerabilità: 6 HIT al bersaglio. |
-| 2 | **Segreto di Pulcinella** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 25 HIT al bersaglio. |
-| 1 | **Scherzo Oltre il Limite** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto. |
-| 2 | **Fiuto per gli Affari** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 [[H]] a sé. Se l'oggetto non c'è più, niente. |
-| 2 | **GENTILE IL TUO CAREZZO** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 [[V]]: HIT ricevuto ×0,25 in questo turno; +5 [[A]] a sé. |
-| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | GEN-19 · +5 [[A]] a sé; −5 [[A]] al bersaglio. |
-| 2 | **Ce l'Hai Due Spicci?** (`base.com.BeggingMoney`) | R | GEN-04 · Copia vicino a te un oggetto casuale del bersaglio. |
-| 2 | **Conto del Tavolo Sei** (`base.items.ContoDelTavoloSei`) | NC | OGG-17 · In campo: a fine turno −4 [[A]]. Consumato: +15 [[V]]. |
+| basic | **Messo in Conto** (`base.cesira.LoMettoInConto`) | R | +8 [[A]]. Consumi un tuo oggetto. |
+| bound | **Tecnica Manipolatoria** (`base.cesira.bound.Battutina`) | NC | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario. |
+| bound | **Fare il Vago** (`base.cesira.bound.FareIlVago`) | NC | In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **Opportuna Distrazione** (`base.cesira.OhGuardaLa`) | NC | 5 [[A]]: l'avversario perde 10 [[A]]. 4 [[HIT]] all'avversario. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[A]]. |
+| 2 | **Buon Vecchio Ricatto** (`base.cesira.Ricatto`) | NC | 15 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se era un attacco, gli rimandi metà dei danni fissi scritti sulla sua carta, dello stesso tipo. |
+| 1 | **Copione Già Visto** (`base.cesira.LoSapevo`) | NC | 10 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se annulli la carta che aveva annunciato, l'avversario resta Vulnerabile. |
+| 2 | **Conto Salato** (`base.cesira.ContoSalato`) | NC | 5 [[A]]: 8 [[HIT]] all'avversario. Se l'avversario è Vulnerabile: 6 [[HIT]] all'avversario. |
+| 2 | **Segreto di Pulcinella** (`base.cesira.LoSannoTutti`) | C | 15 [[A]]: 25 [[HIT]] all'avversario. |
+| 1 | **Scherzo Oltre il Limite** (`base.cesira.Malelingue`) | R | 10 [[A]]: l'avversario perde [[A]] pari a metà della [[A]] che ti resta. [[HIT]] all'avversario pari a 5 più metà della [[A]] che ti resta. |
+| 2 | **Fiuto per gli Affari** (`base.cesira.LoRivendo`) | NC | Vendi il tuo oggetto scelto, che esce senza il suo effetto: +8 [[H]]. Se non c'è più, niente. |
+| 2 | **GENTILE IL TUO CAREZZO** (`bruiser.CantFeelAnything`) | NC | 5 [[V]]: in questo turno subisci un quarto dei [[HIT]] che subiresti. +5 [[A]]. |
+| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | +5 [[A]]. L'avversario perde 5 [[A]]. |
+| 2 | **Ce l'Hai Due Spicci?** (`base.com.BeggingMoney`) | R | Copia accanto a te un oggetto a caso dell'avversario. |
+| 2 | **Conto del Tavolo Sei** (`base.items.ContoDelTavoloSei`) | NC | In campo, a fine turno: perdi 4 [[A]]. Quando lo consumi: +15 [[V]]. |
 
 ### Mazzo di prova di Sergio Sommerso — `prova-b2-sergio-sigaretta`
 
@@ -494,21 +494,21 @@ Personaggio: **Sergio Sommerso** (P), salute 85, A 35, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Messo in Conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +8 [[A]] a sé; consuma un proprio oggetto. |
-| bound | **Tecnica Manipolatoria** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| bound | **Fare il Vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Opportuna Distrazione** (`base.cesira.OhGuardaLa`) | NC | CES-AR1 · 5 [[A]]: −10 [[A]] al bersaglio; 4 HIT al bersaglio. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[A]]. |
-| 2 | **Buon Vecchio Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
-| 1 | **Copione Già Visto** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 [[A]]: Annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
-| 2 | **Conto Salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 [[A]]: 8 HIT al bersaglio. Se il bersaglio ha un gettone di vulnerabilità: 6 HIT al bersaglio. |
-| 2 | **Segreto di Pulcinella** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 25 HIT al bersaglio. |
-| 1 | **Scherzo Oltre il Limite** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto. |
-| 2 | **Fiuto per gli Affari** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 [[H]] a sé. Se l'oggetto non c'è più, niente. |
-| 2 | **GENTILE IL TUO CAREZZO** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 [[V]]: HIT ricevuto ×0,25 in questo turno; +5 [[A]] a sé. |
-| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | GEN-19 · +5 [[A]] a sé; −5 [[A]] al bersaglio. |
-| 2 | **Ce l'Hai Due Spicci?** (`base.com.BeggingMoney`) | R | GEN-04 · Copia vicino a te un oggetto casuale del bersaglio. |
-| 2 | **Sigaretta Accesa** (`base.items.SigarettaAccesa`) | R | OGG-18 · In campo: a fine turno +2 [[T]]. Consumato: +10 [[A]]. |
+| basic | **Messo in Conto** (`base.cesira.LoMettoInConto`) | R | +8 [[A]]. Consumi un tuo oggetto. |
+| bound | **Tecnica Manipolatoria** (`base.cesira.bound.Battutina`) | NC | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario. |
+| bound | **Fare il Vago** (`base.cesira.bound.FareIlVago`) | NC | In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **Opportuna Distrazione** (`base.cesira.OhGuardaLa`) | NC | 5 [[A]]: l'avversario perde 10 [[A]]. 4 [[HIT]] all'avversario. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[A]]. |
+| 2 | **Buon Vecchio Ricatto** (`base.cesira.Ricatto`) | NC | 15 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se era un attacco, gli rimandi metà dei danni fissi scritti sulla sua carta, dello stesso tipo. |
+| 1 | **Copione Già Visto** (`base.cesira.LoSapevo`) | NC | 10 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se annulli la carta che aveva annunciato, l'avversario resta Vulnerabile. |
+| 2 | **Conto Salato** (`base.cesira.ContoSalato`) | NC | 5 [[A]]: 8 [[HIT]] all'avversario. Se l'avversario è Vulnerabile: 6 [[HIT]] all'avversario. |
+| 2 | **Segreto di Pulcinella** (`base.cesira.LoSannoTutti`) | C | 15 [[A]]: 25 [[HIT]] all'avversario. |
+| 1 | **Scherzo Oltre il Limite** (`base.cesira.Malelingue`) | R | 10 [[A]]: l'avversario perde [[A]] pari a metà della [[A]] che ti resta. [[HIT]] all'avversario pari a 5 più metà della [[A]] che ti resta. |
+| 2 | **Fiuto per gli Affari** (`base.cesira.LoRivendo`) | NC | Vendi il tuo oggetto scelto, che esce senza il suo effetto: +8 [[H]]. Se non c'è più, niente. |
+| 2 | **GENTILE IL TUO CAREZZO** (`bruiser.CantFeelAnything`) | NC | 5 [[V]]: in questo turno subisci un quarto dei [[HIT]] che subiresti. +5 [[A]]. |
+| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | +5 [[A]]. L'avversario perde 5 [[A]]. |
+| 2 | **Ce l'Hai Due Spicci?** (`base.com.BeggingMoney`) | R | Copia accanto a te un oggetto a caso dell'avversario. |
+| 2 | **Sigaretta Accesa** (`base.items.SigarettaAccesa`) | R | In campo, a fine turno: +2 [[T]]. Quando lo consumi: +10 [[A]]. |
 
 ### Mazzo di prova di Celestina Bucatina — `prova-b2-celestina`
 
@@ -516,23 +516,23 @@ Personaggio: **Celestina Bucatina** (P), salute 65, A 35, T 20; oggetti 2; immun
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 [[T]] a sé; consuma un proprio oggetto. |
-| bound | **Fondo del Posacenere** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: +2 [[T]] a sé; 2 CUT al bersaglio. |
-| bound | **Rintanarsi nel Cappotto** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +2 [[T]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **L'Ultimo Tiro** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 8 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5. |
-| 2 | **Fare l'Inventario** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel». Se lo trovi: +10 [[T]], +5 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 20 POISON al bersaglio; +5 [[T]] al bersaglio. |
-| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagno di [[H]] a sé pari a metà della tua [[T]] residua, arrotondata per difetto; Perdita di [[T]] a sé pari a [[T]] residua. |
-| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 [[T]]: Annulla le mosse dirette a sé che arrivano dopo. |
-| 1 | **Trascinare nel Tunnel** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 [[T]]: Trasferisci tutta la tua [[T]] residua al bersaglio e togligli l'immunità a [[T]]. 10 POISON al bersaglio. A fine turno ottieni l'immunità a [[T]]. |
-| 1 | **Afferrare** (`com.Grab`) | C | GEN-01 · consuma un proprio oggetto. |
-| 1 | **Estrema Fretta di Alcolizzarsi** (`base.com.RincorsaDalMarciapiede`) | C | GEN-12 · 10 [[A]]: +5 [[V]] a sé; 10 HIT al bersaglio. |
-| 1 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +10 [[H]]; +2 [[T]]. |
-| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | OGG-04 · Consumato: immunità a [[T]] e [[L]]; +20 [[L]], +20 [[T]]; timer 5 che toglie tutte le immunità e gli stati, poi 20 POISON. |
-| 1 | **Un Assaggino** (`base.tossico.UnAssaggino`) | NC | TOS-AR6 · Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante». Se lo trovi: +20 [[T]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Ce l'Hai Due Spicci?** (`base.com.BeggingMoney`) | R | GEN-04 · Copia vicino a te un oggetto casuale del bersaglio. |
-| 2 | **Riprendere Fiato** (`base.com.SecondoFiato`) | R | GEN-20 · HIT e CUT ricevuti ×1,25 per 2 turni; +10 [[H]] a sé. |
-| 2 | **Sigaretta Accesa** (`base.items.SigarettaAccesa`) | R | OGG-18 · In campo: a fine turno +2 [[T]]. Consumato: +10 [[A]]. |
+| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | +5 [[T]]. Consumi un tuo oggetto. |
+| bound | **Fondo del Posacenere** (`junkie.character.PatheticBlade`) | C | +2 [[T]]. 2 [[CUT]] all'avversario. |
+| bound | **Rintanarsi nel Cappotto** (`base.tossico.bound.RaschiareIlFondo`) | C | +2 [[T]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **L'Ultimo Tiro** (`junkie.LethalHeroinDose`) | NC | Subisci 2 [[HIT]]. 8 [[POISON]] all'avversario. L'avversario guadagna 4 [[T]]. Rincara 5. |
+| 2 | **Fare l'Inventario** (`junkie.MethDrivenRage`) | NC | Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel». Se lo trovi: +10 [[T]], +5 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[T]]. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | 10 [[T]]: 20 [[POISON]] all'avversario. L'avversario guadagna 5 [[T]]. |
+| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | Guadagni [[H]] pari a metà della tua [[T]]. Perdi tutta la tua [[T]]. |
+| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | 10 [[T]]: annulli le mosse contro di te che si risolvono dopo la tua. |
+| 1 | **Trascinare nel Tunnel** (`junkie.ToxicBloodDrain`) | R | 10 [[T]]: dai all'avversario tutta la [[T]] che ti resta e togligli l'immunità a [[T]]. 10 [[POISON]] all'avversario. A fine turno diventi immune a [[T]]. |
+| 1 | **Afferrare** (`com.Grab`) | C | Consumi un tuo oggetto. |
+| 1 | **Estrema Fretta di Alcolizzarsi** (`base.com.RincorsaDalMarciapiede`) | C | 10 [[A]]: +5 [[V]]. 10 [[HIT]] all'avversario. |
+| 1 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | Quando lo consumi: +10 [[H]], +2 [[T]]. |
+| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | Quando lo consumi: diventi immune a [[T]] e [[L]]; +20 [[L]], +20 [[T]]. Alla fine del quinto turno, contando questo, perdi tutte le immunità e tutti gli stati, poi subisci 20 [[POISON]]. |
+| 1 | **Un Assaggino** (`base.tossico.UnAssaggino`) | NC | Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante». Se lo trovi: +20 [[T]] e diventi Vulnerabile. Se non lo trovi: +5 [[T]]. |
+| 2 | **Ce l'Hai Due Spicci?** (`base.com.BeggingMoney`) | R | Copia accanto a te un oggetto a caso dell'avversario. |
+| 2 | **Riprendere Fiato** (`base.com.SecondoFiato`) | R | In questo turno e nel prossimo subisci una volta e un quarto i [[HIT]] e [[CUT]] che subiresti. +10 [[H]]. |
+| 2 | **Sigaretta Accesa** (`base.items.SigarettaAccesa`) | R | In campo, a fine turno: +2 [[T]]. Quando lo consumi: +10 [[A]]. |
 
 ### Mazzo di prova di Celestina Bucatina — `prova-b2-rischio9`
 
@@ -540,23 +540,23 @@ Personaggio: **Celestina Bucatina** (P), salute 65, A 35, T 20; oggetti 2; immun
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 [[T]] a sé; consuma un proprio oggetto. |
-| bound | **Fondo del Posacenere** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: +2 [[T]] a sé; 2 CUT al bersaglio. |
-| bound | **Rintanarsi nel Cappotto** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +2 [[T]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **L'Ultimo Tiro** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 8 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5. |
-| 2 | **Fare l'Inventario** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel». Se lo trovi: +10 [[T]], +5 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 20 POISON al bersaglio; +5 [[T]] al bersaglio. |
-| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagno di [[H]] a sé pari a metà della tua [[T]] residua, arrotondata per difetto; Perdita di [[T]] a sé pari a [[T]] residua. |
-| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 [[T]]: Annulla le mosse dirette a sé che arrivano dopo. |
-| 1 | **Trascinare nel Tunnel** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 [[T]]: Trasferisci tutta la tua [[T]] residua al bersaglio e togligli l'immunità a [[T]]. 10 POISON al bersaglio. A fine turno ottieni l'immunità a [[T]]. |
-| 1 | **Afferrare** (`com.Grab`) | C | GEN-01 · consuma un proprio oggetto. |
-| 1 | **Estrema Fretta di Alcolizzarsi** (`base.com.RincorsaDalMarciapiede`) | C | GEN-12 · 10 [[A]]: +5 [[V]] a sé; 10 HIT al bersaglio. |
-| 1 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +10 [[H]]; +2 [[T]]. |
-| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | OGG-04 · Consumato: immunità a [[T]] e [[L]]; +20 [[L]], +20 [[T]]; timer 5 che toglie tutte le immunità e gli stati, poi 20 POISON. |
-| 1 | **Un Assaggino** (`base.tossico.UnAssaggino`) | NC | TOS-AR6 · Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante». Se lo trovi: +20 [[T]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Riprendere Fiato** (`base.com.SecondoFiato`) | R | GEN-20 · HIT e CUT ricevuti ×1,25 per 2 turni; +10 [[H]] a sé. |
-| 2 | **Sigaretta Accesa** (`base.items.SigarettaAccesa`) | R | OGG-18 · In campo: a fine turno +2 [[T]]. Consumato: +10 [[A]]. |
-| 2 | **Scatto Repentino** (`base.com.ShuffleFeet`) | NC | GEN-03 · Scambia tutti gli oggetti col bersaglio, rispettando le capacità. |
+| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | +5 [[T]]. Consumi un tuo oggetto. |
+| bound | **Fondo del Posacenere** (`junkie.character.PatheticBlade`) | C | +2 [[T]]. 2 [[CUT]] all'avversario. |
+| bound | **Rintanarsi nel Cappotto** (`base.tossico.bound.RaschiareIlFondo`) | C | +2 [[T]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **L'Ultimo Tiro** (`junkie.LethalHeroinDose`) | NC | Subisci 2 [[HIT]]. 8 [[POISON]] all'avversario. L'avversario guadagna 4 [[T]]. Rincara 5. |
+| 2 | **Fare l'Inventario** (`junkie.MethDrivenRage`) | NC | Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel». Se lo trovi: +10 [[T]], +5 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[T]]. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | 10 [[T]]: 20 [[POISON]] all'avversario. L'avversario guadagna 5 [[T]]. |
+| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | Guadagni [[H]] pari a metà della tua [[T]]. Perdi tutta la tua [[T]]. |
+| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | 10 [[T]]: annulli le mosse contro di te che si risolvono dopo la tua. |
+| 1 | **Trascinare nel Tunnel** (`junkie.ToxicBloodDrain`) | R | 10 [[T]]: dai all'avversario tutta la [[T]] che ti resta e togligli l'immunità a [[T]]. 10 [[POISON]] all'avversario. A fine turno diventi immune a [[T]]. |
+| 1 | **Afferrare** (`com.Grab`) | C | Consumi un tuo oggetto. |
+| 1 | **Estrema Fretta di Alcolizzarsi** (`base.com.RincorsaDalMarciapiede`) | C | 10 [[A]]: +5 [[V]]. 10 [[HIT]] all'avversario. |
+| 1 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | Quando lo consumi: +10 [[H]], +2 [[T]]. |
+| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | Quando lo consumi: diventi immune a [[T]] e [[L]]; +20 [[L]], +20 [[T]]. Alla fine del quinto turno, contando questo, perdi tutte le immunità e tutti gli stati, poi subisci 20 [[POISON]]. |
+| 1 | **Un Assaggino** (`base.tossico.UnAssaggino`) | NC | Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante». Se lo trovi: +20 [[T]] e diventi Vulnerabile. Se non lo trovi: +5 [[T]]. |
+| 2 | **Riprendere Fiato** (`base.com.SecondoFiato`) | R | In questo turno e nel prossimo subisci una volta e un quarto i [[HIT]] e [[CUT]] che subiresti. +10 [[H]]. |
+| 2 | **Sigaretta Accesa** (`base.items.SigarettaAccesa`) | R | In campo, a fine turno: +2 [[T]]. Quando lo consumi: +10 [[A]]. |
+| 2 | **Scatto Repentino** (`base.com.ShuffleFeet`) | NC | Scambia tutti i tuoi oggetti con quelli dell'avversario; ognuno ne tiene quanti ne può tenere. |
 
 ### Mazzo di prova di Sergio Sommerso — `prova-b2-rischio10`
 
@@ -564,21 +564,21 @@ Personaggio: **Sergio Sommerso** (P), salute 85, A 35, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Messo in Conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +8 [[A]] a sé; consuma un proprio oggetto. |
-| bound | **Tecnica Manipolatoria** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| bound | **Fare il Vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Opportuna Distrazione** (`base.cesira.OhGuardaLa`) | NC | CES-AR1 · 5 [[A]]: −10 [[A]] al bersaglio; 4 HIT al bersaglio. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[A]]. |
-| 2 | **Buon Vecchio Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
-| 1 | **Copione Già Visto** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 [[A]]: Annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
-| 2 | **Conto Salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 [[A]]: 8 HIT al bersaglio. Se il bersaglio ha un gettone di vulnerabilità: 6 HIT al bersaglio. |
-| 2 | **Segreto di Pulcinella** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 25 HIT al bersaglio. |
-| 1 | **Scherzo Oltre il Limite** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto. |
-| 2 | **Fiuto per gli Affari** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 [[H]] a sé. Se l'oggetto non c'è più, niente. |
-| 2 | **GENTILE IL TUO CAREZZO** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 [[V]]: HIT ricevuto ×0,25 in questo turno; +5 [[A]] a sé. |
-| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | GEN-19 · +5 [[A]] a sé; −5 [[A]] al bersaglio. |
-| 2 | **Conto del Tavolo Sei** (`base.items.ContoDelTavoloSei`) | NC | OGG-17 · In campo: a fine turno −4 [[A]]. Consumato: +15 [[V]]. |
-| 2 | **Scatto Repentino** (`base.com.ShuffleFeet`) | NC | GEN-03 · Scambia tutti gli oggetti col bersaglio, rispettando le capacità. |
+| basic | **Messo in Conto** (`base.cesira.LoMettoInConto`) | R | +8 [[A]]. Consumi un tuo oggetto. |
+| bound | **Tecnica Manipolatoria** (`base.cesira.bound.Battutina`) | NC | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario. |
+| bound | **Fare il Vago** (`base.cesira.bound.FareIlVago`) | NC | In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **Opportuna Distrazione** (`base.cesira.OhGuardaLa`) | NC | 5 [[A]]: l'avversario perde 10 [[A]]. 4 [[HIT]] all'avversario. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[A]]. |
+| 2 | **Buon Vecchio Ricatto** (`base.cesira.Ricatto`) | NC | 15 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se era un attacco, gli rimandi metà dei danni fissi scritti sulla sua carta, dello stesso tipo. |
+| 1 | **Copione Già Visto** (`base.cesira.LoSapevo`) | NC | 10 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se annulli la carta che aveva annunciato, l'avversario resta Vulnerabile. |
+| 2 | **Conto Salato** (`base.cesira.ContoSalato`) | NC | 5 [[A]]: 8 [[HIT]] all'avversario. Se l'avversario è Vulnerabile: 6 [[HIT]] all'avversario. |
+| 2 | **Segreto di Pulcinella** (`base.cesira.LoSannoTutti`) | C | 15 [[A]]: 25 [[HIT]] all'avversario. |
+| 1 | **Scherzo Oltre il Limite** (`base.cesira.Malelingue`) | R | 10 [[A]]: l'avversario perde [[A]] pari a metà della [[A]] che ti resta. [[HIT]] all'avversario pari a 5 più metà della [[A]] che ti resta. |
+| 2 | **Fiuto per gli Affari** (`base.cesira.LoRivendo`) | NC | Vendi il tuo oggetto scelto, che esce senza il suo effetto: +8 [[H]]. Se non c'è più, niente. |
+| 2 | **GENTILE IL TUO CAREZZO** (`bruiser.CantFeelAnything`) | NC | 5 [[V]]: in questo turno subisci un quarto dei [[HIT]] che subiresti. +5 [[A]]. |
+| 2 | **Mano Lesta** (`base.com.ManoLesta`) | C | +5 [[A]]. L'avversario perde 5 [[A]]. |
+| 2 | **Conto del Tavolo Sei** (`base.items.ContoDelTavoloSei`) | NC | In campo, a fine turno: perdi 4 [[A]]. Quando lo consumi: +15 [[V]]. |
+| 2 | **Scatto Repentino** (`base.com.ShuffleFeet`) | NC | Scambia tutti i tuoi oggetti con quelli dell'avversario; ognuno ne tiene quanti ne può tenere. |
 
 ### Mazzo di prova di SPAZIENZIO DE LA UCCISO — `iso-b2-conto`
 
@@ -586,23 +586,23 @@ Personaggio: **SPAZIENZIO DE LA UCCISO** (P), salute 70, A 20, V 25; oggetti 1; 
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **ADOPERIAMOTI** (`com.basic.BruiserGrab`) | C | SPA-BA · Basic: consuma un proprio oggetto. |
-| bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | SPA-BO1 · Bound: +5 [[V]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| bound | **SVEGLIAMOCI - MA TU NO** (`bruiser.character.LittleSmack`) | C | SPA-BO2 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 [[V]]: 35 HIT al bersaglio. |
-| 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | SPA-AR2 · 10 [[V]]: HIT al bersaglio pari a 6 più metà della tua [[V]] residua, arrotondata per difetto. |
-| 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | SPA-AR3 · Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO». Se lo trovi: +25 [[V]], +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]], +5 [[A]]. |
-| 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | SPA-AR4 · CUT ricevuto ×0,5 per 4 turni; +10 [[V]] a sé. |
-| 2 | **FAI BASTA** (`bruiser.YouStop`) | NC | SPA-AR5 · 5 [[V]]: Annulla la mossa del bersaglio se arriva dopo. Niente [[A]] al bersaglio. |
-| 2 | **GABBIANO, DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | GEN-05 · 10 [[V]]: 20 HIT al bersaglio; dell'autore valgono solo gli stati GOOD. |
-| 2 | **Tecnica del Carapace Mentale** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +2 [[H]] a sé. |
-| 1 | **Foratone da 28** (`base.com.MattoneDelCantiere`) | C | GEN-06 · 15 [[V]]: 25 HIT al bersaglio. |
-| 1 | **ORMALE GUARIAMOTI** (`bruiser.HealingBlow`) | NC | GEN-07 · 20 [[V]]: 30 HIT al bersaglio; Azzera [[T]] del bersaglio; Azzera [[L]] del bersaglio. |
-| 1 | **Denti Stretti** (`base.com.DentiStretti`) | C | GEN-14 · −5 [[A]] a sé; +10 [[V]] a sé. |
-| 1 | **Posacenere di Vetro** (`base.items.PosacenereDiVetro`) | NC | OGG-13 · Consumato: equip, HIT inflitto ×1,5, uso singolo (resta fino a fine turno dopo l'uso). |
-| 1 | **SGOMBERIAMOVI** (`base.bruiser.TiFaccioSpazio`) | NC | SPA-AR6 · Annuncia «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU». Se lo trovi: +15 [[V]], +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]], +5 [[A]]. |
-| 2 | **Conto del Tavolo Sei** (`base.items.ContoDelTavoloSei`) | NC | OGG-17 · In campo: a fine turno −4 [[A]]. Consumato: +15 [[V]]. |
+| basic | **ADOPERIAMOTI** (`com.basic.BruiserGrab`) | C | Consumi un tuo oggetto. |
+| bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | +5 [[V]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| bound | **SVEGLIAMOCI - MA TU NO** (`bruiser.character.LittleSmack`) | C | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | 25 [[V]]: 35 [[HIT]] all'avversario. |
+| 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | 10 [[V]]: [[HIT]] all'avversario pari a 6 più metà della [[V]] che ti resta. |
+| 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO». Se lo trovi: +25 [[V]], +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]], +5 [[A]]. |
+| 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | Per 4 turni, contando questo, subisci metà dei [[CUT]] che subiresti. +10 [[V]]. |
+| 2 | **FAI BASTA** (`bruiser.YouStop`) | NC | 5 [[V]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. |
+| 2 | **GABBIANO, DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | 10 [[V]]: 20 [[HIT]] all'avversario. Su questo danno contano solo i tuoi stati positivi. |
+| 2 | **Tecnica del Carapace Mentale** (`base.com.TartarugaSulMarciapiede`) | C | 5 [[A]]: in questo turno subisci metà dei [[HIT]] e [[CUT]] che subiresti. +2 [[H]]. |
+| 1 | **Foratone da 28** (`base.com.MattoneDelCantiere`) | C | 15 [[V]]: 25 [[HIT]] all'avversario. |
+| 1 | **ORMALE GUARIAMOTI** (`bruiser.HealingBlow`) | NC | 20 [[V]]: 30 [[HIT]] all'avversario. Azzeri la [[T]] e la [[L]] dell'avversario. |
+| 1 | **Denti Stretti** (`base.com.DentiStretti`) | C | Perdi 5 [[A]]. +10 [[V]]. |
+| 1 | **Posacenere di Vetro** (`base.items.PosacenereDiVetro`) | NC | Quando lo consumi: infliggi una volta e mezza i [[HIT]] che infliggeresti (equipaggiamento). Dopo il primo uso dura solo fino a fine turno. |
+| 1 | **SGOMBERIAMOVI** (`base.bruiser.TiFaccioSpazio`) | NC | Annuncia «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU». Se lo trovi: +15 [[V]], +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]], +5 [[A]]. |
+| 2 | **Conto del Tavolo Sei** (`base.items.ContoDelTavoloSei`) | NC | In campo, a fine turno: perdi 4 [[A]]. Quando lo consumi: +15 [[V]]. |
 
 ### Mazzo di prova di Celestina Bucatina — `iso-b2-sigaretta`
 
@@ -610,23 +610,23 @@ Personaggio: **Celestina Bucatina** (P), salute 65, A 35, T 20; oggetti 2; immun
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 [[T]] a sé; consuma un proprio oggetto. |
-| bound | **Fondo del Posacenere** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: +2 [[T]] a sé; 2 CUT al bersaglio. |
-| bound | **Rintanarsi nel Cappotto** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +2 [[T]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **L'Ultimo Tiro** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 8 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5. |
-| 2 | **Fare l'Inventario** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel». Se lo trovi: +10 [[T]], +5 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 20 POISON al bersaglio; +5 [[T]] al bersaglio. |
-| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagno di [[H]] a sé pari a metà della tua [[T]] residua, arrotondata per difetto; Perdita di [[T]] a sé pari a [[T]] residua. |
-| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 [[T]]: Annulla le mosse dirette a sé che arrivano dopo. |
-| 1 | **Trascinare nel Tunnel** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 [[T]]: Trasferisci tutta la tua [[T]] residua al bersaglio e togligli l'immunità a [[T]]. 10 POISON al bersaglio. A fine turno ottieni l'immunità a [[T]]. |
-| 2 | **Afferrare** (`com.Grab`) | C | GEN-01 · consuma un proprio oggetto. |
-| 1 | **Estrema Fretta di Alcolizzarsi** (`base.com.RincorsaDalMarciapiede`) | C | GEN-12 · 10 [[A]]: +5 [[V]] a sé; 10 HIT al bersaglio. |
-| 1 | **Furto con Destrezza** (`com.Steal`) | C | GEN-02 · 10 [[A]]: Ruba un oggetto lontano e lo mette vicino a sé. |
-| 1 | **Fasciatura d'Emergenza** (`base.com.FasciaturaColFazzolettaccio`) | C | GEN-16 · −5 [[A]] a sé; +8 [[H]] a sé. |
-| 2 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +10 [[H]]; +2 [[T]]. |
-| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | OGG-04 · Consumato: immunità a [[T]] e [[L]]; +20 [[L]], +20 [[T]]; timer 5 che toglie tutte le immunità e gli stati, poi 20 POISON. |
-| 1 | **Un Assaggino** (`base.tossico.UnAssaggino`) | NC | TOS-AR6 · Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante». Se lo trovi: +20 [[T]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Sigaretta Accesa** (`base.items.SigarettaAccesa`) | R | OGG-18 · In campo: a fine turno +2 [[T]]. Consumato: +10 [[A]]. |
+| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | +5 [[T]]. Consumi un tuo oggetto. |
+| bound | **Fondo del Posacenere** (`junkie.character.PatheticBlade`) | C | +2 [[T]]. 2 [[CUT]] all'avversario. |
+| bound | **Rintanarsi nel Cappotto** (`base.tossico.bound.RaschiareIlFondo`) | C | +2 [[T]]. In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **L'Ultimo Tiro** (`junkie.LethalHeroinDose`) | NC | Subisci 2 [[HIT]]. 8 [[POISON]] all'avversario. L'avversario guadagna 4 [[T]]. Rincara 5. |
+| 2 | **Fare l'Inventario** (`junkie.MethDrivenRage`) | NC | Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel». Se lo trovi: +10 [[T]], +5 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[T]]. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | 10 [[T]]: 20 [[POISON]] all'avversario. L'avversario guadagna 5 [[T]]. |
+| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | Guadagni [[H]] pari a metà della tua [[T]]. Perdi tutta la tua [[T]]. |
+| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | 10 [[T]]: annulli le mosse contro di te che si risolvono dopo la tua. |
+| 1 | **Trascinare nel Tunnel** (`junkie.ToxicBloodDrain`) | R | 10 [[T]]: dai all'avversario tutta la [[T]] che ti resta e togligli l'immunità a [[T]]. 10 [[POISON]] all'avversario. A fine turno diventi immune a [[T]]. |
+| 2 | **Afferrare** (`com.Grab`) | C | Consumi un tuo oggetto. |
+| 1 | **Estrema Fretta di Alcolizzarsi** (`base.com.RincorsaDalMarciapiede`) | C | 10 [[A]]: +5 [[V]]. 10 [[HIT]] all'avversario. |
+| 1 | **Furto con Destrezza** (`com.Steal`) | C | 10 [[A]]: prendi un oggetto dell'avversario e mettilo accanto a te. |
+| 1 | **Fasciatura d'Emergenza** (`base.com.FasciaturaColFazzolettaccio`) | C | Perdi 5 [[A]]. +8 [[H]]. |
+| 2 | **Kebab Abbandonato** (`base.items.PaninoDelKebab`) | C | Quando lo consumi: +10 [[H]], +2 [[T]]. |
+| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | Quando lo consumi: diventi immune a [[T]] e [[L]]; +20 [[L]], +20 [[T]]. Alla fine del quinto turno, contando questo, perdi tutte le immunità e tutti gli stati, poi subisci 20 [[POISON]]. |
+| 1 | **Un Assaggino** (`base.tossico.UnAssaggino`) | NC | Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante». Se lo trovi: +20 [[T]] e diventi Vulnerabile. Se non lo trovi: +5 [[T]]. |
+| 2 | **Sigaretta Accesa** (`base.items.SigarettaAccesa`) | R | In campo, a fine turno: +2 [[T]]. Quando lo consumi: +10 [[A]]. |
 
 ### Mazzo di prova di Sergio Sommerso — `iso-b2-sigaretta-sergio`
 
@@ -634,22 +634,22 @@ Personaggio: **Sergio Sommerso** (P), salute 85, A 35, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Messo in Conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +8 [[A]] a sé; consuma un proprio oggetto. |
-| bound | **Tecnica Manipolatoria** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio. |
-| bound | **Fare il Vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT, CUT e POISON ricevuti ×0,75 in questo turno. |
-| last resort | **Addosso!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Opportuna Distrazione** (`base.cesira.OhGuardaLa`) | NC | CES-AR1 · 5 [[A]]: −10 [[A]] al bersaglio; 4 HIT al bersaglio. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[A]]. |
-| 2 | **Buon Vecchio Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
-| 1 | **Copione Già Visto** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 [[A]]: Annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
-| 2 | **Conto Salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 [[A]]: 8 HIT al bersaglio. Se il bersaglio ha un gettone di vulnerabilità: 6 HIT al bersaglio. |
-| 2 | **Segreto di Pulcinella** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 25 HIT al bersaglio. |
-| 1 | **Scherzo Oltre il Limite** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto. |
-| 1 | **STORDIAMOTI HO DETTO** (`bruiser.StunningBlow`) | NC | GEN-09 · 10 [[V]]: −10 [[A]] al bersaglio; 10 HIT al bersaglio. |
-| 2 | **Tecnica del Carapace Mentale** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +2 [[H]] a sé. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
-| 1 | **Santino di San Briaco** (`base.items.SantinoDellaPortinaia`) | R | OGG-15 · Consumato: immunità all'effetto periodico di [[L]] per 3 turni. |
-| 1 | **Svegliaaah!** (`base.com.AcquaInFaccia`) | NC | GEN-22 · 5 [[A]]: Azzera [[L]] del bersaglio; 4 HIT al bersaglio. |
-| 2 | **Fiuto per gli Affari** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 [[H]] a sé. Se l'oggetto non c'è più, niente. |
-| 2 | **Sigaretta Accesa** (`base.items.SigarettaAccesa`) | R | OGG-18 · In campo: a fine turno +2 [[T]]. Consumato: +10 [[A]]. |
+| basic | **Messo in Conto** (`base.cesira.LoMettoInConto`) | R | +8 [[A]]. Consumi un tuo oggetto. |
+| bound | **Tecnica Manipolatoria** (`base.cesira.bound.Battutina`) | NC | Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario. |
+| bound | **Fare il Vago** (`base.cesira.bound.FareIlVago`) | NC | In questo turno subisci tre quarti dei danni che subiresti. |
+| last resort | **Addosso!!!** (`com.last.Struggle`) | C | Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te). |
+| 2 | **Opportuna Distrazione** (`base.cesira.OhGuardaLa`) | NC | 5 [[A]]: l'avversario perde 10 [[A]]. 4 [[HIT]] all'avversario. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[A]]. |
+| 2 | **Buon Vecchio Ricatto** (`base.cesira.Ricatto`) | NC | 15 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se era un attacco, gli rimandi metà dei danni fissi scritti sulla sua carta, dello stesso tipo. |
+| 1 | **Copione Già Visto** (`base.cesira.LoSapevo`) | NC | 10 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se annulli la carta che aveva annunciato, l'avversario resta Vulnerabile. |
+| 2 | **Conto Salato** (`base.cesira.ContoSalato`) | NC | 5 [[A]]: 8 [[HIT]] all'avversario. Se l'avversario è Vulnerabile: 6 [[HIT]] all'avversario. |
+| 2 | **Segreto di Pulcinella** (`base.cesira.LoSannoTutti`) | C | 15 [[A]]: 25 [[HIT]] all'avversario. |
+| 1 | **Scherzo Oltre il Limite** (`base.cesira.Malelingue`) | R | 10 [[A]]: l'avversario perde [[A]] pari a metà della [[A]] che ti resta. [[HIT]] all'avversario pari a 5 più metà della [[A]] che ti resta. |
+| 1 | **STORDIAMOTI HO DETTO** (`bruiser.StunningBlow`) | NC | 10 [[V]]: l'avversario perde 10 [[A]]. 10 [[HIT]] all'avversario. |
+| 2 | **Tecnica del Carapace Mentale** (`base.com.TartarugaSulMarciapiede`) | C | 5 [[A]]: in questo turno subisci metà dei [[HIT]] e [[CUT]] che subiresti. +2 [[H]]. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | 8 [[HIT]] all'avversario. |
+| 1 | **Santino di San Briaco** (`base.items.SantinoDellaPortinaia`) | R | Quando lo consumi: diventi immune a [[L]] per 3 turni. |
+| 1 | **Svegliaaah!** (`base.com.AcquaInFaccia`) | NC | 5 [[A]]: azzeri la [[L]] dell'avversario. 4 [[HIT]] all'avversario. |
+| 2 | **Fiuto per gli Affari** (`base.cesira.LoRivendo`) | NC | Vendi il tuo oggetto scelto, che esce senza il suo effetto: +8 [[H]]. Se non c'è più, niente. |
+| 2 | **Sigaretta Accesa** (`base.items.SigarettaAccesa`) | R | In campo, a fine turno: +2 [[T]]. Quando lo consumi: +10 [[A]]. |
 
 <!-- fine generato -->

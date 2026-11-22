@@ -27,7 +27,7 @@ from symbols_pdf import (DAMAGES, RESOURCE_LETTERS, RESOURCES, ROLES, ROLE_LABEL
 DEFAULT_BOZZA = ROOT / 'server/src/test/resources/set-base/bozza.json'
 PLAYGROUND = ROOT / 'docs/design/set-base/regole-playground.md'
 STARTER_PREFIX = 'starter-'
-SLOT = re.compile(r'^([A-Z]{2,3}-[A-Z0-9]+) · ')
+SLOTS = ROOT / 'docs/design/set-base/testi/slot.json'  # SB-25 B1 (D169 (5)): the slot code is no longer in the text
 PLACEHOLDER = re.compile(r'\[\[([^\]]*)\]\]')
 SYM_ADVANCE = 1.08    # advance of an inline symbol, in em
 SYM_SIZE = .95        # diameter of an inline symbol, in em
@@ -161,6 +161,7 @@ def load_bozza(path, playground=PLAYGROUND):
         if key not in data:
             _fail(f'manca la sezione {key}')
     rules = data['rules']
+    slots = json.loads(SLOTS.read_text(encoding='utf-8'))['slot']
     deck_size, max_copies, bound_choices = rules.get('deckSize'), rules.get('maxCopies'), rules.get('boundChoices')
     cards_by_id, chars_by_id = {}, {}
     for c in data['characters']:
@@ -216,7 +217,6 @@ def load_bozza(path, playground=PLAYGROUND):
         tag = signals[0] if signals else 'Oggetto' if item else 'Regolare'
         gui = c['gui']
         desc = gui['description']
-        m = SLOT.match(desc)
         role = gui.get('role')
         if role not in ROLES:
             _fail(f'{i}: ruolo sconosciuto {role}')
@@ -237,8 +237,8 @@ def load_bozza(path, playground=PLAYGROUND):
             if owner_id not in chars_by_id:
                 _fail(f'{i}: personaggio sconosciuto {owner_id}')
             owner = ('Legata a: ' if c.get('boundTo') else 'Esclusiva di: ') + chars_by_id[owner_id]['name'].strip()
-        faces.append(dict(id=i, name=gui['name'].strip(), tag=tag, rarity=c['rarity'], slot=m.group(1) if m else '', character=False,
-                          text=desc[m.end():] if m else desc, role=role, damage=damage, damage_amount=gui.get('damageAmount'),
+        faces.append(dict(id=i, name=gui['name'].strip(), tag=tag, rarity=c['rarity'], slot=slots.get(i, ''), character=False,
+                          text=desc, role=role, damage=damage, damage_amount=gui.get('damageAmount'),
                           cost=cost, priority=c.get('priority'), targets=targets, owner=owner, item=item))
     # The 20 cards of a deck, the character, its basic, the two bound and the last resort: 25 fronts.
     deck_cards = []
