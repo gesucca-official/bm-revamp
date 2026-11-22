@@ -47,6 +47,10 @@ client e nel PDF. Nessun numero della bozza 1.7.
 
 ## Piano della Fase B
 
+Aggiornato da [D170](../../set-base-decisioni.md#decisioni-del-proprietario): ogni carta, personaggio e token ha anche un **testo
+completo** generato dagli stessi dati (il testo tecnico di oggi ne è la base: non si butta); la Fase B si divide in **B1** (passi 1–4
+e 8, più il testo completo) e **B2** (passi 5–7 e 9, più l'elenco delle carte col testo completo nella guida stampata).
+
 Un esecutore Opus, sforzo alto, passo diretto sul glossario e sul campione approvati.
 
 1. **Frasi nel generatore.** Le frasi di `frasi.py`, con le correzioni del proprietario, entrano in `testi/testi_stampati.py`
