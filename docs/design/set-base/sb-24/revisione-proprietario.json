@@ -1,7 +1,7 @@
 {
  "formato": "sb-24-revisione-proprietario/1",
  "proposta": "a758e3ee4cc7",
- "aggiornato": "2026-11-22T13:57:36.000Z",
+ "aggiornato": "2026-11-22T14:02:29.000Z",
  "voci": {
   "CES-AR1": {
    "nome": "Opportuna Distrazione",
@@ -9,9 +9,9 @@
    "aggiornato": "2026-11-22T12:36:32.030Z"
   },
   "CES-AR2": {
-   "nome": "Buon, Vecchio Ricatto",
+   "nome": "Buon Vecchio Ricatto",
    "flavour": "«So cosa hai fatto a Ferragosto. Non ti conviene darmi un motivo per renderlo pubblico.»",
-   "aggiornato": "2026-11-22T12:38:43.325Z"
+   "aggiornato": "2026-11-22T14:02:29.000Z"
   },
   "CES-AR3": {
    "nome": "Copione Già Visto",
@@ -267,8 +267,8 @@
   },
   "MAR-AR3": {
    "nome": "Agilità Innaturale",
-   "flavour": "«La mia discendenza Mohave mi concede rapidità. Non sarà utile come il potere che ti dà il tuo popolo eletto, ma non tutti si abbassano a tanto! Non mi avrete mai!»",
-   "aggiornato": "2026-11-22T13:57:36.000Z"
+   "flavour": "«La mia discendenza Mohave mi concede rapidità. Non sarà utile come il potere che ti danno gli illuminati, ma non tutti si abbassano a tanto! Non mi avrete mai!»",
+   "aggiornato": "2026-11-22T14:02:29.000Z"
   },
   "MAR-AR4": {
    "nome": "Unta e Bisunta",
@@ -416,8 +416,8 @@
   },
   "PG-SPA": {
    "nome": "SPAZIENZIO DE LA UCCISO",
-   "flavour": "«LA VIOLENZA È UN'APOSTROFO ROSSO SANGUE FRA LE PAROLE T'AMMAZZO.»",
-   "aggiornato": "2026-11-22T13:57:36.000Z"
+   "flavour": "«LA VIOLENZA È UN APOSTROFO ROSSO SANGUE FRA LE PAROLE T'AMMAZZO.»",
+   "aggiornato": "2026-11-22T14:02:29.000Z"
   },
   "PG-TOS": {
    "flavour": "«Se solo tu aprissi gli occhi e vedessi che cosa è davvero la vita, ti accorgeresti che l'unica cosa sensata da fare è metterti qui accanto a me.»",
@@ -616,8 +616,9 @@
   },
   "TOS-BO2": {
    "nome": "Rintanarsi nel Cappotto",
-   "flavour": "Il giubbotto non è suo, ma ormai il possessore originale non lo vuole più.",
-   "aggiornato": "2026-11-22T11:53:35.575Z"
+   "flavour": "Il cappotto non è suo, ma ormai il possessore originale non lo vuole più.",
+   "aggiornato": "2026-11-22T14:02:29.000Z",
+   "illustrazione": "Celestina si stringe in un cappotto troppo grande, preso da una sedia, e si fa piccola."
   },
   "TOS-BO3": {
    "nome": "Tagliare la Dose",

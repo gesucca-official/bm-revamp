@@ -12,7 +12,7 @@ Una riga corta per filone: chi apre una regia parte da qui e dalla Â«RipartenzaÂ
 
 | Filone | Piano e stato | Macchina | Prossimo passo |
 |---|---|---|---|
-| Set Base | [piano](set-base-plan.md) | portatile | SB-24 (flavour finale e congelamento); SB-23 chiuso, formato 20/2 (D165) |
+| Set Base | [piano](set-base-plan.md) | portatile | SB-24 Fase B (nomi e flavour nella bozza, congelamento 1.7); revisione del proprietario approvata (D166) |
 | Client web | [roadmap](client-roadmap.md); [piano C4](client-c4-plan.md), chiusa | l'altra | C5 (playtest finali) |
 | Carriere | [piano CA-0](ca-plan.md); contenuti nella [tabella dei lavori anticipati](product-roadmap.md#lavori-anticipati) | portatile | CA-0b (formato delle carriere 0.1) |
 
