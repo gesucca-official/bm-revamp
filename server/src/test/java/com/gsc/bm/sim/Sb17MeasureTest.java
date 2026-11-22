@@ -69,20 +69,21 @@ class Sb17MeasureTest {
                 String card = m.getPlayedCardName();
                 boolean otherVoided = moves.stream().anyMatch(o -> o != m && o.isVoid());
                 Counts c = counts(m.getPlayerId());
+                // SB-24 Fase B (D166): the names of the 1.7 next to those of the earlier drafts; the counters carry the printed name.
                 switch (card) {
-                    case "Ricatto": case "Lo sapevo":
+                    case "Ricatto": case "Lo sapevo": case "Buon Vecchio Ricatto": case "Copione Già Visto":
                         if (m.isVoid()) c.add(card + "/selfVoided");
                         else c.add(card + (otherVoided ? "/voided" : "/tooSlow"));
                         break;
-                    case "Conto salato":
+                    case "Conto salato": case "Conto Salato":
                         if (!m.isVoid()) c.add(card + (Boolean.TRUE.equals(tokenOnTarget.get(m.getPlayerId())) ? "/onToken" : "/noToken"));
                         break;
-                    case "Fare il vago": // SB-17 B4 (D118): the parry bound, and how often against a found card the opponent shows
+                    case "Fare il vago": case "Fare il Vago": // SB-17 B4 (D118): the parry bound, and how often against a found card the opponent shows
                         if (m.isVoid()) break;
                         c.add(card + "/played");
                         if (Boolean.TRUE.equals(foeShows.get(m.getPlayerId()))) c.add(card + "/foeShows");
                         break;
-                    case "Lo rivendo": // SB-17 B3 (D114), B4 (D118): with the item sold or nothing to sell, from the report of the move
+                    case "Lo rivendo": case "Fiuto per gli Affari": // SB-17 B3 (D114), B4 (D118): with the item sold or nothing to sell, from the report of the move
                         if (m.isVoid()) break;
                         String sold = m.getMoveReport().getOrDefault(Card.CardTarget.SELF, List.of()).stream()
                                 .filter(l -> l.startsWith("Sold Item ")).findFirst().orElse(null);

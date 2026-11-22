@@ -158,7 +158,7 @@ class Sb16iBotsTest {
     void anAheadSgommataIsASaveAgainstAShownLethalHit() throws Exception {
         assertEquals(Set.of("Tra due paraurti"), kept("/set-base/storico/1.5/bozza.json"), "1.5: only the parry");
         // D99 (7): the 1.6 kept the Sgommata (x0.5: 17 of 34 on 25 health); the 1.6b (x0.8) leaves 28 of 35 (D139), still lethal.
-        assertEquals(Set.of("Tra due paraurti"), kept("/set-base/bozza.json"), "1.6b: the Sgommata ahead (x0.8) is no save from 35 on 25");
+        assertEquals(Set.of("Unta e Bisunta"), kept("/set-base/bozza.json"), "1.6b: the Sgommata ahead (x0.8) is no save from 35 on 25");
     }
 
     @Test

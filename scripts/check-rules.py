@@ -38,8 +38,8 @@ general = rules_text.split('\n## Revisioni\n', 1)[0]
 for entry in expected['cards'] + expected['characters'] + expected['tokens'] + [{'class': 'bitch.SoberUp'}]:
     name = entry['class'].split('.')[-1]
     assert not re.search(r'\b' + name + r'\b', general), 'The regulation cites the card ' + name + ': it belongs to the set document'
-# R07 1.13: the rarity vocabulary is read from the regulation; the playground loader (SB-6b) must use the same values.
-rarity_rule = re.search(r'\*\*Rarità \(1\.13\)\.\*\*([^\n]+)', rules_text)
+# R07 1.14 (SB-24, P added): the rarity vocabulary is read from the regulation; the playground loader (SB-6b) must use the same values.
+rarity_rule = re.search(r'\*\*Rarità \(1\.14\)\.\*\*([^\n]+)', rules_text)
 assert rarity_rule, 'R07: missing the rarity paragraph'
 rarity_values = re.search(r'una rarità, ((?:[A-Z]+, )*[A-Z]+) o ([A-Z]+), oppure nessuna', rarity_rule.group(1))
 assert rarity_values, 'R07: rarity vocabulary not found'

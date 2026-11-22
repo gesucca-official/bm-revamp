@@ -117,7 +117,7 @@ async function main() {
       const list = events(exported), initial = list[0].data, final = list[list.length - 1].data;
       assert.strictEqual(list[0].kind, 'INITIAL'); assert.strictEqual(list[list.length - 1].kind, 'OUTCOME');
       assert.strictEqual(initial.state.mode, mode);
-      assert.strictEqual(initial.versions.draft.sets.base.version, 'bozza');
+      assert.strictEqual(initial.versions.draft.sets.base.version, '1.7');
       assert.strictEqual(initial.versions.draft.sources[0].sha256, process.env.BM_DRAFT_SHA);
       assert.strictEqual(initial.versions.draft.bot, 'risorse');
       // D74: the draft bot keeps its base style and records the public announced-hit timing policy.

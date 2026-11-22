@@ -53,6 +53,15 @@ class Bozza16Test {
         return null;
     }
 
+    /** SB-24 Fase B (D166): the draft without what the freeze 1.7 writes (version, names, flavour, characters' rarity). */
+    static JsonNode withoutSb24(JsonNode draft) {
+        ObjectNode copy = draft.deepCopy();
+        ((ObjectNode) copy.path("set")).remove("version");
+        for (JsonNode c : copy.path("characters")) ((ObjectNode) c).remove(List.of("name", "flavour", "rarity"));
+        for (JsonNode c : copy.path("cards")) ((ObjectNode) c.path("gui")).remove(List.of("name", "flavour"));
+        return copy;
+    }
+
     private static JsonNode withoutPrintedText(JsonNode card) {
         ObjectNode comparable = card.deepCopy();
         ((ObjectNode) comparable.get("gui")).remove(List.of("description", "gains", "damageAmount"));
@@ -91,6 +100,9 @@ class Bozza16Test {
         // SB-18 B2 (D126): Duccio, his cards and prova-duccio too.
         // SB-19 B1 (D129): the nine cards of the missing slots and the nine decks with the additions too.
         JsonNode old = SetBaseArms.armB(resource(SetBaseArms.FROZEN_15)), now = Sb19.without(Sb18.without(Sb17.without(resource("/set-base/bozza.json"))));
+        // SB-24 Fase B (D166): names, flavour, the characters' P rarity and the version 1.7 are the owner's, not D97's; the rest is compared.
+        old = withoutSb24(old);
+        now = withoutSb24(now);
         assertTrue(SetBaseArms.carriesArmB(now), "arm B inside");
         ObjectNode rules = old.path("rules").deepCopy();
         rules.put("searchShuffle", true);
@@ -123,7 +135,6 @@ class Bozza16Test {
                 // D149 and SB-21f: exact changes to the draft cards, with the rest of each card still checked.
                 if (b.equals("base.pino.GoingBerserk")) {
                     ((ObjectNode) expected.path("params")).put("base", 10).put("perAlcohol", 1);
-                    ((ObjectNode) expected.path("gui")).put("name", "Giro secco");
                 }
                 if (b.equals("base.pino.QuestoLoFiniscoIo"))
                     ((ObjectNode) expected.path("self").path(0)).put("amount", 15);

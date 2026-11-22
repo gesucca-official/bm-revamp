@@ -53,8 +53,8 @@ final class Draft implements PlayerSource {
     static final String FORMAT_SETS = "sb-6b/1";
     /** Il set a cui appartengono i file {@value #FORMAT}; l'unico i cui id non hanno il prefisso del set. */
     static final String BASE_SET = "base";
-    /** Le rarità di R07 (regolamento 1.13); assente vuol dire nessuna. scripts/check-rules.py le confronta col regolamento. */
-    static final List<String> RARITIES = List.of("COMMON", "UNCOMMON", "RARE");
+    /** Le rarità di R07 (regolamento 1.14, SB-24: PROTAGONIST, in breve P); assente vuol dire nessuna. scripts/check-rules.py le confronta col regolamento. */
+    static final List<String> RARITIES = List.of("COMMON", "UNCOMMON", "RARE", "PROTAGONIST");
     private static final java.util.regex.Pattern SET_ID = java.util.regex.Pattern.compile("[a-z][a-z0-9-]*");
     /** Il set di oggi scritto come bozza. */
     static final String CURRENT = "/sb-6a/attuale.json";
@@ -93,14 +93,17 @@ final class Draft implements PlayerSource {
         final String name, description, image, sprite, role, gains, damage, damageAmount;
         /** SB-19 (RP-28): the short text of an item's «In campo» effect, e.g. "−3 A"; null when the card has none. */
         final String inPlay;
+        /** SB-24: the flavour line of the card (D166), descriptive only; null when the draft does not write it. */
+        final String flavour;
 
         Gui(String name, String description, String image, String sprite, String role, String gains, String damage, String damageAmount) {
-            this(name, description, image, sprite, role, gains, damage, damageAmount, null);
+            this(name, description, image, sprite, role, gains, damage, damageAmount, null, null);
         }
 
         Gui(String name, String description, String image, String sprite, String role, String gains, String damage, String damageAmount,
-            String inPlay) {
+            String inPlay, String flavour) {
             this.inPlay = inPlay;
+            this.flavour = flavour;
             this.name = name;
             this.description = description;
             this.image = image;
@@ -140,13 +143,16 @@ final class Draft implements PlayerSource {
 
     private static final class CharacterSpec {
         final String id, name, basic, set, rarity;
+        /** SB-24: the flavour line of the character (D166), descriptive only; null when the draft does not write it. */
+        final String flavour;
         final Map<Resource, Integer> resources;
         final int items;
         final Set<Resource> immunities;
 
         CharacterSpec(String id, String name, Map<Resource, Integer> resources, int items, Set<Resource> immunities, String basic,
-                      String set, String rarity) {
+                      String set, String rarity, String flavour) {
             this.id = id;
+            this.flavour = flavour;
             this.set = set;
             this.rarity = rarity;
             this.name = name;
@@ -520,6 +526,11 @@ final class Draft implements PlayerSource {
 
     String characterRarity(String id) { return characters.get(id).rarity; }
 
+    /** SB-24: the flavour line of the card or of the character (D166), or null; descriptive, no effect on play. */
+    String flavourOf(String binding) { return cards.get(binding).gui.flavour; }
+
+    String characterFlavour(String id) { return characters.get(id).flavour; }
+
     String characterName(String id) { return characters.get(id).name; }
 
     /** Le bound legate al personaggio fra le carte caricate, in ordine di binding: quelle fra cui un mazzo sceglie. */
@@ -630,9 +641,10 @@ final class Draft implements PlayerSource {
         ObjectNode node = object(raw, "personaggio");
         String id = text(node, "id", "personaggio");
         String where = label("personaggio", id, textOrNull(node, "set"));
-        fields(node, where, Set.of("id", "name", "resources", "items", "immunities"), Set.of("basic", "rarity", "set"));
+        fields(node, where, Set.of("id", "name", "resources", "items", "immunities"), Set.of("basic", "rarity", "set", "flavour"));
         String set = setOf(node, where, id), rarity = rarity(node, where);
         String name = text(node, "name", where);
+        String flavour = optional(node, "flavour", where);
         ObjectNode resourcesNode = object(node.get("resources"), where + ": resources");
         Map<Resource, Integer> resources = new EnumMap<>(Resource.class);
         resourcesNode.fields().forEachRemaining(entry -> {
@@ -654,7 +666,7 @@ final class Draft implements PlayerSource {
         String basic = node.has("basic") ? text(node, "basic", where) : null;
         if (rules.basicFixedPerCharacter && basic == null) throw invalid(where, "campo basic mancante: la basic è fissa per personaggio");
         return new CharacterSpec(id, name, Collections.unmodifiableMap(resources), items, Collections.unmodifiableSet(immunities), basic,
-                set, rarity);
+                set, rarity, flavour);
     }
 
     private CardSpec card(JsonNode raw) {
@@ -745,10 +757,10 @@ final class Draft implements PlayerSource {
         String at = where + ": gui";
         if (raw == null) throw invalid(where, "campo gui mancante");
         ObjectNode node = object(raw, at);
-        fields(node, at, Set.of("name", "role", "gains", "damage", "damageAmount"), Set.of("description", "image", "sprite", "inPlay"));
+        fields(node, at, Set.of("name", "role", "gains", "damage", "damageAmount"), Set.of("description", "image", "sprite", "inPlay", "flavour"));
         return new Gui(text(node, "name", at), optional(node, "description", at), optional(node, "image", at), optional(node, "sprite", at),
                 text(node, "role", at), text(node, "gains", at), text(node, "damage", at), text(node, "damageAmount", at),
-                optional(node, "inPlay", at));
+                optional(node, "inPlay", at), optional(node, "flavour", at));
     }
 
     private DeckSpec deck(JsonNode raw) {

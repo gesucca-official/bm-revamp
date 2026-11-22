@@ -22,7 +22,7 @@ BOZZA = ROOT / "server/src/test/resources/set-base/bozza.json"
 DOC = Path(__file__).resolve().with_name("bozza-di-riferimento.md")
 START, END = "<!-- inizio generato -->", "<!-- fine generato -->"
 RES = {"HEALTH": "salute", "ALERTNESS": "A", "VIOLENCE": "V", "TOXICITY": "T", "ALCOHOL": "L"}
-RARITY = {"COMMON": "C", "UNCOMMON": "NC", "RARE": "R"}
+RARITY = {"COMMON": "C", "UNCOMMON": "NC", "RARE": "R", "PROTAGONIST": "P"}  # P: SB-24, R07 1.14
 
 
 def sha(path):

@@ -20,6 +20,9 @@ import java.util.*;
 final class InPlayObserve {
     /** Item name, then holder character, then counter: applied, consumed, sold, passed, destroyed, displaced, atEnd, toxicityNotImmune. */
     final Map<String, Map<String, Map<String, Long>>> totals = new TreeMap<>();
+    /** The cards that destroy, steal and sell an item, by printed name: before and after SB-24 Fase B (D166). */
+    private static final Set<String> DESTROYS = Set.of("Smontiamo tutto", "Disassemblare"), STEALS = Set.of("Steal", "Furto con Destrezza"),
+            SELLS = Set.of("Lo rivendo", "Fiuto per gli Affari");
     /** At the start of the turn: per player, the in-play item instances near it. */
     private final Map<String, List<Card>> ready = new HashMap<>();
 
@@ -65,11 +68,11 @@ final class InPlayObserve {
                 Move own = g.getResolvedMoves().stream().filter(m -> m.getPlayerId().equals(p.getPlayerId()) && !m.isVoid()
                         && item.getName().equals(m.getChoices().get(Move.AdditionalAction.TARGET_ITEM))).findFirst().orElse(null);
                 boolean destroyed = g.getResolvedMoves().stream().anyMatch(m -> !m.isVoid() && !m.getPlayerId().equals(p.getPlayerId())
-                        && "Smontiamo tutto".equals(m.getPlayedCardName()));
+                        && DESTROYS.contains(m.getPlayedCardName()));
                 boolean stolen = g.getResolvedMoves().stream().anyMatch(m -> !m.isVoid() && !m.getPlayerId().equals(p.getPlayerId())
-                        && "Steal".equals(m.getPlayedCardName()));
+                        && STEALS.contains(m.getPlayedCardName()));
                 if (passed) exit = stolen ? "stolen" : "passed";
-                else if (own != null) exit = "Lo rivendo".equals(own.getPlayedCardName()) ? "sold" : "consumed";
+                else if (own != null) exit = SELLS.contains(own.getPlayedCardName()) ? "sold" : "consumed";
                 else if (destroyed) exit = "destroyed";
                 else exit = "displaced";
                 add(item.getName(), holder, exit, 1);

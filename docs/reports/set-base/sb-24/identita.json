@@ -1,0 +1,40 @@
+{
+ "blocco": "SB-24 Fase B",
+ "banco": "Sb19MeasureTest#round (banco di SB-21z e SB-23), d50, sette mazzi di riferimento, 4 semi per cella dal 7.000.000, 144 celle di stili per incontro, 28 incontri, 16.128 partite per corsa",
+ "perche": "il banco di sb-16i (ChargeMeasureTest#measure) si ferma sulla bozza di D162 col vecchio tetto delle bound (D33/D36, superato da D159): log charge-try-base.log",
+ "corse": {
+  "base-on-base": "codice 627eb92, bozza 627eb92",
+  "new-on-base": "codice nuovo, bozza 627eb92",
+  "new-on-17": "codice nuovo, bozza 1.7"
+ },
+ "impronte": {
+  "base-on-base": {
+   "matrix.json": "8a9b0c76a152535f383f78f8af11bdfe69c51d83555e8a2edbbc8f41af864f44",
+   "matrix.md": "1134cea5ef5a230aea7fa31d5e21cecd56a987c1f2b09c63e840f98707b0db0b",
+   "deck-observations.json": "d9db45344652db9028edb1a1e1b822b36a77476f2edffb917899cc18a967b6ff",
+   "draft.json": "daa6400dd131496ebb21454517f221fc3e60ce754e0f61cea16d650fe9ab1a4c",
+   "in-play.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+   "secondi": 28.8429063
+  },
+  "new-on-base": {
+   "matrix.json": "8a9b0c76a152535f383f78f8af11bdfe69c51d83555e8a2edbbc8f41af864f44",
+   "matrix.md": "1134cea5ef5a230aea7fa31d5e21cecd56a987c1f2b09c63e840f98707b0db0b",
+   "deck-observations.json": "d9db45344652db9028edb1a1e1b822b36a77476f2edffb917899cc18a967b6ff",
+   "draft.json": "daa6400dd131496ebb21454517f221fc3e60ce754e0f61cea16d650fe9ab1a4c",
+   "in-play.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+   "secondi": 24.2178122
+  },
+  "new-on-17": {
+   "matrix.json": "525dc3e8c548dec217fa83f952814312ec2378ae8c71a9560a3b18e1b36a4b0a",
+   "matrix.md": "3c0a38b5252dadd8d770357baa2d100787325ca18162823d4eb84168e5c118b1",
+   "deck-observations.json": "d9db45344652db9028edb1a1e1b822b36a77476f2edffb917899cc18a967b6ff",
+   "draft.json": "53bcd7654466d11de8b04402059524c50ac9dd090e0181aaa01e7be1d82312e6",
+   "in-play.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+   "secondi": 24.1951555
+  }
+ },
+ "esito": {
+  "new-on-base contro base-on-base": "tutti e cinque i file identici byte per byte",
+  "new-on-17 contro new-on-base": "deck-observations.json e in-play.json identici byte per byte; matrix.json e matrix.md differiscono solo nell'intestazione (percorso e SHA-256 del file della bozza: 1 campo e 3 righe); draft.json identico dopo aver tolto i campi della Fase B (numeri-invariati.py, spoglia)"
+ }
+}

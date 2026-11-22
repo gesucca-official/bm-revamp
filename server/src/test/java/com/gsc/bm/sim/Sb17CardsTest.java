@@ -176,7 +176,7 @@ class Sb17CardsTest {
     void ricattoVoidsALaterHitAndReflectsHalfItsBaseDamage() {
         Player b = opponent(List.of(hit("Pugno", 1, "HIT 30")), fillers(10));
         Game game = game(sergio("base.cesira.Ricatto"), b);
-        int[] lost = turn(game, move(game, "s", "Ricatto", "b"), move(game, "b", "Pugno", "s"));
+        int[] lost = turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", "Pugno", "s"));
         assertTrue(voided(game, "b"));
         assertArrayEquals(new int[]{0, 15}, lost, "30 HIT voided, 15 HIT to b");
         assertEquals(45, game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS), "15 A paid");
@@ -186,14 +186,14 @@ class Sb17CardsTest {
     void ricattoReflectsEachTypeTruncated() {
         Player b = opponent(List.of(hit("Misto", 1, "HIT 10", "CUT 11")), fillers(10));
         Game game = game(sergio("base.cesira.Ricatto"), b);
-        assertArrayEquals(new int[]{0, 10}, turn(game, move(game, "s", "Ricatto", "b"), move(game, "b", "Misto", "s")), "5 HIT + 5 CUT (5,5 truncated)");
+        assertArrayEquals(new int[]{0, 10}, turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", "Misto", "s")), "5 HIT + 5 CUT (5,5 truncated)");
     }
 
     @Test
     void ricattoOnAMoveWithoutDamageReflectsNothing() {
         Player b = opponent(List.of(charge()), strikeOnTop());
         Game game = game(sergio("base.cesira.Ricatto"), b);
-        assertArrayEquals(new int[]{0, 0}, turn(game, move(game, "s", "Ricatto", "b"), move(game, "b", "Carica", "SELF")));
+        assertArrayEquals(new int[]{0, 0}, turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", "Carica", "SELF")));
         assertTrue(voided(game, "b"));
         assertTrue(tokens(game, "b").isEmpty(), "a voided charge gives no token (D72)");
     }
@@ -202,14 +202,14 @@ class Sb17CardsTest {
     void ricattoTooSlowVoidsNothingAndReflectsNothing() {
         Player b = player("b", 90, List.of(hit("Veloce", 2, "HIT 30")), fillers(10)); // same priority, more A: b first
         Game game = game(sergio("base.cesira.Ricatto"), b);
-        assertArrayEquals(new int[]{30, 0}, turn(game, move(game, "s", "Ricatto", "b"), move(game, "b", "Veloce", "s")));
+        assertArrayEquals(new int[]{30, 0}, turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", "Veloce", "s")));
         assertFalse(voided(game, "b"));
     }
 
     @Test
     void ricattoOnTheAnnouncedStrikeReflectsTheBaseAndTheTokenEnds() {
         Game game = charged(sergio("base.cesira.Ricatto"), opponent(List.of(charge()), strikeOnTop()));
-        int[] lost = turn(game, move(game, "s", "Ricatto", "b"), move(game, "b", STRIKE, "s"));
+        int[] lost = turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", STRIKE, "s"));
         assertTrue(voided(game, "b"));
         assertEquals(0, lost[0]);
         assertEquals(22, lost[1], "15 reflected from the base 30, ×1,5 on b's token, truncated");
@@ -236,7 +236,7 @@ class Sb17CardsTest {
         Card cinghiata = draft.card("base.mara.CinghiataDiTraverso");
         Player b = player("b", 40, List.of(cinghiata), fillers(10));
         Game game = game(sergio("base.cesira.Ricatto"), b);
-        assertArrayEquals(new int[]{0, 10}, turn(game, move(game, "s", "Ricatto", "b"), move(game, "b", cinghiata.getName(), "s")),
+        assertArrayEquals(new int[]{0, 10}, turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", cinghiata.getName(), "s")),
                 "20 CUT of base (SB-21z, D162), half reflected; the A of b and the ahead bonus do not count");
     }
 
@@ -245,7 +245,7 @@ class Sb17CardsTest {
         Player b = opponent(List.of(hit("Pugno", 1, "HIT 30")), fillers(10));
         b.getCharacter().getResources().put(Resource.HEALTH, 10);
         Game game = game(sergio("base.cesira.Ricatto"), b);
-        turn(game, move(game, "s", "Ricatto", "b"), move(game, "b", "Pugno", "s"));
+        turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", "Pugno", "s"));
         assertTrue(game.getPlayers().get("b").getCharacter().isDead(), "15 reflected on 10 health: b is down");
         assertEquals(500, health(game, "s"));
         assertEquals("s", game.getWinner().orElseThrow());
@@ -256,20 +256,20 @@ class Sb17CardsTest {
     @Test
     void loSapevoKeepsTheTokenOfTheVoidedStrikeWithoutOtherCopies() {
         Game game = charged(sergio("base.cesira.LoSapevo", "base.cesira.ContoSalato"), opponent(List.of(charge()), strikeOnTop()));
-        assertArrayEquals(new int[]{0, 0}, turn(game, move(game, "s", "Lo sapevo", "b"), move(game, "b", STRIKE, "s")));
+        assertArrayEquals(new int[]{0, 0}, turn(game, move(game, "s", "Copione Già Visto", "b"), move(game, "b", STRIKE, "s")));
         assertTrue(voided(game, "b"));
         assertFalse(tokens(game, "b").isEmpty(), "the voided strike does not satisfy the token");
         assertFalse(game.getPlayers().get("b").getRevealed().isEmpty(), "the mark of the found card stays with the token");
         assertEquals(50, game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS), "60 − 10 A paid");
         // As after a discard (D71): with no copy left, the token lasts one more whole turn.
-        assertEquals(21, turn(game, move(game, "s", "Conto salato", "b"), move(game, "b", "Riempitivo", "SELF"))[1], "(8 + 6) × 1,5, B2 (D110)");
+        assertEquals(21, turn(game, move(game, "s", "Conto Salato", "b"), move(game, "b", "Riempitivo", "SELF"))[1], "(8 + 6) × 1,5, B2 (D110)");
         assertTrue(tokens(game, "b").isEmpty(), "ended a turn after the last copy left the hand");
     }
 
     @Test
     void loSapevoKeepsTheTokenWhileAnotherCopyIsInHand() {
         Game game = charged(sergio("base.cesira.LoSapevo"), opponent(List.of(charge(), strike()), strikeOnTop()));
-        turn(game, move(game, "s", "Lo sapevo", "b"), move(game, "b", STRIKE, "s"));
+        turn(game, move(game, "s", "Copione Già Visto", "b"), move(game, "b", STRIKE, "s"));
         assertTrue(voided(game, "b"));
         for (int n = 1; n <= 3; n++) {
             turn(game, move(game, "s", "Riempitivo", "SELF"), move(game, "b", "Riempitivo", "SELF"));
@@ -283,7 +283,7 @@ class Sb17CardsTest {
     void loSapevoOnAnUnannouncedMoveOnlyVoids() {
         Player b = opponent(List.of(hit("Pugno", 1, "HIT 30")), fillers(10));
         Game game = game(sergio("base.cesira.LoSapevo"), b);
-        assertArrayEquals(new int[]{0, 0}, turn(game, move(game, "s", "Lo sapevo", "b"), move(game, "b", "Pugno", "s")));
+        assertArrayEquals(new int[]{0, 0}, turn(game, move(game, "s", "Copione Già Visto", "b"), move(game, "b", "Pugno", "s")));
         assertTrue(voided(game, "b"));
         assertTrue(tokens(game, "b").isEmpty());
     }
@@ -306,10 +306,10 @@ class Sb17CardsTest {
         deck.addAll(strikeOnTop()); // the first draw is a filler: the strike is still in the deck for the charge
         Player b = opponent(List.of(charge()), deck);
         Game game = game(sergio("base.cesira.ContoSalato", "base.cesira.ContoSalato"), b);
-        assertEquals(8, turn(game, move(game, "s", "Conto salato", "b"), move(game, "b", "Riempitivo", "SELF"))[1], "no token");
+        assertEquals(8, turn(game, move(game, "s", "Conto Salato", "b"), move(game, "b", "Riempitivo", "SELF"))[1], "no token");
         turn(game, move(game, "s", "Riempitivo", "SELF"), move(game, "b", "Carica", "SELF"));
         assertFalse(tokens(game, "b").isEmpty());
-        assertEquals(21, turn(game, move(game, "s", "Conto salato", "b"), move(game, "b", "Riempitivo", "SELF"))[1], "(8 + 6) × 1,5, B2 (D110)");
+        assertEquals(21, turn(game, move(game, "s", "Conto Salato", "b"), move(game, "b", "Riempitivo", "SELF"))[1], "(8 + 6) × 1,5, B2 (D110)");
     }
 
     @Test
@@ -343,7 +343,7 @@ class Sb17CardsTest {
         Player b = opponent(List.of(filler("Riempitivo")), fillers(10));
         Game game = game(sergio("base.cesira.LoSannoTutti"), b);
         int before = game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS);
-        assertEquals(25, turn(game, move(game, "s", "Lo sanno tutti", "b"), move(game, "b", "Riempitivo", "SELF"))[1]);
+        assertEquals(25, turn(game, move(game, "s", "Segreto di Pulcinella", "b"), move(game, "b", "Riempitivo", "SELF"))[1]);
         assertEquals(before - 15, game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS), "15 A paid: R3 (20 A) tolta, stato del giro 2 (D112)");
     }
 
@@ -372,15 +372,15 @@ class Sb17CardsTest {
         for (String b : List.of("com.items.CocktailOnTheGround", "base.items.CascoDaLavoro", "base.items.GuantiDaOfficina"))
             large.getItems().add(draft.card(b));
         ((com.gsc.bm.model.cards.AbstractCard) shuffle).applyEffectOnTarget(small, large);
-        assertEquals(List.of("Guanti da officina"), names(small.getItems()), "the last item fits the capacity 1");
-        assertEquals(List.of("Espresso del distributore"), names(large.getItems()));
+        assertEquals(List.of("Guanti da Officina"), names(small.getItems()), "the last item fits the capacity 1");
+        assertEquals(List.of("Espresso della Macchinetta"), names(large.getItems()));
         assertEquals(PrintedEffects.Kind.SWAP_ITEMS, ((PrintedEffects.Source) shuffle).printedEffects().getSteps().get(0).getKind());
     }
 
     // ---- Lo metto in conto (CES-BA) and Lo rivendo (CES-AR7, D121; regole del playground 1.4, RP-25, RP-26) ----
 
     private static final String RIVENDO = "base.cesira.LoRivendo";
-    private static final String SANTINO = "Santino della portinaia", ESPRESSO = "Espresso del distributore", PERONI = "Peroni da 66, calda";
+    private static final String SANTINO = "Santino di San Briaco", ESPRESSO = "Espresso della Macchinetta", PERONI = "Bionda da 66, calda";
     private static final Map<String, String> ITEM_BINDINGS = Map.of(SANTINO, "base.items.SantinoDellaPortinaia",
             ESPRESSO, "base.items.EspressoDelDistributore", PERONI, "com.items.RottenBeer");
 
@@ -394,7 +394,7 @@ class Sb17CardsTest {
     private static Move sell(Game game, String item) {
         Map<Move.AdditionalAction, String> choices = new EnumMap<>(Move.AdditionalAction.class);
         if (item != null) choices.put(Move.AdditionalAction.TARGET_ITEM, item);
-        return new Move("Lo rivendo", "s", "SELF", game.getGameId(), choices);
+        return new Move("Fiuto per gli Affari", "s", "SELF", game.getGameId(), choices);
     }
 
     private static List<String> items(Game game, String id) { return names(game.getPlayers().get(id).getCharacter().getItems()); }
@@ -428,7 +428,7 @@ class Sb17CardsTest {
         int a = alertness(game, "s");
         Map<Move.AdditionalAction, String> choices = new EnumMap<>(Move.AdditionalAction.class);
         choices.put(Move.AdditionalAction.TARGET_ITEM, SANTINO);
-        turn(game, new Move("Lo metto in conto", "s", "SELF", game.getGameId(), choices), move(game, "b", "Riempitivo", "SELF"));
+        turn(game, new Move("Messo in Conto", "s", "SELF", game.getGameId(), choices), move(game, "b", "Riempitivo", "SELF"));
         assertEquals(a + 8, alertness(game, "s"), "+8 A (SB-21g, D158)");
         assertEquals(List.of(), items(game, "s"), "the item is consumed with its effect");
         assertTrue(game.getPlayers().get("s").getCharacter().getImmunities().contains(Resource.ALCOHOL), "the Santino's effect applies");
@@ -494,19 +494,19 @@ class Sb17CardsTest {
         for (Object[] c : cases) {
             Game game = rivendo((String[]) c[0]);
             List<com.gsc.bm.model.game.bot.LegalMove> sales = com.gsc.bm.model.game.bot.BotView.of(game, "s").legalMoves().stream()
-                    .filter(m -> m.getCard().getName().equals("Lo rivendo")).collect(Collectors.toList());
+                    .filter(m -> m.getCard().getName().equals("Fiuto per gli Affari")).collect(Collectors.toList());
             assertEquals(1, sales.size(), java.util.Arrays.toString((String[]) c[0]) + ": one move, the rule shared by every bot");
             assertEquals(c[1], sales.get(0).getItem(), java.util.Arrays.toString((String[]) c[0]) + ": never an Espresso while a Santino is there");
         }
         assertTrue(com.gsc.bm.model.game.bot.BotView.of(rivendo(), "s").legalMoves().stream()
-                .noneMatch(m -> m.getCard().getName().equals("Lo rivendo")), "without items the card cannot be played");
+                .noneMatch(m -> m.getCard().getName().equals("Fiuto per gli Affari")), "without items the card cannot be played");
     }
 
     @Test
     void theForecastSellsTheTargetedItem() {
         Game game = rivendo(ESPRESSO, SANTINO);
         com.gsc.bm.model.game.bot.BotView view = com.gsc.bm.model.game.bot.BotView.of(game, "s");
-        com.gsc.bm.model.game.bot.LegalMove sale = view.legalMoves().stream().filter(m -> m.getCard().getName().equals("Lo rivendo"))
+        com.gsc.bm.model.game.bot.LegalMove sale = view.legalMoves().stream().filter(m -> m.getCard().getName().equals("Fiuto per gli Affari"))
                 .findFirst().orElseThrow();
         List<Map<String, Integer>> ends = com.gsc.bm.model.game.bot.TurnForecast.variants(view, sale, null);
         assertFalse(ends.isEmpty());
@@ -580,7 +580,7 @@ class Sb17CardsTest {
         Game game = game(sergio(VAGO), b);
         Map<Move.AdditionalAction, String> discard = new EnumMap<>(Move.AdditionalAction.class);
         discard.put(Move.AdditionalAction.DISCARD_ONE, "Riempitivo");
-        int[] lost = turn(game, new Move("Fare il vago", "s", "SELF", game.getGameId(), discard), move(game, "b", "Misto", "s"));
+        int[] lost = turn(game, new Move("Fare il Vago", "s", "SELF", game.getGameId(), discard), move(game, "b", "Misto", "s"));
         assertEquals(21, lost[0], "20 × 0,75 + 8 × 0,75 = 15 + 6");
         assertEquals(28, turn(game, move(game, "s", "Riempitivo", "SELF"), move(game, "b", "Misto", "s"))[0], "the turn after: in full");
     }
@@ -593,16 +593,16 @@ class Sb17CardsTest {
                 List.of(BotView.publicText(draft.card(VAGO)), BotView.publicText(draft.card("base.com.Spintone"))), 10, List.of()),
                 List.of(new BotView.Opponent(LethalAwarePolicyTest.seat("foe", 60, 20, 30, 0, List.of()), 5, 10,
                         List.of(new BotView.RevealedSeen(1, impact, 3, null)))), List.of(), Map.of(), Ruleset.D50);
-        assertEquals(Set.of("Fare il vago"), offered(v), "the only move that keeps Sergio up");
+        assertEquals(Set.of("Fare il Vago"), offered(v), "the only move that keeps Sergio up");
         for (BotPolicy style : List.of(new AggressivePolicy(), new PrudentPolicy(), new ResourceAwarePolicy(), new RandomPolicy()))
             for (long seed = 0; seed < 5; seed++)
-                assertEquals("Fare il vago", new LethalAwarePolicy(new SoughtHitPolicy(style, SoughtHitPolicy.Timing.ALWAYS))
+                assertEquals("Fare il Vago", new LethalAwarePolicy(new SoughtHitPolicy(style, SoughtHitPolicy.Timing.ALWAYS))
                         .choose(v, v.legalMoves(), new Random(seed)).getCard().getName(), style.getClass().getSimpleName());
         BotView safe = new BotView(4, new BotView.Self(LethalAwarePolicyTest.seat("me", 60, 30, 10, 0, List.of()),
                 List.of(BotView.publicText(draft.card(VAGO)), BotView.publicText(draft.card("base.com.Spintone"))), 10, List.of()),
                 List.of(new BotView.Opponent(LethalAwarePolicyTest.seat("foe", 60, 20, 30, 0, List.of()), 5, 10,
                         List.of(new BotView.RevealedSeen(1, impact, 3, null)))), List.of(), Map.of(), Ruleset.D50);
-        assertEquals(Set.of("Fare il vago", "Spintone"), offered(safe), "not lethal: nothing is forced");
+        assertEquals(Set.of("Fare il Vago", "Spintone"), offered(safe), "not lethal: nothing is forced");
     }
 
     /** The cards the lethal-aware bot leaves to its style. */

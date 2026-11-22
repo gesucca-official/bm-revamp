@@ -6,6 +6,8 @@
 > slot nelle [schede](schede-personaggi.md) e nella [griglia](griglia.md). Dove questo documento contrasta con loro, prevalgono loro.
 > Un'idea entra nel gioco solo passando dal blocco che la usa (sotto).
 
+> **SB-24 Fase B, 22 novembre 2026 ([D166](../../set-base-decisioni.md#decisioni-del-proprietario)).** I nomi finali delle carte, il loro flavour e gli appunti per le illustrazioni sono nella [griglia](griglia.md#nomi-flavour-e-illustrazioni-sb-24), generati dalla bozza congelata 1.7. Sulle carte Piera si chiama **Piera Pinot** e Spazienzio è scritto **SPAZIENZIO DE LA UCCISO**; gli ID e i nomi di classe non cambiano. I nomi di carta citati qui sotto sono quelli del loro momento.
+
 Aperto l'8 novembre 2026. Le idee sono del proprietario; le varianti proposte su sua richiesta sono segnate come tali.
 
 ## Chi usa cosa

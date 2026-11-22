@@ -41,7 +41,7 @@ async function main() {
       ['INITIAL', 'MOVE_ACCEPTED', 'ROUND_READY', 'ENGINE_REPORT', 'ROUND_COMMITTED', 'COMMAND_COMMITTED', 'OUTCOME']);
     const initial = JSON.parse(all[0].json).data;
     assert.strictEqual(initial.state.mode, 'quick1vCom'); assert.strictEqual(initial.state.players.length, 2);
-    assert.strictEqual(initial.versions.rulesVersion, '1.13');
+    assert.strictEqual(initial.versions.rulesVersion, '1.14');
     assert.deepStrictEqual(Object.keys(initial.versions.sets), ['base']);
     assert.strictEqual(initial.versions.sets.base.version, '0.1'); assert(/^[a-f0-9]{64}$/.test(initial.versions.sets.base.sha256));
     assert.strictEqual(initial.state.players[0].initialDeckDrawOrder.length, 20);

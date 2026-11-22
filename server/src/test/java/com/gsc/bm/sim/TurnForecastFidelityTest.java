@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class TurnForecastFidelityTest {
     /** SB-18 B2 (D126): Duccio's cards paid in HEALTH, by their printed names. */
-    static final List<String> HEALTH_COSTS = List.of("Nocche sbucciate", "E allora?", "Capocciata", "Testa dura");
+    static final List<String> HEALTH_COSTS = List.of("Nocche Sbucciate", "E Allora...?", "Craniata Patriottica", "Testa Dura");
 
     @Test
     void theForecastMatchesTheEngineTurnByTurn() throws Exception {
@@ -88,17 +88,17 @@ class TurnForecastFidelityTest {
                         forecasts.put(mine.getPlayerId(), TurnForecast.variants(view, legal, other));
                     }
                     for (Move m : g.getPendingMoves())
-                        if (m.getPlayedCardName().equals("Conto salato") && g.getPlayers().containsKey(m.getTargetId()) && g.getPlayers()
+                        if (m.getPlayedCardName().equals("Conto Salato") && g.getPlayers().containsKey(m.getTargetId()) && g.getPlayers()
                                 .get(m.getTargetId()).getCharacter().getStatuses().stream().anyMatch(st -> st.getExposure() != null)) sergio[2]++;
                 } else if (!forecasts.isEmpty()) {
                     Map<String, Integer> actual = new HashMap<>();
                     for (Player p : g.getPlayers().values()) actual.put(p.getPlayerId(), p.getCharacter().getResources().get(Resource.HEALTH));
                     for (Move m : g.getResolvedMoves()) {
-                        if (m.getPlayedCardName().equals("Ricatto") && g.getResolvedMoves().stream().anyMatch(o -> o != m && o.isVoid())) sergio[0]++;
+                        if (m.getPlayedCardName().equals("Buon Vecchio Ricatto") && g.getResolvedMoves().stream().anyMatch(o -> o != m && o.isVoid())) sergio[0]++;
                         if (m.isKeepsToken()) sergio[1]++;
-                        if (m.getPlayedCardName().equals("Lo sanno tutti") && !m.isVoid()) sergio[3]++;
-                        if (m.getPlayedCardName().equals("Lo rivendo") && !m.isVoid()) sales[0]++;
-                        if (m.getPlayedCardName().equals("Fare il vago") && !m.isVoid()) sales[1]++;
+                        if (m.getPlayedCardName().equals("Segreto di Pulcinella") && !m.isVoid()) sergio[3]++;
+                        if (m.getPlayedCardName().equals("Fiuto per gli Affari") && !m.isVoid()) sales[0]++;
+                        if (m.getPlayedCardName().equals("Fare il Vago") && !m.isVoid()) sales[1]++;
                         if (m.getPlayedCardName().equals(Sb21h.COUNTER) && !m.isVoid()) variants[0]++;
                         if (m.getPlayedCardName().equals(Sb21h.RISE) && !m.isVoid()) variants[1]++;
                         int paid = HEALTH_COSTS.indexOf(m.getPlayedCardName());

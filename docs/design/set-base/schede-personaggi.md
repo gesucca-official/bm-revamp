@@ -5,6 +5,8 @@
 > è [game-rules.md](../../game-rules.md) e la partita viva non cambia. Le carte non sono progettate qui: basic, bound e azioni
 > sono compito di SB-10 e SB-11–SB-18; qui c'è solo la direzione.
 
+> **SB-24 Fase B, 22 novembre 2026 ([D166](../../set-base-decisioni.md#decisioni-del-proprietario)).** I nomi finali delle carte, il loro flavour e gli appunti per le illustrazioni sono nella [griglia](griglia.md#nomi-flavour-e-illustrazioni-sb-24), generati dalla bozza congelata 1.7. Sulle carte Piera si chiama **Piera Pinot** e Spazienzio è scritto **SPAZIENZIO DE LA UCCISO**; gli ID e i nomi di classe non cambiano. I nomi di carta citati qui sotto sono quelli del loro momento.
+
 > **Nomi e flavour dell'8 novembre 2026**, dai concept del proprietario raccolti nel [serbatoio di flavour](flavour.md) e portati qui
 > dopo l'approvazione di SB-15. Cinque personaggi cambiano nome: Pino diventa **Piera Ultimo Giro**, Gigi **Beppe Bulletta**, il Tossico
 > **Celestina Bucatina**, Cesira la Malalingua **Sergio Sommerso**, Rocco «Sant'Incasso» **Duccio Braccio Teso**. Il vecchio nome resta

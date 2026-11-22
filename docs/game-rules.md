@@ -1,6 +1,6 @@
 # Botte Micidiali — Regolamento ufficiale
 
-Versione **1.13 — 8 novembre 2026**. Fonte normativa del gioco, insieme ai documenti di set (R00).
+Versione **1.14 — 22 novembre 2026**. Fonte normativa del gioco, insieme ai documenti di set (R00).
 
 ## R00 — Autorità
 
@@ -139,7 +139,7 @@ Le carte stanno nei documenti di set (R00), uno per set, in `docs/sets/`; il set
 
 Convenzioni delle schede: identificatori stabili delle classi; i nomi visualizzati sono nell'allegato. Ogni riga indica tipologia e, dove previsto, sottotipo. V=VIOLENCE, A=ALERTNESS, T=TOXICITY, L=ALCOHOL; —=nessun costo risorse. Effetti prima dei modificatori R05; t è il valore al momento dell'effetto, dopo i costi. Una bound richiede lo scarto R02 anche se la scheda non lo ripete; le durate seguono R05. La scheda di un personaggio indica HEALTH, ALERTNESS, risorsa speciale, capacità di oggetti e immunità iniziale; le altre risorse partono da 0 (R01).
 
-**Rarità (1.13).** Ogni carta può avere una rarità, COMMON, UNCOMMON o RARE, oppure nessuna. È un dato del catalogo indicato dal documento del set: non è un effetto, non cambia costi, bersagli, priorità o risoluzione e non limita la costruzione dei mazzi.
+**Rarità (1.14).** Ogni carta può avere una rarità, COMMON, UNCOMMON, RARE o PROTAGONIST, oppure nessuna. È un dato del catalogo indicato dal documento del set: non è un effetto, non cambia costi, bersagli, priorità o risoluzione e non limita la costruzione dei mazzi. PROTAGONIST, in breve P, segue le stesse regole delle altre: nessun effetto sul gioco né sulla costruzione dei mazzi.
 
 ## R07a — Ruoli descrittivi delle carte (1.7)
 
@@ -190,6 +190,8 @@ Fonti iniziali: Game, Move, Player, ComPlayer, Character, Status, tutte le class
 Mappa test e risultati: `docs/rules-conformance.md`. Verifica dal workspace: `./scripts/build.ps1 -Task Test -Offline` e `python scripts/check-rules.py`. La copertura è dichiarata per casi, non come prova esaustiva di tutte le combinazioni.
 
 ## Revisioni
+
+- **1.14 — 22 novembre 2026, SB-24 (rarità P):** R07 ammette una quarta rarità, PROTAGONIST (in breve P), accanto a COMMON, UNCOMMON e RARE; come le altre è un dato descrittivo del catalogo, senza effetti sul gioco né sulla costruzione dei mazzi. Decisioni del proprietario D137 del piano Set Base (18 novembre 2026: «tutti i personaggi vorrei che avessero una rarità loro, P, che funziona un po' come la mythic rarity di mtga»), D144 e D166 (5) (22 novembre 2026: «andiamo con la fase B»). Motivazione: i sette personaggi del Set Base in progettazione hanno una rarità propria; frequenza nelle buste e jolly si progettano con l'economia (EC-0) e non sono regole del gioco. Il codice di catalogo PROTAGONIST è una scelta dell'esecutore, inglese come gli altri tre e con l'iniziale P. Nessuna regola, effetto, costo, priorità, bersaglio, starter o bilanciamento cambia; il Set Base 0.1 della partita viva resta senza rarità.
 
 - **1.13 — 8 novembre 2026, SB-2 (regolamento e set):** il regolamento contiene le regole generali e le carte passano ai documenti di set in `docs/sets/`, con versione propria; il primo è il Set Base 0.1, con le 39 carte e il token di prima. R00: fonte normativa sono regolamento e documenti di set; il regolamento governa il sistema, la scheda governa la carta e deroga solo se lo dice esplicitamente. R07 diventa «Carte e documenti di set», con le convenzioni delle schede e la rarità come dato descrittivo del catalogo (COMMON, UNCOMMON, RARE o nessuna; nel Set Base 0.1 nessuna); R07a conserva le definizioni e lascia al set le tabelle per carta. Le frasi che citavano carte specifiche diventano regole generali con lo stesso esito sulle carte di oggi: R04, una carta che bersaglia un oggetto scomparso non lo consuma, ruba o distrugge ma applica gli altri suoi effetti (prima Grab, Steal, BreakYourToy ed EverythingIsDrug); R05, un filtro sugli stati dell'autore non limita quelli del bersaglio (prima SeagullFly), gli equip si rimuovono con gli effetti che lo prevedono (prima BadEducation), ogni applicazione di uno stato è uno stato distinto (prima MadeOfStone e BrokenBeerBottle; la durata 3 di MadeOfStone passa alla sua scheda); R03, nessuna bound o last resort bersaglia oggetti e ogni last resort è gratuita, ora vincoli per ogni set; R01, R01a e R02 rimandano al documento del set per personaggi, starter, token ed esempi. Decisioni del proprietario D11 e D42 del piano Set Base e raccomandazioni della fase A di SB-2, approvate l'8 novembre 2026 («vanno bene tutte le raccomandazioni»). Motivazione: con 115 carte le tabelle di R07 diventerebbero ingestibili e ogni ritocco di una carta cambierebbe la versione delle regole; ora cambia quella del set. Nessun effetto, costo, priorità, bersaglio, starter o bilanciamento cambia; le descrizioni SQLite citano il set («Riferimento: Set Base 0.1.») invece del regolamento.
 

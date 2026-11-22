@@ -253,6 +253,29 @@ class MultiSetTest {
         assertNull(draft.characterRarity(BRUISER));
     }
 
+    /** SB-24 Fase B (R07 1.14, D137, D166): P (PROTAGONIST) on a character and on a card, and the flavour line of both. */
+    @Test void theProtagonistRarityAndTheFlavourAreRead() throws Exception {
+        ObjectNode mini = resource(MINI);
+        ((ArrayNode) mini.get("characters")).add(JSON.readTree("{\"id\":\"mini.character.Bidello\",\"name\":\"Bidello di prova\","
+                + "\"rarity\":\"PROTAGONIST\",\"flavour\":\"«Si chiude alle otto.»\",\"resources\":{\"HEALTH\":90,\"ALERTNESS\":20},"
+                + "\"items\":1,\"immunities\":[],\"basic\":\"com.basic.BruiserGrab\"}"));
+        cardOf(mini, "mini.Spallucce").put("rarity", "PROTAGONIST");
+        ((ObjectNode) cardOf(mini, "mini.Spallucce").get("gui")).put("flavour", "Il bar fa spallucce.");
+        ((ObjectNode) cardOf(mini, "mini.RintoccoDiCampana").get("gui")).put("flavour", "Din don.");
+        Draft draft = Draft.parse(files(resource(Draft.CURRENT), mini));
+        assertEquals("PROTAGONIST", draft.characterRarity("mini.character.Bidello"));
+        assertEquals("«Si chiude alle otto.»", draft.characterFlavour("mini.character.Bidello"));
+        assertEquals("PROTAGONIST", draft.rarityOf("mini.Spallucce"), "R07 1.14: P is a rarity like the others");
+        assertEquals("Il bar fa spallucce.", draft.flavourOf("mini.Spallucce"));
+        assertEquals("Din don.", draft.flavourOf("mini.RintoccoDiCampana"), "a Java card reads its flavour too");
+        assertNull(draft.flavourOf(SBUFFATA), "no flavour written, none read");
+        assertNull(draft.characterFlavour(BRUISER));
+        // Descriptive only: the card plays as it did without rarity and flavour.
+        Draft plain = Draft.parse(files(resource(Draft.CURRENT), resource(MINI)));
+        assertEquals(plain.card("mini.Spallucce").getPriority(), draft.card("mini.Spallucce").getPriority());
+        assertEquals(plain.card("mini.Spallucce").getCost(), draft.card("mini.Spallucce").getCost());
+    }
+
     // ---- bozze composte errate ----
 
     private static Map<String, JsonNode> files(JsonNode base, JsonNode mini) {
@@ -378,6 +401,15 @@ class MultiSetTest {
                 "carta mini.RintoccoDiCampana (set mini)", "MYTHIC"));
         cases.put("rarità non testuale", new Case(mini(m -> cardOf(m, "mini.Spallucce").put("rarity", 3)),
                 "carta mini.Spallucce (set mini)", "rarity"));
+        cases.put("rarità P abbreviata", new Case(mini(m -> cardOf(m, "mini.Spallucce").put("rarity", "P")),
+                "carta mini.Spallucce (set mini)", "rarity P fuori vocabolario", "PROTAGONIST"));
+        // Flavour (SB-24): un testo non vuoto, in gui per le carte e accanto al nome per i personaggi.
+        cases.put("flavour vuoto", new Case(mini(m -> ((ObjectNode) cardOf(m, "mini.Spallucce").get("gui")).put("flavour", " ")),
+                "carta mini.Spallucce (set mini): gui", "flavour deve essere un testo non vuoto"));
+        cases.put("flavour non testuale", new Case(mini(m -> ((ObjectNode) cardOf(m, "mini.Spallucce").get("gui")).put("flavour", 3)),
+                "carta mini.Spallucce (set mini): gui", "flavour"));
+        cases.put("flavour fuori da gui", new Case(mini(m -> cardOf(m, "mini.Spallucce").put("flavour", "Fuori posto.")),
+                "carta mini.Spallucce (set mini)", "flavour"));
         // Carte di set non caricati o non richiesti.
         cases.put("carta di un set non caricato", new Case(mini(m -> swap(deckOf(m, "mini.tossico"), "mini.Spallucce", "terzo.Gomitata")),
                 "mazzo mini.tossico (set mini)", "carta sconosciuta: terzo.Gomitata", "set caricati: base, mini"));

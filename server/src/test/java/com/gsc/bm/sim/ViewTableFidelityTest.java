@@ -170,8 +170,8 @@ class ViewTableFidelityTest {
                         fieldAtReady.put(p.getPlayerId(), new ArrayList<>(p.getCharacter().getItems()));
                     }
                     for (ViewTable.Play p : now) {
-                        if (p.card.getName().equals("Lo rivendo")) sales[0]++;
-                        if (p.card.getName().equals("Fare il vago")) sales[1]++;
+                        if (p.card.getName().equals("Fiuto per gli Affari")) sales[0]++;
+                        if (p.card.getName().equals("Fare il Vago")) sales[1]++;
                         int paid = TurnForecastFidelityTest.HEALTH_COSTS.indexOf(p.card.getName());
                         if (paid >= 0) duccio[paid]++;
                     }

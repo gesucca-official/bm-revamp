@@ -52,7 +52,7 @@ JAVA = {
         "Spendi tutta la tua [[L]] residua. Il bersaglio perde [[A]] pari alla [[L]] spesa. "
         "Infliggi danni da colpo pari a {base} più {moltiplicatore} della [[L]] spesa"
     ),
-    "com.items.AnotherRottenBeer": "Consumato: +{alcohol} [[L]]; crea il token BrokenBeerBottle vicino a sé",
+    "com.items.AnotherRottenBeer": "Consumato: +{alcohol} [[L]]; crea il token «Bottiglia Spaccata» vicino a sé",
     "bruiser.BreakYourToy": "Distrugge un oggetto lontano",
     "base.gigi.LavoroFattoBene": "Infliggi danni da colpo pari a {base} più {perItem} per ogni tuo oggetto sul campo",
     "base.cesira.Ricatto": (
@@ -541,7 +541,7 @@ def genera(carta, slot, nomi):
     gui = carta["gui"]
     if not slot:
         raise ValueError("gui.description: prefisso di slot mancante")
-    campi(gui, "gui", "name role damage description", "gains damageAmount image sprite inPlay")
+    campi(gui, "gui", "name role damage description", "gains damageAmount image sprite inPlay flavour")
     verifica_carta(carta, nomi)
     corpo, gains, danno = testo_java(carta) if carta.get("java") else testo_dati(carta, nomi)
     return {"description": slot.group() + costo(carta) + corpo + ".", "gains": gains, "damageAmount": danno}

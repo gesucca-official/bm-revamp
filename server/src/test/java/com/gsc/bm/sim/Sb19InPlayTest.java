@@ -270,8 +270,8 @@ class Sb19InPlayTest {
         assertEquals(4, report.size(), report.toString());
         assertTrue(report.get(0).startsWith("(TOXICITY effect)"), report.toString());
         assertTrue(report.get(1).startsWith("Timer expired for Prova"), report.toString());
-        assertTrue(report.get(2).startsWith("(Sigaretta accesa) TOXICITY: 4->6"), "the oldest first: " + report);
-        assertTrue(report.get(3).startsWith("(Conto del tavolo sei) ALERTNESS: 10->6 (-4)"), report.toString());
+        assertTrue(report.get(2).startsWith("(Sigaretta Accesa) TOXICITY: 4->6"), "the oldest first: " + report);
+        assertTrue(report.get(3).startsWith("(Conto del Tavolo Sei) ALERTNESS: 10->6 (-4)"), report.toString());
         assertEquals(100 - 2, c.getResources().get(Resource.HEALTH), "the poison of T 4 (2), taken before the +2 T");
         c.resolveTimeBasedEffects();
         assertEquals(100 - 2 - 3, c.getResources().get(Resource.HEALTH), "the T that the Sigaretta gave poisons from the next turn: 6/2");
@@ -343,8 +343,8 @@ class Sb19InPlayTest {
         // «Steal» (GEN-02): s takes the Conto from b and pays it at the end of this same turn; b, who had it, does not.
         Game game = game(Ruleset.D50, player("s", res(), Set.of(), List.of(draft.card("com.Steal"))), player("b", res(Resource.ALERTNESS, 30), Set.of(), List.of()));
         game.getPlayers().get("b").getCharacter().getItems().add(conto());
-        turn(game, move(game, "s", "Steal", "b", "Conto del tavolo sei"), move(game, "b", "Riempitivo", "SELF", null));
-        assertEquals(List.of("Conto del tavolo sei"), names(game.getPlayers().get("s").getCharacter()));
+        turn(game, move(game, "s", "Furto con Destrezza", "b", "Conto del Tavolo Sei"), move(game, "b", "Riempitivo", "SELF", null));
+        assertEquals(List.of("Conto del Tavolo Sei"), names(game.getPlayers().get("s").getCharacter()));
         assertEquals(60 - 10 - 4, res(game, "s", Resource.ALERTNESS), "10 A for the Steal, then −4");
         assertEquals(30, res(game, "b", Resource.ALERTNESS), "the previous holder pays nothing");
     }
@@ -355,7 +355,7 @@ class Sb19InPlayTest {
         game.getPlayers().get("s").getCharacter().getItems().add(conto());
         turn(game, move(game, "s", "Scatto Repentino", "b", null), move(game, "b", "Riempitivo", "SELF", null));
         assertEquals(List.of(), names(game.getPlayers().get("s").getCharacter()));
-        assertEquals(List.of("Conto del tavolo sei"), names(game.getPlayers().get("b").getCharacter()));
+        assertEquals(List.of("Conto del Tavolo Sei"), names(game.getPlayers().get("b").getCharacter()));
         assertEquals(60, res(game, "s", Resource.ALERTNESS));
         assertEquals(26, res(game, "b", Resource.ALERTNESS)); // SB-21z (D162): −4 A, was −3
     }
@@ -364,7 +364,7 @@ class Sb19InPlayTest {
     void aConsumedItemGivesItsGainAndNoMoreEffect() {
         Game game = game(Ruleset.D50, player("s", res(), Set.of(), List.of()), player("b", res(), Set.of(), List.of()));
         game.getPlayers().get("s").getCharacter().getItems().add(conto());
-        turn(game, move(game, "s", "Basic", "SELF", "Conto del tavolo sei"), move(game, "b", "Riempitivo", "SELF", null));
+        turn(game, move(game, "s", "Basic", "SELF", "Conto del Tavolo Sei"), move(game, "b", "Riempitivo", "SELF", null));
         assertEquals(List.of(), names(game.getPlayers().get("s").getCharacter()));
         assertEquals(15, res(game, "s", Resource.VIOLENCE), "+15 V");
         assertEquals(60, res(game, "s", Resource.ALERTNESS), "consumed before the end of the turn: no −3");
@@ -375,7 +375,7 @@ class Sb19InPlayTest {
         Game game = game(Ruleset.D50, player("s", res(Resource.HEALTH, 50), Set.of(), List.of(draft.card("base.cesira.LoRivendo"))),
                 player("b", res(), Set.of(), List.of()));
         game.getPlayers().get("s").getCharacter().getItems().add(conto());
-        turn(game, move(game, "s", "Lo rivendo", "SELF", "Conto del tavolo sei"), move(game, "b", "Riempitivo", "SELF", null));
+        turn(game, move(game, "s", "Fiuto per gli Affari", "SELF", "Conto del Tavolo Sei"), move(game, "b", "Riempitivo", "SELF", null));
         assertEquals(List.of(), names(game.getPlayers().get("s").getCharacter()));
         assertEquals(58, res(game, "s", Resource.HEALTH), "+8 HEALTH");
         assertEquals(60, res(game, "s", Resource.ALERTNESS), "RP-25: sold, so no −3 and no +15 V");
@@ -388,7 +388,7 @@ class Sb19InPlayTest {
         c.useRuleset(Ruleset.D50);
         c.getItems().add(conto());
         c.getItems().add(draft.card("base.items.EspressoDelDistributore"));
-        assertEquals(List.of("Espresso del distributore"), names(c), "capacity 1: the newest stays (R02)");
+        assertEquals(List.of("Espresso della Macchinetta"), names(c), "capacity 1: the newest stays (R02)");
         List<String> report = c.resolveTimeBasedEffects();
         assertEquals(10, c.getResources().get(Resource.ALERTNESS));
         assertTrue(report.isEmpty(), report.toString());

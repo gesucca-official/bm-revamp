@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -440,7 +441,7 @@ class SetBaseDraftTest {
         assertEquals(Map.of("HEALTH", PINO_HEALTH, "ALERTNESS", 15, "VIOLENCE", 0, "TOXICITY", 0, "ALCOHOL", PINO_ALCOHOL), resources);
         assertEquals(2, pino.get("items").asInt(), "capacità 2 (SB-9)");
         assertTrue(draft.character(PINO).getImmunities().isEmpty(), "nessuna immunità a L (D28)");
-        assertEquals("Piera Ultimo Giro", pino.get("name").asText());
+        assertEquals("Piera Pinot", pino.get("name").asText(), "SB-24 (D166): il nome del proprietario");
 
         String deck = "starter-pino";
         assertEquals(PINO, draft.characterOf(deck));
@@ -636,7 +637,7 @@ class SetBaseDraftTest {
     static final Map<String, String> CHARACTER_SLOTS = Map.of(SPAZIENZIO, "PG-SPA", MARA, "PG-MAR", TOSSICO, "PG-TOS", PINO, "PG-PIN",
             GIGI, "PG-GIG", Sb17.SERGIO, "PG-CES", Sb18.DUCCIO, "PG-ROC");
     /**
-     * Le rarità della griglia (colonna «Rarità»: C, NC, R) per ogni slot che la bozza contiene, elencate qui perché la prova non legga i
+     * Le rarità della griglia (colonna «Rarità»: C, NC, R, e P dei personaggi da SB-24) per ogni slot che la bozza contiene, elencate qui perché la prova non legga i
      * documenti. Le stesse le scrive e le confronta col file della griglia docs/reports/set-base/sb-6b/rarita-bozza.py (--check).
      */
     // D79: approved step-2 rarities, including the five new NC titles.
@@ -646,9 +647,11 @@ class SetBaseDraftTest {
             // SB-18 B2 (D126, D124 (6)): + Duccio (PG-ROC, ROC-*, LR-ROC), 2 C / 3 NC / 1 R and the basic, bounds and last resort.
             // SB-19 B1 (D129, D130): + the nine slots that were missing: GEN-08 and GEN-19 C; GEN-10, GEN-11 and OGG-08 NC; GEN-04, GEN-20, GEN-21 and OGG-16 R.
             // SB-19 B2 (D130): + OGG-17 «Conto del tavolo sei» NC and OGG-18 «Sigaretta accesa» R.
-            "COMMON", Set.of("GEN-08", "GEN-19", "ROC-AR1", "ROC-AR2", "CES-AR5", "GEN-01", "GEN-02", "GEN-05", "GEN-06", "GEN-12", "GEN-13", "GEN-14", "GEN-16", "GEN-17", "GEN-18", "GIG-AR4", "GIG-BO1", "GIG-BO2", "LR-STR", "MAR-AR3", "MAR-BA", "MAR-BO1", "MAR-BO2", "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-11", "OGG-12", "PG-MAR", "PG-SPA", "PIN-AR1", "PIN-AR3", "PIN-BO1", "PIN-BO2", "SPA-AR4", "SPA-BA", "SPA-BO1", "SPA-BO2", "TOS-AR3", "TOS-BO1", "TOS-BO2"),
-            "UNCOMMON", Set.of("GEN-10", "GEN-11", "OGG-08", "OGG-17", "ROC-AR3", "ROC-AR4", "ROC-AR5", "ROC-BO1", "ROC-BO2", "ROC-BO3", "CES-AR1", "CES-AR2", "CES-AR3", "CES-AR4", "CES-AR7", "CES-BO1", "CES-BO2", "CES-BO3", "GEN-03", "GEN-09", "GEN-22", "GEN-07", "GEN-15", "OGG-14", "GIG-AR1", "GIG-AR2", "GIG-AR3", "GIG-AR6", "GIG-BA", "GIG-BO3", "LR-PIN", "LR-TOS", "MAR-AR2", "MAR-AR4", "MAR-AR5", "MAR-AR6", "MAR-BO3", "OGG-03", "OGG-09", "OGG-13", "PG-GIG", "PG-PIN", "PG-TOS", "PIN-AR2", "PIN-AR4", "PIN-AR6", "PIN-BA", "PIN-BO3", "SPA-AR1", "SPA-AR3", "SPA-AR5", "SPA-AR6", "SPA-BO3", "TOS-AR1", "TOS-AR2", "TOS-AR4", "TOS-AR6", "TOS-BA", "TOS-BO3"),
-            "RARE", Set.of("GEN-04", "GEN-20", "GEN-21", "GEN-24", "OGG-16", "OGG-18", "PG-ROC", "ROC-BA", "ROC-AR6", "LR-ROC", "PG-CES", "CES-BA", "CES-AR6", "GEN-23", "OGG-15", "GIG-AR5", "MAR-AR1", "OGG-04", "PIN-AR5", "SPA-AR2", "TOS-AR5"));
+            "COMMON", Set.of("GEN-08", "GEN-19", "ROC-AR1", "ROC-AR2", "CES-AR5", "GEN-01", "GEN-02", "GEN-05", "GEN-06", "GEN-12", "GEN-13", "GEN-14", "GEN-16", "GEN-17", "GEN-18", "GIG-AR4", "GIG-BO1", "GIG-BO2", "LR-STR", "MAR-AR3", "MAR-BA", "MAR-BO1", "MAR-BO2", "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-11", "OGG-12", "PIN-AR1", "PIN-AR3", "PIN-BO1", "PIN-BO2", "SPA-AR4", "SPA-BA", "SPA-BO1", "SPA-BO2", "TOS-AR3", "TOS-BO1", "TOS-BO2"),
+            "UNCOMMON", Set.of("GEN-10", "GEN-11", "OGG-08", "OGG-17", "ROC-AR3", "ROC-AR4", "ROC-AR5", "ROC-BO1", "ROC-BO2", "ROC-BO3", "CES-AR1", "CES-AR2", "CES-AR3", "CES-AR4", "CES-AR7", "CES-BO1", "CES-BO2", "CES-BO3", "GEN-03", "GEN-09", "GEN-22", "GEN-07", "GEN-15", "OGG-14", "GIG-AR1", "GIG-AR2", "GIG-AR3", "GIG-AR6", "GIG-BA", "GIG-BO3", "LR-PIN", "LR-TOS", "MAR-AR2", "MAR-AR4", "MAR-AR5", "MAR-AR6", "MAR-BO3", "OGG-03", "OGG-09", "OGG-13", "PIN-AR2", "PIN-AR4", "PIN-AR6", "PIN-BA", "PIN-BO3", "SPA-AR1", "SPA-AR3", "SPA-AR5", "SPA-AR6", "SPA-BO3", "TOS-AR1", "TOS-AR2", "TOS-AR4", "TOS-AR6", "TOS-BA", "TOS-BO3"),
+            // SB-24 Fase B (D137, D166 (1), regolamento 1.14): i sette personaggi passano a P.
+            "PROTAGONIST", Set.of("PG-SPA", "PG-MAR", "PG-TOS", "PG-PIN", "PG-GIG", "PG-CES", "PG-ROC"),
+            "RARE", Set.of("GEN-04", "GEN-20", "GEN-21", "GEN-24", "OGG-16", "OGG-18", "ROC-BA", "ROC-AR6", "LR-ROC", "CES-BA", "CES-AR6", "GEN-23", "OGG-15", "GIG-AR5", "MAR-AR1", "OGG-04", "PIN-AR5", "SPA-AR2", "TOS-AR5"));
 
     private static String gridRarity(String slot) {
         List<String> found = new ArrayList<>();
@@ -658,7 +661,7 @@ class SetBaseDraftTest {
     }
 
     /**
-     * SB-15, parte 1: la bozza è nel formato sb-6b/1, set «base» in versione «bozza», e ogni carta e personaggio ha la rarità della griglia,
+     * SB-15, parte 1: la bozza è nel formato sb-6b/1, set «base» in versione «1.7» (SB-24), e ogni carta e personaggio ha la rarità della griglia,
      * nel vocabolario di R07. Lo slot si legge all'inizio della descrizione delle carte. Le rare negli starter sono 1 o 2 (griglia, «Per rarità»).
      */
     @Test
@@ -667,7 +670,7 @@ class SetBaseDraftTest {
         assertEquals(List.of("base"), new ArrayList<>(draft.sets().keySet()));
         Draft.SetInfo base = draft.sets().get("base");
         assertEquals("Set Base", base.name);
-        assertEquals("bozza", base.version, "una bozza in lavorazione, non il Set Base 0.1 del documento di set");
+        assertEquals("1.7", base.version, "SB-24 (D166 (5)): la bozza congelata 1.7, non il Set Base 0.1 del documento di set");
         assertTrue(base.requires.isEmpty());
 
         Pattern slot = Pattern.compile("^([A-Z]{2,3}-[A-Z0-9]+) · .*");
@@ -686,6 +689,7 @@ class SetBaseDraftTest {
             String rarity = draft.characterRarity(id);
             assertTrue(Draft.RARITIES.contains(rarity), id + ": rarità " + rarity + " fuori dal vocabolario di R07");
             assertEquals(gridRarity(CHARACTER_SLOTS.get(id)), rarity, id);
+            assertEquals("PROTAGONIST", rarity, id + ": rarità P dei personaggi (D137, R07 1.14)");
         }
         assertEquals(Map.of("COMMON", 42, "RARE", 19, "UNCOMMON", 56), counts,
                 "117 carte più 7 personaggi dopo l'aggiunta di GEN-24 (D152)");
@@ -693,6 +697,14 @@ class SetBaseDraftTest {
             long rares = draft.cardsOf(deck).keySet().stream().filter(b -> "RARE".equals(draft.rarityOf(b))).count();
             assertTrue(rares >= 1 && rares <= 2, deck + ": " + rares + " rare distinte");
         }
+    }
+
+    /** SB-24 Fase B (D166): la bozza congelata 1.7 ha un flavour per ogni carta e personaggio; il testo è il proprietario a sceglierlo. */
+    @Test
+    void everyCardAndCharacterHasAFlavour() {
+        for (String binding : draft.cardBindings()) assertNotNull(draft.flavourOf(binding), binding);
+        for (String id : draft.characterIds()) assertNotNull(draft.characterFlavour(id), id);
+        assertEquals("SPAZIENZIO DE LA UCCISO", draft.characterName(SPAZIENZIO), "D166: il nome del personaggio è tutto in maiuscolo");
     }
 
     @Test
@@ -875,9 +887,9 @@ class SetBaseDraftTest {
         assertEquals(health, spazienzio.getResources().get(Resource.HEALTH), "3 oggetti");
         me.getItems().add(draft.card("base.items.GuantiDaOfficina"));
         assertEquals(3, me.getItems().size(), "capacità 3");
-        assertFalse(me.getItems().stream().anyMatch(i -> i.getName().equals("Casco da lavoro")), "il più vecchio esce");
+        assertFalse(me.getItems().stream().anyMatch(i -> i.getName().equals("Casco da Cantiere")), "il più vecchio esce");
         // Gli equip non contano: consumati i Guanti (equip, HIT inflitto ×1,25), restano 2 oggetti; il danno sale di un quarto.
-        Card guanti = me.getItems().stream().filter(i -> i.getName().equals("Guanti da officina")).findFirst().orElseThrow();
+        Card guanti = me.getItems().stream().filter(i -> i.getName().equals("Guanti da Officina")).findFirst().orElseThrow();
         me.getItems().remove(guanti);
         ((AbstractCard) guanti).applyEffectOnSelf(me);
         assertTrue(me.getStatuses().stream().anyMatch(s -> s.isEquip()), "i Guanti sono un equip");
@@ -914,7 +926,7 @@ class SetBaseDraftTest {
     @Test
     void lavoroFattoBeneLoadsFromTheDraftWithItsParameters() {
         Card lavoro = draft.card("base.gigi.LavoroFattoBene");
-        assertEquals("Lavoro fatto bene", lavoro.getName());
+        assertEquals("Lavoro Fatto Bene", lavoro.getName());
         assertEquals(Map.of(Resource.VIOLENCE, 10), lavoro.getCost(), "D82, era 5");
         assertEquals(1, lavoro.getPriority());
         assertEquals(Set.of(Card.CardTarget.OPPONENT), lavoro.getCanTarget());

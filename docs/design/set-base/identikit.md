@@ -6,6 +6,8 @@
 > nelle [schede](schede-personaggi.md). Aperto il 10 novembre 2026. Le idee del proprietario sono indicate come tali; il resto è
 > *Variante della regia*, da provare con le [immagini di prova](identikit-prompt.md) e da confermare.
 
+> **SB-24 Fase B, 22 novembre 2026 ([D166](../../set-base-decisioni.md#decisioni-del-proprietario)).** I nomi finali delle carte, il loro flavour e gli appunti per le illustrazioni sono nella [griglia](griglia.md#nomi-flavour-e-illustrazioni-sb-24), generati dalla bozza congelata 1.7. Sulle carte Piera si chiama **Piera Pinot** e Spazienzio è scritto **SPAZIENZIO DE LA UCCISO**; gli ID e i nomi di classe non cambiano. I nomi di carta citati qui sotto sono quelli del loro momento.
+
 ## Regole del cast
 
 - **Silhouette diverse.** Ogni personaggio si riconosce dalla sola sagoma, anche in piccolo e in ombra: chi non è un personaggio del gioco è

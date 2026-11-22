@@ -11,6 +11,7 @@
 > **Bozza SB-21e, 19 novembre 2026 ([D152](../../set-base-decisioni.md#decisioni-del-proprietario)).** Estasi torna come generica rara (GEN-24), premio per chi accumula T e L. I 10 L di costo sono la deroga deliberata a D33 (4). PIN-AR2 diventa «Giro secco», nome di lavoro fino a SB-24. Il set sale a **124 carte**, 44 C / 59 NC / 21 R.
 > **Bozza SB-21f, 20 novembre 2026 ([D156](../../set-base-decisioni.md#decisioni-del-proprietario)).** Dopo la prova al client, Giro secco scende a 10 HIT più la L spesa ed Estasi sale a 40 HIT per premiare il doppio costo. Per D149 (4) e D153, Testata da ultimo giro sale a 35 HIT e Piera scende a 79 salute.
 > **Bozza SB-21g, 20 novembre 2026 ([D158](../../set-base-decisioni.md#decisioni-del-proprietario)).** Importi e fattori conformi a D158. Ritocchi a salute, L e due colpi per rientrare nei controlli di SB-21f. [Rapporto](../../reports/set-base/sb-21g-report.md).
+> **SB-24 Fase B, 22 novembre 2026 ([D166](../../set-base-decisioni.md#decisioni-del-proprietario)): bozza congelata 1.7.** Nomi, flavour e illustrazioni scelti dal proprietario sono nella sezione [Nomi, flavour e illustrazioni](#nomi-flavour-e-illustrazioni-sb-24), generata dalla bozza; i sette personaggi hanno rarità P ([regolamento 1.14](../../game-rules.md), R07). Tabelle dei personaggi e degli starter e conti per rarità portano i nomi nuovi; candidate, motivi, note e correzioni restano con i nomi del loro momento. Nessun numero cambia.
 > **Non normativo:** il regolamento vigente è
 > [game-rules.md](../../game-rules.md) e la partita viva non cambia. Nessuna carta è scritta qui come dato giocabile: le carte nascono in
 > SB-11 e nei blocchi seguenti, che possono scambiare gli slot purché i totali tengano ([piano, SB-10](../../set-base-plan.md#sb-10--griglia-degli-slot-e-listino-di-potenza)).
@@ -150,13 +151,13 @@ di SB-12a–SB-15. Nessun cambiamento al gioco vivo.
 
 | ID | Personaggio | Tipo | Valori iniziali | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---|---|---|---|---|
-| PG-SPA | Spazienzio de la Ucciso | Personaggio, base | H 78 (SB-21g), A 20, V 25, capacità 1 | C | Spazienzio | `BigBadBruiser`, conservato | Il metro del set (SB-9); salute precedente 85¹ | dati |
-| PG-MAR | Mara Contromano | Personaggio, base | H 70 (SB-21g), A 40, capacità 2 | C | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio; salute precedente 80¹ | dati |
-| PG-TOS | Celestina Bucatina | Personaggio, avanzato | H 66 (D149), A 35, T 15 (SB-16e), capacità 2, immune all'effetto periodico di T | NC | Celestina | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno; precedenti 80/20⁵ | dati |
-| PG-PIN | Piera Ultimo Giro | Personaggio, avanzato | H 78, A 15, L 14 (SB-21g), capacità 2 | NC | Piera | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito; precedenti 100/20⁶ | dati |
-| PG-GIG | Beppe Bulletta | Personaggio, avanzato | H 80 (SB-16e), A 25, V 25⁷, capacità 3 | NC | Beppe | bozza | Oggetti ed equip; salute precedente 95⁷ | dati |
-| PG-CES | Sergio Sommerso | Personaggio, booster | H ~~90~~ ~~75~~ 85 (SB-17: D106, riserva del giro 2), A 30, V 10, capacità 2 | R | — | bozza (SB-17), concept SB-9 | Contromosse e letture | dati |
-| PG-ROC | Duccio Braccio Teso | Personaggio, booster | H ~~130~~ ~~110~~ 115 (SB-18: D124, D126; riserva R2), A 15, capacità 2 | R | — | bozza (SB-18 B2), concept SB-9; personaggio di prova SB-6a | La salute come risorsa (D27) | dati |
+| PG-SPA | SPAZIENZIO DE LA UCCISO | Personaggio, base | H 78 (SB-21g), A 20, V 25, capacità 1 | P | Spazienzio | `BigBadBruiser`, conservato | Il metro del set (SB-9); salute precedente 85¹ | dati |
+| PG-MAR | Mara Contromano | Personaggio, base | H 70 (SB-21g), A 40, capacità 2 | P | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio; salute precedente 80¹ | dati |
+| PG-TOS | Celestina Bucatina | Personaggio, avanzato | H 66 (D149), A 35, T 15 (SB-16e), capacità 2, immune all'effetto periodico di T | P | Celestina | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno; precedenti 80/20⁵ | dati |
+| PG-PIN | Piera Pinot | Personaggio, avanzato | H 78, A 15, L 14 (SB-21g), capacità 2 | P | Piera | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito; precedenti 100/20⁶ | dati |
+| PG-GIG | Beppe Bulletta | Personaggio, avanzato | H 80 (SB-16e), A 25, V 25⁷, capacità 3 | P | Beppe | bozza | Oggetti ed equip; salute precedente 95⁷ | dati |
+| PG-CES | Sergio Sommerso | Personaggio, booster | H ~~90~~ ~~75~~ 85 (SB-17: D106, riserva del giro 2), A 30, V 10, capacità 2 | P | — | bozza (SB-17), concept SB-9 | Contromosse e letture | dati |
+| PG-ROC | Duccio Braccio Teso | Personaggio, booster | H ~~130~~ ~~110~~ 115 (SB-18: D124, D126; riserva R2), A 15, capacità 2 | P | — | bozza (SB-18 B2), concept SB-9; personaggio di prova SB-6a | La salute come risorsa (D27) | dati |
 
 **Salute iniziale (cautela di SB-10a).** A 2,5–4,8 punti di quota per 1 HEALTH, Mara a −15 vale sulla carta da −37 a −72 punti e Duccio
 a +30 da +75 a +144. La griglia le compensa con le carte, senza cambiare i valori (decisione 5): Mara ha costi in A bassi, una bound di A e
@@ -413,6 +414,142 @@ Si consumano con una presa; il loro valore è quello di una presa, non di uno sl
 
 ¹¹ **SB-19, Fase B2** ([D130](../../set-base-decisioni.md#decisioni-del-proprietario), [proposta A2](sb-19-proposta-a2.md#3-i-due-oggetti), [regole del playground 1.5](regole-playground.md#10-oggetti-con-un-effetto-in-campo-15-sb-19)): i due oggetti hanno un effetto «In campo» (RP-27) che agisce a fine turno su chi li ha vicino in quel momento, anche nel turno in cui arrivano, mai su HEALTH; il campo `inPlay` della bozza (RP-28) lo scrive. Consumati, venduti o scalzati non agiscono. Sono carte del playground, in `d50` e solo in bozza.
 
+## Nomi, flavour e illustrazioni (SB-24)
+
+<!-- inizio nomi generati -->
+
+Generata da `sb-24/genera-nomi-griglia.py` da `bozza.json` versione «1.7» e dalla revisione del proprietario ([D166](../../set-base-decisioni.md#decisioni-del-proprietario)). 125 voci: 7 personaggi, 117 carte e il token; rarità C 42 · NC 56 · R 19 · P 7. L'illustrazione è un appunto per SB-32, non un prompt.
+
+| Slot | Nome | Rarità | Flavour | Illustrazione |
+|---|---|---|---|---|
+| PG-SPA | SPAZIENZIO DE LA UCCISO | P | «LA VIOLENZA È UN APOSTROFO ROSSO SANGUE FRA LE PAROLE T'AMMAZZO.» | Ritratto dal riferimento approvato: in piedi davanti al bancone, spalle in avanti e pugni stretti, rosso di rabbia; strisce ai pantaloni, mappa dei tatuaggi rispettata. |
+| PG-MAR | Mara Contromano | P | «Tutto questo cibo che consegno... ma chi lo ordina? Con quali soldi? No, non ci casco: è un complotto!» | Ritratto dal riferimento approvato: davanti al muro del bar con la bici appoggiata, casco di stagnola in mano, indica qualcosa fuori campo. |
+| PG-TOS | Celestina Bucatina | P | «Se solo tu aprissi gli occhi e vedessi che cosa è davvero la vita, ti accorgeresti che l'unica cosa sensata da fare è metterti qui accanto a me.» | Ritratto dal riferimento approvato: accovacciata sotto il bancone, tiene in alto una cosa appena raccolta e la esamina come un gioielliere; tuta sul viola, lontana dal bordeaux. |
+| PG-PIN | Piera Pinot | P | «Un altro... grappino... no... non tu... Grappino...» | Ritratto dal riferimento approvato: seduta al bancone, il bicchierino alzato, Grappino ai piedi che abbaia. |
+| PG-GIG | Beppe Bulletta | P | «Che lavoro faccio? Ufficialmente, il metalmeccanico. Sottobanco, un po' tutti.» | Ritratto dal riferimento approvato: appoggiato a una colonna del bar, braccia incrociate, lo sguardo tranquillo di chi ne ha viste tante. |
+| PG-CES | Sergio Sommerso | P | «Mantenete le distanze, trogloditi. Non voglio certo che mi attacchiate la povertà.» | Ritratto dal riferimento approvato: dritto in mezzo al bar, una mano in tasca, la sigaretta tenuta con sufficienza; il laccio slacciato che lui non ha notato. |
+| PG-ROC | Duccio Braccio Teso | P | «Credere, obbedire, e Sex On The Beach con doppia ciliegina!» | Ritratto dal riferimento approvato: posa eroica, mano sul cuore, nell'altra mano il cocktail rosa con l'ombrellino; niente simboli espliciti. |
+| SPA-BA | ADOPERIAMOTI | C | «OGNI COSA HA IL SUO IMPIEGO. QUESTA, NELLA FATTISPECIE, TI FARÀ SMETTERE LA VITA...» | Spazienzio afferra dal tavolo la prima cosa che trova, senza guardare cosa sia. |
+| MAR-BA | Requisire al Volo | C | «No, no! Non è rubare, è intercettare!» | Mara afferra al volo un oggetto che cade dal tavolo, senza smettere di camminare. |
+| SPA-BO1 | LIEVE FASTIDIO | C | «IRRITARMI NON FARÀ ALTRO CHE ACCORCIARTI L'ESISTENZA - CHE DI PER SÉ È UN NOBILE OBIETTIVO.» | Spazienzio incassa un colpo appoggiato al bancone senza muoversi, una vena che pulsa sulla tempia. |
+| SPA-BO2 | SVEGLIAMOCI - MA TU NO | C | «ORSÙ SVEGLIAMOCI - MA TU NO.» | Spazienzio si rovescia in testa una caraffa d'acqua e con l'altra mano molla uno schiaffo distratto. |
+| SPA-BO3 | VIOLENZAZIONE | NC | «SE I GABBIANI PRATICANO L'AUTOEROTISMO, IO PRATICO L'AUTOVIOLENZA.» | Spazienzio dà una testata al muro del bar; sull'intonaco resta un'ammaccatura, lui sorride. |
+| MAR-BO1 | Sventare l'Assassinio | C | «Stavi provando ad avvelenarmi, eh? Voi massoni non mollate mai.» | Mara sputa per terra quello che stava bevendo e taglia di lato con lo spigolo del casco. |
+| MAR-BO2 | Semaforo Rosso | C | «Fermo là! Lo sanno tutti che hai fretta... dovevi schermare i tuoi pensieri con l'alluminio, se volevi tenerteli per te!» | Mara si ferma di colpo con la mano alzata come un vigile, e un pugno le passa davanti al naso. |
+| MAR-BO3 | Tagliare la Strada | NC | Arriva prima lei. A far che non si sa, ma arriva sempre prima lei. | Mara taglia la strada a un avversario passandogli davanti in bici fra i tavoli. |
+| LR-STR | Addosso!!! | C | Quando non resta niente, testa bassa e caricare. | Un avventore qualunque, in ombra, si lancia a testa bassa oltre un tavolo rovesciato. |
+| SPA-AR1 | GARGANTUESCO IMPATTO SUL TU | NC | «BWAAARGH! ACCOGLI LA MORTE CHE DISPENSO SUL TU!» | Spazienzio cala tutti e due i pugni dall'alto su un avversario in ombra; il tavolo sotto si spezza. |
+| SPA-AR2 | SPEDIAMOTI DUNQUE IN O-AHIO | R | «MAL VIAGGIO, E NON SCRIVERMI QUANDO ATTERRI.» | Spazienzio lancia un avversario fuori dalla porta del bar, verso la strada di notte. |
+| SPA-AR3 | PAZIENZA: FINITA | NC | «PAZIENZA E SOLDI? MAI AVUTI. IN COMPENSO, HO TANTE VITE DA CESSARE NEL FUTURO PROSSIMO, A COMINCIARE DALLA TUA.» | Primo piano di Spazienzio che diventa paonazzo, mascella in avanti, vena sulla tempia. |
+| SPA-AR4 | NON GIOCARE COL COLTELLO NO | C | «CARINO QUESTO TUO BASTONCINO, LO FANNO ANCHE DA UOMO O SOLO DA BAMBINO?» | Una lama si piega contro il petto tatuato di Spazienzio, che la guarda offeso. |
+| SPA-AR5 | FAI BASTA | NC | «BASTA NON È UNA DOMANDA. LA VIOLENZA È UNA DOMANDA, E LA RISPOSTA È SÌ.» | Spazienzio blocca con una mano il braccio di chi stava per colpire, e lo fissa. |
+| MAR-AR1 | Lazo del Rider | R | «La cinghia dello zaino avrebbe un'altra funzione, ma per combattere gli illuminati bisogna adattarsi.» | Mara fa roteare la cinghia dello zaino delle consegne e colpisce di traverso. |
+| MAR-AR2 | Sgommata | NC | Se qualcuno ordinasse un brodo, se lo vedrebbe arrivare shakerato. | La ruota posteriore della bici di Mara sgomma sul pavimento del bar e schizza di lato chi le sta davanti. |
+| MAR-AR3 | Agilità Innaturale | C | «La mia discendenza Mohave mi concede rapidità. Non sarà utile come il potere che ti danno gli illuminati, ma non tutti si abbassano a tanto! Non mi avrete mai!» | Mara scivola sotto il braccio di un avversario e gli sbuca alle spalle. |
+| MAR-AR4 | Unta e Bisunta | NC | «Anni e anni a consegnare kebab mi hanno dotata di una lubrificazione completa. Scivolo via che è un piacere!» | Mara si infila fra due avversari, che si colpiscono a vicenda. |
+| MAR-AR5 | Slalom d'Avvicinamento | NC | Il complotto non si può smascherare sempre andando dritti al punto: a volte, occorre girarci intorno. | Mara zigzaga fra i tavoli in bici, la consegna in equilibrio sullo zaino. |
+| GEN-02 | Furto con Destrezza | C | Un attimo fa era lì. Adesso ha cambiato padrone. | Una mano svelta sfila un oggetto da un tavolo vicino mentre il padrone guarda altrove. |
+| GEN-05 | GABBIANO, DUNQUE VOLIAMOTI | C | «QUELLE TUE SOPRACCIGLIA MODELLATE PARLANO CHIARO: PROIETTIAMOTI DUNQUE!» | Un avventore viene lanciato da Spazienzio dal bancone a braccia larghe, come un gabbiano, verso l'avversario. |
+| GEN-06 | Foratone da 28 | C | Il cantiere di fronte è fermo dal 2011 per una misteriosa mancanza di materiale. | Un mattone forato vola attraverso il bar verso la testa di un avversario. |
+| GEN-07 | ORMALE GUARIAMOTI | NC | «LA GIUSTA MEDICINA CURA OGNI MALE. NEL TUO CASO, LA MEDICINA SONO LE BOTTE.» | Un pugno di Spazienzio fa schizzare via da un avversario una nuvola di vapori d'alcol. |
+| GEN-13 | Tecnica del Carapace Mentale | C | Testa dentro e gomiti fuori: il resto è tutta questione di crederci. | Un avventore rannicchiato sul marciapiede si copre la testa con le braccia, come un guscio. |
+| GEN-14 | Denti Stretti | C | Stringi i denti - quelli che ti restano. | Primo piano di una mascella serrata, i denti storti stretti fino a scricchiolare. |
+| GEN-17 | Sputo nel Posacenere | C | Ci vogliono un posacenere pieno e nessuna educazione. | Un avventore lancia verso l'avversario il contenuto di un posacenere dove ha palesemente sputato dentro: il risultato è uno schizzo grigiastro. |
+| GEN-18 | Spintone | C | Il saluto del Serraglio. | Una spinta a due mani manda un avventore a sbattere contro un tavolo. |
+| OGG-01 | Negroni Trovato per Terra | C | È ancora mezzo pieno, sarebbe un peccato sprecarlo. | Un Negroni appoggiato sul pavimento appiccicoso, col ghiaccio sciolto e un mozzicone dentro. |
+| OGG-13 | Posacenere di Vetro | NC | Pesante, pieno e a portata di mano. Cosa potrebbe mai andare storto? | Un posacenere di vetro spesso, pieno di mozziconi, sul tavolo. |
+| OGG-06 | Espresso della Macchinetta | C | Cinquanta centesimi e tre minuti di attesa, ma ti dà la caffeina di cui hai bisogno. | Un bicchierino di caffè fumante sotto la bocchetta di un distributore ammaccato. |
+| OGG-14 | Ghiaccio nel Tovagliolo | NC | Cinque minuti sul bernoccolo, poi via di nuovo nel bicchiere. | Cubetti di ghiaccio avvolti in un tovagliolo di carta che gocciola. |
+| GEN-15 | Due Dita in Gola | NC | Il modo più rapido per ricominciare la serata. | Piera, piegata sul lavandino del bagno; si vede solo lo sforzo. |
+| OGG-07 | Kebab Abbandonato | C | Tripla cipolla, triplo piccante. Qualcuno lo stava aspettando, ma Mara era troppo occupata per consegnarlo. | Un kebab mezzo scartato nella stagnola, abbandonato su una sedia. |
+| OGG-10 | Giubbotto di Finta Pelle | C | La pelle sarà anche finta, ma quella che protegge dalle lame è vera. | Un giubbotto nero di finta pelle screpolata appeso allo schienale di una sedia. |
+| TOS-BA | Desiderio Incontrollabile | NC | Tutto è droga con il giusto atteggiamento. | Celestina si infila in bocca qualcosa raccolto dal tavolo, senza neanche guardarlo. |
+| TOS-BO1 | Fondo del Posacenere | C | «Sotto lo strato di cicche e cenere si nascondono sempre le cose più buone. Non è forse una metafora della vita?» | Celestina rovescia un posacenere e con l'unghia tira fuori qualcosa di tagliente. |
+| TOS-BO2 | Rintanarsi nel Cappotto | C | Il cappotto non è suo, ma ormai il possessore originale non lo vuole più. | Celestina si stringe in un cappotto troppo grande, preso da una sedia, e si fa piccola. |
+| TOS-BO3 | Tagliare la Dose | NC | «Mi sto disintossicando un quarto alla volta. Non volontariamente: questo è il massimo che sono riuscita a trovare.» | Celestina divide in parti uguali una caramella con un coltellino, con la precisione di un farmacista. |
+| LR-TOS | L'Ultimo Tiro | NC | Fumare il filtro è più tollerabile del dubbio di aver buttato anche solo un microgrammo assimilabile. | Celestina, a terra, soffia addosso all'avversario una nuvola verdastra con un ghigno storto. |
+| TOS-AR1 | Fare l'Inventario | NC | Le capacità organizzative di un tossicodipendente sono spesso sottovalutate. | Celestina rovista nel marsupio e tira fuori, una dopo l'altra, cose raccolte da terra. |
+| TOS-AR2 | Tossicone Scatarrante | NC | Ripulire i polmoni spesso finisce con lo sporcare qualcos'altro. | Celestina tossisce piegata in due verso l'avversario, che indietreggia coprendosi la faccia. |
+| TOS-AR3 | Metabolismo Corrotto | C | «Il mio fegato ha filtrato cose che il tuo nemmeno immagina.» | Celestina si rialza come nuova da un mucchio di bottiglie vuote, stiracchiandosi. |
+| TOS-AR4 | Riflessi Aumentati dalla Speed | NC | Con la giusta sostanza, una persona può aumentare determinate capacità - a discapito di tutte le altre e, spesso, della vita. | Celestina, occhi sbarrati, schiva un pugno piegandosi di lato come un giunco. |
+| TOS-AR5 | Trascinare nel Tunnel | R | «Che vuoi che sia? Solo una volta, tanto per provare. La roba ce la metto io, almeno per questa volta...» | Celestina stringe la mano all'avversario con un sorriso troppo largo; la sua ombra si allunga su di lui. |
+| GEN-01 | Afferrare | C | Al Serraglio vale una regola: quello che hai davanti, finiscilo. | Una mano afferra dal tavolo l'ultimo oggetto rimasto, fra bicchieri vuoti. |
+| GEN-12 | Estrema Fretta di Alcolizzarsi | C | Tre passi di rincorsa dal marciapiede comunicano senza equivoci l'entità del bisogno di bere. | Un avventore entra di corsa dalla strada e travolge chi sta sulla soglia. |
+| GEN-16 | Fasciatura d'Emergenza | C | Prendendone tante, si imparano per forza anche i rudimenti del pronto soccorso. | Duccio si lega al braccio un fazzoletto sporco, stringendo il nodo coi denti. |
+| OGG-12 | Pasticca Abbandonata | C | Cosa sia, non lo sa nessuno. Una medicina, oppure droga? In fondo, le due cose non sono poi così diverse. | Celestina copre qualcosa sul bancone; fra le dita si intravede solo un riflesso colorato. |
+| OGG-04 | Mescolone Micidiale | R | Ricetta segreta: quello che resta nei bicchieri a fine serata. | Una caraffa piena di un liquido dai colori impossibili, che fuma appena. |
+| PIN-BA | Fino all'Ultima Goccia | NC | «Questo... lo finisco io... Non si lascia... il grondino...» | Piera svuota il bicchiere di un altro avventore mentre lui si gira. |
+| PIN-BO1 | Posto Fisso | C | Lo sgabello è suo da sette ore. Quando va in bagno, lo difende Grappino con le unghie e con i denti. | Grappino ringhia seduto sullo sgabello di Piera, che si appoggia al bancone. |
+| PIN-BO2 | Violenta Spruzzata di Seltz | C | «Il seltz... pulisce la bocca... così... senti di più... la grappa...» | Piera spinge con la spalla un avversario contro il bancone e intanto si versa un seltz. |
+| PIN-BO3 | Schiarirsi le Idee | NC | «Ah... ecco. Adesso... vi vedo... tutte e due...» | Piera si sciacqua la faccia al lavandino del bagno e si guarda allo specchio. |
+| LR-PIN | Ultimo Giro | NC | «Ultimo... giro... per davvero... stavolta...» | Piera rovescia sull'avversario un vassoio pieno di bicchierini. |
+| PIN-AR1 | Scompenso da Ultimo Giro | C | Il vero ubriacone si distingue anche nell'ultimo atto della serata, cioè lo svenimento molesto. | Piera crolla in avanti dallo sgabello e la sua testa centra in pieno l'avversario. |
+| PIN-AR2 | Alla Goccia | NC | «Tutto... d'un fiato... non fate... i bambini!» | Piera tracanna l'intero bicchiere e poi lo cala sulla testa dell'avversario. |
+| PIN-AR3 | Avamposto Fortificato al Bancone | C | Il bancone è stato installato nel 1974 e Piera ci si appoggia dal 1975. | Piera aggrappata al bancone che oscilla come una nave in tempesta, senza versare una goccia. |
+| PIN-AR4 | Un Altro e Arrivo | NC | «Arrivo... arrivo! Un altro... e arrivo...» | Piera alza un dito verso il barista senza girarsi, mentre gli altri la aspettano spazientiti. |
+| PIN-AR5 | Rutto a Bruciapelo | R | Proibito dalla Convenzione di Ginevra a meno di tre metri di distanza. | Piera rutta verso l'avversario, che vola all'indietro fra i tavoli; Grappino si nasconde sotto lo sgabello. |
+| OGG-05 | Amaro nel Bicchiere di Plastica | C | Ghiaccio? Perché mai? La temperatura ambiente esalta il gusto di sogni infranti. | Un bicchierino di plastica bianca mezzo schiacciato, pieno di amaro scuro. |
+| OGG-02 | Bionda da 66, calda | C | Aperta da qualche giorno, ma non fa che migliorare rispetto al prodotto sigillato. | Una bottiglia da 66 senza etichetta, sudata e tiepida, sul bancone. |
+| OGG-03 | Doppio Malto da Discount | NC | Minima spesa, massima resa. Non farti beccare: al Serraglio non piace chi si porta il bere da casa. | Una bottiglia verde di doppio malto senza etichetta, già incrinata sul fondo. |
+| GIG-BA | Questo Torna Utile | NC | Non si butta via niente. Tutto si smonta, e si rimonta rivendendolo a caro prezzo. | Beppe raccoglie un pezzo di sedia rotta e lo soppesa con aria da intenditore. |
+| GIG-BO1 | Cuffie e Testa Bassa | C | Nelle cuffie, metal estremo. Fuori, qualcuno che urla. Non cambia poi molto in realtà. | Beppe a testa bassa con le cuffie, scuote appena il bun a tempo mentre i colpi gli rimbalzano sulle spalle. |
+| GIG-BO2 | Colpo col Cacciavite | C | «Croce o taglio? Fa lo stesso: toh!» | Beppe colpisce col manico di un cacciavite, rapido e senza cattiveria. |
+| GIG-BO3 | Affilare gli Utensili | NC | Al tornio ha imparato una cosa: gli utensili non si buttano via, si affilano alla mola. Il principio si applica a qualunque cosa. | Beppe passa una lima sul bordo di una chiave inglese, fra le scintille. |
+| GIG-AR1 | Disassemblare | NC | «Bel lavoro. Chi te l'ha montato, un cane? Ci penso io, va'...» | Beppe smonta in un attimo l'oggetto dell'avversario e lascia i pezzi in fila sul tavolo. |
+| GIG-AR2 | Chiave da Tredici | NC | La tredici va bene per quasi tutto, soprattutto se prima l'hai affilata. Per il resto, c'è la quattordici. | Beppe cala una chiave inglese da tredici appuntita sulla spalla dell'avversario, infilzandolo. |
+| GIG-AR3 | Preparare il Lavoro | NC | «Prima si prendono le misure. Col calibro, sulla tua faccia.» | Beppe misura col calibro il naso dell'avversario, serio come al tornio. |
+| GIG-AR4 | Secondo Bagagliaio | C | «Ho dovuto togliere il motore, ma guarda quanto spazio! Ci entro pure io!» | Beppe si ripara dentro il cofano aperto di un'auto parcheggiata davanti al bar, al posto del motore. |
+| GIG-AR5 | Lavoro Fatto Bene | R | Più attrezzi spargi in giro, meglio sembra fatto il lavoro. E più puoi farlo pagare. | Beppe, coi suoi attrezzi sparsi sul tavolo, sferra un pugno preciso. |
+| OGG-09 | Guanti da Officina | NC | Danneggiano le mani più di quanto non le proteggano. | Un paio di guanti da lavoro unti, appoggiati sul tavolo come due mani stanche. |
+| OGG-11 | Casco da Cantiere | C | Omologato per i calcinacci, ma va bene anche per i pugni. | Un casco da cantiere bianco sporco, ammaccato, appoggiato sul bancone. |
+| SPA-AR6 | SGOMBERIAMOVI | NC | «MERA MATERIA O VIVA CARNE CHE SIA, CATAPULTERÒ VIA OGNI ATOMO CHE MI IMPICCIA.» | Spazienzio avanza fra i tavoli spingendo via sedie e avventori a braccia aperte. |
+| MAR-AR6 | Traiettoria Imprevedibile | NC | «La stagnola funziona: non puoi più leggermi i pensieri, adesso! Non sai dove sto andando. Neanch'io, in effetti - ma non importa.» | Mara stringe la curva attorno a un tavolo, piegata sulla bici, il casco di stagnola che luccica. |
+| TOS-AR6 | Un Assaggino | NC | «Su, non fare tante storie! Non avresti fatto tante storie se fossi stata bella e ben vestita.» | Celestina annusa il bicchiere di un altro avventore e se lo porta alla bocca. |
+| PIN-AR6 | Un Altro... Grappino... | NC | Ogni volta che lo dice, Grappino abbaia. Un nome poco saggio da affibbiare a un cane di un'alcolista. | Piera alza il bicchierino per il brindisi mentre Grappino, ai suoi piedi, abbaia a tutti. |
+| GIG-AR6 | Metodo Empirico | NC | «Chiave dinamometrica? Per farne cosa? Un quarto di giro alla volta e vediamo se regge.» | Beppe stringe un bullone del tavolo dell'avversario, che traballa. |
+| CES-BA | Messo in Conto | R | Sul conto di chi, non si sa. L'importante è che qualcuno lo paghi - preferibilmente, qualcun altro. | Sergio si mette in tasca un oggetto dal bancone e fa un cenno al barista, che annuisce. |
+| CES-AR7 | Fiuto per gli Affari | NC | «L'ho pagato poco e lo rivendo a molto. Si chiama mercato.» | Sergio porge un oggetto a un avventore e intasca le banconote senza contarle. |
+| CES-BO1 | Discutiamone in Privato | NC | Certi argomenti vanno toccati senza nessuno che si impicci, oppure non vanno toccati affatto. | Sergio indica la porta con due dita, sopracciglio alzato, e l'avversario resta a metà del gesto. |
+| CES-BO2 | Tecnica Manipolatoria | NC | La sobrietà, in un pub di ubriaconi, può essere un'arma affilata quanto una spada. | Sergio beve un sorso d'acqua tonica e intanto sussurra qualcosa che fa arrossire l'avversario. |
+| CES-BO3 | Fare il Vago | NC | «Che volete da me? Sto aspettando una telefonata da Lugano. Non ho certo tempo per voialtri!» | Sergio guarda il soffitto e fuma, mentre intorno a lui volano sedie. |
+| CES-AR1 | Opportuna Distrazione | NC | Anche se un trucco è vecchio quanto il mondo, se funziona funziona. | Sergio indica qualcosa alle spalle dell'avversario, che si gira; intanto lui colpisce. |
+| CES-AR2 | Buon Vecchio Ricatto | NC | «So cosa hai fatto a Ferragosto. Non ti conviene darmi un motivo per renderlo pubblico.» | Sergio mostra all'avversario lo schermo del telefono; l'avversario abbassa il pugno, pallido. |
+| CES-AR3 | Copione Già Visto | NC | Gira che ti rigira, la gente è tutta uguale. Chi se ne accorge, può ben usare questo fatto a proprio vantaggio. | Sergio para un colpo col dorso della mano, senza smettere di fumare. |
+| CES-AR4 | Conto Salato | NC | «Oh, ti sembra caro? Scusa, non sapevo fossi povero...» | Sergio sbatte uno scontrino lunghissimo in faccia all'avversario. |
+| CES-AR5 | Segreto di Pulcinella | C | «Non mi piace spettegolare se non ci guadagno niente. Fortunatamente per me, non è questo il caso: senti un po'...» | Sergio si china all'orecchio di un avventore e gli sussurra qualcosa; tutto il bar si gira. |
+| CES-AR6 | Scherzo Oltre il Limite | R | Lui scherza e tutti ridono, ma tu muori dentro mentre processi l'ultimo insulto che ti arriva. | Sergio parla con mezzo sorriso, e le sue parole colpiscono l'avversario come schiaffi. |
+| GEN-09 | STORDIAMOTI HO DETTO | NC | «NON FARMELO RIPETERE, O DOVRÒ STORDIRTI DI NUOVO...» | Un ceffone di Spazienzio fa girare la testa all'avversario, che vede doppio. |
+| GEN-23 | Sgambetto | R | Più uno è ubriaco e meno ha coscienza di dove vadano le sue gambe. | Sergio allunga un piede da sotto un tavolo e un avventore lanciato in carica vola in avanti. |
+| GEN-24 | Estasi da Coca Etilene | R | Chi riesce a sopportare la giusta combinazione di sostanze, può avere accesso a un potere simile a quello di Braccio di Ferro quando mangia gli spinaci. | Celestina, con gli occhi spiritati, colpisce con una forza fuori misura; dietro di lei, bicchieri vuoti. |
+| GEN-03 | Scatto Repentino | NC | Al Serraglio vale una regola: quello che hai davanti è tuo. | Due avventori finiscono uno addosso all'altro e si rialzano ciascuno con le cose dell'altro. |
+| GEN-22 | Svegliaaah! | NC | La verità è là fuori, basta solo volerla vedere. Non abbiate paura di aprire gli occhi! | Mara lancia un bicchiere d'acqua in faccia a un'avventrice brilla, che si risveglia di colpo. |
+| OGG-15 | Santino di San Briaco | R | La portinaia del palazzo di fronte ne regala uno a chi esce barcollando. | Un santino sgualcito con l'aureola dorata, infilato nella cornice di uno specchio. |
+| ROC-BA | Prima gli Italiani | R | «Prima gli italiani. Poi gli altri. Poi, se avanza, magari io...» | Duccio scavalca la fila al bancone col petto in fuori. |
+| ROC-BO1 | Rinfrescata Arrogante | NC | Difendere la patria mette sete, a quanto pare. | Duccio dà una gomitata e poi beve curvo dalla fontanella davanti al bar. |
+| ROC-BO2 | Rialziamoci e Partite! | NC | Il vero patriota si rialza sempre. Di solito dove l'hanno lasciato. | Duccio si rialza dal marciapiede, una mano sul cuore, il cocktail miracolosamente intatto, i suoi compari in lontananza che se ne vanno. |
+| ROC-BO3 | (Dis)onore alla Bandiera | NC | Dovrebbe onorare la bandiera, ma invece finisce per proteggersi con essa. | Duccio si ripara dietro una bandiera tricolore italiana; si intuisce soltanto che sia una bandiera italiana, non si vede chiaramente. |
+| LR-ROC | Non Mi Hai Fatto Niente | R | Ne ha già prese di peggio. Tante, ma sicuramente di peggio. | Duccio, pieno di lividi, carica a testa bassa con un ultimo grido. |
+| ROC-AR1 | Nocche Sbucciate | C | Fa più male a lui, ma non lo ammetterà mai. D'altronde è un requisito per quelli come lui. | Duccio tira un pugno e si guarda le nocche sbucciate, con le lacrime agli occhi. |
+| ROC-AR2 | Stoico come un Busto di Bronzo | C | «Guarda il mezzobusto: si lamenta forse, egli?» | Duccio incassa un colpo nello stomaco col petto gonfio e gli occhi lucidi, mentre si immagina un suo mezzobusto di bronzo. |
+| ROC-AR3 | E Allora...? | NC | La sua risposta a tutto, dibattiti e... battiti. | Duccio, col naso che sanguina, alza le spalle e restituisce il colpo. |
+| ROC-AR4 | Craniata Patriottica | NC | La testa rasata serve a questo. | Duccio colpisce di testa l'avversario; vedono le stelle tutti e due. |
+| ROC-AR5 | La Storia la Scrivono i Vincitori | NC | Non preoccuparti, te la spiega lui la vera storia d'Italia. Con le mani. | Duccio punta il dito sul petto dell'avversario mentre gli fa la predica. |
+| ROC-AR6 | Testa Dura | R | Dentro non c'è molto, da fuori però si può usare. | Duccio spacca un tavolo con la fronte e resta in piedi, barcollando, fiero. |
+| GEN-04 | Ce l'Hai Due Spicci? | R | «...per il biglietto del treno, che hai capito?» | Celestina tende la mano a un avventore e se ne va con qualcosa di uguale al suo. |
+| GEN-08 | AMMALIAMOTI DI BOTTE | C | «LA SALUTE È UN DONO CHE NON TI MERITI PIÙ.» | Un pugno allo stomaco di Spazienzio piega in due l'avversario, che diventa verde. |
+| GEN-10 | PERMESSO SCUSA PUOI SMETTERLA | NC | «NESSUNA DI QUESTE È UNA DOMANDA, PENSAVO FOSSE CHIARO.» | Spazienzio strappa di dosso il giubbotto all'avversario con un inchino beffardo. |
+| GEN-11 | GENTILE IL TUO CAREZZO | NC | «LE TUE MANI DELICATE POTREBBERO FARMI ECCITARE. NON SO SE TI CONVENGA.» | Un pugno arriva sulla guancia di Spazienzio che sorride beato, come per una carezza. |
+| GEN-19 | Mano Lesta | C | Ti stringe la mano e ti sorride, ma nonostante le sue parole gentili, per qualche motivo poi ti senti abusato. | Un avventore stringe la mano a Sergio, che sorride malvagio. |
+| GEN-20 | Riprendere Fiato | R | La fatica fisica non ti spaventa, ma fare a botte non è proprio come far grattare del metallo da una macchina. | Beppe si rialza respirando a pieni polmoni, il petto gonfio, la guardia abbassata. |
+| GEN-21 | Coccio di Bottiglia | R | Un colpo secco al bancone, e la bottiglia assume subito un'altra funzione. | Una mano spacca il fondo di una bottiglia sul bordo del bancone; il collo resta in pugno, tagliente. |
+| OGG-08 | Acqua Minerale Sgasata | NC | Non sa di niente. È proprio quello che la rende utile: a un certo punto della serata, nessun sapore è un buon sapore. | Una bottiglia di plastica di minerale a metà, senza tappo. |
+| OGG-16 | Grappa della Casa | R | Di dubbia provenienza, ma di indubbia nocività. | Una bottiglia di vetro senza etichetta con un liquido trasparente, e un bicchierino accanto. |
+| OGG-17 | Conto del Tavolo Sei | NC | Nessuno sa chi ha ordinato cosa, ma tutti sanno che faranno di tutto per non pagarlo. | Uno scontrino lunghissimo arrotolato su un tavolo pieno di bicchieri vuoti. |
+| OGG-18 | Sigaretta Accesa | R | Non è tua, ma non fa niente: ti godrai il fumo passivo come tutti quanti. | Una sigaretta accesa in bilico sul bordo di un posacenere, il fumo che sale a spirale. |
+| TOKEN | Bottiglia Spaccata | — | Tutti conoscono il proverbio: "spaco botilia, amazo familia". | Il collo di una bottiglia verde spaccata, coi bordi taglienti che luccicano. |
+
+<!-- fine nomi generati -->
+
 ## Starter
 
 Basic, due bound comuni e last resort a parte (R01a). «Archetipo · generiche · oggetti» in copie; il nome proprio viene dalla bozza dove
@@ -420,11 +557,11 @@ c'è.
 
 | Starter | Basic, bound, last resort | Archetipo | Generiche | Oggetti | Distinte | Rare |
 |---|---|---|---|---|---:|---:|
-| Spazienzio «Pazienza finita» | SPA-BA · SPA-BO1, SPA-BO2 · Struggle | GARGANTUESCO IMPATTO SUL TU 2, SPEDIAMOTI DUNQUE IN O-AHIO 1, PAZIENZA: FINITA 2, NON GIOCARE COL COLTELLO NO 2, FAI BASTA 2, TI FACCIO SPAZIO 1 (**10**) | GABBIANO DUNQUE VOLIAMOTI 2, Tartaruga sul marciapiede 2, Mattone del cantiere 1, ORMALE GUARIAMOTI 1, Denti stretti 1 (**7**) | Negroni Trovato per Terra 2, Posacenere di vetro 1 (**3**) | 13 | 1 |
-| Mara «Consegna sul muso» | MAR-BA · MAR-BO1, MAR-BO2 · Struggle | Cinghiata di traverso 1, Sgommata 2, Sorpasso in curva 2, Tra due paraurti 2, Slalom d'avvicinamento 2, Ti stringo la curva 1 (**10**) | Spintone 1, Sputo da posacenere 2, Tartaruga sul marciapiede 1, ~~Steal 1~~ (**4**, SB-16i) | Espresso del distributore 2, Panino del kebab dimenticato 2, Giubbotto di finta pelle 1, Ghiaccio nel tovagliolo 1 (**6**, SB-16i) | 13 | 1 |
-| Celestina «Tutto è droga» | TOS-BA · TOS-BO1, TOS-BO2 · L'ultima dose | Dose in preparazione 2, Tossicone Scatarrante 2, Metabolismo Corrotto 2, Riflessi Aumentati dalla Speed 2, C'è del sangue nella mia droga 1, Un assaggino 1 (**10**) | Grab 2, Rincorsa dal marciapiede 1, Steal 1, Fasciatura col fazzolettaccio 1 (**5**) | Pasticca trovata sul bancone 2, Panino del kebab dimenticato 2, Mescolone Micidiale 1 (**5**) | 13 | 2 |
-| Piera «Chiude quando dico io» | PIN-BA · PIN-BO1, PIN-BO2 · L'ultimo giro | Testata da ultimo giro 2, Giro secco 2, Il bancone regge, io pure 2, Un altro e arrivo 2, Rutto a distanza sociale 1, Prima il brindisi 1 (**10**) | Grab ~~2~~ 1, Spintone 2, Fasciatura col fazzolettaccio 1, Due dita in gola 1 (**5**, SB-16i) | Amaro nel bicchiere di plastica 2, Peroni da 66, calda 2, Tennents Super 1 (**5**) | 12 | 1 |
-| Beppe «Intervento sul posto» | GIG-BA · GIG-BO1, GIG-BO2 · Struggle | Smontiamo tutto 2, Chiave da tredici 2, Preparo il lavoro 2, Sotto il cofano 1, Lavoro fatto bene 1, Una stretta di prova 1 (**9**) | Steal ~~2~~ 1, GABBIANO DUNQUE VOLIAMOTI 1, Spintone 1, Due dita in gola 1 (**4**, SB-16i) | Guanti da officina 2, Giubbotto di finta pelle 2, Casco da lavoro 2, Espresso del distributore 1 (**7**) | 13 | 1 |
+| Spazienzio «Pazienza finita» | SPA-BA · SPA-BO1, SPA-BO2 · Addosso!!! | GARGANTUESCO IMPATTO SUL TU 2, SPEDIAMOTI DUNQUE IN O-AHIO 1, PAZIENZA: FINITA 2, NON GIOCARE COL COLTELLO NO 2, FAI BASTA 2, SGOMBERIAMOVI 1 (**10**) | GABBIANO, DUNQUE VOLIAMOTI 2, Tecnica del Carapace Mentale 2, Foratone da 28 1, ORMALE GUARIAMOTI 1, Denti Stretti 1 (**7**) | Negroni Trovato per Terra 2, Posacenere di Vetro 1 (**3**) | 13 | 1 |
+| Mara «Consegna sul muso» | MAR-BA · MAR-BO1, MAR-BO2 · Addosso!!! | Lazo del Rider 1, Sgommata 2, Agilità Innaturale 2, Unta e Bisunta 2, Slalom d'Avvicinamento 2, Traiettoria Imprevedibile 1 (**10**) | Spintone 1, Sputo nel Posacenere 2, Tecnica del Carapace Mentale 1, ~~Furto con Destrezza 1~~ (**4**, SB-16i) | Espresso della Macchinetta 2, Kebab Abbandonato 2, Giubbotto di Finta Pelle 1, Ghiaccio nel Tovagliolo 1 (**6**, SB-16i) | 13 | 1 |
+| Celestina «Tutto è droga» | TOS-BA · TOS-BO1, TOS-BO2 · L'Ultimo Tiro | Fare l'Inventario 2, Tossicone Scatarrante 2, Metabolismo Corrotto 2, Riflessi Aumentati dalla Speed 2, Trascinare nel Tunnel 1, Un Assaggino 1 (**10**) | Afferrare 2, Estrema Fretta di Alcolizzarsi 1, Furto con Destrezza 1, Fasciatura d'Emergenza 1 (**5**) | Pasticca Abbandonata 2, Kebab Abbandonato 2, Mescolone Micidiale 1 (**5**) | 13 | 2 |
+| Piera «Chiude quando dico io» | PIN-BA · PIN-BO1, PIN-BO2 · Ultimo Giro | Scompenso da Ultimo Giro 2, Alla Goccia 2, Avamposto Fortificato al Bancone 2, Un Altro e Arrivo 2, Rutto a Bruciapelo 1, Un Altro... Grappino... 1 (**10**) | Afferrare ~~2~~ 1, Spintone 2, Fasciatura d'Emergenza 1, Due Dita in Gola 1 (**5**, SB-16i) | Amaro nel Bicchiere di Plastica 2, Bionda da 66, calda 2, Doppio Malto da Discount 1 (**5**) | 12 | 1 |
+| Beppe «Intervento sul posto» | GIG-BA · GIG-BO1, GIG-BO2 · Addosso!!! | Disassemblare 2, Chiave da Tredici 2, Preparare il Lavoro 2, Secondo Bagagliaio 1, Lavoro Fatto Bene 1, Metodo Empirico 1 (**9**) | Furto con Destrezza ~~2~~ 1, GABBIANO, DUNQUE VOLIAMOTI 1, Spintone 1, Due Dita in Gola 1 (**4**, SB-16i) | Guanti da Officina 2, Giubbotto di Finta Pelle 2, Casco da Cantiere 2, Espresso della Macchinetta 1 (**7**) | 13 | 1 |
 
 Composizioni D79: archetipo/generiche/oggetti in copie 10/7/3, 10/5/5, 10/5/5, 10/5/5 e 9/4/7 (dalla 1.6 di SB-16i Mara 10/4/6). Le generiche ridotte restano nel pool; Mattone esce solo dallo starter di Beppe. Rarità delle copie C/NC/R: 10/9/1, 12/7/1, 11/7/2, 13/6/1, 10/9/1; dalla 1.6 Mara 11/8/1, Piera 12/7/1, Beppe 9/10/1.
 
@@ -607,18 +744,18 @@ Con Struggle, 24 generiche, 18 oggetti e 7 personaggi il totale è 124.
 
 **Per rarità**
 
-| Blocco | C | NC | R |
-|---|---:|---:|---:|
-| Personaggi | 2 | 3 | 2 |
-| Basic | 2 | 3 | 2 |
-| Bound | 10 | 11 | 0 |
-| Last resort | 1 | 2 | 1 |
-| Archetipo | 9 | 27 | 7 |
-| Generiche | 12 | 7 | 5 |
-| Oggetti | 8 | 6 | 4 |
-| **Totale** | **44** | **59** | **21** |
+| Blocco | C | NC | R | P |
+|---|---:|---:|---:|---:|
+| Personaggi | 0 | 0 | 0 | 7 |
+| Basic | 2 | 3 | 2 | 0 |
+| Bound | 10 | 11 | 0 | 0 |
+| Last resort | 1 | 2 | 1 | 0 |
+| Archetipo | 9 | 27 | 7 | 0 |
+| Generiche | 12 | 7 | 5 | 0 |
+| Oggetti | 8 | 6 | 4 | 0 |
+| **Totale** | **42** | **56** | **19** | **7** |
 
-D79 porta l’archetipo a 11 C / 24 NC / 7 R; la bozza di oggi ha 9 C / 27 NC / 7 R (Duccio 2 / 3 / 1 e Sergio 1 / 4 / 1 in D124 e D121, CES-AR7 dentro), e SB-19 B1 riscrive la tabella dalla bozza (44 / 58 / 19, ex 45 / 55 / 20): l'archetipo di D79 non torna più, e restano 19 rare, una in meno di D79, perché «Bottigliata» è diventata Mano lesta comune. SB-19 B2 (D130) aggiunge OGG-17 (NC) e OGG-18 (R): 44 / 59 / 20. Nota storica: la tabella della fase A dava all'archetipo 19, 9 e 9, che non torna con i totali approvati (54, 41, 20): qui 20, 10 e 7 (decisione B3).
+D79 porta l’archetipo a 11 C / 24 NC / 7 R; la bozza di oggi ha 9 C / 27 NC / 7 R (Duccio 2 / 3 / 1 e Sergio 1 / 4 / 1 in D124 e D121, CES-AR7 dentro), e SB-19 B1 riscrive la tabella dalla bozza (44 / 58 / 19, ex 45 / 55 / 20): l'archetipo di D79 non torna più, e restano 19 rare, una in meno di D79, perché «Bottigliata» è diventata Mano lesta comune. SB-19 B2 (D130) aggiunge OGG-17 (NC) e OGG-18 (R): 44 / 59 / 20. Nota storica: la tabella della fase A dava all'archetipo 19, 9 e 9, che non torna con i totali approvati (54, 41, 20): qui 20, 10 e 7 (decisione B3). SB-24 (D137, D166, regolamento 1.14): i sette personaggi passano a P, rarità propria senza effetti sul gioco; le carte restano come sono, 42 C / 56 NC / 19 R più 7 P.
 Rare negli starter: 1 o 2 ciascuno.
 
 **Per ruolo** (117 carte giocabili dopo SB-21e, D152. Ruoli di R07a dal campo `gui.role` di `bozza.json`)
