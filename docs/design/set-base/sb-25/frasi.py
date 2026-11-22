@@ -58,22 +58,30 @@ def tipi_di_danno(tipi):
     return "danni" if set(tipi) == set(DANNI) else elenco(danno(t) for t in tipi)
 
 
-def quanti(fattore, tipi):
-    """Quanti danni, coi fattori ammessi da D161 (3) a parole."""
-    cosa = tipi_di_danno(tipi)
-    frasi = {0.25: f"solo un quarto dei {cosa}", 0.5: f"metà dei {cosa}", 0.75: f"un quarto di {cosa} in meno",
-             1.25: f"un quarto di {cosa} in più", 1.5: f"metà {cosa} in più", 2: f"il doppio dei {cosa}"}
-    if fattore not in frasi:
-        raise ValueError(f"fattore fuori dal set di D161: {fattore}")
-    return frasi[fattore]
+# D169: il fattore si dice come parte dei danni che si avrebbero senza la carta («tre quarti dei danni che subiresti»),
+# non come differenza («un quarto di danni in meno»).
+CONDIZIONALE = {"subisci": "subiresti", "infliggi": "infliggeresti", "subisce": "subirebbe", "infligge": "infliggerebbe"}
+CODE = tuple(" che " + c for c in CONDIZIONALE.values())
+PARTI = {0.25: "un quarto dei", 0.5: "metà dei", 0.75: "tre quarti dei", 1.25: "una volta e un quarto i",
+         1.5: "una volta e mezza i", 2: "il doppio dei"}
 
 
-def valgono(fattore):
-    frasi = {0.25: " e valgono solo un quarto", 0.5: " e valgono la metà", 0.75: " e valgono un quarto in meno", 1: "",
-             1.25: " e valgono un quarto in più", 1.5: " e valgono metà in più", 2: " e valgono il doppio"}
+def quanti(fattore, tipi, verbo):
+    """Quanti danni, coi fattori ammessi da D161 (3) a parole: «tre quarti dei danni che subiresti»."""
+    if fattore not in PARTI:
+        raise ValueError(f"fattore fuori dal set di D161: {fattore}")
+    return f"{PARTI[fattore]} {tipi_di_danno(tipi)} che {CONDIZIONALE[verbo]}"
+
+
+def valgono(fattore, verbo):
+    """Coda di un danno convertito: «i tuoi [[HIT]] diventano [[CUT]] e ne infliggi tre quarti»."""
+    frasi = {0.25: "un quarto", 0.5: "metà", 0.75: "tre quarti", 1.25: "una volta e un quarto", 1.5: "una volta e mezza",
+             2: "il doppio"}
+    if fattore == 1:
+        return ""
     if fattore not in frasi:
         raise ValueError(f"fattore fuori dal set di D161: {fattore}")
-    return frasi[fattore]
+    return f" e ne {verbo} {frasi[fattore]}"
 
 
 def durata(turni):
@@ -110,11 +118,11 @@ def frase_stato(stati, sede):
         chi = ("i " + elenco(danno(t) for t in tipi) + (" che subisce l'avversario" if avversario else " che subisci")
                if subisce else ("i " if avversario else "i tuoi ") + elenco(danno(t) for t in tipi)
                + (" dell'avversario" if avversario else ""))
-        effetto = f"{chi} diventano {danno(stato['convertTo'])}{valgono(fattore)}"
+        verbo = ("subisce" if subisce else "infligge") if avversario else ("subisci" if subisce else "infliggi")
+        effetto = f"{chi} diventano {danno(stato['convertTo'])}{valgono(fattore, verbo)}"
     else:
-        verbo = ("l'avversario subisce" if subisce else "l'avversario infligge") if avversario else (
-            "subisci" if subisce else "infliggi")
-        effetto = f"{verbo} {quanti(fattore, tipi)}"
+        verbo = ("subisce" if subisce else "infligge") if avversario else ("subisci" if subisce else "infliggi")
+        effetto = f"{'l' + chr(39) + 'avversario ' if avversario else ''}{verbo} {quanti(fattore, tipi, verbo)}"
     # L'equipaggiamento si dice in coda: è lo stesso effetto, ma un'altra carta lo può togliere (R01a, R05).
     etichetta = " (equipaggiamento)" if stato.get("equip") else ""
     if stato.get("singleUse"):
@@ -198,7 +206,7 @@ def frasi_passi(passi, sede, nomi, costo):
                 if {"factor": vulnerabilita["factor"], "damage": list(vulnerabilita.get("damage", DANNI))} == VULNERABILE:
                     trovata = (trovata + " e diventi" if trovata != "niente" else "diventi") + " Vulnerabile"
                 else:
-                    trovata += f"; diventi Vulnerabile, ma subisci {quanti(vulnerabilita['factor'], vulnerabilita.get('damage', DANNI))}"
+                    trovata += f"; diventi Vulnerabile, ma subisci {quanti(vulnerabilita['factor'], vulnerabilita.get('damage', DANNI), 'subisci')}"
             testo = (f"Annuncia {' o '.join('«' + nomi[b] + '»' for b in scelte)}. "
                      f"Se lo trovi: {trovata}. Se non lo trovi: {mancata}")
         elif op in ("anticipo", "gettone"):
@@ -243,7 +251,9 @@ def cuci(parti, separatore=". "):
               and parte.endswith(" dell'avversario")):
             frasi[-1] = ultima[:-len(" dell'avversario")] + " e " + parte[len("azzeri "):]
         elif comune and " e " not in ultima[len(comune):] and "(" not in ultima + parte:
-            frasi[-1] += " e " + parte[len(comune):]
+            # «subisci metà dei [[HIT]] e tre quarti dei [[CUT]] che subiresti»: la coda comune si dice una volta sola.
+            coda = next((c for c in CODE if ultima.endswith(c) and parte.endswith(c)), "")
+            frasi[-1] = ultima[:len(ultima) - len(coda)] + " e " + parte[len(comune):]
         else:
             frasi.append(parte)
     if separatore == ". ":

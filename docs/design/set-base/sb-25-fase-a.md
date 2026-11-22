@@ -1,7 +1,7 @@
 # SB-25 Fase A — Glossario, campione e piano della Fase B
 
-Preparata dall'esecutore il 22 novembre 2026, dopo [D168](../../set-base-decisioni.md#decisioni-del-proprietario). In attesa della
-revisione del proprietario sulla pagina. Direzione approvata: [proposta di SB-25](sb-25-proposta.md).
+Preparata dall'esecutore il 22 novembre 2026, dopo [D168](../../set-base-decisioni.md#decisioni-del-proprietario). Domande risolte in
+[D169](../../set-base-decisioni.md#decisioni-del-proprietario), con la frase dei fattori del proprietario; in attesa della sua revisione sulla pagina. Direzione approvata: [proposta di SB-25](sb-25-proposta.md).
 
 ## In breve
 
@@ -18,8 +18,8 @@ revisione del proprietario sulla pagina. Direzione approvata: [proposta di SB-25
   cambiato: bozza, generatore, client e PDF sono come prima.
 - **Segnaposto dei danni:** `[[HIT]]`, `[[CUT]]`, `[[POISON]]`, accanto a `[[H]]`…`[[L]]`. Un danno si legge «20 [[HIT]]
   all'avversario»; un danno che cresce «[[HIT]] all'avversario pari a 6 più metà della [[V]] che ti resta».
-- **Lunghezza:** sulle 117 carte, senza codice di slot e con ogni simbolo contato come un carattere, la media passa da 75 a 66
-  caratteri e il massimo da 198 a 165 (Opportuna Distrazione e Buon Vecchio Ricatto).
+- **Lunghezza:** sulle 117 carte, senza codice di slot e con ogni simbolo contato come un carattere, la media passa da 75 a 68
+  caratteri (66 prima della frase dei fattori di D169) e il massimo da 198 a 165 (Opportuna Distrazione e Buon Vecchio Ricatto).
 
 ## Cosa cambia, nella Fase B
 
@@ -35,6 +35,9 @@ client e nel PDF. Nessun numero della bozza 1.7.
   Restano «Quando lo consumi:» e «In campo, a fine turno:» per gli oggetti, perché dicono quando succede.
 - **Le condizioni vanno in fondo** («Gioca d'anticipo: …»), così non sembrano reggere le frasi che seguono; il prototipo le sposta
   solo se nessun effetto successivo legge le risorse di chi gioca, altrimenti si ferma con errore. Oggi tocca solo Agilità Innaturale.
+- **Fattori come parte dei danni** (D169): «subisci tre quarti dei danni che subiresti», «infliggi una volta e mezza i [[HIT]]
+  che infliggeresti», «i tuoi [[HIT]] diventano [[CUT]] e ne infliggi tre quarti». Con due fattori di fila la coda si dice una volta:
+  «subisci tre quarti dei [[HIT]] e metà dei [[POISON]] che subiresti». Gli aumenti in questa forma li ha scelti la regia.
 - **Due frasi con lo stesso inizio diventano una** («Perdi un quarto della tua [[T]] e un quarto della tua [[L]]»).
 - **«Che ti resta» / «la tua».** Una quantità letta dalle risorse dice «che ti resta» se la carta costa quella risorsa (si legge
   dopo il costo), altrimenti «la tua».
@@ -77,6 +80,8 @@ Un esecutore Opus, sforzo alto, passo diretto sul glossario e sul campione appro
 9. **Pagina di revisione con tutti i testi**, da rivedere a rate come in SB-24; STOP per l'approvazione, poi SB-25 si chiude.
 
 ## Domande
+
+Risolte il 22 novembre 2026 in [D169](../../set-base-decisioni.md#decisioni-del-proprietario): valgono le quattro proposte.
 
 1. **Arrotondamento.** Le carte non dicono più «arrotondato per difetto»: la guida lo dice una volta per tutte («metà e quarti si
    arrotondano sempre per difetto»), ed è vero per ogni carta. Va bene, o lo vuoi ancora su ogni carta (circa 20 caratteri in più
