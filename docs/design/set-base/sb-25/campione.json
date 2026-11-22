@@ -1,0 +1,70 @@
+{
+ "nota": "SB-25 Fase A: il campione della proposta (D168). I testi, di oggi e proposti, li genera frasi.py dalla bozza; qui ci sono solo la scelta delle voci, il motivo e quello che il testo breve non dice.",
+ "voci": [
+  {
+   "slot": "SPA-AR3",
+   "perche": "Annuncia con due nomi e la vulnerabilità: oggi il testo spiega il gettone con una formula.",
+   "sottile": "Quando finisce Vulnerabile: dopo gli effetti di fine turno del turno in cui giochi una carta col nome trovato (anche parata o annullata); scartarla non basta; se non ne restano copie in mano né nel mazzo, finisce alla fine del turno dopo; due Vulnerabile si moltiplicano. Il testo breve dice solo la parola chiave: la regola intera la dà già oggi il client sul segnalino «Vulnerabile» (e nell'ispezione della carta trovata), e la darà la guida delle carte stampate."
+  },
+  {
+   "slot": "SPA-BO2",
+   "perche": "La bound «perdi un quarto», fra i testi più lunghi di oggi.",
+   "sottile": "Il quarto si arrotonda per difetto (con 7 [[T]] ne perdi 1): la carta non lo ripete, lo dice una volta la guida (domanda 1). Si legge la [[T]] che hai quando la carta si risolve."
+  },
+  {
+   "slot": "SPA-BO1",
+   "perche": "Difesa di un turno su tutti e tre i tipi, oggi «HIT, CUT e POISON ricevuti ×0,75».",
+   "sottile": "Vale per i danni che arrivano dopo che la carta si è risolta, compreso il veleno di fine turno di questo turno; un attacco più veloce la precede. Ogni danno si arrotonda per difetto (7 diventa 5)."
+  },
+  {
+   "slot": "SPA-AR2",
+   "perche": "Danno che cresce con la [[V]]: oggi «pari a 6 più metà della tua [[V]] residua, arrotondata per difetto».",
+   "sottile": "«Che ti resta» vuol dire dopo aver pagato i 10 [[V]] della carta, quando si risolve. Per «Buon Vecchio Ricatto» il danno fisso di questa carta è 6."
+  },
+  {
+   "slot": "MAR-AR1",
+   "perche": "Danno che cresce più Gioca d'anticipo.",
+   "sottile": "«Prima» vuol dire in un gruppo di velocità precedente: priorità più alta, o pari priorità e più [[A]] dopo i costi; a pari priorità e pari [[A]] niente anticipo. La definizione intera sta nel glossario e nella guida; il registro del turno dice già «Gioca d'anticipo: sì/no»."
+  },
+  {
+   "slot": "GEN-05",
+   "perche": "Gli stati GOOD dell'autore: oggi «dell'autore valgono solo gli stati GOOD».",
+   "sottile": "Contano solo i tuoi stati: gli stati dell'avversario (per esempio la sua difesa) valgono tutti, positivi e negativi. Positivo e negativo sono le parole dei segnalini del client («Stato positivo», «Stato negativo»); gli equipaggiamenti del set sono tutti positivi, quindi contano."
+  },
+  {
+   "slot": "CES-AR2",
+   "perche": "Annulla e rimanda metà del colpo: classe Java, frase scritta a mano nel generatore.",
+   "sottile": "«Si risolve dopo» comprende la stessa velocità quando l'avversario siede dopo di te (R04, ordine d'inserimento). «Danni fissi scritti sulla carta»: mai la parte letta dalle risorse, dagli oggetti o da Rincara (da «SPEDIAMOTI DUNQUE IN O-AHIO» tornano 3 [[HIT]]); la metà si arrotonda per difetto e passa per gli stati come ogni danno. Una mossa già annullata da altri non rimanda niente."
+  },
+  {
+   "slot": "TOS-AR5",
+   "perche": "Travaso di [[T]] e immunità, classe Java.",
+   "sottile": "La [[T]] che dai è quella dopo aver pagato i 10 [[T]]. L'immunità che togli all'avversario e quella che ottieni a fine turno restano finché un'altra carta non le toglie. Immune vuol dire solo che la [[T]] non avvelena a fine turno: costi, guadagni e danni [[POISON]] restano."
+  },
+  {
+   "slot": "OGG-04",
+   "perche": "Immunità e timer, classe Java: il testo più lungo del campione.",
+   "sottile": "«Tutte le immunità» comprende quella del personaggio (Celestina perde l'immunità a [[T]]); «tutti gli stati» comprende equipaggiamenti e stati positivi. Dopo, la [[T]] e la [[L]] che hai tornano a fare effetto a fine turno. Da verificare nella Fase B con un test: nel motore anche Vulnerabile è fatto di stati, quindi probabilmente sparisce anche lui."
+  },
+  {
+   "slot": "GIG-BO3",
+   "perche": "Equipaggiamento che converte il danno.",
+   "sottile": "Diventati [[CUT]], i danni non li riduce più la corazza dell'alcol (che vale solo sui [[HIT]]) e ricevono gli stati sui [[CUT]]. Vale anche sui [[HIT]] che infliggi a te stesso. «PERMESSO SCUSA PUOI SMETTERLA» toglie gli equipaggiamenti."
+  },
+  {
+   "slot": "OGG-03",
+   "perche": "Doppio Malto da Discount col token che crea.",
+   "sottile": "La Bottiglia Spaccata è un oggetto come gli altri: se superi gli oggetti che puoi tenere, sparisce il più vecchio. Per usarla la consumi con una carta che bersaglia un tuo oggetto."
+  },
+  {
+   "slot": "TOKEN",
+   "perche": "Il token: oggi il client legge il testo inglese della classe Java.",
+   "sottile": "Il token non è nella bozza: i suoi numeri vengono dalla classe Java (BrokenBeerBottle), copiati nel prototipo. Nella Fase B il testo va generato con un controllo che quei numeri coincidano. Ogni Bottiglia consumata dà un equipaggiamento suo, indipendente dagli altri (R05)."
+  },
+  {
+   "slot": "PG-TOS",
+   "perche": "Un personaggio: oggi «Valori iniziali: HEALTH 65, A 35, T 20; oggetti vicini: 2.». Celestina mostra anche l'immunità.",
+   "sottile": "Le risorse che la carta non nomina partono da 0. «Puoi tenere 2 oggetti»: col terzo sparisce il più vecchio. Oggi i personaggi non hanno un testo nella bozza: lo scrive la pagina di SB-24 e lo disegna a modo suo la carta stampata."
+  }
+ ]
+}

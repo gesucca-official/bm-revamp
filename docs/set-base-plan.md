@@ -8,7 +8,7 @@ aggiornano il regolamento. La partita viva resta quella del regolamento vigente:
 >
 > - **In vigore:** partita viva al regolamento **1.14** (la 1.14 aggiunge solo la rarità P, descrittiva) e Set Base 0.1; bozza congelata **1.7** (SB-24, D166); regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101) con le correzioni di D139, D149 e D152 (Estasi GEN-24, Giro secco in PIN-AR2), set a 124 carte (D152, D155).
 > - **In corso:** [SB-25](#sb-25--testi-delle-carte-per-i-giocatori) Fase A (glossario, campione e pagina di revisione) su un esecutore Opus ([D168](#decisioni-del-proprietario)). **SB-24 chiuso** ([D167](#decisioni-del-proprietario), [report](reports/set-base/sb-24-report.md)): bozza congelata **1.7**, SHA-256 `65bc46cf…`, coi nomi e il flavour del proprietario e la rarità P (regolamento 1.14); nessun numero cambiato. **SB-23 chiuso** ([D165](#decisioni-del-proprietario), [report](reports/set-base/sb-23-report.md)): formato 20/2 confermato (a 20/2 ricerche fallite 17,6%, last resort 9,9%; il 25/3 esce dai criteri D161 sulle coppie). **SB-22 chiuso** ([D163](#decisioni-del-proprietario)): il set piace, la bozza di D162 resta in vigore.
-> - **In attesa:** consegna della Fase A di SB-25.
+> - **In attesa:** revisione del proprietario sulla [pagina di SB-25](design/set-base/sb-25/revisione.html) (glossario, campione di 13 voci, [piano della Fase B](design/set-base/sb-25-fase-a.md)), domande 1–4 della [Fase A](design/set-base/sb-25-fase-a.md#domande).
 > - **Prossimo:** revisione del proprietario su glossario e campione di SB-25, poi Fase B (tutti i testi, simboli dei danni nel client e nel PDF, controllo, prova d'ingombro). Q12 resta aperta.
 > - **Decisioni da leggere:** D165, D164, D163, D162, D161, D160, D159, D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D165).
 
@@ -303,7 +303,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-22 | Prova umana con mazzi costruiti | SB-21 | **chiuso** il 21 novembre 2026 ([D163](#decisioni-del-proprietario)): il set piace, i costruiti non bloccano ([guida](reports/set-base/sb-22-prova.md)) |
 | | SB-23 | Valutazione delle varianti del formato | SB-21 | **chiuso** il 21 novembre 2026: formato 20/2 confermato ([D165](#decisioni-del-proprietario), [report](reports/set-base/sb-23-report.md)) |
 | Congelamento | SB-24 | Flavour finale e congelamento | SB-22, SB-23 | **chiuso** il 22 novembre 2026: bozza congelata **1.7** con i nomi e il flavour del proprietario, regolamento 1.14 ([D166](#decisioni-del-proprietario), [D167](#decisioni-del-proprietario), [report](reports/set-base/sb-24-report.md)) |
-| | SB-25 | Testi delle carte per i giocatori | SB-24 | [proposta](design/set-base/sb-25-proposta.md) approvata ([D168](#decisioni-del-proprietario)): danni come simboli, flavour nel client in SB-31; Fase A in corso |
+| | SB-25 | Testi delle carte per i giocatori | SB-24 | [proposta](design/set-base/sb-25-proposta.md) approvata ([D168](#decisioni-del-proprietario)): danni come simboli, flavour nel client in SB-31; [Fase A](design/set-base/sb-25-fase-a.md) consegnata, in attesa della revisione del proprietario |
 | | SB-26 | Generazione del catalogo dal set | SB-25 |  |
 | | SB-27 | Carte d'effetto speciale in forma definitiva | SB-26 |  |
 | | SB-28 | Trasferimento nella partita viva | SB-26, SB-27 |  |
@@ -725,6 +725,8 @@ nell'ispezione a 1366×768 e 844×390. Nessun effetto cambia.
 accorcia il testo o si semplifica la carta, tornando a SB-24. Le frasi del report del server in «Ultimo turno» sono fuori, salvo Q8.
 
 **Anticipato ([D138](#decisioni-del-proprietario)).** SB-20c genera i testi stampati dai dati, con segnaposto per i simboli delle risorse disegnati dal client, così testo e dati non divergono durante SB-21 e la prova di SB-22. Restano qui il glossario, la passata di stile in italiano semplice, il campione approvato dal proprietario, il controllo automatico delle formule e la prova di ingombro.
+
+**Fase A, 22 novembre 2026 ([D168](#decisioni-del-proprietario)).** Consegnata la [proposta della Fase A](design/set-base/sb-25-fase-a.md) con la [pagina di revisione](design/set-base/sb-25/revisione.html): glossario di 35 voci, campione di 13 (le 12 della proposta più il token), testi generati dalla bozza 1.7 dal prototipo [frasi.py](design/set-base/sb-25/frasi.py), che gira su tutte le 125 voci. Segnaposto dei danni `[[HIT]]`, `[[CUT]]`, `[[POISON]]`; parole chiave e stati con le parole dei segnalini del client (Vulnerabile, stato positivo/negativo, equipaggiamento, immune). Nessun file di gioco cambiato. STOP per il proprietario: correzioni sulla pagina e domande 1–4 (arrotondamento, dove si legge la regola intera delle parole chiave, nomi degli stati, campo dello slot).
 
 ### SB-26 — Generazione del catalogo dal set
 

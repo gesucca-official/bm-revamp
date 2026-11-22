@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SB-25 · Testi delle carte</title>
+<style>
+:root{--bg:#f6f1e7;--card:#fffdf8;--ink:#2a2420;--muted:#76695e;--line:#d9cdbb;--accent:#7a2e2e;--accent2:#2f5d62;
+--ok:#2e6b3a;--okbg:#e3f1e2;--warn:#8a5a00;--warnbg:#fff1cc;--edit:#fff7d6;--paper:#f3ead2}
+@media (prefers-color-scheme: dark){:root{--bg:#1c1916;--card:#26221e;--ink:#eee6da;--muted:#a89a8a;--line:#3d362f;
+--accent:#d58b8b;--accent2:#8cc3c9;--ok:#8fd19b;--okbg:#1f3323;--warn:#f0c062;--warnbg:#3a2f12;--edit:#3a3420}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,Segoe UI,Roboto,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px}
+h1{font-size:18px;margin:0 0 6px}
+.riga{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,select,input[type=search]{font:inherit;padding:5px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+button{cursor:pointer}button:hover{border-color:var(--accent2)}
+button.primario{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+.stato{font-size:13px;color:var(--muted)}
+.sporco{background:var(--warnbg);color:var(--warn);padding:3px 8px;border-radius:6px;font-weight:600}
+.pulito{background:var(--okbg);color:var(--ok);padding:3px 8px;border-radius:6px}
+main{max-width:1200px;margin:0 auto;padding:12px 16px 80px}
+.avviso{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:10px 14px;margin:10px 0}
+.avviso.forte{border-color:var(--warn);background:var(--warnbg)}
+.promemoria{position:fixed;right:16px;bottom:16px;max-width:560px;width:calc(100% - 32px);z-index:10;background:var(--card);
+border:2px solid var(--accent);border-radius:10px;padding:12px 14px;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.promemoria pre{margin:4px 0;padding:6px 8px;background:var(--bg);border-radius:6px;overflow-x:auto;font-size:13px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.promemoria pre code{white-space:pre}
+h2{font-size:19px;margin:26px 0 8px}
+h3{font-size:16px;margin:18px 0 6px;color:var(--accent2)}
+.voce{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:10px 14px}
+.voce.ok{border-left:6px solid var(--ok)}.voce.rivedere{border-left:6px solid var(--warn)}
+.testa{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between}
+.sigla{font-weight:700;font-family:ui-monospace,Consolas,monospace}
+.etichetta{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:10px;padding:0 7px}
+table{width:100%;border-collapse:collapse;margin-top:6px}
+th{text-align:left;font-size:12px;color:var(--muted);font-weight:600;width:130px;vertical-align:top;padding:6px 6px 6px 0}
+td{vertical-align:top;padding:4px 6px}
+.oggi{color:var(--muted)}
+.testo-carta{background:var(--paper);color:#2a2420;border-radius:6px;padding:6px 9px;display:inline-block;max-width:100%}
+.sim{display:inline-block;width:1.05em;height:1.05em;vertical-align:-0.17em;margin:0 .06em}
+.sim svg{width:100%;height:100%;display:block}
+.tieni{white-space:nowrap}
+.ignoto{color:#b00;font-weight:700}
+textarea.campo{width:100%;font:inherit;padding:5px 7px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);min-height:44px;resize:vertical}
+textarea.mono{font-family:ui-monospace,Consolas,monospace;font-size:13px}
+.cambiato{background:var(--edit)!important;border-color:var(--warn)!important}
+.conta{font-size:11px;color:var(--muted)}
+.nota-voce{font-size:13px;margin-top:6px}
+.piede{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.piede textarea{flex:1 1 300px}
+button.segno.attivo.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+button.segno.attivo.rivedere{background:var(--warn);color:#fff;border-color:var(--warn)}
+.legenda{display:flex;flex-wrap:wrap;gap:6px 18px}
+.legenda code{font-size:13px}
+.piano{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 16px}
+.flavour{font-style:italic;color:var(--muted);font-size:13px}
+@media (max-width:760px){tr{display:block}th{display:block;width:auto}td{display:block}}
+</style>
+</head>
+<body>
+<header>
+  <h1>SB-25 · Testi delle carte: glossario e campione</h1>
+  <div class="riga">
+    <button class="primario" id="bSalva" title="Scrive revisione-proprietario.json nella cartella del repository">Salva</button>
+    <button id="bApri" title="Carica revisione-proprietario.json dal repository">Apri</button>
+    <button id="bEsporta" title="Scarica il JSON, da salvare sopra quello del repository">Esporta</button>
+    <span id="indicatore"></span>
+    <span class="stato" id="fileStato"></span>
+  </div>
+  <div class="riga" style="margin-top:6px">
+    <select id="fSezione"><option value="">Tutto</option><option value="glossario">Glossario</option><option value="campione">Campione</option><option value="domande">Domande</option></select>
+    <select id="fSegno">
+      <option value="">Tutti i segni</option><option value="nessuno">Senza segno</option>
+      <option value="ok">Ok</option><option value="rivedere">Da rivedere</option>
+      <option value="modificate">Corrette da me</option><option value="nota">Con nota</option>
+    </select>
+    <input type="search" id="fTesto" placeholder="Cerca…">
+    <span class="stato" id="progresso"></span>
+  </div>
+</header>
+<main>
+  <div class="avviso">
+    <b>Come si usa.</b> Per ogni voce trovi il testo di oggi e quello proposto, già coi simboli come li disegna il client.
+    Se una frase non ti piace correggila nel riquadro (i simboli si scrivono come segnaposto, vedi la legenda: sotto vedi
+    come viene), scrivi una nota e segna <b>Ok</b> o <b>Da rivedere</b>. In fondo ci sono le domande e il piano della Fase B.
+    <b>Salva</b> (Chrome o Edge) scrive il file <code id="percorso1"></code>: la prima volta scegli quel file nella cartella del
+    repository, poi la pagina lo ricorda. Con altri browser usa <b>Esporta</b> e salva il file scaricato sopra quello del repository.
+    Su un altro PC, dopo <code>git pull</code>, apri la pagina e premi <b>Apri</b> sullo stesso file (oppure rigenera la pagina:
+    <code>python -X utf8 docs/design/set-base/sb-25/genera-revisione.py</code>). Le modifiche non salvate restano anche nel browser, come rete di sicurezza.
+    <div style="margin-top:8px"><b>Legenda dei segnaposto</b> (nei testi i numeri vengono dalla bozza 1.7):</div>
+    <div class="legenda" id="legenda"></div>
+    <div id="conti" class="stato" style="margin-top:6px"></div>
+  </div>
+  <div id="avvisi"></div>
+  <div id="lista"></div>
+  <section id="sezPiano"><h2>Piano della Fase B</h2><div class="piano"><p>Un esecutore Opus, sforzo alto, passo diretto sul glossario e sul campione approvati.</p>
+<ol>
+<li><b>Frasi nel generatore.</b> Le frasi di <code>frasi.py</code>, con le correzioni del proprietario, entrano in <code>testi/testi_stampati.py</code> (al posto di <code>testo_passi</code>, <code>testo_dati</code>, <code>testo_java</code> e del dizionario <code>JAVA</code>); <code>TOKEN_SCONOSCIUTO</code> accetta <code>[[HIT]]</code>, <code>[[CUT]]</code>, <code>[[POISON]]</code>; <code>genera-testi.py --scrivi</code> riscrive <code>gui.description</code> delle 117 carte; <code>controlla-testi.py</code> resta il confronto esatto col generatore. <code>gains</code> e <code>damageAmount</code> non cambiano formato (D168 (4)).</li>
+<li><b>Slot fuori dal testo</b> nel campo deciso alla domanda 4. Chi legge oggi il prefisso: <code>SLOT</code> in <code>testi_stampati.py</code>, <code>tools/print-cards/bozza.py</code>, le pagine di revisione di SB-20a e SB-24; la Fase B li cerca tutti con <code>git grep</code> e li sposta sul campo.</li>
+<li><b>Controllo automatico</b> in <code>controlla-testi.py</code>: rifiuta «×», formule (<code>abs(</code>, <code>&gt;=</code>, <code>/</code>), sigle (HIT, CUT, POISON, HEALTH, GOOD, BAD, equip), lettere isolate fuori dai segnaposto, rimandi al regolamento («R05», «Regolamento»), «bersaglio», «autore», «a sé», il codice dello slot. Con una prova che gli faccia vedere un caso per regola.</li>
+<li><b>Personaggi, token e stati.</b> Il testo dei personaggi e del token generato dalla stessa libreria (la carta stampata lo usa; il client lo mostra in SB-31); nomi e descrizioni degli stati secondo la domanda 3; la regola intera delle parole chiave nelle pagine di guida di <code>tools/print-cards</code>, secondo la domanda 2.</li>
+<li><b>Client:</b> <code>EffectText</code> (<code>client-web/src/ui.tsx</code>) disegna <code>[[HIT]]</code>, <code>[[CUT]]</code>, <code>[[POISON]]</code> col simbolo che <code>DamageMark</code> usa già; un test unitario. Verifiche dell'area client web: <code>./client-web/run.ps1 -Task Test</code>, <code>-Task Build</code>, <code>-Task Size</code>; le Playwright dell'ispezione scelte dalla regia, a 1366×768 e 844×390; prima il jar rifatto (<code>./scripts/build.ps1 -Task Server -Offline</code>), perché la bozza cambia.</li>
+<li><b>Carta stampata:</b> <code>tools/print-cards</code> disegna i segnaposto dei danni nel testo (le forme sono già in <code>symbols_pdf.py</code>); <code>test_generator.py</code> e <code>verify.py</code> verdi, PDF della bozza renderizzato e guardato. Area non classificata: la regia ne scrive impatto e verifica nel prompt.</li>
+<li><b>Prova d'ingombro</b>, flavour compreso: tutte le carte sulla carta stampata, e nell'ispezione del client a 1366×768 e 844×390 con uno script di misura che aggiunge il flavour solo durante la prova (il client lo mostra davvero in SB-31, D168 (2)). Si accorcia solo ciò che non entra: prima la frase, poi il flavour (D166 (2)).</li>
+<li><b>Numeri invariati.</b> Una variante di <code>docs/reports/set-base/sb-24/numeri-invariati.py</code> che toglie dal confronto solo <code>gui.description</code> e il campo dello slot: tutto il resto della bozza identico alla 1.7 di SB-24. Poi <code>controlla-numeri.py</code>, <code>controlla-testi.py</code>, <code>controlla-nomi.py</code> (righe della bozza nella tabella delle aree), le righe «Sempre» (<code>git diff --check</code>, <code>check-links.py</code>, <code>check-rules.py</code>, <code>./scripts/build.ps1 -Task Test -Offline</code>), e l'impronta nuova della 1.7 registrata.</li>
+<li><b>Pagina di revisione con tutti i testi</b>, da rivedere a rate come in SB-24; STOP per l'approvazione, poi SB-25 si chiude.</li>
+</ol></div>
+  <p class="stato">Dal documento della proposta, <code>docs/design/set-base/sb-25-fase-a.md</code>.</p></section>
+</main>
+<div class="promemoria" id="promemoria" hidden></div>
+<input type="file" id="inputFile" accept=".json,application/json" hidden>
+<script>
+"use strict";
+const META = {"incorporato": null, "proposta": "498578dad6e1", "formato": "sb-25-revisione-proprietario/1", "percorso": "docs/design/set-base/sb-25/revisione-proprietario.json", "simboli": {"[[H]]": {"nome": "salute", "svg": "<svg viewBox=\"-1 -1 2 2\" aria-hidden=\"true\"><circle cx=\"-0.45\" cy=\"-0.25\" r=\"0.5\" fill=\"#a3313d\"/><circle cx=\"0.45\" cy=\"-0.25\" r=\"0.5\" fill=\"#a3313d\"/><polygon points=\"-0.93,-0.05 0.93,-0.05 0,0.95\" fill=\"#a3313d\"/><\/svg>"}, "[[A]]": {"nome": "allerta", "svg": "<svg viewBox=\"-1 -1 2 2\" aria-hidden=\"true\"><ellipse cx=\"0\" cy=\"0\" rx=\"1\" ry=\"0.62\" fill=\"#f3ead2\" stroke=\"#2f8189\" stroke-width=\"0.26\"/><circle cx=\"0\" cy=\"0\" r=\"0.36\" fill=\"#2f8189\"/><\/svg>"}, "[[V]]": {"nome": "violenza", "svg": "<svg viewBox=\"-1 -1 2 2\" aria-hidden=\"true\"><polygon points=\"0.3,-1 -0.65,0.15 -0.05,0.15 -0.3,1 0.7,-0.2 0.08,-0.2\" fill=\"#c0582c\"/><\/svg>"}, "[[T]]": {"nome": "tossicità", "svg": "<svg viewBox=\"-1 -1 2 2\" aria-hidden=\"true\" style=\"overflow:visible\"><polygon points=\"0,-1 0.6,0.12 -0.6,0.12\" fill=\"#30231e\" stroke=\"#30231e\" stroke-width=\"0.2857\" stroke-linejoin=\"round\"/><circle cx=\"0\" cy=\"0.32\" r=\"0.6\" fill=\"#30231e\" stroke=\"#30231e\" stroke-width=\"0.2857\" stroke-linejoin=\"round\"/><polygon points=\"0,-1 0.6,0.12 -0.6,0.12\" fill=\"#78962c\"/><circle cx=\"0\" cy=\"0.32\" r=\"0.6\" fill=\"#78962c\"/><\/svg>"}, "[[L]]": {"nome": "alcol", "svg": "<svg viewBox=\"-1 -1 2 2\" aria-hidden=\"true\" style=\"overflow:visible\"><rect x=\"-0.48\" y=\"-0.2\" width=\"0.96\" height=\"1.2\" rx=\"0.22\" ry=\"0.22\" fill=\"#30231e\" stroke=\"#30231e\" stroke-width=\"0.2857\" stroke-linejoin=\"round\"/><rect x=\"-0.17\" y=\"-1\" width=\"0.34\" height=\"0.9\" fill=\"#30231e\" stroke=\"#30231e\" stroke-width=\"0.2857\" stroke-linejoin=\"round\"/><rect x=\"-0.48\" y=\"-0.2\" width=\"0.96\" height=\"1.2\" rx=\"0.22\" ry=\"0.22\" fill=\"#c98d1f\"/><rect x=\"-0.17\" y=\"-1\" width=\"0.34\" height=\"0.9\" fill=\"#c98d1f\"/><\/svg>"}, "[[HIT]]": {"nome": "colpo", "svg": "<svg viewBox=\"-1 -1 2 2\" aria-hidden=\"true\"><polygon points=\"1,0 0.4804173569058691,0.1989953848298467 0.7071067811865476,0.7071067811865475 0.19899538482984672,0.4804173569058691 6.123233995736766e-17,1 -0.19899538482984666,0.4804173569058691 -0.7071067811865475,0.7071067811865476 -0.4804173569058691,0.19899538482984674 -1,1.2246467991473532e-16 -0.4804173569058692,-0.19899538482984663 -0.7071067811865477,-0.7071067811865475 -0.198995384829847,-0.480417356905869 -1.8369701987210297e-16,-1 0.1989953848298468,-0.48041735690586906 0.7071067811865474,-0.7071067811865477 0.480417356905869,-0.19899538482984702\" fill=\"#a3313d\"/><polygon points=\"0.52,0 0.24981702559105196,0.10347760011152028 0.36769552621700474,0.3676955262170047 0.10347760011152031,0.24981702559105196 3.1840816777831187e-17,0.52 -0.10347760011152027,0.24981702559105196 -0.3676955262170047,0.36769552621700474 -0.24981702559105196,0.10347760011152032 -0.52,6.368163355566237e-17 -0.24981702559105198,-0.10347760011152025 -0.3676955262170048,-0.3676955262170047 -0.10347760011152043,-0.2498170255910519 -9.552245033349355e-17,-0.52 0.10347760011152035,-0.24981702559105193 0.36769552621700463,-0.3676955262170048 0.2498170255910519,-0.10347760011152045\" fill=\"#f2c84b\"/><\/svg>"}, "[[CUT]]": {"nome": "taglio", "svg": "<svg viewBox=\"-1 -1 2 2\" aria-hidden=\"true\"><polygon points=\"0.7212489168102784,-0.6929646455628167 0.6010407640085654,-0.17677669529663698 0.12727922061357855,0.2969848480983499 -0.26870057685088805,-0.09899494936611664 0.06363961030678922,-0.43133513652379396 0.42426406871192845,-0.5939696961966999\" fill=\"#4d6070\"/><polygon points=\"-0.43840620433565947,-0.15556349186104038 0.18384776310850237,0.4666904755831214 0.08485281374238571,0.565685424949238 -0.5374011537017761,-0.05656854249492371\" fill=\"#4d6070\"/><polygon points=\"-0.43840620433565947,0.15556349186104046 -0.1272792206135785,0.4666904755831214 -0.5091168824543142,0.9050966799187808 -0.8768124086713189,0.5374011537017762\" fill=\"#4d6070\"/><polygon points=\"0.6363961030678927,-0.4949747468305834 0.5586143571373725,-0.2899137802864845 0.148492424049175,0.12020815280171307 0.08485281374238571,0.056568542494923796\" fill=\"#bfe5f6\"/><\/svg>"}, "[[POISON]]": {"nome": "veleno", "svg": "<svg viewBox=\"-1 -1 2 2\" aria-hidden=\"true\"><polygon points=\"0,-1 0.62,0.1 0.62,0.45 0.38,0.82 0,0.95 -0.38,0.82 -0.62,0.45 -0.62,0.1\" fill=\"#5f8a1f\"/><polygon points=\"-0.46,0.14 -0.46,0.44 -0.3,0.68 -0.2,0.62 -0.34,0.4 -0.34,0.18\" fill=\"#b4e06a\"/><\/svg>"}}, "gruppi": ["Simboli", "Chi riceve", "Quantità e fattori", "Durate e tempi", "Parole chiave", "Stati", "Fuori dal testo", "Testi fuori dalle carte"]};
+const DATI = [{"id": "G01", "sezione": "glossario", "gruppo": "Simboli", "titolo": "Risorse", "oggi": "[[H]] [[A]] [[V]] [[T]] [[L]] nei testi delle carte; HEALTH, A, V nei personaggi", "proposta": "Sempre simboli, col numero davanti: +5 [[V]], perdi 5 [[A]]. Mai la lettera, mai il nome inglese.", "perche": "Come oggi (D138); i personaggi si allineano."}, {"id": "G02", "sezione": "glossario", "gruppo": "Simboli", "titolo": "Tipi di danno", "oggi": "2 HIT al bersaglio · 10 POISON al bersaglio", "proposta": "Simboli disegnati dal client, segnaposto [[HIT]], [[CUT]], [[POISON]]: 2 [[HIT]] all'avversario · 10 [[POISON]] all'avversario.", "perche": "D168 (1). Il segnaposto è il nome del tipo nei dati, così non si confonde con [[H]]; il lettore di schermo dice «colpo», «taglio», «veleno», i nomi che il client usa già."}, {"id": "G03", "sezione": "glossario", "gruppo": "Simboli", "titolo": "Danni senza tipo", "oggi": "HIT, CUT e POISON ricevuti ×0,75", "proposta": "«danni» vuol dire tutti e tre i tipi: subisci un quarto di danni in meno. Con uno o due tipi, i simboli: subisci metà dei [[HIT]] e [[CUT]].", "perche": "Una parola sola dove valgono tutti; il simbolo dove conta il tipo."}, {"id": "G04", "sezione": "glossario", "gruppo": "Simboli", "titolo": "Attacco", "oggi": "se era un colpo", "proposta": "Una carta che fa danni è un «attacco»: se era un attacco.", "perche": "«colpo» è il nome di [[HIT]]: usarlo per tutti i danni confonde."}, {"id": "G05", "sezione": "glossario", "gruppo": "Chi riceve", "titolo": "Chi gioca la carta", "oggi": "+5 [[V]] a sé · 5 HIT a sé · dell'autore", "proposta": "Tu, sottinteso: +5 [[V]] · perdi 5 [[A]] · subisci 5 [[HIT]] · i tuoi stati.", "perche": "Niente «a sé» né «autore»: la carta parla a chi la gioca."}, {"id": "G06", "sezione": "glossario", "gruppo": "Chi riceve", "titolo": "L'avversario", "oggi": "al bersaglio · il bersaglio perde · Il bersaglio:", "proposta": "l'avversario: 20 [[HIT]] all'avversario · l'avversario perde 10 [[A]]. In tutti contro tutti è quello che scegli.", "perche": "Niente «bersaglio» da manuale."}, {"id": "G07", "sezione": "glossario", "gruppo": "Chi riceve", "titolo": "Oggetti", "oggi": "un proprio oggetto · un oggetto lontano · vicino a sé", "proposta": "un tuo oggetto · un oggetto dell'avversario · accanto a te.", "perche": "«Vicino» e «lontano» sono parole del regolamento; il giocatore vede di chi è l'oggetto."}, {"id": "G08", "sezione": "glossario", "gruppo": "Quantità e fattori", "titolo": "Quantità letta dalle risorse", "oggi": "pari a 6 più metà della tua [[V]] residua, arrotondata per difetto", "proposta": "[[HIT]] all'avversario pari a 6 più metà della [[V]] che ti resta. Senza costo nella stessa risorsa: metà della tua [[V]].", "perche": "«che ti resta» dice che si legge dopo aver pagato la carta, quando si risolve; «la tua» quando la carta non costa quella risorsa."}, {"id": "G09", "sezione": "glossario", "gruppo": "Quantità e fattori", "titolo": "Arrotondamento", "oggi": "arrotondata per difetto, ripetuto su ogni carta", "proposta": "Una volta nella guida: metà e quarti si arrotondano sempre per difetto. La carta non lo ripete.", "perche": "È vero ovunque (R05 tronca, R06 divide per intero, le formule sono intere): domanda 1."}, {"id": "G10", "sezione": "glossario", "gruppo": "Quantità e fattori", "titolo": "×0,25", "oggi": "5 [[V]]: HIT ricevuto ×0,25 in questo turno; +5 [[A]] a sé.", "proposta": "In questo turno subisci solo un quarto dei [[HIT]].", "perche": "D161 (3): fattori a parole. Una carta oggi (GENTILE IL TUO CAREZZO)."}, {"id": "G11", "sezione": "glossario", "gruppo": "Quantità e fattori", "titolo": "×0,5", "oggi": "5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +5 [[A]] a sé.", "proposta": "In questo turno subisci metà dei [[HIT]] e [[CUT]]. Per i valori: metà della tua [[T]].", "perche": "D161 (3)."}, {"id": "G12", "sezione": "glossario", "gruppo": "Quantità e fattori", "titolo": "×0,75", "oggi": "HIT, CUT e POISON ricevuti ×0,75 in questo turno", "proposta": "In questo turno subisci un quarto di danni in meno. Su un tipo convertito: valgono un quarto in meno.", "perche": "D161 (3); la frase è quella dell'esempio della proposta approvata."}, {"id": "G13", "sezione": "glossario", "gruppo": "Quantità e fattori", "titolo": "×1,25", "oggi": "HIT e CUT ricevuti ×1,25 per 2 turni", "proposta": "In questo turno e nel prossimo subisci un quarto di [[HIT]] e [[CUT]] in più.", "perche": "D161 (3)."}, {"id": "G14", "sezione": "glossario", "gruppo": "Quantità e fattori", "titolo": "×1,5", "oggi": "equip, HIT inflitto ×1,5", "proposta": "infliggi metà [[HIT]] in più · valgono metà in più.", "perche": "D161 (3)."}, {"id": "G15", "sezione": "glossario", "gruppo": "Quantità e fattori", "titolo": "×2", "oggi": "(nessuna carta della 1.7)", "proposta": "subisci il doppio dei danni · valgono il doppio. Per le risorse spese: il doppio della [[L]] spesa.", "perche": "D161 (3): pronto se serve."}, {"id": "G16", "sezione": "glossario", "gruppo": "Quantità e fattori", "titolo": "Costo", "oggi": "10 [[V]]: …", "proposta": "Invariato: il costo in testa coi due punti, poi il testo in minuscolo: 10 [[V]]: 20 [[HIT]] all'avversario.", "perche": "È già chiaro e il client lo disegna anche come monete."}, {"id": "G17", "sezione": "glossario", "gruppo": "Durate e tempi", "titolo": "Durata 0", "oggi": "in questo turno", "proposta": "in questo turno (in testa alla frase): In questo turno subisci un quarto di danni in meno.", "perche": "R05: d=0 copre il turno in corso."}, {"id": "G18", "sezione": "glossario", "gruppo": "Durate e tempi", "titolo": "Durata 1", "oggi": "per 2 turni", "proposta": "in questo turno e nel prossimo.", "perche": "Il piano chiede di rendere chiaro che durata 2 vuol dire tre turni: si dice quali."}, {"id": "G19", "sezione": "glossario", "gruppo": "Durate e tempi", "titolo": "Durata 2 o più", "oggi": "Consumato: equip, CUT ricevuto ×0,75 per 3 turni.", "proposta": "per 3 turni, contando questo,", "perche": "Toglie il dubbio sul turno in corso."}, {"id": "G20", "sezione": "glossario", "gruppo": "Durate e tempi", "titolo": "Timer", "oggi": "timer 5 che toglie tutte le immunità e gli stati, poi 20 POISON", "proposta": "Alla fine del quinto turno, contando questo, perdi tutte le immunità e tutti gli stati, poi subisci 20 [[POISON]]. Con 1: a fine turno.", "perche": "R06: il timer conta anche il turno in cui nasce. Sul tavolo il segnalino resta «Timer», come oggi."}, {"id": "G21", "sezione": "glossario", "gruppo": "Parole chiave", "titolo": "Sottotipo (Bound, Basic, Last resort)", "oggi": "Bound: … · Basic: … · Last resort: …", "proposta": "Esce dal testo: il telaio dice già AZIONE LEGATA, AZIONE BASE, ULTIMA RISORSA (client) e LEGATA AL PERSONAGGIO (carta stampata). A voce: legata, base, ultima risorsa.", "perche": "Il testo dice cosa fa la carta, non cos'è; risparmia spazio sulle bound."}, {"id": "G22", "sezione": "glossario", "gruppo": "Parole chiave", "titolo": "Consumato", "oggi": "Consumato: +10 [[L]] · In campo: a fine turno −4 [[A]]", "proposta": "Quando lo consumi: +10 [[L]] · In campo, a fine turno: perdi 4 [[A]].", "perche": "Dice quando succede, con parole normali."}, {"id": "G23", "sezione": "glossario", "gruppo": "Parole chiave", "titolo": "Annuncia", "oggi": "Annuncia «X» o «Y». Se lo trovi: … Se non lo trovi: …", "proposta": "Invariata (D97). Definizione: al posto della pesca cerchi nel mazzo una carta col nome che scegli fra i due; se la trovi va in mano e la mostri.", "perche": "Già approvata e già corta."}, {"id": "G24", "sezione": "glossario", "gruppo": "Parole chiave", "titolo": "Vulnerabile (il gettone)", "oggi": "gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5)", "proposta": "Se lo trovi: +25 [[V]], +15 [[A]] e diventi Vulnerabile. Definizione: subisci metà danni in più, anche dal veleno di fine turno, fino alla fine del turno in cui giochi la carta trovata.", "perche": "È la parola del segnalino del client («Stato negativo: Vulnerabile»), che già spiega la regola intera. Tutte le 12 carte della 1.7 hanno ×1,5 su tutti i tipi: il numero non serve sulla carta."}, {"id": "G25", "sezione": "glossario", "gruppo": "Parole chiave", "titolo": "Gioca d'anticipo", "oggi": "Gioca d'anticipo: 5 CUT al bersaglio", "proposta": "Invariata (D97), sempre in fondo al testo. Definizione: se la tua mossa si risolve prima di quella dell'avversario (priorità più alta, o pari priorità e più [[A]] dopo i costi), succede anche questo.", "perche": "In fondo, così non sembra reggere le frasi che seguono; il prototipo la sposta solo se l'esito non cambia."}, {"id": "G26", "sezione": "glossario", "gruppo": "Parole chiave", "titolo": "Rincara", "oggi": "Rincara 5 (2 a sé)", "proposta": "Rincara 5 (2 a te). Definizione: per ogni volta che hai già giocato questa carta, +5 ai danni all'avversario e +2 a quelli che subisci tu.", "perche": "Invariata (D95, D97), tranne «a sé»."}, {"id": "G27", "sezione": "glossario", "gruppo": "Parole chiave", "titolo": "Equipaggiamento", "oggi": "equip, HIT inflitto ×0,75 e convertito in CUT per 2 turni", "proposta": "In questo turno e nel prossimo i tuoi [[HIT]] diventano [[CUT]] e valgono un quarto in meno (equipaggiamento). Con uso singolo: dopo il primo uso dura solo fino a fine turno.", "perche": "«Equipaggiamento» è la parola del regolamento (R01a) e del segnalino del client; serve perché c'è una carta che toglie gli equipaggiamenti."}, {"id": "G28", "sezione": "glossario", "gruppo": "Parole chiave", "titolo": "Contromossa", "oggi": "Annulla la mossa del bersaglio se arriva dopo", "proposta": "Se la mossa dell'avversario si risolve dopo la tua, la annulli.", "perche": "«Arriva dopo» è vago: conta l'ordine di risoluzione (R04)."}, {"id": "G29", "sezione": "glossario", "gruppo": "Stati", "titolo": "Stati GOOD e BAD", "oggi": "dell'autore valgono solo gli stati GOOD", "proposta": "stati positivi e negativi: Su questo danno contano solo i tuoi stati positivi.", "perche": "Le parole dei segnalini del client («Stato positivo», «Stato negativo»)."}, {"id": "G30", "sezione": "glossario", "gruppo": "Stati", "titolo": "Immunità", "oggi": "immunità a [[T]] · immunità all'effetto periodico di [[L]]", "proposta": "immune a [[T]]. Definizione: la tua [[T]] non fa effetto a fine turno; costi, guadagni, perdite e danni [[POISON]] restano.", "perche": "Come il segnalino del client («Immune a tossicità»); il limite lo dice il regolamento (R01)."}, {"id": "G31", "sezione": "glossario", "gruppo": "Stati", "titolo": "Nomi e descrizioni degli stati", "oggi": "MI TENGO AL BANCO - HIT / - CUT / - POISON · «Hit Damage taken: x0.75»", "proposta": "Un nome solo, senza il tipo inglese in coda (MI TENGO AL BANCO); la descrizione generata con le frasi del glossario (subisci un quarto di danni in meno), in italiano.", "perche": "Il client mostra nome e descrizione sul segnalino: oggi una è in inglese. Domanda 3."}, {"id": "G32", "sezione": "glossario", "gruppo": "Fuori dal testo", "titolo": "Codice dello slot", "oggi": "SPA-AR3 · Annuncia…", "proposta": "Esce dal testo del giocatore e resta in un campo suo, che gli strumenti leggono.", "perche": "D168 (4)."}, {"id": "G33", "sezione": "glossario", "gruppo": "Fuori dal testo", "titolo": "Rimandi al regolamento e formule", "oggi": "regulation 1.1 R05 · ×0,75 · abs(T)", "proposta": "Mai nel testo del giocatore: niente sigle R05, formule, fattori con ×, lettere isolate. Un controllo automatico li rifiuta (Fase B).", "perche": "Piano di SB-25, completamento verificabile."}, {"id": "G34", "sezione": "glossario", "gruppo": "Testi fuori dalle carte", "titolo": "Personaggio", "oggi": "Valori iniziali: HEALTH 70, A 20, V 25; oggetti vicini: 1.", "proposta": "Parti con 70 [[H]], 20 [[A]] e 25 [[V]]. Puoi tenere 1 oggetto. Con un'immunità: Immune a [[T]].", "perche": "Le risorse non nominate partono da 0 (R01)."}, {"id": "G35", "sezione": "glossario", "gruppo": "Testi fuori dalle carte", "titolo": "Token", "oggi": "Equip: Hit Damage x1.5, converted to Cut. … regulation 1.1 R05.", "proposta": "Quando lo consumi: i tuoi [[HIT]] diventano [[CUT]] e valgono metà in più (equipaggiamento). Dopo il primo uso dura solo fino a fine turno.", "perche": "Oggi il client legge la frase inglese della classe Java."}, {"id": "SPA-AR3", "sezione": "campione", "gruppo": "Campione", "titolo": "PAZIENZA: FINITA", "oggi": "Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO». Se lo trovi: +25 [[V]], +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]], +5 [[A]].", "proposta": "Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO». Se lo trovi: +25 [[V]], +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]], +5 [[A]].", "perche": "Annuncia con due nomi e la vulnerabilità: oggi il testo spiega il gettone con una formula.", "sottile": "Quando finisce Vulnerabile: dopo gli effetti di fine turno del turno in cui giochi una carta col nome trovato (anche parata o annullata); scartarla non basta; se non ne restano copie in mano né nel mazzo, finisce alla fine del turno dopo; due Vulnerabile si moltiplicano. Il testo breve dice solo la parola chiave: la regola intera la dà già oggi il client sul segnalino «Vulnerabile» (e nell'ispezione della carta trovata), e la darà la guida delle carte stampate.", "flavour": "«PAZIENZA E SOLDI? MAI AVUTI. IN COMPENSO, HO TANTE VITE DA CESSARE NEL FUTURO PROSSIMO, A COMINCIARE DALLA TUA.»"}, {"id": "SPA-BO2", "sezione": "campione", "gruppo": "Campione", "titolo": "SVEGLIAMOCI - MA TU NO", "oggi": "Bound: Perdita di [[T]] a sé pari a un quarto della tua [[T]] residua, arrotondato per difetto; Perdita di [[L]] a sé pari a un quarto della tua [[L]] residua, arrotondato per difetto; 2 HIT al bersaglio.", "proposta": "Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario.", "perche": "La bound «perdi un quarto», fra i testi più lunghi di oggi.", "sottile": "Il quarto si arrotonda per difetto (con 7 [[T]] ne perdi 1): la carta non lo ripete, lo dice una volta la guida (domanda 1). Si legge la [[T]] che hai quando la carta si risolve.", "flavour": "«ORSÙ SVEGLIAMOCI - MA TU NO.»"}, {"id": "SPA-BO1", "sezione": "campione", "gruppo": "Campione", "titolo": "LIEVE FASTIDIO", "oggi": "Bound: +5 [[V]] a sé; HIT, CUT e POISON ricevuti ×0,75 in questo turno.", "proposta": "+5 [[V]]. In questo turno subisci un quarto di danni in meno.", "perche": "Difesa di un turno su tutti e tre i tipi, oggi «HIT, CUT e POISON ricevuti ×0,75».", "sottile": "Vale per i danni che arrivano dopo che la carta si è risolta, compreso il veleno di fine turno di questo turno; un attacco più veloce la precede. Ogni danno si arrotonda per difetto (7 diventa 5).", "flavour": "«IRRITARMI NON FARÀ ALTRO CHE ACCORCIARTI L'ESISTENZA - CHE DI PER SÉ È UN NOBILE OBIETTIVO.»"}, {"id": "SPA-AR2", "sezione": "campione", "gruppo": "Campione", "titolo": "SPEDIAMOTI DUNQUE IN O-AHIO", "oggi": "10 [[V]]: HIT al bersaglio pari a 6 più metà della tua [[V]] residua, arrotondata per difetto.", "proposta": "10 [[V]]: [[HIT]] all'avversario pari a 6 più metà della [[V]] che ti resta.", "perche": "Danno che cresce con la [[V]]: oggi «pari a 6 più metà della tua [[V]] residua, arrotondata per difetto».", "sottile": "«Che ti resta» vuol dire dopo aver pagato i 10 [[V]] della carta, quando si risolve. Per «Buon Vecchio Ricatto» il danno fisso di questa carta è 6.", "flavour": "«MAL VIAGGIO, E NON SCRIVERMI QUANDO ATTERRI.»"}, {"id": "MAR-AR1", "sezione": "campione", "gruppo": "Campione", "titolo": "Lazo del Rider", "oggi": "20 [[A]]: CUT al bersaglio pari a 20 più metà della tua [[A]] residua, arrotondata per difetto. Gioca d'anticipo: 5 CUT al bersaglio.", "proposta": "20 [[A]]: [[CUT]] all'avversario pari a 20 più metà della [[A]] che ti resta. Gioca d'anticipo: 5 [[CUT]] all'avversario.", "perche": "Danno che cresce più Gioca d'anticipo.", "sottile": "«Prima» vuol dire in un gruppo di velocità precedente: priorità più alta, o pari priorità e più [[A]] dopo i costi; a pari priorità e pari [[A]] niente anticipo. La definizione intera sta nel glossario e nella guida; il registro del turno dice già «Gioca d'anticipo: sì/no».", "flavour": "«La cinghia dello zaino avrebbe un'altra funzione, ma per combattere gli illuminati bisogna adattarsi.»"}, {"id": "GEN-05", "sezione": "campione", "gruppo": "Campione", "titolo": "GABBIANO, DUNQUE VOLIAMOTI", "oggi": "10 [[V]]: 20 HIT al bersaglio; dell'autore valgono solo gli stati GOOD.", "proposta": "10 [[V]]: 20 [[HIT]] all'avversario. Su questo danno contano solo i tuoi stati positivi.", "perche": "Gli stati GOOD dell'autore: oggi «dell'autore valgono solo gli stati GOOD».", "sottile": "Contano solo i tuoi stati: gli stati dell'avversario (per esempio la sua difesa) valgono tutti, positivi e negativi. Positivo e negativo sono le parole dei segnalini del client («Stato positivo», «Stato negativo»); gli equipaggiamenti del set sono tutti positivi, quindi contano.", "flavour": "«QUELLE TUE SOPRACCIGLIA MODELLATE PARLANO CHIARO: PROIETTIAMOTI DUNQUE!»"}, {"id": "CES-AR2", "sezione": "campione", "gruppo": "Campione", "titolo": "Buon Vecchio Ricatto", "oggi": "15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo.", "proposta": "15 [[A]]: se la mossa dell'avversario si risolve dopo la tua, la annulli. Se era un attacco, gli rimandi metà dei danni fissi scritti sulla sua carta, dello stesso tipo.", "perche": "Annulla e rimanda metà del colpo: classe Java, frase scritta a mano nel generatore.", "sottile": "«Si risolve dopo» comprende la stessa velocità quando l'avversario siede dopo di te (R04, ordine d'inserimento). «Danni fissi scritti sulla carta»: mai la parte letta dalle risorse, dagli oggetti o da Rincara (da «SPEDIAMOTI DUNQUE IN O-AHIO» tornano 3 [[HIT]]); la metà si arrotonda per difetto e passa per gli stati come ogni danno. Una mossa già annullata da altri non rimanda niente.", "flavour": "«So cosa hai fatto a Ferragosto. Non ti conviene darmi un motivo per renderlo pubblico.»"}, {"id": "TOS-AR5", "sezione": "campione", "gruppo": "Campione", "titolo": "Trascinare nel Tunnel", "oggi": "10 [[T]]: Trasferisci tutta la tua [[T]] residua al bersaglio e togligli l'immunità a [[T]]. 10 POISON al bersaglio. A fine turno ottieni l'immunità a [[T]].", "proposta": "10 [[T]]: dai all'avversario tutta la [[T]] che ti resta e togligli l'immunità a [[T]]. 10 [[POISON]] all'avversario. A fine turno diventi immune a [[T]].", "perche": "Travaso di [[T]] e immunità, classe Java.", "sottile": "La [[T]] che dai è quella dopo aver pagato i 10 [[T]]. L'immunità che togli all'avversario e quella che ottieni a fine turno restano finché un'altra carta non le toglie. Immune vuol dire solo che la [[T]] non avvelena a fine turno: costi, guadagni e danni [[POISON]] restano.", "flavour": "«Che vuoi che sia? Solo una volta, tanto per provare. La roba ce la metto io, almeno per questa volta...»"}, {"id": "OGG-04", "sezione": "campione", "gruppo": "Campione", "titolo": "Mescolone Micidiale", "oggi": "Consumato: immunità a [[T]] e [[L]]; +20 [[L]], +20 [[T]]; timer 5 che toglie tutte le immunità e gli stati, poi 20 POISON.", "proposta": "Quando lo consumi: diventi immune a [[T]] e [[L]]; +20 [[L]], +20 [[T]]. Alla fine del quinto turno, contando questo, perdi tutte le immunità e tutti gli stati, poi subisci 20 [[POISON]].", "perche": "Immunità e timer, classe Java: il testo più lungo del campione.", "sottile": "«Tutte le immunità» comprende quella del personaggio (Celestina perde l'immunità a [[T]]); «tutti gli stati» comprende equipaggiamenti e stati positivi. Dopo, la [[T]] e la [[L]] che hai tornano a fare effetto a fine turno. Da verificare nella Fase B con un test: nel motore anche Vulnerabile è fatto di stati, quindi probabilmente sparisce anche lui.", "flavour": "Ricetta segreta: quello che resta nei bicchieri a fine serata."}, {"id": "GIG-BO3", "sezione": "campione", "gruppo": "Campione", "titolo": "Affilare gli Utensili", "oggi": "Bound: equip, HIT inflitto ×0,75 e convertito in CUT per 2 turni.", "proposta": "In questo turno e nel prossimo i tuoi [[HIT]] diventano [[CUT]] e valgono un quarto in meno (equipaggiamento).", "perche": "Equipaggiamento che converte il danno.", "sottile": "Diventati [[CUT]], i danni non li riduce più la corazza dell'alcol (che vale solo sui [[HIT]]) e ricevono gli stati sui [[CUT]]. Vale anche sui [[HIT]] che infliggi a te stesso. «PERMESSO SCUSA PUOI SMETTERLA» toglie gli equipaggiamenti.", "flavour": "Al tornio ha imparato una cosa: gli utensili non si buttano via, si affilano alla mola. Il principio si applica a qualunque cosa."}, {"id": "OGG-03", "sezione": "campione", "gruppo": "Campione", "titolo": "Doppio Malto da Discount", "oggi": "Consumato: +10 [[L]]; crea il token «Bottiglia Spaccata» vicino a sé.", "proposta": "Quando lo consumi: +10 [[L]]. Accanto a te compare una Bottiglia Spaccata.", "perche": "Doppio Malto da Discount col token che crea.", "sottile": "La Bottiglia Spaccata è un oggetto come gli altri: se superi gli oggetti che puoi tenere, sparisce il più vecchio. Per usarla la consumi con una carta che bersaglia un tuo oggetto.", "flavour": "Minima spesa, massima resa. Non farti beccare: al Serraglio non piace chi si porta il bere da casa."}, {"id": "TOKEN", "sezione": "campione", "gruppo": "Campione", "titolo": "Bottiglia Spaccata", "oggi": "Equip: Hit Damage x1.5, converted to Cut. Removed at turn end after use; may apply again that turn. Independent status per application: regulation 1.1 R05.", "proposta": "Quando lo consumi: i tuoi [[HIT]] diventano [[CUT]] e valgono metà in più (equipaggiamento). Dopo il primo uso dura solo fino a fine turno.", "perche": "Il token: oggi il client legge il testo inglese della classe Java.", "sottile": "Il token non è nella bozza: i suoi numeri vengono dalla classe Java (BrokenBeerBottle), copiati nel prototipo. Nella Fase B il testo va generato con un controllo che quei numeri coincidano. Ogni Bottiglia consumata dà un equipaggiamento suo, indipendente dagli altri (R05).", "flavour": ""}, {"id": "PG-TOS", "sezione": "campione", "gruppo": "Campione", "titolo": "Celestina Bucatina", "oggi": "Valori iniziali: HEALTH 65, A 35, T 20; oggetti vicini: 2.", "proposta": "Parti con 65 [[H]], 35 [[A]] e 20 [[T]]. Puoi tenere 2 oggetti. Immune a [[T]].", "perche": "Un personaggio: oggi «Valori iniziali: HEALTH 65, A 35, T 20; oggetti vicini: 2.». Celestina mostra anche l'immunità.", "sottile": "Le risorse che la carta non nomina partono da 0. «Puoi tenere 2 oggetti»: col terzo sparisce il più vecchio. Oggi i personaggi non hanno un testo nella bozza: lo scrive la pagina di SB-24 e lo disegna a modo suo la carta stampata.", "flavour": "«Se solo tu aprissi gli occhi e vedessi che cosa è davvero la vita, ti accorgeresti che l'unica cosa sensata da fare è metterti qui accanto a me.»"}];
+const DOMANDE = [{"id": "D1", "testo": "Le carte non dicono più «arrotondato per difetto»: la guida lo dice una volta per tutte («metà e quarti si arrotondano sempre per difetto»), ed è vero per ogni carta. Va bene, o lo vuoi ancora su ogni carta (circa 20 caratteri in più per ogni quantità, su 11 carte)?", "titolo": "Arrotondamento."}, {"id": "D2", "testo": "Vulnerabile, Gioca d'anticipo, Rincara, Annuncia, equipaggiamento, immune. Proposta: nella Fase B nelle pagine di guida della carta stampata; nel client restano i segnalini, che già spiegano Vulnerabile, immunità, equipaggiamenti e timer; un promemoria per carta nell'ispezione va in SB-31. In alternativa il promemoria fra parentesi sulla carta stessa, più lungo.", "titolo": "Dove si legge la regola intera delle parole chiave."}, {"id": "D3", "testo": "Oggi sono nella bozza come «MI TENGO AL BANCO - HIT» e «Hit Damage taken: x0.75», e il client li mostra sui segnalini. Li rifà la Fase B (un nome solo senza il tipo inglese, descrizione italiana generata)? Cambia dati della bozza che il motore porta al client, nessun numero.", "titolo": "Nomi e descrizioni degli stati."}, {"id": "D4", "testo": "(a) Un campo gui.slot nella bozza: il caricatore del server (Draft.java, area playground) oggi rifiuta i campi che non conosce, quindi va cambiato, con le verifiche di quell'area. (b) Un file a parte, binding → slot, che leggono gli strumenti: il server non si tocca. Propongo (b).", "titolo": "Dove va il codice dello slot."}];
+const INCORPORATO = {"formato": "sb-25-revisione-proprietario/1", "proposta": null, "aggiornato": null, "voci": {}};
+const CHIAVE_LS = "bm-sb25-revisione";
+const PER_ID = Object.fromEntries(DATI.map(d => [d.id, d]));
+let lavoro = normalizza(INCORPORATO);
+let sporco = false;
+let toccate = new Set();
+let maniglia = null, manigliaRicordata = null;
+
+function $(id) { return document.getElementById(id); }
+function adesso() { return new Date().toISOString(); }
+function esc(s) { return String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+// I segnaposto come il client: numero, simbolo e punteggiatura vicina restano insieme quando la riga va a capo.
+function disegna(testo) {
+  const t = esc(testo);
+  return t.replace(/([+−-]?\d+ )?\[\[([A-Z]+)\]\]([.,;:!?)»])?/g, (tutto, num, k, punt) => {
+    const s = META.simboli["[[" + k + "]]"];
+    if (!s) return `<span class="ignoto" title="segnaposto sconosciuto">${tutto}</span>`;
+    return `<span class="tieni">${num || ""}<span class="sim" role="img" aria-label="${esc(s.nome)}" title="${esc(s.nome)} · [[${k}]]">${s.svg}</span>${punt || ""}</span>`;
+  });
+}
+// Lunghezza come la vede il giocatore: ogni simbolo conta un carattere.
+function lunghezza(testo) { return String(testo).replace(/\[\[[A-Z]+\]\]/g, "#").length; }
+
+function normalizza(o) {
+  const out = {formato: META.formato, proposta: META.proposta, aggiornato: null, voci: {}};
+  if (o && typeof o === "object") {
+    if (o.formato && o.formato !== META.formato) throw new Error("formato inatteso: " + o.formato);
+    out.aggiornato = o.aggiornato || null;
+    if (o.proposta) out.propostaFile = o.proposta;
+    for (const [id, v] of Object.entries(o.voci || {})) if (v && typeof v === "object") out.voci[id] = {...v};
+  }
+  return out;
+}
+function unisci(a, b) {
+  const out = normalizza(a); let prese = 0;
+  for (const [id, v] of Object.entries(b.voci)) {
+    const mia = out.voci[id];
+    if (!mia || (v.aggiornato || "") > (mia.aggiornato || "")) { out.voci[id] = {...v}; prese++; }
+  }
+  out.aggiornato = [a.aggiornato, b.aggiornato].filter(Boolean).sort().pop() || null;
+  return {lavoro: out, prese};
+}
+function salvaLocale() { try { localStorage.setItem(CHIAVE_LS, JSON.stringify({sporco, toccate: [...toccate], lavoro})); } catch (e) {} }
+function leggiLocale() { try { const t = localStorage.getItem(CHIAVE_LS); return t ? JSON.parse(t) : null; } catch (e) { return null; } }
+
+function valore(id, campo) {
+  const v = lavoro.voci[id];
+  if (v && campo in v) return v[campo];
+  if (campo === "testo") return PER_ID[id] ? PER_ID[id].proposta : "";
+  return "";
+}
+function corretta(id) { const v = lavoro.voci[id]; return !!(v && "testo" in v); }
+function imposta(id, campo, val) {
+  const v = lavoro.voci[id] || (lavoro.voci[id] = {});
+  if (campo === "testo" && PER_ID[id] && val === PER_ID[id].proposta) delete v.testo;
+  else if (val) v[campo] = val; else delete v[campo];
+  v.aggiornato = adesso(); lavoro.aggiornato = v.aggiornato;
+  toccate.add(id); segnaSporco(true);
+}
+function segnaSporco(s) {
+  sporco = s; if (!s) toccate.clear(); salvaLocale();
+  const i = $("indicatore"); i.className = s ? "sporco" : "pulito";
+  i.textContent = s ? "● Modifiche non salvate nel file" : "Tutto salvato nel file";
+  aggiornaProgresso();
+}
+function testoFile() {
+  const out = {formato: META.formato, proposta: META.proposta, aggiornato: lavoro.aggiornato || adesso(), voci: {}};
+  for (const id of Object.keys(lavoro.voci).sort()) {
+    const v = lavoro.voci[id], pulita = {};
+    for (const k of ["testo", "risposta", "nota", "stato", "aggiornato"]) if (k in v && v[k] !== "") pulita[k] = v[k];
+    if (Object.keys(pulita).length) out.voci[id] = pulita;
+  }
+  return JSON.stringify(out, null, 1) + "\n";
+}
+
+// ---- File: Salva, Apri, Esporta (come la pagina di SB-24)
+const IDB = {
+  apri() { return new Promise((ok, ko) => { const r = indexedDB.open("bm-sb25", 1);
+    r.onupgradeneeded = () => r.result.createObjectStore("maniglie"); r.onsuccess = () => ok(r.result); r.onerror = () => ko(r.error); }); },
+  async metti(v) { const db = await this.apri(); return new Promise((ok, ko) => { const t = db.transaction("maniglie", "readwrite");
+    t.objectStore("maniglie").put(v, "file"); t.oncomplete = ok; t.onerror = () => ko(t.error); }); },
+  async prendi() { const db = await this.apri(); return new Promise((ok, ko) => { const r = db.transaction("maniglie").objectStore("maniglie").get("file");
+    r.onsuccess = () => ok(r.result || null); r.onerror = () => ko(r.error); }); },
+};
+async function ricorda(m) { maniglia = m; manigliaRicordata = null; try { await IDB.metti(m); } catch (e) {} mostraFile(); }
+function mostraFile() {
+  const s = $("fileStato");
+  if (maniglia) s.textContent = "File collegato: " + maniglia.name;
+  else if (manigliaRicordata) s.innerHTML = 'File della volta scorsa: ' + esc(manigliaRicordata.name) + ' <button id="bRicollega">Ricollega e ricarica</button>';
+  else s.textContent = "Nessun file collegato" + (window.showSaveFilePicker ? "" : " (questo browser non scrive file: usa Esporta)");
+  const b = $("bRicollega"); if (b) b.onclick = ricollega;
+}
+async function permesso(m) { const opz = {mode: "readwrite"}; if ((await m.queryPermission(opz)) === "granted") return true; return (await m.requestPermission(opz)) === "granted"; }
+async function caricaTesto(testo, origine) {
+  const daFile = normalizza(JSON.parse(testo));
+  const nelFile = Object.keys(daFile.voci).length;
+  const tenute = [...toccate].filter(id => lavoro.voci[id] && (lavoro.voci[id].aggiornato || "") > (daFile.voci[id]?.aggiornato || ""));
+  for (const id of tenute) daFile.voci[id] = {...lavoro.voci[id]};
+  lavoro = daFile; toccate = new Set(tenute);
+  avvisoProposta(daFile); ridisegna(); segnaSporco(tenute.length > 0);
+  avviso(`Caricato ${origine}: ${nelFile} voci nel file` + (tenute.length ? `; restano ${tenute.length} voci cambiate qui e non ancora salvate (premi Salva)` : "") + ".");
+}
+async function ricollega() {
+  try { if (!(await permesso(manigliaRicordata))) return; const m = manigliaRicordata; await ricorda(m);
+    await caricaTesto(await (await m.getFile()).text(), "dal file " + m.name);
+  } catch (e) { avviso("Non riesco a ricollegare il file: " + e.message, true); }
+}
+async function apri() {
+  if (window.showOpenFilePicker) {
+    try { const [m] = await showOpenFilePicker({types: [{description: "JSON", accept: {"application/json": [".json"]}}], id: "bm-sb25"});
+      await caricaTesto(await (await m.getFile()).text(), "dal file " + m.name); await ricorda(m);
+    } catch (e) { if (e.name !== "AbortError") avviso("Apertura non riuscita: " + e.message, true); }
+  } else $("inputFile").click();
+}
+async function salva() {
+  if (!window.showSaveFilePicker) return esporta();
+  try {
+    if (!maniglia && manigliaRicordata && (await permesso(manigliaRicordata))) await ricorda(manigliaRicordata);
+    if (!maniglia) { const m = await showSaveFilePicker({suggestedName: "revisione-proprietario.json", id: "bm-sb25",
+      types: [{description: "JSON", accept: {"application/json": [".json"]}}]}); await ricorda(m); }
+    if (!(await permesso(maniglia))) throw new Error("permesso di scrittura negato");
+    const w = await maniglia.createWritable(); await w.write(testoFile()); await w.close();
+    segnaSporco(false); promemoria("salvato");
+  } catch (e) { if (e.name !== "AbortError") avviso("Salvataggio non riuscito: " + e.message + ". Prova con Esporta.", true); }
+}
+function esporta() {
+  const blob = new Blob([testoFile()], {type: "application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = "revisione-proprietario.json";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  segnaSporco(false); promemoria("esportato");
+}
+function promemoria(come) {
+  const p = $("promemoria");
+  const cmd = [`git add ${META.percorso}`, `git commit -m "SB-25: owner review"`, `git push`];
+  p.innerHTML = `<b>${come === "salvato" ? "Salvato nel file." : "File scaricato."} Ricordati di committarlo e pusharlo.</b>` +
+    (come === "esportato" ? `<div class="stato">Prima sposta il file scaricato sopra <code>${esc(META.percorso)}</code> nel repository.</div>` : "") +
+    `<div class="stato">Dalla radice del repository:</div>` +
+    cmd.map(c => `<pre><code>${esc(c)}</code><button data-c="${esc(c)}">Copia</button></pre>`).join("") +
+    `<div class="riga"><button data-c="${esc(cmd.join("\n"))}">Copia tutto</button><button id="bChiudiProm">Fatto, chiudi</button></div>`;
+  p.hidden = false;
+  p.querySelectorAll("button[data-c]").forEach(b => b.onclick = async () => {
+    try { await navigator.clipboard.writeText(b.dataset.c); b.textContent = "Copiato"; } catch (e) { b.textContent = "Seleziona e copia a mano"; }
+  });
+  $("bChiudiProm").onclick = () => { p.hidden = true; };
+}
+function avviso(testo, forte) {
+  const d = document.createElement("div"); d.className = "avviso" + (forte ? " forte" : "");
+  d.innerHTML = esc(testo) + ' <button>×</button>'; d.querySelector("button").onclick = () => d.remove(); $("avvisi").prepend(d);
+}
+function avvisoProposta(f) {
+  if (f.propostaFile && f.propostaFile !== META.proposta)
+    avviso(`Il file del proprietario è stato salvato su un'altra versione della proposta (${f.propostaFile}, ora ${META.proposta}): controlla le voci segnate.`, true);
+}
+
+// ---- Disegno
+function segni(id, ripristino) {
+  const st = valore(id, "stato");
+  return `<div class="riga"><button class="segno ok${st === "ok" ? " attivo" : ""}" data-segno="ok">Ok</button>
+   <button class="segno rivedere${st === "rivedere" ? " attivo" : ""}" data-segno="rivedere">Da rivedere</button>` +
+   (ripristino ? `<button class="ripristina" title="Torna al testo proposto">↺ Proposta</button>` : "") + `</div>`;
+}
+function voceHtml(d) {
+  const id = d.id, st = valore(id, "stato"), testo = valore(id, "testo"), cambiato = corretta(id);
+  const carta = d.sezione === "campione";
+  const anteprima = cambiato ? `<div class="stato" style="margin-top:4px">Come viene la tua correzione:</div><div class="testo-carta" data-anteprima="${id}">${disegna(testo)}</div>`
+    : `<div data-anteprima="${id}" hidden></div>`;
+  return `<div class="voce ${st}" id="v-${id}" data-id="${id}">
+  <div class="testa"><div><span class="sigla">${esc(id)}</span> · <b>${esc(d.titolo)}</b> <span class="etichetta">${esc(d.gruppo)}</span></div>${segni(id, true)}</div>
+  <table>
+   <tr><th>Oggi</th><td class="oggi">${disegna(d.oggi)}</td></tr>
+   <tr><th>Proposta</th><td><div class="testo-carta">${disegna(d.proposta)}</div>${carta ? ` <span class="conta">${lunghezza(d.proposta)} caratteri (oggi ${lunghezza(d.oggi)}; ogni simbolo conta 1)</span>` : ""}</td></tr>
+   <tr><th>Correggi</th><td><textarea class="campo mono${cambiato ? " cambiato" : ""}" data-id="${id}" data-campo="testo" rows="2">${esc(testo)}</textarea>${anteprima}</td></tr>
+   ${d.sottile ? `<tr><th>Cosa non dice</th><td class="nota-voce">${disegna(d.sottile)}</td></tr>` : ""}
+   ${d.flavour ? `<tr><th>Flavour</th><td class="flavour">${esc(d.flavour)} <span class="conta">${d.flavour.length} caratteri, per la prova d'ingombro della Fase B</span></td></tr>` : ""}
+  </table>
+  <div class="nota-voce"><b>Perché:</b> ${disegna(d.perche)}</div>
+  <div class="piede"><textarea class="campo" data-id="${id}" data-campo="nota" rows="1" placeholder="Nota libera">${esc(valore(id, "nota"))}</textarea></div>
+ </div>`;
+}
+function domandaHtml(q) {
+  const st = valore(q.id, "stato");
+  return `<div class="voce ${st}" id="v-${q.id}" data-id="${q.id}">
+  <div class="testa"><div><span class="sigla">${q.id}</span> · <b>${esc(q.titolo)}</b></div>${segni(q.id, false)}</div>
+  <p>${disegna(q.testo)}</p>
+  <div class="piede"><textarea class="campo" data-id="${q.id}" data-campo="risposta" rows="2" placeholder="La tua risposta (vuota = va bene la proposta)">${esc(valore(q.id, "risposta"))}</textarea></div>
+  <div class="piede"><textarea class="campo" data-id="${q.id}" data-campo="nota" rows="1" placeholder="Nota libera">${esc(valore(q.id, "nota"))}</textarea></div>
+ </div>`;
+}
+function filtra(id, d) {
+  const s = $("fSegno").value, q = $("fTesto").value.trim().toLowerCase(), st = valore(id, "stato");
+  if (s === "nessuno" && st) return false;
+  if ((s === "ok" || s === "rivedere") && st !== s) return false;
+  if (s === "modificate" && !corretta(id) && !valore(id, "risposta")) return false;
+  if (s === "nota" && !valore(id, "nota")) return false;
+  if (q) { const pag = [id, d.titolo, d.oggi, d.proposta, d.testo, d.perche, d.sottile, valore(id, "testo"), valore(id, "nota"), valore(id, "risposta")].join(" ").toLowerCase();
+    if (!pag.includes(q)) return false; }
+  return true;
+}
+function ridisegna() {
+  const sez = $("fSezione").value, parti = [];
+  if (!sez || sez === "campione") {
+    const voci = DATI.filter(d => d.sezione === "campione" && filtra(d.id, d));
+    if (voci.length) parti.push(`<h2>Campione <span class="stato">${voci.length} voci, testi generati dalla bozza 1.7</span></h2>` + voci.map(voceHtml).join(""));
+  }
+  if (!sez || sez === "glossario") {
+    const blocchi = [];
+    for (const g of META.gruppi) {
+      const voci = DATI.filter(d => d.sezione === "glossario" && d.gruppo === g && filtra(d.id, d));
+      if (voci.length) blocchi.push(`<h3>${esc(g)}</h3>` + voci.map(voceHtml).join(""));
+    }
+    if (blocchi.length) parti.push(`<h2>Glossario</h2>` + blocchi.join(""));
+  }
+  if (!sez || sez === "domande") {
+    const voci = DOMANDE.filter(q => filtra(q.id, q));
+    if (voci.length) parti.push(`<h2>Domande</h2>` + voci.map(domandaHtml).join(""));
+  }
+  $("lista").innerHTML = parti.join("") || '<div class="avviso">Nessuna voce con questi filtri.</div>';
+  $("sezPiano").hidden = !!sez && sez !== "domande";
+  aggiornaProgresso();
+}
+function aggiornaProgresso() {
+  const tutte = [...DATI.map(d => d.id), ...DOMANDE.map(q => q.id)];
+  let ok = 0, riv = 0, mod = 0, note = 0;
+  for (const id of tutte) { const st = valore(id, "stato"); if (st === "ok") ok++; else if (st === "rivedere") riv++;
+    if (corretta(id) || valore(id, "risposta")) mod++; if (valore(id, "nota")) note++; }
+  $("progresso").textContent = `Segnate ${ok + riv}/${tutte.length} (ok ${ok}, da rivedere ${riv}) · corrette o risposte ${mod} · con nota ${note}`;
+}
+function ridisegnaVoce(id) {
+  const box = $("v-" + id); if (!box) return;
+  box.outerHTML = PER_ID[id] ? voceHtml(PER_ID[id]) : domandaHtml(DOMANDE.find(q => q.id === id));
+}
+
+// ---- Eventi
+$("lista").addEventListener("input", e => {
+  const el = e.target, id = el.dataset.id, campo = el.dataset.campo; if (!id || !campo) return;
+  imposta(id, campo, el.value);
+  if (campo === "testo") {
+    const cambiato = corretta(id); el.classList.toggle("cambiato", cambiato);
+    const a = document.querySelector(`[data-anteprima="${id}"]`);
+    if (a) { a.hidden = !cambiato; a.className = cambiato ? "testo-carta" : ""; a.innerHTML = cambiato ? disegna(el.value) : ""; }
+  }
+});
+$("lista").addEventListener("click", e => {
+  const box = e.target.closest(".voce"); if (!box) return; const id = box.dataset.id;
+  if (e.target.dataset.segno) { imposta(id, "stato", valore(id, "stato") === e.target.dataset.segno ? "" : e.target.dataset.segno); ridisegnaVoce(id); }
+  else if (e.target.classList.contains("ripristina")) {
+    if (!corretta(id)) return;
+    if (!confirm("Riportare " + id + " al testo proposto? Nota e segno restano.")) return;
+    imposta(id, "testo", PER_ID[id].proposta); ridisegnaVoce(id);
+  }
+});
+for (const id of ["fSezione", "fSegno"]) $(id).addEventListener("change", ridisegna);
+$("fTesto").addEventListener("input", ridisegna);
+$("bSalva").onclick = salva; $("bApri").onclick = apri; $("bEsporta").onclick = esporta;
+$("inputFile").onchange = async e => { const f = e.target.files[0]; if (!f) return;
+  try { await caricaTesto(await f.text(), "da " + f.name); } catch (err) { avviso("File non valido: " + err.message, true); } e.target.value = ""; };
+window.addEventListener("beforeunload", e => { if (sporco) { e.preventDefault(); e.returnValue = ""; } });
+document.addEventListener("keydown", e => { if ((e.ctrlKey || e.metaKey) && e.key === "s") { e.preventDefault(); salva(); } });
+
+// ---- Avvio
+$("percorso1").textContent = META.percorso;
+$("legenda").innerHTML = Object.entries(META.simboli).map(([k, s]) => `<span>${disegna(k)} <code>${esc(k)}</code> ${esc(s.nome)}</span>`).join("");
+$("conti").textContent = `Voci: ${DATI.filter(d => d.sezione === "glossario").length} del glossario, ${DATI.filter(d => d.sezione === "campione").length} del campione, ${DOMANDE.length} domande · proposta ${META.proposta} · lavoro incorporato alla generazione: ${META.incorporato || "nessuno"}`;
+avvisoProposta(lavoro);
+const locale = leggiLocale();
+if (locale && locale.lavoro && locale.sporco) {
+  try { const {lavoro: unito, prese} = unisci(lavoro, normalizza(locale.lavoro));
+    if (prese) { lavoro = unito; sporco = true; toccate = new Set(locale.toccate || []); avviso(`Ritrovate nel browser ${prese} voci modificate e non salvate nel file: le ho ripristinate. Premi Salva.`, true); }
+  } catch (e) {}
+}
+ridisegna(); segnaSporco(sporco); mostraFile();
+if (window.indexedDB && window.showSaveFilePicker) IDB.prendi().then(m => { if (m && !maniglia) { manigliaRicordata = m; mostraFile(); } }).catch(() => {});
+window.__sb25 = {testoFile, caricaTesto, get lavoro() { return lavoro; }, get sporco() { return sporco; }};
+</script>
+</body>
+</html>
