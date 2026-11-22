@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simbolo del veleno</title>
+<style>
+:root{--card:#e9dcc0;--ink:#30231e;--board:#3a2a22}
+body{margin:0;padding:16px;background:var(--card);color:var(--ink);font:15px/1.45 Arial,Helvetica,sans-serif;max-width:760px}
+h1{font-size:19px;margin:0 0 4px} p.sub{margin:0 0 14px;font-size:13px}
+.c{background:#f3ead2;border:1px solid #c9b48c;border-radius:8px;padding:10px 12px;margin:0 0 12px}
+.c h2{font-size:15px;margin:0 0 6px}
+.row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.big svg{width:64px;height:64px}.mid svg{width:28px;height:28px}
+.dark{background:var(--board);border-radius:6px;padding:6px 10px;display:flex;gap:10px;align-items:center}
+.dark svg{width:28px;height:28px}
+.t{font-size:15px;margin-top:6px}
+.t .s{display:inline-block;width:1em;height:1em;vertical-align:-.12em}
+.t .s svg{display:block;width:100%;height:100%}
+.small{font-size:12.5px}
+.badge{display:inline-flex;align-items:center;gap:3px;border:1.5px solid #5f8a1f;border-radius:10px;padding:0 6px 0 4px;font-weight:bold;font-size:12px;background:#fff8e6}
+.badge svg{width:14px;height:14px}
+</style></head><body>
+<h1>Simbolo del veleno: proposte</h1>
+<p class="sub">Ogni proposta è disegnata coi colori di oggi, a 64 px, a 28 px su carta e sul tavolo scuro, nel distintivo del danno e nel testo a 15 e 12,5 px, accanto alla tossicità <span id="tInline"></span> e all'alcol <span id="lInline"></span>.</p>
+<div id="out"></div>
+<script>
+const MAIN='#5f8a1f',ACC='#b4e06a',LIGHT='#f3ead2',EDGE='#30231e';
+const P=(pts,f,extra='')=>`<polygon points="${pts.join(' ').replace(/(\S+) (\S+)/g,'$1,$2')}" fill="${f}" ${extra}/>`;
+const C=(x,y,r,f,extra='')=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${f}" ${extra}/>`;
+const E=(x,y,rx,ry,f,extra='')=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${f}" ${extra}/>`;
+const R=(x,y,w,h,r,f,extra='')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" ry="${r}" fill="${f}" ${extra}/>`;
+const svg=(body)=>`<svg viewBox="-1 -1 2 2" style="overflow:visible" aria-hidden="true">${body}</svg>`;
+const rot=(pts,deg,cx=0,cy=0)=>{const t=deg*Math.PI/180,c=Math.cos(t),s=Math.sin(t);const o=[];for(let i=0;i<pts.length;i+=2){const x=pts[i]-cx,y=pts[i+1]-cy;o.push(+(cx+x*c-y*s).toFixed(3),+(cy+x*s+y*c).toFixed(3));}return o;};
+// Skull: cranium, jaw, two eyes, nose; scale k, centre (x,y); body colour f, holes colour h.
+function skull(f,h,k=1,x=0,y=0,teeth=true){
+ const X=v=>+(x+v*k).toFixed(3),Y=v=>+(y+v*k).toFixed(3),K=v=>+(v*k).toFixed(3);
+ let s=C(X(0),Y(-.16),K(.74),f)+R(X(-.44),Y(.28),K(.88),K(.56),K(.16),f);
+ s+=E(X(-.3),Y(-.08),K(.22),K(.25),h)+E(X(.3),Y(-.08),K(.22),K(.25),h);
+ s+=P([X(0),Y(.2),X(-.11),Y(.4),X(.11),Y(.4)],h);
+ if(teeth)s+=R(X(-.2),Y(.58),K(.1),K(.26),0,h)+R(X(.1),Y(.58),K(.1),K(.26),0,h);
+ return s;}
+// Erlenmeyer flask: lip, neck, conical body; scale k, centre (x,y).
+function flask(f,k=1,x=0,y=0,extra=''){
+ const X=v=>+(x+v*k).toFixed(3),Y=v=>+(y+v*k).toFixed(3),K=v=>+(v*k).toFixed(3);
+ return R(X(-.3),Y(-1),K(.6),K(.16),K(.06),f,extra)+P([X(-.17),Y(-.86),X(.17),Y(-.86),X(.17),Y(-.38),X(.78),Y(.78),X(.7),Y(.95),X(-.7),Y(.95),X(-.78),Y(.78),X(-.17),Y(-.38)],f,extra);}
+function bone(deg){const b=[-.86,-.1,.86,-.1,.86,.1,-.86,.1];let s=P(rot(b,deg),MAIN);
+ for(const [ex,ey] of [[-.86,-.13],[-.86,.13],[.86,-.13],[.86,.13]]){const [rx,ry]=rot([ex,ey],deg);s+=C(rx,ry,.15,MAIN);}return s;}
+const CANDIDATES=[
+ {id:'oggi',title:'Oggi: la goccia',note:'Quasi uguale alla tossicità nel testo.',
+  svg:svg(P([0,-1,.62,.1,.62,.45,.38,.82,0,.95,-.38,.82,-.62,.45,-.62,.1],MAIN)+P([-.46,.14,-.46,.44,-.3,.68,-.2,.62,-.34,.4,-.34,.18],ACC))},
+ {id:'A',title:'A · Teschio davanti al matraccio',note:'La tua idea: il matraccio verde chiaro dietro, il teschio verde scuro davanti. Da piccolo resta il teschio.',
+  svg:svg(flask(ACC,.8,.34,-.22,`stroke="${MAIN}" stroke-width=".09" stroke-linejoin="round"`)+skull(MAIN,LIGHT,.86,-.14,.18))},
+ {id:'B',title:'B · Matraccio con l\'etichetta del teschio',note:'Il matraccio pieno, il teschio chiaro sopra come etichetta. Da piccolo è un matraccio verde: rischia di somigliare all\'alcol.',
+  svg:svg(flask(MAIN,1)+skull(LIGHT,MAIN,.42,0,.42,false))},
+ {id:'C',title:'C · Teschio con le ossa incrociate',note:'Il segno del veleno che tutti conoscono, senza matraccio.',
+  svg:svg(bone(45)+bone(-45)+skull(MAIN,LIGHT,.7,0,-.05))},
+ {id:'D',title:'D · Teschio solo',note:'Il più semplice: si legge meglio a 12 px.',
+  svg:svg(skull(MAIN,LIGHT,1.06,0,.04))},
+];
+const T=`<svg viewBox="-1 -1 2 2" style="overflow:visible"><polygon points="0,-1 0.6,0.12 -0.6,0.12" fill="${EDGE}" stroke="${EDGE}" stroke-width="0.2857" stroke-linejoin="round"/><circle cx="0" cy="0.32" r="0.6" fill="${EDGE}" stroke="${EDGE}" stroke-width="0.2857"/><polygon points="0,-1 0.6,0.12 -0.6,0.12" fill="#78962c"/><circle cx="0" cy="0.32" r="0.6" fill="#78962c"/></svg>`;
+const L=`<svg viewBox="-1 -1 2 2" style="overflow:visible"><rect x="-0.48" y="-0.2" width="0.96" height="1.2" rx="0.22" fill="${EDGE}" stroke="${EDGE}" stroke-width="0.2857"/><rect x="-0.17" y="-1" width="0.34" height="0.9" fill="${EDGE}" stroke="${EDGE}" stroke-width="0.2857"/><rect x="-0.48" y="-0.2" width="0.96" height="1.2" rx="0.22" fill="#c98d1f"/><rect x="-0.17" y="-1" width="0.34" height="0.9" fill="#c98d1f"/></svg>`;
+const HIT=`<svg viewBox="-1 -1 2 2">${P(Array.from({length:16},(_,i)=>{const a=Math.PI*i/8,k=(i%2?.52:1);return [+(Math.cos(a)*k).toFixed(3),+(Math.sin(a)*k).toFixed(3)];}).flat(),'#a3313d')}</svg>`;
+const s=x=>`<span class="s">${x}</span>`;
+document.getElementById('tInline').outerHTML=`<span class="t" style="margin:0">${s(T)}</span>`;
+document.getElementById('lInline').outerHTML=`<span class="t" style="margin:0">${s(L)}</span>`;
+document.getElementById('out').innerHTML=CANDIDATES.map(c=>`<div class="c"><h2>${c.title}</h2>
+<div class="row"><span class="big">${c.svg}</span><span class="mid">${c.svg}</span>
+<span class="dark">${c.svg}<span style="width:28px;height:28px;display:inline-block">${T}</span></span>
+<span class="badge">${c.svg}10</span></div>
+<div class="t">Quando lo consumi: diventi immune a ${s(T)} e ${s(L)}; +20 ${s(L)}, +20 ${s(T)}. Alla fine del quinto turno perdi tutti gli stati, poi subisci 20 ${s(c.svg)}.</div>
+<div class="t small">10 ${s(T)}: dai all'avversario tutta la ${s(T)} che ti resta. 10 ${s(c.svg)} all'avversario. Chi lo ha subisce tre quarti dei ${s(HIT)} e metà dei ${s(c.svg)} che subirebbe.</div>
+<div class="small" style="margin-top:4px">${c.note}</div></div>`).join('');
+</script></body></html>
