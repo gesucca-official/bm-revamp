@@ -3,7 +3,7 @@ import type {Card,Resource} from './contracts.ts';
 import {RESOURCE_NAMES} from './resolution.ts';
 import {DAMAGE_ACCENT,DAMAGE_COLOR,DAMAGE_NAMES,RES_COLOR,gainsOf,damageOf,damageText,leftV,type DamageType} from './readability.ts';
 import {frameSvg,type FrameKind} from './frames.ts';
-import {MARK_LAYERS,SYMBOL_LAYERS,edgeFor,svgParts,symbolColors,type Ground,type Layer,type MarkKind,type SymbolKind} from './symbols.ts';
+import {MARK_LAYERS,SYMBOL_LAYERS,edgeFor,isDamage,svgParts,symbolColors,textParts,type Ground,type Layer,type MarkKind,type SymbolKind} from './symbols.ts';
 
 export const resourceNames:Record<string,string>=RESOURCE_NAMES;
 export const targetNames:Record<string,string>={SELF:'Te stesso',OPPONENT:'Un avversario',NEAR_ITEM:'Un tuo oggetto',FAR_ITEM:'Un oggetto avversario'};
@@ -25,28 +25,23 @@ export function MeasuredFrame({kind}:{kind:FrameKind}){const holder=useRef<HTMLS
 export const SymbolMark=({kind,className,colors,px,ground}:{kind:SymbolKind;className?:string;colors?:{main:string;accent?:string};px?:number;ground?:Ground})=>{const edge=edgeFor(kind,ground);
  return <SvgMark layers={SYMBOL_LAYERS[kind]} colors={{...(colors??symbolColors(kind)),...(edge!==undefined?{edge:hex(edge)}:{})}} className={className} px={px}/>;};
 
-const effectResources=new Map<string,Resource>([
- ['[[H]]','HEALTH'],['[[A]]','ALERTNESS'],['[[V]]','VIOLENCE'],['[[T]]','TOXICITY'],['[[L]]','ALCOHOL']
-]);
+/** The text of a card with its placeholders drawn: resources as the coins of the table, types of damage (SB-25, D168 (1)) as DamageMark;
+ * the quantity and the adjacent punctuation stay with the symbol when the line wraps. */
 export function EffectText({card}:{card:Card}){
- const text=effect(card);
- const parts:React.ReactNode[]=[];
- let start=0;
- // Keep the quantity and adjacent punctuation with the symbol when the line wraps.
- for(const match of text.matchAll(/([+−-]?\d+ )?(\[\[[\s\S]*?\]\])([.,;:!?)»])?/gu)){
-  const [whole,amount,token,punctuation]=match;
-  const resource=effectResources.get(token);
-  if(!resource)continue;
-  const index=match.index;
-  const name=resourceNames[resource].toLowerCase();
-  parts.push(text.slice(start,index),<span key={index} className="effect-term">{amount}
-   <span className="effect-resource" role="img" aria-label={name} title={name}><SymbolMark kind={resource} ground="light"/></span>
-   {punctuation}</span>);
-  start=index+whole.length;
- }
- if(!parts.length)return text;
- parts.push(text.slice(start));
- return parts;
+ const text=effect(card),parts=textParts(text);
+ if(parts.length===1&&typeof parts[0]==='string')return text;
+ return parts.map(p=>{
+  if(typeof p==='string')return p;
+  const {index,amount,kind,punctuation}=p;
+  if(isDamage(kind)){const name=DAMAGE_NAMES[kind];
+   return <span key={index} className="effect-term">{amount}
+    <span className="effect-resource effect-damage" role="img" aria-label={name} title={name}><DamageMark type={kind}/></span>
+    {punctuation}</span>;}
+  const name=resourceNames[kind].toLowerCase();
+  return <span key={index} className="effect-term">{amount}
+   <span className="effect-resource" role="img" aria-label={name} title={name}><SymbolMark kind={kind} ground="light"/></span>
+   {punctuation}</span>;
+ });
 }
 
 /** ✓ and ✕ as shapes in the colour of the text, in place of the glyphs Impact and Arial lack. */

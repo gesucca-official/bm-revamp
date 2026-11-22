@@ -1,7 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {EDGE_INK,EDGE_WIDTH,LIGHT,MARK_LAYERS,SYMBOL_LAYERS,drawMark,drawSymbol,edgeFor,svgParts,symbolColors,type Pen,type SymbolKind} from '../src/symbols.ts';
-import {DAMAGE_ACCENT_SHAPES,DAMAGE_SHAPES,RESOURCES,ROLES} from '../src/readability.ts';
+import {readFileSync} from 'node:fs';
+import {EDGE_INK,EDGE_WIDTH,LIGHT,MARK_LAYERS,SYMBOL_LAYERS,TEXT_SYMBOLS,drawMark,drawSymbol,edgeFor,isDamage,svgParts,symbolColors,textParts,type Pen,type SymbolKind} from '../src/symbols.ts';
+import {DAMAGE_ACCENT_SHAPES,DAMAGE_NAMES,DAMAGE_SHAPES,RESOURCES,ROLES} from '../src/readability.ts';
 
 // C4-3: one family of symbols for the table (Pixi) and the HTML shell (SVG). The 15 approved symbols keep their shapes.
 const KINDS=[...RESOURCES,...Object.keys(ROLES),'HIT','CUT','POISON'] as SymbolKind[];
@@ -68,4 +69,22 @@ test('3b, SVG: the outline elements come first (fill and stroke of the edge colo
  assert.deepEqual(edged.slice(-plain.length),plain);const outline=edged.slice(0,edged.length-plain.length);assert.equal(outline.length,2,'a body and a neck');
  for(const p of outline){assert.equal(p.attrs.fill,'#30231e');assert.equal(p.attrs.stroke,'#30231e');assert.equal(p.attrs['stroke-width'],+(EDGE_WIDTH/6).toFixed(4));}
  assert.equal(svgParts(SYMBOL_LAYERS.ALCOHOL,{main:'#c98d1f'},12).length,plain.length,'without the edge colour, nothing is added');
+});
+
+test('SB-25 (D168 (1)): a card text draws the three damage placeholders as damage symbols, the resources as before, unknown tokens as text',()=>{
+ // A live text: only resources, cut exactly where the old regular expression of EffectText cut it.
+ assert.deepEqual(textParts('Guadagni 10 [[V]], perdi 5 [[H]].'),['Guadagni ',{index:9,amount:'10 ',kind:'VIOLENCE',punctuation:','},' perdi ',{index:25,amount:'5 ',kind:'HEALTH',punctuation:'.'},'']);
+ assert.deepEqual(textParts('Nessun simbolo.'),['Nessun simbolo.']);
+ assert.deepEqual(textParts('Un [[Q]] sconosciuto resta testo.'),['Un [[Q]] sconosciuto resta testo.']);
+ // A draft text with the three types of damage (SB-25 B1): each one a symbol, with its quantity and punctuation.
+ const parts=textParts('20 [[HIT]] all\'avversario; i tuoi [[HIT]] diventano [[CUT]] e 4 [[POISON]].');
+ assert.deepEqual(parts.filter(p=>typeof p!=='string').map(p=>[(p as {kind:string}).kind,(p as {amount?:string}).amount,(p as {punctuation?:string}).punctuation]),
+  [['HIT','20 ',undefined],['HIT',undefined,undefined],['CUT',undefined,undefined],['POISON','4 ','.']]);
+ assert.equal(parts.filter(p=>typeof p==='string').join(''),' all\'avversario; i tuoi  diventano  e ');
+ for(const t of ['HIT','CUT','POISON'] as const){assert.equal(TEXT_SYMBOLS.get(`[[${t}]]`),t);assert.ok(isDamage(t));}
+ for(const r of RESOURCES)assert.ok(!isDamage(r));
+ // The names a screen reader says, as in the glossary of SB-25 Fase A; EffectText draws the damage with DamageMark.
+ assert.deepEqual(DAMAGE_NAMES,{HIT:'colpo',CUT:'taglio',POISON:'veleno'});
+ const ui=readFileSync(new URL('../src/ui.tsx',import.meta.url),'utf8');
+ assert.match(ui,/isDamage\(kind\)\)\{const name=DAMAGE_NAMES\[kind\];[\s\S]*?aria-label=\{name\}[^>]*><DamageMark type=\{kind\}\/>/);
 });

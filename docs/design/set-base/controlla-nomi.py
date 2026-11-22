@@ -4,7 +4,9 @@ Uso, dalla radice del repository:
   python -X utf8 docs/design/set-base/controlla-nomi.py [BOZZA]   (predefinita: server/src/test/resources/set-base/bozza.json)
 
 Esce con 1 e stampa ogni violazione se ce n'è almeno una, altrimenti con 0. Le voci sono i personaggi (`name`), le carte (`gui.name`)
-e il token che una descrizione nomina fra «» dopo «crea il token». Una voce è provvisoria se:
+e il token, trovato per binding (SB-25 B2, D171 (3)): `com.tokens.BrokenBeerBottle` col nome del generatore dei testi
+(`testi/testi_stampati.py`, `TOKEN_NOME`), se la carta che lo crea è nella bozza. Ogni voce è etichettata col suo slot, letto da
+`testi/slot.json` (dalla B1 il codice dello slot non è più nella descrizione, D169 (5)). Una voce è provvisoria se:
 N1 Inglese di catalogo  il nome è il nome di classe di una carta, di un personaggio o di un token dell'allegato del set vivo
                         (docs/rules-catalog.json: Grab, Steal, BrokenBeerBottle, Struggle…), oppure è una parola sola in CamelCase
                         (`SuperImpact`); una descrizione che cita uno di quei nomi di classe come parola intera conta come N1.
@@ -23,10 +25,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2].parent
 DEFAULT = ROOT / "server/src/test/resources/set-base/bozza.json"
 ALLEGATO = ROOT / "docs/rules-catalog.json"
+SLOT = ROOT / "docs/design/set-base/testi/slot.json"
+sys.path.insert(0, str(ROOT / "docs/design/set-base/testi"))
+from testi_stampati import TOKEN_BINDING, TOKEN_CREATO_DA, TOKEN_NOME  # noqa: E402  (il token non è nella bozza)
 SEGNAPOSTI = (re.compile(r"da inventare", re.I), re.compile(r"nome di lavoro", re.I), re.compile(r"provvisori[oa]", re.I),
               re.compile(r"\bTODO\b"), re.compile(r"\?\?\?"))
 CAMEL = re.compile(r"^[A-Z][a-z]+(?:[A-Z][a-z0-9]*)+$")
-TOKEN = re.compile(r"crea il token «([^»]+)»")
 
 
 def classi_del_catalogo():
@@ -34,20 +38,19 @@ def classi_del_catalogo():
     return {voce["class"].split(".")[-1] for chiave in ("cards", "characters", "tokens") for voce in allegato.get(chiave, [])}
 
 
-def voci(bozza):
+def voci(bozza, slot=None):
     """(etichetta, nome, flavour o None se la voce non ne ha bisogno, descrizione)."""
+    slot = json.loads(SLOT.read_text(encoding="utf-8"))["slot"] if slot is None else slot
     out = []
     for p in bozza["characters"]:
-        out.append((f"personaggio {p['id']}", p["name"], p.get("flavour", ""), ""))
-    tokens = {}
+        out.append((f"{slot.get(p['id'], 'senza slot')} (personaggio {p['id']})", p["name"], p.get("flavour", ""), ""))
+    carte = {c["binding"] for c in bozza["cards"]}
     for c in bozza["cards"]:
         gui = c["gui"]
-        slot = gui.get("description", "").split(" · ")[0]
-        out.append((f"{slot} ({c['binding']})", gui["name"], gui.get("flavour", ""), gui.get("description", "")))
-        for nome in TOKEN.findall(gui.get("description", "")):
-            tokens[nome] = slot
-    for nome, slot in tokens.items():
-        out.append((f"token creato da {slot}", nome, None, ""))
+        out.append((f"{slot.get(c['binding'], 'senza slot')} ({c['binding']})", gui["name"], gui.get("flavour", ""), gui.get("description", "")))
+    if TOKEN_CREATO_DA in carte:
+        out.append((f"{slot.get(TOKEN_BINDING, 'senza slot')} (token {TOKEN_BINDING}, creato da {slot.get(TOKEN_CREATO_DA, TOKEN_CREATO_DA)})",
+                    TOKEN_NOME, None, ""))
     return out
 
 
@@ -58,6 +61,8 @@ def controlla(bozza, classi):
     visti = {}
     for etichetta, nome, flavour, descrizione in voci(bozza):
         chiave = " ".join(nome.split()).casefold()
+        if etichetta.startswith("senza slot"):
+            errori.append(f"N0 {etichetta}: la voce non ha uno slot in slot.json")
         if chiave in classi_minuscole or CAMEL.match(nome.strip()):
             errori.append(f"N1 {etichetta}: «{nome}» è un nome inglese di catalogo")
         for citato in parola_di_classe.findall(descrizione):
@@ -82,6 +87,10 @@ def main():
     percorso = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT
     bozza = json.loads(percorso.read_text(encoding="utf-8"))
     errori = controlla(bozza, classi_del_catalogo())
+    # Ogni slot di slot.json ha la sua voce (125 in tutto con il token): una voce persa non passa in silenzio.
+    slot = json.loads(SLOT.read_text(encoding="utf-8"))["slot"]
+    if len(voci(bozza, slot)) != len(slot):
+        errori.append(f"N0 {len(voci(bozza, slot))} voci, ma slot.json ha {len(slot)} slot: una voce è persa o in più")
     if errori:
         print("\n".join(errori))
     n = len(voci(bozza))

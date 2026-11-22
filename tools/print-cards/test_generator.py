@@ -167,18 +167,32 @@ class BozzaModeTest(unittest.TestCase):
         result = run_generate('--bozza', '--output', str(output))
         self.assertEqual(result.returncode, 0, result.stderr)
         m = self.manifest(output)
-        self.assertEqual(len(self.data['characters']) + len(self.data['cards']), 123)
-        self.assertEqual((m['mode'], m['catalog_count'], m['printed_count']), ('bozza', 123, 123))
-        self.assertEqual(len(m['placements']), 123)
+        faces = len(self.data['characters']) + len(self.data['cards'])
+        self.assertEqual(faces, 124)  # bozza 1.7: 7 characters (rarity P, SB-24) and 117 cards
+        self.assertEqual((m['mode'], m['catalog_count'], m['printed_count']), ('bozza', faces, faces))
+        self.assertEqual(len(m['placements']), faces)
         self.assertEqual(m['rules_profile'], 'd50')
         self.assertEqual(m['bozza']['sha256'], hashlib.sha256(BOZZA.read_bytes()).hexdigest())
         text = pdf_text(output)
         self.assertNotIn('[[', text)
         self.assertNotIn(']]', text)
         # The provisional mark with the short hash is on every front, and the guide points to the playground rules.
-        self.assertGreaterEqual(text.count(m['bozza']['sha256_short']), 123)
+        self.assertGreaterEqual(text.count(m['bozza']['sha256_short']), faces)
         self.assertIn('regole-playground.md', text)
         self.assertIn('BOZZA PROVVISORIA', text)
+        # SB-25 B2: the characters print their rarity P; the guide has the keyword rules; the booklet the full text of all 125 entries.
+        self.assertGreaterEqual(text.count('PROTAGONISTA (P)'), len(self.data['characters']))
+        flat = re.sub(r'\s+', '', text)  # pypdf splits the words of a line
+        for title, _ in bozza_mode.KEYWORD_RULES:
+            self.assertIn(re.sub(r'\s+', '', title), flat)
+        self.assertIn('siarrotondanosempreperdifetto', flat)
+        self.assertIn('TESTICOMPLETI', flat)
+        full = json.loads(bozza_mode.FULL_TEXTS.read_text(encoding='utf-8'))['voci']
+        self.assertEqual((m['full_text_entries'], len(full)), (125, 125))
+        self.assertGreater(m['full_text_pages'], 0)
+        self.assertEqual(m['card_pages'] + m['guide_pages'] + m['full_text_pages'], m['total_pages'])
+        for v in full.values():
+            self.assertIn(re.sub(r'\s+', '', f'{v["nome"]} · {v["slot"]}'), flat, v['slot'])
 
     def test_starter_deck_is_character_basic_two_bound_last_resort_and_twenty_cards(self):
         deck = next(d for d in self.data['decks'] if d['id'].startswith('starter-'))
@@ -195,6 +209,8 @@ class BozzaModeTest(unittest.TestCase):
             self.assertEqual(m['printed_count'], 25)
             self.assertEqual(m['selection']['decks'], [deck['id']])
             self.assertNotIn('[[', pdf_text(output))
+            # The booklet of a deck has the entries printed and the token, not the whole set.
+            self.assertEqual(m['full_text_entries'], len(expected) + 1)
         output = self.d/'double.pdf'
         result = run_generate('--bozza', '--starter', deck['id'], '--starter', deck['id'], '--copies', '2', '--output', str(output))
         self.assertEqual(result.returncode, 0, result.stderr)
@@ -247,6 +263,12 @@ class BozzaModeTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'non chiuse'):
             bozza_mode.parse_inline('Costo [[H', 'prova')
         self.assertEqual(bozza_mode.parse_inline('a [[H]]b', 'prova'), ['a ', ('sym', 'HEALTH'), 'b'])
+        # SB-25 (D168 (1)): the three types of damage are symbols too, never their letters.
+        self.assertEqual(bozza_mode.parse_inline('20 [[HIT]], [[CUT]] e [[POISON]].', 'prova'),
+                         ['20 ', ('sym', 'HIT'), ', ', ('sym', 'CUT'), ' e ', ('sym', 'POISON'), '.'])
+        for wrong in ('[[hit]]', '[[DAMAGE]]', '[[HITS]]'):
+            with self.assertRaisesRegex(ValueError, 'segnaposto sconosciuto'):
+                bozza_mode.parse_inline(wrong, 'prova')
         mutated = json.loads(BOZZA.read_text(encoding='utf-8-sig'))
         mutated['cards'][0]['gui']['description'] += ' [[Q]]'
         source = self.d/'bozza-rotta.json'
@@ -264,6 +286,30 @@ class BozzaModeTest(unittest.TestCase):
         self.assertIn('nessun testo viene troncato', result.stderr)
         self.assertFalse(output.exists())
 
+    def test_rarity_p_is_accepted_and_an_unknown_rarity_refused(self):
+        self.assertIn('PROTAGONIST', bozza_mode.RARITY)
+        self.assertEqual({c['rarity'] for c in self.data['characters']}, {'PROTAGONIST'})
+        mutated = json.loads(BOZZA.read_text(encoding='utf-8-sig'))
+        mutated['characters'][0]['rarity'] = 'MYTHIC'
+        source = self.d/'bozza-rarita.json'
+        source.write_text(json.dumps(mutated), encoding='utf-8')
+        with self.assertRaisesRegex(ValueError, 'rarità sconosciuta MYTHIC'):
+            bozza_mode.load_bozza(source)
+
+    def test_flavour_is_printed_and_a_flavour_that_does_not_fit_is_refused(self):
+        bz = bozza_mode.load_bozza(BOZZA)
+        self.assertTrue(all(f['flavour'] for f in bz['faces']), 'every front of the 1.7 has a flavour (D166)')
+        mutated = json.loads(BOZZA.read_text(encoding='utf-8-sig'))
+        mutated['cards'][0]['gui']['flavour'] = '«' + 'PAROLA ' * 90 + '»'
+        source = self.d/'bozza-flavour.json'
+        source.write_text(json.dumps(mutated), encoding='utf-8')
+        output = self.d/'flavour.pdf'
+        result = run_generate('--bozza', str(source), '--output', str(output))
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('[flavour; senza flavour restano', result.stderr)
+        self.assertIn(mutated['cards'][0]['binding'], result.stderr)
+        self.assertFalse(output.exists())
+
     def test_every_draft_front_fits_at_the_standard_size(self):
         from io import BytesIO
         from reportlab.lib.pagesizes import A4
@@ -272,9 +318,12 @@ class BozzaModeTest(unittest.TestCase):
         from generate import fonts
         bz = bozza_mode.load_bozza(BOZZA)
         fonts(None)
+        bozza_mode.italic_font()
         scratch = canvas.Canvas(BytesIO(), pagesize=A4)
         for n, face in enumerate(bz['faces']):
-            bozza_mode.draw_face(scratch, face, 0, 0, 62*mm, 87*mm, n + 1, len(bz['faces']), 'stamp')
+            room = bozza_mode.draw_face(scratch, face, 0, 0, 62*mm, 87*mm, n + 1, len(bz['faces']), 'stamp')
+            self.assertGreaterEqual(room['room'], 0, face['id'])
+            self.assertLessEqual(room['room'], room['room_without_flavour'], face['id'])
             if face['text']:
                 for line in bozza_mode.wrap(face['text'], 'Body', 9, 54*mm, face['id']):
                     self.assertLessEqual(bozza_mode._width(line, 'Body', 9), 54*mm + .01, face['id'])

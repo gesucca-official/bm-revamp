@@ -94,6 +94,29 @@ export function drawLayers(g:Pen,layers:Layer[],x:number,y:number,s:number,c:Col
  }
  return g;}
 export const drawSymbol=(g:Pen,kind:SymbolKind,x:number,y:number,s:number,c:Colors)=>drawLayers(g,SYMBOL_LAYERS[kind],x,y,s,c);
+
+/** The placeholders of a card text and the symbol each one stands for: the five resources and, from SB-25 (D168 (1)), the three types of damage.
+ * The live catalog has only the resources; the damage placeholders come from the Set Base draft. */
+export const TEXT_SYMBOLS:ReadonlyMap<string,Resource|DamageType>=new Map<string,Resource|DamageType>([
+ ['[[H]]','HEALTH'],['[[A]]','ALERTNESS'],['[[V]]','VIOLENCE'],['[[T]]','TOXICITY'],['[[L]]','ALCOHOL'],['[[HIT]]','HIT'],['[[CUT]]','CUT'],['[[POISON]]','POISON']
+]);
+export const isDamage=(kind:Resource|DamageType):kind is DamageType=>kind in DAMAGE_COLOR;
+/** A symbol in a card text, with the quantity before it and the punctuation after it, kept together when the line wraps. */
+export type TextSymbol={index:number;amount?:string;kind:Resource|DamageType;punctuation?:string};
+/** A card text as plain strings and symbols; an unknown placeholder stays text, as before SB-25. */
+export function textParts(text:string):(string|TextSymbol)[]{
+ const parts:(string|TextSymbol)[]=[];
+ let start=0;
+ for(const match of text.matchAll(/([+−-]?\d+ )?(\[\[[\s\S]*?\]\])([.,;:!?)»])?/gu)){
+  const [whole,amount,token,punctuation]=match,kind=TEXT_SYMBOLS.get(token);
+  if(!kind)continue;
+  parts.push(text.slice(start,match.index),{index:match.index,amount,kind,punctuation});
+  start=match.index+whole.length;
+ }
+ if(!parts.length)return [text];
+ parts.push(text.slice(start));
+ return parts;
+}
 export const drawMark=(g:Pen,kind:MarkKind,x:number,y:number,s:number,color:number)=>drawLayers(g,MARK_LAYERS[kind],x,y,s,{main:color});
 
 /** The same layers as the elements of an SVG with viewBox -1 -1 2 2 (the catalog, the editor, the inspection and the shell): the tag and the attributes of each. `px` is the size

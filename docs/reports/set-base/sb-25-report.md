@@ -1,5 +1,204 @@
 # SB-25 — Testi delle carte per i giocatori
 
+## Fase B2 — Simboli dei danni nel client e nel PDF, guida stampata, prova d'ingombro, pagina con tutti i testi
+
+Esecutore, 22 novembre 2026, sul commit di base `a94c713`. Passo diretto ([D170](../../set-base-decisioni.md#decisioni-del-proprietario),
+[D171](../../set-base-decisioni.md#decisioni-del-proprietario)), prompt della regia. Evidenze in [sb-25/](sb-25/) (file `b2-*` e `ingombro-*`).
+
+### Esito
+
+**Consegnata, tutto verde; STOP per il proprietario.** Il client disegna `[[HIT]]`, `[[CUT]]`, `[[POISON]]` nei testi delle carte con
+il simbolo di `DamageMark`; il PDF della bozza accetta la rarità P, disegna i simboli dei danni e stampa il flavour, ha la guida con le
+regole complete delle parole chiave e un libretto con il testo completo delle 125 voci. La prova d'ingombro (testo breve più flavour) è
+fatta sulla carta stampata e sull'ispezione del client a 1366×768 e 844×390: **entra tutto, nessun taglio di testo applicato, nessun
+taglio di flavour proposto**. `controlla-nomi.py` rivede 125 voci. La regola di Mescolone è scritta (RP-29, regole del playground 1.7) e
+fissata da un test. La pagina con tutti i testi è pronta per il proprietario.
+
+**Impronta finale** di `server/src/test/resources/set-base/bozza.json`: SHA-256
+`ea5f77b6b36a88298ad2756b14e40ba8e40afcb14b9dd468ee572ba42a2047ac` (byte del repository, LF), **uguale a quella della B1**: la B2 non
+ha toccato la bozza, perché nessun testo andava tagliato.
+
+### Stato per tappe
+
+1. Preliminari: base di print-cards rossa come detto nella B1 (6 fallimenti e 1 errore di `test_generator.py`, rarità `PROTAGONIST`
+   rifiutata), `verify.py` verde sul PDF vivo. Fatto; i rossi sono chiusi (sotto).
+2. Client, `EffectText`. Fatto.
+3. print-cards: rarità P, simboli dei danni, flavour, guida, testi completi. Fatto.
+4. Prova d'ingombro con flavour, stampa e client. Fatto: nessun taglio.
+5. `controlla-nomi.py` a 125 voci. Fatto.
+6. Mescolone: regola scritta e test. Fatto: il motore lo fa già, nessuno STOP.
+7. Pagina di revisione. Fatto, provata in Edge.
+8. Prove, mutazioni, verifiche, report, piano, commit. Fatto.
+
+### Cosa cambia
+
+1. **Client** ([symbols.ts](../../../client-web/src/symbols.ts), [ui.tsx](../../../client-web/src/ui.tsx)). La lettura dei segnaposto
+   esce da `EffectText` e diventa una funzione pura, `textParts`, con la tabella `TEXT_SYMBOLS` (cinque risorse e tre danni) e
+   `isDamage`: stessa espressione di prima, numero e punteggiatura vicina restano attaccati al simbolo. `EffectText` disegna i danni con
+   `DamageMark` (il simbolo del danno nominale e dei report) e le risorse con `SymbolMark` come prima; nome per i lettori di schermo
+   da `DAMAGE_NAMES` (colpo, taglio, veleno). Un segnaposto sconosciuto resta testo. Nessun CSS nuovo. Le carte vive non hanno segnaposto
+   di danno e si disegnano come prima (test sui testi vivi). Test nuovo in [symbols.test.ts](../../../client-web/tests/symbols.test.ts).
+2. **print-cards, fronti** ([bozza.py](../../../tools/print-cards/bozza.py)). Rarità `PROTAGONIST` = «PROTAGONISTA (P)», senza pallini;
+   una rarità sconosciuta resta un errore. `[[HIT]]`, `[[CUT]]`, `[[POISON]]` disegnati con le forme di `symbols_pdf.py` (`DAMAGES`). Il
+   flavour è stampato sotto il testo, in corsivo a 7,5 pt (D166 (2)); un fronte che non entra col flavour è rifiutato e il messaggio dice
+   quanto resterebbe senza. Per far entrare i personaggi col flavour le righe del fronte sono accorciate: «Capacità oggetti: 1 · Immune a
+   [[T]]» (o «Nessuna immunità») su una riga, «Legate (2 a scelta): …». Il danno nominale stampa simbolo e quantità, senza ripetere il
+   tipo in lettere.
+3. **print-cards, guida.** Nuova sezione «Parole chiave»: metà e quarti (arrotondamento per difetto, detto una volta, D169 (1)), mai sotto
+   zero, chi si muove prima, Gioca d’anticipo, Rincara, Annuncia, Vulnerabile (con Mescolone, D171 (1)), stati e durate, equipaggiamento,
+   Immune, fine turno, corazza dell’alcol; ogni voce cita la sua fonte (regolamento o regole del playground). La legenda dei danni dice il
+   nome italiano; «Lettura della carta» spiega la P e il flavour.
+4. **print-cards, testi completi.** Dopo la guida, nello stesso PDF, il libretto «Testi completi» (D170 (4)) generato da
+   `testi/testi-completi.json`: catalogo 125 voci (7 personaggi, 117 carte, il token) in 21 pagine; un mazzo stampa le sue voci più il
+   token. Intestazione «nome · slot · tipo», paragrafi del testo completo coi simboli. Il manifest riporta `guide_pages`,
+   `full_text_pages`, `full_text_entries`. Catalogo: 14 fogli di carte, 4 pagine di guida, 21 di testi completi, 39 pagine.
+5. **print-cards, test** ([test_generator.py](../../../tools/print-cards/test_generator.py)): conteggi a 124 fronti, rarità P accettata e
+   rarità sconosciuta rifiutata, flavour stampato e flavour troppo lungo rifiutato, segnaposto dei danni, pagine della guida e del libretto,
+   ogni voce «nome · slot» presente. README aggiornato (sezione della bozza e rasterizzazione senza Poppler).
+6. **controlla-nomi.py** ([D171](../../set-base-decisioni.md#decisioni-del-proprietario) (4)): etichette dallo slot di `slot.json`, token
+   cercato per binding (costanti di `testi_stampati.py`); in più due controlli nuovi: una voce senza slot (N0) e numero di voci diverso dal
+   numero di slot (N0), così il token perso non passa più in silenzio. Esce con 125 voci, 0 violazioni.
+7. **Regole del playground 1.7** ([regole-playground.md](../../design/set-base/regole-playground.md)): nuova **RP-29**, il timer di
+   «Mescolone Micidiale» toglie anche i gettoni di vulnerabilità, prima dei suoi 20 POISON. Nessun comportamento cambia.
+   [MescoloneD171Test](../../../server/src/test/java/com/gsc/bm/sim/MescoloneD171Test.java) gioca sette turni con l'oggetto vero della
+   bozza: Vulnerabile al primo turno, consumo al secondo, al sesto (il quinto contando il consumo) il taglio è ancora ×1,5 e poi spariscono
+   immunità, stati e i tre gettoni, e il POISON del timer non è moltiplicato (35 in tutto, non 45); al settimo il taglio torna 10. Nessun
+   test fissava la versione delle regole del playground (i «1.6» dei test di fedeltà sono etichette di bozza).
+8. **Prova d'ingombro** ([ingombro-stampa.py](sb-25/ingombro-stampa.py), [ingombro-client.mjs](sb-25/ingombro-client.mjs)), sotto.
+9. **Pagina di revisione** ([revisione-b.html](../../design/set-base/sb-25/revisione-b.html), generatore
+   [genera-revisione-b.py](../../design/set-base/sb-25/genera-revisione-b.py), file del proprietario
+   [revisione-b-proprietario.json](../../design/set-base/sb-25/revisione-b-proprietario.json)), sotto.
+10. Riga proposta in [aree-protette.md](../../aree-protette.md#playground-e-misure) per `tools/print-cards/`: `test_generator.py`,
+    `verify.py`, il PDF della bozza generato in un file temporaneo e guardato; il PDF vivo committato non deve cambiare.
+
+### Prova d'ingombro
+
+**Carta stampata** ([ingombro-stampa.json](sb-25/ingombro-stampa.json)). Ogni fronte disposto come lo stampa `--bozza` (62 × 87 mm,
+testo 9 pt, flavour corsivo 7,5 pt): **124 fronti su 124 entrano col flavour**. I più stretti: Mara Contromano 1,33 mm (13,09 senza
+flavour), Celestina Bucatina 2,01 mm, «PAZIENZA: FINITA» 3,92 mm. Il token non è un fronte stampato.
+
+**Client** ([ingombro-client.json](sb-25/ingombro-client.json)). Jar col profilo `local,bozza` su un database temporaneo, client costruito
+con il nuovo `EffectText`, Edge con Playwright; una partita rapida, l'ispezione aperta su una carta in mano e poi ognuna delle 117 carte
+del catalogo mostrata nella stessa finestra. Il flavour (che il client mostrerà in SB-31) è aggiunto solo per misurare, come paragrafo in
+corsivo sotto il testo, e tolto subito dopo. Criterio: testo, e testo più flavour, si leggono in una sola vista della finestra
+d'ispezione (altezza interna massima, cioè `max-height` meno bordi e padding), senza essere spezzati dallo scorrimento. «Non scorre» non è
+il criterio: a 844×390 l'ispezione scorre già oggi per 107 carte su 117 (costi, priorità, danno, ruolo e bersaglio stanno sopra il testo).
+
+| Misura | Vista interna | Scorre oggi | Testo fuori vista | Testo + flavour fuori vista | Margine minimo |
+|---|---|---|---|---|---|
+| 1366×768 | 641 px | 0 | 0 | 0 | 444 px («PAZIENZA: FINITA») |
+| 844×390 | 332 px | 107 | 0 | 0 | 155 px («PAZIENZA: FINITA») |
+
+Nessun `[[` rimasto nel testo, 78 simboli di danno disegnati per misura, 0 errori di pagina. Catture (col flavour di prova):
+[1366×768, «PAZIENZA: FINITA»](sb-25/b2-client-1366x768-Glare.jpg), [844×390, «Trascinare nel Tunnel»](sb-25/b2-client-844x390-ToxicBloodDrain.jpg).
+Stampa, pagine guardate (rasterizzate con PyMuPDF, Poppler assente): [personaggi](sb-25/b2-stampa-p01-personaggi.jpg),
+[carte coi simboli dei danni](sb-25/b2-stampa-p02-carte.jpg), [guida, parole chiave](sb-25/b2-stampa-p16-guida-parole-chiave.jpg),
+[testi completi](sb-25/b2-stampa-p19-testi-completi.jpg).
+
+**Esito: nessun taglio.** `genera-testi.py --scrivi` non è stato lanciato, `gui.description` e le descrizioni degli stati non cambiano;
+nessun taglio di flavour da proporre (la pagina di revisione ha il posto per mostrarlo, vuoto).
+
+### Pagina di revisione
+
+[revisione-b.html](../../design/set-base/sb-25/revisione-b.html): un solo file, niente rete, si apre da file://. 169 voci: 7 personaggi,
+117 carte, il token e i 44 stati. Per ogni voce: nome, slot, testo breve coi simboli disegnati come nel client (SVG di
+`sb-25/simboli.json`, numero e punteggiatura attaccati al simbolo come in `EffectText`), lunghezza, flavour, testo completo (a scomparsa),
+prova d'ingombro della voce; per gli stati nome, carta e descrizione. Riquadro per correggere il testo breve, il flavour o la descrizione
+(con anteprima dei simboli), nota, «Ok» / «Da rivedere», «↺ Proposta». Filtri per sezione, segno (anche «Corrette da me», «Con nota»),
+ricerca e rate da 20; contatore «Segnate n/169». «Salva» scrive `revisione-b-proprietario.json` (Chrome ed Edge; la pagina ricorda il
+file), altrove «Esporta»; dopo ogni salvataggio o esportazione il promemoria con `git add`, `git commit`, `git push` di quel file e i
+tasti «Copia». Le modifiche non salvate restano nel browser e si ritrovano alla riapertura. Rigenerarla incorpora il file del proprietario.
+
+**Provata così.** (a) Nel pannello browser dell'app: 169 voci, 943 simboli disegnati, nessun segnaposto rimasto, correzione con anteprima,
+segno, nota, filtro «Corrette da me», contatore; anche a 375 px di larghezza, senza scorrimento orizzontale. (b) In Edge con Playwright da
+`file://`: «Esporta» scarica `revisione-b-proprietario.json` col formato `sb-25-revisione-b-proprietario/1` e le voci toccate; il
+promemoria compare coi tre comandi; «Salva» con un selettore di file simulato (quello vero chiede il file all'utente) scrive lo stesso
+formato e la pagina mostra il file collegato; dopo una ricarica con una modifica non salvata la pagina la ritrova; «Apri» da un browser
+senza selettore carica il file e tiene la modifica più recente. 0 errori di pagina. Il «Salva» vero col selettore di Windows non è
+provabile da qui: lo prova il proprietario al primo uso.
+
+### Scelte prese
+
+- Flavour sul volto in corsivo a 7,5 pt, sotto il testo e separato da 1,6 mm: entra in tutti i fronti senza tagli.
+- Righe del fronte dei personaggi accorciate (immunità sulla riga della capacità, «Legate (2 a scelta)») invece di accorciare il flavour:
+  Celestina Bucatina e Mara Contromano non entravano col flavour.
+- Danno nominale stampato come simbolo e quantità, senza il tipo in lettere (il simbolo lo dice già; la guida lo spiega).
+- Testi completi come libretto a parte nello stesso PDF, dopo la guida: la guida resta corta da tenere sul tavolo.
+- Prova del client sull'ispezione vera, con un paragrafo di flavour aggiunto e tolto: il client non mostra ancora il flavour (SB-31). Il
+  criterio è «in una vista», non «senza scorrimento» (sopra).
+- Rasterizzazione delle pagine con PyMuPDF, già installato nel Python dell'utente; nessun pacchetto nuovo.
+- `controlla-nomi.py`: aggiunti i due controlli N0, perché la mutazione «token non contato» sopravviveva (usciva 0 con 124 voci).
+- Segnalini degli stati e token nel client: lasciati fuori (domande 1 e 2).
+
+### Mutazioni
+
+Ognuna applicata, verifica lanciata, file ripristinato (impronte controllate dopo):
+
+| Mutazione | Verifica | Esito |
+|---|---|---|
+| `[[HIT]]` tolto da `TEXT_SYMBOLS` | test del client | uccisa |
+| `isDamage` sempre falso | test del client | uccisa |
+| `EffectText` senza `DamageMark` | test del client | uccisa |
+| rarità `PROTAGONIST` tolta | `test_generator.py` | uccisa (7 fallimenti, 2 errori) |
+| segnaposto dei danni non riconosciuti in stampa | `test_generator.py` | uccisa |
+| libretto dei testi completi senza token | `test_generator.py` | uccisa |
+| token non contato in `controlla-nomi.py` | `controlla-nomi.py` | viva al primo giro, uccisa dopo il controllo N0 |
+
+`MescoloneD171Test` fissa ciò che il motore fa già; una mutazione del motore (`server/src/main`) è fuori perimetro e non è stata fatta.
+
+### Verifiche
+
+| Verifica | Esito |
+|---|---|
+| `git diff --check` | pulito |
+| `python scripts/check-links.py` | 8 link rotti, tutti in `docs/design/carriere/` (altro filone, gli stessi della base); nessuno nuovo |
+| `python scripts/check-rules.py` | verde |
+| `./scripts/build.ps1 -Task Test -Offline` | BUILD SUCCESS: 979 test (978 della B1 più `MescoloneD171Test`), 0 falliti o in errore, 23 saltati |
+| `./client-web/run.ps1 -Task Test` | verde: 368 test, 0 falliti |
+| `./client-web/run.ps1 -Task Build` | verde (`tsc --noEmit` e `vite build`; il solito avviso di vite sul pezzo oltre 500 kB) |
+| `./client-web/run.ps1 -Task Size` (con `BM_OUT`) | verde: JS 354.567 B gzip, totale 1.764.768 B gzip, texture 82,6% del tetto C4; limiti e tetti rispettati; `BASE_750` non toccato |
+| `./scripts/build.ps1 -Task Server -Offline`, poi `-Task VerifyDecks` a 1366×768 e 844×390 | jar rifatto (BUILD SUCCESS); `VerifyDecks` verde a 1366×768 e 844×390, con `Serve` attivo (al primo giro senza `Serve` falliva la connessione a 4320) |
+| `python tools/print-cards/test_generator.py` | OK, 16 test (prima: 6 fallimenti e 1 errore) |
+| `python tools/print-cards/verify.py` | OK: 40 voci, 40 fronti sul PDF vivo committato (non rigenerato) |
+| PDF della bozza (`generate.py --bozza`, in una cartella temporanea) | 124 fronti, 14 fogli, 4 pagine di guida, 21 di testi completi; pagine 1, 2, 16, 19 guardate (catture sopra) |
+| `controlla-numeri.py` | 0: 117 carte, 7 personaggi, nessuna violazione |
+| `testi/controlla-testi.py` | 0: 117 carte e 44 stati, 125 testi completi coincidono, nessun gergo |
+| `controlla-nomi.py` | 0: 125 voci, 0 violazioni |
+| [numeri-invariati.py](sb-25/numeri-invariati.py) contro `dce3733` | 0: numeri, mazzi, regole e versione 1.7 identici; cambiano solo le 117 descrizioni e i 44 stati della B1 |
+| `genera-bozza-di-riferimento.py --verifica` | allineata (non rigenerata: la bozza non cambia) |
+| `MescoloneD171Test` da solo | verde |
+
+### Rossi
+
+Nessun rosso nuovo. Chiusi i rossi preesistenti di print-cards (rarità P rifiutata, segnaposto dei danni) e `controlla-nomi.py` a 124
+voci, aperti nella B1. Nei test d'integrazione vivi di `test_generator.py` compare un `UnicodeDecodeError` in un thread di lettura del
+sottoprocesso (codifica della console Windows): rumore, l'esito resta OK; `generate.py` non è stato toccato.
+
+### Osservazioni fuori perimetro
+
+- Generare il PDF vivo con le opzioni predefinite riscrive `output/pdf/botte-micidiali-carte.{pdf,manifest.json}`, committati e vecchi
+  (regolamento 1.13 contro 1.14). Successo una volta durante il lavoro: ripristinati con `git checkout --`, non nel commit.
+
+### Domande per la regia
+
+1. **Segnaposto negli stati del client.** I segnalini degli stati e la loro lista nell'ispezione del personaggio (`chipsOf` in
+   `readability.ts`, `table.tsx`) mostrano la descrizione dello stato così com'è: con la B1 contiene `[[HIT]]` ecc., che si vedono
+   letterali nel client della bozza (non nel vivo). Il perimetro della B2 è `EffectText`. Proposta: in SB-31 la lista dell'ispezione
+   passa da `textParts` come `EffectText` e il segnalino sul tavolo usa i nomi (colpo, taglio, veleno); oppure subito, con un prompt piccolo.
+2. **Token nel client.** Il testo del token «Bottiglia Spaccata» nel client è ancora quello inglese della classe Java (G35): resta per
+   SB-31?
+3. **Riga di `aree-protette.md`.** Proposta per `tools/print-cards/` (sopra): tenerla?
+4. **PDF vivo committato e vecchio** (osservazione sopra): rigenerarlo in un blocco che ha `output/` nel perimetro?
+
+### File
+
+`client-web/src/{symbols.ts, ui.tsx}`, `client-web/tests/symbols.test.ts`, `tools/print-cards/{bozza.py, test_generator.py, README.md}`,
+`docs/design/set-base/controlla-nomi.py`, `docs/design/set-base/regole-playground.md`,
+`server/src/test/java/com/gsc/bm/sim/MescoloneD171Test.java`,
+`docs/design/set-base/sb-25/{genera-revisione-b.py, revisione-b.html, revisione-b-proprietario.json}`,
+`docs/reports/set-base/sb-25/{ingombro-stampa.py, ingombro-stampa.json, ingombro-client.mjs, ingombro-client.json, b2-*.jpg}`,
+`docs/aree-protette.md`, questo report, `docs/set-base-plan.md`.
+
 ## Fase B1 — Testo breve, testo completo, stati, slot in un file a parte
 
 Esecutore, 22 novembre 2026, sul commit di base `dce3733`. Passo diretto ([D170](../../set-base-decisioni.md#decisioni-del-proprietario)),
