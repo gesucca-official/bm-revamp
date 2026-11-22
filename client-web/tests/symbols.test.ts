@@ -9,13 +9,14 @@ const KINDS=[...RESOURCES,...Object.keys(ROLES),'HIT','CUT','POISON'] as SymbolK
 const recorder=()=>{const calls:string[]=[],f=(n:string)=>(...a:unknown[])=>{calls.push(`${n}(${a.map(v=>typeof v==='number'?+v.toFixed(4):JSON.stringify(v)).join(',')})`);return g;};
  const g:Pen={poly:f('poly'),circle:f('circle'),ellipse:f('ellipse'),rect:f('rect'),roundRect:f('roundRect'),moveTo:f('moveTo'),lineTo:f('lineTo'),fill:f('fill'),stroke:f('stroke')};return {g,calls};};
 
-test('the 15 approved symbols (5 resources, 7 roles, 3 damages) exist, inside the unit square, and the damage ones are the polygons of readability.ts',()=>{
+test('the 15 approved symbols (5 resources, 7 roles, 3 damages) exist, inside the unit square, and the burst and the knife are the polygons of readability.ts (the poison: D172, tested below)',()=>{
  assert.equal(new Set(KINDS).size,15);
  for(const k of KINDS){const layers=SYMBOL_LAYERS[k];assert.ok(layers.length>0,k);
   for(const l of layers)for(const p of l.prims){
    const pts=p.t==='poly'||p.t==='path'?p.p:p.t==='circle'?[p.x-p.r,p.y-p.r,p.x+p.r,p.y+p.r]:p.t==='ellipse'?[p.x-p.rx,p.y-p.ry,p.x+p.rx,p.y+p.ry]:[p.x,p.y,p.x+p.w,p.y+p.h];
    assert.ok(pts.every(v=>Math.abs(v)<=1.0001),`${k} leaves the unit square`);}}
- for(const t of ['HIT','CUT','POISON'] as const){
+ // D172: the poison is no longer a polygon of readability.ts (see the test below); the burst and the knife still are.
+ for(const t of ['HIT','CUT'] as const){
   assert.deepEqual(SYMBOL_LAYERS[t].filter(l=>l.fill==='main').map(l=>(l.prims[0] as {p:number[]}).p),DAMAGE_SHAPES[t]);
   assert.deepEqual(SYMBOL_LAYERS[t].filter(l=>l.fill==='accent').map(l=>(l.prims[0] as {p:number[]}).p),DAMAGE_ACCENT_SHAPES[t]);}
 });
@@ -40,6 +41,24 @@ test('the SVG of the HTML shell has one element per primitive of the table, with
  assert.equal(svgParts(SYMBOL_LAYERS.HIT,{main:'#a3313d'}).length,1,'no accent colour, no accent layer');
  const eye=svgParts(SYMBOL_LAYERS.ALERTNESS,{main:'#2f8189'});assert.equal(eye[0].attrs.fill,'#f3ead2');assert.equal(eye[0].attrs.stroke,'#2f8189');assert.ok(Number(eye[0].attrs['stroke-width'])>=.26);
  const check=svgParts(MARK_LAYERS.check,{main:'currentColor'})[0];assert.equal(check.tag,'polyline');assert.equal(check.attrs.fill,'none');assert.equal(check.attrs['stroke-linecap'],'round');
+});
+
+test('D172: the poison is a skull in front of a flask: flask (accent, outlined in the main colour), then skull (main), then eyes, nose and teeth (the paper)',()=>{
+ const L=SYMBOL_LAYERS.POISON;assert.deepEqual(L.map(l=>l.fill),['accent','main','light']);
+ assert.equal(L[0].stroke?.tone,'main');assert.equal(L[0].prims.length,1,'the flask is one outline: no seam between lip, neck and body');
+ assert.deepEqual(L[1].prims.map(p=>p.t),['circle','rrect'],'cranium and jaw');assert.deepEqual(L[2].prims.map(p=>p.t),['ellipse','ellipse','poly','rect','rect'],'two eyes, nose, two teeth');
+ // With the colours of the table the three tones are: light green, dark green, paper.
+ const parts=svgParts(L,{main:'#5f8a1f',accent:'#b4e06a'});assert.deepEqual(parts.map(p=>p.attrs.fill),['#b4e06a','#5f8a1f','#5f8a1f',`#${LIGHT.toString(16)}`,`#${LIGHT.toString(16)}`,`#${LIGHT.toString(16)}`,`#${LIGHT.toString(16)}`,`#${LIGHT.toString(16)}`]);
+ assert.equal(parts[0].attrs.stroke,'#5f8a1f');
+ // Not the drop of the toxicity: another set of primitives, and no outline on the light coin (the skull is dark enough there).
+ assert.notDeepEqual(SYMBOL_LAYERS.POISON,SYMBOL_LAYERS.TOXICITY);assert.equal(edgeFor('POISON','light'),undefined);assert.equal(edgeFor('POISON','dark'),undefined);
+ // `flat`: the silhouette in one colour, the backing of the impact on the table: no paper, no accent, all of it in the colour given.
+ const flat=recorder();drawSymbol(flat.g,'POISON',0,0,20,{main:0x111111,accent:0x111111,flat:true});
+ assert.ok(flat.calls.filter(c=>c.startsWith('fill(')).every(c=>c==='fill(1118481)'),'every fill in the one colour');assert.ok(flat.calls.filter(c=>c.startsWith('stroke(')).every(c=>c.includes('"color":1118481')));
+ const paper=recorder();drawSymbol(paper.g,'POISON',0,0,20,{main:0x111111,accent:0x222222});assert.ok(paper.calls.includes(`fill(${LIGHT})`),'without flat the eyes are the paper');
+ // The flask is drawn before the skull (behind it); a symbol without the accent colour loses the flask only.
+ const order=recorder();drawSymbol(order.g,'POISON',0,0,20,{main:1,accent:2});assert.deepEqual(order.calls.filter(c=>c.startsWith('fill(')),['fill(2)','fill(1)',`fill(${LIGHT})`]);
+ const noAccent=recorder();drawSymbol(noAccent.g,'POISON',0,0,20,{main:1});assert.deepEqual(noAccent.calls.filter(c=>c.startsWith('fill(')),['fill(1)',`fill(${LIGHT})`]);
 });
 
 test('every symbol has its colours in CSS: the resource, the role or the damage, and the accent only for a damage',()=>{

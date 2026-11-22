@@ -53,7 +53,7 @@ const PAIRS:Pair[]=[
 const EXCEPTIONS:Record<string,string>={
  'damage HIT (accent) on the pill':'decorative: the type is read from the main colour and the shape (burst), and the amount is in the number (rule 11)',
  'damage CUT (accent) on the pill':'decorative: the knife is read from its main colour and shape',
- 'damage POISON (accent) on the pill':'decorative: the drop is read from its main colour and shape',
+ 'damage POISON (accent) on the pill':'decorative: the poison is read from its main colour and shape, the skull; the accent is the flask behind it (D172)',
  'ring on the card':'the ring is flanked by the dark band (1a), which passes against ring and card: the pair that counts is the band',
  'ring on the coin':'same: the dark band flanks the ring',
  'halo of the allowed targets (petrol) on the card':'it lies on the wood (6.4:1 dark, 3.2:1 mid); on a card the ring and the arrow are there as well',

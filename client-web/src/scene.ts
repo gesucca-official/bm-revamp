@@ -678,7 +678,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  private impactMark(kind:ImpactKind|'VOID',compact:boolean){const c=new Container(),g=new Graphics(),R=compact?26:40;c.addChild(g);
   if(kind==='HIT'){glyph(g,'HIT',0,0,R*2.3,INK);glyph(g,'HIT',0,0,R*2,DAMAGE_COLOR.HIT,DAMAGE_ACCENT.HIT);}
   else if(kind==='CUT'){glyph(g,'CUT',0,0,R*2.3,INK);glyph(g,'CUT',0,0,R*2,0x6b8296,DAMAGE_ACCENT.CUT);}
-  else if(kind==='POISON'){glyph(g,'POISON',0,0,R*2.1,INK);glyph(g,'POISON',0,0,R*1.8,0x78b02c,DAMAGE_ACCENT.POISON);for(const [bx,by,br] of [[.9,-.2,.2],[-.9,.15,.16],[.6,.8,.13]])g.circle(bx*R,by*R,br*R).fill(0x78b02c).stroke({color:INK,width:1.5});}
+  else if(kind==='POISON'){drawSymbol(g as unknown as Pen,'POISON',0,0,R*2.1,{main:INK,accent:INK,flat:true});glyph(g,'POISON',0,0,R*1.8,0x78b02c,DAMAGE_ACCENT.POISON);for(const [bx,by,br] of [[.9,-.2,.2],[-.9,.15,.16],[.6,.8,.13]])g.circle(bx*R,by*R,br*R).fill(0x78b02c).stroke({color:INK,width:1.5});}
   else if(kind==='VOID'){const a=R*.9;g.moveTo(-a,-a).lineTo(a,a).moveTo(a,-a).lineTo(-a,a).stroke({color:INK,width:compact?9:13,cap:'round'});g.moveTo(-a,-a).lineTo(a,a).moveTo(a,-a).lineTo(-a,a).stroke({color:WINE,width:compact?5:8,cap:'round'});}
   else if(kind==='PLAIN')g.circle(0,0,24).stroke({color:PETROL,width:4});
   else{g.circle(0,0,R).fill({color:0x120c08,alpha:.55}).stroke({color:ROLE_COLOR[kind],width:compact?3:4});glyph(g,kind,0,0,R*1.5,INK);glyph(g,kind,0,0,R*1.25,kind==='COUNTER'||kind==='DEFENSE'?0x8fd0d0:PAPER);}

@@ -624,28 +624,28 @@ export const damageLabel=(card:Card,left:number|null)=>damageOf(card).map(e=>`${
  */
 export function damageReport(card:Card):string|null{const entries=damageOf(card);if(!entries.length)return null;
  return `${damageLabel(card,null)}${entries.some(e=>e.x)?' (più metà della V residua di chi gioca)':''}`;}
-/** Polygons (in -1..1) of the symbols of the three types, drawn alike by the table (Pixi) and by the catalog (SVG): a burst, a knife, a drop. Every polygon of a type takes the same fill; the slits between them draw the guard of the knife. */
+/** Polygons (in -1..1) of the symbols of the three types, drawn alike by the table (Pixi) and by the catalog (SVG): a burst and a knife (the poison is a skull in front of a flask, see PolygonDamage). Every polygon of a type takes the same fill; the slits between them draw the guard of the knife. */
 const turn=(poly:number[],deg:number)=>{const t=deg*Math.PI/180,c=Math.cos(t),s=Math.sin(t);return poly.map((v,i,a)=>i%2?a[i-1]*s+v*c:v*c-a[i+1]*s);};
 const star=(r:number)=>Array.from({length:16},(_,i)=>{const a=Math.PI*i/8,k=(i%2?.52:1)*r;return [Math.cos(a)*k,Math.sin(a)*k];}).flat();
-export const DAMAGE_SHAPES:Record<DamageType,number[][]>={
+/** D172: the poison is no longer a drop but a skull in front of a flask, drawn in several tones by `SYMBOL_LAYERS.POISON` (symbols.ts); only the burst and the knife are plain polygons here. */
+export type PolygonDamage=Exclude<DamageType,'POISON'>;
+export const DAMAGE_SHAPES:Record<PolygonDamage,number[][]>={
  // Burst of sixteen points (the first impact of C3-5); its second colour is a smaller burst inside, for depth.
  HIT:[star(1)],
  // Knife, tip up and to the right: blade, guard and handle, drawn upright then turned.
  CUT:[
   [.02,-1,.30,-.55,.30,.12,-.26,.12,-.26,-.35,-.12,-.72],[-.42,.20,.46,.20,.46,.34,-.42,.34],[-.20,.42,.24,.42,.28,1,-.24,1],
  ].map(poly=>turn(poly,45)),
- POISON:[[0,-1,.62,.1,.62,.45,.38,.82,0,.95,-.38,.82,-.62,.45,-.62,.1]],
 };
 export const DAMAGE_COLOR:Record<DamageType,number>={HIT:0xa3313d,CUT:0x4d6070,POISON:0x5f8a1f};
 /** Colours of the resources and of the roles (the table and the HTML shell share them, C4-3): the colour only reinforces the shape. */
 export const RES_COLOR:Record<Resource,number>={HEALTH:0xa3313d,ALERTNESS:0x2f8189,VIOLENCE:0xc0582c,TOXICITY:0x78962c,ALCOHOL:0xc98d1f};
 export const ROLE_COLOR:Record<Role,number>={DAMAGE:0x742e33,DEFENSE:0x2c6262,RESOURCES:0x4b6a2d,COUNTER:0x343f6b,DISRUPT:0x5c3a6a,ITEMS:0x86561b,OTHER:0x5d5247};
-/** The second colour of each symbol (owner trial, C3-7): the yellow heart of the burst, the light glint on the blade, the light glint on the drop. */
+/** The second colour of each symbol (owner trial, C3-7): the yellow heart of the burst, the light glint on the blade, the light of the flask behind the skull. */
 export const DAMAGE_ACCENT:Record<DamageType,number>={HIT:0xf2c84b,CUT:0xbfe5f6,POISON:0xb4e06a};
-export const DAMAGE_ACCENT_SHAPES:Record<DamageType,number[][]>={
+export const DAMAGE_ACCENT_SHAPES:Record<PolygonDamage,number[][]>={
  HIT:[star(.52)],
  CUT:[[.10,-.80,.19,-.60,.19,-.02,.10,-.02]].map(poly=>turn(poly,45)),
- POISON:[[-.46,.14,-.46,.44,-.30,.68,-.20,.62,-.34,.40,-.34,.18]],
 };
 
 /**

@@ -33,9 +33,10 @@ test('A3 notation: 20+x resolves with half the V left after the cost, truncated 
  assert.equal(damageLabel(card({damage:'—',damageAmount:'—'}),null),'');
 });
 
-test('C3-5: every symbol has a shape with at least three points, the three of them different',()=>{
+test('C3-5: every polygon symbol has a shape with at least three points, the two of them different (D172: the poison is a skull and a flask in symbols.ts, no longer a polygon here)',()=>{
  for(const [type,polys] of Object.entries(DAMAGE_SHAPES)){assert.ok(polys.length>=1,type);for(const p of polys){assert.ok(p.length>=6&&p.length%2===0,type);assert.ok(p.every(v=>Math.abs(v)<=1),`${type} inside -1..1`);}}
- assert.equal(new Set(Object.values(DAMAGE_SHAPES).map(p=>JSON.stringify(p))).size,3);
+ assert.deepEqual(Object.keys(DAMAGE_SHAPES),['HIT','CUT']);
+ assert.equal(new Set(Object.values(DAMAGE_SHAPES).map(p=>JSON.stringify(p))).size,2);
 });
 
 test('C3-5: the impact of every card of the catalog is that of its type of damage, else of its role (O7, D2)',()=>{

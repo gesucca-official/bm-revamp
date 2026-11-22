@@ -1,5 +1,126 @@
 # SB-25 — Testi delle carte per i giocatori
 
+## Simbolo del veleno (D172)
+
+Esecutore, 22 novembre 2026, sul commit di base `4def5bf`. Passo diretto ([D172](../../set-base-decisioni.md#decisioni-del-proprietario)),
+prompt della regia. Evidenze in [sb-25/](sb-25/) (file `d172-*`). La [proposta A](../../design/set-base/sb-25/veleno-proposta.html)
+è il disegno di partenza.
+
+### Esito
+
+**Consegnato, con due rossi dello strumento da leggere (sotto: uno noto, R2; uno nuovo, rosso anche sulla base); STOP per la revisione della regia.** Il danno POISON è ora un teschio verde scuro
+(`#5f8a1f`) davanti a un matraccio verde chiaro (`#b4e06a`) bordato di verde scuro, in tutti i punti in cui compare: testi delle carte
+(`EffectText`), distintivo del danno (`DamageMark`), guida dei simboli, impatto sul tavolo, stampa viva e stampa della bozza. I due colori
+non sono cambiati; la goccia resta solo alla tossicità; gli altri 14 simboli sono come prima. Nessun numero e nessun testo della bozza è
+stato toccato.
+
+**Impronta di `server/src/test/resources/set-base/bozza.json`:** `ea5f77b6b36a88298ad2756b14e40ba8e40afcb14b9dd468ee572ba42a2047ac`, uguale a quella della B2 (ricalcolata prima del commit).
+
+### Cosa cambia
+
+- **`client-web/src/symbols.ts`:** POISON non è più un poligono unico ma ha le sue righe di strati, come ALERTNESS e ITEMS: matraccio
+  (un solo poligono, riempimento accent, bordo main), teschio (cerchio e rettangolo arrotondato, main), occhi, naso e denti (strato
+  `light`, il colore della carta). Una opzione nuova di `Colors`, `flat`, disegna tutti gli strati nel colore principale: serve alla
+  sagoma scura dietro l'impatto, che altrimenti mostrerebbe gli occhi chiari.
+- **`client-web/src/readability.ts`:** POISON esce da `DAMAGE_SHAPES` e `DAMAGE_ACCENT_SHAPES`; i due record sono ora di tipo
+  `Record<PolygonDamage, …>` (`PolygonDamage` = i danni che restano poligoni, HIT e CUT). Le costanti dei colori non cambiano.
+- **`client-web/src/scene.ts`:** la sagoma dietro l'impatto del veleno usa `drawSymbol` con `flat`; il simbolo colorato e le bolle sono
+  quelli di prima. `ui.tsx` non cambia: `DamageMark` ed `EffectText` leggono già `SYMBOL_LAYERS`.
+- **`tools/print-cards/symbols_pdf.py`:** stesso disegno, stessi numeri, nel porto per reportlab (`LAYERS['POISON']`).
+- **`client-web/README.md`:** tre menzioni della «goccia» del veleno diventano «teschio davanti a un matraccio (D172)».
+- **`docs/design/set-base/sb-25/simboli.json` e `revisione-b.html`:** rigenerati dai generatori esistenti (non toccati); la pagina di
+  revisione mostra il simbolo nuovo.
+- **`docs/set-base-plan.md`:** Ripartenza («In attesa»), riga e sezione di SB-25.
+
+**Attesi dei test cambiati, tutti per D172:** `symbols.test.ts` (il ciclo dei poligoni è su HIT e CUT; un test nuovo fissa ordine e toni
+degli strati, il matraccio come un solo poligono, i riempimenti e il bordo in SVG, assenza di `edgeFor`, l'opzione `flat` e l'ordine dei
+riempimenti con e senza accent); `impact.test.ts` («tre forme diverse» sono ora le chiavi HIT e CUT, dimensione 2); `contrast.test.ts` (il
+testo dell'eccezione «damage POISON (accent) on the pill»: l'accent è il matraccio dietro il teschio, decorativo); `test_generator.py`
+(POISON entra nel confronto degli strati letterali con `symbols.ts`; l'asserzione sul vecchio poligono di `readability.ts` è tolta).
+Nessuna soglia, nessun limite e nessuna regola 1–18 sono cambiati.
+
+### Scelte prese
+
+1. **Strati espliciti, non un poligono.** Un teschio con occhi, naso e denti e un matraccio col bordo non stanno in un poligono pieno.
+   Gli strati con toni e bordo esistono già e i tre disegnatori (Pixi, SVG, reportlab) li leggono; l'unico codice di disegno nuovo è `flat`.
+2. **Il matraccio è un po' più piccolo e più basso della proposta** (scala .78 in (.30, −.12), non .8 in (.34, −.22)) **e ha il bordo più
+   sottile** (.05, non .09). Scelto guardando 12, 15, 28 e 64 px sulla carta chiara e sul tavolo scuro: il teschio resta la figura e il
+   matraccio si legge come forma anche a 12 px. Il disegno resta nel quadrato −1..1.
+3. **Matraccio in un solo poligono** (labbro, collo e corpo in un solo contorno): niente cuciture di bordo alle piccole dimensioni.
+4. **Nessun contorno scuro** (`edgeFor` non cambia): il teschio verde scuro sulla carta chiara e sul tavolo scuro ha già abbastanza
+   contrasto; la sagoma scura c'è solo nell'impatto, come per HIT e CUT.
+5. **Il PDF vivo in `output/pdf/` non è rigenerato** (lo fa SB-28, come dice D172 (2)); la bozza è stata generata in una cartella
+   temporanea e guardata.
+
+### Verifiche
+
+| Verifica | Esito |
+|---|---|
+| `./client-web/run.ps1 -Task Test` | 369 verdi, 0 rossi (nel giro di `VerifyAll` e rifatto alla fine, dopo le ultime modifiche ai testi) |
+| `-Task Build` | verde (7 s), `tsc` pulito |
+| `-Task Size` | verde, `limitsPass` e `ceilingsPass` veri; limiti invariati (JS gzip 354 729 byte; texture all'82,6 %) |
+| `VerifyDecks` 1366×768 e 844×390 | verdi |
+| `VerifyResolution` 844×390 | verde |
+| `VerifyResolution` 1366×768 | **rosso nel giro completo, 2 giri su 2; rosso anche sulla base**: vedi «Rossi» |
+| `VerifyLayout` 1366×768, 844×390, 1920×1080 | rossi **solo di cadenza**, uguali sulla base: **noto, voce R2** (vedi «Rossi») |
+| `python -X utf8 tools/print-cards/test_generator.py` | verde (16 test) |
+| `python tools/print-cards/verify.py` | verde |
+| `generate.py --bozza --output <temp>` | PDF di 39 pagine; guardate le pagine 2, 6 e 15 |
+| `git diff --check` | pulito (solo gli avvisi sui fine riga dei file con CRLF) |
+| `python -X utf8 scripts/check-links.py` | solo gli 8 collegamenti rotti già noti nelle cartelle Carriera; i 3 verso questa sezione, scritti nel piano, ora esistono |
+
+**Rifatta qui, stesso esito di prima:** la prova d'ingombro nell'ispezione del client (`ingombro-client.mjs`, 117 carte), a 1366×768 e
+844×390: **nessun testo fuori vista, nessun errore**. Il simbolo nuovo è un'icona in linea alta quanto il testo: l'ingombro non cambia.
+
+### Rossi
+
+**`VerifyLayout`, tre misure: solo cadenza, nessuna geometria — noto, voce R2.** Le uniche righe `PROBLEM` sono «frames within 20 ms» (a
+844×390: «within 33 ms») e, a 1920×1080, un «input» di 109–148 ms; nessun problema di riquadri, testi o simboli. Rilanciata da sola, a
+macchina ferma: rossa a 1366×768 e a 1920×1080 tutte le volte. **Sulla base** (un worktree del commit `4def5bf`, stesso jar, stessa
+macchina, build mia) **rossa con la stessa firma** a 1366×768 (frame entro 20 ms 0,89–0,92 sulla base, 0,86–0,91 col blocco) e a
+1920×1080 (0,75–0,88, input 128 ms). A 844×390 è intermittente su entrambe: base 1 rosso su 4 giri, blocco 3 su 5. Il blocco aggiunge
+poche primitive a un simbolo e non cambia la scena: non vedo un nesso, e le differenze stanno nel rumore della macchina.
+
+**`VerifyResolution` 1366×768, giro completo: `TimeoutError` dello strumento, rosso anche sulla base — nuovo, non attribuibile al blocco.**
+Due giri completi col blocco, due rossi, entrambi nello scenario `humans` (FFA con due umani), dopo 40 e 30 minuti: `locator.click`
+(giro 1) e `locator.isEnabled` (giro 2) su `getByTestId('confirm')` scadono a 30 s (`verify-resolution.mjs:126` e `:125`, in
+`playOne`). Il pulsante ✓ non compare più o non c'è ancora quando lo strumento lo cerca (ipotesi: il turno si è chiuso per il tempo; non
+l'ho misurato). Nello stesso giro del blocco 844×390 è verde. **Sulla base** (stesso worktree di `4def5bf`, stesso jar) il giro completo a
+1366×768 è rosso con lo stesso tipo di errore in un altro punto: `TimeoutError` su `getByRole('button', {name: 'Torna all’hub'})` in
+`toHub` (`verify-resolution.mjs:103`, chiamato alla riga 735, prima di `humans`). Lo scenario `humans` da solo è verde 6 volte su 6
+(3 col blocco, 3 sulla base). Non è nel [registro dei rossi noti](../rossi-noti.md): non ho una firma uguale da citare, quindi non lo
+dichiaro noto. Il giro 2 col blocco era in corso mentre lanciavo `test_generator.py` (137 s di CPU): non l’ho rifatto a macchina
+ferma, perché il primo giro era già rosso senza altro in corso e la base lo è comunque. Nel percorso del clic non c'è nulla del simbolo.
+
+### Non verificato
+
+- L'impatto del veleno **non è fotografato nel gioco vero**: [d172-impatto-sul-tavolo](sb-25/d172-impatto-sul-tavolo.jpg) viene da una
+  pagina di prova che chiama `drawSymbol` con le stesse righe di `Scene.impactMark` (Pixi), non dalla scena. Le prove vive della scena
+  (`VerifyResolution`, `VerifyLayout`) non guardano il simbolo.
+- Il PDF vivo non è rigenerato (SB-28). La prova d'ingombro stampata (`ingombro-stampa.py`) non è stata rifatta: il simbolo è
+  un'icona in linea e il testo è lo stesso.
+- Nessuna prova su un telefono vero.
+
+### Cosa giudica il proprietario
+
+La [pagina di revisione](../../design/set-base/sb-25/revisione-b.html) (ogni testo col simbolo nuovo) e le immagini in [sb-25/](sb-25/):
+[ispezione a 1366×768](sb-25/d172-client-1366x768-ispezione-veleno.jpg), [ispezione a 844×390](sb-25/d172-client-844x390-ispezione-veleno.jpg),
+[impatto](sb-25/d172-impatto-sul-tavolo.jpg), [carte stampate](sb-25/d172-stampa-p06-carte-veleno.jpg), [guida dei danni](sb-25/d172-stampa-p15-guida-danni.jpg).
+In particolare: se il teschio si legge a 12–15 px accanto alla goccia della tossicità, e se il matraccio, così piccolo, è abbastanza chiaro.
+
+### Domande per la regia
+
+1. Il rosso di `VerifyResolution` a 1366×768 (giro completo) c'è anche sulla base, con `TimeoutError` in punti diversi. Apro una voce
+   R7 «`VerifyResolution` 1366×768, giro completo: `TimeoutError` su ✓ o su «Torna all'hub»», o lo lasciamo scritto solo qui?
+2. La cadenza di `VerifyLayout` è rossa anche sulla base, su questa macchina, a macchina ferma; R2 dice che a macchina ferma torna
+   verde. Va aggiornata la voce?
+
+### File
+
+Modificati: `client-web/src/{readability,scene,symbols}.ts`, `client-web/tests/{contrast,impact,symbols}.test.ts`, `client-web/README.md`,
+`tools/print-cards/{symbols_pdf.py,test_generator.py}`, `docs/design/set-base/sb-25/{simboli.json,revisione-b.html}`,
+`docs/set-base-plan.md`, questo rapporto. Nuovi: `docs/reports/set-base/sb-25/d172-*.jpg` (5 immagini, circa 380 KB in tutto).
+
 ## Fase B2 — Simboli dei danni nel client e nel PDF, guida stampata, prova d'ingombro, pagina con tutti i testi
 
 Esecutore, 22 novembre 2026, sul commit di base `a94c713`. Passo diretto ([D170](../../set-base-decisioni.md#decisioni-del-proprietario),

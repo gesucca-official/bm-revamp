@@ -372,15 +372,14 @@ class SymbolPortTest(unittest.TestCase):
         return out
 
     def test_literal_shapes_equal_the_client(self):
-        for kind in ('HEALTH', 'ALERTNESS', 'VIOLENCE', 'TOXICITY', 'ALCOHOL', 'DEFENSE', 'RESOURCES', 'DISRUPT', 'ITEMS', 'OTHER'):
+        # D172: POISON (skull in front of a flask) is a literal line of symbols.ts like the others.
+        for kind in ('HEALTH', 'ALERTNESS', 'VIOLENCE', 'TOXICITY', 'ALCOHOL', 'DEFENSE', 'RESOURCES', 'DISRUPT', 'ITEMS', 'OTHER', 'POISON'):
             line = re.search(r'^ ' + kind + r':(\[.*\]),?$', self.symbols, re.M).group(1)
             line = re.sub(r',min:[\d.]+', '', line)
             self.assertEqual(numbers(line), self.flat(kind), kind)
         # Computed shapes: the parameters of the formulas, and the literal polygons of the damage symbols.
         self.assertIn('star(10,.45)', self.symbols)
         self.assertEqual(self.flat('DAMAGE'), symbols_pdf._star(10, .45))
-        poison = re.search(r'POISON:\[\[([-\d.,]+)\]\]', self.readability).group(1)
-        self.assertEqual(numbers(poison), symbols_pdf._DAMAGE_SHAPES['POISON'][0])
         cut = re.search(r'CUT:\[\s*(.*?)\s*\]\.map\(poly=>turn\(poly,45\)\)', self.readability, re.S).group(1)
         self.assertEqual([symbols_pdf._turn(numbers(p), 45) for p in re.findall(r'\[([-\d.,]+)\]', cut)], symbols_pdf._DAMAGE_SHAPES['CUT'])
 

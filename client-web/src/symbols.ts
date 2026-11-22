@@ -1,5 +1,5 @@
 import type {Resource} from './contracts.ts';
-import {DAMAGE_ACCENT,DAMAGE_ACCENT_SHAPES,DAMAGE_COLOR,DAMAGE_SHAPES,RES_COLOR,ROLE_COLOR,type DamageType,type Role} from './readability.ts';
+import {DAMAGE_ACCENT,DAMAGE_ACCENT_SHAPES,DAMAGE_COLOR,DAMAGE_SHAPES,RES_COLOR,ROLE_COLOR,type DamageType,type PolygonDamage,type Role} from './readability.ts';
 
 // C4-3: one family of symbols for the table (Pixi) and the HTML shell (SVG), on the model of DAMAGE_SHAPES: plain data in -1..1 and
 // two small drivers, `drawSymbol` (Graphics) here and `SymbolMark` in ui.tsx. The 15 symbols approved in C2a, C3-5 and C3-7 (five resources,
@@ -43,8 +43,10 @@ export const SYMBOL_LAYERS:Record<SymbolKind,Layer[]>={
  DISRUPT:[fill(poly([0,.95,.9,-.6,-.9,-.6]))],
  ITEMS:[{prims:[{t:'rrect',x:-.95,y:-.55,w:1.1,h:1.4,r:.15}],stroke:{tone:'main',w:.11,min:1.2}},fill({t:'rrect',x:-.15,y:-.85,w:1.1,h:1.4,r:.15})],
  OTHER:[fill({t:'circle',x:-.6,y:0,r:.24},{t:'circle',x:0,y:0,r:.24},{t:'circle',x:.6,y:0,r:.24})],
- // Types of damage: the polygons of readability.ts, each its own fill, then the accent on top.
- ...Object.fromEntries((['HIT','CUT','POISON'] as DamageType[]).map(k=>[k,[...DAMAGE_SHAPES[k].map(p=>fill(poly(p))),...DAMAGE_ACCENT_SHAPES[k].map(p=>({prims:[poly(p)],fill:'accent' as Tone}))]])) as Record<DamageType,Layer[]>,
+ // Types of damage: the burst and the knife are the polygons of readability.ts, each its own fill, then the accent on top.
+ ...Object.fromEntries((['HIT','CUT'] as PolygonDamage[]).map(k=>[k,[...DAMAGE_SHAPES[k].map(p=>fill(poly(p))),...DAMAGE_ACCENT_SHAPES[k].map(p=>({prims:[poly(p)],fill:'accent' as Tone}))]])) as Record<PolygonDamage,Layer[]>,
+ // D172 (owner, 22 November 2026): the poison is a dark skull (the main colour) in front of a light flask (the accent, outlined in the main colour); the eyes, the nose and the two teeth are the paper (LIGHT). One literal line, ported to tools/print-cards/symbols_pdf.py.
+ POISON:[{prims:[poly([.066,-.9,.534,-.9,.534,-.775,.433,-.775,.433,-.416,.908,.488,.846,.621,-.246,.621,-.308,.488,.167,-.416,.167,-.775,.066,-.775])],fill:'accent',stroke:{tone:'main',w:.05,min:1}},fill({t:'circle',x:-.14,y:.042,r:.636},{t:'rrect',x:-.518,y:.421,w:.757,h:.482,r:.138}),{prims:[{t:'ellipse',x:-.398,y:.111,rx:.189,ry:.215},{t:'ellipse',x:.118,y:.111,rx:.189,ry:.215},poly([-.14,.352,-.235,.524,-.045,.524]),{t:'rect',x:-.324,y:.679,w:.11,h:.223},{t:'rect',x:-.064,y:.679,w:.11,h:.223}],fill:'light'}],
 };
 /** The marks that stand for a glyph of a font: the confirmation ✓ and the cancellation or voided ✕. */
 export const MARK_LAYERS:Record<MarkKind,Layer[]>={
@@ -64,7 +66,8 @@ export interface Pen{
  fill(color:number):Pen;stroke(style:{color:number;width:number;cap?:'round';join?:'round'}):Pen;
 }
 /** `edge`: C4-8a (3b), an outline of 1 px outside the fill of the main layers, for the symbols that fall under 3:1 on their ground (see `edgeFor`). */
-export type Colors={main:number;accent?:number;edge?:number};
+/** `flat` (D172): every tone is drawn in `main`, the silhouette of a symbol (the dark backing of the poison on the table); the accent layers are drawn too. */
+export type Colors={main:number;accent?:number;edge?:number;flat?:boolean};
 /** C4-8a 3b (owner, 10 November 2026): the ground a symbol is drawn on, and the three that need an outline there: the heart on the dark board (2.3:1), alcohol and toxicity
  * on the light coin (2.5:1 and 2.95:1). Form before colour (rule 11): the colours of the three do not change. The rest of the pairs pass 3:1 without it. */
 export type Ground='dark'|'light';
@@ -72,7 +75,7 @@ export const EDGE_INK=0x30231e;
 export const edgeFor=(kind:SymbolKind,ground?:Ground):number|undefined=>ground==='dark'&&kind==='HEALTH'?LIGHT:ground==='light'&&(kind==='ALCOHOL'||kind==='TOXICITY')?EDGE_INK:undefined;
 /** Width of the outline drawn centred on the contour: 2 px, of which 1 px shows outside the fill. */
 export const EDGE_WIDTH=2;
-const toneColor=(t:Tone,c:Colors)=>t==='main'?c.main:t==='accent'?c.accent:LIGHT;
+const toneColor=(t:Tone,c:Colors)=>t==='main'||c.flat?c.main:t==='accent'?c.accent:LIGHT;
 /** Draws `layers` centred on (x, y) in a box of side `s` (the radius is s/2); a layer whose accent colour is not given is skipped. */
 export function drawLayers(g:Pen,layers:Layer[],x:number,y:number,s:number,c:Colors){const r=s/2,pt=(a:number[])=>a.map((v,i)=>i%2?y+v*r:x+v*r);
  const prims=(l:Layer)=>{for(const p of l.prims)switch(p.t){

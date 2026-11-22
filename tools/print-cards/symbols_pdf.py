@@ -81,15 +81,21 @@ LAYERS = {
 _DAMAGE_SHAPES = {
     'HIT': [_star16(1)],
     'CUT': [_turn(p, 45) for p in ([.02, -1, .30, -.55, .30, .12, -.26, .12, -.26, -.35, -.12, -.72], [-.42, .20, .46, .20, .46, .34, -.42, .34], [-.20, .42, .24, .42, .28, 1, -.24, 1])],
-    'POISON': [[0, -1, .62, .1, .62, .45, .38, .82, 0, .95, -.38, .82, -.62, .45, -.62, .1]],
 }
 _DAMAGE_ACCENT_SHAPES = {
     'HIT': [_star16(.52)],
     'CUT': [_turn([.10, -.80, .19, -.60, .19, -.02, .10, -.02], 45)],
-    'POISON': [[-.46, .14, -.46, .44, -.30, .68, -.20, .62, -.34, .40, -.34, .18]],
 }
-for _k in DAMAGES:
+for _k in ('HIT', 'CUT'):
     LAYERS[_k] = [_fill(_poly(p)) for p in _DAMAGE_SHAPES[_k]] + [dict(prims=[_poly(p)], fill='accent') for p in _DAMAGE_ACCENT_SHAPES[_k]]
+# D172: the poison is a skull (main) in front of a flask (accent, outlined in main); eyes, nose and teeth are LIGHT. Port of the line POISON of SYMBOL_LAYERS.
+LAYERS['POISON'] = [
+    dict(prims=[_poly([.066, -.9, .534, -.9, .534, -.775, .433, -.775, .433, -.416, .908, .488, .846, .621, -.246, .621, -.308, .488, .167, -.416, .167, -.775, .066, -.775])],
+         fill='accent', stroke=('main', .05, .5)),
+    _fill(_circle(-.14, .042, .636), _rrect(-.518, .421, .757, .482, .138)),
+    dict(prims=[('ellipse', -.398, .111, .189, .215), ('ellipse', .118, .111, .189, .215), _poly([-.14, .352, -.235, .524, -.045, .524]),
+                _rect(-.324, .679, .11, .223), _rect(-.064, .679, .11, .223)], fill='light'),
+]
 
 KINDS = tuple(LAYERS)
 
