@@ -12,7 +12,7 @@ Una riga corta per filone: chi apre una regia parte da qui e dalla «Ripartenza�
 
 | Filone | Piano e stato | Macchina | Prossimo passo |
 |---|---|---|---|
-| Set Base | [piano](set-base-plan.md) | portatile | SB-24 Fase B (nomi e flavour nella bozza, congelamento 1.7); revisione del proprietario approvata (D166) |
+| Set Base | [piano](set-base-plan.md) | portatile | SB-25 (testi delle carte per i giocatori); SB-24 chiuso, bozza congelata 1.7 (D167) |
 | Client web | [roadmap](client-roadmap.md); [piano C4](client-c4-plan.md), chiusa | l'altra | C5 (playtest finali) |
 | Carriere | [piano CA-0](ca-plan.md); contenuti nella [tabella dei lavori anticipati](product-roadmap.md#lavori-anticipati) | portatile | CA-0b (formato delle carriere 0.1) |
 
@@ -22,7 +22,7 @@ Aggiornato al **18 novembre 2026**.
 
 | Ambito | Stato | Fonte |
 |---|---|---|
-| Regolamento | Versione **1.13** (8 novembre 2026): rispetto alla base I22 (1.6) aggiunge R07a, ruolo descrittivo e guadagni a sé di ogni carta nel catalogo (O14, 1.7), vieta «/» nell'identificativo dei mazzi personalizzati (R02, 1.8), aggiunge a R07a il danno nominale di ogni carta (A1 del piano C3, 1.9) e il suo importo (A3, 1.10) e stabilisce che ogni personaggio ha tutte e cinque le risorse, a 0 quelle che la scheda non indica (R01, 1.11: corregge il crash di BadTrip, LethalHeroinDose e PervertedMetabolism giocate da Spazienzio; [rapporto](reports/rules-1.11-report.md)); con la **1.12** (7 novembre 2026, SB-1) R02 impone le regole dei mazzi (20 carte, 2 copie, basic e due bound proprie, last resort) e R03 non ha più giocatori vivi senza mosse ([rapporto](reports/set-base/sb-1-report.md)); con la **1.13** (8 novembre 2026, SB-2) le carte passano al documento del set [Set Base 0.1](sets/base.md), con versione propria, e R04 e R05 non citano più carte ([rapporto](reports/set-base/sb-2-report.md)); nessun effetto di carta cambiato | [game-rules.md](game-rules.md#r07a--ruoli-descrittivi-delle-carte-17), [sets/base.md](sets/base.md) |
+| Regolamento | Versione **1.14** (22 novembre 2026): rispetto alla base I22 (1.6) aggiunge R07a, ruolo descrittivo e guadagni a sé di ogni carta nel catalogo (O14, 1.7), vieta «/» nell'identificativo dei mazzi personalizzati (R02, 1.8), aggiunge a R07a il danno nominale di ogni carta (A1 del piano C3, 1.9) e il suo importo (A3, 1.10) e stabilisce che ogni personaggio ha tutte e cinque le risorse, a 0 quelle che la scheda non indica (R01, 1.11: corregge il crash di BadTrip, LethalHeroinDose e PervertedMetabolism giocate da Spazienzio; [rapporto](reports/rules-1.11-report.md)); con la **1.12** (7 novembre 2026, SB-1) R02 impone le regole dei mazzi (20 carte, 2 copie, basic e due bound proprie, last resort) e R03 non ha più giocatori vivi senza mosse ([rapporto](reports/set-base/sb-1-report.md)); con la **1.13** (8 novembre 2026, SB-2) le carte passano al documento del set [Set Base 0.1](sets/base.md), con versione propria, e R04 e R05 non citano più carte ([rapporto](reports/set-base/sb-2-report.md)); con la **1.14** (22 novembre 2026, SB-24) R07 ammette la rarità PROTAGONIST (P), solo descrittiva ([rapporto](reports/set-base/sb-24-report.md)); nessun effetto di carta cambiato | [game-rules.md](game-rules.md#r07a--ruoli-descrittivi-delle-carte-17), [sets/base.md](sets/base.md) |
 | Versione base | Candidato `I22-3e71300e057687ba` **approvato** dal proprietario il 26 ottobre 2026; roadmap della base conclusa e archiviata | [report I22](reports/i22-report.md#approvazione), [roadmap archiviata](history/roadmap-base-i22.md) |
 | Client giocabili | `client-debug/` Angular, completo; `client-web/` animato (PixiJS/TypeScript, React/HTML, Vite) collegato al server, con la parità del debug; CLI per gli scenari automatici | [client-web](../client-web/README.md), [client-debug](../client-debug/README.md), [CLI](cli.md) |
 | C0 | **Chiusa** il 27 ottobre 2026, con deroga sulla risposta al tocco (116 ms contro 100) e landscape obbligatorio; scena sintetica congelata in `client-c0/revision/` | [esiti C0-R5](reports/client-c0-r5-procedure.md#esiti) |
@@ -35,12 +35,12 @@ Aggiornato al **18 novembre 2026**.
 | Dopo C5 e Set Base | **Roadmap**, scritta il 10 novembre 2026 dalle idee del proprietario; parte dopo C5 (D1) e non tocca i piani in corso. **Lavori anticipati sulle carriere (D22), stato nella [tabella](product-roadmap.md#lavori-anticipati):** tutorial con dialoghi e materiale visivo approvati, identikit dei sette personaggi del Set Base, bar «Il Serraglio»; prototipo CA-0a chiuso il 12 novembre 2026 e tenuto nel repository; prossima la scrittura della campagna principale (CA-2). Filoni: strumenti di verifica, deploy per amici su invito a costo zero, app e desktop, tavolo in verticale, economia a due valute con jolly, carriera single player, PvP e classifica del solo duello, apertura al pubblico. Decisioni D1–D22 (D13–D22: storia della carriera, giocatore muto che gioca il personaggio che prende le sue parti, visual novel, rami da rigiocare, quattro carriere, achievement, buste che garantiscono un personaggio, battute neutre sul giocatore, lavori anticipati sulle carriere), domande aperte nella pagina | [roadmap del prodotto](product-roadmap.md) |
 
 Gli effetti delle carte non sono cambiati dal lavoro C0–C3; il regolamento è alla
-1.13: la 1.7 aggiunge ruolo e guadagni, la 1.9 il danno nominale (A1 del piano C3) e la 1.10 il suo importo (A3),
+1.14: la 1.7 aggiunge ruolo e guadagni, la 1.9 il danno nominale (A1 del piano C3) e la 1.10 il suo importo (A3),
 tutti campi descrittivi del catalogo esposti dal server e copiati nelle regole del
 debug; la 1.8 vieta «/» nell'identificativo dei mazzi personalizzati (R02); la 1.11 fa partire da 0 le risorse
 che la scheda di un personaggio non indica (R01), così le viste mostrano le cinque risorse dal primo turno; la 1.12 porta le regole dei mazzi
 (R02: 20 carte regolari, al massimo 2 copie, basic e due bound del personaggio, last resort) e la 1.13 sposta le carte nel documento del
-set (Set Base 0.1), lasciando nel regolamento le sole regole generali. I conteggi dei test sono nei rapporti
+set (Set Base 0.1), lasciando nel regolamento le sole regole generali; la 1.14 ammette la rarità PROTAGONIST (P), solo descrittiva. I conteggi dei test sono nei rapporti
 della relativa consegna. Le numerazioni I01–I26 e F01–F39 appartengono alla
 base e non vengono riaperte dalle tappe C0–C5.
 
@@ -57,7 +57,7 @@ Documenti da seguire per lavorare sul progetto nello stato attuale.
 | [Verifiche del client](verifiche-client.md) | Insidie degli strumenti di `client-web` e punti di revisione propri del client; si legge solo quando servono |
 | [Guida locale](setup.md) | Installazione, avvio, dati locali, verifiche e candidato I22 |
 | [CLI](cli.md) | Client testuale per scenari applicativi |
-| [Regolamento 1.13](game-rules.md) e [Set Base 0.1](sets/base.md) | Fonte normativa: sistema e carte del set; le copie client, l'allegato e il catalogo sono controllati da `scripts/check-rules.py` |
+| [Regolamento 1.14](game-rules.md) e [Set Base 0.1](sets/base.md) | Fonte normativa: sistema e carte del set; le copie client, l'allegato e il catalogo sono controllati da `scripts/check-rules.py` |
 | [Decisioni del proprietario](open-questions.md) | Decisioni Q/R recepite; le note datate sono storiche |
 | [Archivio partite](match-archive.md) | Contratto corrente di journal, export e chiusura al riavvio |
 | [Pubblicazione](publishing.md) | Identità Git, contenuti esclusi, verifiche GitHub |

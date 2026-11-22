@@ -39,7 +39,7 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `0fa0431e77b5…`). Formato `sb-6b/1`, set `base` versione «1.7»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `65bc46cf0b33…`). Formato `sb-6b/1`, set `base` versione «1.7»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
 Il file contiene 117 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 7 personaggi, 5 starter e, di prova, 21 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
 
@@ -134,7 +134,7 @@ Personaggio: **Piera Pinot** (P), salute 80, A 15, L 15; oggetti 2; immunità: n
 | 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
 | 1 | **Fasciatura d'Emergenza** (`base.com.FasciaturaColFazzolettaccio`) | C | GEN-16 · −5 [[A]] a sé; +8 [[H]] a sé. |
 | 2 | **Amaro nel Bicchiere di Plastica** (`base.items.AmaroNelBicchiereDiPlastica`) | C | OGG-05 · Consumato: +20 [[L]]; −5 [[A]]. |
-| 2 | **Bionda da 66, calda** (`com.items.RottenBeer`) | C | OGG-02 · Consumato: +10 [[L]]. |
+| 2 | **Bionda da 66, Calda** (`com.items.RottenBeer`) | C | OGG-02 · Consumato: +10 [[L]]. |
 | 1 | **Doppio Malto da Discount** (`com.items.AnotherRottenBeer`) | NC | OGG-03 · Consumato: +10 [[L]]; crea il token «Bottiglia Spaccata» vicino a sé. |
 | 1 | **Un Altro... Grappino...** (`base.pino.PrimaIlBrindisi`) | NC | PIN-AR6 · Annuncia «Rutto a Bruciapelo» o «Alla Goccia». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
 | 1 | **Due Dita in Gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; Azzera [[T]] a sé; Azzera [[L]] a sé. |

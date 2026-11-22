@@ -380,7 +380,7 @@ class Sb17CardsTest {
     // ---- Lo metto in conto (CES-BA) and Lo rivendo (CES-AR7, D121; regole del playground 1.4, RP-25, RP-26) ----
 
     private static final String RIVENDO = "base.cesira.LoRivendo";
-    private static final String SANTINO = "Santino di San Briaco", ESPRESSO = "Espresso della Macchinetta", PERONI = "Bionda da 66, calda";
+    private static final String SANTINO = "Santino di San Briaco", ESPRESSO = "Espresso della Macchinetta", PERONI = "Bionda da 66, Calda";
     private static final Map<String, String> ITEM_BINDINGS = Map.of(SANTINO, "base.items.SantinoDellaPortinaia",
             ESPRESSO, "base.items.EspressoDelDistributore", PERONI, "com.items.RottenBeer");
 

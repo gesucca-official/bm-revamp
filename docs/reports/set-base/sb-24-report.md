@@ -12,6 +12,8 @@ Nessun numero della bozza cambia: lo provano `numeri-invariati.py`, `controlla-n
 **Impronta di congelamento:** `server/src/test/resources/set-base/bozza.json`, versione 1.7, SHA-256
 `0fa0431e77b53d65bf50e8ffd71069d3611b21b73f613fd3411a2d027e564657` (byte del repository, LF).
 
+**Dopo la revisione ([D167](../../set-base-decisioni.md#decisioni-del-proprietario)):** OGG-02 diventa «Bionda da 66, Calda» (domanda 1) e SB-24 è chiuso; impronta definitiva della 1.7 `65bc46cf0b336dbc3c55546792d318e72405700ac0b45e02269c2ec14e1e01a4`.
+
 ## Stato per tappe
 
 - STOP 1 prima di scrivere: il passaggio a 1.14 e a «1.7» rompeva tre attesi fissi fuori perimetro. La regia ha allargato il perimetro

@@ -452,7 +452,7 @@
              "role": "RESOURCES", "gains": "+20 L", "damage": "—", "damageAmount": "—"}},
     {"binding": "com.items.RottenBeer", "rarity": "COMMON", "kind": "ITEM",
      "self": [{"op": "gain", "resource": "ALCOHOL", "amount": 10}],
-     "gui": {"name": "Bionda da 66, calda", "flavour": "Aperta da qualche giorno, ma non fa che migliorare rispetto al prodotto sigillato.", "description": "OGG-02 · Consumato: +10 [[L]].",
+     "gui": {"name": "Bionda da 66, Calda", "flavour": "Aperta da qualche giorno, ma non fa che migliorare rispetto al prodotto sigillato.", "description": "OGG-02 · Consumato: +10 [[L]].",
              "role": "RESOURCES", "gains": "+10 L", "damage": "—", "damageAmount": "—"}},
     {"binding": "com.items.AnotherRottenBeer", "rarity": "UNCOMMON", "java": true, "params": {"alcohol": 10},
      "gui": {"name": "Doppio Malto da Discount", "flavour": "Minima spesa, massima resa. Non farti beccare: al Serraglio non piace chi si porta il bere da casa.", "description": "OGG-03 · Consumato: +10 [[L]]; crea il token «Bottiglia Spaccata» vicino a sé.",
