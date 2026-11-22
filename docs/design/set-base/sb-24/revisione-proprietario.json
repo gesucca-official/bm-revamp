@@ -1,12 +1,530 @@
 {
  "formato": "sb-24-revisione-proprietario/1",
  "proposta": "a758e3ee4cc7",
- "aggiornato": "2026-11-21T21:03:53.275Z",
+ "aggiornato": "2026-11-22T13:51:54.117Z",
  "voci": {
+  "CES-AR1": {
+   "nome": "Opportuna Distrazione",
+   "flavour": "Anche se un trucco è vecchio quanto il mondo, se funziona funziona.",
+   "aggiornato": "2026-11-22T12:36:32.030Z"
+  },
+  "CES-AR2": {
+   "nome": "Buon, Vecchio Ricatto",
+   "flavour": "«So cosa hai fatto a Ferragosto. Non ti conviene darmi un motivo per renderlo pubblico.»",
+   "aggiornato": "2026-11-22T12:38:43.325Z"
+  },
+  "CES-AR3": {
+   "nome": "Copione Già Visto",
+   "flavour": "Gira che ti rigira, la gente è tutta uguale. Chi se ne accorge, può ben usare questo fatto a proprio vantaggio.",
+   "aggiornato": "2026-11-22T12:39:39.419Z"
+  },
+  "CES-AR4": {
+   "nome": "Conto Salato",
+   "flavour": "«Oh, ti sembra caro? Scusa, non sapevo fossi povero...»",
+   "aggiornato": "2026-11-22T12:40:01.478Z"
+  },
+  "CES-AR5": {
+   "nome": "Segreto di Pulcinella",
+   "flavour": "«Non mi piace spettegolare se non ci guadagno niente. Fortunatamente per me, non è questo il caso: senti un po'...»",
+   "aggiornato": "2026-11-22T12:40:47.991Z"
+  },
+  "CES-AR6": {
+   "nome": "Scherzo Oltre il Limite",
+   "flavour": "Lui scherza e tutti ridono, ma tu muori dentro mentre processi l'ultimo insulto che ti arriva.",
+   "aggiornato": "2026-11-22T12:43:19.950Z"
+  },
+  "CES-AR7": {
+   "nome": "Fiuto per gli Affari",
+   "flavour": "«L'ho pagato poco e lo rivendo a molto. Si chiama mercato.»",
+   "aggiornato": "2026-11-22T12:43:45.881Z"
+  },
+  "CES-BA": {
+   "nome": "Messo in Conto",
+   "flavour": "Sul conto di chi, non si sa. L'importante è che qualcuno lo paghi - preferibilmente, qualcun'altro.",
+   "aggiornato": "2026-11-22T12:30:40.169Z"
+  },
+  "CES-BO1": {
+   "nome": "Discutiamone In Privato",
+   "flavour": "Certi argomenti vanno toccati senza nessuno che si impicci, oppure non vanno toccati affatto.",
+   "aggiornato": "2026-11-22T12:31:45.654Z"
+  },
+  "CES-BO2": {
+   "nome": "Tecnica Manipolatoria",
+   "flavour": "La sobrietà, in un pub di ubriaconi, può essere un'arma affilata quanto una spada.",
+   "aggiornato": "2026-11-22T12:34:55.846Z"
+  },
+  "CES-BO3": {
+   "nome": "Fare il Vago",
+   "flavour": "«Che volete da me? Sto aspettando una telefonata da Lugano. Non ho certo tempo per voialtri!»",
+   "aggiornato": "2026-11-22T12:35:48.165Z"
+  },
+  "GEN-01": {
+   "nome": "Afferrare",
+   "aggiornato": "2026-11-22T13:09:05.156Z"
+  },
+  "GEN-02": {
+   "nome": "Furto Con Destrezza",
+   "aggiornato": "2026-11-22T13:09:07.980Z"
+  },
+  "GEN-03": {
+   "nome": "Scatto Repentino",
+   "flavour": "Al Serraglio vale una regola: quello che hai davanti è tuo.",
+   "aggiornato": "2026-11-22T13:09:14.277Z"
+  },
+  "GEN-04": {
+   "nome": "Ce l'Hai Due Spicci?",
+   "flavour": "«...per il biglietto del treno, che hai capito?»",
+   "illustrazione": "Celestina tende la mano a un avventore e se ne va con qualcosa di uguale al suo.",
+   "aggiornato": "2026-11-22T13:10:31.108Z"
+  },
+  "GEN-05": {
+   "nome": "GABBIANO, DUNQUE VOLIAMOTI",
+   "flavour": "«QUELLE TUE SOPRACCIGLIA MODELLATE PARLANO CHIARO: PROIETTIAMOTI DUNQUE!»",
+   "illustrazione": "Un avventore viene lanciato da Spazienzio dal bancone a braccia larghe, come un gabbiano, verso l'avversario.",
+   "aggiornato": "2026-11-22T13:11:45.493Z"
+  },
+  "GEN-06": {
+   "nome": "Foratone da 28",
+   "flavour": "Il cantiere di fronte è fermo dal 2011 per una misteriosa mancanza di materiale.",
+   "illustrazione": "Un mattone forato vola attraverso il bar verso la testa di un avversario.",
+   "aggiornato": "2026-11-22T13:12:36.982Z"
+  },
+  "GEN-07": {
+   "flavour": "«LA GIUSTA MEDICINA CURA OGNI MALE. NEL TUO CASO, LA MEDICINA SONO LE BOTTE.»",
+   "illustrazione": "Un pugno di Spazienzio fa schizzare via da un avversario una nuvola di vapori d'alcol.",
+   "aggiornato": "2026-11-22T13:13:16.064Z"
+  },
+  "GEN-08": {
+   "flavour": "«LA SALUTE E' UN DONO CHE NON TI MERITI PIU.»",
+   "illustrazione": "Un pugno allo stomaco di Spazienzio piega in due l'avversario, che diventa verde.",
+   "aggiornato": "2026-11-22T13:14:03.175Z"
+  },
+  "GEN-09": {
+   "flavour": "«NON FARMELO RIPETERE, O DOVRO' STORDIRTI DI NUOVO..»",
+   "illustrazione": "Un ceffone di Spazienzio fa girare la testa all'avversario, che vede doppio.",
+   "aggiornato": "2026-11-22T13:14:32.551Z"
+  },
+  "GEN-10": {
+   "nome": "PERMESSO SCUSA PUOI SMETTERLA",
+   "flavour": "«NESSUNA DI QUESTE E' UNA DOMANDA, PENSAVO FOSSE CHIARO.»",
+   "illustrazione": "Spazienzio strappa di dosso il giubbotto all'avversario con un inchino beffardo.",
+   "aggiornato": "2026-11-22T13:15:23.462Z"
+  },
+  "GEN-11": {
+   "flavour": "«LE TUE MANI DELICATE POTREBBERO FARMI ECCITARE. NON SO SE TI CONVENGA.»",
+   "illustrazione": "Un pugno arriva sulla guancia di Spazienzio che sorride beato, come per una carezza.",
+   "aggiornato": "2026-11-22T13:15:56.321Z"
+  },
+  "GEN-12": {
+   "nome": "Estrema Fretta di Alcolizzarsi",
+   "flavour": "Tre passi di rincorsa dal marciapiede comunicano senza equivoci l'entità del bisogno di bere.",
+   "aggiornato": "2026-11-22T13:16:55.141Z"
+  },
+  "GEN-13": {
+   "nome": "Tecnica del Carapace Mentale",
+   "flavour": "Testa dentro e gomiti fuori: il resto è tutta questione di crederci.",
+   "aggiornato": "2026-11-22T13:18:12.434Z"
+  },
+  "GEN-14": {
+   "nome": "Denti Stretti",
+   "flavour": "Stringi i denti - quelli che ti restano.",
+   "aggiornato": "2026-11-22T13:18:30.907Z"
+  },
+  "GEN-15": {
+   "nome": "Due Dita In Gola",
+   "illustrazione": "Piera, piegata sul lavandino del bagno; si vede solo lo sforzo.",
+   "aggiornato": "2026-11-22T13:18:57.829Z"
+  },
+  "GEN-16": {
+   "nome": "Fasciatura d'Emergenza",
+   "flavour": "Prendendone tante, si imparano per forza anche i rudimenti del pronto soccorso.",
+   "illustrazione": "Duccio si lega al braccio un fazzoletto sporco, stringendo il nodo coi denti.",
+   "aggiornato": "2026-11-22T13:19:48.451Z"
+  },
+  "GEN-17": {
+   "nome": "Sputo nel Posacenere",
+   "illustrazione": "Un avventore lancia verso l'avversario il contenuto di un posacenere dove ha palesemente sputato dentro: il risultato è uno schizzo grigiastro.",
+   "aggiornato": "2026-11-22T13:21:43.124Z"
+  },
+  "GEN-18": {
+   "illustrazione": "Una spinta a due mani manda un avventore a sbattere contro un tavolo.",
+   "aggiornato": "2026-11-22T13:22:03.164Z"
+  },
+  "GEN-19": {
+   "nome": "Mano Lesta",
+   "flavour": "Ti stringe la mano e ti sorride, ma nonostante le sue parole gentili, per qualche motivo poi ti senti abusato.",
+   "illustrazione": "Un avventore stringe la mano a Sergio, che sorride malvagio.",
+   "aggiornato": "2026-11-22T13:23:27.361Z"
+  },
+  "GEN-20": {
+   "nome": "Riprendere Fiato",
+   "flavour": "La fatica fisica non ti spaventa, ma fare a botte non è proprio come far grattare del metallo da una macchina.",
+   "illustrazione": "Beppe si rialza respirando a pieni polmoni, il petto gonfio, la guardia abbassata.",
+   "aggiornato": "2026-11-22T13:24:24.493Z"
+  },
+  "GEN-21": {
+   "nome": "Coccio di Bottiglia",
+   "flavour": "Un colpo secco al bancone, e la bottiglia assume subito un'altra funzione.",
+   "aggiornato": "2026-11-22T13:24:51.289Z"
+  },
+  "GEN-22": {
+   "nome": "Svegliaaah!",
+   "flavour": "La verità è là fuori, basta solo volerla vedere. Non abbiate paura di aprire gli occhi!",
+   "illustrazione": "Mara lancia un bicchiere d'acqua in faccia a un'avventrice brilla, che si risveglia di colpo.",
+   "aggiornato": "2026-11-22T13:27:49.154Z"
+  },
+  "GEN-23": {
+   "flavour": "Più uno è ubriaco e meno ha coscienza di dove vadano le sue gambe.",
+   "illustrazione": "Sergio allunga un piede da sotto un tavolo e un avventore lanciato in carica vola in avanti.",
+   "aggiornato": "2026-11-22T13:29:25.609Z"
+  },
+  "GEN-24": {
+   "nome": "Estasi da Coca Etilene",
+   "flavour": "Chi riesce a sopportare la giusta combinazione di sostanze, può avere accesso a un potere simile a quello di Braccio di Ferro quando mangia gli spinaci.",
+   "illustrazione": "Celestina, con gli occhi spiritati, colpisce con una forza fuori misura; dietro di lui, bicchieri vuoti.",
+   "aggiornato": "2026-11-22T13:30:49.433Z"
+  },
+  "GIG-AR1": {
+   "nome": "Disassemblare",
+   "flavour": "«Bel lavoro. Chi te l'ha montato, un cane? Ci penso io, va'...»",
+   "aggiornato": "2026-11-22T12:23:35.760Z"
+  },
+  "GIG-AR2": {
+   "nome": "Chiave da Tredici",
+   "flavour": "La tredici va bene per quasi tutto, soprattutto se prima l'hai affilata. Per il resto, c'è la quattordici.",
+   "illustrazione": "Beppe cala una chiave inglese da tredici appuntita sulla spalla dell'avversario, infilzandolo.",
+   "aggiornato": "2026-11-22T12:24:42.117Z"
+  },
+  "GIG-AR3": {
+   "nome": "Preparare il Lavoro",
+   "flavour": "«Prima si prendono le misure. Col calibro, sulla tua faccia.»",
+   "aggiornato": "2026-11-22T12:25:28.245Z"
+  },
+  "GIG-AR4": {
+   "nome": "Secondo Bagagliaio",
+   "flavour": "«Ho dovuto togliere il motore, ma guarda quanto spazio! Ci entro pure io!»",
+   "illustrazione": "Beppe si ripara dentro il cofano aperto di un'auto parcheggiata davanti al bar, al posto del motore.",
+   "aggiornato": "2026-11-22T12:27:37.784Z"
+  },
+  "GIG-AR5": {
+   "nome": "Lavoro Fatto Bene",
+   "flavour": "Più attrezzi spargi in giro, meglio sembra fatto il lavoro. E più puoi farlo pagare.",
+   "aggiornato": "2026-11-22T12:28:05.365Z"
+  },
+  "GIG-AR6": {
+   "nome": "Metodo Empirico",
+   "flavour": "«Chiave dinamometrica? Per farne cosa? Un quarto di giro alla volta e vediamo se regge.»",
+   "aggiornato": "2026-11-22T12:29:09.507Z"
+  },
+  "GIG-BA": {
+   "nome": "Questo Torna Utile",
+   "flavour": "Non si butta via niente. Tutto si smonta, e si rimonta rivendendolo a caro prezzo.",
+   "aggiornato": "2026-11-22T12:21:32.703Z"
+  },
+  "GIG-BO1": {
+   "nome": "Cuffie e Testa Bassa",
+   "flavour": "Nelle cuffie, metal estremo. Fuori, qualcuno che urla. Non cambia poi molto in realtà.",
+   "aggiornato": "2026-11-22T12:21:51.135Z"
+  },
+  "GIG-BO2": {
+   "nome": "Colpo col Cacciavite",
+   "flavour": "«Croce o taglio? Fa lo stesso: toh!»",
+   "aggiornato": "2026-11-22T12:22:35.447Z"
+  },
+  "GIG-BO3": {
+   "nome": "Affilare gli Utensili",
+   "flavour": "Al tornio ha imparato una cosa: gli utensili non si buttano via, si affilano alla mola. Il principio si applica a qualunque cosa.",
+   "aggiornato": "2026-11-22T12:23:18.118Z"
+  },
+  "LR-PIN": {
+   "nome": "Ultimo Giro",
+   "flavour": "«Ultimo... giro... per davvero... stavolta...»",
+   "aggiornato": "2026-11-22T12:13:45.613Z"
+  },
+  "LR-ROC": {
+   "nome": "Non Mi Hai Fatto Niente",
+   "flavour": "Ne ha già prese di peggio. Tante, ma sicuramente di peggio.",
+   "aggiornato": "2026-11-22T12:53:27.757Z"
+  },
+  "LR-STR": {
+   "nome": "Addosso!!!",
+   "flavour": "Quando non resta niente, testa bassa e caricare.",
+   "aggiornato": "2026-11-22T13:00:51.617Z"
+  },
+  "LR-TOS": {
+   "nome": "L'Ultimo Tiro",
+   "flavour": "Fumare il filtro è più tollerabile del dubbio di aver buttato anche solo un microgrammo assimilabile.",
+   "aggiornato": "2026-11-22T11:55:26.192Z"
+  },
+  "MAR-AR1": {
+   "nome": "Lazo del Rider",
+   "flavour": "«La cinghia dello zaino avrebbe un'altra funzione, ma per combattere gli illuminati bisogna adattarsi.»",
+   "aggiornato": "2026-11-22T11:32:09.595Z"
+  },
+  "MAR-AR2": {
+   "flavour": "Se qualcuno ordinasse un brodo, se lo vedrebbe arrivare shackerato.",
+   "aggiornato": "2026-11-22T11:35:32.478Z"
+  },
+  "MAR-AR3": {
+   "nome": "Agilità Innaturale",
+   "flavour": "«La mia discendenza Mohave mi concede rapidità. Non sarà utile come il potere che ti data il tuo popolo eletto, ma non tutti si abbassano a tanto! Non mi avrete mai!»",
+   "aggiornato": "2026-11-22T11:43:27.169Z"
+  },
+  "MAR-AR4": {
+   "nome": "Unta e Bisunta",
+   "flavour": "«Anni e anni a consegnare kebab mi hanno dotata di una lubrificazione completa. Scivolo via che è un piacere!»",
+   "aggiornato": "2026-11-22T11:43:50.978Z"
+  },
+  "MAR-AR5": {
+   "nome": "Slalom d'Avvicinamento",
+   "flavour": "Il complotto non si può smascherare sempre andando dritti al punto: a volte, occorre girarci intorno.",
+   "aggiornato": "2026-11-22T11:45:16.834Z"
+  },
+  "MAR-AR6": {
+   "nome": "Traiettoria Imprevedibile",
+   "flavour": "«La stagnola funziona: non puoi più leggermi i pensieri, adesso! Non sai dove sto andando. Neanch'io, in effetti - ma non importa.»",
+   "aggiornato": "2026-11-22T11:46:31.153Z"
+  },
+  "MAR-BA": {
+   "nome": "Requisire al Volo",
+   "flavour": "«No, no! Non è rubare, è intercettare!»",
+   "aggiornato": "2026-11-22T11:23:34.512Z"
+  },
+  "MAR-BO1": {
+   "nome": "Sventare l'Assassinio",
+   "flavour": "«Stavi provando ad avvelenarmi, eh? Voi massoni non mollate mai.»",
+   "aggiornato": "2026-11-22T11:23:53.677Z"
+  },
+  "MAR-BO2": {
+   "nome": "Semaforo Rosso",
+   "flavour": "«Fermo là! Lo sanno tutti che hai fretta... dovevi schermare i tuoi pensieri con l'alluminio, se volevi tenerteli per te!»",
+   "aggiornato": "2026-11-22T11:27:20.105Z"
+  },
+  "MAR-BO3": {
+   "nome": "Tagliare la Strada",
+   "flavour": "Arriva prima lei. A far che non si sa, ma arriva sempre prima lei.",
+   "aggiornato": "2026-11-22T11:31:02.796Z"
+  },
+  "OGG-01": {
+   "nome": "Negroni Trovato per Terra",
+   "flavour": "E' ancora mezzo pieno, sarebbe un peccato sprecarlo.",
+   "aggiornato": "2026-11-22T13:31:16.323Z"
+  },
+  "OGG-02": {
+   "flavour": "Aperta da qualche giorno, ma non fa che migliorare rispetto al prodotto sgillato.",
+   "aggiornato": "2026-11-22T13:31:48.834Z"
+  },
+  "OGG-03": {
+   "nome": "Doppio Malto da Discount",
+   "flavour": "Minima spesa, massima resa. Non farti beccare: al Serraglio non piace chi si porta il bere da casa.",
+   "aggiornato": "2026-11-22T13:32:33.129Z"
+  },
+  "OGG-04": {
+   "nome": "Mescolone Micidiale",
+   "aggiornato": "2026-11-22T13:32:37.925Z"
+  },
+  "OGG-05": {
+   "nome": "Amaro nel Bicchiere di Plastica",
+   "flavour": "Ghiaccio? Perché mai? La temperatura ambiente esalta il gusto di sogni infranti.",
+   "aggiornato": "2026-11-22T13:39:17.915Z"
+  },
+  "OGG-06": {
+   "nome": "Espresso della Macchinetta",
+   "flavour": "Cinquanta centesimi e tre minuti di attesa, ma ti da la caffeina di cui hai bisogno.",
+   "aggiornato": "2026-11-22T13:40:14.717Z"
+  },
+  "OGG-07": {
+   "nome": "Kebab Abbandonato",
+   "flavour": "Tripla cipolla, triplo piccante. Qualcuno lo stava aspettando, ma Mara era troppo occupata per consegnarlo.",
+   "aggiornato": "2026-11-22T13:41:09.130Z"
+  },
+  "OGG-08": {
+   "nome": "Acqua Minerale Sgasata",
+   "flavour": "Non sa di niente. È proprio quello che la rende utile: a un certo punto della serata, nessun sapore è un buon sapore.",
+   "aggiornato": "2026-11-22T13:42:20.024Z"
+  },
+  "OGG-09": {
+   "nome": "Guanti da Officina",
+   "flavour": "Danneggiano le mani più di quanto non le proteggano.",
+   "aggiornato": "2026-11-22T13:43:28.301Z"
+  },
+  "OGG-10": {
+   "nome": "Giubbotto di Finta Pelle",
+   "flavour": "La pelle sarà anche finta, ma quella che protegge dalle lame è vera.",
+   "aggiornato": "2026-11-22T13:43:53.990Z"
+  },
+  "OGG-11": {
+   "nome": "Casco da Cantiere",
+   "flavour": "Omologato per i calcinacci, ma va bene anche per i pugni.",
+   "aggiornato": "2026-11-22T13:44:17.348Z"
+  },
+  "OGG-12": {
+   "nome": "Pasticca Abbandonata",
+   "flavour": "Cosa sia, non lo sa nessuno. Una medicina, oppure droga? In fondo, le due cose non sono poi così diverse.",
+   "illustrazione": "Celestina copre qualcosa sul bancone; fra le dita si intravede solo un riflesso colorato.",
+   "aggiornato": "2026-11-22T13:47:28.829Z"
+  },
+  "OGG-13": {
+   "nome": "Posacenere di Vetro",
+   "flavour": "Pesante, pieno e a portata di mano. Cosa potrebbe mai andare storto?",
+   "aggiornato": "2026-11-22T13:47:41.569Z"
+  },
+  "OGG-14": {
+   "nome": "Ghiaccio nel Tovagliolo",
+   "flavour": "Cinque minuti sul bernoccolo, poi via di nuovo nel bicchiere.",
+   "aggiornato": "2026-11-22T13:48:29.071Z"
+  },
+  "OGG-15": {
+   "nome": "Santino di San Briaco",
+   "aggiornato": "2026-11-22T13:49:46.988Z"
+  },
+  "OGG-16": {
+   "nome": "Grappa della Casa",
+   "flavour": "Di dubbia provenienza, ma di indubbia nocività.",
+   "aggiornato": "2026-11-22T13:50:23.142Z"
+  },
+  "OGG-17": {
+   "nome": "Conto del Tavolo Sei",
+   "flavour": "Nessuno sa chi ha ordinato cosa, ma tutti sanno che faranno di tutto per non pagarlo.",
+   "aggiornato": "2026-11-22T13:50:53.906Z"
+  },
+  "OGG-18": {
+   "nome": "Sigaretta Accesa",
+   "flavour": "Non è tua, ma non fa niente: ti godrai il fumo passivo come tutti quanti.",
+   "aggiornato": "2026-11-22T13:51:22.404Z"
+  },
+  "PG-CES": {
+   "flavour": "«Mantenete le distanze, trogloditi. Non voglio certo che mi attacchiate la povertà.»",
+   "aggiornato": "2026-11-22T12:29:51.706Z"
+  },
+  "PG-GIG": {
+   "flavour": "«Che lavoro faccio? Ufficialmente, il metalmeccanico. Sottobanco, un po' tutti.»",
+   "aggiornato": "2026-11-22T12:20:42.399Z"
+  },
+  "PG-MAR": {
+   "flavour": "«Tutto questo cibo che consegno... ma chi lo ordina? Con quali soldi? No, non ci casco: è un complotto!»",
+   "aggiornato": "2026-11-22T11:20:36.329Z"
+  },
+  "PG-PIN": {
+   "nome": "Piera Pinot",
+   "flavour": "«Un altro... grappino... no... non tu... Grappino...»",
+   "aggiornato": "2026-11-22T12:09:58.993Z"
+  },
+  "PG-ROC": {
+   "flavour": "«Credere, obbedire, e Sex On The Beach con doppia ciliegina!»",
+   "aggiornato": "2026-11-22T12:44:51.941Z"
+  },
   "PG-SPA": {
    "nome": "SPAZIENZIO DE LA UCCISO",
-   "flavour": "«LA VIOLENZA É UN'APOSTROFO ROSSO SANGUE FRA LE PAROLE T'AMMAZZO:::»",
-   "aggiornato": "2026-11-21T20:43:18.390Z"
+   "flavour": "«LA VIOLENZA É UN'APOSTROFO ROSSO SANGUE FRA LE PAROLE T'AMMAZZO.»",
+   "aggiornato": "2026-11-21T21:13:07.464Z"
+  },
+  "PG-TOS": {
+   "flavour": "«Se solo tu aprissi gli occhi e vedessi che cosa è davvero la vita, ti accorgeresti che l'unica cosa sensata da fare è metterti qui accanto a me.»",
+   "aggiornato": "2026-11-22T11:50:33.937Z"
+  },
+  "PIN-AR1": {
+   "nome": "Scompenso da Ultimo Giro",
+   "flavour": "Il vero ubriacone si distingue anche nell'ultimo atto della serata, cioè lo svenimento molesto.",
+   "aggiornato": "2026-11-22T12:15:33.953Z"
+  },
+  "PIN-AR2": {
+   "nome": "Alla Goccia",
+   "flavour": "«Tutto... d'un fiato... non fate... i bambini!»",
+   "aggiornato": "2026-11-22T12:15:59.685Z"
+  },
+  "PIN-AR3": {
+   "nome": "Avamposto Fortificato al Bancone",
+   "flavour": "Il bancone è stato installato dal 1974 e Piera ci si appoggia dal 1975.",
+   "aggiornato": "2026-11-22T12:17:05.860Z"
+  },
+  "PIN-AR4": {
+   "nome": "Un Altro e Arrivo",
+   "flavour": "«Arrivo... arrivo! Un altro... e arrivo...»",
+   "aggiornato": "2026-11-22T12:18:08.898Z"
+  },
+  "PIN-AR5": {
+   "nome": "Rutto a Bruciapelo",
+   "flavour": "Proibito dalla Convenzione di Ginevra a meno di tre metri di distanza.",
+   "aggiornato": "2026-11-22T12:19:29.264Z"
+  },
+  "PIN-AR6": {
+   "nome": "Un altro... Grappino...",
+   "flavour": "Ogni volta che lo dice, Grappino abbaia. Un nome poco saggio da affibbiare a un cane di un'alcolista.",
+   "aggiornato": "2026-11-22T12:20:02.019Z"
+  },
+  "PIN-BA": {
+   "nome": "Fino all'Ultima Goccia",
+   "flavour": "«Questo... lo finisco io.. Non si lascia... il grondino...»",
+   "aggiornato": "2026-11-22T12:10:49.289Z"
+  },
+  "PIN-BO1": {
+   "nome": "Posto Fisso",
+   "flavour": "Lo sgabello è suo da sette ore. Quando va in bagno, lo difende Grappino con le unghie e con i denti.",
+   "aggiornato": "2026-11-22T12:11:24.180Z"
+  },
+  "PIN-BO2": {
+   "nome": "Violenta Spruzzata di Seltz",
+   "flavour": "«Il seltz... pulisce la bocca... così... senti di più... la grappa...»",
+   "aggiornato": "2026-11-22T12:12:43.235Z"
+  },
+  "PIN-BO3": {
+   "nome": "Schiarirsi le Idee",
+   "flavour": "«Ah... ecco. Adesso... vi vedo... tutte e due...»",
+   "aggiornato": "2026-11-22T12:13:15.674Z"
+  },
+  "ROC-AR1": {
+   "nome": "Nocche Sbucciate",
+   "flavour": "Fa più male a lui, ma non lo ammetterà mai. D'altronde è un requisito per quelli come lui.",
+   "aggiornato": "2026-11-22T13:00:29.914Z"
+  },
+  "ROC-AR2": {
+   "nome": "Stoico Come un Busto di Bronzo",
+   "flavour": "«Guarda il mezzobusto: si lamenta forse, egli?»",
+   "illustrazione": "Duccio incassa un colpo nello stomaco col petto gonfio e gli occhi lucidi, mentre si immagina un suo mezzobusto di bronzo.",
+   "aggiornato": "2026-11-22T12:55:28.365Z"
+  },
+  "ROC-AR3": {
+   "nome": "E Allora... ?",
+   "flavour": "La sua risposta a tutto, dibattiti e... battiti.",
+   "aggiornato": "2026-11-22T12:57:10.408Z"
+  },
+  "ROC-AR4": {
+   "nome": "Craniata Patriottica",
+   "flavour": "La testa rasata serve a questo.",
+   "aggiornato": "2026-11-22T12:57:26.484Z"
+  },
+  "ROC-AR5": {
+   "nome": "La Storia La Scrivono I Vincitori",
+   "flavour": "Non preoccuparti, te la spiega lui la vera storia d'Italia. Con le mani.",
+   "aggiornato": "2026-11-22T12:58:37.168Z"
+  },
+  "ROC-AR6": {
+   "nome": "Testa Dura",
+   "flavour": "Dentro non c'è molto, da fuori però si può usare.",
+   "aggiornato": "2026-11-22T12:58:56.378Z"
+  },
+  "ROC-BA": {
+   "nome": "Prima gli Italiani",
+   "flavour": "«Prima gli italiani. Poi gli altri. Poi, se avanza, magari io...»",
+   "aggiornato": "2026-11-22T12:45:16.319Z"
+  },
+  "ROC-BO1": {
+   "nome": "Rinfrescata Arrogante",
+   "flavour": "Difendere la patria mette sete, a quanto pare. ",
+   "aggiornato": "2026-11-22T12:47:02.420Z"
+  },
+  "ROC-BO2": {
+   "nome": "Rialziamoci e Partite!",
+   "flavour": "Il vero patriota si rialza sempre. Di solito dove l'hanno lasciato.",
+   "illustrazione": "Duccio si rialza dal marciapiede, una mano sul cuore, il cocktail miracolosamente intatto, i suoi compari in lontananza che se ne vanno.",
+   "aggiornato": "2026-11-22T12:50:59.726Z"
+  },
+  "ROC-BO3": {
+   "nome": "(Dis)onore Alla Bandiera",
+   "flavour": "Dovrebbe onorare la bandiera, ma invece finisce con proteggersi con essa.",
+   "illustrazione": "Duccio si ripara dietro una bandiera tricolore italiana; si intuisce soltanto che sia una bandiera italiana, non si vede chiaramente.",
+   "aggiornato": "2026-11-22T12:52:48.505Z"
   },
   "SPA-AR1": {
    "flavour": "«BWAAARGH! ACCOGLI LA MORTE CHE DISPENSO SUL TU!»",
@@ -17,8 +535,8 @@
    "aggiornato": "2026-11-21T20:58:16.999Z"
   },
   "SPA-AR3": {
-   "flavour": "«PAZIENZA E SOLDI, MAI AVUTI. IN COMPENSO, HO TANTE VITE DA CESSARE NEL FUTURO PROSSIMO.»",
-   "aggiornato": "2026-11-21T20:59:20.826Z"
+   "flavour": "«PAZIENZA E SOLDI? MAI AVUTI. IN COMPENSO, HO TANTE VITE DA CESSARE NEL FUTURO PROSSIMO, A COMINCIARE DALLA TUA.»",
+   "aggiornato": "2026-11-21T21:12:15.988Z"
   },
   "SPA-AR4": {
    "flavour": "«CARINO QUETO TUO BASTONCINO, LO FANNO ANCHE DA UOMO O SOLO DA BAMBINO?»",
@@ -29,9 +547,9 @@
    "aggiornato": "2026-11-21T21:02:41.073Z"
   },
   "SPA-AR6": {
-   "nome": "SGROMRIAMOVI",
-   "flavour": "«MOSÈ APRì LE ACQUE, E IO APRIRò VOIALTRI.»",
-   "aggiornato": "2026-11-21T21:03:53.275Z"
+   "nome": "SGOMBERIAMOVI",
+   "flavour": "«MERA MATERIA O VIVA CARNE CHE SIA, CATAPULTERO' VIA OGNI ATOMO CHE MI IMPICCIA.»",
+   "aggiornato": "2026-11-21T21:11:44.832Z"
   },
   "SPA-BA": {
    "flavour": "«OGNI COSA HA IL SUO IMPIEGO. QUESTA, NELLA FATTISPECIE, TI FARÀ SMETTERE LA VITA:::»",
@@ -50,6 +568,61 @@
    "nome": "VIOLENZAZIONE",
    "flavour": "«SE I GABBIANI PRATICANO L'AUTOEROTISMO, IO PRATICO L'AUTOVIOLENZA.»",
    "aggiornato": "2026-11-21T20:56:31.719Z"
+  },
+  "TOKEN": {
+   "nome": "Bottiglia Spaccata",
+   "flavour": "Tutti conoscono il proverbio: \"spaco botilia, amazo familia\".",
+   "aggiornato": "2026-11-22T13:51:54.117Z"
+  },
+  "TOS-AR1": {
+   "nome": "Fare l'Inventario",
+   "flavour": "Le capacità organizzative di un tossicodipendente sono spesso sottovalutate.",
+   "aggiornato": "2026-11-22T11:57:18.339Z"
+  },
+  "TOS-AR2": {
+   "nome": "Tossicone Scatarrante",
+   "flavour": "Ripulire i polmoni spesso finisce con lo sporcare qualcos'altro.",
+   "aggiornato": "2026-11-22T11:58:03.249Z"
+  },
+  "TOS-AR3": {
+   "nome": "Metabolismo Corrotto",
+   "flavour": "«Il mio fegato ha filtrato cose che il tuo nemmeno immagina.»",
+   "aggiornato": "2026-11-22T11:58:40.914Z"
+  },
+  "TOS-AR4": {
+   "nome": "Riflessi Aumentati dalla Speed",
+   "flavour": "Con la giusta sostanza, una persona può aumentare determinate capacità - a discapito di tutte le altre e, spesso, della vita.",
+   "aggiornato": "2026-11-22T11:59:50.947Z"
+  },
+  "TOS-AR5": {
+   "nome": "Trascinare nel Tunnel",
+   "flavour": "«Che vuoi che sia? Solo una volta, tanto per provare. La roba ce la metto io, almeno per questa volta...»",
+   "aggiornato": "2026-11-22T12:02:16.829Z"
+  },
+  "TOS-AR6": {
+   "nome": "Un Assaggino",
+   "flavour": "«Su, non fare tante storie! Non avresti fatto tanto storie se fossi stata bella e ben vestita.»",
+   "aggiornato": "2026-11-22T12:03:45.522Z"
+  },
+  "TOS-BA": {
+   "nome": "Desiderio Incontrollabile",
+   "flavour": "Tutto è droga con il giusto atteggiamento.",
+   "aggiornato": "2026-11-22T11:50:48.541Z"
+  },
+  "TOS-BO1": {
+   "nome": "Fondo del Posacenere",
+   "flavour": "«Sotto lo strato di cicche e cenere si nascondono sempre le cose più buone. Non è forse una metafora della vita?»",
+   "aggiornato": "2026-11-22T11:51:50.867Z"
+  },
+  "TOS-BO2": {
+   "nome": "Rintanarsi nel Cappotto",
+   "flavour": "Il giubbotto non è suo, ma ormai il possessore originale non lo vuole più.",
+   "aggiornato": "2026-11-22T11:53:35.575Z"
+  },
+  "TOS-BO3": {
+   "nome": "Tagliare la Dose",
+   "flavour": "«Mi sto disintossicando un quarto alla volta. Non volontariamente: questo è il massimo che sono riuscita a trovare.»",
+   "aggiornato": "2026-11-22T11:54:26.223Z"
   }
  }
 }
