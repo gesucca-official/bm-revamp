@@ -185,4 +185,36 @@ class Sb27SpazienzioCardsTest {
         assertTrue(tokens(game, actor).isEmpty(), "giocare il nome chiude Vulnerabile");
         assertEquals(0, spazienzio.getShownRevealed().size(), "D178: il promemoria cade insieme a Vulnerabile");
     }
+
+    @Test
+    void patienceKeepsTheFoundCopyShownWhenMescoloneRemovesVulnerability() throws Exception {
+        Draft draft = Draft.fromClasspath("/set-base/bozza.json");
+        String actor = "bruiser.character.BigBadBruiser";
+        Card patience = card("bruiser.Glare");
+        Card found = card("bruiser.SuperImpact");
+        Card mescolone = card("com.items.MarvelousCocktail");
+        Player spazienzio = player(draft.character(actor), List.of(patience, consume()),
+                List.of(filler(), found, filler(), filler(), filler(), filler(), filler()), null);
+        Game game = game(spazienzio, b());
+        ch(game, actor).getItems().add(mescolone);
+
+        turn(game, move(game, actor, "PAZIENZA: FINITA", "SELF"), rest(game, "b"));
+        assertSame(found, spazienzio.getShownRevealed().get(0).getCard());
+        assertFalse(tokens(game, actor).isEmpty());
+
+        turn(game, onItem(game, actor, "Consuma", actor, "Mescolone Micidiale"), rest(game, "b"));
+        for (int turnAfterConsuming = 1; turnAfterConsuming <= 3; turnAfterConsuming++) {
+            turn(game, rest(game, actor), rest(game, "b"));
+        }
+        assertEquals(70, res(game, actor, HEALTH));
+        assertFalse(tokens(game, actor).isEmpty());
+        assertSame(found, spazienzio.getShownRevealed().get(0).getCard());
+
+        turn(game, rest(game, actor), rest(game, "b"));
+        assertEquals(50, res(game, actor, HEALTH), "il timer di quinto turno è scattato e ha inflitto 20 POISON");
+        assertTrue(tokens(game, actor).isEmpty(), "RP-29: il timer rimuove Vulnerabile");
+        assertTrue(spazienzio.holds(found), "la copia annunciata non è stata giocata o scartata");
+        assertEquals(1, spazienzio.getShownRevealed().size(), "D179: il timer lascia il promemoria");
+        assertSame(found, spazienzio.getShownRevealed().get(0).getCard());
+    }
 }
