@@ -1,6 +1,6 @@
 # SB-28 — Proposta: trasferimento nella partita viva
 
-Preparata dalla regia il 23 novembre 2026, dopo [D181](../../set-base-decisioni.md#decisioni-del-proprietario). In attesa della scelta del proprietario.
+Preparata dalla regia il 23 novembre 2026, dopo [D181](../../set-base-decisioni.md#decisioni-del-proprietario). Risposte del proprietario in [D182](../../set-base-decisioni.md#decisioni-del-proprietario): quick a caso fra i cinque starter, mazzi salvati con carte uscite cancellati.
 
 ## Da dove si parte
 
@@ -62,12 +62,14 @@ Nulla va in produzione su Heroku finché non dici tu «pusha».
 
 **Scelte prese**, se non dici altro:
 - il set resta `base`, versione **1.0**; il regolamento passa alla **2.0**, perché cambia il sistema e non solo un dettaglio;
-- Junkie («Celestina Bucatina») passa da starter base ad avanzato, come dice il piano;
+- Junkie («Celestina Bucatina») passa da starter base ad avanzato, come dice il piano; i base sono Spazienzio e Mara, gli avanzati Celestina, Piera e Beppe;
 - le partite archiviate restano leggibili con la versione registrata;
 - il bot delle partite contro il computer resta quello di oggi; il collegamento dei livelli è di SB-30;
 - il flavour e il promemoria delle parole chiave nel client restano di SB-31, le immagini di SB-32.
 
 ## Domande
+
+*Risposte in D182:* (1) la proposta sbagliava le categorie (Pino e Gigi sono avanzati): la quick assegna a caso uno dei **cinque** starter; (2) i mazzi salvati con carte uscite **si cancellano**.
 
 1. **Quick match fino a SB-29.** Oggi assegna a caso uno dei due personaggi vivi. Propongo: a caso fra i **quattro starter base**
    (Spazienzio, Mara, Pino, Gigi). SB-29 aggiunge poi la scelta della categoria e porta dentro Celestina. In alternativa: tutti e
