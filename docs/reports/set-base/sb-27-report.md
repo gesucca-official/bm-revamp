@@ -186,3 +186,141 @@ e «Copione Già Visto» leggono le regole del playground (`playground()`), che 
    Va bene come estensione della regola del proprietario?
 3. Il costo `{"ALERTNESS": 0}` di «Ce l'Hai Due Spicci?» nel file del set è un costo a zero (la scheda dice «Nessun costo in
    risorse»): lo si toglie in Fase B o in SB-28, o resta?
+
+## Fase B
+
+**Stato:** inventario rilevato dalle 125 schede del Set Base 1.0 candidato. Base del blocco: `ed73a7d`.
+
+Al controllo preliminare erano presenti quattro artefatti non tracciati in `output/pdf/`. Il proprietario ha autorizzato a proseguire: «Procedi lasciandoli al loro posto». Restano fuori dal commit.
+
+### Inventario e copertura
+
+Le 19 carte speciali riportano i casi e le clausole della fase A. Un trattino indica una voce ancora senza casi della fase B.
+
+| Slot | Nome | Tipo | Classe di test | Casi | Clausole coperte |
+|---|---|---|---|---:|---|
+| PG-SPA | SPAZIENZIO DE LA UCCISO | Personaggio | — | — | — |
+| PG-MAR | Mara Contromano | Personaggio | — | — | — |
+| PG-TOS | Celestina Bucatina | Personaggio | — | — | — |
+| PG-PIN | Piera Pinot | Personaggio | — | — | — |
+| PG-GIG | Beppe Bulletta | Personaggio | — | — | — |
+| PG-CES | Sergio Sommerso | Personaggio | — | — | — |
+| PG-ROC | Duccio Braccio Teso | Personaggio | — | — | — |
+| SPA-BA | ADOPERIAMOTI | Azione, Base | — | — | — |
+| SPA-BO1 | LIEVE FASTIDIO | Azione, Legata al personaggio | — | — | — |
+| SPA-BO2 | SVEGLIAMOCI - MA TU NO | Azione, Legata al personaggio | — | — | — |
+| SPA-BO3 | VIOLENZAZIONE | Azione, Legata al personaggio | — | — | — |
+| SPA-AR1 | GARGANTUESCO IMPATTO SUL TU | Azione, Regolare | — | — | — |
+| SPA-AR2 | SPEDIAMOTI DUNQUE IN O-AHIO | Azione, Regolare | — | — | — |
+| SPA-AR3 | PAZIENZA: FINITA | Azione, Regolare | — | — | — |
+| SPA-AR4 | NON GIOCARE COL COLTELLO NO | Azione, Regolare | — | — | — |
+| SPA-AR5 | FAI BASTA | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 3 | annulla una mossa ancora da risolvere, che tiene costo e pescata; su una mossa già risolta nulla; a pari priorità e pari A vale l'ordine di entrata |
+| SPA-AR6 | SGOMBERIAMOVI | Azione, Regolare | — | — | — |
+| MAR-BA | Requisire al Volo | Azione, Base | — | — | — |
+| MAR-BO1 | Sventare l'Assassinio | Azione, Legata al personaggio | — | — | — |
+| MAR-BO2 | Semaforo Rosso | Azione, Legata al personaggio | — | — | — |
+| MAR-BO3 | Tagliare la Strada | Azione, Legata al personaggio | — | — | — |
+| MAR-AR1 | Lazo del Rider | Azione, Regolare | — | — | — |
+| MAR-AR2 | Sgommata | Azione, Regolare | — | — | — |
+| MAR-AR3 | Agilità Innaturale | Azione, Regolare | — | — | — |
+| MAR-AR4 | Unta e Bisunta | Azione, Regolare | — | — | — |
+| MAR-AR5 | Slalom d'Avvicinamento | Azione, Regolare | — | — | — |
+| MAR-AR6 | Traiettoria Imprevedibile | Azione, Regolare | — | — | — |
+| TOS-BA | Desiderio Incontrollabile | Azione, Base | — | — | — |
+| TOS-BO1 | Fondo del Posacenere | Azione, Legata al personaggio | — | — | — |
+| TOS-BO2 | Rintanarsi nel Cappotto | Azione, Legata al personaggio | — | — | — |
+| TOS-BO3 | Tagliare la Dose | Azione, Legata al personaggio | — | — | — |
+| LR-TOS | L'Ultimo Tiro | Azione, Ultima risorsa | — | — | — |
+| TOS-AR1 | Fare l'Inventario | Azione, Regolare | — | — | — |
+| TOS-AR2 | Tossicone Scatarrante | Azione, Regolare | — | — | — |
+| TOS-AR3 | Metabolismo Corrotto | Azione, Regolare | — | — | — |
+| TOS-AR4 | Riflessi Aumentati dalla Speed | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 5 | annulla una mossa contro di te o contro un tuo oggetto; lascia la mossa che l'avversario gioca su sé e quella già risolta; annulla la mossa di ogni avversario (tre giocatori) |
+| TOS-AR5 | Trascinare nel Tunnel | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 4 | dà la T dopo il costo, poi avvelena (b perde 10 + 10); toglie l'immunità al bersaglio, anche quella del personaggio; ti fa immune solo dopo il veleno di questo turno; non immune prima della fine del turno |
+| TOS-AR6 | Un Assaggino | Azione, Regolare | — | — | — |
+| PIN-BA | Fino all'Ultima Goccia | Azione, Base | — | — | — |
+| PIN-BO1 | Posto Fisso | Azione, Legata al personaggio | — | — | — |
+| PIN-BO2 | Violenta Spruzzata di Seltz | Azione, Legata al personaggio | — | — | — |
+| PIN-BO3 | Schiarirsi le Idee | Azione, Legata al personaggio | — | — | — |
+| LR-PIN | Ultimo Giro | Azione, Ultima risorsa | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 5 | HIT 10 + L spesa e 2 a te (2/13); il danno a sé viene prima della spesa, quindi l'armatura alcolica lo riduce (0/22); Rincara conta le giocate annullate e solo le tue (4/14, poi 6/18); ignora le giocate dell'avversario; su Vulnerabile arrotonda per difetto (16) |
+| PIN-AR1 | Scompenso da Ultimo Giro | Azione, Regolare | — | — | — |
+| PIN-AR2 | Alla Goccia | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 4 | 10 + L spesa (22); senza L 10; armatura del bersaglio (20); Vulnerabile (16) |
+| PIN-AR3 | Avamposto Fortificato al Bancone | Azione, Regolare | — | — | — |
+| PIN-AR4 | Un Altro e Arrivo | Azione, Regolare | — | — | — |
+| PIN-AR5 | Rutto a Bruciapelo | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 4 | L dopo il costo, toglie A, HIT 15 + 2 × L (29, b a 3 A); A non sotto 0 (45); con solo il costo non spende altro (15); armatura (27) |
+| PIN-AR6 | Un Altro... Grappino... | Azione, Regolare | — | — | — |
+| GIG-BA | Questo Torna Utile | Azione, Base | — | — | — |
+| GIG-BO1 | Cuffie e Testa Bassa | Azione, Legata al personaggio | — | — | — |
+| GIG-BO2 | Colpo col Cacciavite | Azione, Legata al personaggio | — | — | — |
+| GIG-BO3 | Affilare gli Utensili | Azione, Legata al personaggio | — | — | — |
+| GIG-AR1 | Disassemblare | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 2 | distrugge l'oggetto scelto senza effetto; oggetto già sparito: nulla |
+| GIG-AR2 | Chiave da Tredici | Azione, Regolare | — | — | — |
+| GIG-AR3 | Preparare il Lavoro | Azione, Regolare | — | — | — |
+| GIG-AR4 | Secondo Bagagliaio | Azione, Regolare | — | — | — |
+| GIG-AR5 | Lavoro Fatto Bene | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 5 | 15 senza oggetti; + 4 per oggetto, gettoni compresi (23); equipaggiamenti non contati; oggetti contati all'inizio della sua risoluzione (19); Vulnerabile (22) |
+| GIG-AR6 | Metodo Empirico | Azione, Regolare | — | — | — |
+| CES-BA | Messo in Conto | Azione, Base | — | — | — |
+| CES-BO1 | Discutiamone in Privato | Azione, Legata al personaggio | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 4 | annulla una mossa successiva che Annuncia e resta in mano; lascia risolvere una mossa senza Annuncia; annuncio già risolto o mossa già annullata: nulla |
+| CES-BO2 | Tecnica Manipolatoria | Azione, Legata al personaggio | — | — | — |
+| CES-BO3 | Fare il Vago | Azione, Legata al personaggio | — | — | — |
+| CES-AR1 | Opportuna Distrazione | Azione, Regolare | — | — | — |
+| CES-AR2 | Buon Vecchio Ricatto | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 8 | annulla un attacco e rimanda metà del danno fisso (15); arrotonda per difetto ogni tipo (12, 5 + 5); non attacco: nulla; già risolta: nulla; già annullata: nulla; solo la parte fissa (Lazo 10, Scompenso 17); niente Rincara (Addosso 5); il danno passa per gli stati del bersaglio (Vulnerabile 22) |
+| CES-AR3 | Copione Già Visto | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 4 | annulla una mossa ancora da risolvere; sulla carta annunciata tiene l'avversario Vulnerabile (colpo dopo: 15); su un'altra carta annulla e basta; carta annunciata già annullata: il gettone finisce senza effetto |
+| CES-AR4 | Conto Salato | Azione, Regolare | — | — | — |
+| CES-AR5 | Segreto di Pulcinella | Azione, Regolare | — | — | — |
+| CES-AR6 | Scherzo Oltre il Limite | Azione, Regolare | — | — | — |
+| CES-AR7 | Fiuto per gli Affari | Azione, Regolare | — | — | — |
+| ROC-BA | Prima gli Italiani | Azione, Base | — | — | — |
+| ROC-BO1 | Rinfrescata Arrogante | Azione, Legata al personaggio | — | — | — |
+| ROC-BO2 | Rialziamoci e Partite! | Azione, Legata al personaggio | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 3 | cura 4 da 1 a 30 H (30 → 34, 1 → 5), sopra 30 nulla (31); legge la salute dopo le mosse precedenti (35 − 7 + 4 = 32); a terra si risolve e non è annullata, a 0 non dà nulla; resta in mano |
+| ROC-BO3 | (Dis)onore alla Bandiera | Azione, Legata al personaggio | — | — | — |
+| LR-ROC | Non Mi Hai Fatto Niente | Azione, Ultima risorsa | — | — | — |
+| ROC-AR1 | Nocche Sbucciate | Azione, Regolare | — | — | — |
+| ROC-AR2 | Stoico come un Busto di Bronzo | Azione, Regolare | — | — | — |
+| ROC-AR3 | E Allora...? | Azione, Regolare | — | — | — |
+| ROC-AR4 | Craniata Patriottica | Azione, Regolare | — | — | — |
+| ROC-AR5 | La Storia la Scrivono i Vincitori | Azione, Regolare | — | — | — |
+| ROC-AR6 | Testa Dura | Azione, Regolare | — | — | — |
+| GEN-01 | Afferrare | Azione, Regolare | — | — | — |
+| GEN-02 | Furto con Destrezza | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 4 | prende l'oggetto scelto; oltre la capienza perde il proprio più vecchio; oggetto non più lì: nulla; l'effetto «In campo» passa al ladro (Conto, −4 A) |
+| GEN-03 | Scatto Repentino | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 3 | scambia tutti gli oggetti; oltre la capienza perde i più vecchi ricevuti; un lato vuoto: passano tutti, con il loro «In campo» |
+| GEN-04 | Ce l'Hai Due Spicci? | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 5 | copia un oggetto che l'avversario tiene; uno a caso fra due; senza oggetti nulla; oltre la capienza perde il proprio più vecchio; la copia è solo tua |
+| GEN-05 | GABBIANO, DUNQUE VOLIAMOTI | Azione, Regolare | — | — | — |
+| GEN-06 | Foratone da 28 | Azione, Regolare | — | — | — |
+| GEN-07 | ORMALE GUARIAMOTI | Azione, Regolare | — | — | — |
+| GEN-08 | AMMALIAMOTI DI BOTTE | Azione, Regolare | — | — | — |
+| GEN-09 | STORDIAMOTI HO DETTO | Azione, Regolare | — | — | — |
+| GEN-10 | PERMESSO SCUSA PUOI SMETTERLA | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 2 | toglie gli equipaggiamenti, poi 8 HIT; lascia gli altri stati (6, «Guardia») |
+| GEN-11 | GENTILE IL TUO CAREZZO | Azione, Regolare | — | — | — |
+| GEN-12 | Estrema Fretta di Alcolizzarsi | Azione, Regolare | — | — | — |
+| GEN-13 | Tecnica del Carapace Mentale | Azione, Regolare | — | — | — |
+| GEN-14 | Denti Stretti | Azione, Regolare | — | — | — |
+| GEN-15 | Due Dita in Gola | Azione, Regolare | — | — | — |
+| GEN-16 | Fasciatura d'Emergenza | Azione, Regolare | — | — | — |
+| GEN-17 | Sputo nel Posacenere | Azione, Regolare | — | — | — |
+| GEN-18 | Spintone | Azione, Regolare | — | — | — |
+| GEN-19 | Mano Lesta | Azione, Regolare | — | — | — |
+| GEN-20 | Riprendere Fiato | Azione, Regolare | — | — | — |
+| GEN-21 | Coccio di Bottiglia | Azione, Regolare | — | — | — |
+| GEN-22 | Svegliaaah! | Azione, Regolare | — | — | — |
+| GEN-23 | Sgambetto | Azione, Regolare | — | — | — |
+| GEN-24 | Estasi da Coca Etilene | Azione, Regolare | — | — | — |
+| LR-STR | Addosso!!! | Azione, Ultima risorsa | — | — | — |
+| OGG-01 | Negroni Trovato per Terra | Oggetto | — | — | — |
+| OGG-02 | Bionda da 66, Calda | Oggetto | — | — | — |
+| OGG-03 | Doppio Malto da Discount | Oggetto | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 2 | lascia una bottiglia e dà 10 L; bottiglia a capienza piena perde la più vecchia |
+| OGG-04 | Mescolone Micidiale | Oggetto | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 1 | cronologia di cinque turni: T e L bloccate, poi via tutto e veleno |
+| OGG-05 | Amaro nel Bicchiere di Plastica | Oggetto | — | — | — |
+| OGG-06 | Espresso della Macchinetta | Oggetto | — | — | — |
+| OGG-07 | Kebab Abbandonato | Oggetto | — | — | — |
+| OGG-08 | Acqua Minerale Sgasata | Oggetto | — | — | — |
+| OGG-09 | Guanti da Officina | Oggetto | — | — | — |
+| OGG-10 | Giubbotto di Finta Pelle | Oggetto | — | — | — |
+| OGG-11 | Casco da Cantiere | Oggetto | — | — | — |
+| OGG-12 | Pasticca Abbandonata | Oggetto | — | — | — |
+| OGG-13 | Posacenere di Vetro | Oggetto | — | — | — |
+| OGG-14 | Ghiaccio nel Tovagliolo | Oggetto | — | — | — |
+| OGG-15 | Santino di San Briaco | Oggetto | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 2 | blocca la L per tre turni contando questo, poi la L agisce (L 4, A 55); un secondo Santino non allunga |
+| OGG-16 | Grappa della Casa | Oggetto | — | — | — |
+| OGG-17 | Conto del Tavolo Sei | Oggetto | — | — | — |
+| OGG-18 | Sigaretta Accesa | Oggetto | — | — | — |
+| TOKEN | Bottiglia Spaccata | Oggetto, Token | — | — | — |
