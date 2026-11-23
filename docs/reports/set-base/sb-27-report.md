@@ -1,5 +1,7 @@
 # SB-27 Fase A — Le 19 carte d'effetto speciale in forma definitiva
 
+**Chiuso il 23 novembre 2026** ([D181](../../set-base-decisioni.md#decisioni-del-proprietario)): il proprietario, «Sì, chiudi».
+
 **Revisione della regia, 23 novembre 2026:** accettata, Fase A chiusa; risposte alle domande nel [piano](../../set-base-plan.md#sb-27--carte-deffetto-speciale-in-forma-definitiva).
 
 **Esito:** fatto, in attesa di revisione. Le 11 classi del set nuovo tengono solo la logica e prendono ogni numero dal file del set; le 19 carte hanno test scritti dalla scheda (70 casi), nessuna differenza fra carta e scheda; suite completa verde; corsa d'identità uguale salvo l'impronta della bozza nell'intestazione della matrice (vedi «Corsa d'identità»). Nuova impronta della bozza `325926e3…`.
