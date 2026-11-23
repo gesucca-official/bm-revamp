@@ -13,6 +13,9 @@ __pycache__/
 *.db-*
 *.match-recovery/
 !server/src/main/resources/cards.sqlite
+# SB-26: the generated candidate catalogs, checked by check-rules.py --candidate.
+!server/src/test/resources/set-base/catalogo/cards.sqlite
+!docs/reports/set-base/sb-26/espansione/cards.sqlite
 
 # Private configuration and local environment.
 .env
