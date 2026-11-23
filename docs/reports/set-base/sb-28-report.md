@@ -120,3 +120,64 @@ Leggere il regolamento 2.0 (soprattutto R04, R06 e R07b) e la corrispondenza. Do
 1. I dubbi D1–D8: vanno bene le scelte?
 2. Dove va la descrizione del formato del file del set: una pagina `docs/formato-file-set.md` in Fase B (proposta), o i commenti delle
    classi del caricatore?
+
+## Fase B
+
+**Esito: consegnata il 23 novembre 2026, in un solo commit di passaggio (`80d5b3b`).** La partita viva gioca il regolamento 2.0 col Set Base
+1.0, letto dal file del set in produzione; quick a caso fra i cinque starter, mazzi salvati con carte uscite cancellati. Dettagli
+(norma, carte uscite, pulizia di SB-27, attese cambiate con la decisione) in [sb-28/fasi-b-c.md](sb-28/fasi-b-c.md).
+
+### Verifiche della Fase B
+
+| Verifica | Esito |
+|---|---|
+| `./scripts/build.ps1 -Task Test -Offline` | verde: 1497 test, 0 falliti, 23 saltati; client di debug 37 su 37 |
+| `./scripts/build.ps1 -Task TestServerContext -Offline` (a parte) | verde: 1695 test, 0 falliti, 23 saltati |
+| `check-rules.py`, `verify-match-manifests.py`, `set_catalog.py --vivo --check`, `prova-errori.py`, `git diff --check` | verdi |
+| `client-web` `VerifyModes` (server su database temporaneo), `VerifyFfa` | verdi; `VerifyFfa` dopo la correzione della domanda 3 |
+| corsa d'identità del giro 20/2 sul percorso vivo (403.200 partite, `d50`) | uguale al congelamento: `deck-observations.json` `87aa84d6…` identico, `matrix.json` uguale salvo i due campi della fonte (domanda 4); [confronto](sb-28/identita/confronto.json) |
+| misura lunga `ChargeMeasureTest#liveBenchOnTheSameHistoricalDraft` (`-Dsim.rules=1.13`) | identica: `final-live.json` `ca131721…` |
+| `client-web` `Test` | **rosso, 7 test** (domanda 2) |
+
+Le altre misure lunghe saltate (`sim.*`) non sono state eseguite.
+
+### Domande per la regia
+
+1. Le fixture che costruiscono `new Game` a mano giocano il motore 1.13 (`Ruleset.LEGACY`, predefinito) coi personaggi Java dello 0.1
+   (100 HEALTH), mentre l'intestazione dell'archivio dice 2.0 (in `cli-match-export-test.cjs` la salute scende a −5). Le partite
+   della fabbrica giocano 2.0. Restano così, o le fixture passano a `Ruleset.LIVE`?
+2. `client-web` `Test` ha 7 test rossi legati allo 0.1: atlante (125 classi, 40 riquadri), cornici e impatti (conteggi 37), intestazioni
+   e tabelle dei documenti (R02a, R07b, S5 tolto, personaggi), testi degli stati confrontati con le righe dello 0.1. È adeguamento del
+   client (SB-31) e illustrazioni (SB-32), fuori perimetro: non toccati. Non verificato se erano verdi sulla base.
+3. `client-web/tools/verify-ffa.mjs`: il controllo di riservatezza segnalava una carta «solo nella mano dell'altro» presente in
+   `revealed` di un computer, cioè la copia mostrata da una ricerca, pubblica per R08 2.0. Ho escluso `revealed` dal controllo, citando
+   D183. È uno strumento condiviso (passo «con proposta»): va bene così?
+4. Identità: nell'intestazione della matrice cambiano `bozza` (nome della fonte) e `sha256`, perché la corsa legge il file vivo e non la
+   bozza. Ogni partita è uguale. Vale come identità?
+5. Restano, da decidere: le classi Java delle carte a dati dello 0.1 e i personaggi Java in `server/src/main`; il controllo
+   `poison > 0` di `ToxicBloodDrain`; `verify-decks` e `verify-resolution` del client citano carte dello 0.1 (non eseguite);
+   catalogo vivo senza immagini (`no-img.png` fino a SB-32).
+
+## Fase C
+
+**Esito: consegnata il 23 novembre 2026.** Partite reali via CLI ([runner](sb-28/partite-cli.cjs), [risultato](sb-28/partite-cli.json))
+su un server col jar nuovo e un database temporaneo, contro il bot del server: un'open 1vCom fino all'esito per ognuno dei cinque
+starter (Spazienzio, Mara, Celestina, Piera, Beppe) e per Sergio e Duccio (mazzi di prova fatti di carte vive), più cinque quick
+1vCom. Tutte arrivate all'esito (10 vittorie, 1 sconfitta, 1 pareggio), 0 mosse rifiutate, esportazione integra, regolamento 2.0 e
+set 1.0 registrati; collezione di 7 personaggi e 117 carte. Le quick hanno dato Piera, Beppe e Celestina. La migrazione ha scritto nel
+log «0 saved decks … deleted, 0 kept»; sulla copia del database locale del proprietario cancellerebbe 0 mazzi (ne ha 0).
+
+**Partita del proprietario** (da `E:\bm`, il jar è già rifatto; il primo avvio applica la migrazione al database locale):
+
+```powershell
+./scripts/dev.ps1 -Task Server -SeedAccounts
+./client-web/run.ps1 -Task Build
+./client-web/run.ps1 -Task Serve
+```
+
+Poi http://127.0.0.1:4320 con `devAlice` (password del seme locale). Il jar va rifatto (`./scripts/build.ps1 -Task Server -Offline`)
+solo se cambia il codice.
+
+**Non provato:** una partita giocata da una persona nel client (spetta al proprietario); FFA con cinque umani; le altre verifiche
+`Verify…` del client (fra cui `VerifyDecks` e `VerifyResolution`, ancora sullo 0.1); la migrazione su mazzi salvati veri (coperta
+solo da `SetBaseDecksMigrationTest`).

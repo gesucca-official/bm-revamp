@@ -1,0 +1,367 @@
+{
+  "decks": [
+    {
+      "deck": "starter-spazienzio",
+      "name": "Spazienzio",
+      "category": "base",
+      "gameId": "d44f0ae96f39a8dffa16c475525992a2cd3a3ba1725f32145ba37a70d9d40479",
+      "versions": {
+        "codeSha256": "7aa1c6a59f36449e2a5003e54de8d3036e926b14263c3d36ab72655718b6ac10",
+        "codeFormat": "jar",
+        "rulesVersion": "2.0",
+        "rulesSha256": "d324e19c804811815810ae4ff9132fc1de48ce2f00dde4eaa0762ebb409b7236",
+        "sets": {
+          "base": {
+            "version": "1.0",
+            "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+          }
+        },
+        "catalogSha256": "25cda5f33863dd9bd9200cc1c5ca9ef740b18b096f4bf72700c2efd45a3bf94a",
+        "rulesCatalogSha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+      },
+      "character": "bruiser.character.BigBadBruiser",
+      "foe": "junkie.character.ToxicJunkie",
+      "turns": 12,
+      "refused": 0,
+      "outcome": {
+        "over": true,
+        "result": "win",
+        "winner": "ComPlayer_5260"
+      },
+      "played": 12,
+      "distinct": 9
+    },
+    {
+      "deck": "starter-mara",
+      "name": "Mara",
+      "category": "base",
+      "gameId": "4a7a19e7634669dcd75f952a9f539b91facc545815f8b144c2b6d6522f18a495",
+      "versions": {
+        "codeSha256": "7aa1c6a59f36449e2a5003e54de8d3036e926b14263c3d36ab72655718b6ac10",
+        "codeFormat": "jar",
+        "rulesVersion": "2.0",
+        "rulesSha256": "d324e19c804811815810ae4ff9132fc1de48ce2f00dde4eaa0762ebb409b7236",
+        "sets": {
+          "base": {
+            "version": "1.0",
+            "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+          }
+        },
+        "catalogSha256": "25cda5f33863dd9bd9200cc1c5ca9ef740b18b096f4bf72700c2efd45a3bf94a",
+        "rulesCatalogSha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+      },
+      "character": "base.character.Mara",
+      "foe": "base.character.Mara",
+      "turns": 6,
+      "refused": 0,
+      "outcome": {
+        "over": true,
+        "result": "win",
+        "winner": "devAlice"
+      },
+      "played": 6,
+      "distinct": 5
+    },
+    {
+      "deck": "starter-tossico",
+      "name": "Celestina",
+      "category": "avanzato",
+      "gameId": "96fee008b334e0102d435b8d560c3384b73fcacf1ae81311438969788c546e06",
+      "versions": {
+        "codeSha256": "7aa1c6a59f36449e2a5003e54de8d3036e926b14263c3d36ab72655718b6ac10",
+        "codeFormat": "jar",
+        "rulesVersion": "2.0",
+        "rulesSha256": "d324e19c804811815810ae4ff9132fc1de48ce2f00dde4eaa0762ebb409b7236",
+        "sets": {
+          "base": {
+            "version": "1.0",
+            "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+          }
+        },
+        "catalogSha256": "25cda5f33863dd9bd9200cc1c5ca9ef740b18b096f4bf72700c2efd45a3bf94a",
+        "rulesCatalogSha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+      },
+      "character": "junkie.character.ToxicJunkie",
+      "foe": "base.character.Mara",
+      "turns": 5,
+      "refused": 0,
+      "outcome": {
+        "over": true,
+        "result": "win",
+        "winner": "devAlice"
+      },
+      "played": 5,
+      "distinct": 5
+    },
+    {
+      "deck": "starter-pino",
+      "name": "Piera",
+      "category": "avanzato",
+      "gameId": "5f88445ee5b10def8deb383519ae25d9034bb195d3a4ffc83dc33f4e8ac428fe",
+      "versions": {
+        "codeSha256": "7aa1c6a59f36449e2a5003e54de8d3036e926b14263c3d36ab72655718b6ac10",
+        "codeFormat": "jar",
+        "rulesVersion": "2.0",
+        "rulesSha256": "d324e19c804811815810ae4ff9132fc1de48ce2f00dde4eaa0762ebb409b7236",
+        "sets": {
+          "base": {
+            "version": "1.0",
+            "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+          }
+        },
+        "catalogSha256": "25cda5f33863dd9bd9200cc1c5ca9ef740b18b096f4bf72700c2efd45a3bf94a",
+        "rulesCatalogSha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+      },
+      "character": "base.character.Pino",
+      "foe": "base.character.Mara",
+      "turns": 3,
+      "refused": 0,
+      "outcome": {
+        "over": true,
+        "result": "win",
+        "winner": "devAlice"
+      },
+      "played": 3,
+      "distinct": 3
+    },
+    {
+      "deck": "starter-gigi",
+      "name": "Beppe",
+      "category": "avanzato",
+      "gameId": "1abcbf6cbf8509ba620567ae15c4d959b4eff7a10a6be3399d0e1a89da72f6a2",
+      "versions": {
+        "codeSha256": "7aa1c6a59f36449e2a5003e54de8d3036e926b14263c3d36ab72655718b6ac10",
+        "codeFormat": "jar",
+        "rulesVersion": "2.0",
+        "rulesSha256": "d324e19c804811815810ae4ff9132fc1de48ce2f00dde4eaa0762ebb409b7236",
+        "sets": {
+          "base": {
+            "version": "1.0",
+            "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+          }
+        },
+        "catalogSha256": "25cda5f33863dd9bd9200cc1c5ca9ef740b18b096f4bf72700c2efd45a3bf94a",
+        "rulesCatalogSha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+      },
+      "character": "base.character.Gigi",
+      "foe": "base.character.Gigi",
+      "turns": 6,
+      "refused": 0,
+      "outcome": {
+        "over": true,
+        "result": "win",
+        "winner": "devAlice"
+      },
+      "played": 6,
+      "distinct": 5
+    },
+    {
+      "deck": "prova-sergio",
+      "name": null,
+      "category": null,
+      "gameId": "e9f28ae4248d165cc2f9bb0fd22a1fae09f0e37a706b08630c96bf51a1172eab",
+      "versions": {
+        "codeSha256": "7aa1c6a59f36449e2a5003e54de8d3036e926b14263c3d36ab72655718b6ac10",
+        "codeFormat": "jar",
+        "rulesVersion": "2.0",
+        "rulesSha256": "d324e19c804811815810ae4ff9132fc1de48ce2f00dde4eaa0762ebb409b7236",
+        "sets": {
+          "base": {
+            "version": "1.0",
+            "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+          }
+        },
+        "catalogSha256": "25cda5f33863dd9bd9200cc1c5ca9ef740b18b096f4bf72700c2efd45a3bf94a",
+        "rulesCatalogSha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+      },
+      "character": "base.character.Cesira",
+      "foe": "bruiser.character.BigBadBruiser",
+      "turns": 19,
+      "refused": 0,
+      "outcome": {
+        "over": true,
+        "result": "win",
+        "winner": "devAlice"
+      },
+      "played": 19,
+      "distinct": 12
+    },
+    {
+      "deck": "prova-duccio",
+      "name": null,
+      "category": null,
+      "gameId": "8cb41ec08b0ac05d6f11cceca6babed1066349439f86de512d8510d974a13726",
+      "versions": {
+        "codeSha256": "7aa1c6a59f36449e2a5003e54de8d3036e926b14263c3d36ab72655718b6ac10",
+        "codeFormat": "jar",
+        "rulesVersion": "2.0",
+        "rulesSha256": "d324e19c804811815810ae4ff9132fc1de48ce2f00dde4eaa0762ebb409b7236",
+        "sets": {
+          "base": {
+            "version": "1.0",
+            "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+          }
+        },
+        "catalogSha256": "25cda5f33863dd9bd9200cc1c5ca9ef740b18b096f4bf72700c2efd45a3bf94a",
+        "rulesCatalogSha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+      },
+      "character": "base.character.Rocco",
+      "foe": "junkie.character.ToxicJunkie",
+      "turns": 5,
+      "refused": 0,
+      "outcome": {
+        "over": true,
+        "result": "win",
+        "winner": "devAlice"
+      },
+      "played": 5,
+      "distinct": 4
+    }
+  ],
+  "quick": [
+    {
+      "gameId": "86207a50ca8631841673f666c06776f4461e91282f3f543254450854c9b7b1fd",
+      "versions": {
+        "codeSha256": "7aa1c6a59f36449e2a5003e54de8d3036e926b14263c3d36ab72655718b6ac10",
+        "codeFormat": "jar",
+        "rulesVersion": "2.0",
+        "rulesSha256": "d324e19c804811815810ae4ff9132fc1de48ce2f00dde4eaa0762ebb409b7236",
+        "sets": {
+          "base": {
+            "version": "1.0",
+            "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+          }
+        },
+        "catalogSha256": "25cda5f33863dd9bd9200cc1c5ca9ef740b18b096f4bf72700c2efd45a3bf94a",
+        "rulesCatalogSha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+      },
+      "character": "base.character.Pino",
+      "foe": "base.character.Mara",
+      "turns": 9,
+      "refused": 0,
+      "outcome": {
+        "over": true,
+        "result": "win",
+        "winner": "devAlice"
+      },
+      "played": 9,
+      "distinct": 8
+    },
+    {
+      "gameId": "74edc2fa2fdd388865f7cd326f0f8fd4078170dff27695bae6d027f9e5454ea3",
+      "versions": {
+        "codeSha256": "7aa1c6a59f36449e2a5003e54de8d3036e926b14263c3d36ab72655718b6ac10",
+        "codeFormat": "jar",
+        "rulesVersion": "2.0",
+        "rulesSha256": "d324e19c804811815810ae4ff9132fc1de48ce2f00dde4eaa0762ebb409b7236",
+        "sets": {
+          "base": {
+            "version": "1.0",
+            "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+          }
+        },
+        "catalogSha256": "25cda5f33863dd9bd9200cc1c5ca9ef740b18b096f4bf72700c2efd45a3bf94a",
+        "rulesCatalogSha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+      },
+      "character": "base.character.Pino",
+      "foe": "base.character.Mara",
+      "turns": 18,
+      "refused": 0,
+      "outcome": {
+        "over": true,
+        "result": "win",
+        "winner": "devAlice"
+      },
+      "played": 18,
+      "distinct": 11
+    },
+    {
+      "gameId": "b9a17bd07c215ee850ee8474377d3740b409d030dbd62775d377ae41fe212799",
+      "versions": {
+        "codeSha256": "7aa1c6a59f36449e2a5003e54de8d3036e926b14263c3d36ab72655718b6ac10",
+        "codeFormat": "jar",
+        "rulesVersion": "2.0",
+        "rulesSha256": "d324e19c804811815810ae4ff9132fc1de48ce2f00dde4eaa0762ebb409b7236",
+        "sets": {
+          "base": {
+            "version": "1.0",
+            "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+          }
+        },
+        "catalogSha256": "25cda5f33863dd9bd9200cc1c5ca9ef740b18b096f4bf72700c2efd45a3bf94a",
+        "rulesCatalogSha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+      },
+      "character": "base.character.Gigi",
+      "foe": "base.character.Pino",
+      "turns": 9,
+      "refused": 0,
+      "outcome": {
+        "over": true,
+        "result": "win",
+        "winner": "devAlice"
+      },
+      "played": 9,
+      "distinct": 7
+    },
+    {
+      "gameId": "872c94535a3c40c177539c39e066734ac473131a8a3f1f2974efceb1c96917de",
+      "versions": {
+        "codeSha256": "7aa1c6a59f36449e2a5003e54de8d3036e926b14263c3d36ab72655718b6ac10",
+        "codeFormat": "jar",
+        "rulesVersion": "2.0",
+        "rulesSha256": "d324e19c804811815810ae4ff9132fc1de48ce2f00dde4eaa0762ebb409b7236",
+        "sets": {
+          "base": {
+            "version": "1.0",
+            "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+          }
+        },
+        "catalogSha256": "25cda5f33863dd9bd9200cc1c5ca9ef740b18b096f4bf72700c2efd45a3bf94a",
+        "rulesCatalogSha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+      },
+      "character": "junkie.character.ToxicJunkie",
+      "foe": "base.character.Mara",
+      "turns": 6,
+      "refused": 0,
+      "outcome": {
+        "over": true,
+        "result": "draw",
+        "winner": null
+      },
+      "played": 6,
+      "distinct": 6
+    },
+    {
+      "gameId": "68b7af0db59b4d3b92f09dff9a3440130fb6532214ccf603fad05d0e20b0c956",
+      "versions": {
+        "codeSha256": "7aa1c6a59f36449e2a5003e54de8d3036e926b14263c3d36ab72655718b6ac10",
+        "codeFormat": "jar",
+        "rulesVersion": "2.0",
+        "rulesSha256": "d324e19c804811815810ae4ff9132fc1de48ce2f00dde4eaa0762ebb409b7236",
+        "sets": {
+          "base": {
+            "version": "1.0",
+            "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+          }
+        },
+        "catalogSha256": "25cda5f33863dd9bd9200cc1c5ca9ef740b18b096f4bf72700c2efd45a3bf94a",
+        "rulesCatalogSha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+      },
+      "character": "junkie.character.ToxicJunkie",
+      "foe": "base.character.Pino",
+      "turns": 8,
+      "refused": 0,
+      "outcome": {
+        "over": true,
+        "result": "win",
+        "winner": "devAlice"
+      },
+      "played": 8,
+      "distinct": 7
+    }
+  ],
+  "collection": {
+    "characters": 7,
+    "cards": 117
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "comando": "powershell -File docs/reports/set-base/sb-21z/run.ps1 -Phase round -Label r20-2 -Draft 'classpath:/sets/base.json;classpath:/set-base/mazzi-prova.json' -Games 100 -Seed 7000000 -Rows/-Foes i cinque starter, prova-sergio, prova-duccio (regole d50 = 2.0)",
+  "partite": 403200,
+  "riferimento": {
+    "matrix.json": "5ca36649069459ffc15b0a9c10c4d2abd46311d897e8a9e2ad80174df439ae7c",
+    "deck-observations.json": "87aa84d65f8b04edb86ddac8af6458bf7a817c9391cb93b4260aec0eb219c468"
+  },
+  "vivo": {
+    "matrix.json": "417570aa6f1d44f8e77a50fa5010808679f3a58d92b61b57a32575be38619ffe",
+    "deck-observations.json": "87aa84d65f8b04edb86ddac8af6458bf7a817c9391cb93b4260aec0eb219c468",
+    "in-play.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  },
+  "campiDiversi": {
+    "intestazione.bozza": [
+      "classpath:/set-base/bozza.json",
+      "server/base.json + mazzi-prova.json"
+    ],
+    "intestazione.sha256": [
+      "325926e35d371ad169848a5930924472ddfdd94a71b73a959fac0ed2dda83d8d",
+      "4cee87f1658b725fe873f114a596bdea1ac5bf1bf98a24152af117c73b67833c"
+    ]
+  },
+  "ugualeSenzaIDueCampiDellaFonte": true,
+  "deckObservationsUguale": true
+}
