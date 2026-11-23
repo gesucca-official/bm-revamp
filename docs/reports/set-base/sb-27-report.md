@@ -189,13 +189,61 @@ e «Copione Già Visto» leggono le regole del playground (`playground()`), che 
 
 ## Fase B
 
-**Stato:** inventario rilevato dalle 125 schede del Set Base 1.0 candidato. Base del blocco: `ed73a7d`.
+**Esito:** STOP D177 su SPA-AR3, in attesa della regia. Inventario delle 125 schede completo. Nove casi ordinari della fase B e un caso diagnostico rosso. La copertura della fase B è parziale. Base del blocco: `ed73a7d`.
 
 Al controllo preliminare erano presenti quattro artefatti non tracciati in `output/pdf/`. Il proprietario ha autorizzato a proseguire: «Procedi lasciandoli al loro posto». Restano fuori dal commit.
 
+### Scostamento SPA-AR3 — PAZIENZA: FINITA
+
+La [scheda SPA-AR3](../../../server/src/test/resources/set-base/catalogo/sets/base.md)
+dice «la mostri a tutti finché resta in mano». [RP-16 e RP-18](../../design/set-base/regole-playground.md)
+descrivono la scadenza del promemoria da due prospettive. RP-16 fa cadere gettone e promemoria a fine turno quando si gioca il nome.
+RP-18 lega la visibilità alla copia trovata. Il caso che distingue le letture è giocare l'altra copia, già in mano al momento della ricerca.
+
+1. SPAZIENZIO parte con una copia di «GARGANTUESCO IMPATTO SUL TU» in mano e una nel mazzo. Gioca «PAZIENZA: FINITA»,
+   sale a 50 V e 35 A e mostra la copia trovata.
+2. Al turno dopo gioca la copia già in mano. L'avversario subisce 35 HIT, la copia giocata esce e Vulnerabile termina.
+   La copia trovata resta in mano. Atteso dalla frase della scheda: 1 copia mostrata. Osservato: 0.
+3. La rimozione di fine turno in `Game.resolveMoves` include i promemoria soddisfatti anche se `Player.holds` conferma che la copia
+   trovata è ancora in mano. Motore, bozza e scheda coincidono con la base del blocco.
+
+[Caso JUnit diagnostico](sb-27/Sb27PatienceRevealReproTest.java). Per riprodurlo, copiare il file nella cartella
+`server/src/test/java/com/gsc/bm/sim/` ed eseguire `Sb27PatienceRevealReproTest` con Maven offline. Il giro mirato ha eseguito
+80 casi, con questo unico rosso (`expected: <1> but was: <0>`). I 70 casi della fase A e i nove casi ordinari della fase B sono verdi.
+Il sorgente diagnostico è nel rapporto per poter riprodurre il rosso e tenere la suite ordinaria eseguibile a zero fallimenti.
+
+La stessa frase compare nelle schede SPA-AR6, MAR-AR5, MAR-AR6, TOS-AR1, TOS-AR6, PIN-AR4, PIN-AR6, GIG-AR3, GIG-AR6,
+CES-AR1 e ROC-AR5. L'elenco individua le schede da riesaminare con la stessa decisione.
+
+### Banco, scelte e lavoro residuo
+
+- Banco d50 della fase A, estratto in `Sb27Table`. Le prove usano l'ordine del turno di `Game`, carte della bozza e attesi
+  letterali dalla scheda. Le mosse di appoggio sono sintetiche. Il caso diagnostico usa anche il personaggio della bozza.
+- I due primi rossi su L erano errori nel calcolo del test. A fine turno R06 sottrae metà della L più uno, quindi 10 L
+  diventano 4 e 12 L diventano 5. Il giro mirato ha confermato la correzione. I casi e gli attesi della fase A sono intatti.
+- Restano da provare i rami e le clausole assenti dalla tabella, le altre carte a dati, i sette personaggi e il token.
+  Lo STOP è intervenuto prima della valutazione sistematica delle clausole eventualmente non testabili.
+
+### Verifiche
+
+- `./scripts/build.ps1 -Task Test -Offline` verde. Server: 1.059 casi, zero fallimenti, zero errori, 23 saltati.
+  Client di debug: 37 su 37. Il caso diagnostico resta riproducibile separatamente.
+- `python scripts/check-rules.py` e `python scripts/check-rules.py --candidate` verdi.
+- `python scripts/check-links.py` segnala gli stessi otto riferimenti mancanti sotto `docs/design/carriere/` presenti alla base.
+  Rapporto e piano hanno zero link rotti. `git diff --check` pulito.
+- Il diff da `ed73a7d` resta nel perimetro. L'impronta SHA-256 di `bozza.json` è
+  `325926e35d371ad169848a5930924472ddfdd94a71b73a959fac0ed2dda83d8d`.
+- `TestServerContext` rimandato. La fase interviene sui soli test e documenti.
+
+### Domanda per la regia
+
+1. Quando si gioca la copia omonima già in mano, il promemoria della copia trovata deve cadere con Vulnerabile (come in RP-16),
+   oppure la copia trovata deve restare visibile finché lascia la mano (come dice SPA-AR3)? La risposta decide se occorre
+   allineare le schede di Annuncia o la regola e il motore.
+
 ### Inventario e copertura
 
-Le 19 carte speciali riportano i casi e le clausole della fase A. Un trattino indica una voce ancora senza casi della fase B.
+Le 19 carte speciali riportano i casi e le clausole della fase A. Un trattino indica una voce ancora senza casi della fase B. La tabella indica le sole clausole esercitate prima dello STOP.
 
 | Slot | Nome | Tipo | Classe di test | Casi | Clausole coperte |
 |---|---|---|---|---:|---|
@@ -206,14 +254,14 @@ Le 19 carte speciali riportano i casi e le clausole della fase A. Un trattino in
 | PG-GIG | Beppe Bulletta | Personaggio | — | — | — |
 | PG-CES | Sergio Sommerso | Personaggio | — | — | — |
 | PG-ROC | Duccio Braccio Teso | Personaggio | — | — | — |
-| SPA-BA | ADOPERIAMOTI | Azione, Base | — | — | — |
-| SPA-BO1 | LIEVE FASTIDIO | Azione, Legata al personaggio | — | — | — |
-| SPA-BO2 | SVEGLIAMOCI - MA TU NO | Azione, Legata al personaggio | — | — | — |
-| SPA-BO3 | VIOLENZAZIONE | Azione, Legata al personaggio | — | — | — |
-| SPA-AR1 | GARGANTUESCO IMPATTO SUL TU | Azione, Regolare | — | — | — |
-| SPA-AR2 | SPEDIAMOTI DUNQUE IN O-AHIO | Azione, Regolare | — | — | — |
-| SPA-AR3 | PAZIENZA: FINITA | Azione, Regolare | — | — | — |
-| SPA-AR4 | NON GIOCARE COL COLTELLO NO | Azione, Regolare | — | — | — |
+| SPA-BA | ADOPERIAMOTI | Azione, Base | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 2 | basic gratuita, priorità e bersaglio, consumo del solo oggetto scelto, permanenza in mano, oggetto rubato prima della risoluzione |
+| SPA-BO1 | LIEVE FASTIDIO | Azione, Legata al personaggio | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 2 | bound gratuita, priorità e bersaglio, +5 V, tre quarti di HIT/CUT/POISON e del veleno periodico, cumulo, danno precedente e scadenza |
+| SPA-BO2 | SVEGLIAMOCI - MA TU NO | Azione, Legata al personaggio | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | priorità e bersaglio, quarti di T e L arrotondati per difetto, T letta dopo la mossa precedente, 2 HIT, permanenza in mano |
+| SPA-BO3 | VIOLENZAZIONE | Azione, Legata al personaggio | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | priorità, costo e bersaglio, 4 HIT a sé e +8 V, permanenza in mano |
+| SPA-AR1 | GARGANTUESCO IMPATTO SUL TU | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | costo 25 V, priorità, 35 HIT al solo avversario scelto |
+| SPA-AR2 | SPEDIAMOTI DUNQUE IN O-AHIO | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | costo 10 V, priorità e bersaglio, 12 HIT da 13 V rimaste, metà arrotondata per difetto |
+| SPA-AR3 | PAZIENZA: FINITA | Azione, Regolare | [Sb27PatienceRevealReproTest](sb-27/Sb27PatienceRevealReproTest.java) | 1 rosso diagnostico | ricerca riuscita, premio e copia mostrata, giocata di altra copia omonima, fine di Vulnerabile e visibilità residua (STOP) |
+| SPA-AR4 | NON GIOCARE COL COLTELLO NO | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | +10 V, metà dei CUT per quattro turni, HIT invariati, ritorno al danno intero al quinto turno |
 | SPA-AR5 | FAI BASTA | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 3 | annulla una mossa ancora da risolvere, che tiene costo e pescata; su una mossa già risolta nulla; a pari priorità e pari A vale l'ordine di entrata |
 | SPA-AR6 | SGOMBERIAMOVI | Azione, Regolare | — | — | — |
 | MAR-BA | Requisire al Volo | Azione, Base | — | — | — |
