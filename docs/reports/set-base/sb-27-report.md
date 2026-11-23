@@ -189,7 +189,7 @@ e «Copione Già Visto» leggono le regole del playground (`playground()`), che 
 
 ## Fase B
 
-**Esito:** terzo STOP D177 sull’annuncio ripetuto dopo Mescolone Micidiale, in attesa della regia. D179 chiude i due casi precedenti. Inventario delle 125 schede completo, 21 casi ordinari della fase B e un nuovo caso diagnostico rosso. La copertura della fase B è parziale. Base del blocco `ed73a7d`, ultima ripresa da `6145d6a`.
+**Esito della ripresa:** D180 applicata, due casi integrati e identità SB-23 20/2 confermata byte per byte. STOP 2 del contratto sull’identità viva: il banco storico si ferma sullo stesso errore di caricamento anche sulla base. Inventario delle 125 schede completo. La copertura della fase B è parziale. Base del blocco `ed73a7d`, ripresa da `2bbbcbd`.
 
 Al controllo preliminare erano presenti quattro artefatti non tracciati in `output/pdf/`. Il proprietario ha autorizzato a proseguire: «Procedi lasciandoli al loro posto». Restano fuori dal commit.
 
@@ -267,37 +267,65 @@ Se ci sono più gettoni, finisce il più vecchio. Il caso distingue un promemori
 `Game.resolveMoves` soddisfa la prima voce con quel nome nell'elenco dei promemoria. La voce scelta è ancora presente dopo
 Mescolone, benché il suo gettone sia già stato rimosso. Il confronto con `6145d6a` conferma che il motore e la bozza sono identici.
 
-Il [caso diagnostico](sb-27/Sb27RepeatAfterMescoloneReproTest.java) ha dato l'unico rosso nel giro mirato di 93 casi,
-sull'ultima asserzione (`expected: <true> but was: <false>`). Per riprodurlo, copiarlo nella cartella
-`server/src/test/java/com/gsc/bm/sim/` e lanciare `Sb27RepeatAfterMescoloneReproTest` con Maven offline.
-I due casi già decisi, gli altri 19 casi ordinari della fase B e i 70 della fase A sono verdi.
+Il diagnostico fu l'unico rosso nel giro mirato di 93 casi. L'evidenza è nel commit `316fd7d`.
+
+### Deviazione autorizzata — D180
+
+Il proprietario ha risposto «sì, correggi il motore». RP-15, nelle regole del playground 1.9, esplicita che la giocata omonima
+soddisfa il gettone più vecchio ancora attivo. Nel ramo `playground()` di `Game.resolveMoves`, i promemoria omonimi senza
+gettone entrano nella rimozione di fine turno insieme al promemoria soddisfatto. Il caso già diagnosticato verifica zero
+Vulnerabile dopo la giocata. Un secondo caso verifica zero copie mostrate quando la copia del promemoria senza gettone è
+ancora in mano e viene giocata l'altra copia. Entrambi entrano in `Sb27SpazienzioCardsTest` accanto ai casi D178 e D179.
+
+#### Identità SB-23 20/2
+
+Due corse esclusive da 403.200 partite ciascuna, prima su `2bbbcbd` (158,09 s) e poi con D180 (178,37 s). Comando identico
+alla fase A con `run.ps1 -Phase round -Label r20-2 -Games 100 -Seed 7000000`, bozza dal classpath e la stessa lista di sette
+mazzi come righe e avversari. Uscite in `%TEMP%/bm-sb27-d180-2bbbcbd/{ref,new}/round-r20-2`.
+
+| File | Byte | SHA-256, identico prima e dopo |
+|---|---:|---|
+| `matrix.json` | 1.604.211 | `5ca36649069459ffc15b0a9c10c4d2abd46311d897e8a9e2ad80174df439ae7c` |
+| `deck-observations.json` | 565.051 | `87aa84d65f8b04edb86ddac8af6458bf7a817c9391cb93b4260aec0eb219c468` |
+
+Il confronto ha letto tutti i byte dei due file di ciascuna corsa.
 
 ### Banco, scelte e lavoro residuo
 
 - Banco d50 della fase A, estratto in `Sb27Table`. Le prove usano l'ordine del turno di `Game`, carte della bozza e attesi
-  letterali dalla scheda. Le mosse di appoggio sono sintetiche. I casi di Annuncia usano anche il personaggio della bozza. Nel diagnostico il seme del banco mantiene nel mazzo la seconda copia fino al secondo annuncio.
+  letterali dalla scheda. Le mosse di appoggio sono sintetiche. I casi di Annuncia usano anche il personaggio della bozza. Nel caso del secondo annuncio il seme del banco mantiene nel mazzo la seconda copia fino al secondo annuncio.
 - I due primi rossi su L erano errori nel calcolo del test. A fine turno R06 sottrae metà della L più uno, quindi 10 L
   diventano 4 e 12 L diventano 5. Il giro mirato ha confermato la correzione. I casi e gli attesi della fase A sono intatti.
 - Restano da provare i rami e le clausole assenti dalla tabella, le altre carte a dati, i sette personaggi e il token.
   Lo STOP è intervenuto prima della valutazione sistematica delle clausole eventualmente non testabili.
 
-### Verifiche
+### Verifiche D180
 
-- `./scripts/build.ps1 -Task Test -Offline` verde dopo D179. Server: 1.071 casi, zero fallimenti, zero errori, 23 saltati.
-  Client di debug: 37 su 37. Il nuovo caso diagnostico resta riproducibile separatamente.
-- `controlla-testi.py`, `python scripts/check-rules.py`, `python scripts/check-rules.py --candidate` e
-  `python tools/set-catalog/set_catalog.py --check` verdi dopo la rigenerazione D179.
-- `python scripts/check-links.py` segnala gli stessi otto riferimenti mancanti sotto `docs/design/carriere/` presenti alla base.
-  Rapporto e piano hanno zero link rotti. `git diff --check` pulito.
-- Il diff della ripresa da `6145d6a` resta nei perimetri del passo D179 e dei test di fase B. L'impronta SHA-256 di `bozza.json` è
+- `./scripts/build.ps1 -Task Test -Offline` verde. Server: 1.073 casi, zero fallimenti, zero errori, 23 saltati.
+  Client di debug: 37 su 37. La fase B conta 23 casi ordinari e i 70 casi della fase A passano.
+- `python scripts/check-rules.py`, `python scripts/check-rules.py --candidate` e
+  `python tools/set-catalog/set_catalog.py --check` verdi. SHA-256 di `bozza.json`
   `325926e35d371ad169848a5930924472ddfdd94a71b73a959fac0ed2dda83d8d`.
-- `TestServerContext` rimandato. La fase interviene sui soli test e documenti.
+- Per `Game.java` si applica la tabella «Partita viva». `TestServerContext -Offline` verde con 1.191 casi,
+  zero fallimenti, zero errori e 23 saltati. `verify-match-manifests.py` PASS.
+- `git diff --check` pulito e diff da `2bbbcbd` entro i perimetri autorizzati. I documenti toccati hanno zero link rotti.
+  Il controllo globale segnala gli otto riferimenti mancanti preesistenti sotto `docs/design/carriere/`.
+
+#### STOP 2 — identità della partita viva
+
+La misura aggiuntiva prescritta per `Game.java` si ferma prima delle 480.000 partite. Il banco
+`ChargeMeasureTest#liveBenchOnTheSameHistoricalDraft` usa `Draft.fromFile` direttamente sulla bozza storica
+`%TEMP%/bm-sb16g2b2-live/base-draft.json`, SHA-256 `faf265fad50ee0bedca125209f7008434a73660131f786ad272800235567d7c5`.
+Il caricatore rifiuta `base.pino.UltimoGiro` con «parametro mancante params.perPlay».
+La prova mirata con il codice di produzione della base `2bbbcbd` restituisce lo stesso errore prima di simulare.
+La correzione D180 è stata ripristinata dopo il confronto e la bozza storica è intatta. L’identità viva resta da verificare.
+Il log del confronto sulla base è in `%TEMP%/bm-sb27-d180-2bbbcbd/live-on-base.log`.
 
 ### Domanda per la regia
 
-1. Dopo un nuovo annuncio omonimo, la giocata del nome deve far finire l'unico Vulnerabile attivo come prevede RP-15,
-   anche se il promemoria più vecchio è rimasto dopo Mescolone? Il caso distingue la scelta del gettone dalla chiusura
-   del promemoria della prima copia.
+1. Il banco di identità viva può leggere la fixture con `BozzeStoriche.fromFile`, l’adattatore approvato in fase A, e rifare il
+   confronto sulla base e sul codice D180? La modifica al test esistente è fuori dal perimetro di questa ripresa. La copertura
+   residua della fase B resta sospesa allo STOP 2.
 
 ### Inventario e copertura
 
@@ -318,10 +346,10 @@ Le 19 carte speciali riportano i casi e le clausole della fase A. Un trattino in
 | SPA-BO3 | VIOLENZAZIONE | Azione, Legata al personaggio | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | priorità, costo e bersaglio, 4 HIT a sé e +8 V, permanenza in mano |
 | SPA-AR1 | GARGANTUESCO IMPATTO SUL TU | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | costo 25 V, priorità, 35 HIT al solo avversario scelto |
 | SPA-AR2 | SPEDIAMOTI DUNQUE IN O-AHIO | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | costo 10 V, priorità e bersaglio, 12 HIT da 13 V rimaste, metà arrotondata per difetto |
-| SPA-AR3 | PAZIENZA: FINITA | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java), [Sb27SpazienzioAnnounceTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioAnnounceTest.java) | 7 | scelta predefinita, esplicita e automatica, premio pieno, ripiego e annullamento, Vulnerabile su HIT/CUT/POISON e sul veleno periodico, giocata dell’altra copia e timer di OGG-04. Caso incrociato rosso in SPA-AR6 |
+| SPA-AR3 | PAZIENZA: FINITA | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java), [Sb27SpazienzioAnnounceTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioAnnounceTest.java) | 8 | scelta predefinita, esplicita e automatica, premio pieno, ripiego e annullamento, Vulnerabile su HIT/CUT/POISON e sul veleno periodico, giocata dell’altra copia e timer di OGG-04. Chiusura del promemoria senza gettone quando si gioca l’altra copia (D180) |
 | SPA-AR4 | NON GIOCARE COL COLTELLO NO | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | +10 V, metà dei CUT per quattro turni, HIT invariati, ritorno al danno intero al quinto turno |
 | SPA-AR5 | FAI BASTA | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 3 | annulla una mossa ancora da risolvere, che tiene costo e pescata; su una mossa già risolta nulla; a pari priorità e pari A vale l'ordine di entrata |
-| SPA-AR6 | SGOMBERIAMOVI | Azione, Regolare | [Sb27SpazienzioAnnounceTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioAnnounceTest.java), [Sb27RepeatAfterMescoloneReproTest](sb-27/Sb27RepeatAfterMescoloneReproTest.java) | 5 verdi + 1 diagnostico rosso | scelta predefinita, esplicita e automatica, premio pieno, ripiego e annullamento, Vulnerabile su HIT/CUT/POISON e sul veleno periodico, secondo annuncio omonimo dopo il timer (STOP) |
+| SPA-AR6 | SGOMBERIAMOVI | Azione, Regolare | [Sb27SpazienzioAnnounceTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioAnnounceTest.java), [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 6 | scelta predefinita, esplicita e automatica, premio pieno, ripiego e annullamento, Vulnerabile su HIT/CUT/POISON e sul veleno periodico, secondo annuncio omonimo dopo il timer, fine del gettone attivo e di entrambi i promemoria (D180) |
 | MAR-BA | Requisire al Volo | Azione, Base | — | — | — |
 | MAR-BO1 | Sventare l'Assassinio | Azione, Legata al personaggio | — | — | — |
 | MAR-BO2 | Semaforo Rosso | Azione, Legata al personaggio | — | — | — |

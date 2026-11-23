@@ -6,6 +6,7 @@ import com.gsc.bm.model.game.Player;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -216,5 +217,72 @@ class Sb27SpazienzioCardsTest {
         assertTrue(spazienzio.holds(found), "la copia annunciata non è stata giocata o scartata");
         assertEquals(1, spazienzio.getShownRevealed().size(), "D179: il timer lascia il promemoria");
         assertSame(found, spazienzio.getShownRevealed().get(0).getCard());
+    }
+
+    @Test
+    void matchingPlayEndsTheOnlyRemainingVulnerabilityAfterMescolone() throws Exception {
+        Draft draft = Draft.fromClasspath("/set-base/bozza.json");
+        String actor = "bruiser.character.BigBadBruiser";
+        Card first = card("bruiser.SuperImpact");
+        Card second = card("bruiser.SuperImpact");
+        List<Card> deck = new ArrayList<>(fillers(12));
+        deck.add(0, first);
+        deck.add(2, second); // Col seme del banco resta nel mazzo fino al secondo annuncio.
+        Player spazienzio = player(draft.character(actor),
+                List.of(card("bruiser.Glare"), consume(), card("base.bruiser.TiFaccioSpazio")), deck, null);
+        Game game = game(spazienzio, b());
+        ch(game, actor).getItems().add(card("com.items.MarvelousCocktail"));
+
+        turn(game, move(game, actor, "PAZIENZA: FINITA", "SELF"), rest(game, "b"));
+        assertSame(first, spazienzio.getShownRevealed().get(0).getCard());
+        assertEquals(3, tokens(game, actor).size());
+
+        turn(game, onItem(game, actor, "Consuma", actor, "Mescolone Micidiale"), rest(game, "b"));
+        for (int afterConsumption = 1; afterConsumption <= 4; afterConsumption++) {
+            turn(game, rest(game, actor), rest(game, "b"));
+        }
+        assertTrue(tokens(game, actor).isEmpty(), "RP-29: il primo Vulnerabile è finito");
+        assertSame(first, spazienzio.getShownRevealed().get(0).getCard(), "D179: il primo promemoria è ancora mostrato");
+        assertTrue(spazienzio.getDeck().stream().anyMatch(copy -> copy == second));
+
+        turn(game, move(game, actor, "SGOMBERIAMOVI", "SELF"), rest(game, "b"));
+        assertEquals(2, spazienzio.getShownRevealed().size());
+        assertSame(second, spazienzio.getShownRevealed().get(1).getCard());
+        assertEquals(3, tokens(game, actor).size(), "c'è un solo gettone, del secondo annuncio");
+        assertSame(first, game.getCardFromHand(actor, "GARGANTUESCO IMPATTO SUL TU"));
+
+        turn(game, move(game, actor, "GARGANTUESCO IMPATTO SUL TU", "b"), rest(game, "b"));
+        assertFalse(spazienzio.holds(first));
+        assertTrue(spazienzio.holds(second));
+        assertTrue(tokens(game, actor).isEmpty(), "D180: giocare il nome soddisfa l'unico Vulnerabile presente");
+        assertTrue(spazienzio.getShownRevealed().isEmpty(), "entrambi i promemoria chiudono a fine turno");
+    }
+
+    @Test
+    void matchingPlayClosesTheStaleReminderEvenWhenItsCopyStaysInHand() throws Exception {
+        Draft draft = Draft.fromClasspath("/set-base/bozza.json");
+        String actor = "bruiser.character.BigBadBruiser";
+        Card alreadyHeld = card(IMPACT);
+        Card found = card(IMPACT);
+        Player spazienzio = player(draft.character(actor), List.of(card("bruiser.Glare"), consume(), alreadyHeld),
+                List.of(filler(), found, filler(), filler(), filler(), filler(), filler()), null);
+        Game game = game(spazienzio, b());
+        ch(game, actor).getItems().add(card("com.items.MarvelousCocktail"));
+
+        turn(game, move(game, actor, "PAZIENZA: FINITA", "SELF"), rest(game, "b"));
+        assertSame(found, spazienzio.getShownRevealed().get(0).getCard());
+        turn(game, onItem(game, actor, "Consuma", actor, "Mescolone Micidiale"), rest(game, "b"));
+        for (int afterConsumption = 1; afterConsumption <= 4; afterConsumption++) {
+            turn(game, rest(game, actor), rest(game, "b"));
+        }
+        assertTrue(tokens(game, actor).isEmpty());
+        assertEquals(1, spazienzio.getShownRevealed().size());
+        assertSame(found, spazienzio.getShownRevealed().get(0).getCard());
+        assertSame(alreadyHeld, game.getCardFromHand(actor, "GARGANTUESCO IMPATTO SUL TU"));
+
+        turn(game, move(game, actor, "GARGANTUESCO IMPATTO SUL TU", "b"), rest(game, "b"));
+        assertFalse(spazienzio.holds(alreadyHeld));
+        assertTrue(spazienzio.holds(found));
+        assertEquals(0, spazienzio.getShownRevealed().size(), "D180: la giocata omonima fa cadere il promemoria senza gettone");
     }
 }

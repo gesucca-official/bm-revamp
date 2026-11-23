@@ -211,10 +211,18 @@ public class Game implements Serializable {
                 if (announced instanceof com.gsc.bm.model.cards.AbstractCard)
                     m.setPlayedRole(((com.gsc.bm.model.cards.AbstractCard) announced).getRole());
                 // SB-17 (D106 (3)): a move voided by a counter printed with «il suo gettone resta» satisfies no token.
-                if (!m.isKeepsToken()) for (Player.Revealed r : owner.getRevealed())
-                    if (!satisfied.contains(r) && r.getCard().getName().equalsIgnoreCase(m.getPlayedCardName())) {
-                        satisfied.add(r); break;
+                if (!m.isKeepsToken()) {
+                    boolean activeTokenSatisfied = false;
+                    for (Player.Revealed r : owner.getRevealed()) {
+                        if (satisfied.contains(r) || !r.getCard().getName().equalsIgnoreCase(m.getPlayedCardName())) continue;
+                        boolean hasToken = owner.getCharacter().getStatuses().stream()
+                                .anyMatch(status -> Objects.equals(status.getExposure(), r.getId()));
+                        // D180: close reminders without tokens as well as the oldest active token, all at end of turn.
+                        if (hasToken && activeTokenSatisfied) continue;
+                        satisfied.add(r);
+                        activeTokenSatisfied |= hasToken;
                     }
+                }
             }
             // SB-16i («Gioca d'anticipo»), playground only: decided when the move resolves, from the order already fixed.
             Card played = getCardFromHand(m.getPlayerId(), m.getPlayedCardName());
