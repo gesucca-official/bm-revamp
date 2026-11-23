@@ -937,7 +937,7 @@ def frase_ricerca_completa(passo, ctx):
     trovata = [f"{v} {simbolo(r)}" for r, v in passo["foundGains"].items() if v]
     mancata = [f"{v} {simbolo(r)}" for r, v in passo["missedGains"].items() if v]
     vuln = passo.get("vulnerability")
-    se_trovi = "va in mano e la mostri a tutti finché resta in mano"
+    se_trovi = "va in mano e la mostri a tutti finché resta in mano e finché dura il Vulnerabile legato a lei"
     if trovata:
         se_trovi += f"; guadagni {elenco(trovata)}"
     if vuln:
