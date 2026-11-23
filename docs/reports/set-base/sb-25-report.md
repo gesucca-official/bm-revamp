@@ -1,5 +1,7 @@
 # SB-25 — Testi delle carte per i giocatori
 
+**Chiuso il 23 novembre 2026 ([D174](../../set-base-decisioni.md#decisioni-del-proprietario)):** il proprietario ha rivisto la [pagina della B2](../../design/set-base/sb-25/revisione-b.html) senza correzioni. Impronta finale della bozza 1.7 coi testi: `a8930edeb822028918d8fcd4c78fce2e4ffda007b2edca883ff48528290b527d`.
+
 ## Verbi dei danni (D173)
 
 Esecutore, 23 novembre 2026, sul commit di base `4a6395e`. Passo diretto ([D173](../../set-base-decisioni.md#decisioni-del-proprietario)),
