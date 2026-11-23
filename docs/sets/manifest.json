@@ -1,0 +1,55 @@
+{
+  "nota": "SB-28: catalogo vivo del Set Base, generato da tools/set-catalog/set_catalog.py --vivo; non si modificano a mano. L'impronta di cards.sqlite è quella del contenuto (schema e righe, iterdump), che non dipende dalla libreria SQLite.",
+  "argomenti": [
+    "--vivo",
+    "--set",
+    "server/src/test/resources/set-base/bozza.json",
+    "--testi",
+    "docs/design/set-base/testi/testi-completi.json",
+    "--slot",
+    "docs/design/set-base/testi/slot.json"
+  ],
+  "set": [
+    "base"
+  ],
+  "ingressi": [
+    {
+      "file": "server/src/test/resources/set-base/bozza.json",
+      "sha256": "a969dff08aaa80895f9345c6f1d5787699469c90adc806e3880c48e58e964f9b"
+    },
+    {
+      "file": "docs/design/set-base/testi/testi-completi.json",
+      "sha256": "ef7cd3ea9e0c3bf0f52dd7c6c6296cdc05b4ac92afc1e5592ca7a9c5158b6ae7"
+    },
+    {
+      "file": "docs/design/set-base/testi/slot.json",
+      "sha256": "48bc14dd58706e7d8ca9bb3583e5d4eaa714bff591233ffb549635a8a35176f7"
+    }
+  ],
+  "uscite": [
+    {
+      "file": "client-debug/src/assets/docs/sets/base.md",
+      "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+    },
+    {
+      "file": "server/src/main/resources/sets/base.json",
+      "sha256": "de7088d20b90095d4d489aa55a373ff2b1256a8bfdfe8badd459f71fd24b89ba"
+    },
+    {
+      "file": "docs/rules-catalog.json",
+      "sha256": "78ba59e0a99389b157956db244ca912b55bf90aa8e0a5033d90ee517db8362ba"
+    },
+    {
+      "file": "docs/sets/base.md",
+      "sha256": "855eb715911bb044f7d13ca6c3a30f0a553227a965a9e21d243091f243a4afec"
+    },
+    {
+      "file": "server/src/test/resources/set-base/mazzi-prova.json",
+      "sha256": "598545d27e0f983930b3acf2957a04c1c90fb64c9131f87d54dc9472bd6289e6"
+    },
+    {
+      "file": "server/src/main/resources/cards.sqlite",
+      "contenuto_sha256": "c8cddb3caf3347b7fef83f6b8ec831ba828e5867fb08f0283165b0ec08c3b968"
+    }
+  ]
+}

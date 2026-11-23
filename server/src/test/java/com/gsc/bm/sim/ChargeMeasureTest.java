@@ -333,7 +333,7 @@ class ChargeMeasureTest {
 
     @Test @EnabledIfSystemProperty(named="sim.liveReference",matches=".+")
     void liveBenchOnTheSameHistoricalDraft() throws Exception {
-        assertEquals(Ruleset.LIVE,SimulationRunner.selectedRuleset());
+        assertEquals(Ruleset.LEGACY,SimulationRunner.selectedRuleset());
         Path root=Path.of(System.getProperty("sim.liveReference"));
         Draft draft=BozzeStoriche.fromFile(root.resolve("base-draft.json"));
         Map<String,BotPolicy> styles=new LinkedHashMap<>();

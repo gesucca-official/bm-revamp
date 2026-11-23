@@ -15,7 +15,7 @@ controlla la partita viva con le stesse regole e, con `--candidate`, il catalogo
 un testo completo e un testo breve cambiati lo fanno fallire. Nulla di vivo cambia: regolamento, documento 0.1, allegato, `cards.sqlite`,
 copie del client, `server/src/main` e la bozza (SHA-256 `a8930ede…` prima e dopo) sono quelli del commit di base.
 
-**Da leggere per primo** (il [documento candidato](../../../server/src/test/resources/set-base/catalogo/sets/base.md), 1.620 righe):
+**Da leggere per primo** (il [documento candidato](../../sets/base.md), 1.620 righe):
 
 | Cosa | Scheda | Riga |
 |---|---|---:|

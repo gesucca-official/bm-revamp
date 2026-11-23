@@ -9,9 +9,19 @@ The words are not written here. Short text, gains and nominal damage come from t
 and must be the one that generator writes. A card the SB-25 generator does not know (a test class of an expansion) keeps the
 texts of its own file. Output is deterministic: fixed ordering, no timestamps, no paths of the machine.
 
-    python tools/set-catalog/set_catalog.py                      # base candidate into server/src/test/resources/set-base/catalogo
-    python tools/set-catalog/set_catalog.py --check              # regenerate in memory and compare, nothing written
+    python tools/set-catalog/set_catalog.py --out DIR            # a catalog of trial, into DIR (relative to the root)
+    python tools/set-catalog/set_catalog.py --out DIR --check    # regenerate in memory and compare, nothing written
     python tools/set-catalog/set_catalog.py --extra server/src/test/resources/sb-6b/mini.json --out docs/reports/set-base/sb-26/espansione
+
+SB-28: `--vivo` writes the live catalog of the Set Base 1.0 from the same inputs, each file in its live place (LIVE_PATHS): the
+set document and its debug-client copy, the annex, cards.sqlite, the live set file (the draft without its test decks) and the
+test decks apart, in a decks-only file of the test resources. The manifest of the live catalog is docs/sets/manifest.json.
+
+    python tools/set-catalog/set_catalog.py --vivo              # the live catalog
+    python tools/set-catalog/set_catalog.py --vivo --check      # regenerate in memory and compare
+
+The candidate of SB-26 (server/src/test/resources/set-base/catalogo) became the live catalog and left the repository: without
+--vivo an output folder is required.
 """
 import argparse
 import hashlib
@@ -28,8 +38,18 @@ TESTI_DIR = ROOT / "docs/design/set-base/testi"
 DEFAULT_SET = "server/src/test/resources/set-base/bozza.json"
 DEFAULT_TEXTS = "docs/design/set-base/testi/testi-completi.json"
 DEFAULT_SLOT = "docs/design/set-base/testi/slot.json"
-DEFAULT_OUT = "server/src/test/resources/set-base/catalogo"
+DEFAULT_OUT = None  # SB-28: the SB-26 candidate folder became the live catalog (--vivo)
 DEFAULT_VERSIONS = {"base": "1.0"}
+# SB-28: the live catalog. The set document says the date and the regulation it requires; every output has its live place.
+LIVE_DATE = "23 novembre 2026"
+LIVE_RULES = "2.0"
+LIVE_SET_FILE = "server/src/main/resources/sets/base.json"
+LIVE_TEST_DECKS = "server/src/test/resources/set-base/mazzi-prova.json"
+LIVE_MANIFEST = "docs/sets/manifest.json"
+LIVE_PATHS = {"sets/base.md": "docs/sets/base.md", "client-debug/sets/base.md": "client-debug/src/assets/docs/sets/base.md",
+              "sets/base.json": "docs/rules-catalog.json", "cards.sqlite": "server/src/main/resources/cards.sqlite",
+              "set-file": LIVE_SET_FILE, "test-decks": LIVE_TEST_DECKS, "manifest.json": LIVE_MANIFEST}
+STARTER_CATEGORY = {"base": "base", "avanzato": "avanzato"}
 GENERATOR = "tools/set-catalog/set_catalog.py"
 MANIFEST = "manifest.json"
 SQLITE = "cards.sqlite"
@@ -93,9 +113,10 @@ def priority_text(priority):
 
 # ---------------------------------------------------------------------------------------------------------------- model
 class SetInput:
-    def __init__(self, root, path, texts=None, slot=None):
+    def __init__(self, root, path, texts=None, slot=None, raw=None):
         self.path = path
-        self.raw = (root / path).read_bytes()
+        self.raw = (root / path).read_bytes() if raw is None else raw
+        self.source_raw = self.raw  # SB-28: the draft the live set file comes from (the file itself otherwise)
         self.data = json.loads(self.raw.decode("utf-8"))
         if self.data.get("format") != "sb-6b/1":
             raise ValueError(f"{path}: formato sconosciuto, atteso sb-6b/1")
@@ -108,8 +129,8 @@ class SetInput:
 class Catalog:
     """Every entry of every set, with the texts of the SB-25 generator."""
 
-    def __init__(self, root, sets, versions):
-        self.root, self.sets, self.versions = root, sets, versions
+    def __init__(self, root, sets, versions, live=False):
+        self.root, self.sets, self.versions, self.live = root, sets, versions, live
         ts = self.ts = load_texts_module(root)
         merged = {"cards": [c for s in sets for c in s.data["cards"]],
                   "characters": [p for s in sets for p in s.data.get("characters", [])],
@@ -320,14 +341,21 @@ def set_document(cat, s):
     for e in chars + cards:
         rarities[e.get("rarity") or NONE] = rarities.get(e.get("rarity") or NONE, 0) + 1
     out = [f"# Botte Micidiali — {data['set']['name']}", ""]
-    state = "candidata" if candidate else "di prova"
+    state = LIVE_DATE if cat.live else "candidata" if candidate else "di prova"
     out.append(f"Versione **{version} — {state}**. Documento del set `{sid}`, con le schede normative delle sue carte "
-               "(regolamento, R00 e R07).")
+               "(regolamento, R00 e R07)." + (f" Richiede il regolamento {LIVE_RULES}." if cat.live else ""))
     out.append("")
-    out.append(f"Questo documento è generato da `{GENERATOR}` dal file del set `{s.path}` (versione {data['set']['version']} "
-               "del file): non si modifica a mano, si cambia il file del set e si rigenera (decisione D175 del piano Set Base). "
-               + ("Resta candidato fino al trasferimento nella partita viva (SB-28); fino ad allora vale il documento del set "
-                  "in `docs/sets/`. " if candidate else "")
+    if cat.live:
+        intro = (f"Questo documento è generato da `{GENERATOR} --vivo` dal file del set `{s.path}`, che lo stesso comando "
+                 f"ricava dalla bozza `{DEFAULT_SET}` (versione {data['set']['version']} del file) togliendo i mazzi di prova: "
+                 "non si modifica a mano, si cambia la bozza e si rigenera (decisioni D175 e D183 del piano Set Base; il "
+                 "formato del file è descritto in `docs/formato-file-set.md`). ")
+    else:
+        intro = (f"Questo documento è generato da `{GENERATOR}` dal file del set `{s.path}` (versione {data['set']['version']} "
+                 "del file): non si modifica a mano, si cambia il file del set e si rigenera (decisione D175 del piano Set Base). "
+                 + ("Resta candidato fino al trasferimento nella partita viva (SB-28); fino ad allora vale il documento del set "
+                    "in `docs/sets/`. " if candidate else ""))
+    out.append(intro
                + "Il regolamento governa il sistema, le schede governano le carte: una scheda deroga a una regola solo se lo dice "
                "esplicitamente. La scheda normativa di ogni carta è il suo **testo completo**; il testo breve stampato sulla "
                "carta è nell'allegato ed è descrittivo: in caso di dubbio prevale la scheda. Ruoli, guadagni e danno nominale "
@@ -366,10 +394,21 @@ def set_document(cat, s):
         out.append(f"Ogni starter è conforme a R02: {data.get('rules', {}).get('deckSize', 20)} carte regolari, oltre alla base, "
                    "alle due legate scelte e all'ultima risorsa. Le composizioni sono qui e nell'allegato.")
         out.append("")
-        out += ["| Starter | Personaggio | Base | Legate | Ultima risorsa |", "|---|---|---|---|---|"]
+        named = all(d.get("name") for d in starters)
+        if named:
+            # SB-28 (D182): name and category of every starter; the quick deals one of them at random.
+            by_category = {c: [d["name"] for d in starters if d["category"] == c] for c in ("base", "avanzato")}
+            out.append("Ogni starter ha un nome e una categoria (D182): **base** " + " e ".join(by_category["base"])
+                       + "; **avanzati** " + ", ".join(by_category["avanzato"][:-1]) + " e " + by_category["avanzato"][-1]
+                       + f". La quick assegna a caso uno dei {len(starters)} starter, base o avanzato (R01).")
+            out.append("")
+            out += ["| Starter | Nome | Categoria | Personaggio | Base | Legate | Ultima risorsa |", "|---|---|---|---|---|---|---|"]
+        else:
+            out += ["| Starter | Personaggio | Base | Legate | Ultima risorsa |", "|---|---|---|---|---|"]
         for d in starters:
             pg = cat.characters[d["character"]]
-            out.append(f"| `{d['id']}` | {pg['name']} | {cat.names[pg['basic']]} | "
+            cells = f"{d['name']} | {d['category']} | " if named else ""
+            out.append(f"| `{d['id']}` | {cells}{pg['name']} | {cat.names[pg['basic']]} | "
                        + " e ".join(cat.names[b] for b in d["bound"]) + f" | {cat.names[d['lastResort']]} |")
         out.append("")
         for d in starters:
@@ -440,7 +479,15 @@ def set_document(cat, s):
     if from_file:
         note = (" Il generatore dei testi di SB-25 non conosce " + ", ".join(f"`{b}`" for b in from_file)
                 + ": per queste carte testo breve, guadagni, danno nominale e scheda sono il testo del file.")
-    if candidate:
+    if cat.live:
+        out.append(f"- **{version} — {LIVE_DATE}, SB-28:** il Set Base entra nella partita viva e sostituisce la 0.1, archiviata in "
+                   f"`docs/history/set-base-0.1.md`. **Richiede il regolamento {LIVE_RULES}**, che porta nel sistema le regole "
+                   "del playground con cui il set è stato bilanciato (D50, D78, D183). Generata dal file del set " + inputs[0]
+                   + f", ricavato dalla bozza `{DEFAULT_SET}` (SHA-256 `{sha256(s.source_raw)}`), con " + " e ".join(inputs[1:])
+                   + ". Schede = testi completi approvati in D174, coi rimandi al regolamento (D183); testo breve, guadagni e "
+                   "danno nominale dal generatore di SB-25; starter con nome e categoria (D182). Al passaggio i mazzi "
+                   "personalizzati salvati che contengono carte dello 0.1 uscite dal set si cancellano (D182 (3))." + note)
+    elif candidate:
         out.append(f"- **{version} candidata — SB-26:** generata dal file del set {inputs[0]}, con "
                    + " e ".join(inputs[1:]) + ". Schede = testi completi approvati in D174; testo breve, guadagni e danno "
                    "nominale dal generatore di SB-25. Sostituirà la 0.1 nella partita viva con SB-28 (D175)." + note)
@@ -542,10 +589,48 @@ def sqlite_dump(data):
 
 
 # ------------------------------------------------------------------------------------------------------------ outputs
-def generate(root, specs, versions, args_list):
-    """{relative output path: bytes} for the given sets ([(set file, texts file, slot file)])."""
-    sets = [SetInput(root, *spec) for spec in specs]
-    cat = Catalog(root, sets, versions)
+DECKS_OPEN = '  "decks": [\n'
+DECKS_CLOSE = "\n  ]\n}\n"
+DECK_BETWEEN = "\n    },\n    {\n"
+
+
+def split_set_file(raw):
+    """SB-28: (live set file, test decks file) from the bytes of the draft. The live file is the draft with only its starters
+    (the decks with a category, D182); the test decks go to a file of decks only, which the loader composes with the live
+    file. Both keep the draft's text, deck by deck, so a reader finds the same lines."""
+    text = raw.decode("utf-8")
+    data = json.loads(text)
+    head, sep, tail = text.partition(DECKS_OPEN)
+    if not sep or not tail.endswith(DECKS_CLOSE) or not tail.startswith("    {\n"):
+        raise ValueError(f"{DEFAULT_SET}: la sezione decks non ha la forma attesa (un mazzo per blocco, in fondo al file)")
+    parts = tail[:-len(DECKS_CLOSE)].split(DECK_BETWEEN)
+    blocks = [("" if i == 0 else "    {\n") + b + ("" if i == len(parts) - 1 else "\n    }") for i, b in enumerate(parts)]
+    if [json.loads(b)["id"] for b in blocks] != [d["id"] for d in data["decks"]]:
+        raise ValueError(f"{DEFAULT_SET}: i blocchi dei mazzi non corrispondono ai mazzi del file")
+    starters = [b for b, d in zip(blocks, data["decks"]) if d.get("category")]
+    tests = [b for b, d in zip(blocks, data["decks"]) if not d.get("category")]
+    if not starters:
+        raise ValueError(f"{DEFAULT_SET}: nessuno starter con nome e categoria")
+    live = head + DECKS_OPEN + ",\n".join(starters) + DECKS_CLOSE
+    decks = '{\n  "format": "' + data["format"] + '",\n' + DECKS_OPEN + ",\n".join(tests) + DECKS_CLOSE
+    expected = dict(data, decks=[d for d in data["decks"] if d.get("category")])
+    if json.loads(live) != expected or json.loads(decks)["decks"] != [d for d in data["decks"] if not d.get("category")]:
+        raise ValueError(f"{DEFAULT_SET}: la divisione fra file vivo e mazzi di prova non conserva i dati")
+    return live.encode("utf-8"), decks.encode("utf-8")
+
+
+def generate(root, specs, versions, args_list, live=False):
+    """{relative output path: bytes} for the given sets ([(set file, texts file, slot file)]). SB-28, live: the main set is
+    read from the live set file derived from the draft, and the live set file and the test decks are outputs too."""
+    if live:
+        source = SetInput(root, *specs[0])
+        live_file, test_decks = split_set_file(source.raw)
+        main = SetInput(root, LIVE_SET_FILE, specs[0][1], specs[0][2], raw=live_file)
+        main.source_raw = source.raw
+        sets = [main] + [SetInput(root, *spec) for spec in specs[1:]]
+    else:
+        sets = [SetInput(root, *spec) for spec in specs]
+    cat = Catalog(root, sets, versions, live)
     files, annexes = {}, []
     for s in sets:
         doc = set_document(cat, s).encode("utf-8")
@@ -557,20 +642,24 @@ def generate(root, specs, versions, args_list):
     db = sqlite_bytes(cat, annexes)
     files[SQLITE] = db
     inputs = []
+    if live:
+        files["set-file"], files["test-decks"] = live_file, test_decks
     for s in sets:
-        inputs.append({"file": s.path, "sha256": sha256(s.raw)})
+        inputs.append({"file": specs[0][0] if live and s is sets[0] else s.path, "sha256": sha256(s.source_raw)})
         if s.texts_raw:
             inputs.append({"file": s.texts_path, "sha256": sha256(s.texts_raw)})
         if s.slot_raw:
             inputs.append({"file": s.slot_path, "sha256": sha256(s.slot_raw)})
     manifest = {
-        "nota": "SB-26 (D175): file generati da " + GENERATOR + "; non si modificano a mano. L'impronta di cards.sqlite è "
+        "nota": ("SB-28: catalogo vivo del Set Base, generato da " + GENERATOR + " --vivo; " if live else "SB-26 (D175): file generati da "
+                 + GENERATOR + "; ") + "non si modificano a mano. L'impronta di cards.sqlite è "
                 "quella del contenuto (schema e righe, iterdump), che non dipende dalla libreria SQLite.",
         "argomenti": args_list,
         "set": [s.id for s in sets],
         "ingressi": inputs,
-        "uscite": [{"file": name, "sha256": sha256(data)} for name, data in sorted(files.items()) if name != SQLITE]
-                  + [{"file": SQLITE, "contenuto_sha256": sha256(sqlite_dump(db).encode("utf-8"))}],
+        "uscite": [{"file": LIVE_PATHS[name] if live else name, "sha256": sha256(data)} for name, data in sorted(files.items())
+                   if name != SQLITE]
+                  + [{"file": LIVE_PATHS[SQLITE] if live else SQLITE, "contenuto_sha256": sha256(sqlite_dump(db).encode("utf-8"))}],
     }
     files[MANIFEST] = (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     return files, cat, sets
@@ -584,15 +673,16 @@ def parse_args(argv):
     cli.add_argument("--extra", action="append", default=[], help="un altro file di set (espansione), anche più volte")
     cli.add_argument("--versione", action="append", default=[], metavar="SET=VER",
                      help="versione del documento candidato di un set (predefinita: base=1.0); gli altri set usano quella del file")
-    cli.add_argument("--out", default=DEFAULT_OUT, help="cartella di uscita, relativa alla radice")
+    cli.add_argument("--out", default=DEFAULT_OUT, help="cartella di uscita, relativa alla radice (obbligatoria senza --vivo)")
     cli.add_argument("--root", default=None, help="radice del repository (predefinita: questa copia)")
     cli.add_argument("--check", action="store_true", help="rigenera in memoria e confronta con la cartella, senza scrivere")
+    cli.add_argument("--vivo", action="store_true", help="SB-28: il catalogo vivo, ogni file al suo posto (LIVE_PATHS)")
     return cli.parse_args(argv)
 
 
 def generation_args(args):
     """The arguments that decide the output, as the manifest records them (paths relative to the root, '/' separators)."""
-    out = ["--set", args.set, "--testi", args.testi, "--slot", args.slot]
+    out = (["--vivo"] if args.vivo else []) + ["--set", args.set, "--testi", args.testi, "--slot", args.slot]
     for extra in args.extra:
         out += ["--extra", extra]
     for v in args.versione:
@@ -611,7 +701,11 @@ def run(argv, root=None):
     args.set, args.testi, args.slot = (p.replace("\\", "/") for p in (args.set, args.testi, args.slot))
     args.extra = [p.replace("\\", "/") for p in args.extra]
     specs = [(args.set, args.testi or None, args.slot or None)] + [(e, None, None) for e in args.extra]
-    return generate(root, specs, versions, generation_args(args)), args, root
+    if args.vivo and (args.extra or args.out != DEFAULT_OUT):
+        raise ValueError("--vivo scrive il solo Set Base nei posti vivi: niente --extra né --out")
+    if not args.vivo and not args.out:
+        raise ValueError("serve --vivo (il catalogo vivo) oppure --out CARTELLA (un catalogo di prova, per esempio con un'espansione)")
+    return generate(root, specs, versions, generation_args(args), live=args.vivo), args, root
 
 
 def main(argv=None):
@@ -620,6 +714,8 @@ def main(argv=None):
     except (OSError, ValueError, KeyError) as error:
         print(f"set_catalog: {error}", file=sys.stderr)
         return 1
+    if args.vivo:
+        return write_live(root, files, args.check)
     out = root / args.out
     if args.check:
         differ = [name for name, data in sorted(files.items()) if not (out / name).exists() or
@@ -640,6 +736,25 @@ def main(argv=None):
     for p in stale:
         p.unlink()
     print(f"{len(files)} file generati in {args.out}" + (f"; tolti {len(stale)} file non più generati" if stale else "") + ".")
+    return 0
+
+
+def write_live(root, files, check):
+    """SB-28: the live catalog, every file in its live place; --check compares without writing (SQLite by content)."""
+    differ = []
+    for name, data in sorted(files.items()):
+        path = root / LIVE_PATHS[name]
+        same = path.exists() and (sqlite_dump(path.read_bytes()) == sqlite_dump(data) if name == SQLITE else path.read_bytes() == data)
+        if check:
+            if not same:
+                differ.append(LIVE_PATHS[name])
+        elif not same:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(data)
+    if differ:
+        print("Diversi dalla generazione: " + ", ".join(differ), file=sys.stderr)
+        return 1
+    print(f"{len(files)} file del catalogo vivo " + ("identici alla generazione." if check else "generati."))
     return 0
 
 

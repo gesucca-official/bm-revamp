@@ -60,7 +60,7 @@ classDiagram
 
 **V:** `bindingName` è il nome della classe relativo a `com.gsc.bm.model.cards.`; le factory usano `Class.forName` e un costruttore vuoto. Effetti, costi e priorità risiedono nel codice Java; nomi, descrizioni e immagini sono nel catalogo SQLite. Non esiste un interprete generico delle descrizioni delle carte. [CardFactoryServiceImpl](../server/src/main/java/com/gsc/bm/service/factories/CardFactoryServiceImpl.java).
 
-**V:** `BrokenBeerBottle` è un token costruito direttamente da `AnotherRottenBeer`, senza riga nel catalogo. `SoberUp` ha un effetto scritto ma non una riga di catalogo e non configura `canTarget`; non basta la sua presenza per dichiararlo giocabile. [AnotherRottenBeer](../server/src/main/java/com/gsc/bm/model/cards/com/items/AnotherRottenBeer.java), [SoberUp](../server/src/main/java/com/gsc/bm/model/cards/bitch/SoberUp.java).
+**V:** `BrokenBeerBottle` è un token costruito direttamente da `AnotherRottenBeer`, senza riga nel catalogo. `SoberUp` ha un effetto scritto ma non una riga di catalogo e non configura `canTarget`; non basta la sua presenza per dichiararlo giocabile. [AnotherRottenBeer](../server/src/main/java/com/gsc/bm/model/cards/com/items/AnotherRottenBeer.java), [SoberUp](../server/src/test/java/com/gsc/bm/model/cards/bitch/SoberUp.java) (SB-28: fuori dal codice di produzione, resta fra i sorgenti di test per le misure storiche).
 
 ## Account, collezione, mazzi e viste
 

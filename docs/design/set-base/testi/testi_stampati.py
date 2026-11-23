@@ -46,13 +46,13 @@ SCHEMI_OP = {
 # I parametri vengono passati alle classi come interi. I binding senza parametri hanno una mappa vuota. Le frasi delle classi sono
 # in breve_java e completo_java.
 PARAMETRI_JAVA = {
-    "bruiser.YouStop": "alertnessToTarget",
+    "bruiser.YouStop": "",  # SB-28: alertnessToTarget, spento a 0, tolto con la classe (D181 (3))
     "com.Steal": "",
     "junkie.AmphetamineReflexes": "",
     "junkie.ToxicBloodDrain": "turns poison",
     "com.items.MarvelousCocktail": "alcohol toxicity turns poison",
     "base.pino.UltimoGiro": "base selfHit perPlay perPlaySelf",
-    "base.pino.GoingBerserk": "base",
+    "base.pino.GoingBerserk": "base perAlcohol",  # SB-28: perAlcohol obbligatorio, come nella classe (D181 (3))
     "base.pino.RuttoADistanzaSociale": "base perAlcohol",
     "com.items.AnotherRottenBeer": "alcohol",
     "bruiser.BreakYourToy": "",
@@ -76,8 +76,8 @@ TOKEN_STATO = {"op": "status", "statusType": "GOOD", "flow": "OUTPUT", "property
 TOKEN_SORGENTE = JAVA_SRC / "com/tokens/BrokenBeerBottle.java"
 TOKEN_CREATO_DA = "com.items.AnotherRottenBeer"
 
-# Dove il giocatore trova la regola intera (D170 (2)). SB-28, Fase A: le regole del playground entrano nel regolamento 2.0
-# candidato (docs/design/set-base/sb-28/game-rules-2.0.md, corrispondenza in sb-28/corrispondenza.md); cambiano solo queste righe.
+# Dove il giocatore trova la regola intera (D170 (2)). SB-28: le regole del playground sono entrate nel regolamento 2.0
+# (docs/game-rules.md, corrispondenza in docs/design/set-base/sb-28/corrispondenza.md); cambiarono solo queste righe.
 RIMANDI = {
     "tipi": "regolamento, R01a",
     "costo": "regolamento, R04",
@@ -248,14 +248,15 @@ def verifica_carta(carta, nomi):
     comuni = "binding gui"
     metadati = "rarity set exclusiveTo cost priority"
     risorse(carta.get("cost", {}), "cost")
+    if any(valore == 0 for valore in carta.get("cost", {}).values()):
+        raise ValueError("cost: un costo a zero non si scrive (SB-28: tolto «A 0» di «Ce l'Hai Due Spicci?»)")
     if "java" in carta:
         campi(carta, "carta Java", f"{comuni} java params", metadati)
         if carta["java"] is not True:
             raise ValueError("java: deve valere true")
         binding = carta["binding"]
         scelta(binding, JAVA, "binding Java")
-        facoltativi = "perAlcohol" if binding == "base.pino.GoingBerserk" else ""
-        campi(carta["params"], "params", PARAMETRI_JAVA.get(binding, ""), facoltativi)
+        campi(carta["params"], "params", PARAMETRI_JAVA.get(binding, ""), "")
         for nome, valore in carta["params"].items():
             intero(valore, f"params.{nome}")
         return
@@ -642,8 +643,7 @@ def breve_java(carta):
     costo = carta.get("cost", {})
     autodanno = f"Subisci {p['selfHit']} [[HIT]]. " if p.get("selfHit") else ""
     if b == "bruiser.YouStop":
-        n = p["alertnessToTarget"]
-        return CONTROMOSSA + (f" Se la annulli, l'avversario guadagna {n} [[A]]." if n else "")
+        return CONTROMOSSA
     if b == "com.Steal":
         return "Prendi un oggetto dell'avversario e mettilo accanto a te."
     if b == "junkie.AmphetamineReflexes":
@@ -663,7 +663,7 @@ def breve_java(carta):
         spesa = "tutta la [[L]] che ti resta" if costo.get("ALCOHOL") else "tutta la tua [[L]]"
         tetto = f", al massimo {p['maxDamage']}" if p.get("maxDamage") else ""
         return (f"{autodanno}Spendi {spesa}. Infliggi [[HIT]] all'avversario pari a {p['base']} più "
-                f"{quanto_spesa(p.get('perAlcohol', 1))}{tetto}.")
+                f"{quanto_spesa(p['perAlcohol'])}{tetto}.")
     if b == "base.pino.RuttoADistanzaSociale":
         spesa = "tutta la [[L]] che ti resta" if costo.get("ALCOHOL") else "tutta la tua [[L]]"
         return (f"Spendi {spesa}. L'avversario perde [[A]] pari alla [[L]] spesa. "
@@ -1190,11 +1190,7 @@ def completo_java(carta, ctx):
         else:
             corpo = f"{se}, la annulli; se si è già risolta, o l'avversario non ha una mossa, non succede niente."
         paragrafi.append(corpo + " " + dopo + " " + annullata)
-        if b == "bruiser.YouStop":
-            n = p["alertnessToTarget"]
-            if n:
-                paragrafi.append(f"Se la annulli, l'avversario guadagna {n} [[A]], anche se un'altra carta l'aveva già annullata.")
-        else:
+        if b != "bruiser.YouStop":
             paragrafi.append("Se un'altra carta l'ha già annullata, non succede niente.")
         if b == "base.cesira.Ricatto":
             frazione = FRAZIONI_PERCENTO[p["percent"]]
@@ -1251,7 +1247,7 @@ def completo_java(carta, ctx):
             ])))
     elif b in ("base.pino.UltimoGiro", "base.pino.GoingBerserk"):
         spesa = "la [[L]] che ti resta dopo aver pagato il costo" if costo.get("ALCOHOL") else "la tua [[L]]"
-        per = p.get("perAlcohol", 1)
+        per = 1 if b == "base.pino.UltimoGiro" else p["perAlcohol"]  # Ultimo Giro somma la L spesa una volta
         frasi = [f"All'inizio della risoluzione si legge {spesa}: è la [[L]] spesa."]
         if p.get("selfHit") or (b == "base.pino.UltimoGiro" and p.get("perPlaySelf")):
             frasi.append(f"Subisci {p.get('selfHit', 0)} {danno('HIT')}: è un danno che infliggi a te stesso, quindi contano sia i "
@@ -1385,6 +1381,7 @@ def verifica_token():
         "flow": rf"\.flow\(StatusFlow\.{TOKEN_STATO['flow']}\)",
         "equip": r"\.equip\(true\)",
         "singleUse": r"\.singleUse\(true\)",
+        "nome": rf'setGuiName\("{TOKEN_NOME}"\)',  # SB-28 (D168 (4)): il nome vivo è quello della scheda
     }
     diversi = [campo for campo, forma in attesi.items() if not re.search(forma, sorgente)]
     if diversi:

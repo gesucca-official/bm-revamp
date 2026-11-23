@@ -219,7 +219,7 @@ class Sb16iClientFieldsTest {
 
     @Test
     void withTheLiveRulesAChoiceIsRefusedAsBefore() {
-        Game game = game(Ruleset.LIVE, player("a", List.of(charge()), deck("X", "Y")), idle("b"));
+        Game game = game(Ruleset.LEGACY, player("a", List.of(charge()), deck("X", "Y")), idle("b"));
         IllegalMoveException e = assertThrows(IllegalMoveException.class,
                 () -> send(game, command(game, "a", "Carica", "SELF").put("searchChoice", "t.X")));
         assertEquals("no search choice with these rules", e.getWhatHeDid());
@@ -252,7 +252,7 @@ class Sb16iClientFieldsTest {
     void withoutTwoNameCardsOrWithTheLiveRulesTheFieldIsAbsent() {
         Game none = game(Ruleset.D50, player("a", List.of(single(), filler("Riempitivo")), deck("X")), idle("b"));
         assertFalse(viewFor(none, "a").path("players").path("a").has("searchable"));
-        Game live = game(Ruleset.LIVE, player("a", List.of(charge()), deck("X", "Y")), idle("b"));
+        Game live = game(Ruleset.LEGACY, player("a", List.of(charge()), deck("X", "Y")), idle("b"));
         assertFalse(viewFor(live, "a").path("players").path("a").has("searchable"));
     }
 
@@ -283,7 +283,7 @@ class Sb16iClientFieldsTest {
     @Test
     void withTheLiveRulesTheViewsHaveTheFieldsOfBefore() {
         Player a = player("a", List.of(charge(), filler("Riempitivo")), deck("X", "Y"));
-        Game game = game(Ruleset.LIVE, a, idle("b"));
+        Game game = game(Ruleset.LEGACY, a, idle("b"));
         send(game, command(game, "a", "Riempitivo", "SELF"));
         send(game, command(game, "b", "Attesa", "SELF"));
         resolve(game);

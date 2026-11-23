@@ -355,7 +355,7 @@ class RegoleD50Test {
         c.takeDamage(new Damage(Damage.DamageType.HIT, 10));
         assertEquals(50, c.getResources().get(Resource.HEALTH), "3/4 = 0, divisione intera");
 
-        Character live = drunk(Ruleset.LIVE, 20);
+        Character live = drunk(Ruleset.LEGACY, 20);
         assertFalse(live.takeDamage(new Damage(Damage.DamageType.HIT, 15)).contains("armor"));
         assertEquals(85, live.getResources().get(Resource.HEALTH));
     }
@@ -411,7 +411,7 @@ class RegoleD50Test {
         Player a = player("a", 50, 10, List.of(charge("Carica", "t.Colpo cercato", "SELF")),
                 List.of(filler("Cima"), hit("Colpo cercato", 20, 1)));
         Player b = player("b", 50, 10, List.of(filler("Attesa")), List.of(filler("Fb")));
-        Game game = game(Ruleset.LIVE, a, b);
+        Game game = game(Ruleset.LEGACY, a, b);
         Move charge = of(turn(game, move(game, "a", "Carica", "SELF"), move(game, "b", "Attesa", "SELF")), "a");
         assertTrue(hand(a).contains("Cima"));
         assertNull(charge.getSearchedFor());
@@ -632,7 +632,7 @@ class RegoleD50Test {
         Player a = player("a", 10, 10, List.of(charge("Carica", "t.Colpo cercato", "OPPONENT")),
                 List.of(filler("Cima"), hit("Colpo cercato", 20, 1)));
         Player b = player("b", 40, 10, List.of(hit("Veloce", 20, 2)), List.of(filler("Fb")));
-        Game game = game(Ruleset.LIVE, a, b);
+        Game game = game(Ruleset.LEGACY, a, b);
         turn(game, move(game, "a", "Carica", "b"), move(game, "b", "Veloce", "a"));
         for (String viewer : List.of("a", "b"))
             for (com.fasterxml.jackson.databind.JsonNode m : viewFor(game, viewer).path("resolvedMoves")) {

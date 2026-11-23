@@ -83,7 +83,7 @@ final class SimulationRunner {
         Player a = catalog.player(first.character, "seat-1", new Random(source.nextLong()), first.policy);
         Player b = catalog.player(second.character, "seat-2", new Random(source.nextLong()), second.policy);
         Game game = new Game(List.of(a, b), "sim", false);
-        if (ruleset != Ruleset.LIVE) game.useRuleset(ruleset);
+        if (ruleset != Ruleset.LEGACY) game.useRuleset(ruleset);
         return game;
     }
 

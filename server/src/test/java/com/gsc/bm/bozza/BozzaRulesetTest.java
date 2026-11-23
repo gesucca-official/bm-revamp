@@ -36,7 +36,7 @@ class BozzaRulesetTest {
         assertEquals(Ruleset.D50, bozza.ruleset());
         assertEquals("d50", bozza.describe().get("rules"));
         BozzaDraft live = new BozzaDraft(development(), BozzaDraftTest.DRAFT, "", "pool", "risorse", "1.13");
-        assertEquals(Ruleset.LIVE, live.ruleset());
+        assertEquals(Ruleset.LEGACY, live.ruleset());
         assertEquals("1.13", live.describe().get("rules"));
         IllegalStateException error = assertThrows(IllegalStateException.class,
                 () -> new BozzaDraft(development(), BozzaDraftTest.DRAFT, "", "pool", "risorse", "1.14"));
@@ -60,8 +60,10 @@ class BozzaRulesetTest {
 
         Game live = new GameFactoryServiceImpl(new MockEnvironment(), players,
                 new StaticListableBeanFactory().getBeanProvider(BozzaDraft.class)).craftQuick1vComGame("umano");
+        // SB-28 (D183): the live game plays regulation 2.0, the d50 rules; before, 1.13.
         assertEquals(Ruleset.LIVE, live.getRuleset());
-        for (Player p : live.getPlayers().values()) assertEquals(Ruleset.LIVE, p.getCharacter().ruleset());
+        assertEquals(Ruleset.D50, Ruleset.LIVE);
+        for (Player p : live.getPlayers().values()) assertEquals(Ruleset.D50, p.getCharacter().ruleset());
     }
 
     @Test
@@ -69,8 +71,8 @@ class BozzaRulesetTest {
         Game game = new Game(List.of(), "vuota", false);
         game.useRuleset(Ruleset.D50);
         assertEquals(Ruleset.D50, game.getRuleset());
-        assertEquals(Ruleset.LIVE, Ruleset.parse(null));
-        assertEquals(Ruleset.LIVE, Ruleset.parse(" 1.13 "));
+        assertEquals(Ruleset.LEGACY, Ruleset.parse(null));
+        assertEquals(Ruleset.LEGACY, Ruleset.parse(" 1.13 "));
         assertEquals(Ruleset.D50, Ruleset.parse("D50"));
         assertThrows(IllegalArgumentException.class, () -> Ruleset.parse("p1"));
     }

@@ -118,7 +118,8 @@ class Sb19CardsTest {
     void theNineCardsArePricedAsTheProposalWritesThem() throws Exception {
         // binding -> slot, rarity, cost, priority
         Map<String, Object[]> expected = new LinkedHashMap<>();
-        expected.put(Sb19.ELEMOSINA, new Object[]{"GEN-04", "RARE", Map.of(Resource.ALERTNESS, 0), 0});
+        // SB-28 (D181 (3)): il costo «A 0» non si scrive più; la carta è gratuita come prima.
+        expected.put(Sb19.ELEMOSINA, new Object[]{"GEN-04", "RARE", Map.of(), 0});
         expected.put(Sb19.COLPO, new Object[]{"GEN-08", "COMMON", Map.of(Resource.VIOLENCE, 15), 1});
         expected.put(Sb19.MALEDUCAZIONE, new Object[]{"GEN-10", "UNCOMMON", Map.of(Resource.VIOLENCE, 5), 1});
         expected.put(Sb19.NON_SENTO_NIENTE, new Object[]{"GEN-11", "UNCOMMON", Map.of(Resource.VIOLENCE, 5), 2});

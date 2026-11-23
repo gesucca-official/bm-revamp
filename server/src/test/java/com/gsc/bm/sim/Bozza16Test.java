@@ -144,6 +144,8 @@ class Bozza16Test {
                     // SB-27 (D177 (1)): selfHit 0 only switched the self-damage off; it left the draft with its logic.
                     ((ObjectNode) expected.path("params")).remove("selfHit");
                 }
+                // SB-28 (D181 (3), lista di SB-27): alertnessToTarget 0 di «FAI BASTA» è uscito con la sua logica.
+                if (b.equals("bruiser.YouStop")) ((ObjectNode) expected.path("params")).remove("alertnessToTarget");
                 if (b.equals("base.pino.QuestoLoFiniscoIo"))
                     ((ObjectNode) expected.path("self").path(0)).put("amount", 15);
                 if (b.equals("base.pino.TestataDaUltimoGiro"))

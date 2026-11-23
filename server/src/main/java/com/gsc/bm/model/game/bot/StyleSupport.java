@@ -432,8 +432,8 @@ final class StyleSupport {
     /**
      * SB-17, playground only, the same for every style: what the printed text of a counter or a swap adds to the move.
      * <ul>
-     *   <li>reflection («Ricatto»): the reflected part of the base damage of the strongest card the target shows, times the
-     *       target's tokens;</li>
+     *   <li>reflection (a counter that sends damage back): the reflected part of the base damage of the strongest card the
+     *       target shows, times the target's tokens;</li>
      *   <li>the token that stays («Lo sapevo»), only against a shown card with a token: the extra damage the token adds to the
      *       strongest own hit in hand;</li>
      *   <li>a swap of the trays (SWAP_ITEMS): the difference in items.</li>

@@ -20,14 +20,17 @@ python scripts/check-rules.py
 python scripts/verify-match-manifests.py
 ```
 
-Per il catalogo candidato del set generato dal file del set (SB-26, [tabella delle aree](docs/aree-protette.md)):
+Per il catalogo vivo, generato dal file del set (SB-26, vivo da SB-28; [tabella delle aree](docs/aree-protette.md)):
 rigenera, controlla e prova che un disallineamento voluto faccia fallire il controllo:
 
 ```powershell
-python -X utf8 tools/set-catalog/set_catalog.py
-python -X utf8 scripts/check-rules.py --candidate
+python -X utf8 tools/set-catalog/set_catalog.py --vivo
+python -X utf8 scripts/check-rules.py
 python -X utf8 tools/set-catalog/prova-errori.py
 ```
+
+Un catalogo di prova (per esempio con un'espansione) si genera in una cartella con
+`set_catalog.py --out CARTELLA` e si controlla con `check-rules.py --candidate CARTELLA`.
 
 Il contesto completo verifica anche l'avvio e gli scenari applicativi; i soli
 unit test non lo sostituiscono. Nella proposta descrivere problema, risultato e

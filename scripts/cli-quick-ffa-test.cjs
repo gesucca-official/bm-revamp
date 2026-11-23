@@ -93,6 +93,9 @@ async function finish(members,id) {
   assert.deepStrictEqual((await members[0].command({command:'export',gameId:id})).data,x);
   savedExports.push(x);return x.events.map(e=>JSON.parse(e.json));
 }
+// SB-28 (D183): FFA from the live factory plays regulation 2.0. Struggle («Addosso!!!», Set Base 1.0): 5 HIT to its player and
+// 10 to the target, Rincara 5 (2 a te); in the ring everyone plays one and takes one, both(k) after k rounds; HEALTH stops at 0.
+const taken=k=>5*k+k*(k-1), dealt=k=>10*k+5*k*(k-1)/2, both=k=>taken(k)+dealt(k);
 async function round(members,id,targets) {
   const turn=(await view(members[0],id)).turn;
   await Promise.all(members.map(async (c,i)=>accepted(c,await commandMove(c,id,targets[i],'com.last.Struggle'))));
@@ -126,18 +129,18 @@ async function round(members,id,targets) {
     await a.wait('/user/queue/illegalMove',replay);
     checks.push('pending restored in same FFA turn; original deadlines; replay rejected; old transport closed');
     await Promise.all(members.slice(1).map(async (x,i)=>accepted(x,await commandMove(x,id,members[(i+2)%members.length].user,'com.last.Struggle'))));
-    for(let turn=1;turn<7;turn++) {
+    for(let turn=1;turn<4;turn++) { // both(4) = 102: everyone reaches 0 at the fourth round
       const v=await round(members,id,members.map((x,i)=>members[(i+1)%members.length].user));
-      members.forEach(x=>assert.strictEqual(v.players[x.user].character.resources.HEALTH,100-15*(turn+1)));
+      members.forEach(x=>assert.strictEqual(v.players[x.user].character.resources.HEALTH,Math.max(0,100-both(turn+1))));
     }
     const final=await view(a,id);assert(final.over);assert.strictEqual(final.winner,'NONE');
     await f.close();
     await denied(f.user,x=>x.command({command:'subscribe',destination:'/user/queue/game/'+id+'/view'}),id);
     await denied(f.user,x=>x.command({command:'send',destination:'/app/game/'+id+'/move',data:{gameId:id,playerId:a.user}}),id);
     const events=await finish(members,id);
-    assert.strictEqual(events.filter(e=>e.kind==='ROUND_COMMITTED').length,7);
-    assert.strictEqual(events.filter(e=>e.kind==='MOVE_ACCEPTED').length,7*members.length);
-    checks.push('complete ring from HEALTH 100; seven rounds; private hands, pending, ready; concurrent moves; outsider denied');
+    assert.strictEqual(events.filter(e=>e.kind==='ROUND_COMMITTED').length,4);
+    assert.strictEqual(events.filter(e=>e.kind==='MOVE_ACCEPTED').length,4*members.length);
+    checks.push('complete ring from HEALTH 100; four rounds; private hands, pending, ready; concurrent moves; outsider denied');
   } else if(scenario==='concurrent') {
     await join(a);await join(b);
     await Promise.all([c,d,e].map(x=>x.command({command:'join',mode:'quick/ffa'})).concat([a.command({command:'start'}),b.command({command:'start'})]));
@@ -167,9 +170,9 @@ async function round(members,id,targets) {
     await b.command({command:'start'});const id=(await a.wait(READY,0)).data;assert.strictEqual((await b.wait(READY,0)).data,id);
     await watch(a,id);await watch(b,id);const v=await view(a,id), bot=Object.keys(v.players).find(p=>![a.user,b.user].includes(p));assert(bot);
     await b.command({command:'leave',gameId:id});assert(!(await view(a,id)).over);
-    for(let n=0;n<10;n++) await round([a],id,[bot]);
-    const final=await view(a,id);assert(final.over);assert.strictEqual(final.winner,a.user);assert.strictEqual(final.players[a.user].character.resources.HEALTH,50);
-    const events=await finish([a,b],id);assert.strictEqual(events.filter(e=>e.kind==='ROUND_COMMITTED').length,10);
+    for(let n=0;n<5;n++) await round([a],id,[bot]); // dealt(5) = 100
+    const final=await view(a,id);assert(final.over);assert.strictEqual(final.winner,a.user);assert.strictEqual(final.players[a.user].character.resources.HEALTH,100-taken(5));
+    const events=await finish([a,b],id);assert.strictEqual(events.filter(e=>e.kind==='ROUND_COMMITTED').length,5);
     checks.push('duplicate join; add bot by second participant; leave/reinsert clears orphan bots; bot moves once per round; full win');
   } else {
     const members=[a,b,c,d,e], id=await start(members,true);

@@ -295,7 +295,7 @@ class Sb17CardsTest {
         assertFalse(m.isKeepsToken());
         m.setKeepsToken(true);
         assertTrue(m.isKeepsToken());
-        assertFalse(Ruleset.LIVE.playground());
+        assertFalse(Ruleset.LEGACY.playground());
     }
 
     // ---- Conto salato (CES-AR4): the condition on the token ----

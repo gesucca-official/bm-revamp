@@ -36,7 +36,7 @@ class ListinoAnchorTest {
 
     @Test
     void anotherAnchorChangesOnlyTheTwoAnchorCards() throws Exception {
-        Draft base = Draft.fromClasspath(Listino.BASE), seven = Listino.withAnchor(base, 7);
+        Draft base = BozzeStoriche.fromClasspath(Listino.BASE), seven = Listino.withAnchor(base, 7);
         JsonNode before = base.json(), after = seven.json();
         for (String binding : new String[] {Listino.SLOT1, Listino.SLOT2}) {
             JsonNode card = card(after, binding);
@@ -62,7 +62,7 @@ class ListinoAnchorTest {
         Map<String, BotPolicy> styles = new LinkedHashMap<>(PlaygroundTest.styles());
         styles.remove("com");
         styles.remove("casuale");
-        Draft ten = Draft.fromClasspath(Listino.BASE), seven = Listino.withAnchor(ten, 7);
+        Draft ten = BozzeStoriche.fromClasspath(Listino.BASE), seven = Listino.withAnchor(ten, 7);
         Listino onSeven = new Listino(seven, new Listino.Params(1, 1, 1, 1), styles);
         Listino onTen = new Listino(ten, new Listino.Params(1, 1, 1, 1), styles);
         Listino.Point same = onSeven.evaluate(onSeven.slotProbe(Listino.NEUTRO, null, id -> Listino.hitter(id, Map.of(), 1, "HIT", 7)),

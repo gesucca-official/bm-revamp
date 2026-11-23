@@ -33,13 +33,13 @@ function client(user, password = 'synthetic') {
   
   const a = client('cliModesA'), b = client('cliModesB'); await a.connect(); await b.connect();
   const profile = (await a.command({command:'profile'})).data;
-  assert.strictEqual(profile.collection.cards.length, 37);
+  assert.strictEqual(profile.collection.cards.length, 117); // SB-28 (D182): the live Set Base 1.0 (the 0.1 had 37)
   const card = binding => {const c = profile.collection.cards.find(c => c.bindingName === binding); assert(c, binding); return c;};
   // R02 1.12: own basic, two different own bound cards, Struggle, 20 regular cards with at most 2 copies each.
   const twice = bindings => [].concat(...bindings.map(b => [card(b), card(b)]));
   const bruiser = profile.collection.characters.find(c => c.bindingName === 'bruiser.character.BigBadBruiser');
   const ten = ['bruiser.SuperImpact','bruiser.Glare','bruiser.StunningBlow','bruiser.YouStop','bruiser.MadeOfStone',
-    'bruiser.SeagullFly','com.ShuffleFeet','com.Steal','com.items.RottenBeer','com.items.CocktailOnTheGround'];
+    'bruiser.SeagullFly','base.com.ShuffleFeet','com.Steal','com.items.RottenBeer','com.items.CocktailOnTheGround'];
   const deck = {deckId:'cli-fixture', character:bruiser,
     basicActionCard:card('com.basic.BruiserGrab'), lastResortCard:card('com.last.Struggle'),
     characterBoundCards:[card('bruiser.character.LittleSmack'), card('bruiser.character.LittleRage')], regularCards:twice(ten)};

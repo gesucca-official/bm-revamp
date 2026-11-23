@@ -15,17 +15,22 @@ async function main() {
     // R02 1.12: two valid decks, 20 regular actions (no items, so no draw chain) with two copies each. Every turn the human
     // plays the bound without damage (`quiet`) discarding a regular card; with no regular card left in hand, Struggle.
     // The bot (fixed by OpenCompleteCliTest) has no move, so HEALTH and deck counts are exact.
+    // SB-28 (D182, D183): the cards of the live Set Base 1.0 (the 0.1 BadTrip and GoingBerserk left the set; the Junkie's quiet
+    // bound is now «Rintanarsi nel Cappotto», +2 T on herself, and Celestina is immune to T) and the starting HEALTH of the live
+    // characters (Spazienzio 70, Celestina 65). Struggle is «Addosso!!!»: 5 HIT to you and 10 to the opponent, Rincara 5 (2 a te).
     const n=20;
     const configs=[
-      {id:'i16-bruiser',character:'bruiser.character.BigBadBruiser',basic:'com.basic.BruiserGrab',
+      {id:'i16-bruiser',character:'bruiser.character.BigBadBruiser',basic:'com.basic.BruiserGrab',health:70,
         bound:['bruiser.character.LittleSmack','bruiser.character.LittleRage'],quiet:'bruiser.character.LittleRage',quietSelf:true,
         regular:['bruiser.Glare','bruiser.StunningBlow','bruiser.SuperImpact','bruiser.YouStop','bruiser.MadeOfStone',
-          'bruiser.SeagullFly','bruiser.HealingBlow','com.ShuffleFeet','com.Grab','com.Steal']},
-      {id:'i16-junkie',character:'junkie.character.ToxicJunkie',basic:'com.basic.ToxicGrab',
-        bound:['junkie.character.RottenSmile','junkie.character.PatheticBlade'],quiet:'junkie.character.RottenSmile',quietSelf:false,
-        regular:['junkie.Cough','junkie.BadTrip','junkie.GoingBerserk','junkie.MethDrivenRage','junkie.AmphetamineReflexes',
-          'junkie.PervertedMetabolism','junkie.ToxicBloodDrain','com.ShuffleFeet','com.Grab','com.Steal']}
+          'bruiser.SeagullFly','bruiser.HealingBlow','base.com.ShuffleFeet','com.Grab','com.Steal']},
+      {id:'i16-junkie',character:'junkie.character.ToxicJunkie',basic:'com.basic.ToxicGrab',health:65,
+        bound:['base.tossico.bound.RaschiareIlFondo','junkie.character.PatheticBlade'],quiet:'base.tossico.bound.RaschiareIlFondo',quietSelf:true,
+        regular:['junkie.Cough','base.com.DentiStretti','base.com.SecondoFiato','junkie.MethDrivenRage','junkie.AmphetamineReflexes',
+          'junkie.PervertedMetabolism','junkie.ToxicBloodDrain','base.com.ShuffleFeet','com.Grab','com.Steal']}
     ];
+    // Struggle played k times: Rincara adds 5 to the opponent and 2 to you for every earlier play; HEALTH stops at 0 (R01).
+    const taken=k=>5*k+k*(k-1), dealt=k=>10*k+5*k*(k-1)/2;
     const twice=bindings=>[].concat(...bindings.map(b=>[b,b]));
     function deck(cfg) { return {deckId:cfg.id,character:character(cfg.character),basicActionCard:card(cfg.basic),
       characterBoundCards:cfg.bound.map(card),lastResortCard:card('com.last.Struggle'),regularCards:twice(cfg.regular).map(card)}; }
@@ -85,12 +90,12 @@ async function main() {
         await c.wait('/topic/game/'+id+'/update',mark);
         view=(await c.command({command:'view',gameId:id})).data;
         turns++;
-        const damage=Math.max(0,turns-n);
-        assert.strictEqual(view.players[user].character.resources.HEALTH,100-5*damage);
-        assert.strictEqual(view.players[bot].character.resources.HEALTH,100-10*damage);
+        const struggles=Math.max(0,turns-n);
+        assert.strictEqual(view.players[user].character.resources.HEALTH,Math.max(0,cfg.health-taken(struggles)));
+        assert.strictEqual(view.players[bot].character.resources.HEALTH,Math.max(0,100-dealt(struggles)));
         assert.strictEqual(view.players[user].deck,Math.max(0,n-(5-cfg.bound.length)-turns));
       }
-      assert.strictEqual(turns,n+10);
+      assert.strictEqual(turns,n+5); // dealt(5) = 100: the bot falls at the fifth Struggle
       const exported=(await c.command({command:'export',gameId:id})).data;
       assert.deepStrictEqual(exported.unpersistedEvents,[]);
       assert.strictEqual(exported.recording.complete,true); assert.strictEqual(exported.recording.status,'OK');
@@ -108,7 +113,7 @@ async function main() {
       assert.strictEqual(initial.versions.rulesVersion,process.env.BM_RULES_VERSION);
       // Regulation 1.13 (SB-2): the set documents loaded by the server, with version and hash.
       assert.deepStrictEqual(initial.versions.sets,JSON.parse(process.env.BM_SETS));
-      assert.strictEqual(initial.versions.sets.base.version,'0.1');
+      assert.strictEqual(initial.versions.sets.base.version,'1.0'); // SB-28 (D182): Set Base 1.0
       assert.strictEqual(initial.configuration.botPolicy,'random');
       const human=initial.state.players.find(p=>p.playerId===user);
       assert.strictEqual(initial.state.mode,'open1vCom');

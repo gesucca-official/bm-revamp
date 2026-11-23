@@ -76,8 +76,8 @@ class UnlockedDamageHealthTest {
 
     @Test
     void withTheLiveRulesAndForOtherResourcesTheCostIsReachedAtEquality() {
-        assertEquals(0, unlocked(Ruleset.LIVE, c, capocciata, Resource.HEALTH, 1), 1e-9, "1.13: C pays C");
-        assertEquals(d, unlocked(Ruleset.LIVE, c - 6, capocciata, Resource.HEALTH, 6), 1e-9);
+        assertEquals(0, unlocked(Ruleset.LEGACY, c, capocciata, Resource.HEALTH, 1), 1e-9, "1.13: C pays C");
+        assertEquals(d, unlocked(Ruleset.LEGACY, c - 6, capocciata, Resource.HEALTH, 6), 1e-9);
         BotView.CardSeen violent = costingViolence(capocciata);
         assertEquals(d, unlocked(Ruleset.D50, 80, violent, Resource.VIOLENCE, c - 10), 1e-9, "10 + (C − 10) V = C pays C V under d50 too");
         assertEquals(0, unlocked(Ruleset.D50, 80, violent, Resource.VIOLENCE, c - 11), 1e-9);
@@ -87,6 +87,6 @@ class UnlockedDamageHealthTest {
     void ultimoColpoIsAlwaysPayableUnderD50() {
         BotView.CardSeen last = withLastBlow(capocciata);
         assertEquals(0, unlocked(Ruleset.D50, 10, last, Resource.HEALTH, c), 1e-9, "payable now: nothing to unlock");
-        assertEquals(d, unlocked(Ruleset.LIVE, 10, last, Resource.HEALTH, c), 1e-9, "1.13 knows no «Ultimo colpo»");
+        assertEquals(d, unlocked(Ruleset.LEGACY, 10, last, Resource.HEALTH, c), 1e-9, "1.13 knows no «Ultimo colpo»");
     }
 }

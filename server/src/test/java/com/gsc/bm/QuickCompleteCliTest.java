@@ -43,9 +43,10 @@ class QuickCompleteCliTest extends SqliteContextSupport {
         Character ch = junkie ? new ToxicJunkie() : new BigBadBruiser();
         List<Card> regular = new ArrayList<>();
         // Homogeneous deck: shuffle remains real but cannot change the fixture.
-        for (int i=0; i<(draw ? 0 : 20); i++) regular.add(cards.craftCard("com.ShuffleFeet"));
+        for (int i=0; i<(draw ? 0 : 20); i++) regular.add(cards.craftCard("base.com.ShuffleFeet"));
+        // SB-28: the Junkie starter of the Set Base 1.0 has its own last resort; the fixture keeps the generic Struggle («Addosso!!!»).
         Player human = new Player(user,ch,decks.craftBasicActionStarterCard(ch),
-                decks.craftCharacterBoundStarterCards(ch),decks.craftLastResortStarterCard(ch),regular);
+                decks.craftCharacterBoundStarterCards(ch),cards.craftCard("com.last.Struggle"),regular);
         Character bc = new BigBadBruiser();
         ComPlayer bot = new ComPlayer(bc,decks.craftBasicActionStarterCard(bc),
                 decks.craftCharacterBoundStarterCards(bc),decks.craftLastResortStarterCard(bc),List.of());

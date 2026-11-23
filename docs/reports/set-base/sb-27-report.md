@@ -8,7 +8,7 @@
 
 Base `21b7767`. Prompt della regia del 23 novembre 2026 con la correzione del proprietario sui parametri spenti; due STOP risolti in
 sessione dal proprietario (sotto, «Deviazioni»). Fonte: [D177](../../set-base-decisioni.md#decisioni-del-proprietario), le schede
-del [documento del Set Base 1.0 candidato](../../../server/src/test/resources/set-base/catalogo/sets/base.md).
+del [documento del Set Base 1.0 candidato](../../sets/base.md).
 
 ## Cosa cambia
 
@@ -260,7 +260,7 @@ diagnostico è stato tolto.
 
 Il testo completo di SPA-AR3 e SPA-AR6 e RP-15/RP-16 fanno finire un Vulnerabile quando si gioca il nome corrispondente.
 Se ci sono più gettoni, finisce il più vecchio. Il caso distingue un promemoria rimasto in mano da un gettone attivo.
-[Schede del candidato](../../../server/src/test/resources/set-base/catalogo/sets/base.md)
+[Schede del candidato](../../sets/base.md)
 
 1. PAZIENZA: FINITA trova la prima copia di GARGANTUESCO IMPATTO SUL TU. Il timer di Mescolone rimuove quel Vulnerabile e la
    prima copia resta visibile, come prevede D179.
@@ -372,7 +372,7 @@ La scheda TOKEN e OGG-03 chiamano il token «Bottiglia Spaccata». In d50, il co
 binding atteso `com.tokens.BrokenBeerBottle`. `Card.getName()` restituisce però `Broken Beer Bottle`. `Game.getItem`
 confronta il nome della mossa con quello restituito dalla carta. Il nome della scheda quindi non individua l’oggetto sul server.
 
-Il [caso diagnostico](sb-27/Sb27BottleNameReproTest.java) è l’unico rosso del giro mirato su oggetti, personaggi e token
+Il [caso diagnostico](../../../server/src/test/java/com/gsc/bm/sim/Sb27BottleNameTest.java) è l’unico rosso del giro mirato su oggetti, personaggi e token
 (32 casi). Atteso `Bottiglia Spaccata`, osservato `Broken Beer Bottle`. Per riprodurlo, copiare il sorgente in
 `server/src/test/java/com/gsc/bm/sim/` ed eseguire `Sb27BottleNameReproTest` con Maven offline. Il motore e le schede
 coincidono con `67a01b2`. I casi separati verificano creazione, consumo e durata dell’equipaggiamento con il binding corretto.
@@ -510,7 +510,7 @@ L'inventario distingue 117 carte, sette personaggi e un token. Per le 19 carte s
 | OGG-16 | Grappa della Casa | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 1 | pesca in campo, +25 L/−5 A al consumo e decadimento |
 | OGG-17 | Conto del Tavolo Sei | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java), [Sb27InPlayClausesTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27InPlayClausesTest.java) | 4 | In campo nel turno di pesca e dopo la copia, −4 A, pavimento, nessun danno, +15 V e stop dopo consumo; furto, scambio e copia; vendita, distruzione e capienza |
 | OGG-18 | Sigaretta Accesa | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java), [Sb27InPlayClausesTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27InPlayClausesTest.java) | 4 | In campo +2 T dopo il veleno, turno di arrivo e furto, immunità, +10 A e stop al consumo; furto, scambio e copia; vendita, distruzione e capienza |
-| TOKEN | Bottiglia Spaccata | Oggetto, Token | [Sb27BottleTokenTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27BottleTokenTest.java), [Sb27TokenClausesTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27TokenClausesTest.java), [Sb27BottleNameReproTest](sb-27/Sb27BottleNameReproTest.java) | 4 | creazione, tipo e binding, permanenza in campo, consumo, stati separati, HIT→CUT ×1,5, corazza, più colpi e scadenza, conversione anche su di sé prima degli stati CUT del bersaglio e rimozione con PERMESSO. Nome selezionabile rinviato a SB-28 |
+| TOKEN | Bottiglia Spaccata | Oggetto, Token | [Sb27BottleTokenTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27BottleTokenTest.java), [Sb27TokenClausesTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27TokenClausesTest.java), [Sb27BottleNameReproTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27BottleNameTest.java) | 4 | creazione, tipo e binding, permanenza in campo, consumo, stati separati, HIT→CUT ×1,5, corazza, più colpi e scadenza, conversione anche su di sé prima degli stati CUT del bersaglio e rimozione con PERMESSO. Nome selezionabile rinviato a SB-28 |
 
 ### Clausole comuni e limiti del banco
 

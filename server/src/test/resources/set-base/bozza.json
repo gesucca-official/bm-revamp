@@ -100,7 +100,7 @@
               {"op": "gain", "resource": "VIOLENCE", "amount": 10}],
      "gui": {"name": "NON GIOCARE COL COLTELLO NO", "flavour": "«CARINO QUESTO TUO BASTONCINO, LO FANNO ANCHE DA UOMO O SOLO DA BAMBINO?»", "description": "Per 4 turni, contando questo, subisci metà dei [[CUT]] che subiresti. +10 [[V]].",
              "role": "DEFENSE", "gains": "+10 V", "damage": "—", "damageAmount": "—"}},
-    {"binding": "bruiser.YouStop", "rarity": "UNCOMMON", "java": true, "cost": {"VIOLENCE": 5}, "priority": 2, "params": {"alertnessToTarget": 0},
+    {"binding": "bruiser.YouStop", "rarity": "UNCOMMON", "java": true, "cost": {"VIOLENCE": 5}, "priority": 2, "params": {},
      "gui": {"name": "FAI BASTA", "flavour": "«BASTA NON È UNA DOMANDA. LA VIOLENZA È UNA DOMANDA, E LA RISPOSTA È SÌ.»", "description": "5 [[V]]: se la mossa dell'avversario si risolve dopo la tua, la annulli.",
              "role": "COUNTER", "gains": "—", "damage": "—", "damageAmount": "—"}},
 
@@ -589,7 +589,7 @@
     {"binding": "base.rocco.Capocciata", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"HEALTH": 30}, "target": [{"op": "damage", "type": "HIT", "amount": 25}], "gui": {"name": "Craniata Patriottica", "flavour": "La testa rasata serve a questo.", "description": "30 [[H]]: infliggi 25 [[HIT]] all'avversario.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 25"}},
     {"binding": "base.rocco.TeLoSpiegoIo", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "self": [{"op": "search", "cards": ["base.rocco.Capocciata", "base.rocco.TestaDura"], "vulnerability": {"factor": 1.5}, "foundGains": {"HEALTH": 6}, "missedGains": {"HEALTH": 2}}], "target": [{"op": "damage", "type": "HIT", "amount": 4}], "gui": {"name": "La Storia la Scrivono i Vincitori", "flavour": "Non preoccuparti, te la spiega lui la vera storia d'Italia. Con le mani.", "description": "Infliggi 4 [[HIT]] all'avversario. Annuncia «Craniata Patriottica» o «Testa Dura». Se lo trovi: +6 [[H]] e diventi Vulnerabile. Se non lo trovi: +2 [[H]].", "role": "DISRUPT", "gains": "+6 H", "damage": "HIT", "damageAmount": "HIT 4"}},
     {"binding": "base.rocco.TestaDura", "rarity": "RARE", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"HEALTH": 35}, "target": [{"op": "damage", "type": "HIT", "amount": 30}], "gui": {"name": "Testa Dura", "flavour": "Dentro non c'è molto, da fuori però si può usare.", "description": "35 [[H]]: infliggi 30 [[HIT]] all'avversario.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 30"}},
-    {"binding": "base.com.BeggingMoney", "rarity": "RARE", "java": true, "cost": {"ALERTNESS": 0}, "priority": 0, "params": {}, "gui": {"name": "Ce l'Hai Due Spicci?", "flavour": "«...per il biglietto del treno, che hai capito?»", "description": "Copia accanto a te un oggetto a caso dell'avversario.", "role": "ITEMS", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.com.BeggingMoney", "rarity": "RARE", "java": true, "cost": {}, "priority": 0, "params": {}, "gui": {"name": "Ce l'Hai Due Spicci?", "flavour": "«...per il biglietto del treno, che hai capito?»", "description": "Copia accanto a te un oggetto a caso dell'avversario.", "role": "ITEMS", "gains": "—", "damage": "—", "damageAmount": "—"}},
     {"binding": "bruiser.SickeningBlow", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"VIOLENCE": 15}, "target": [{"op": "damage", "type": "HIT", "amount": 10}, {"op": "gain", "resource": "TOXICITY", "amount": 10}], "gui": {"name": "AMMALIAMOTI DI BOTTE", "flavour": "«LA SALUTE È UN DONO CHE NON TI MERITI PIÙ.»", "description": "15 [[V]]: infliggi 10 [[HIT]] all'avversario. L'avversario guadagna 10 [[T]].", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 10"}},
     {"binding": "bruiser.BadEducation", "rarity": "UNCOMMON", "java": true, "cost": {"VIOLENCE": 5}, "priority": 1, "params": {"hitDamage": 8}, "gui": {"name": "PERMESSO SCUSA PUOI SMETTERLA", "flavour": "«NESSUNA DI QUESTE È UNA DOMANDA, PENSAVO FOSSE CHIARO.»", "description": "5 [[V]]: togli all'avversario i suoi equipaggiamenti. Infliggi 8 [[HIT]] all'avversario.", "role": "OTHER", "gains": "—", "damage": "HIT", "damageAmount": "HIT 8"}},
     {"binding": "bruiser.CantFeelAnything", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 2, "targets": ["SELF"], "cost": {"VIOLENCE": 5}, "self": [{"op": "status", "name": "GENTILE IL TUO CAREZZO", "description": "Chi lo ha subisce un quarto dei [[HIT]] che subirebbe.", "statusType": "GOOD", "flow": "INPUT", "property": "HIT", "factor": 0.25, "turns": 0}, {"op": "say", "text": "Gained status: NON SENTO NIENTE"}, {"op": "gain", "resource": "ALERTNESS", "amount": 5}], "gui": {"name": "GENTILE IL TUO CAREZZO", "flavour": "«LE TUE MANI DELICATE POTREBBERO FARMI ECCITARE. NON SO SE TI CONVENGA.»", "description": "5 [[V]]: in questo turno subisci un quarto dei [[HIT]] che subiresti. +5 [[A]].", "role": "DEFENSE", "gains": "+5 A", "damage": "—", "damageAmount": "—"}},
@@ -604,6 +604,8 @@
   "decks": [
     {
       "id": "starter-spazienzio",
+      "name": "Spazienzio",
+      "category": "base",
       "character": "bruiser.character.BigBadBruiser",
       "bound": [
         "bruiser.character.LittleRage",
@@ -628,6 +630,8 @@
     },
     {
       "id": "starter-mara",
+      "name": "Mara",
+      "category": "base",
       "character": "base.character.Mara",
       "bound": [
         "base.mara.bound.PassoStretto",
@@ -652,6 +656,8 @@
     },
     {
       "id": "starter-tossico",
+      "name": "Celestina",
+      "category": "avanzato",
       "character": "junkie.character.ToxicJunkie",
       "bound": [
         "junkie.character.PatheticBlade",
@@ -676,6 +682,8 @@
     },
     {
       "id": "starter-pino",
+      "name": "Piera",
+      "category": "avanzato",
       "character": "base.character.Pino",
       "bound": [
         "base.pino.bound.CinqueMinutiEVado",
@@ -700,6 +708,8 @@
     },
     {
       "id": "starter-gigi",
+      "name": "Beppe",
+      "category": "avanzato",
       "character": "base.character.Gigi",
       "bound": [
         "base.gigi.bound.UnaStrettaEPassa",

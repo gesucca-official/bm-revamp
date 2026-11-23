@@ -23,7 +23,7 @@ class ApplicationSchemaTest {
         reopened.update("UPDATE BM_SCHEMA_VERSION SET checksum='modified' WHERE version=1");
         assertThrows(IllegalStateException.class, () -> ApplicationDatabase.open(file));
         assertEquals("modified", reopened.queryForObject("SELECT checksum FROM BM_SCHEMA_VERSION WHERE version=1", String.class));
-        assertEquals(3, reopened.queryForObject("SELECT COUNT(*) FROM BM_SCHEMA_VERSION", Integer.class));
+        assertEquals(4, reopened.queryForObject("SELECT COUNT(*) FROM BM_SCHEMA_VERSION", Integer.class)); // SB-28 (D182 (3)): V004
         reopened.update("UPDATE BM_SCHEMA_VERSION SET version=99, checksum=? WHERE version=1", originalChecksum);
         assertThrows(IllegalStateException.class, () -> ApplicationDatabase.open(file));
         assertEquals(99, reopened.queryForObject("SELECT MAX(version) FROM BM_SCHEMA_VERSION", Integer.class));

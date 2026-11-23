@@ -1,10 +1,12 @@
-"""Bozza mode of the generator: print the Set Base draft (bozza.json) for in-person play.
+"""The printer of a set file: the live Set Base (SB-28) or, with --bozza, a draft in the same format, for in-person play.
 
-Everything is read at run time from server/src/test/resources/set-base/bozza.json: a rerun picks up any change of the draft.
-Fronts carry a provisional mark (set version, playground rules, short SHA-256 of the draft). Resource, role and damage
-symbols are the vector shapes of the client (symbols_pdf.py), never font glyphs; a placeholder the generator does not
-know fails loudly. Text that does not fit is refused, never truncated or shrunk. Not normative: the playground rules
-are in docs/design/set-base/regole-playground.md and are only pointed to, not reprinted.
+Everything is read at run time from the set file (the live one, server/src/main/resources/sets/base.json, or a draft such as
+server/src/test/resources/set-base/bozza.json): a rerun picks up any change. Fronts carry the set and its version, the version of
+the regulation and the short SHA-256 of the file; a draft also carries a provisional mark. Resource, role and damage symbols are the
+vector shapes of the client (symbols_pdf.py), never font glyphs; a placeholder the generator does not know fails loudly. Text that
+does not fit is refused, never truncated or shrunk. The rules are in the regulation (docs/game-rules.md) and in the set document,
+which the guide points to and does not reprint. SB-28: the playground rules became regulation 2.0 (D183); the guide cites the
+regulation, no longer the playground document (RP-n).
 """
 from collections import Counter
 from contextlib import closing
@@ -26,7 +28,8 @@ from generate import COLORS, INK, ROOT, fonts, symbol
 from symbols_pdf import (DAMAGES, RESOURCE_LETTERS, RESOURCES, ROLES, ROLE_LABEL, RESOURCE_NAME_IT, LAYERS, colors as symbol_colors, draw_symbol)
 
 DEFAULT_BOZZA = ROOT / 'server/src/test/resources/set-base/bozza.json'
-PLAYGROUND = ROOT / 'docs/design/set-base/regole-playground.md'
+REGULATION = ROOT / 'docs/game-rules.md'
+SET_DOCS = ROOT / 'docs/sets'  # SB-28: the published version of a live set is the one of its document (the file keeps the draft's)
 STARTER_PREFIX = 'starter-'
 SLOTS = ROOT / 'docs/design/set-base/testi/slot.json'  # SB-25 B1 (D169 (5)): the slot code is no longer in the text
 FULL_TEXTS = ROOT / 'docs/design/set-base/testi/testi-completi.json'  # SB-25 B1 (D170): the full text of every entry, generated
@@ -35,7 +38,7 @@ SYM_ADVANCE = 1.08    # advance of an inline symbol, in em
 SYM_SIZE = .95        # diameter of an inline symbol, in em
 SYM_RISE = .34        # centre of an inline symbol above the baseline, in em
 LEADING = 1.28
-# PROTAGONIST (P): the rarity of the characters, descriptive like the others (rules 1.14, R07); no pips, its own label.
+# PROTAGONIST (P): the rarity of the characters, descriptive like the others (regulation, R07); no pips, its own label.
 RARITY = {'COMMON': ('COMUNE', 1), 'UNCOMMON': ('NON COMUNE', 2), 'RARE': ('RARA', 3), 'PROTAGONIST': ('PROTAGONISTA (P)', 0)}
 INLINE = {**RESOURCE_LETTERS, **{d: d for d in DAMAGES}}  # [[H]]…[[L]] and, from SB-25 (D168 (1)), [[HIT]] [[CUT]] [[POISON]]
 FLAVOUR_PT = 7.5      # the flavour under the text, in italic (D166 (2), (4): printed on the face)
@@ -163,14 +166,15 @@ def _fail(msg):
     raise ValueError(f'bozza: {msg}')
 
 
-def playground_profile(path=PLAYGROUND):
-    m = re.match(r'# Regole del playground in vigore \((d\d+)\)', path.read_text(encoding='utf-8-sig'))
+def document_version(path, what):
+    m = re.search(r'^Versione \*\*([0-9.]+) —', path.read_text(encoding='utf-8-sig'), re.M)
     if not m:
-        _fail(f'{path.name}: profilo delle regole non riconosciuto nel titolo')
+        _fail(f'{path.name}: versione {what} non trovata')
     return m.group(1)
 
 
-def load_bozza(path, playground=PLAYGROUND):
+def load_bozza(path, live=False, regulation=REGULATION, set_docs=SET_DOCS):
+    """A set file. `live`: the live set, labelled with the version of its set document (Set Base 1.0) instead of the file's."""
     raw = path.read_bytes()
     data = json.loads(raw.decode('utf-8-sig'))
     if data.get('format') != 'sb-6b/1':
@@ -265,9 +269,12 @@ def load_bozza(path, playground=PLAYGROUND):
         entries = Counter([d['character'], ch['basic'], *d['bound'], d['lastResort']])
         entries.update(d['cards'])
         deck_cards.append(dict(id=d['id'], character=d['character'], basic=ch['basic'], bound=d['bound'], last=d['lastResort'],
-                               cards=d['cards'], quantities=entries, starter=d['id'].startswith(STARTER_PREFIX)))
-    return dict(raw_sha256=hashlib.sha256(raw).hexdigest(), set_label=f"{data['set']['name']} {data['set']['version']}", set_name=data['set']['name'], set_version=data['set']['version'],
-                rules=playground_profile(playground), faces=faces, decks=deck_cards, limits=dict(deck_size=deck_size, max_copies=max_copies))
+                               cards=d['cards'], quantities=entries, starter=d['id'].startswith(STARTER_PREFIX),
+                               name=d.get('name'), category=d.get('category')))
+    version = document_version(set_docs / f"{data['set']['id']}.md", 'del documento del set') if live else data['set']['version']
+    return dict(raw_sha256=hashlib.sha256(raw).hexdigest(), set_label=f"{data['set']['name']} {version}", set_name=data['set']['name'], set_id=data['set']['id'], set_version=version,
+                file_version=data['set']['version'], live=live, rules=document_version(regulation, 'del regolamento'), faces=faces, decks=deck_cards,
+                limits=dict(deck_size=deck_size, max_copies=max_copies))
 
 
 def select_decks(requests, decks, faces):
@@ -280,7 +287,8 @@ def select_decks(requests, decks, faces):
         if exact:
             matches = exact
         else:
-            matches = [d for d in decks if key in (d['character'].casefold(), d['character'].split('.')[-1].casefold(), by_id[d['character']]['name'].casefold())]
+            matches = [d for d in decks if key in (d['character'].casefold(), d['character'].split('.')[-1].casefold(), by_id[d['character']]['name'].casefold(),
+                                                   (d['name'] or '').casefold())]
             if len(matches) > 1 and sum(d['starter'] for d in matches) == 1:
                 matches = [d for d in matches if d['starter']]
         if len(matches) != 1:
@@ -291,7 +299,8 @@ def select_decks(requests, decks, faces):
 
 
 def deck_label(deck, by_id):
-    return f'{deck["id"]} | {by_id[deck["character"]]["name"]} | {"starter" if deck["starter"] else "misura"} | {sum(deck["quantities"].values())} fronti (personaggio incluso)'
+    kind = (f'starter {deck["category"]} «{deck["name"]}»' if deck['category'] else 'starter') if deck['starter'] else 'misura'
+    return f'{deck["id"]} | {by_id[deck["character"]]["name"]} | {kind} | {sum(deck["quantities"].values())} fronti (personaggio incluso)'
 
 
 # --------------------------------------------------------------------------------------------------------------- faces
@@ -304,8 +313,8 @@ def crop_marks(pdf, x, y, width, height):
             pdf.line(cx, cy + dy * .5 * mm, cx, cy + dy * 1.5 * mm)
 
 
-def draw_face(pdf, face, x, y, width, height, number, total, stamp):
-    """One bozza front. Raises Overflow naming the card when a text does not fit (flavour included, D166 (2)).
+def draw_face(pdf, face, x, y, width, height, number, total, stamp, mark='BOZZA PROVVISORIA'):
+    """One front; `mark` is the word in the band (the provisional mark of a draft, the set of the live print). Raises Overflow naming the card when a text does not fit (flavour included, D166 (2)).
 
     Returns the vertical room in mm: `room` is left under the text and the flavour, `room_without_flavour` under the text alone
     (the fit test of SB-25 reads both)."""
@@ -318,7 +327,7 @@ def draw_face(pdf, face, x, y, width, height, number, total, stamp):
     pdf.rect(x, y, width, height)
     pdf.setFillColor(color); pdf.rect(x, y + height - 5 * mm, width, 5 * mm, stroke=0, fill=1)
     pdf.setFillColor(white); pdf.setFont('Strong', 6)
-    pdf.drawString(x + 4 * mm, y + height - 3.4 * mm, 'BOZZA PROVVISORIA')
+    pdf.drawString(x + 4 * mm, y + height - 3.4 * mm, mark)
     right = x + width - 4 * mm
     pdf.setFont('Strong', 6); pdf.drawRightString(right - pips * 2.6 - 1.2, y + height - 3.4 * mm, label)
     pdf.setFillColor(white)
@@ -374,7 +383,7 @@ def draw_face(pdf, face, x, y, width, height, number, total, stamp):
             top = text_block(pdf, face['flavour'], x + 4 * mm, top - FLAVOUR_GAP * mm, inner, bottom, FLAVOUR_PT, where, font='Flavour')
         except Overflow as error:
             raise Overflow(f'{error} [flavour; senza flavour restano {(without - bottom) / mm:.1f} mm]') from None
-    # Footer: slot and binding id (small, as the live mode), then the provisional mark with the version of the draft.
+    # Footer: slot and binding id (small), then the stamp: set and version, regulation, short hash of the file.
     pdf.setFillColor(INK); pdf.setFont('Body', 6)
     ident = (face['slot'] + ' · ' if face['slot'] else '') + face['id']
     check_glyphs(ident + stamp, 'Body')
@@ -391,7 +400,7 @@ def draw_face(pdf, face, x, y, width, height, number, total, stamp):
 class Guide:
     """Reference pages after the fronts: paragraphs move to a new page, never shrink."""
 
-    def __init__(self, pdf, first_page, stamp, title='BOZZA DEL SET BASE / GUIDA AL TAVOLO', label='Guida'):
+    def __init__(self, pdf, first_page, stamp, title='SET BASE / GUIDA AL TAVOLO', label='Guida'):
         self.pdf, self.count, self.top, self.stamp, self.first = pdf, first_page, 0, stamp, first_page
         self.title, self.label = title, label
         self.pw, self.ph = A4
@@ -433,33 +442,34 @@ class Guide:
         self.top -= 8.5 * mm
 
 
-# SB-25 (D169 (2)–(3)): the whole rule of each keyword and what every card takes for granted, once, here. Worded from the rules
-# (docs/game-rules.md) and the playground rules (docs/design/set-base/regole-playground.md, d50), which stay the full sources;
-# each paragraph names where it comes from. The approved glossary of SB-25 Fase A gave the words of the definitions.
+# SB-25 (D169 (2)–(3)): the whole rule of each keyword and what every card takes for granted, once, here. Worded from the
+# regulation (docs/game-rules.md), which stays the full source; each paragraph names where it comes from. The approved glossary of
+# SB-25 Fase A gave the words of the definitions. SB-28: the playground rules became regulation 2.0 (D183); the references to them
+# (RP-n) now cite the rules of the regulation that took them in (docs/design/set-base/sb-28/corrispondenza.md).
 KEYWORD_RULES = (
     ('Metà e quarti', 'Metà e quarti si arrotondano sempre per difetto: metà di 15 è 7, un quarto di 10 è 2, una volta e mezza 15 è 22. '
      'Vale per ogni quantità e ogni fattore delle carte e per gli effetti di fine turno; per questo le carte non lo ripetono '
      '(regolamento, R05 e R06; D169).'),
-    ('Mai sotto zero', 'Nessuna risorsa scende sotto zero, [[H]] compresa: chi perde più di quanto ha arriva a 0 (regole del playground, RP-4). '
-     'Un costo si paga solo con quello che hai; un costo in [[H]] che ti porterebbe a 0 o sotto non si paga (RP-2).'),
+    ('Mai sotto zero', 'Nessuna risorsa scende sotto zero, [[H]] compresa: chi perde più di quanto ha arriva a 0 (regolamento, R01 «Pavimento a zero»). '
+     'Un costo si paga solo con quello che hai; un costo in [[H]] che ti porterebbe a 0 o sotto non si paga (regolamento, R03).'),
     ('Chi si muove prima', 'Le mosse si risolvono per gruppi di velocità: prima la priorità più alta, a pari priorità chi ha più [[A]] dopo aver pagato i costi; '
      'dentro un gruppo le mosse sono simultanee. La mossa di chi è a terra all’inizio del suo gruppo si annulla, salvo che sia rivolta a sé '
-     'o a un proprio oggetto (regole del playground, RP-1).'),
+     'o a un proprio oggetto (regolamento, R04).'),
     ('Gioca d’anticipo', '«Gioca d’anticipo: E» vuol dire: se la tua mossa si risolve prima di quella dell’avversario che bersagli, applichi anche E. '
      '«Prima» vuol dire in un gruppo di velocità precedente; nello stesso gruppo non c’è anticipo. Non c’è anticipo se l’avversario non gioca '
      '(nessuna mossa, eliminato, forfait) o se la tua mossa viene annullata; c’è se la sua verrà annullata più tardi, o se è già a terra ma la sua mossa '
-     'è ancora da risolvere. Con più avversari conta solo quello bersagliato (regole del playground, «Gioca d’anticipo»).'),
+     'è ancora da risolvere. Con più avversari conta solo quello bersagliato (regolamento, R07b «Gioca d’anticipo»).'),
     ('Rincara', '«Rincara X (Y a te)»: per ogni volta che hai già giocato questa carta nella partita, +X ai danni all’avversario e +Y a quelli che subisci tu. '
-     'Contano le tue giocate di questa carta, anche quelle annullate, non quelle dell’avversario; il conto è pubblico (regole del playground, «Rincara»).'),
+     'Contano le tue giocate di questa carta, anche quelle annullate, non quelle dell’avversario; il conto è pubblico (regolamento, R07b «Rincara» e R08).'),
     ('Annuncia', '«Annuncia X»: al posto della pesca che segue la tua mossa cerchi nel mazzo una carta di nome X. Con «Annuncia X o Y» scegli tu, quando giochi la carta, '
      'quale cercare fra i nomi che hai ancora nel mazzo; con uno solo la scelta è quella. Se la trovi va in mano, la mostri a tutti, ricevi solo i guadagni '
      '«Se lo trovi» e diventi Vulnerabile, legato a quel nome. Se non la trovi peschi normalmente e ricevi solo i guadagni «Se non lo trovi». '
-     'Dopo ogni ricerca, trovata o no, il mazzo si mischia. La copia trovata resta scoperta finché è in mano (regole del playground, RP-13, RP-14, RP-18, RP-19, RP-24).'),
+     'Dopo ogni ricerca, trovata o no, il mazzo si mischia. La copia trovata resta scoperta finché è in mano (regolamento, R02a e R07b «Annuncia»).'),
     ('Vulnerabile', 'Chi è Vulnerabile subisce una volta e mezza i [[HIT]], i [[CUT]] e i [[POISON]] che subirebbe, anche il veleno di fine turno. '
      'Il gettone è sul giocatore ed è legato al nome della carta trovata: cade dopo tutti gli effetti di fine turno del turno in cui giochi una carta con quel nome, '
      'anche se viene parata o annullata (scartarla non basta). Se a fine turno quel nome non è più né in mano né nel mazzo, il gettone resta per tutto il turno dopo, poi cade. '
      'Più gettoni sono indipendenti e si moltiplicano (due: due volte e un quarto); una carta giocata ne toglie uno solo, il più vecchio. '
-     'Il timer di «Mescolone Micidiale», che toglie tutti gli stati, toglie anche i gettoni Vulnerabile (regole del playground, RP-14…RP-17, RP-20; D171).'),
+     'Il timer di «Mescolone Micidiale», che toglie tutti gli stati, toglie anche i gettoni Vulnerabile (regolamento, R07b «Vulnerabile e gettone»; D171).'),
     ('Stati e durate', 'Uno stato positivo o negativo cambia i danni o le risorse finché dura; più stati si applicano nell’ordine in cui sono arrivati, e ogni carta ne dà uno suo. '
      '«In questo turno» dura fino alla fine del turno, «in questo turno e nel prossimo» anche il turno dopo; senza durata resta. '
      'Un timer conta anche il turno in cui nasce: «alla fine del quinto turno, contando questo» (regolamento, R05 e R06).'),
@@ -471,14 +481,14 @@ KEYWORD_RULES = (
     ('Fine turno', 'A fine turno, per ogni personaggio vivo: con [[T]] sopra 0 subisce [[POISON]] pari a metà della sua [[T]]; con [[L]] sopra 0 perde [[A]] pari a metà della sua [[L]], '
      'poi la sua [[L]] diventa metà più 1; poi scadono i timer e calano le durate degli stati (regolamento, R06).'),
     ('Corazza dell’alcol', 'Chi ha [[L]] sopra 0 subisce i [[HIT]] ridotti di un quarto della sua [[L]], dopo gli stati e mai sotto zero; [[CUT]] e [[POISON]] no. '
-     'Vale anche sui danni che infligge a sé (regole del playground, RP-6).'),
+     'Vale anche sui danni che infligge a sé (regolamento, R05 «Corazza dell’alcol»).'),
 )
 DAMAGE_NAME_IT = dict(HIT='Colpo', CUT='Taglio', POISON='Veleno')  # the names of the glossary of SB-25 Fase A, as in the client
 
 
 def keyword_rules(g):
     g.block('Parole chiave e regole che le carte presuppongono', 12, True)
-    g.block('Il testo breve delle carte non ripete queste regole: valgono per ogni carta. Sono riassunte dal regolamento e dalle regole del playground, che restano le fonti complete.')
+    g.block('Il testo breve delle carte non ripete queste regole: valgono per ogni carta. Sono riassunte dal regolamento, che resta la fonte completa.')
     for title, text in KEYWORD_RULES:
         g.block(title, 10, True, gap=1)
         g.block(text, 9, indent=3 * mm)
@@ -493,11 +503,11 @@ def full_text_entries(selected_ids=None):
 def build_full_texts(pdf, entries, first_page, stamp):
     """SB-25 (D170 (4)): a booklet after the guide, in the same PDF, with the full text («oracle text») of every printed entry."""
     pdf.showPage()
-    g = Guide(pdf, first_page, stamp, 'BOZZA DEL SET BASE / TESTI COMPLETI', 'Testi completi')
+    g = Guide(pdf, first_page, stamp, 'SET BASE / TESTI COMPLETI', 'Testi completi')
     g.page()
     g.block(f'Il testo completo di {len(entries)} voci: preciso, dice anche ciò che il testo breve della carta tace (arrotondamenti, quando si legge una risorsa, '
-            'cosa conta e cosa no, da quando a quando vale). In caso di dubbio prevale sul testo breve. Per le parole chiave rimanda al regolamento e alle regole '
-            'del playground. Generato da docs/design/set-base/testi/testi-completi.json.')
+            'cosa conta e cosa no, da quando a quando vale). In caso di dubbio prevale sul testo breve. Per le parole chiave rimanda al regolamento. '
+            'Generato da docs/design/set-base/testi/testi-completi.json.')
     tipo = {'personaggio': 'personaggio', 'carta': 'carta', 'token': 'token'}
     for binding, v in entries:
         where = f'testi completi {binding}'
@@ -507,13 +517,20 @@ def build_full_texts(pdf, entries, first_page, stamp):
     return g.count
 
 
-def build_guide(pdf, bz, face_by_id, shown_decks, first_page, selected, args_copies, stamp):
-    g = Guide(pdf, first_page, stamp)
+def build_guide(pdf, bz, face_by_id, shown_decks, first_page, selected, args_copies, stamp, source):
+    g = Guide(pdf, first_page, stamp, ('BOZZA DEL SET BASE' if not bz['live'] else bz['set_name'].upper()) + ' / GUIDA AL TAVOLO')
     g.page()
-    g.block('Bozza provvisoria, non normativa', 12, True)
-    g.block(f'Questa stampa è la bozza del {bz["set_name"]} (versione «{bz["set_version"]}») con le regole del playground {bz["rules"]}, dal file bozza.json (SHA-256 {bz["raw_sha256"][:12]}…; l’impronta intera è nel manifest). '
-            'Cambia a ogni revisione della bozza: confronta l’impronta sul piè di ogni carta prima di mescolare stampe diverse.')
-    g.block('Le regole per giocare sono in docs/design/set-base/regole-playground.md (profilo d50) e nel regolamento (docs/game-rules.md), che restano le fonti complete. Questa guida riporta le parole chiave e le regole che il testo delle carte presuppone e non ripete; in fondo alla stampa i «Testi completi» dicono per ogni carta tutto ciò che il testo breve tace. In caso di dubbio prevale il testo completo sul testo breve.')
+    imprint = f'(SHA-256 {bz["raw_sha256"][:12]}…; l’impronta intera è nel manifest)'
+    if bz['live']:
+        g.block(f'{bz["set_label"]}, regolamento {bz["rules"]}', 12, True)
+        g.block(f'Questa stampa è il {bz["set_label"]} della partita viva, dal file del set {source} {imprint}. Confronta l’impronta sul piè di ogni carta prima di mescolare stampe diverse.')
+        g.block(f'Le regole per giocare sono nel regolamento {bz["rules"]} (docs/game-rules.md) e le schede normative delle carte nel documento del set (docs/sets/{bz["set_id"]}.md): restano le fonti complete. '
+                'Questa guida riporta le parole chiave e le regole che il testo delle carte presuppone e non ripete; in fondo alla stampa i «Testi completi» dicono per ogni carta tutto ciò che il testo breve tace. In caso di dubbio prevale il testo completo sul testo breve.')
+    else:
+        g.block('Bozza provvisoria, non normativa', 12, True)
+        g.block(f'Questa stampa è la bozza del {bz["set_name"]} (versione «{bz["set_version"]}») con il regolamento {bz["rules"]}, dal file {source} {imprint}. '
+                'Cambia a ogni revisione della bozza: confronta l’impronta sul piè di ogni carta prima di mescolare stampe diverse.')
+        g.block('Le regole per giocare sono nel regolamento (docs/game-rules.md), che resta la fonte completa. Questa guida riporta le parole chiave e le regole che il testo delle carte presuppone e non ripete; in fondo alla stampa i «Testi completi» dicono per ogni carta tutto ciò che il testo breve tace. In caso di dubbio prevale il testo completo sul testo breve.')
     g.block('Stampa e taglio', 12, True)
     g.block('Solo fronti. Taglia sui segni esterni e inserisci ogni stampa davanti a una carta di supporto nella sleeve. A4 a colori, dimensioni effettive / 100%, senza adattamento. Misura un rettangolo prima di tagliare: deve corrispondere alle dimensioni indicate a fondo foglio.')
     g.pdf.setStrokeColor(INK); g.pdf.line(16 * mm, g.top, 66 * mm, g.top)
@@ -532,7 +549,7 @@ def build_guide(pdf, bz, face_by_id, shown_decks, first_page, selected, args_cop
     for dmg in DAMAGES:
         g.row(dmg, f'{DAMAGE_NAME_IT[dmg]} ({dmg})')
     g.block('Lettura della carta', 12, True)
-    g.block('In alto: tipo di carta e rarità (1, 2 o 3 pallini = comune, non comune, rara; i personaggi sono PROTAGONISTA, P: una rarità descrittiva, senza effetti sul gioco, regolamento 1.14, R07). Sotto il nome: costo, priorità e bersaglio, poi il ruolo e l’eventuale danno nominale. «Bersaglio: come da testo» indica una carta il cui bersaglio è nel testo. Sotto il testo, in corsivo, il flavour: non ha effetti. Il codice in basso è lo slot della bozza e l’identificatore della carta.')
+    g.block('In alto: tipo di carta e rarità (1, 2 o 3 pallini = comune, non comune, rara; i personaggi sono PROTAGONISTA, P: una rarità descrittiva, senza effetti sul gioco, regolamento, R07). Sotto il nome: costo, priorità e bersaglio, poi il ruolo e l’eventuale danno nominale. «Bersaglio: come da testo» indica una carta il cui bersaglio è nel testo. Sotto il testo, in corsivo, il flavour: non ha effetti. Il codice in basso è lo slot della carta nel set e il suo identificatore.')
     for tag, text in (('Personaggio', 'Personaggio: blu, esagono.'), ('Regolare', 'Azione regolare: terracotta, triangolo.'), ('Base', 'Base: petrolio, cerchio.'),
                       ('Legata al personaggio', 'Legata al personaggio: viola, rombo.'), ('Ultima risorsa', 'Ultima risorsa: ocra, triangolo.'), ('Oggetto', 'Oggetto: verde, quadrato.')):
         g.badge(tag, text)
@@ -543,7 +560,7 @@ def build_guide(pdf, bz, face_by_id, shown_decks, first_page, selected, args_cop
                else 'Una copia per carta non è un mazzo: per stampare mazzi completi usa --starter o --all-starters.'))
     for deck in shown_decks:
         name = lambda i: face_by_id[i]['name']
-        g.block(f'{deck["id"]} — {name(deck["character"])}', 10, True, gap=1)
+        g.block(f'{deck["id"]} — {name(deck["character"])}' + (f' (starter {deck["category"]} «{deck["name"]}»)' if deck['category'] else ''), 10, True, gap=1)
         g.block(f'Personaggio e carte fisse: {name(deck["character"])}; base: {name(deck["basic"])}; legate: {"; ".join(name(b) for b in deck["bound"])}; ultima risorsa: {name(deck["last"])}', 9, indent=3 * mm, gap=1)
         nb = ' '  # "2 x name" stays on one line
         g.block('Mazzo: ' + '; '.join(f'{n}{nb}×{nb}' + name(c).replace(' ', nb) for c, n in deck['cards'].items()) + '.', 9, indent=3 * mm)
@@ -552,8 +569,9 @@ def build_guide(pdf, bz, face_by_id, shown_decks, first_page, selected, args_cop
 
 # ------------------------------------------------------------------------------------------------------------------ run
 def run(args, parser):
-    path = args.bozza
-    bz = load_bozza(path)
+    path = args.set_file
+    bz = load_bozza(path, live=args.bozza is None)
+    source = str(path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else path)
     faces = bz['faces']
     by_id = {f['id']: f for f in faces}
     decks = bz['decks']
@@ -576,7 +594,7 @@ def run(args, parser):
     italic_font(args.font_dir)
     overrides = json.loads(args.copies_file.read_text(encoding='utf-8')) if args.copies_file else {}
     if not isinstance(overrides, dict) or set(overrides) - set(by_id):
-        raise ValueError('copies-file deve essere un oggetto con identificatori della bozza')
+        raise ValueError('copies-file deve essere un oggetto con identificatori del file del set')
     if any(type(n) is not int or n < 0 for n in overrides.values()):
         raise ValueError('Le copie devono essere interi non negativi')
     for card, n in overrides.items():
@@ -591,7 +609,8 @@ def run(args, parser):
     if not instances:
         parser.error('Nessuna copia da stampare')
     sha12 = bz['raw_sha256'][:12]
-    stamp = f'BOZZA · {bz["set_label"]} · {bz["rules"]} · {sha12}'
+    stamp = ('' if bz['live'] else 'BOZZA · ') + f'{bz["set_label"]} · reg. {bz["rules"]} · {sha12}'
+    mark = bz['set_label'].upper() if bz['live'] else 'BOZZA PROVVISORIA'
     total = len(faces)
     # Every card is laid out once on a scratch page before anything is published: all the overflows are reported together.
     problems = []
@@ -599,7 +618,7 @@ def run(args, parser):
     for f in faces:
         if quantities[f['id']]:
             try:
-                draw_face(scratch, f, 0, 0, width, height, faces.index(f) + 1, total, stamp)
+                draw_face(scratch, f, 0, 0, width, height, faces.index(f) + 1, total, stamp, mark)
             except ValueError as error:
                 problems.append((f, str(error)))
     if problems:
@@ -609,8 +628,8 @@ def run(args, parser):
     args.output.parent.mkdir(parents=True, exist_ok=True)
     temporary = args.output.with_suffix('.partial.pdf')
     pdf = canvas.Canvas(str(temporary), pagesize=A4, invariant=1)
-    pdf.setTitle(f'Botte Micidiali | bozza {bz["set_label"]} | regole {bz["rules"]} | {sha12}')
-    pdf.setAuthor('Botte Micidiali - generatore catalogo (bozza)')
+    pdf.setTitle(f'Botte Micidiali | {"" if bz["live"] else "bozza "}{bz["set_label"]} | regolamento {bz["rules"]} | {sha12}')
+    pdf.setAuthor('Botte Micidiali - generatore delle carte stampabili')
     per_sheet = cols * rows
     sheet_count = math.ceil(len(instances) / per_sheet)
     left = (pw - cols * width - (cols - 1) * gap) / 2
@@ -620,25 +639,27 @@ def run(args, parser):
         slot = i % per_sheet
         x = left + (slot % cols) * (width + gap)
         y = upper - (slot // cols) * (height + gap) - height
-        draw_face(pdf, f, x, y, width, height, faces.index(f) + 1, total, stamp)
+        draw_face(pdf, f, x, y, width, height, faces.index(f) + 1, total, stamp, mark)
         positions.append(dict(id=f['id'], page=i // per_sheet + 1, rect_mm=[v / mm for v in (x, y, width, height)]))
         if slot == per_sheet - 1 or i == len(instances) - 1:
             pdf.setFillColor(INK); pdf.setFont('Body', 6)
-            pdf.drawCentredString(pw / 2, 4 * mm, f'BOTTE MICIDIALI / BOZZA / {args.width_mm:g} x {args.height_mm:g} mm / A4 - 100% / foglio {i // per_sheet + 1}/{sheet_count}')
+            pdf.drawCentredString(pw / 2, 4 * mm, f'BOTTE MICIDIALI / {"" if bz["live"] else "BOZZA / "}{args.width_mm:g} x {args.height_mm:g} mm / A4 - 100% / foglio {i // per_sheet + 1}/{sheet_count}')
             pdf.showPage()
     by_deck = bool(args.all_starters or args.starter)
     shown = {d['id'] for d in (selected if by_deck else pool)}
-    guide_end = build_guide(pdf, bz, by_id, [d for d in decks if d['id'] in shown], sheet_count, selected if by_deck else [], args.copies, stamp)
+    guide_end = build_guide(pdf, bz, by_id, [d for d in decks if d['id'] in shown], sheet_count, selected if by_deck else [], args.copies, stamp, source)
     entries = full_text_entries({f['id'] for f in instances} if by_deck else None)
     page_count = build_full_texts(pdf, entries, guide_end, stamp)
     pdf.save()
     temporary.replace(args.output)
-    manifest = dict(mode='bozza', set=bz['set_label'], rules_profile=bz['rules'], bozza=dict(path=str(path.relative_to(ROOT) if path.is_relative_to(ROOT) else path), sha256=bz['raw_sha256'], sha256_short=sha12),
+    manifest = dict(mode='set' if bz['live'] else 'bozza', set=bz['set_label'], file_version=bz['file_version'], rules_version=bz['rules'],
+                    set_file=dict(path=source, sha256=bz['raw_sha256'], sha256_short=sha12),
                     catalog_count=len(faces), printed_count=len(instances),
                     selection=dict(mode='decks' if by_deck else 'catalog', decks=[d['id'] for d in selected] if by_deck else [],
                                    all_decks=bool(args.all_decks), multiplier=args.copies, overrides=overrides),
                     card_pages=sheet_count, guide_pages=guide_end - sheet_count, full_text_pages=page_count - guide_end, full_text_entries=len(entries), total_pages=page_count, grid=[cols, rows], trim_mm=[args.width_mm, args.height_mm], minimum_body_pt=9,
+                    decks=[dict(id=d['id'], name=d['name'], category=d['category']) for d in decks],
                     inventory=[dict(id=f['id'], name=f['name'], tag=f['tag'], rarity=f['rarity'], copies=quantities[f['id']]) for f in faces],
                     placements=positions)
-    args.output.with_suffix('.manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding='utf-8')
-    print(f'{args.output}: bozza {bz["set_label"]} ({bz["rules"]}, {sha12}), {len(faces)} voci, {len(instances)} fronti, {sheet_count} fogli carte, {guide_end - sheet_count} pagine di guida, {page_count - guide_end} di testi completi ({len(entries)} voci), {page_count} pagine totali; griglia {cols}x{rows}.')
+    args.output.with_suffix('.manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding='utf-8', newline='\n')
+    print(f'{args.output}: {"" if bz["live"] else "bozza "}{bz["set_label"]} (regolamento {bz["rules"]}, {sha12}), {len(faces)} voci, {len(instances)} fronti, {sheet_count} fogli carte, {guide_end - sheet_count} pagine di guida, {page_count - guide_end} di testi completi ({len(entries)} voci), {page_count} pagine totali; griglia {cols}x{rows}.')

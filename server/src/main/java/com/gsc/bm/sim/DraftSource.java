@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * SB-8: the public face of a set draft for the development server (profile {@code bozza}). {@link Draft} stays package-private
  * and unchanged, as the runner and the bench use it; this class only exposes what the server needs to build players, the
- * collection and the ready decks. Nothing in the live match uses it: without the profile no bean reaches it.
+ * collection and the ready decks. SB-28: the live game reads its set file through this class too ({@code LiveSet}).
  */
 public final class DraftSource {
 
@@ -63,6 +63,19 @@ public final class DraftSource {
     public String exclusiveTo(String binding) { return draft.exclusiveTo(binding); }
 
     public String characterOf(String deck) { return draft.characterOf(deck); }
+
+    /** SB-28: the name of a starter of the set (D182), or null for a test deck. */
+    public String deckName(String deck) { return draft.deckName(deck); }
+
+    /** SB-28: {@code base} or {@code avanzato} for a starter of the set (D182), or null for a test deck. */
+    public String deckCategory(String deck) { return draft.deckCategory(deck); }
+
+    /** SB-28: the starters of the set, the decks with a category, in the file's order. */
+    public List<String> starters() {
+        List<String> out = new ArrayList<>();
+        for (String deck : draft.deckIds()) if (draft.deckCategory(deck) != null) out.add(deck);
+        return Collections.unmodifiableList(out);
+    }
 
     public String basicOf(String deck) { return draft.basicOf(deck); }
 

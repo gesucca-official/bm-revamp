@@ -13,9 +13,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Tunable {
-    /**
-     * SB-16g passo 3 (D84): an optional number may be left out of a draft, which then keeps the live initializer. Every other
-     * tunable must be written in the draft, as before.
-     */
-    boolean optional() default false;
+    // SB-28 (SB-27 list): the optional numbers of SB-16g (D84) left with the poison of ToxicBloodDrain, now always written.
 }

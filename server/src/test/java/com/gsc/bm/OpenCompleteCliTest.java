@@ -48,7 +48,7 @@ class OpenCompleteCliTest extends SqliteContextSupport {
         // R02 1.12 (D20): a deck saved under 1.11, written straight to the repository: listed, refused at the open start.
         savedDecks.save(new UserDecksRecord(user,"i16-old-rules",new UserDecksRecord.UserStoredDeck("bruiser.character.BigBadBruiser",
                 "com.basic.BruiserGrab","com.last.Struggle",List.of("bruiser.character.LittleSmack","bruiser.character.LittleRage"),
-                List.of("com.ShuffleFeet"))));
+                List.of("base.com.ShuffleFeet"))));
         // Only the opponent is fixed. Saved human decks, factories, shuffle and dealing stay real.
         doAnswer(call -> {
             Character bc = new BigBadBruiser();

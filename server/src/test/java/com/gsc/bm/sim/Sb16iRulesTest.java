@@ -202,7 +202,7 @@ class Sb16iRulesTest {
         Move foreign = move(game, "a", "Carica", "SELF");
         foreign.setSearchChoice("t.Riempitivo");
         assertThrows(IllegalMoveException.class, () -> game.submitMove(foreign));
-        Game live = game(Ruleset.LIVE, player("a", 10, lastResort(0, 0), List.of(charge()), deck("X")), idle("b"));
+        Game live = game(Ruleset.LEGACY, player("a", 10, lastResort(0, 0), List.of(charge()), deck("X")), idle("b"));
         Move liveChoice = move(live, "a", "Carica", "SELF");
         liveChoice.setSearchChoice("t.X");
         assertThrows(IllegalMoveException.class, () -> live.submitMove(liveChoice), "no choice with the live rules");
@@ -306,7 +306,7 @@ class Sb16iRulesTest {
     void theKeywordMeansNothingWithTheLiveRules() {
         Player a = player("a", 30, lastResort(0, 0), List.of(ahead(2, 0), filler("Riempitivo")), fillers("Riempitivo", 6));
         Player b = player("b", 10, lastResort(0, 0), List.of(hit("Spinta", 1, 1), filler("Attesa")), fillers("Attesa", 6));
-        Game game = game(Ruleset.LIVE, a, b);
+        Game game = game(Ruleset.LEGACY, a, b);
         turn(game, move(game, "a", "Anticipo", "b"), move(game, "b", "Spinta", "a"));
         assertNull(resolved(game, "a").getAhead());
         assertEquals(497, resource(b, Resource.HEALTH));

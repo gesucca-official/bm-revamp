@@ -1,5 +1,5 @@
 {
- "date": "2026-10-27T19:25:25.502Z",
+ "date": "2026-11-23T17:19:42.725Z",
  "url": "http://127.0.0.1:4320",
  "viewport": {
   "width": 1366,
@@ -24,29 +24,29 @@
   "game1": {
    "a": "Hai perso",
    "b": "Hai vinto",
-   "turnsA": 9,
-   "turnsB": 9,
-   "gameId": "7adf11a95117c80071f8f9235251249b4dfc3dc2998fbf1e906982156c857e7b"
+   "turnsA": 13,
+   "turnsB": 13,
+   "gameId": "ba409b05352daeabaddc6af83168e220bdf01b538159a4d0dc9a791e06a477fc"
   },
   "privacy": {
    "A": {
-    "views": 27,
+    "views": 41,
     "ownHandArray": true,
     "otherHandNumber": true,
     "otherOnlyNames": 2,
     "leaks": 0
    },
    "B": {
-    "views": 26,
+    "views": 39,
     "ownHandArray": true,
     "otherHandNumber": true,
-    "otherOnlyNames": 3,
+    "otherOnlyNames": 2,
     "leaks": 0
    }
   },
   "newGameRepeatsMode": {
-   "firstGame": "7adf11a95117c80071f8f9235251249b4dfc3dc2998fbf1e906982156c857e7b",
-   "secondGame": "27c5b50f8d90093b3d0456666981f0a6c0aa7a503b98693778c3c5f91664c112",
+   "firstGame": "ba409b05352daeabaddc6af83168e220bdf01b538159a4d0dc9a791e06a477fc",
+   "secondGame": "18630919127ebdd1039034ca5972e1fa5bcf92745e7c42edc7113169fd2291f3",
    "queue": "quick/1v1"
   },
   "joinRefusedWhileResumable": {

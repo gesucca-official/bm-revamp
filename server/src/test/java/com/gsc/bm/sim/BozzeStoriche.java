@@ -20,6 +20,13 @@ import java.util.Set;
  *   <li>scrive i numeri che la classe di allora usava quando la bozza li taceva: {@code perPlay} 0 e {@code perPlaySelf} 0 per
  *       «Ultimo Giro», {@code perAlcohol} 1 per «Alla Goccia».</li>
  * </ul>
+ * SB-28, con la pulizia delle otto classi condivise (lista di SB-27): con la stessa regola si toglie {@code alertnessToTarget} a 0 di
+ * «FAI BASTA» e si scrive {@code poison} 0 di «Trascinare nel Tunnel» dove la bozza lo taceva (prima di D84). Le due bozze del Set
+ * Base 0.1 ({@code sb-6a/attuale.json}, {@code sb-10a/listino-base.json}, riconosciute da {@code alertnessToTarget} 10 di «FAI
+ * BASTA») non si possono rappresentare: le quattro carte condivise la cui forma 0.1 è uscita col set
+ * ({@link #CONDIVISE_01}) si leggono come le scrive il file del set vivo, cioè come le gioca ora il catalogo 0.1 dei test
+ * ({@link SimulationCatalog}). Il resto della bozza 0.1 non cambia.
+ * <p>
  * Su una bozza già nella forma definitiva (la 1.7 di oggi) non cambia nulla.
  */
 final class BozzeStoriche {
@@ -29,11 +36,18 @@ final class BozzeStoriche {
     static final Map<String, Set<String>> TOLTI = Map.of(
             "base.pino.GoingBerserk", Set.of("selfHit", "maxDamage"),
             "base.pino.UltimoGiro", Set.of("maxDamage"),
-            "base.com.BeggingMoney", Set.of("alertnessFromTarget"));
+            "base.com.BeggingMoney", Set.of("alertnessFromTarget"),
+            "bruiser.YouStop", Set.of("alertnessToTarget"));
     /** I numeri che la classe di allora usava quando la bozza li taceva, per carta. */
     static final Map<String, Map<String, Integer>> TACIUTI = Map.of(
             "base.pino.GoingBerserk", Map.of("perAlcohol", 1),
-            "base.pino.UltimoGiro", Map.of("perPlay", 0, "perPlaySelf", 0));
+            "base.pino.UltimoGiro", Map.of("perPlay", 0, "perPlaySelf", 0),
+            "junkie.ToxicBloodDrain", Map.of("poison", 0));
+    /** SB-28: le carte condivise la cui forma del Set Base 0.1 è uscita col set; nelle bozze 0.1 prendono costo e numeri del set vivo. */
+    static final Set<String> CONDIVISE_01 = Set.of("bruiser.YouStop", "junkie.ToxicBloodDrain", "bruiser.BreakYourToy",
+            "bruiser.BadEducation");
+    /** Il file del set vivo, da cui le bozze 0.1 prendono le quattro carte condivise. */
+    static final String SET_VIVO = "/sets/base.json";
 
     private BozzeStoriche() { }
 
@@ -51,6 +65,19 @@ final class BozzeStoriche {
     /** Una copia della bozza adattata; la bozza data non cambia. */
     static JsonNode adatta(JsonNode root) {
         JsonNode copy = root.deepCopy();
+        if (setBase01(copy)) {
+            JsonNode live = vivo();
+            for (JsonNode card : copy.path("cards")) {
+                String binding = card.path("binding").asText();
+                if (!CONDIVISE_01.contains(binding)) continue;
+                JsonNode now = null;
+                for (JsonNode c : live.path("cards")) if (c.path("binding").asText().equals(binding)) now = c;
+                if (now == null) throw new IllegalStateException(binding + ": assente dal set vivo");
+                for (String field : new String[] {"cost", "priority", "params"})
+                    if (now.has(field)) ((ObjectNode) card).set(field, now.get(field).deepCopy());
+                    else ((ObjectNode) card).remove(field);
+            }
+        }
         for (JsonNode card : copy.path("cards")) {
             String binding = card.path("binding").asText();
             if (!card.has("params")) continue;
@@ -67,5 +94,22 @@ final class BozzeStoriche {
             });
         }
         return copy;
+    }
+
+    /** Una bozza del Set Base 0.1: «FAI BASTA» con il guadagno di A dello 0.1 (10). */
+    static boolean setBase01(JsonNode draft) {
+        for (JsonNode card : draft.path("cards"))
+            if (card.path("binding").asText().equals("bruiser.YouStop") && card.path("params").path("alertnessToTarget").asInt(0) == 10)
+                return true;
+        return false;
+    }
+
+    private static JsonNode vivo() {
+        try (InputStream input = BozzeStoriche.class.getResourceAsStream(SET_VIVO)) {
+            if (input == null) throw new IllegalStateException(SET_VIVO + ": file assente");
+            return JSON.readTree(input.readAllBytes());
+        } catch (java.io.IOException e) {
+            throw new IllegalStateException(SET_VIVO, e);
+        }
     }
 }

@@ -4,16 +4,13 @@ import os
 import json
 import re
 from pathlib import Path
-import shutil
-import sqlite3
 import subprocess
 import sys
 import tempfile
 import unittest
 from collections import Counter
-from contextlib import closing
 
-from generate import ROOT, load_catalog, starter_decks, select_starters
+from generate import LIVE_SET, ROOT
 import bozza as bozza_mode
 import symbols_pdf
 
@@ -24,112 +21,6 @@ except ImportError:  # the bozza text checks need pypdf (see README)
 
 GENERATE = Path(__file__).with_name('generate.py')
 BOZZA = ROOT/'server/src/test/resources/set-base/bozza.json'
-
-
-class GeneratorIntegrationTest(unittest.TestCase):
-    def test_starter_selection_and_shared_quantities(self):
-        cards, _, _, regular, initial = load_catalog(ROOT/'server/src/main/resources/cards.sqlite', ROOT/'docs/game-rules.md', ROOT/'docs/rules-catalog.json')
-        decks = starter_decks(cards, regular, initial)
-        owners = list(decks)
-        with tempfile.TemporaryDirectory() as directory:
-            d = Path(directory)
-            output = d/'starter.pdf'
-            command = [sys.executable,str(Path(__file__).with_name('generate.py')),'--output',str(output)]
-            for switches, selected in [(['--starter', owners[0].split('.')[-1]], [owners[0]]),
-                                       (['--all-starters'], owners),
-                                       (['--starter', owners[0], '--starter', owners[0], '--copies','2'], [owners[0]]*4)]:
-                result = subprocess.run(command+switches,capture_output=True,text=True)
-                self.assertEqual(result.returncode,0,result.stderr)
-                m=json.loads(output.with_suffix('.manifest.json').read_text(encoding='utf-8'))
-                expected=Counter()
-                for owner in selected: expected.update(decks[owner])
-                self.assertEqual(Counter(c['id'] for c in m['placements']),expected)
-                self.assertTrue(all(not c.get('token') or not expected[c['id']] for c in cards))
-            copies=d/'copies.json'
-            copies.write_text('{"com.tokens.BrokenBeerBottle": 3, "com.last.Struggle": 0}',encoding='utf-8')
-            result=subprocess.run(command+['--all-starters','--copies-file',str(copies)],capture_output=True,text=True)
-            self.assertEqual(result.returncode,0,result.stderr)
-            m=json.loads(output.with_suffix('.manifest.json').read_text(encoding='utf-8'))
-            printed=Counter(c['id'] for c in m['placements'])
-            self.assertEqual(printed['com.tokens.BrokenBeerBottle'],3)
-            self.assertEqual(printed['com.last.Struggle'],0)
-            before=output.read_bytes()
-            result=subprocess.run(command+['--starter','inesistente'],capture_output=True,text=True)
-            self.assertNotEqual(result.returncode,0)
-            self.assertEqual(output.read_bytes(),before)
-            result=subprocess.run(command+['--list-starters'],capture_output=True,text=True)
-            self.assertEqual(result.returncode,0,result.stderr)
-            for owner in owners: self.assertIn(owner,result.stdout)
-            self.assertEqual(output.read_bytes(),before)
-        # Full names resolve too; collisions require the full stable identifier.
-        by_id={c['id']:c for c in cards}
-        self.assertEqual(select_starters([by_id[owners[0]]['name']],decks,cards),[owners[0]])
-        ambiguous=[dict(c) for c in cards]
-        for c in ambiguous:
-            if c['id'] in owners: c['name']='stesso nome'
-        with self.assertRaisesRegex(ValueError,'ambiguo'):
-            select_starters(['stesso nome'],decks,ambiguous)
-
-    def test_catalog_growth_and_missing_rules(self):
-        with tempfile.TemporaryDirectory() as directory:
-            d = Path(directory)
-            db = d/'cards.sqlite'
-            shutil.copyfile(ROOT/'server/src/main/resources/cards.sqlite', db)
-            with closing(sqlite3.connect(db)) as conn:
-                conn.execute("insert into CRD001_GUI(C_REF_CLASS,T_GUI_NAME,T_GUI_DESCRIPTION) select 'com.NewGrab','Nuova carta fixture',T_GUI_DESCRIPTION from CRD001_GUI where C_REF_CLASS='com.Grab'")
-                conn.execute("insert into CRD003_CHARACTERS(C_REF_CLASS,T_GUI_NAME) values ('fixture.NewHero','Nuovo eroe fixture')")
-                conn.execute("insert into DCK001_STARTERS select 'fixture.NewHero',C_CRD_REF_CLASS,N_QTY from DCK001_STARTERS where C_PG_REF_CLASS='bruiser.character.BigBadBruiser'")
-                conn.execute("insert into DCK002_STARTERS_CH select 'fixture.NewHero',T_BASIC_REF_CLASS,T_CH_BOUND_1_REF_CLASS,T_CH_BOUND_2_REF_CLASS,T_LAST_RESORT_REF_CLASS from DCK002_STARTERS_CH where C_PG_REF_CLASS='bruiser.character.BigBadBruiser'")
-                conn.commit()
-            annex = json.loads((ROOT/'docs/rules-catalog.json').read_text(encoding='utf-8'))
-            n = dict(next(c for c in annex['cards'] if c['class']=='com.Grab'))
-            n.update({'class':'com.NewGrab','name':'Nuova carta fixture'})
-            annex['cards'].append(n)
-            annex['characters'].append({'class':'fixture.NewHero','name':'Nuovo eroe fixture','type':'Personaggio'})
-            ap = d/'annex.json'; ap.write_text(json.dumps(annex),encoding='utf-8')
-            # Regulation 1.13: the sheets are in the set document, named like the set of the annex.
-            rules = (ROOT/'docs/sets/base.md').read_text(encoding='utf-8-sig')
-            line = next(line for line in rules.splitlines() if line.startswith('| Grab |'))
-            hero = next(line for line in rules.splitlines() if line.startswith('| BigBadBruiser |'))
-            extended = rules.replace(line,line+'\n'+line.replace('| Grab |','| NewGrab |')).replace(hero,hero+'\n'+hero.replace('BigBadBruiser','NewHero').replace('Spazienzio de la Ucciso','Nuovo eroe fixture'))
-            rp = d/'base.md'; rp.write_text(extended,encoding='utf-8')
-            output = d/'result.pdf'
-            command = [sys.executable,str(Path(__file__).with_name('generate.py')),'--database',str(db),'--annex',str(ap),'--set',str(rp),'--output',str(output)]
-            result = subprocess.run(command,capture_output=True,text=True)
-            self.assertEqual(result.returncode,0,result.stderr)
-            m = json.loads(output.with_suffix('.manifest.json').read_text(encoding='utf-8'))
-            self.assertIn('com.NewGrab',{c['id'] for c in m['inventory']})
-            self.assertEqual(m['catalog_count'],len(annex['cards'])+len(annex['characters'])+len(annex['tokens']))
-            for option in (['--starter','NewHero'],['--all-starters']):
-                result=subprocess.run(command+option,capture_output=True,text=True)
-                self.assertEqual(result.returncode,0,result.stderr)
-                m=json.loads(output.with_suffix('.manifest.json').read_text(encoding='utf-8'))
-                self.assertIn('fixture.NewHero',m['selection']['starters'])
-                self.assertEqual(sum(p['id']=='fixture.NewHero' for p in m['placements']),1)
-            result=subprocess.run(command+['--list-starters'],capture_output=True,text=True)
-            self.assertEqual(result.returncode,0,result.stderr)
-            self.assertIn('fixture.NewHero',result.stdout)
-            # Database-only additions must not be silently omitted or invented.
-            rp.write_text(rules,encoding='utf-8')
-            result = subprocess.run(command,capture_output=True,text=True)
-            self.assertNotEqual(result.returncode,0)
-            self.assertIn('Inventario del set diverso',result.stderr)
-
-    def test_overflow_and_copy_selection(self):
-        with tempfile.TemporaryDirectory() as directory:
-            d = Path(directory)
-            output=d/'result.pdf'
-            command=[sys.executable,str(Path(__file__).with_name('generate.py')),'--output',str(output)]
-            result=subprocess.run(command+['--width-mm','30','--height-mm','40'],capture_output=True,text=True)
-            self.assertNotEqual(result.returncode,0)
-            self.assertFalse(output.exists())
-            copies=d/'copies.json'; copies.write_text('{"com.Grab": 2}',encoding='utf-8')
-            result=subprocess.run(command+['--copies','0','--copies-file',str(copies),'--width-mm','60','--height-mm','85'],capture_output=True,text=True)
-            self.assertEqual(result.returncode,0,result.stderr)
-            m=json.loads(output.with_suffix('.manifest.json').read_text(encoding='utf-8'))
-            self.assertEqual(m['printed_count'],2)
-            self.assertEqual(m['trim_mm'],[60,85])
-            self.assertEqual({c['id'] for c in m['placements']},{'com.Grab'})
 
 
 def run_generate(*arguments):
@@ -171,15 +62,18 @@ class BozzaModeTest(unittest.TestCase):
         self.assertEqual(faces, 124)  # bozza 1.7: 7 characters (rarity P, SB-24) and 117 cards
         self.assertEqual((m['mode'], m['catalog_count'], m['printed_count']), ('bozza', faces, faces))
         self.assertEqual(len(m['placements']), faces)
-        self.assertEqual(m['rules_profile'], 'd50')
-        self.assertEqual(m['bozza']['sha256'], hashlib.sha256(BOZZA.read_bytes()).hexdigest())
+        # SB-28: the playground rules became regulation 2.0 (D183); the print says the regulation, read from docs/game-rules.md.
+        self.assertEqual((m['rules_version'], m['set'], m['file_version']), ('2.0', 'Set Base 1.7', '1.7'))
+        self.assertEqual(m['set_file']['sha256'], hashlib.sha256(BOZZA.read_bytes()).hexdigest())
         text = pdf_text(output)
         self.assertNotIn('[[', text)
         self.assertNotIn(']]', text)
-        # The provisional mark with the short hash is on every front, and the guide points to the playground rules.
-        self.assertGreaterEqual(text.count(m['bozza']['sha256_short']), faces)
-        self.assertIn('regole-playground.md', text)
-        self.assertIn('BOZZA PROVVISORIA', text)
+        # The provisional mark with the short hash is on every front; the guide cites the regulation, no longer the playground rules.
+        self.assertGreaterEqual(text.count(m['set_file']['sha256_short']), faces)
+        self.assertIn('docs/game-rules.md', text)
+        self.assertNotIn('playground', text)
+        self.assertIsNone(re.search(r'RP-[0-9]', text))
+        self.assertGreaterEqual(text.count('BOZZA PROVVISORIA'), faces)
         # SB-25 B2: the characters print their rarity P; the guide has the keyword rules; the booklet the full text of all 125 entries.
         self.assertGreaterEqual(text.count('PROTAGONISTA (P)'), len(self.data['characters']))
         flat = re.sub(r'\s+', '', text)  # pypdf splits the words of a line
@@ -229,6 +123,7 @@ class BozzaModeTest(unittest.TestCase):
         self.assertEqual(self.manifest(output)['printed_count'], 25*len(self.data['decks']))
         self.assertNotEqual(run_generate('--bozza', '--all-decks', '--output', str(output)).returncode, 0)
         self.assertNotEqual(run_generate('--all-decks', '--output', str(output)).returncode, 0)
+        self.assertFalse(output.with_name('botte-micidiali-carte.pdf').exists())
         deck = starters[0]
         copies = self.d/'copies.json'
         copies.write_text(json.dumps({deck['lastResort']: 0, deck['bound'][0]: 3}), encoding='utf-8')
@@ -328,18 +223,42 @@ class BozzaModeTest(unittest.TestCase):
                 for line in bozza_mode.wrap(face['text'], 'Body', 9, 54*mm, face['id']):
                     self.assertLessEqual(bozza_mode._width(line, 'Body', 9), 54*mm + .01, face['id'])
 
-    def test_live_mode_is_not_touched(self):
+    def test_live_mode_prints_the_live_set_file(self):
+        """SB-28: without --bozza the print is the live Set Base 1.0, from the set file the server reads, with regulation 2.0."""
+        live = json.loads(LIVE_SET.read_text(encoding='utf-8'))
         output = self.d/'live.pdf'
         result = run_generate('--output', str(output))
         self.assertEqual(result.returncode, 0, result.stderr)
         m = self.manifest(output)
-        self.assertNotIn('mode', m)
-        self.assertEqual(m['selection']['mode'], 'catalog')
-        self.assertEqual(m['printed_count'], m['catalog_count'])
-        self.assertTrue(all(k in m for k in ('rules_version', 'set', 'sources', 'inventory', 'placements', 'minimum_body_pt')))
+        self.assertEqual((m['mode'], m['set'], m['file_version'], m['rules_version']), ('set', 'Set Base 1.0', '1.7', '2.0'))
+        self.assertEqual(m['set_file'], dict(path='server/src/main/resources/sets/base.json', sha256=hashlib.sha256(LIVE_SET.read_bytes()).hexdigest(),
+                                             sha256_short=hashlib.sha256(LIVE_SET.read_bytes()).hexdigest()[:12]))
+        self.assertEqual((m['catalog_count'], m['printed_count']), (124, 124))
+        self.assertEqual([(d['name'], d['category']) for d in m['decks']],
+                         [('Spazienzio', 'base'), ('Mara', 'base'), ('Celestina', 'avanzato'), ('Piera', 'avanzato'), ('Beppe', 'avanzato')])
         text = pdf_text(output)
+        flat = re.sub(r'\s+', '', text)  # pypdf splits the words of a line
         self.assertNotIn('BOZZA', text)
-        self.assertIn('GUIDA AL TAVOLO', text)
+        self.assertNotIn('playground', text)
+        self.assertIsNone(re.search(r'RP-[0-9]', text))
+        self.assertGreaterEqual(text.count('SET BASE 1.0'), 124)
+        self.assertIn('SETBASE/GUIDAALTAVOLO', flat)
+        self.assertIn('regolamento2.0(docs/game-rules.md)', flat)
+        for card in live['cards']:
+            self.assertIn(re.sub(r'\s+', '', card['gui']['name']), flat, card['binding'])
+        verify = subprocess.run([sys.executable, str(GENERATE.with_name('verify.py')), str(output)], capture_output=True, text=True, encoding='utf-8',
+                                env=dict(os.environ, PYTHONIOENCODING='utf-8'))
+        self.assertEqual(verify.returncode, 0, verify.stderr)
+        # The starters by the name of D182; the decks of a print are the five of the live file.
+        listed = run_generate('--list-starters')
+        self.assertEqual(listed.returncode, 0, listed.stderr)
+        self.assertEqual(len(listed.stdout.splitlines()), 5)
+        self.assertIn('starter avanzato «Celestina»', listed.stdout)
+        output = self.d/'live-mara.pdf'
+        result = run_generate('--starter', 'Mara', '--output', str(output))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.manifest(output)['selection']['decks'], ['starter-mara'])
+        self.assertEqual(self.manifest(output)['printed_count'], 25)
 
 
 class SymbolPortTest(unittest.TestCase):

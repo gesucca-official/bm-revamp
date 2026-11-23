@@ -1,0 +1,493 @@
+{
+  "format": "sb-6b/1",
+  "decks": [
+    {
+      "id": "prova-sergio",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.OhGuardaLa": 2,
+        "base.cesira.Ricatto": 2,
+        "base.cesira.LoSapevo": 1,
+        "base.cesira.ContoSalato": 2,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Malelingue": 1,
+        "bruiser.StunningBlow": 1,
+        "base.com.TartarugaSulMarciapiede": 2,
+        "base.com.Spintone": 1,
+        "base.items.SantinoDellaPortinaia": 1,
+        "base.items.EspressoDelDistributore": 2,
+        "base.com.AcquaInFaccia": 1,
+        "base.cesira.LoRivendo": 2
+      }
+    },
+    {
+      "id": "prova-duccio",
+      "character": "base.character.Rocco",
+      "bound": [
+        "base.rocco.bound.Colpetto",
+        "base.rocco.bound.AlzoLaVoce"
+      ],
+      "lastResort": "base.rocco.NeHoPreseDiPeggio",
+      "cards": {
+        "base.rocco.TeLoSpiegoIo": 2,
+        "base.rocco.Capocciata": 2,
+        "base.rocco.TestaDura": 1,
+        "base.rocco.NoccheSbucciate": 2,
+        "base.rocco.Incassare": 2,
+        "base.rocco.EAllora": 2,
+        "base.com.Spintone": 2,
+        "base.com.SputoDaPosacenere": 2,
+        "base.com.TartarugaSulMarciapiede": 1,
+        "base.com.FasciaturaColFazzolettaccio": 1,
+        "base.items.PaninoDelKebab": 2,
+        "base.items.GhiaccioNelTovagliolo": 1
+      }
+    },
+    {
+      "id": "prova-b1-spazienzio",
+      "character": "bruiser.character.BigBadBruiser",
+      "bound": [
+        "bruiser.character.LittleRage",
+        "bruiser.character.LittleSmack"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.SuperImpact": 2,
+        "bruiser.ExtremelyViolentBlow": 1,
+        "bruiser.Glare": 2,
+        "bruiser.MadeOfStone": 2,
+        "bruiser.YouStop": 2,
+        "base.com.DentiStretti": 1,
+        "com.items.CocktailOnTheGround": 2,
+        "base.items.PosacenereDiVetro": 1,
+        "base.bruiser.TiFaccioSpazio": 1,
+        "bruiser.CantFeelAnything": 2,
+        "bruiser.SickeningBlow": 2,
+        "base.com.CoccioDiBottiglia": 2
+      }
+    },
+    {
+      "id": "prova-b1-mara",
+      "character": "base.character.Mara",
+      "bound": [
+        "base.mara.bound.PassoStretto",
+        "base.mara.bound.CambioMarcia"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.mara.CinghiataDiTraverso": 1,
+        "base.mara.Sgommata": 2,
+        "base.mara.SorpassoInCurva": 2,
+        "base.mara.TraDueParaurti": 2,
+        "base.com.Spintone": 1,
+        "base.com.SputoDaPosacenere": 2,
+        "base.items.EspressoDelDistributore": 2,
+        "base.mara.TiStringoLaCurva": 1,
+        "base.items.GhiaccioNelTovagliolo": 1,
+        "base.com.ManoLesta": 2,
+        "base.com.BeggingMoney": 2,
+        "base.com.SecondoFiato": 2
+      }
+    },
+    {
+      "id": "prova-b1-celestina",
+      "character": "junkie.character.ToxicJunkie",
+      "bound": [
+        "junkie.character.PatheticBlade",
+        "base.tossico.bound.RaschiareIlFondo"
+      ],
+      "lastResort": "junkie.LethalHeroinDose",
+      "cards": {
+        "junkie.MethDrivenRage": 2,
+        "junkie.Cough": 2,
+        "junkie.PervertedMetabolism": 2,
+        "junkie.AmphetamineReflexes": 2,
+        "junkie.ToxicBloodDrain": 1,
+        "com.Grab": 1,
+        "base.com.RincorsaDalMarciapiede": 1,
+        "base.items.PasticcaTrovataSulBancone": 2,
+        "base.items.PaninoDelKebab": 1,
+        "com.items.MarvelousCocktail": 1,
+        "base.tossico.UnAssaggino": 1,
+        "base.com.BeggingMoney": 2,
+        "base.com.SecondoFiato": 2
+      }
+    },
+    {
+      "id": "prova-b1-piera",
+      "character": "base.character.Pino",
+      "bound": [
+        "base.pino.bound.CinqueMinutiEVado",
+        "base.pino.bound.SpallataAlBancone"
+      ],
+      "lastResort": "base.pino.UltimoGiro",
+      "cards": {
+        "base.pino.TestataDaUltimoGiro": 2,
+        "base.pino.GoingBerserk": 2,
+        "base.pino.IlBanconeRegge": 2,
+        "base.pino.OffroIo": 2,
+        "base.pino.RuttoADistanzaSociale": 1,
+        "base.items.AmaroNelBicchiereDiPlastica": 2,
+        "com.items.AnotherRottenBeer": 1,
+        "base.pino.PrimaIlBrindisi": 1,
+        "base.com.DueDitaInGola": 1,
+        "base.items.GrappaDellaCasa": 2,
+        "base.com.ManoLesta": 2,
+        "base.items.MezzaMineraleSgasata": 2
+      }
+    },
+    {
+      "id": "prova-b1-beppe",
+      "character": "base.character.Gigi",
+      "bound": [
+        "base.gigi.bound.UnaStrettaEPassa",
+        "base.gigi.bound.ColpoDiCacciavite"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.BreakYourToy": 2,
+        "base.gigi.ChiaveDaTredici": 2,
+        "base.gigi.ColpoDiChiaveInglese": 2,
+        "base.gigi.SottoIlCofano": 1,
+        "base.gigi.LavoroFattoBene": 1,
+        "com.Steal": 1,
+        "base.items.GuantiDaOfficina": 2,
+        "base.items.CascoDaLavoro": 1,
+        "base.items.EspressoDelDistributore": 1,
+        "base.gigi.UnaStrettaDiProva": 1,
+        "bruiser.SickeningBlow": 2,
+        "bruiser.BadEducation": 2,
+        "base.com.CoccioDiBottiglia": 2
+      }
+    },
+    {
+      "id": "prova-b1-sergio",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.OhGuardaLa": 2,
+        "base.cesira.Ricatto": 2,
+        "base.cesira.LoSapevo": 1,
+        "base.cesira.ContoSalato": 2,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Malelingue": 1,
+        "base.items.EspressoDelDistributore": 2,
+        "base.cesira.LoRivendo": 2,
+        "bruiser.CantFeelAnything": 2,
+        "base.com.ManoLesta": 2,
+        "base.com.BeggingMoney": 2
+      }
+    },
+    {
+      "id": "prova-b1-duccio",
+      "character": "base.character.Rocco",
+      "bound": [
+        "base.rocco.bound.Colpetto",
+        "base.rocco.bound.AlzoLaVoce"
+      ],
+      "lastResort": "base.rocco.NeHoPreseDiPeggio",
+      "cards": {
+        "base.rocco.TeLoSpiegoIo": 1,
+        "base.rocco.Capocciata": 2,
+        "base.rocco.TestaDura": 1,
+        "base.rocco.NoccheSbucciate": 2,
+        "base.rocco.Incassare": 2,
+        "base.rocco.EAllora": 2,
+        "base.com.Spintone": 2,
+        "base.com.SputoDaPosacenere": 2,
+        "base.com.SecondoFiato": 2,
+        "base.com.ManoLesta": 2,
+        "base.items.MezzaMineraleSgasata": 2
+      }
+    },
+    {
+      "id": "prova-b1-equip",
+      "character": "base.character.Gigi",
+      "bound": [
+        "base.gigi.bound.UnaStrettaEPassa",
+        "base.gigi.bound.ColpoDiCacciavite"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.BreakYourToy": 2,
+        "base.gigi.ChiaveDaTredici": 2,
+        "base.gigi.ColpoDiChiaveInglese": 2,
+        "base.gigi.SottoIlCofano": 1,
+        "base.gigi.LavoroFattoBene": 1,
+        "bruiser.SeagullFly": 1,
+        "base.com.Spintone": 1,
+        "base.items.GuantiDaOfficina": 2,
+        "base.items.EspressoDelDistributore": 1,
+        "base.gigi.UnaStrettaDiProva": 1,
+        "base.com.CoccioDiBottiglia": 2,
+        "base.items.PosacenereDiVetro": 2,
+        "bruiser.BadEducation": 2
+      }
+    },
+    {
+      "id": "prova-b1-estasi",
+      "character": "base.character.Gigi",
+      "bound": [
+        "base.gigi.bound.UnaStrettaEPassa",
+        "base.gigi.bound.ColpoDiCacciavite"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.BreakYourToy": 2,
+        "base.gigi.ColpoDiChiaveInglese": 2,
+        "base.gigi.SottoIlCofano": 1,
+        "base.gigi.LavoroFattoBene": 1,
+        "com.Steal": 1,
+        "bruiser.SeagullFly": 1,
+        "base.com.Spintone": 1,
+        "base.items.GuantiDaOfficina": 2,
+        "base.items.GiubbottoDiFintaPelle": 2,
+        "base.items.CascoDaLavoro": 2,
+        "base.com.DueDitaInGola": 1,
+        "base.pino.GoingBerserk": 2,
+        "base.items.GrappaDellaCasa": 2
+      }
+    },
+    {
+      "id": "prova-b2-spazienzio",
+      "character": "bruiser.character.BigBadBruiser",
+      "bound": [
+        "bruiser.character.LittleRage",
+        "bruiser.character.LittleSmack"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.SuperImpact": 2,
+        "bruiser.ExtremelyViolentBlow": 1,
+        "bruiser.Glare": 2,
+        "bruiser.MadeOfStone": 2,
+        "bruiser.YouStop": 2,
+        "base.com.DentiStretti": 1,
+        "base.items.PosacenereDiVetro": 1,
+        "base.bruiser.TiFaccioSpazio": 1,
+        "bruiser.CantFeelAnything": 2,
+        "bruiser.SickeningBlow": 2,
+        "base.com.CoccioDiBottiglia": 2,
+        "base.items.ContoDelTavoloSei": 2
+      }
+    },
+    {
+      "id": "prova-b2-beppe",
+      "character": "base.character.Gigi",
+      "bound": [
+        "base.gigi.bound.UnaStrettaEPassa",
+        "base.gigi.bound.ColpoDiCacciavite"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.BreakYourToy": 2,
+        "base.gigi.ChiaveDaTredici": 2,
+        "base.gigi.ColpoDiChiaveInglese": 2,
+        "base.gigi.SottoIlCofano": 1,
+        "base.gigi.LavoroFattoBene": 1,
+        "com.Steal": 1,
+        "base.items.GuantiDaOfficina": 2,
+        "base.items.CascoDaLavoro": 1,
+        "bruiser.SickeningBlow": 2,
+        "bruiser.BadEducation": 2,
+        "base.com.CoccioDiBottiglia": 2,
+        "base.items.ContoDelTavoloSei": 2
+      }
+    },
+    {
+      "id": "prova-b2-sergio-conto",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.OhGuardaLa": 2,
+        "base.cesira.Ricatto": 2,
+        "base.cesira.LoSapevo": 1,
+        "base.cesira.ContoSalato": 2,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Malelingue": 1,
+        "base.cesira.LoRivendo": 2,
+        "bruiser.CantFeelAnything": 2,
+        "base.com.ManoLesta": 2,
+        "base.com.BeggingMoney": 2,
+        "base.items.ContoDelTavoloSei": 2
+      }
+    },
+    {
+      "id": "prova-b2-sergio-sigaretta",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.OhGuardaLa": 2,
+        "base.cesira.Ricatto": 2,
+        "base.cesira.LoSapevo": 1,
+        "base.cesira.ContoSalato": 2,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Malelingue": 1,
+        "base.cesira.LoRivendo": 2,
+        "bruiser.CantFeelAnything": 2,
+        "base.com.ManoLesta": 2,
+        "base.com.BeggingMoney": 2,
+        "base.items.SigarettaAccesa": 2
+      }
+    },
+    {
+      "id": "prova-b2-celestina",
+      "character": "junkie.character.ToxicJunkie",
+      "bound": [
+        "junkie.character.PatheticBlade",
+        "base.tossico.bound.RaschiareIlFondo"
+      ],
+      "lastResort": "junkie.LethalHeroinDose",
+      "cards": {
+        "junkie.MethDrivenRage": 2,
+        "junkie.Cough": 2,
+        "junkie.PervertedMetabolism": 2,
+        "junkie.AmphetamineReflexes": 2,
+        "junkie.ToxicBloodDrain": 1,
+        "com.Grab": 1,
+        "base.com.RincorsaDalMarciapiede": 1,
+        "base.items.PaninoDelKebab": 1,
+        "com.items.MarvelousCocktail": 1,
+        "base.tossico.UnAssaggino": 1,
+        "base.com.BeggingMoney": 2,
+        "base.com.SecondoFiato": 2,
+        "base.items.SigarettaAccesa": 2
+      }
+    },
+    {
+      "id": "prova-b2-rischio9",
+      "character": "junkie.character.ToxicJunkie",
+      "bound": [
+        "junkie.character.PatheticBlade",
+        "base.tossico.bound.RaschiareIlFondo"
+      ],
+      "lastResort": "junkie.LethalHeroinDose",
+      "cards": {
+        "junkie.MethDrivenRage": 2,
+        "junkie.Cough": 2,
+        "junkie.PervertedMetabolism": 2,
+        "junkie.AmphetamineReflexes": 2,
+        "junkie.ToxicBloodDrain": 1,
+        "com.Grab": 1,
+        "base.com.RincorsaDalMarciapiede": 1,
+        "base.items.PaninoDelKebab": 1,
+        "com.items.MarvelousCocktail": 1,
+        "base.tossico.UnAssaggino": 1,
+        "base.com.SecondoFiato": 2,
+        "base.items.SigarettaAccesa": 2,
+        "base.com.ShuffleFeet": 2
+      }
+    },
+    {
+      "id": "prova-b2-rischio10",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.OhGuardaLa": 2,
+        "base.cesira.Ricatto": 2,
+        "base.cesira.LoSapevo": 1,
+        "base.cesira.ContoSalato": 2,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Malelingue": 1,
+        "base.cesira.LoRivendo": 2,
+        "bruiser.CantFeelAnything": 2,
+        "base.com.ManoLesta": 2,
+        "base.items.ContoDelTavoloSei": 2,
+        "base.com.ShuffleFeet": 2
+      }
+    },
+    {
+      "id": "iso-b2-conto",
+      "character": "bruiser.character.BigBadBruiser",
+      "bound": [
+        "bruiser.character.LittleRage",
+        "bruiser.character.LittleSmack"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.SuperImpact": 2,
+        "bruiser.ExtremelyViolentBlow": 1,
+        "bruiser.Glare": 2,
+        "bruiser.MadeOfStone": 2,
+        "bruiser.YouStop": 2,
+        "bruiser.SeagullFly": 2,
+        "base.com.TartarugaSulMarciapiede": 2,
+        "base.com.MattoneDelCantiere": 1,
+        "bruiser.HealingBlow": 1,
+        "base.com.DentiStretti": 1,
+        "base.items.PosacenereDiVetro": 1,
+        "base.bruiser.TiFaccioSpazio": 1,
+        "base.items.ContoDelTavoloSei": 2
+      }
+    },
+    {
+      "id": "iso-b2-sigaretta",
+      "character": "junkie.character.ToxicJunkie",
+      "bound": [
+        "junkie.character.PatheticBlade",
+        "base.tossico.bound.RaschiareIlFondo"
+      ],
+      "lastResort": "junkie.LethalHeroinDose",
+      "cards": {
+        "junkie.MethDrivenRage": 2,
+        "junkie.Cough": 2,
+        "junkie.PervertedMetabolism": 2,
+        "junkie.AmphetamineReflexes": 2,
+        "junkie.ToxicBloodDrain": 1,
+        "com.Grab": 2,
+        "base.com.RincorsaDalMarciapiede": 1,
+        "com.Steal": 1,
+        "base.com.FasciaturaColFazzolettaccio": 1,
+        "base.items.PaninoDelKebab": 2,
+        "com.items.MarvelousCocktail": 1,
+        "base.tossico.UnAssaggino": 1,
+        "base.items.SigarettaAccesa": 2
+      }
+    },
+    {
+      "id": "iso-b2-sigaretta-sergio",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.OhGuardaLa": 2,
+        "base.cesira.Ricatto": 2,
+        "base.cesira.LoSapevo": 1,
+        "base.cesira.ContoSalato": 2,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Malelingue": 1,
+        "bruiser.StunningBlow": 1,
+        "base.com.TartarugaSulMarciapiede": 2,
+        "base.com.Spintone": 1,
+        "base.items.SantinoDellaPortinaia": 1,
+        "base.com.AcquaInFaccia": 1,
+        "base.cesira.LoRivendo": 2,
+        "base.items.SigarettaAccesa": 2
+      }
+    }
+  ]
+}

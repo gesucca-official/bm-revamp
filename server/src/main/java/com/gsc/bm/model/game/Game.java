@@ -54,10 +54,10 @@ public class Game implements Serializable {
     private final Map<String, Long> moveDeadlines = new LinkedHashMap<>();
     private final Map<String, Long> reconnectDeadlines = new LinkedHashMap<>();
     private String outcomeReason;
-    /** SB-16c: {@link Ruleset#LIVE} (regulation 1.13) unless the profile bozza or the runner choose the playground rules. */
+    /** SB-28: {@link Ruleset#LEGACY} (regulation 1.13) by default, for the tests and measurements before SB-28; the live factory always sets {@link Ruleset#LIVE}. */
     @JsonIgnore
     @ToString.Exclude
-    private Ruleset ruleset = Ruleset.LIVE;
+    private Ruleset ruleset = Ruleset.LEGACY;
     /** SB-16g 2a, playground only: the last id given to a vulnerability token or to a card found by a search (D58, D69). */
     @JsonIgnore
     @ToString.Exclude

@@ -203,21 +203,27 @@ class PotenzaD82Test {
         assertEquals(plainFoe.getResources().get(Resource.HEALTH) - 12, foe.getResources().get(Resource.HEALTH), "12 POISON diretti");
         assertEquals(plainFoe.getResources().get(Resource.TOXICITY), foe.getResources().get(Resource.TOXICITY));
         assertEquals(0, me.getResources().get(Resource.TOXICITY));
-        // The live class keeps its single report line and three printed steps: poison is 0 there (D84).
+        // SB-28 (D181 (3), lista di SB-27): the class starts from the set file's 10 POISON, no longer from the 0 of the Set Base 0.1:
+        // two report lines and four printed steps; 0, read only in the historical drafts, still deals none.
         ToxicBloodDrain live = new ToxicBloodDrain();
         com.gsc.bm.model.Character x = a.character("junkie.character.ToxicJunkie"), y = a.character("base.character.Mara");
         int health = y.getResources().get(Resource.HEALTH);
-        assertEquals(1, live.applyEffectOnTarget(x, y).size());
-        assertEquals(health, y.getResources().get(Resource.HEALTH));
-        assertEquals(3, live.printedEffects().getSteps().size());
+        assertEquals(2, live.applyEffectOnTarget(x, y).size());
+        assertEquals(health - 10, y.getResources().get(Resource.HEALTH));
+        assertEquals(4, live.printedEffects().getSteps().size());
+        ToxicBloodDrain none = (ToxicBloodDrain) noPoison();
+        com.gsc.bm.model.Character z = a.character("base.character.Mara");
+        assertEquals(1, none.applyEffectOnTarget(x, z).size());
+        assertEquals(health, z.getResources().get(Resource.HEALTH));
+        assertEquals(3, none.printedEffects().getSteps().size());
     }
 
-    /** The draft's blood drain without its optional poison: the live value 0 (D84). */
+    /** The draft's blood drain without poison: 0, the value of the drafts written before D84 (SB-28: written, no longer optional). */
     static Card noPoison() {
         try {
             ObjectNode root = a.json().deepCopy();
             for (JsonNode c : root.get("cards"))
-                if (c.get("binding").asText().equals(TRAVASO)) ((ObjectNode) c.get("params")).remove("poison");
+                if (c.get("binding").asText().equals(TRAVASO)) ((ObjectNode) c.get("params")).put("poison", 0);
             return Draft.parse("senza poison", root).card(TRAVASO);
         } catch (Exception e) { throw new IllegalStateException(e); }
     }
@@ -297,8 +303,15 @@ class PotenzaD82Test {
     }
 
     @Test void theLiveToxicBloodDrainHasNoTunablePoisonInItsDraftsUnlessWritten() throws Exception {
-        // Historical drafts without params.poison still load (optional @Tunable, D84); a typo is still refused.
-        Draft.fromClasspath("/sb-6a/attuale.json");
+        // SB-28 (D181 (3), lista di SB-27): poison is no longer optional; a draft without it is refused by the strict loader and read
+        // with poison 0, the value of the class before D84, through the adapter of the historical drafts. A typo is still refused.
+        ObjectNode silent = a.json().deepCopy();
+        for (JsonNode c : silent.get("cards"))
+            if (c.get("binding").asText().equals(TRAVASO)) ((ObjectNode) c.get("params")).remove("poison");
+        IllegalArgumentException missing = assertThrows(IllegalArgumentException.class, () -> Draft.parse("senza poison", silent));
+        assertTrue(missing.getMessage().contains("parametro mancante params.poison"), missing.getMessage());
+        Draft adapted = Draft.parse("senza poison, adattata", BozzeStoriche.adatta(silent));
+        assertEquals(3, ((ToxicBloodDrain) adapted.card(TRAVASO)).printedEffects().getSteps().size());
         ObjectNode root = a.json().deepCopy();
         for (JsonNode c : root.get("cards"))
             if (c.get("binding").asText().equals(TRAVASO)) ((ObjectNode) c.get("params")).put("poisn", 12);

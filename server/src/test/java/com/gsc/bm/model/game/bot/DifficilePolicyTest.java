@@ -210,7 +210,7 @@ class DifficilePolicyTest {
     @Test void liveRulesPassTheHand() {
         BotView d50 = view(seat("me", Map.of(Resource.HEALTH, 25), List.of()), List.of(hit("A", 10, 2, Map.of())), List.of(),
                 seat("foe", Map.of(), List.of()), List.of());
-        BotView live = new BotView(d50.getTurn(), d50.getSelf(), d50.getOpponents(), d50.getLastRound(), Map.of(), Ruleset.LIVE);
+        BotView live = new BotView(d50.getTurn(), d50.getSelf(), d50.getOpponents(), d50.getLastRound(), Map.of(), Ruleset.LEGACY);
         Prefer style = new Prefer("A");
         assertEquals("A", new DifficilePolicy(style, Map.of()).choose(live, live.legalMoves(), new Random(1)).getCard().getName());
         assertEquals(1, style.offered.size());

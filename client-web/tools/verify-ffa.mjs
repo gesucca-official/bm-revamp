@@ -224,7 +224,9 @@ function privacy(me,other,game){
   assert.ok(Array.isArray(v.players[me.user].cardsInHand),`${me.name}: own hand is an array`);
   for(const [id,pl] of Object.entries(v.players))if(id!==me.user)assert.equal(typeof pl.cardsInHand,'number',`${me.name}: ${id}'s hand is only a count`);
   const rest=JSON.parse(JSON.stringify(v));delete rest.resolvedMoves;delete rest.pendingMove;delete rest.timeBasedEffects;
-  for(const pl of Object.values(rest.players))delete pl.character;
+  // SB-28 (D183): regulation 2.0, R08: the copy shown by a successful search is public, and may share its name with a card in
+  // another hand.
+  for(const pl of Object.values(rest.players)){delete pl.character;delete pl.revealed;}
   const text=JSON.stringify(rest);
   for(const n of onlyOther)assert.ok(!text.includes(JSON.stringify(n)),`${me.name}: ${n} (only in ${other.name}'s hand) leaked in a view`);
  }

@@ -298,7 +298,7 @@ class SetBaseDraftTest {
         Listino listino = new Listino(base, new Listino.Params(1, 1, 1, 1), heuristic());
         long onStarters = listino.curves().stream().filter(c -> c.group.equals("tettostarter")).count();
         assertEquals(10, onStarters, "tre bound e due sonde per starter");
-        Listino sb10 = new Listino(Draft.fromClasspath(Listino.BASE), new Listino.Params(1, 1, 1, 1), heuristic());
+        Listino sb10 = new Listino(BozzeStoriche.fromClasspath(Listino.BASE), new Listino.Params(1, 1, 1, 1), heuristic());
         assertTrue(sb10.curves().stream().noneMatch(c -> c.group.equals("tettostarter")), "la base di SB-10a non ha starter nuovi");
     }
 

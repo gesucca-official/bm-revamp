@@ -248,7 +248,7 @@ class LethalAwarePolicyTest {
 
     @Test void theLiveRulesAreUntouched() {
         BotView v = view(seat("me", 25, 30, 0, 0, List.of()), List.of(CINGHIATA, SGOMMATA, PARAURTI, SPINTONE),
-                seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)), Ruleset.LIVE);
+                seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)), Ruleset.LEGACY);
         Record record = run(v, CINGHIATA);
         assertSame(record.offered.size(), v.legalMoves().size());
         assertEquals(all(v), record.names());

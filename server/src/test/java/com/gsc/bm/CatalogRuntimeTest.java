@@ -18,10 +18,13 @@ class CatalogRuntimeTest extends SqliteContextSupport {
     @Autowired CharacterFactoryService characters;
     @Autowired DeckFactoryService decks;
     @TestFactory Stream<DynamicTest> everyCatalogBindingLoads() {
-        assertEquals(37, catalog.count());
+        // SB-28 (D182, D183): the SQLite catalog is the live Set Base 1.0, 117 cards (the 0.1 had 37).
+        assertEquals(117, catalog.count());
         return catalog.findAll().stream().map(row -> DynamicTest.dynamicTest(row.getClazz(), () -> {
             var card = cards.craftCard(row.getClazz());
-            assertNotNull(card.getName()); assertNotNull(row.getGuiImage());
+            assertNotNull(card.getName());
+            // SB-28: the generated live catalog has no images (SB-26); the card carries the catalog's fallback.
+            assertNull(row.getGuiImage()); assertEquals("no-img.png", ((com.gsc.bm.model.cards.AbstractCard) card).getImage());
             assertNotNull(card.getEffect());
             assertNotSame(card, cards.craftCard(row.getClazz()));
             // R07a descriptive role and gains travel from SQLite to the card JSON.

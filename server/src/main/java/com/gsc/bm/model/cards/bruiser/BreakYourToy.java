@@ -19,7 +19,7 @@ public class BreakYourToy extends AbstractCard {
     public BreakYourToy() {
         super();
         setCanTarget(Set.of(CardTarget.FAR_ITEM));
-        setCost(Map.of(Resource.VIOLENCE, 10));
+        setCost(Map.of(Resource.VIOLENCE, 5));
     }
 
     @Override

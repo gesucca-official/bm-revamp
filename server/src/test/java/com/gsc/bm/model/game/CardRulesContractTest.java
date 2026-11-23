@@ -36,13 +36,14 @@ class CardRulesContractTest {
             assertEquals(fields[2].equals("Ultima risorsa"), card.isLastResort());
             if (fields[2].equals("Token")) {
                 assertTrue(card.isItem());
-                assertEquals("Broken Beer Bottle", card.getName());
+                assertEquals("Bottiglia Spaccata", card.getName(), "D168 (4), SB-28: the name of the set's sheet");
             }
         }));
     }
 
-    /** R07a roles are descriptive: the token declares its own, catalog cards receive the SQLite columns unchanged. */
-    @Test void r07a_rolesReachTheCards() throws IOException {
+    /** R07a roles are descriptive: the token declares its own, catalog cards receive the set file's columns unchanged (SB-28: the
+     *  live cards come from the set file, D183; ORMALE GUARIAMOTI keeps the same role and damage in the Set Base 1.0). */
+    @Test void r07a_rolesReachTheCards() throws Exception {
         Map<String, String[]> roles = new LinkedHashMap<>();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(
                 Objects.requireNonNull(getClass().getResourceAsStream("/rules-card-roles.tsv")), StandardCharsets.UTF_8))) {
@@ -56,16 +57,7 @@ class CardRulesContractTest {
         assertEquals("—", token.getDamage(), "the conversion is not the token's own damage (R07a 1.9)");
         assertEquals(roles.get("com.tokens.BrokenBeerBottle")[4], token.getDamageAmount());
         assertEquals("—", token.getDamageAmount());
-        var repo = org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardsGuiRepository.class);
-        var record = org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardsGuiRecord.class);
-        org.mockito.Mockito.when(repo.findById("bruiser.HealingBlow")).thenReturn(Optional.of(record));
-        org.mockito.Mockito.when(record.getGuiName()).thenReturn("ORMALE GUARIAMOTI");
-        org.mockito.Mockito.when(record.getGuiDescription()).thenReturn("");
-        org.mockito.Mockito.when(record.getGuiRole()).thenReturn(roles.get("bruiser.HealingBlow")[1]);
-        org.mockito.Mockito.when(record.getGuiGains()).thenReturn(roles.get("bruiser.HealingBlow")[2]);
-        org.mockito.Mockito.when(record.getGuiDamage()).thenReturn(roles.get("bruiser.HealingBlow")[3]);
-        org.mockito.Mockito.when(record.getGuiDamageAmount()).thenReturn(roles.get("bruiser.HealingBlow")[4]);
-        var factory = new com.gsc.bm.service.factories.CardFactoryServiceImpl(repo,
+        var factory = new com.gsc.bm.service.factories.CardFactoryServiceImpl(new com.gsc.bm.service.catalog.LiveSet(),
                 org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardKeywordsRepository.class));
         var blow = (com.gsc.bm.model.cards.AbstractCard) factory.craftCard("bruiser.HealingBlow");
         assertEquals("DAMAGE", blow.getRole());

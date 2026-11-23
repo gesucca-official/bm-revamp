@@ -485,7 +485,7 @@ class VulnerabilitaD69Test {
     @Test
     void withTheLiveRulesNothingChanges() {
         Player a = player("a", aHand(charge()), withStrikeOnTop(8));
-        Game game = game(Ruleset.LIVE, a, puncher());
+        Game game = game(Ruleset.LEGACY, a, puncher());
         assertEquals(10, turn(game, "Carica"));
         assertTrue(a.getCharacter().getStatuses().isEmpty());
         assertTrue(a.getRevealed().isEmpty());

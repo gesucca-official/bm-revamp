@@ -61,10 +61,11 @@ class QuickDuelCliTest extends SqliteContextSupport {
             List<Card> regular=new ArrayList<>();
             if(scenario.equals("complete") && suffix.equals("A")) regular.add(cards.craftCard("bruiser.MadeOfStone"));
             if(scenario.equals("complete") && suffix.equals("B")) {
-                for(int n=0;n<20;n++) regular.add(cards.craftCard("com.ShuffleFeet"));
+                for(int n=0;n<20;n++) regular.add(cards.craftCard("base.com.ShuffleFeet"));
             }
+            // SB-28: the Junkie starter of the Set Base 1.0 has its own last resort; the fixture keeps the generic Struggle («Addosso!!!»).
             var fixture=new Player(user,character,decks.craftBasicActionStarterCard(character),List.of(),
-                decks.craftLastResortStarterCard(character),regular);
+                cards.craftCard("com.last.Struggle"),regular);
             doAnswer(i -> (Player) org.springframework.util.SerializationUtils.deserialize(
                 org.springframework.util.SerializationUtils.serialize(fixture))).when(players).craftRandomPlayer(user);
         }

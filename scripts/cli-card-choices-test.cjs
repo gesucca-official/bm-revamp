@@ -27,10 +27,12 @@ const clients = ['cliCardsA','cliCardsB'].map(user => new Client(process.env.BM_
     await b.command({command:'move',move:rounds[i][1]});
     await a.wait('/topic/game/'+id+'/update',mark);
     const state=(await a.command({command:'view',gameId:id})).data;
+    // SB-28 (D182): the cards of the Set Base 1.0. «Desiderio Incontrollabile» gives +5 T and no longer costs half of A;
+    // «Svegliamoci - Ma Tu No» deals 2 HIT and no longer gives +5 A. The fixture builds the Game by hand (engine rules 1.13).
     assert.strictEqual(state.players.cliCardsA.character.resources.HEALTH,[100,100,80][i]);
-    assert.strictEqual(state.players.cliCardsB.character.resources.HEALTH,[100,95,78][i]);
-    assert.strictEqual(state.players.cliCardsA.character.resources.ALERTNESS,[10,15,15][i]);
-    assert.strictEqual(state.players.cliCardsB.character.resources.ALERTNESS,[13,5,5][i]); // final ALCOHOL=1: integer 1/2=0
+    assert.strictEqual(state.players.cliCardsB.character.resources.HEALTH,[100,98,81][i]);
+    assert.strictEqual(state.players.cliCardsA.character.resources.ALERTNESS,[10,10,10][i]);
+    assert.strictEqual(state.players.cliCardsB.character.resources.ALERTNESS,[30,28,28][i]); // final ALCOHOL=1: integer 1/2=0
   }
   console.log('CLI card choices: three rounds and recoverable item/discard errors passed');
 })().catch(error => {console.error(error.stack); process.exitCode=1;})

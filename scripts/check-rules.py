@@ -1,14 +1,19 @@
 """Read-only checks: published rules, set documents and catalog must match the reviewed baseline.
 
 Regulation 1.13 (SB-2): the regulation (docs/game-rules.md) holds the general rules and the cards live in the set
-documents (docs/sets/<id>.md), with their own version. The set annex (docs/rules-catalog.json) and the SQLite catalog
-must agree with the set document. `--root DIR` checks another copy of the repository, so a mismatch can be tried on a
-temporary copy without touching the tracked files.
+documents (docs/sets/<id>.md), with their own version. `--root DIR` checks another copy of the repository, so a mismatch can be
+tried on a temporary copy without touching the tracked files.
 
-SB-26 (D175): `--candidate [DIR]` also checks a catalog generated from a set file by tools/set-catalog/set_catalog.py
-(default server/src/test/resources/set-base/catalogo; the folder's manifest names the set files): one or more set documents,
-their annexes, the SQLite catalog and the debug-client copies. The sheet (full text) and the short text are two fields,
-checked separately: the sheet against the set document, the short text against its generator.
+SB-28 (regulation 2.0, Set Base 1.0): the live catalog is generated from the set file by
+`tools/set-catalog/set_catalog.py --vivo` (manifest docs/sets/manifest.json): the set document and its debug-client copy, the
+annex (docs/rules-catalog.json), the SQLite catalog, the live set file and the test decks apart. It is checked as SB-26 checked the
+candidate: the sheet (full text) and the short text are two fields, the sheet against the set document, the short text against
+its generator, and every file must be what the generator writes now. The checks of the Set Base 0.1 (R07 tables, test contracts
+against the document, nominal damage read from the Java sources) left with that set, archived in docs/history/set-base-0.1.md.
+
+SB-26 (D175): `--candidate DIR` also checks a catalog of trial generated with `set_catalog.py --out DIR` (the folder's manifest
+names the set files), for example with an expansion: one or more set documents, their annexes, the SQLite catalog and the
+debug-client copies.
 """
 from pathlib import Path
 import hashlib
@@ -22,7 +27,9 @@ root = Path(sys.argv[sys.argv.index('--root') + 1]).resolve() if '--root' in sys
 canonical = root / 'docs/game-rules.md'
 rules_text = canonical.read_text(encoding='utf-8-sig')
 assert rules_text == (root / 'client-debug/src/assets/docs/rules.md').read_text(encoding='utf-8-sig'), 'Client rules differ'
-assert re.search(r'^Versione \*\*[0-9.]+ —', rules_text, re.M), 'Missing regulation version'
+rules_version = re.search(r'^Versione \*\*([0-9.]+) —', rules_text, re.M)
+assert rules_version, 'Missing regulation version'
+rules_version = rules_version.group(1)
 # Set documents (R00, R07): one per set, identical client copies. There is exactly one set until a second set document is
 # published (SB-26, SB-28): the SB-6b mini-expansion is a test resource without a document.
 set_docs = sorted((root / 'docs/sets').glob('*.md'))
@@ -42,7 +49,10 @@ assert expected.get('set') == set_id, 'Annex set ' + str(expected.get('set')) + 
 assert expected['version'] == set_version, 'Annex version ' + expected['version'] + ' differs from the set document ' + set_version
 # The regulation cites no card before its revision history (SB-2): card-specific text belongs to the set document.
 general = rules_text.split('\n## Revisioni\n', 1)[0]
-for entry in expected['cards'] + expected['characters'] + expected['tokens'] + [{'class': 'bitch.SoberUp'}]:
+# SB-28: the set document says which regulation it requires (R00), the published one.
+required = re.search(r'^Versione \*\*[0-9.]+ —[^\n]* Richiede il regolamento ([0-9.]+)\.$', set_text, re.M)
+assert required and required.group(1) == rules_version, 'The set document must require the published regulation ' + rules_version
+for entry in expected['cards'] + expected['characters'] + expected['tokens']:
     name = entry['class'].split('.')[-1]
     assert not re.search(r'\b' + name + r'\b', general), 'The regulation cites the card ' + name + ': it belongs to the set document'
 # R07 1.14 (SB-24, P added): the rarity vocabulary is read from the regulation; the playground loader (SB-6b) must use the same values.
@@ -57,239 +67,15 @@ loader_rarities = re.search(r'static final List<String> RARITIES = List\.of\(([^
 assert loader_rarities, 'Draft.java: RARITIES not found'
 assert re.findall(r'"([A-Z]+)"', loader_rarities.group(1)) == rarity_vocabulary, \
     'Draft.java RARITIES differ from R07: ' + loader_rarities.group(1) + ' vs ' + ', '.join(rarity_vocabulary)
-rows = {}
-section = set_text.split('\n## S2 — ', 1)[1].split('\n## S5 — ', 1)[0]
-role_section = set_text.split('\n## S5 — ', 1)[1].split('\n## Revisioni', 1)[0]
-reference = '. Riferimento: ' + set_title + ' ' + set_version + '.'
-table_width = None
-for line in section.splitlines():
-    if line.startswith('|'):
-        fields = [part.strip() for part in line.strip('|').split('|')]
-        if table_width is None:
-            table_width = len(fields)
-        assert len(fields) == table_width, 'Inconsistent R07 table columns: ' + line
-        if line.startswith('| '):
-            rows[fields[0]] = fields
-    else:
-        table_width = None
+NONE = '\u2014'
 cost_names = {'V': 'VIOLENCE', 'A': 'ALERTNESS', 'T': 'TOXICITY', 'L': 'ALCOHOL', 'H': 'HEALTH'}  # H: costs in HEALTH (D27)
-target_names = {'Sé': 'SELF', 'Avversario': 'OPPONENT', 'Oggetto vicino': 'NEAR_ITEM', 'Oggetto lontano': 'FAR_ITEM'}
-contracts = []
-missing = [e['class'] for e in expected['cards'] + expected['characters'] + expected['tokens'] if e['class'].split('.')[-1] not in rows]
-assert not missing, 'Cards of the annex without a sheet in the set document: ' + ', '.join(missing)
-for card in expected['cards']:
-    row = rows[card['class'].split('.')[-1]]
-    assert row[1:3] == [card['type'], card['subtype']], card['class'] + ': classification differs from R07'
-    # SB-26 (D175 (4)): sheet and short text are two fields. In the set 0.1 the short text is the sheet followed by the
-    # reference to the set document, so the sheet of the annex is the description without it.
-    assert card['description'].endswith(reference), card['class'] + ': short text without the reference ' + reference.strip()
-    assert card['description'][:-len(reference)] == row[-1], card['class'] + ': sheet differs from the set document'
-    if card['type'] == 'Azione':
-        assert len(row) == 7
-        costs = '' if row[3] == '—' else ','.join(cost_names[v.split()[1]] + '=' + v.split()[0] for v in row[3].split(' + '))
-        contracts.append('\t'.join([card['class'], row[4].replace('−', '-'), target_names[row[5]], costs]))
-assert '\n'.join(contracts) + '\n' == (root / 'server/src/test/resources/rules-v1-cards.tsv').read_text(encoding='utf-8'), 'Test contract differs from R07'
-for character in expected['characters']:
-    row = rows[character['class'].split('.')[-1]]
-    assert row[1:3] == [character['type'], character['name']], 'Character missing or misclassified in R07'
-for token in expected['tokens']:
-    assert rows[token['class'].split('.')[-1]][1:3] == [token['type'], token['subtype']], 'Token classification differs'
-entries = expected['cards'] + expected['characters'] + expected['tokens']
-# R07a: descriptive role and self gains, one row per set entry; no effect depends on them.
+# R07a: descriptive roles, defined by the regulation; the set document lists one per card.
 role_names = {'DAMAGE', 'DEFENSE', 'RESOURCES', 'COUNTER', 'DISRUPT', 'ITEMS', 'OTHER'}
 regulation_roles = rules_text.split('## R07a — ', 1)[1].split('### Danno nominale', 1)[0]
 assert {m.group(1) for m in re.finditer(r'^\| ([A-Z]+) \| ', regulation_roles, re.M)} == role_names, 'R07a role definitions differ'
-roles = {}
-for line in role_section.split('### Danno nominale', 1)[0].splitlines():
-    fields = [part.strip() for part in line.strip('|').split('|')]
-    if line.startswith('| ') and len(fields) == 3 and fields[0] != 'Carta':
-        roles[fields[0]] = fields[1:]
-assert list(roles) == [row for row in rows if row in {e['class'].split('.')[-1] for e in entries}], 'R07a must list the R07 set in order'
-for entry in entries:
-    role, gains = roles[entry['class'].split('.')[-1]]
-    if entry['type'] == 'Personaggio':
-        assert [role, gains] == ['—', '—'] and 'role' not in entry, entry['class'] + ': characters have no role'
-    else:
-        assert role in role_names, entry['class'] + ': unknown role ' + role
-        assert [entry['role'], entry['gains']] == [role, gains], entry['class'] + ': role or gains differ from R07a'
-# R07a 1.9 / 1.10: nominal damage type and amount, also descriptive. Both are checked against the Damage each card's
-# code builds: the target damages are read from the source text (a fixed amount literally, a variable one through its
-# declared formula) and compared with the R07a table, the annex, SQLite and the test contract.
-NONE = '\u2014'
-damage_names = ['HIT', 'CUT', 'POISON']
-damages = {}
-for line in role_section.split('### Danno nominale', 1)[1].splitlines():
-    fields = [part.strip() for part in line.strip('|').split('|')]
-    if line.startswith('| ') and len(fields) == 3 and fields[0] != 'Carta':
-        damages[fields[0]] = fields[1:]
-assert list(damages) == list(roles), 'R07a damage table must list the R07 set in order'
-# Delayed timer damage is excluded by R07a by name; variable amounts are written with x and declared with their formula.
-excluded_by_rules = {'com.items.MarvelousCocktail': {'POISON'}}
-variable_formulas = {'20+x': '20+(self.getResources().get(Resource.VIOLENCE)/2)'}
-
-
-def scan_call(code, open_index):
-    """Text between the parenthesis at open_index and its match."""
-    depth = 0
-    for i in range(open_index, len(code)):
-        depth += {'(': 1, ')': -1}.get(code[i], 0)
-        if depth == 0:
-            return code[open_index + 1:i]
-    raise AssertionError('unbalanced parenthesis')
-
-
-def code_damages(entry):
-    """[(type, amount expression, recipient, file:line)] of each Damage the card's class builds."""
-    path = root / 'server/src/main/java/com/gsc/bm/model/cards' / (entry['class'].replace('.', '/') + '.java')
-    code = path.read_text(encoding='utf-8')
-    found = []
-    for m in re.finditer(r'new Damage\(', code):
-        inner = scan_call(code, m.end() - 1)
-        kind, amount = [part.strip() for part in inner.split(',', 1)]
-        assert kind.startswith('Damage.DamageType.'), entry['class'] + ': unreadable damage type ' + kind
-        before = code[:m.start()]
-        recipient = re.search(r'\.inflictDamage\(\s*(\w+)\s*,\s*$', before)
-        if recipient:
-            who = recipient.group(1)
-        else:
-            assert re.search(r'\.takeDamage\(\s*$', before), entry['class'] + ': Damage built outside inflictDamage/takeDamage'
-            who = 'timer'
-        amount = re.sub(r'\s+', '', amount)
-        if re.fullmatch(r'[A-Za-z_]\w*', amount):
-            # SB-6a: a @Tunable field holds the number; its initializer is the value of the live game.
-            tunable = re.findall(r'@Tunable(?:\(optional\s*=\s*true\))?\s+private\s+int\s+' + amount + r'\s*=\s*(\d+)\s*;', code)
-            assert len(tunable) == 1, entry['class'] + ': damage amount ' + amount + ' is neither a number nor a @Tunable int field'
-            amount = tunable[0]
-            if amount == '0':
-                # SB-16g passo 3 (D84): a tunable worth 0 in the live game deals no damage there (playground-only number).
-                continue
-        found.append((kind.rsplit('.', 1)[1], amount, who,
-                      path.relative_to(root).as_posix() + ':' + str(code.count('\n', 0, m.start()) + 1)))
-    return found
-
-
-def amount_from_code(entry):
-    """Nominal amount written from the code (target damages only, HIT, CUT, POISON order) and its source lines."""
-    per_type, lines = {}, []
-    for kind, amount, who, where in code_damages(entry):
-        if who == 'timer':
-            assert kind in excluded_by_rules.get(entry['class'], set()), entry['class'] + ': undeclared timer damage ' + kind
-            continue
-        if who != 'target':
-            assert who == 'self', entry['class'] + ': damage to an unknown recipient ' + who
-            continue
-        per_type.setdefault(kind, []).append(amount)
-        lines.append(where)
-    parts = []
-    for kind in damage_names:
-        if kind not in per_type:
-            continue
-        amounts = per_type[kind]
-        if all(a.isdigit() for a in amounts):
-            parts.append(kind + ' ' + str(sum(int(a) for a in amounts)))
-        else:
-            assert len(amounts) == 1, entry['class'] + ': several amounts with a variable one'
-            wanted = [x for x, formula in variable_formulas.items() if formula == amounts[0]]
-            assert wanted, entry['class'] + ': variable damage formula not declared: ' + amounts[0]
-            parts.append(kind + ' ' + wanted[0])
-    return (', '.join(parts) or NONE), lines
-
-
-for entry in entries:
-    name = entry['class'].split('.')[-1]
-    damage, amount = damages[name]
-    if entry['type'] == 'Personaggio':
-        assert [damage, amount] == [NONE, NONE] and 'damage' not in entry and 'damageAmount' not in entry, entry['class'] + ': characters have no damage'
-        continue
-    kinds = [] if damage == NONE else damage.split(', ')
-    assert kinds == [k for k in damage_names if k in kinds], entry['class'] + ': unknown, repeated or unordered damage ' + damage
-    assert entry['damage'] == damage, entry['class'] + ': damage differs from R07a'
-    assert entry['damageAmount'] == amount, entry['class'] + ': damage amount differs from R07a'
-    parts = [] if amount == NONE else amount.split(', ')
-    assert len(parts) == len(kinds) and all(re.fullmatch(k + r' (\d+|\d+\+x)', a) for k, a in zip(kinds, parts)), entry['class'] + ': malformed damage amount ' + amount
-    built, _ = amount_from_code(entry)
-    assert built == amount, entry['class'] + ': R07a damage amount ' + amount + ' differs from code ' + built
-    if entry['type'] == 'Azione':
-        for part in parts:
-            kind, number = part.split(' ')
-            shown = kind + ' pari a 20 + V residua/2' if number.endswith('+x') else number + ' ' + kind
-            assert shown in rows[name][-1], entry['class'] + ': R07 effect text does not show ' + part
-if '--sources' in sys.argv:
-    print('| Carta | Tipo | Importo | Codice |\n|---|---|---|---|')
-    for entry in entries:
-        if entry['type'] != 'Personaggio':
-            _, lines = amount_from_code(entry)
-            print('| ' + entry['class'].split('.')[-1] + ' | ' + entry['damage'] + ' | ' + entry['damageAmount'] + ' | ' + (', '.join(lines) or NONE) + ' |')
-roles_contract = ['\t'.join([e['class'], e['role'], e['gains'], e['damage'], e['damageAmount']]) for e in expected['cards'] + expected['tokens']]
-assert '\n'.join(roles_contract) + '\n' == (root / 'server/src/test/resources/rules-card-roles.tsv').read_text(encoding='utf-8'), 'Role test contract differs from R07a'
-types = ['\t'.join([entry['class'], entry['type'], entry.get('subtype', '—')]) for entry in entries]
-assert '\n'.join(types) + '\n' == (root / 'server/src/test/resources/rules-card-types.tsv').read_text(encoding='utf-8'), 'Type test contract differs'
-assert len(expected['cards']) == 37 and len(expected['characters']) == 2 and len(expected['tokens']) == 1, 'Set inventory differs'
-# R02 1.12: deck rules. A basic or a last resort may be reserved to one character (`exclusiveTo`, absent = generic); every
-# character has exactly one basic, reserved to it; a bound belongs to the character named in its class constructor. Both
-# starters must satisfy the deck rules: 20 regular cards, at most 2 copies, own basic, two different own bound cards.
-by_class = {card['class']: card for card in expected['cards']}
-character_classes = {c['class'] for c in expected['characters']}
-def bound_owner(binding):
-    code = (root / 'server/src/main/java/com/gsc/bm/model/cards' / (binding.replace('.', '/') + '.java')).read_text(encoding='utf-8')
-    found = re.search(r'super\((\w+)\.class\)', code)
-    owners = [c for c in character_classes if found and c.split('.')[-1] == found.group(1)]
-    assert len(owners) == 1, binding + ': bound without a catalog character in its constructor'
-    return owners[0]
-for card in expected['cards']:
-    if 'exclusiveTo' in card:
-        assert card['subtype'] in ('Base', 'Ultima risorsa'), card['class'] + ': only a basic or a last resort is reserved to a character'
-        assert card['exclusiveTo'] in character_classes, card['class'] + ': reserved to an unknown character'
-    if card.get('subtype') == 'Base':
-        assert 'exclusiveTo' in card, card['class'] + ': a basic is the fixed basic of one character'
-for character in sorted(character_classes):
-    assert len([c for c in expected['cards'] if c.get('subtype') == 'Base' and c.get('exclusiveTo') == character]) == 1, character + ': exactly one basic'
-assert sorted(row[0] for row in expected['initialCards']) == sorted(character_classes), 'One starter per character'
-for character, basic, bound1, bound2, last in expected['initialCards']:
-    regular = [(binding, qty) for owner, binding, qty in expected['starters'] if owner == character]
-    assert sum(qty for _, qty in regular) == 20, character + ': the starter must have exactly 20 regular cards'
-    assert all(1 <= qty <= 2 for _, qty in regular), character + ': at most 2 copies per card'
-    assert all(by_class[b]['subtype'] in ('Regolare', '—') for b, _ in regular), character + ': only regular cards and items in the deck'
-    assert by_class[basic]['subtype'] == 'Base' and by_class[basic].get('exclusiveTo') == character, character + ': basic of another character'
-    assert bound1 != bound2, character + ': the two bound cards must differ'
-    for bound in (bound1, bound2):
-        assert by_class[bound]['subtype'] == 'Legata al personaggio' and bound_owner(bound) == character, character + ': bound of another character ' + bound
-    assert by_class[last]['subtype'] == 'Ultima risorsa' and by_class[last].get('exclusiveTo', character) == character, character + ': last resort reserved to another character'
-with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() + '?mode=ro', uri=True) as db:
-    actual = [{'class': r[0], 'name': r[1], 'description': r[2], 'role': r[3], 'gains': r[4], 'damage': r[5], 'damageAmount': r[6]} for r in db.execute(
-        'select C_REF_CLASS,T_GUI_NAME,T_GUI_DESCRIPTION,T_GUI_ROLE,T_GUI_GAINS,T_GUI_DAMAGE,T_GUI_DAMAGE_AMOUNT from CRD001_GUI order by C_REF_CLASS')]
-    assert actual == [{key: card[key] for key in ('class', 'name', 'description', 'role', 'gains', 'damage', 'damageAmount')} for card in expected['cards']], 'Card catalog differs from regulation annex'
-    reserved = [list(r) for r in db.execute('select C_REF_CLASS,C_EXCLUSIVE_TO from CRD001_GUI order by C_REF_CLASS')]
-    assert reserved == [[card['class'], card.get('exclusiveTo')] for card in expected['cards']], 'Reserved cards (R02 1.12) differ from regulation annex'
-    characters = [{'class': r[0], 'name': r[1], 'type': 'Personaggio'} for r in db.execute(
-        'select C_REF_CLASS,T_GUI_NAME from CRD003_CHARACTERS order by C_REF_CLASS')]
-    assert characters == expected['characters'], 'Character catalog differs from regulation annex'
-    # R07 1.13 (SB-2): every catalog card and character declares the set of its document; the rarity is descriptive,
-    # one of the regulation values or none, and equal to the annex (`rarity`, absent = none).
-    for table in ('CRD001_GUI', 'CRD003_CHARACTERS'):
-        wrong = [r[0] for r in db.execute('select C_REF_CLASS,C_SET from ' + table + ' order by C_REF_CLASS') if r[1] != set_id]
-        assert not wrong, table + ': cards outside the set ' + set_id + ' of the set document: ' + ', '.join(wrong)
-    rarities = [list(r) for r in db.execute('select C_REF_CLASS,C_RARITY from CRD001_GUI order by C_REF_CLASS')]
-    assert all(r[1] is None or r[1] in rarity_vocabulary for r in rarities), 'Unknown rarity (R07 1.13)'
-    assert rarities == [[card['class'], card.get('rarity')] for card in expected['cards']], 'Rarities differ from the set annex'
-    for table, key in [('DCK001_STARTERS', 'starters'), ('DCK002_STARTERS_CH', 'initialCards')]:
-        actual = [list(row) for row in db.execute('select * from ' + table + ' order by 1,2')]
-        assert actual == expected[key], table + ' differs from regulation annex'
-    assert db.execute('pragma integrity_check').fetchone()[0] == 'ok'
-    assert not db.execute('pragma foreign_key_check').fetchall()
-print('Regolamento ' + re.search(r'^Versione \*\*([0-9.]+) —', rules_text, re.M).group(1) + ' e ' + set_title + ' ' + set_version
-      + ' allineati alle copie client; regolamento senza carte citate; 39 carte (2 personaggio, 33 azione, 4 oggetto) e 1 token del set;'
-      + ' tipologie, ruoli, danno nominale e importo R07a, testi e starter coerenti; allegato e SQLite nel set ' + set_id
-      + ', rarità ammesse (' + ', '.join(rarity_vocabulary) + ', anche nel caricatore delle bozze); starter conformi alle regole dei mazzi R02 1.12; SQLite integro.')
-
-
-# ------------------------------------------------------------------------------------------------ SB-26: candidate catalog
-def candidate_folder():
-    if '--candidate' not in sys.argv:
-        return None
-    i = sys.argv.index('--candidate') + 1
-    given = sys.argv[i] if i < len(sys.argv) and not sys.argv[i].startswith('--') else 'server/src/test/resources/set-base/catalogo'
-    return (root / given).resolve()
+spec = importlib.util.spec_from_file_location('set_catalog_check', root / 'tools/set-catalog/set_catalog.py')
+gen = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(gen)
 
 
 HEADING = re.compile(r'^#### (.+?) — (.+)$')
@@ -332,27 +118,25 @@ def table_rows(text, header):
     return rows
 
 
-def check_candidate(folder):
-    rel = folder.relative_to(root).as_posix()
-    manifest = json.loads((folder / 'manifest.json').read_text(encoding='utf-8'))
+def check_catalog(rel, place, live):
+    """The catalog generated by set_catalog.py: `place(name)` is where the generator's file `name` is (live places or a folder)."""
+    manifest = json.loads(place('manifest.json').read_text(encoding='utf-8'))
     for source in manifest['ingressi']:
         digest = hashlib.sha256((root / source['file']).read_bytes()).hexdigest()
         assert digest == source['sha256'], rel + ': ' + source['file'] + ' changed after the generation: regenerate the catalog'
-    spec = importlib.util.spec_from_file_location('set_catalog_check', root / 'tools/set-catalog/set_catalog.py')
-    gen = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(gen)
     (files, cat, sets), _, _ = gen.run(manifest['argomenti'] + ['--root', str(root)])
     assert manifest['set'] == [s.id for s in sets], rel + ': sets of the manifest differ'
+    assert ('--vivo' in manifest['argomenti']) == live, rel + ': a live catalog is generated with --vivo, a trial one without'
     all_annex = []
     for s in sets:
         sid, data = s.id, s.data
-        where = rel + '/sets/' + sid + '.md'
-        doc = (folder / 'sets' / (sid + '.md')).read_text(encoding='utf-8')
-        assert doc == (folder / 'client-debug/sets' / (sid + '.md')).read_text(encoding='utf-8'), where + ': client copy differs'
+        where = place('sets/' + sid + '.md').relative_to(root).as_posix()
+        doc = place('sets/' + sid + '.md').read_text(encoding='utf-8')
+        assert doc == place('client-debug/sets/' + sid + '.md').read_text(encoding='utf-8'), where + ': client copy differs'
         title = re.match(r'# Botte Micidiali — (.+)\n', doc)
         version = re.search(r'^Versione \*\*([0-9.]+) —', doc, re.M)
         assert title and version and title.group(1) == data['set']['name'], where + ': title or version missing'
-        annex_doc = json.loads((folder / 'sets' / (sid + '.json')).read_text(encoding='utf-8'))
+        annex_doc = json.loads(place('sets/' + sid + '.json').read_text(encoding='utf-8'))
         assert annex_doc['set'] == sid and annex_doc['version'] == version.group(1), where + ': annex set or version differs'
         sheets = parse_sheets(doc, where)
         entries = annex_doc['cards'] + annex_doc['characters'] + annex_doc['tokens']
@@ -421,16 +205,16 @@ def check_candidate(folder):
             assert cat.entries[last]['subtype'] == 'Ultima risorsa' and cat.entries[last].get('exclusiveTo', character) == character, \
                 character + ': last resort reserved to another character'
         all_annex.append((sid, annex_doc))
-    # SQLite: the live schema plus full text and flavour, and the rows of every annex.
-    added = {'CRD001_GUI': ['T_GUI_FULL_TEXT', 'T_GUI_FLAVOUR'], 'CRD003_CHARACTERS': ['T_GUI_FULL_TEXT', 'T_GUI_FLAVOUR']}
-    with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() + '?mode=ro', uri=True) as live, \
-            sqlite3.connect((folder / 'cards.sqlite').as_uri() + '?mode=ro', uri=True) as db:
-        tables = [r[0] for r in live.execute("select name from sqlite_master where type='table' order by name")]
+    # SQLite: the schema of the live catalog (SB-28: with full text and flavour, D175 (1)), and the rows of every annex.
+    with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() + '?mode=ro', uri=True) as vivo, \
+            sqlite3.connect(place('cards.sqlite').as_uri() + '?mode=ro', uri=True) as db:
+        tables = [r[0] for r in vivo.execute("select name from sqlite_master where type='table' order by name")]
         assert tables == [r[0] for r in db.execute("select name from sqlite_master where type='table' order by name")], rel + ': SQLite tables differ from the live catalog'
         for table in tables:
-            columns = [c[1:3] for c in live.execute('pragma table_info(' + table + ')')] + [(c, 'varchar2') for c in added.get(table, [])]
-            assert [c[1:3] for c in db.execute('pragma table_info(' + table + ')')] == columns, table + ': schema differs from the live one plus full text and flavour'
-        assert db.execute('select * from CRD002_KEYWORDS order by 1').fetchall() == live.execute('select * from CRD002_KEYWORDS order by 1').fetchall(), \
+            assert [c[1:3] for c in db.execute('pragma table_info(' + table + ')')] == [c[1:3] for c in vivo.execute('pragma table_info(' + table + ')')], \
+                table + ': schema differs from the live one'
+        assert [c[1] for c in db.execute('pragma table_info(CRD001_GUI)')][-2:] == ['T_GUI_FULL_TEXT', 'T_GUI_FLAVOUR'], 'CRD001_GUI without full text and flavour'
+        assert db.execute('select * from CRD002_KEYWORDS order by 1').fetchall() == vivo.execute('select * from CRD002_KEYWORDS order by 1').fetchall(), \
             'CRD002_KEYWORDS differs from the live catalog'
         cards = sorted(((c['class'], c['name'], c['description'], c['role'], c['gains'], c['damage'], c['damageAmount'], c.get('exclusiveTo'),
                          sid, c.get('rarity'), '\n'.join(c['fullText']), c['flavour']) for sid, a in all_annex for c in a['cards']))
@@ -444,19 +228,55 @@ def check_candidate(folder):
             assert [list(r) for r in db.execute('select * from ' + table + ' order by 1,2')] == sorted(x for _, a in all_annex for x in a[key]), \
                 table + ' differs from the annexes'
         assert db.execute('pragma integrity_check').fetchone()[0] == 'ok' and not db.execute('pragma foreign_key_check').fetchall()
-    # Last, the whole folder is what the generator writes now (SQLite by content, independent of the library).
-    present = sorted(p.relative_to(folder).as_posix() for p in folder.rglob('*') if p.is_file())
-    assert present == sorted(files), rel + ': files differ from the generation: ' + ', '.join(sorted(set(present) ^ set(files)))
+    # Last, every file is what the generator writes now (SQLite by content, independent of the library); a trial folder holds
+    # nothing else.
+    if not live:
+        folder = place('manifest.json').parent
+        present = sorted(p.relative_to(folder).as_posix() for p in folder.rglob('*') if p.is_file())
+        assert present == sorted(files), rel + ': files differ from the generation: ' + ', '.join(sorted(set(present) ^ set(files)))
     for name, data in files.items():
-        mine = (folder / name).read_bytes()
+        mine = place(name).read_bytes()
         same = gen.sqlite_dump(mine) == gen.sqlite_dump(data) if name == gen.SQLITE else mine == data
-        assert same, rel + '/' + name + ': not what the generator writes from the set files: regenerate (tools/set-catalog/set_catalog.py)'
-    counts = ', '.join(s.id + ' ' + str(len([e for e in cat.entries.values() if e['set'] == s.id])) for s in sets)
-    print('Catalogo candidato ' + rel + ': ' + str(len(sets)) + ' set (' + counts + ' voci); schede uguali al testo completo, '
-          'testo breve, guadagni e danno uguali al generatore di SB-25, numeri, rarità, mazzi e R07a uguali al file del set, '
-          'starter conformi a R02, SQLite con lo schema vivo più testo completo e flavour, copie client e file identici alla generazione.')
+        assert same, (place(name).relative_to(root).as_posix() + ': not what the generator writes from the set files: regenerate '
+                      '(tools/set-catalog/set_catalog.py' + (' --vivo)' if live else ' --out)'))
+    return sets, cat
+
+
+# SB-28: the live catalog.
+LIVE = {name: root / path for name, path in gen.LIVE_PATHS.items()}
+assert LIVE['sets/base.md'] == set_doc and LIVE['sets/base.json'] == root / 'docs/rules-catalog.json', 'Live places differ from the generator'
+sets, cat = check_catalog('catalogo vivo', LIVE.__getitem__, True)
+assert [s.id for s in sets] == [set_id], 'The live catalog has the set of the set document only'
+# The starters of the live set file: name and category (D182), in the vocabulary of the loader; no test deck in production.
+live_file = json.loads(LIVE['set-file'].read_text(encoding='utf-8'))
+categories = re.search(r'static final List<String> STARTER_CATEGORIES = List\.of\(([^)]*)\);', loader)
+assert categories, 'Draft.java: STARTER_CATEGORIES not found'
+categories = re.findall(r'"([a-z]+)"', categories.group(1))
+assert live_file['decks'] and all(d.get('name') and d.get('category') in categories for d in live_file['decks']), \
+    'Every deck of the live set file is a starter with name and category (D182)'
+# Regulation 2.0 (D183 (3)): «Ultimo colpo» is not a rule; no live card may carry it.
+assert not [c['binding'] for c in live_file['cards'] if c.get('lastBlow')], 'A live card carries «Ultimo colpo», not in regulation 2.0'
+print('Regolamento ' + rules_version + ' e ' + set_title + ' ' + set_version + ' allineati alle copie client; il set richiede il regolamento '
+      + rules_version + '; regolamento senza carte citate; ' + str(len(expected['characters'])) + ' personaggi, '
+      + str(len(expected['cards'])) + ' carte e ' + str(len(expected['tokens'])) + ' token; schede uguali al testo completo, testo breve, '
+      'guadagni e danno uguali al generatore di SB-25, numeri, rarità, mazzi e R07a uguali al file del set; ' + str(len(live_file['decks']))
+      + ' starter con nome e categoria (' + ', '.join(categories) + '), conformi a R02; nessun «Ultimo colpo»; rarità ammesse ('
+      + ', '.join(rarity_vocabulary) + ', anche nel caricatore delle bozze); SQLite integro; file identici alla generazione (--vivo).')
+
+
+def candidate_folder():
+    if '--candidate' not in sys.argv:
+        return None
+    i = sys.argv.index('--candidate') + 1
+    assert i < len(sys.argv) and not sys.argv[i].startswith('--'), '--candidate needs a folder (SB-28: the SB-26 candidate became the live catalog)'
+    return (root / sys.argv[i]).resolve()
 
 
 folder = candidate_folder()
 if folder is not None:
-    check_candidate(folder)
+    rel = folder.relative_to(root).as_posix()
+    sets, cat = check_catalog(rel, lambda name: folder / name, False)
+    counts = ', '.join(s.id + ' ' + str(len([e for e in cat.entries.values() if e['set'] == s.id])) for s in sets)
+    print('Catalogo di prova ' + rel + ': ' + str(len(sets)) + ' set (' + counts + ' voci); schede uguali al testo completo, '
+          'testo breve, guadagni e danno uguali al generatore di SB-25, numeri, rarità, mazzi e R07a uguali al file del set, '
+          'starter conformi a R02, SQLite con lo schema vivo, copie client e file identici alla generazione.')

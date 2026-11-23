@@ -34,7 +34,7 @@ public abstract class Character implements Serializable {
     /** SB-16c: the rules of the match this character plays, set by {@link com.gsc.bm.model.game.Game#useRuleset}. */
     @Getter(AccessLevel.NONE)
     @JsonIgnore
-    private Ruleset ruleset = Ruleset.LIVE;
+    private Ruleset ruleset = Ruleset.LEGACY;
     /** SB-16c: the cards a search step asked for in the move being resolved (D50, point 6), in printed order, or null. */
     @Getter(AccessLevel.NONE)
     @JsonIgnore

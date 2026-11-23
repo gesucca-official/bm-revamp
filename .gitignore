@@ -13,9 +13,10 @@ __pycache__/
 *.db-*
 *.match-recovery/
 !server/src/main/resources/cards.sqlite
-# SB-26: the generated candidate catalogs, checked by check-rules.py --candidate.
-!server/src/test/resources/set-base/catalogo/cards.sqlite
+# SB-26: the generated trial catalogs, checked by check-rules.py --candidate DIR.
 !docs/reports/set-base/sb-26/espansione/cards.sqlite
+# SB-28: the catalog of the Set Base 0.1, frozen for the tests that still play the 0.1 (SimulationCatalog).
+!server/src/test/resources/set-base/storico/0.1/cards.sqlite
 
 # Private configuration and local environment.
 .env

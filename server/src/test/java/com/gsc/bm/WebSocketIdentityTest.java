@@ -84,7 +84,8 @@ class WebSocketIdentityTest extends SqliteContextSupport {
             assertEquals(1,game.getResolvedMoves().stream().filter(m -> m.getPlayerId().equals(bot.getPlayerId())).count());
             assertEquals(90,human.getResources().get(com.gsc.bm.model.Resource.HEALTH));
             assertEquals(0,human.getResources().get(com.gsc.bm.model.Resource.VIOLENCE));
-            assertEquals(55,bot.getResources().get(com.gsc.bm.model.Resource.HEALTH));
+            // SB-28 (D182): «GARGANTUESCO IMPATTO SUL TU» of the Set Base 1.0 deals 35 HIT (45 in the 0.1); the bot's Struggle costs it 5.
+            assertEquals(60,bot.getResources().get(com.gsc.bm.model.Resource.HEALTH));
             assertEquals(cards.craftCard("com.Grab").getName(),view.path("players").path("roundHuman").path("cardsInHand").get(0).path("name").asText());
             assertEquals(0,view.path("players").path("roundHuman").path("deck").asInt());
             assertEquals(1,game.getPendingMoves().size()); // bot has selected exactly one move for the next turn
@@ -293,7 +294,8 @@ class WebSocketIdentityTest extends SqliteContextSupport {
             assertFalse(result.contains("synthetic"));
             assertEquals(1, game.getTurn());
             assertEquals(90, human.getResources().get(com.gsc.bm.model.Resource.HEALTH));
-            assertEquals(55, bot.getResources().get(com.gsc.bm.model.Resource.HEALTH));
+            // SB-28 (D182): «GARGANTUESCO IMPATTO SUL TU» of the Set Base 1.0 deals 35 HIT (45 in the 0.1); the bot's Struggle costs it 5.
+            assertEquals(60, bot.getResources().get(com.gsc.bm.model.Resource.HEALTH));
         } finally {
             process.destroyForcibly(); org.mockito.Mockito.reset(gameFactory);
             if (game.getTurn() > 0) games.leaveGame(game.getGameId(), "cliHuman");
@@ -321,7 +323,7 @@ class WebSocketIdentityTest extends SqliteContextSupport {
         first.addPOJO(new com.gsc.bm.model.game.Move(grab.getName(),"cliCardsB","SELF",id,java.util.Map.of(com.gsc.bm.model.game.Move.AdditionalAction.TARGET_ITEM,beer.getName())));
         var second=rounds.addArray();
         second.addPOJO(new com.gsc.bm.model.game.Move(smack.getName(),"cliCardsA","cliCardsB",id,java.util.Map.of(com.gsc.bm.model.game.Move.AdditionalAction.DISCARD_ONE,spare.getName())));
-        second.addPOJO(new com.gsc.bm.model.game.Move(grab.getName(),"cliCardsB","SELF",id,java.util.Map.of(com.gsc.bm.model.game.Move.AdditionalAction.TARGET_ITEM,"Broken Beer Bottle")));
+        second.addPOJO(new com.gsc.bm.model.game.Move(grab.getName(),"cliCardsB","SELF",id,java.util.Map.of(com.gsc.bm.model.game.Move.AdditionalAction.TARGET_ITEM,"Bottiglia Spaccata"))); // SB-28 (D182): the token of the Set Base 1.0
         var third=rounds.addArray();
         third.addPOJO(new com.gsc.bm.model.game.Move(struggle.getName(),"cliCardsA","cliCardsB",id,null));
         third.addPOJO(new com.gsc.bm.model.game.Move(struggle.getName(),"cliCardsB","cliCardsA",id,null));
@@ -336,9 +338,10 @@ class WebSocketIdentityTest extends SqliteContextSupport {
             a=game.getPlayers().get("cliCardsA"); b=game.getPlayers().get("cliCardsB");
             assertEquals(3,game.getTurn());
             assertEquals(80,a.getResources().get(com.gsc.bm.model.Resource.HEALTH));
-            assertEquals(78,b.getResources().get(com.gsc.bm.model.Resource.HEALTH));
-            assertEquals(15,a.getResources().get(com.gsc.bm.model.Resource.ALERTNESS));
-            assertEquals(5,b.getResources().get(com.gsc.bm.model.Resource.ALERTNESS)); // R06: ALCOHOL 1/2 truncates to zero
+            // SB-28 (D182): Set Base 1.0 cards (ToxicGrab +5 T without the A cost, LittleSmack 2 HIT without +5 A).
+            assertEquals(81,b.getResources().get(com.gsc.bm.model.Resource.HEALTH));
+            assertEquals(10,a.getResources().get(com.gsc.bm.model.Resource.ALERTNESS));
+            assertEquals(28,b.getResources().get(com.gsc.bm.model.Resource.ALERTNESS)); // R06: ALCOHOL 1/2 truncates to zero
             assertTrue(a.getCardsInHand().contains(smack)); assertFalse(a.getCardsInHand().contains(spare));
             assertFalse(a.getCardsInHand().contains(steal)); assertTrue(b.getCardsInHand().contains(grab));
             assertEquals(1,a.getCardsInHand().stream().filter(com.gsc.bm.model.cards.Card::isLastResort).count());

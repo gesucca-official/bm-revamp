@@ -21,7 +21,7 @@ async function main() {
       while (!view.over) {
         assert(turns < 40,'Stall detected by runner; no outcome manufactured');
         const hand = view.players[user].cardsInHand;
-        const card = hand.find(c=>c.bindingName==='com.ShuffleFeet') || hand.find(c=>c.lastResort);
+        const card = hand.find(c=>c.bindingName==='base.com.ShuffleFeet') || hand.find(c=>c.lastResort);
         assert(card,'Fixture must offer its prescribed legal action');
         lastMove={gameId:id,playerId:user,playedCardName:card.name,targetId:bot,choices:null};
         mark=c.events.length;
@@ -54,7 +54,7 @@ async function main() {
       assert.strictEqual(initial.configuration.botPolicy,'random');
       assert.strictEqual(initial.versions.rulesVersion,process.env.BM_RULES_VERSION);
       assert.deepStrictEqual(initial.versions.sets,JSON.parse(process.env.BM_SETS));
-      assert.strictEqual(initial.versions.sets.base.version,'0.1');
+      assert.strictEqual(initial.versions.sets.base.version,'1.0'); // SB-28 (D182): Set Base 1.0
       assert.strictEqual(initial.state.players[0].initialDeckDrawOrder.length,match===0?20:0);
       for(const key of ['codeSha256','rulesSha256','catalogSha256','rulesCatalogSha256']) assert(/^[a-f0-9]{64}$/.test(initial.versions[key]),key);
       assert.strictEqual(initial.state.players[0].character,user==='i13Junkie'?'junkie.character.ToxicJunkie':'bruiser.character.BigBadBruiser');

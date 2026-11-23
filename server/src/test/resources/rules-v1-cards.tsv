@@ -1,5 +1,5 @@
-bruiser.BadEducation	1	OPPONENT	VIOLENCE=10
-bruiser.BreakYourToy	1	FAR_ITEM	VIOLENCE=10
+bruiser.BadEducation	1	OPPONENT	VIOLENCE=5
+bruiser.BreakYourToy	1	FAR_ITEM	VIOLENCE=5
 bruiser.CantFeelAnything	2	SELF	VIOLENCE=20
 bruiser.ExtremelyViolentBlow	1	OPPONENT	VIOLENCE=20
 bruiser.Glare	0	SELF	

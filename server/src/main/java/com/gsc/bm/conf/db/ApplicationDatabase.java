@@ -20,7 +20,10 @@ import java.util.List;
 
 public final class ApplicationDatabase {
     private static final List<String> MIGRATIONS = List.of("db/application/V001__initial.sql", "db/application/V002__match_events.sql",
-            "db/application/V003__match_registry.sql");
+            "db/application/V003__match_registry.sql", "db/application/V004__set_base_1_0_decks.sql");
+    /** SB-28 (D182 (3)): the migration that deletes the saved decks with cards that left the set; its count is logged. */
+    static final int SET_BASE_DECKS = 4;
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(ApplicationDatabase.class);
     private ApplicationDatabase() { }
 
     public static DataSource open(Path file) {
@@ -88,7 +91,13 @@ public final class ApplicationDatabase {
             for (int i = previous; i < MIGRATIONS.size(); i++) {
                 ResourceDatabasePopulator populator = new ResourceDatabasePopulator(new ClassPathResource(MIGRATIONS.get(i)));
                 if (i >= 1) { populator.setSeparator(";;"); }
+                Integer decksBefore = i + 1 == SET_BASE_DECKS ? jdbc.queryForObject("SELECT COUNT(*) FROM USR002_DECKS", Integer.class) : null;
                 populator.execute(source);
+                if (decksBefore != null) {
+                    int deleted = decksBefore - jdbc.queryForObject("SELECT COUNT(*) FROM USR002_DECKS", Integer.class);
+                    LOG.info("SB-28 (D182 (3)): {} saved decks with cards of the Set Base 0.1 that left the set deleted, {} kept",
+                            deleted, decksBefore - deleted);
+                }
                 jdbc.update("INSERT INTO BM_SCHEMA_VERSION(version,checksum,applied_at) VALUES (?,?,CURRENT_TIMESTAMP)", i + 1, checksums.get(i));
             }
             return null;

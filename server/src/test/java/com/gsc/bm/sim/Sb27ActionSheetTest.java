@@ -26,7 +26,7 @@ class Sb27ActionSheetTest {
     @BeforeAll
     static void loadDraft() throws Exception { load(); }
 
-    // GEN-04: la regia rinvia a SB-28 la rappresentazione del costo a zero.
+    // GEN-04: SB-28 (D181 (3)) toglie il costo «A 0», che non si scrive più: la carta resta gratuita.
     static Stream<Arguments> actions() {
         return Stream.of(
                 arguments("SPA-BA", "com.basic.BruiserGrab", "ADOPERIAMOTI", BASIC, NEAR_ITEM, -1, Map.of()),
@@ -106,7 +106,7 @@ class Sb27ActionSheetTest {
                 arguments("GEN-01", "com.Grab", "Afferrare", REGULAR, NEAR_ITEM, 1, Map.of()),
                 arguments("GEN-02", "com.Steal", "Furto con Destrezza", REGULAR, FAR_ITEM, 0, Map.of(ALERTNESS, 10)),
                 arguments("GEN-03", "base.com.ShuffleFeet", "Scatto Repentino", REGULAR, OPPONENT, -1, Map.of()),
-                arguments("GEN-04", "base.com.BeggingMoney", "Ce l'Hai Due Spicci?", REGULAR, OPPONENT, 0, Map.of(ALERTNESS, 0)),
+                arguments("GEN-04", "base.com.BeggingMoney", "Ce l'Hai Due Spicci?", REGULAR, OPPONENT, 0, Map.of()),
                 arguments("GEN-05", "bruiser.SeagullFly", "GABBIANO, DUNQUE VOLIAMOTI", REGULAR, OPPONENT, 1, Map.of(VIOLENCE, 10)),
                 arguments("GEN-06", "base.com.MattoneDelCantiere", "Foratone da 28", REGULAR, OPPONENT, 0, Map.of(VIOLENCE, 15)),
                 arguments("GEN-07", "bruiser.HealingBlow", "ORMALE GUARIAMOTI", REGULAR, OPPONENT, 1, Map.of(VIOLENCE, 20)),

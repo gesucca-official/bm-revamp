@@ -60,7 +60,7 @@ class MatchArchiveRecoveryTest {
         for(String table:List.of("USR001_CREDENTIALS","USR002_DECKS","LOG001_GAMES","LOG002_WEB_CLIENT","LOG003_MATCH_EVENTS"))
             assertEquals(old.queryForList("SELECT * FROM "+table),upgraded.queryForList("SELECT * FROM "+table));
         assertEquals(old.queryForList("SELECT * FROM BM_SCHEMA_VERSION"),upgraded.queryForList("SELECT * FROM BM_SCHEMA_VERSION WHERE version<=2"));
-        assertEquals(3,upgraded.queryForObject("SELECT COUNT(*) FROM BM_SCHEMA_VERSION",Integer.class));
+        assertEquals(4,upgraded.queryForObject("SELECT COUNT(*) FROM BM_SCHEMA_VERSION",Integer.class)); // SB-28 (D182 (3)): V004
         assertTrue(new MatchEventRepository(upgraded).activeMatchIds().isEmpty()); // no invented historical activity
         assertEquals(event.getHash(),new MatchEventRepository(jdbc(copy)).read("historical").get(0).getHash());
         assertEquals("ok",upgraded.queryForObject("PRAGMA integrity_check",String.class));

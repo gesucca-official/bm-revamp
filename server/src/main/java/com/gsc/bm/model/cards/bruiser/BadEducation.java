@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 public class BadEducation extends AbstractCard {
 
     @Tunable
-    private int hitDamage = 10;
+    private int hitDamage = 8;
 
     public BadEducation() {
         super();
         setCanTarget(Set.of(CardTarget.OPPONENT));
-        setCost(Map.of(Resource.VIOLENCE, 10));
+        setCost(Map.of(Resource.VIOLENCE, 5));
     }
 
     @Override

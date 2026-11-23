@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-/** Nome del TOKEN effettivamente creato e selezionabile nel playground. */
-class Sb27BottleNameReproTest {
+/** D168 (4), applicata in SB-28: il token creato da «Doppio Malto da Discount» porta il nome della scheda. */
+class Sb27BottleNameTest {
     @BeforeAll
     static void loadDraft() throws Exception { load(); }
 

@@ -71,7 +71,8 @@ class RulesConformanceTest {
         a.getCardsInHand().add(named(new YouStop(),"stop")); Card impact=named(new SuperImpact(),"impact"); b.getCardsInHand().add(impact);
         Game g=duel(a,b); g.submitMove(move(g,a,"stop","b",null)); g.submitMove(move(g,b,"impact","a",null)); round(g);
         assertEquals(100,a.getResources().get(Resource.HEALTH)); assertEquals(0,b.getResources().get(Resource.VIOLENCE));
-        assertEquals(30,b.getResources().get(Resource.ALERTNESS)); assertFalse(b.getCardsInHand().contains(impact));
+        // SB-28 (D181 (3), lista di SB-27): «FAI BASTA» non dà più 10 A all'avversario annullato; prima 30.
+        assertEquals(20,b.getResources().get(Resource.ALERTNESS)); assertFalse(b.getCardsInHand().contains(impact));
         assertTrue(g.getResolvedMoves().get(1).isVoid());
     }
     @Test void r04_counteredBoundKeepsAdditionalDiscard() {

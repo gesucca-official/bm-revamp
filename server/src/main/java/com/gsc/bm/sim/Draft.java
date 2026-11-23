@@ -55,9 +55,14 @@ final class Draft implements PlayerSource {
     static final String BASE_SET = "base";
     /** Le rarità di R07 (regolamento 1.14, SB-24: PROTAGONIST, in breve P); assente vuol dire nessuna. scripts/check-rules.py le confronta col regolamento. */
     static final List<String> RARITIES = List.of("COMMON", "UNCOMMON", "RARE", "PROTAGONIST");
+    /** SB-28 (D182): the categories of the starters of a set. */
+    static final List<String> STARTER_CATEGORIES = List.of("base", "avanzato");
     private static final java.util.regex.Pattern SET_ID = java.util.regex.Pattern.compile("[a-z][a-z0-9-]*");
-    /** Il set di oggi scritto come bozza. */
-    static final String CURRENT = "/sb-6a/attuale.json";
+    /**
+     * Il Set Base 0.1 scritto come bozza (risorse di test), la bozza di difetto del simulatore. SB-28: è la copia di sb-6a/attuale.json
+     * che il Set Base 1.0 sa leggere, con le quattro carte condivise come le scrive il file del set vivo (BozzeStoriche, nei test).
+     */
+    static final String CURRENT = "/set-base/storico/0.1/attuale.json";
     private static final ObjectMapper JSON = new ObjectMapper();
     private static final Set<Card.CardTarget> ITEM_TARGETS = EnumSet.of(Card.CardTarget.NEAR_ITEM, Card.CardTarget.FAR_ITEM);
 
@@ -167,8 +172,13 @@ final class Draft implements PlayerSource {
         final String id, character, basic, lastResort, set;
         final List<String> bound;
         final Map<String, Integer> cards;
+        /** SB-28: the name and the category of a starter of the set (D182), both null on a test deck. */
+        final String name, category;
 
-        DeckSpec(String id, String character, String basic, List<String> bound, String lastResort, Map<String, Integer> cards, String set) {
+        DeckSpec(String id, String character, String basic, List<String> bound, String lastResort, Map<String, Integer> cards, String set,
+                 String name, String category) {
+            this.name = name;
+            this.category = category;
             this.id = id;
             this.set = set;
             this.character = character;
@@ -379,6 +389,18 @@ final class Draft implements PlayerSource {
                     fields(top, "bozza", Set.of("format", "sets", "rules", "characters", "cards", "decks"), Set.of());
                     return top.deepCopy();
                 }
+                if (!top.has("set") && units.size() > 1 && !top.has("cards") && !top.has("characters") && !top.has("rules")) {
+                    // SB-28: a file of decks only (the test decks of the set, kept apart from the live set file) adds built decks
+                    // without set to the other files: they see every loaded set, as the decks built by the bench.
+                    fields(top, "bozza", Set.of("format", "decks"), Set.of());
+                    at = unit.source;
+                    for (JsonNode raw : array(top, "decks", "bozza")) {
+                        ObjectNode entry = object(raw, "mazzo").deepCopy();
+                        if (entry.has("set")) throw invalid("mazzo " + entry.path("id").asText("?"), "campo set non ammesso in un file di soli mazzi");
+                        entries.get("decks").add(entry);
+                    }
+                    continue;
+                }
                 if (!top.has("set"))
                     throw invalid("bozza", "format " + FORMAT_SETS + ": campo set mancante (la testata del set), o sets per una vista unita");
                 fields(top, "bozza", Set.of("format", "set", "characters", "cards", "decks"), Set.of("requires", "rules"));
@@ -548,6 +570,12 @@ final class Draft implements PlayerSource {
     Set<String> cardBindings() { return Collections.unmodifiableSet(cards.keySet()); }
 
     String characterOf(String deck) { return decks.get(deck).character; }
+
+    /** SB-28: the name of a starter of the set (D182), or null for a test deck. */
+    String deckName(String deck) { return decks.get(deck).name; }
+
+    /** SB-28: the category of a starter of the set, {@code base} or {@code avanzato} (D182), or null for a test deck. */
+    String deckCategory(String deck) { return decks.get(deck).category; }
 
     /** Una copia del JSON letto: la ricerca dei mazzi di SB-7 ne deriva bozze con altri mazzi. */
     JsonNode json() { return json.deepCopy(); }
@@ -729,7 +757,7 @@ final class Draft implements PlayerSource {
             params.put(entry.getKey(), intValue(entry.getValue(), where + ": params." + entry.getKey()));
         });
         for (String name : tunable.keySet())
-            if (!params.containsKey(name) && !tunable.get(name).getAnnotation(Tunable.class).optional())
+            if (!params.containsKey(name))
                 throw invalid(where, "parametro mancante params." + name);
         Map<Resource, Integer> cost = null;
         Integer priority = null;
@@ -767,8 +795,13 @@ final class Draft implements PlayerSource {
         ObjectNode node = object(raw, "mazzo");
         String id = text(node, "id", "mazzo");
         String where = label("mazzo", id, textOrNull(node, "set"));
-        fields(node, where, Set.of("id", "character", "bound", "lastResort", "cards"), Set.of("basic", "set"));
+        fields(node, where, Set.of("id", "character", "bound", "lastResort", "cards"), Set.of("basic", "set", "name", "category"));
         String set = setOf(node, where, id);
+        // SB-28 (D182): a starter of the set has a name and a category (base or avanzato); a test deck has neither.
+        String deckName = optional(node, "name", where), category = optional(node, "category", where);
+        if ((deckName == null) != (category == null)) throw invalid(where, "name e category vanno insieme: sono gli starter del set");
+        if (category != null && !STARTER_CATEGORIES.contains(category))
+            throw invalid(where, "category " + category + " fuori vocabolario: " + String.join(", ", STARTER_CATEGORIES));
         String characterId = text(node, "character", where);
         CharacterSpec character = characters.get(characterId);
         if (character == null) throw invalid(where, "personaggio sconosciuto: " + characterId + loaded());
@@ -825,7 +858,8 @@ final class Draft implements PlayerSource {
         }
         if (total != rules.deckSize)
             throw invalid(where, "le carte regolari sono " + total + ", il formato ne chiede esattamente " + rules.deckSize);
-        return new DeckSpec(id, characterId, basic, List.copyOf(bound), lastResort, Collections.unmodifiableMap(regular), set);
+        return new DeckSpec(id, characterId, basic, List.copyOf(bound), lastResort, Collections.unmodifiableMap(regular), set,
+                deckName, category);
     }
 
     // ---- controlli sull'insieme ----

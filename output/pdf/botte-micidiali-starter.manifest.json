@@ -1,19 +1,33 @@
 {
-  "rules_version": "1.13",
-  "set": "Set Base 0.1",
-  "catalog_count": 40,
-  "printed_count": 50,
+  "mode": "set",
+  "set": "Set Base 1.0",
+  "file_version": "1.7",
+  "rules_version": "2.0",
+  "set_file": {
+    "path": "server/src/main/resources/sets/base.json",
+    "sha256": "de7088d20b90095d4d489aa55a373ff2b1256a8bfdfe8badd459f71fd24b89ba",
+    "sha256_short": "de7088d20b90"
+  },
+  "catalog_count": 124,
+  "printed_count": 125,
   "selection": {
-    "mode": "starters",
-    "starters": [
-      "bruiser.character.BigBadBruiser",
-      "junkie.character.ToxicJunkie"
+    "mode": "decks",
+    "decks": [
+      "starter-spazienzio",
+      "starter-mara",
+      "starter-tossico",
+      "starter-pino",
+      "starter-gigi"
     ],
+    "all_decks": false,
     "multiplier": 1,
     "overrides": {}
   },
-  "card_pages": 6,
-  "total_pages": 10,
+  "card_pages": 14,
+  "guide_pages": 4,
+  "full_text_pages": 13,
+  "full_text_entries": 79,
+  "total_pages": 31,
   "grid": [
     3,
     3
@@ -23,297 +37,906 @@
     87
   ],
   "minimum_body_pt": 9,
-  "sources": {
-    "server\\src\\main\\resources\\cards.sqlite": "6d8b921d0042d5b062215031135fcffe7e8128673857454425eb5fd47821d745",
-    "docs\\game-rules.md": "82658531d92e38a5e8916c8990f3e93417656cf3d390b51692dec123c0b036bb",
-    "docs\\rules-catalog.json": "583b5dfa739661cef90d8e02f9ed70a88c6cd365763abb9020363aafe9d0b282",
-    "docs\\sets\\base.md": "db42568c1ca206931df3cab0e4d3c0b5c002bb7ffb42526bfef1f07cb173dc0c"
-  },
+  "decks": [
+    {
+      "id": "starter-spazienzio",
+      "name": "Spazienzio",
+      "category": "base"
+    },
+    {
+      "id": "starter-mara",
+      "name": "Mara",
+      "category": "base"
+    },
+    {
+      "id": "starter-tossico",
+      "name": "Celestina",
+      "category": "avanzato"
+    },
+    {
+      "id": "starter-pino",
+      "name": "Piera",
+      "category": "avanzato"
+    },
+    {
+      "id": "starter-gigi",
+      "name": "Beppe",
+      "category": "avanzato"
+    }
+  ],
   "inventory": [
     {
-      "id": "bruiser.BadEducation",
-      "name": "PERMESSO SCUSA ORA SMETTI",
-      "type": "Azione",
-      "subtype": "Regolare",
+      "id": "bruiser.character.BigBadBruiser",
+      "name": "SPAZIENZIO DE LA UCCISO",
+      "tag": "Personaggio",
+      "rarity": "PROTAGONIST",
       "copies": 1
     },
     {
-      "id": "bruiser.BreakYourToy",
-      "name": "BELLO IL TUO GIOCATTOLO SI",
-      "type": "Azione",
-      "subtype": "Regolare",
+      "id": "base.character.Mara",
+      "name": "Mara Contromano",
+      "tag": "Personaggio",
+      "rarity": "PROTAGONIST",
       "copies": 1
     },
     {
-      "id": "bruiser.CantFeelAnything",
-      "name": "GENTILE IL TUO CAREZZO",
-      "type": "Azione",
-      "subtype": "Regolare",
+      "id": "junkie.character.ToxicJunkie",
+      "name": "Celestina Bucatina",
+      "tag": "Personaggio",
+      "rarity": "PROTAGONIST",
       "copies": 1
     },
     {
-      "id": "bruiser.ExtremelyViolentBlow",
-      "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 2
-    },
-    {
-      "id": "bruiser.Glare",
-      "name": "PAZIENZA: FINITA",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 2
-    },
-    {
-      "id": "bruiser.HealingBlow",
-      "name": "ORMALE GUARIAMOTI",
-      "type": "Azione",
-      "subtype": "Regolare",
+      "id": "base.character.Pino",
+      "name": "Piera Pinot",
+      "tag": "Personaggio",
+      "rarity": "PROTAGONIST",
       "copies": 1
     },
     {
-      "id": "bruiser.MadeOfStone",
-      "name": "NON GIOCARE COL COLTELLO NO",
-      "type": "Azione",
-      "subtype": "Regolare",
+      "id": "base.character.Gigi",
+      "name": "Beppe Bulletta",
+      "tag": "Personaggio",
+      "rarity": "PROTAGONIST",
       "copies": 1
     },
     {
-      "id": "bruiser.SeagullFly",
-      "name": "GABBIANO DUNQUE VOLIAMOTI",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 1
+      "id": "base.character.Cesira",
+      "name": "Sergio Sommerso",
+      "tag": "Personaggio",
+      "rarity": "PROTAGONIST",
+      "copies": 0
     },
     {
-      "id": "bruiser.SickeningBlow",
-      "name": "AMMALIAMOTI DI BOTTE",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 1
-    },
-    {
-      "id": "bruiser.StunningBlow",
-      "name": "STORDIAMOTI HO DETTO",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 2
-    },
-    {
-      "id": "bruiser.SuperImpact",
-      "name": "GARGANTUESCO IMPATTO SUL TU",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 1
-    },
-    {
-      "id": "bruiser.WhatchaDoin",
-      "name": "COSA FAI NON É UNA DOMANDA",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 1
-    },
-    {
-      "id": "bruiser.YouStop",
-      "name": "FAI BASTA",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 2
-    },
-    {
-      "id": "bruiser.character.LittleRage",
-      "name": "LIEVE FASTIDIO",
-      "type": "Azione",
-      "subtype": "Legata al personaggio",
-      "copies": 1
-    },
-    {
-      "id": "bruiser.character.LittleSmack",
-      "name": "SVEGLIAMOCI MA TU NO",
-      "type": "Azione",
-      "subtype": "Legata al personaggio",
-      "copies": 1
-    },
-    {
-      "id": "com.Grab",
-      "name": "Grab",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 2
-    },
-    {
-      "id": "com.ShuffleFeet",
-      "name": "Scatto Repentino",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 1
-    },
-    {
-      "id": "com.Steal",
-      "name": "Steal",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 2
+      "id": "base.character.Rocco",
+      "name": "Duccio Braccio Teso",
+      "tag": "Personaggio",
+      "rarity": "PROTAGONIST",
+      "copies": 0
     },
     {
       "id": "com.basic.BruiserGrab",
       "name": "ADOPERIAMOTI",
-      "type": "Azione",
-      "subtype": "Base",
+      "tag": "Base",
+      "rarity": "COMMON",
       "copies": 1
     },
     {
-      "id": "com.basic.ToxicGrab",
-      "name": "Desiderio Incontrollabile",
-      "type": "Azione",
-      "subtype": "Base",
+      "id": "base.mara.PresoAlVolo",
+      "name": "Requisire al Volo",
+      "tag": "Base",
+      "rarity": "COMMON",
       "copies": 1
     },
     {
-      "id": "com.items.AnotherRottenBeer",
-      "name": "Tennents Super",
-      "type": "Oggetto",
-      "subtype": "",
+      "id": "bruiser.character.LittleRage",
+      "name": "LIEVE FASTIDIO",
+      "tag": "Legata al personaggio",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.character.LittleSmack",
+      "name": "SVEGLIAMOCI - MA TU NO",
+      "tag": "Legata al personaggio",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.spazienzio.bound.TestaAlMuro",
+      "name": "VIOLENZAZIONE",
+      "tag": "Legata al personaggio",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.mara.bound.PassoStretto",
+      "name": "Sventare l'Assassinio",
+      "tag": "Legata al personaggio",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.mara.bound.CambioMarcia",
+      "name": "Semaforo Rosso",
+      "tag": "Legata al personaggio",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.mara.bound.ColpoDiStriscio",
+      "name": "Tagliare la Strada",
+      "tag": "Legata al personaggio",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "com.last.Struggle",
+      "name": "Addosso!!!",
+      "tag": "Ultima risorsa",
+      "rarity": "COMMON",
+      "copies": 3
+    },
+    {
+      "id": "bruiser.SuperImpact",
+      "name": "GARGANTUESCO IMPATTO SUL TU",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
       "copies": 2
+    },
+    {
+      "id": "bruiser.ExtremelyViolentBlow",
+      "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "tag": "Regolare",
+      "rarity": "RARE",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.Glare",
+      "name": "PAZIENZA: FINITA",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "bruiser.MadeOfStone",
+      "name": "NON GIOCARE COL COLTELLO NO",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 2
+    },
+    {
+      "id": "bruiser.YouStop",
+      "name": "FAI BASTA",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.mara.CinghiataDiTraverso",
+      "name": "Lazo del Rider",
+      "tag": "Regolare",
+      "rarity": "RARE",
+      "copies": 1
+    },
+    {
+      "id": "base.mara.Sgommata",
+      "name": "Sgommata",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.mara.SorpassoInCurva",
+      "name": "Agilità Innaturale",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.mara.TraDueParaurti",
+      "name": "Unta e Bisunta",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.mara.Slalom",
+      "name": "Slalom d'Avvicinamento",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "com.Steal",
+      "name": "Furto con Destrezza",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 2
+    },
+    {
+      "id": "bruiser.SeagullFly",
+      "name": "GABBIANO, DUNQUE VOLIAMOTI",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 3
+    },
+    {
+      "id": "base.com.MattoneDelCantiere",
+      "name": "Foratone da 28",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.HealingBlow",
+      "name": "ORMALE GUARIAMOTI",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.com.TartarugaSulMarciapiede",
+      "name": "Tecnica del Carapace Mentale",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 3
+    },
+    {
+      "id": "base.com.DentiStretti",
+      "name": "Denti Stretti",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.com.SputoDaPosacenere",
+      "name": "Sputo nel Posacenere",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.com.Spintone",
+      "name": "Spintone",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 4
     },
     {
       "id": "com.items.CocktailOnTheGround",
       "name": "Negroni Trovato per Terra",
-      "type": "Oggetto",
-      "subtype": "",
+      "tag": "Oggetto",
+      "rarity": "COMMON",
       "copies": 2
     },
     {
-      "id": "com.items.MarvelousCocktail",
-      "name": "Mescolone Micidiale",
-      "type": "Oggetto",
-      "subtype": "",
+      "id": "base.items.PosacenereDiVetro",
+      "name": "Posacenere di Vetro",
+      "tag": "Oggetto",
+      "rarity": "UNCOMMON",
       "copies": 1
     },
     {
-      "id": "com.items.RottenBeer",
-      "name": "Peroni da 66, calda",
-      "type": "Oggetto",
-      "subtype": "",
+      "id": "base.items.EspressoDelDistributore",
+      "name": "Espresso della Macchinetta",
+      "tag": "Oggetto",
+      "rarity": "COMMON",
       "copies": 3
     },
     {
-      "id": "com.last.Struggle",
-      "name": "Last Resort: Banzai!!!",
-      "type": "Azione",
-      "subtype": "Ultima risorsa",
+      "id": "base.items.GhiaccioNelTovagliolo",
+      "name": "Ghiaccio nel Tovagliolo",
+      "tag": "Oggetto",
+      "rarity": "UNCOMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.com.DueDitaInGola",
+      "name": "Due Dita in Gola",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.items.PaninoDelKebab",
+      "name": "Kebab Abbandonato",
+      "tag": "Oggetto",
+      "rarity": "COMMON",
+      "copies": 4
+    },
+    {
+      "id": "base.items.GiubbottoDiFintaPelle",
+      "name": "Giubbotto di Finta Pelle",
+      "tag": "Oggetto",
+      "rarity": "COMMON",
+      "copies": 3
+    },
+    {
+      "id": "com.basic.ToxicGrab",
+      "name": "Desiderio Incontrollabile",
+      "tag": "Base",
+      "rarity": "UNCOMMON",
+      "copies": 1
+    },
+    {
+      "id": "junkie.character.PatheticBlade",
+      "name": "Fondo del Posacenere",
+      "tag": "Legata al personaggio",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.tossico.bound.RaschiareIlFondo",
+      "name": "Rintanarsi nel Cappotto",
+      "tag": "Legata al personaggio",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "junkie.character.RottenSmile",
+      "name": "Tagliare la Dose",
+      "tag": "Legata al personaggio",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "junkie.LethalHeroinDose",
+      "name": "L'Ultimo Tiro",
+      "tag": "Ultima risorsa",
+      "rarity": "UNCOMMON",
+      "copies": 1
+    },
+    {
+      "id": "junkie.MethDrivenRage",
+      "name": "Fare l'Inventario",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "junkie.Cough",
+      "name": "Tossicone Scatarrante",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "junkie.PervertedMetabolism",
+      "name": "Metabolismo Corrotto",
+      "tag": "Regolare",
+      "rarity": "COMMON",
       "copies": 2
     },
     {
       "id": "junkie.AmphetamineReflexes",
       "name": "Riflessi Aumentati dalla Speed",
-      "type": "Azione",
-      "subtype": "Regolare",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
       "copies": 2
     },
     {
-      "id": "junkie.BadTrip",
-      "name": "Presa Male di Brutto",
-      "type": "Azione",
-      "subtype": "Regolare",
+      "id": "junkie.ToxicBloodDrain",
+      "name": "Trascinare nel Tunnel",
+      "tag": "Regolare",
+      "rarity": "RARE",
       "copies": 1
     },
     {
-      "id": "junkie.BeggingMoney",
-      "name": "Ce l'hai due spiccioli per il biglietto?",
-      "type": "Azione",
-      "subtype": "Regolare",
+      "id": "com.Grab",
+      "name": "Afferrare",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 3
+    },
+    {
+      "id": "base.com.RincorsaDalMarciapiede",
+      "name": "Estrema Fretta di Alcolizzarsi",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.com.FasciaturaColFazzolettaccio",
+      "name": "Fasciatura d'Emergenza",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.items.PasticcaTrovataSulBancone",
+      "name": "Pasticca Abbandonata",
+      "tag": "Oggetto",
+      "rarity": "COMMON",
+      "copies": 2
+    },
+    {
+      "id": "com.items.MarvelousCocktail",
+      "name": "Mescolone Micidiale",
+      "tag": "Oggetto",
+      "rarity": "RARE",
+      "copies": 1
+    },
+    {
+      "id": "base.pino.QuestoLoFiniscoIo",
+      "name": "Fino all'Ultima Goccia",
+      "tag": "Base",
+      "rarity": "UNCOMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.pino.bound.CinqueMinutiEVado",
+      "name": "Posto Fisso",
+      "tag": "Legata al personaggio",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.pino.bound.SpallataAlBancone",
+      "name": "Violenta Spruzzata di Seltz",
+      "tag": "Legata al personaggio",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.pino.bound.Coccio",
+      "name": "Schiarirsi le Idee",
+      "tag": "Legata al personaggio",
+      "rarity": "UNCOMMON",
       "copies": 0
     },
     {
-      "id": "junkie.Cough",
-      "name": "Tossicone Scatarrante",
-      "type": "Azione",
-      "subtype": "Regolare",
+      "id": "base.pino.UltimoGiro",
+      "name": "Ultimo Giro",
+      "tag": "Ultima risorsa",
+      "rarity": "UNCOMMON",
       "copies": 1
     },
     {
-      "id": "junkie.EverythingIsDrug",
-      "name": "Tutto è Droga",
-      "type": "Azione",
-      "subtype": "Regolare",
+      "id": "base.pino.TestataDaUltimoGiro",
+      "name": "Scompenso da Ultimo Giro",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.pino.GoingBerserk",
+      "name": "Alla Goccia",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.pino.IlBanconeRegge",
+      "name": "Avamposto Fortificato al Bancone",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.pino.OffroIo",
+      "name": "Un Altro e Arrivo",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.pino.RuttoADistanzaSociale",
+      "name": "Rutto a Bruciapelo",
+      "tag": "Regolare",
+      "rarity": "RARE",
       "copies": 1
     },
     {
-      "id": "junkie.GoingBerserk",
+      "id": "base.items.AmaroNelBicchiereDiPlastica",
+      "name": "Amaro nel Bicchiere di Plastica",
+      "tag": "Oggetto",
+      "rarity": "COMMON",
+      "copies": 2
+    },
+    {
+      "id": "com.items.RottenBeer",
+      "name": "Bionda da 66, Calda",
+      "tag": "Oggetto",
+      "rarity": "COMMON",
+      "copies": 2
+    },
+    {
+      "id": "com.items.AnotherRottenBeer",
+      "name": "Doppio Malto da Discount",
+      "tag": "Oggetto",
+      "rarity": "UNCOMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.gigi.QuestoTornaUtile",
+      "name": "Questo Torna Utile",
+      "tag": "Base",
+      "rarity": "UNCOMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.gigi.bound.UnaStrettaEPassa",
+      "name": "Cuffie e Testa Bassa",
+      "tag": "Legata al personaggio",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.gigi.bound.ColpoDiCacciavite",
+      "name": "Colpo col Cacciavite",
+      "tag": "Legata al personaggio",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.gigi.bound.Lima",
+      "name": "Affilare gli Utensili",
+      "tag": "Legata al personaggio",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "bruiser.BreakYourToy",
+      "name": "Disassemblare",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.gigi.ChiaveDaTredici",
+      "name": "Chiave da Tredici",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.gigi.ColpoDiChiaveInglese",
+      "name": "Preparare il Lavoro",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.gigi.SottoIlCofano",
+      "name": "Secondo Bagagliaio",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.gigi.LavoroFattoBene",
+      "name": "Lavoro Fatto Bene",
+      "tag": "Regolare",
+      "rarity": "RARE",
+      "copies": 1
+    },
+    {
+      "id": "base.items.GuantiDaOfficina",
+      "name": "Guanti da Officina",
+      "tag": "Oggetto",
+      "rarity": "UNCOMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.items.CascoDaLavoro",
+      "name": "Casco da Cantiere",
+      "tag": "Oggetto",
+      "rarity": "COMMON",
+      "copies": 2
+    },
+    {
+      "id": "base.bruiser.TiFaccioSpazio",
+      "name": "SGOMBERIAMOVI",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.mara.TiStringoLaCurva",
+      "name": "Traiettoria Imprevedibile",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.tossico.UnAssaggino",
+      "name": "Un Assaggino",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.pino.PrimaIlBrindisi",
+      "name": "Un Altro... Grappino...",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.gigi.UnaStrettaDiProva",
+      "name": "Metodo Empirico",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 1
+    },
+    {
+      "id": "base.cesira.LoMettoInConto",
+      "name": "Messo in Conto",
+      "tag": "Base",
+      "rarity": "RARE",
+      "copies": 0
+    },
+    {
+      "id": "base.cesira.LoRivendo",
+      "name": "Fiuto per gli Affari",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.cesira.bound.NeRiparliamoFuori",
+      "name": "Discutiamone in Privato",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.cesira.bound.Battutina",
+      "name": "Tecnica Manipolatoria",
+      "tag": "Legata al personaggio",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.cesira.bound.FareIlVago",
+      "name": "Fare il Vago",
+      "tag": "Legata al personaggio",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.cesira.OhGuardaLa",
+      "name": "Opportuna Distrazione",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.cesira.Ricatto",
+      "name": "Buon Vecchio Ricatto",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.cesira.LoSapevo",
+      "name": "Copione Già Visto",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.cesira.ContoSalato",
+      "name": "Conto Salato",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.cesira.LoSannoTutti",
+      "name": "Segreto di Pulcinella",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.cesira.Malelingue",
+      "name": "Scherzo Oltre il Limite",
+      "tag": "Regolare",
+      "rarity": "RARE",
+      "copies": 0
+    },
+    {
+      "id": "bruiser.StunningBlow",
+      "name": "STORDIAMOTI HO DETTO",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.com.Sgambetto",
+      "name": "Sgambetto",
+      "tag": "Regolare",
+      "rarity": "RARE",
+      "copies": 0
+    },
+    {
+      "id": "base.com.EstasiDaCocaEtilene",
       "name": "Estasi da Coca Etilene",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 1
+      "tag": "Regolare",
+      "rarity": "RARE",
+      "copies": 0
     },
     {
-      "id": "junkie.LethalHeroinDose",
-      "name": "Dose di Eroina da Cavalli",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 1
+      "id": "base.com.ShuffleFeet",
+      "name": "Scatto Repentino",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
     },
     {
-      "id": "junkie.MethDrivenRage",
-      "name": "Rabbia Psicotica da Meth",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 1
+      "id": "base.com.AcquaInFaccia",
+      "name": "Svegliaaah!",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
     },
     {
-      "id": "junkie.PervertedMetabolism",
-      "name": "Metabolismo Corrotto",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 1
+      "id": "base.items.SantinoDellaPortinaia",
+      "name": "Santino di San Briaco",
+      "tag": "Oggetto",
+      "rarity": "RARE",
+      "copies": 0
     },
     {
-      "id": "junkie.ToxicBloodDrain",
-      "name": "C'è del sangue nella mia droga",
-      "type": "Azione",
-      "subtype": "Regolare",
-      "copies": 1
+      "id": "base.rocco.PrimaIo",
+      "name": "Prima gli Italiani",
+      "tag": "Base",
+      "rarity": "RARE",
+      "copies": 0
     },
     {
-      "id": "junkie.character.PatheticBlade",
-      "name": "Ago Marcio e Spezzato",
-      "type": "Azione",
-      "subtype": "Legata al personaggio",
-      "copies": 1
+      "id": "base.rocco.bound.Colpetto",
+      "name": "Rinfrescata Arrogante",
+      "tag": "Legata al personaggio",
+      "rarity": "UNCOMMON",
+      "copies": 0
     },
     {
-      "id": "junkie.character.RottenSmile",
-      "name": "Ghigno co' i' Denti Marci",
-      "type": "Azione",
-      "subtype": "Legata al personaggio",
-      "copies": 1
+      "id": "base.rocco.bound.MiRialzo",
+      "name": "Rialziamoci e Partite!",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
     },
     {
-      "id": "bruiser.character.BigBadBruiser",
-      "name": "Spazienzio de la Ucciso",
-      "type": "Personaggio",
-      "subtype": "",
-      "copies": 1
+      "id": "base.rocco.bound.AlzoLaVoce",
+      "name": "(Dis)onore alla Bandiera",
+      "tag": "Legata al personaggio",
+      "rarity": "UNCOMMON",
+      "copies": 0
     },
     {
-      "id": "junkie.character.ToxicJunkie",
-      "name": "Tossico del Serraglio",
-      "type": "Personaggio",
-      "subtype": "",
-      "copies": 1
+      "id": "base.rocco.NeHoPreseDiPeggio",
+      "name": "Non Mi Hai Fatto Niente",
+      "tag": "Ultima risorsa",
+      "rarity": "RARE",
+      "copies": 0
     },
     {
-      "id": "com.tokens.BrokenBeerBottle",
-      "name": "Broken Beer Bottle",
-      "type": "Oggetto",
-      "subtype": "Token",
+      "id": "base.rocco.NoccheSbucciate",
+      "name": "Nocche Sbucciate",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.rocco.Incassare",
+      "name": "Stoico come un Busto di Bronzo",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.rocco.EAllora",
+      "name": "E Allora...?",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.rocco.Capocciata",
+      "name": "Craniata Patriottica",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.rocco.TeLoSpiegoIo",
+      "name": "La Storia la Scrivono i Vincitori",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.rocco.TestaDura",
+      "name": "Testa Dura",
+      "tag": "Regolare",
+      "rarity": "RARE",
+      "copies": 0
+    },
+    {
+      "id": "base.com.BeggingMoney",
+      "name": "Ce l'Hai Due Spicci?",
+      "tag": "Regolare",
+      "rarity": "RARE",
+      "copies": 0
+    },
+    {
+      "id": "bruiser.SickeningBlow",
+      "name": "AMMALIAMOTI DI BOTTE",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 0
+    },
+    {
+      "id": "bruiser.BadEducation",
+      "name": "PERMESSO SCUSA PUOI SMETTERLA",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "bruiser.CantFeelAnything",
+      "name": "GENTILE IL TUO CAREZZO",
+      "tag": "Regolare",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.com.ManoLesta",
+      "name": "Mano Lesta",
+      "tag": "Regolare",
+      "rarity": "COMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.com.SecondoFiato",
+      "name": "Riprendere Fiato",
+      "tag": "Regolare",
+      "rarity": "RARE",
+      "copies": 0
+    },
+    {
+      "id": "base.com.CoccioDiBottiglia",
+      "name": "Coccio di Bottiglia",
+      "tag": "Regolare",
+      "rarity": "RARE",
+      "copies": 0
+    },
+    {
+      "id": "base.items.MezzaMineraleSgasata",
+      "name": "Acqua Minerale Sgasata",
+      "tag": "Oggetto",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.items.GrappaDellaCasa",
+      "name": "Grappa della Casa",
+      "tag": "Oggetto",
+      "rarity": "RARE",
+      "copies": 0
+    },
+    {
+      "id": "base.items.ContoDelTavoloSei",
+      "name": "Conto del Tavolo Sei",
+      "tag": "Oggetto",
+      "rarity": "UNCOMMON",
+      "copies": 0
+    },
+    {
+      "id": "base.items.SigarettaAccesa",
+      "name": "Sigaretta Accesa",
+      "tag": "Oggetto",
+      "rarity": "RARE",
       "copies": 0
     }
   ],
   "placements": [
     {
-      "id": "bruiser.BadEducation",
+      "id": "bruiser.character.BigBadBruiser",
       "page": 1,
       "rect_mm": [
         8.999999999999998,
@@ -323,7 +946,7 @@
       ]
     },
     {
-      "id": "bruiser.BreakYourToy",
+      "id": "base.character.Mara",
       "page": 1,
       "rect_mm": [
         74.0,
@@ -333,7 +956,7 @@
       ]
     },
     {
-      "id": "bruiser.CantFeelAnything",
+      "id": "junkie.character.ToxicJunkie",
       "page": 1,
       "rect_mm": [
         139.0,
@@ -343,7 +966,7 @@
       ]
     },
     {
-      "id": "bruiser.ExtremelyViolentBlow",
+      "id": "base.character.Pino",
       "page": 1,
       "rect_mm": [
         8.999999999999998,
@@ -353,7 +976,7 @@
       ]
     },
     {
-      "id": "bruiser.ExtremelyViolentBlow",
+      "id": "base.character.Gigi",
       "page": 1,
       "rect_mm": [
         74.0,
@@ -363,7 +986,7 @@
       ]
     },
     {
-      "id": "bruiser.Glare",
+      "id": "com.basic.BruiserGrab",
       "page": 1,
       "rect_mm": [
         139.0,
@@ -373,7 +996,7 @@
       ]
     },
     {
-      "id": "bruiser.Glare",
+      "id": "base.mara.PresoAlVolo",
       "page": 1,
       "rect_mm": [
         8.999999999999998,
@@ -383,7 +1006,7 @@
       ]
     },
     {
-      "id": "bruiser.HealingBlow",
+      "id": "bruiser.character.LittleRage",
       "page": 1,
       "rect_mm": [
         74.0,
@@ -393,7 +1016,7 @@
       ]
     },
     {
-      "id": "bruiser.MadeOfStone",
+      "id": "bruiser.character.LittleSmack",
       "page": 1,
       "rect_mm": [
         139.0,
@@ -403,7 +1026,7 @@
       ]
     },
     {
-      "id": "bruiser.SeagullFly",
+      "id": "base.mara.bound.PassoStretto",
       "page": 2,
       "rect_mm": [
         8.999999999999998,
@@ -413,7 +1036,7 @@
       ]
     },
     {
-      "id": "bruiser.SickeningBlow",
+      "id": "base.mara.bound.CambioMarcia",
       "page": 2,
       "rect_mm": [
         74.0,
@@ -423,7 +1046,7 @@
       ]
     },
     {
-      "id": "bruiser.StunningBlow",
+      "id": "com.last.Struggle",
       "page": 2,
       "rect_mm": [
         139.0,
@@ -433,10 +1056,20 @@
       ]
     },
     {
-      "id": "bruiser.StunningBlow",
+      "id": "com.last.Struggle",
       "page": 2,
       "rect_mm": [
         8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.last.Struggle",
+      "page": 2,
+      "rect_mm": [
+        74.0,
         104.99999999999996,
         62.00000000000001,
         87.0
@@ -446,17 +1079,77 @@
       "id": "bruiser.SuperImpact",
       "page": 2,
       "rect_mm": [
-        74.0,
+        139.0,
         104.99999999999996,
         62.00000000000001,
         87.0
       ]
     },
     {
-      "id": "bruiser.WhatchaDoin",
+      "id": "bruiser.SuperImpact",
+      "page": 2,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.ExtremelyViolentBlow",
+      "page": 2,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.Glare",
       "page": 2,
       "rect_mm": [
         139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.Glare",
+      "page": 3,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.MadeOfStone",
+      "page": 3,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.MadeOfStone",
+      "page": 3,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.YouStop",
+      "page": 3,
+      "rect_mm": [
+        8.999999999999998,
         104.99999999999996,
         62.00000000000001,
         87.0
@@ -464,7 +1157,27 @@
     },
     {
       "id": "bruiser.YouStop",
-      "page": 2,
+      "page": 3,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.mara.CinghiataDiTraverso",
+      "page": 3,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.mara.Sgommata",
+      "page": 3,
       "rect_mm": [
         8.999999999999998,
         14.999999999999977,
@@ -473,8 +1186,8 @@
       ]
     },
     {
-      "id": "bruiser.YouStop",
-      "page": 2,
+      "id": "base.mara.Sgommata",
+      "page": 3,
       "rect_mm": [
         74.0,
         14.999999999999977,
@@ -483,8 +1196,8 @@
       ]
     },
     {
-      "id": "bruiser.character.LittleRage",
-      "page": 2,
+      "id": "base.mara.SorpassoInCurva",
+      "page": 3,
       "rect_mm": [
         139.0,
         14.999999999999977,
@@ -493,8 +1206,8 @@
       ]
     },
     {
-      "id": "bruiser.character.LittleSmack",
-      "page": 3,
+      "id": "base.mara.SorpassoInCurva",
+      "page": 4,
       "rect_mm": [
         8.999999999999998,
         195.0,
@@ -503,8 +1216,8 @@
       ]
     },
     {
-      "id": "com.Grab",
-      "page": 3,
+      "id": "base.mara.TraDueParaurti",
+      "page": 4,
       "rect_mm": [
         74.0,
         195.0,
@@ -513,8 +1226,8 @@
       ]
     },
     {
-      "id": "com.Grab",
-      "page": 3,
+      "id": "base.mara.TraDueParaurti",
+      "page": 4,
       "rect_mm": [
         139.0,
         195.0,
@@ -523,10 +1236,20 @@
       ]
     },
     {
-      "id": "com.ShuffleFeet",
-      "page": 3,
+      "id": "base.mara.Slalom",
+      "page": 4,
       "rect_mm": [
         8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.mara.Slalom",
+      "page": 4,
+      "rect_mm": [
+        74.0,
         104.99999999999996,
         62.00000000000001,
         87.0
@@ -534,17 +1257,7 @@
     },
     {
       "id": "com.Steal",
-      "page": 3,
-      "rect_mm": [
-        74.0,
-        104.99999999999996,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "com.Steal",
-      "page": 3,
+      "page": 4,
       "rect_mm": [
         139.0,
         104.99999999999996,
@@ -553,58 +1266,328 @@
       ]
     },
     {
-      "id": "com.basic.BruiserGrab",
-      "page": 3,
+      "id": "com.Steal",
+      "page": 4,
       "rect_mm": [
         8.999999999999998,
         14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.SeagullFly",
+      "page": 4,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.SeagullFly",
+      "page": 4,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.SeagullFly",
+      "page": 5,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.MattoneDelCantiere",
+      "page": 5,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.HealingBlow",
+      "page": 5,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.TartarugaSulMarciapiede",
+      "page": 5,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.TartarugaSulMarciapiede",
+      "page": 5,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.TartarugaSulMarciapiede",
+      "page": 5,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.DentiStretti",
+      "page": 5,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.SputoDaPosacenere",
+      "page": 5,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.SputoDaPosacenere",
+      "page": 5,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.Spintone",
+      "page": 6,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.Spintone",
+      "page": 6,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.Spintone",
+      "page": 6,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.Spintone",
+      "page": 6,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.items.CocktailOnTheGround",
+      "page": 6,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.items.CocktailOnTheGround",
+      "page": 6,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.PosacenereDiVetro",
+      "page": 6,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.EspressoDelDistributore",
+      "page": 6,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.EspressoDelDistributore",
+      "page": 6,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.EspressoDelDistributore",
+      "page": 7,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.GhiaccioNelTovagliolo",
+      "page": 7,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.DueDitaInGola",
+      "page": 7,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.com.DueDitaInGola",
+      "page": 7,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.PaninoDelKebab",
+      "page": 7,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.PaninoDelKebab",
+      "page": 7,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.PaninoDelKebab",
+      "page": 7,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.PaninoDelKebab",
+      "page": 7,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.GiubbottoDiFintaPelle",
+      "page": 7,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.GiubbottoDiFintaPelle",
+      "page": 8,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.GiubbottoDiFintaPelle",
+      "page": 8,
+      "rect_mm": [
+        74.0,
+        195.0,
         62.00000000000001,
         87.0
       ]
     },
     {
       "id": "com.basic.ToxicGrab",
-      "page": 3,
-      "rect_mm": [
-        74.0,
-        14.999999999999977,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "com.items.AnotherRottenBeer",
-      "page": 3,
-      "rect_mm": [
-        139.0,
-        14.999999999999977,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "com.items.AnotherRottenBeer",
-      "page": 4,
-      "rect_mm": [
-        8.999999999999998,
-        195.0,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "com.items.CocktailOnTheGround",
-      "page": 4,
-      "rect_mm": [
-        74.0,
-        195.0,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "com.items.CocktailOnTheGround",
-      "page": 4,
+      "page": 8,
       "rect_mm": [
         139.0,
         195.0,
@@ -613,8 +1596,8 @@
       ]
     },
     {
-      "id": "com.items.MarvelousCocktail",
-      "page": 4,
+      "id": "junkie.character.PatheticBlade",
+      "page": 8,
       "rect_mm": [
         8.999999999999998,
         104.99999999999996,
@@ -623,110 +1606,10 @@
       ]
     },
     {
-      "id": "com.items.RottenBeer",
-      "page": 4,
+      "id": "base.tossico.bound.RaschiareIlFondo",
+      "page": 8,
       "rect_mm": [
         74.0,
-        104.99999999999996,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "com.items.RottenBeer",
-      "page": 4,
-      "rect_mm": [
-        139.0,
-        104.99999999999996,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "com.items.RottenBeer",
-      "page": 4,
-      "rect_mm": [
-        8.999999999999998,
-        14.999999999999977,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "com.last.Struggle",
-      "page": 4,
-      "rect_mm": [
-        74.0,
-        14.999999999999977,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "com.last.Struggle",
-      "page": 4,
-      "rect_mm": [
-        139.0,
-        14.999999999999977,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "junkie.AmphetamineReflexes",
-      "page": 5,
-      "rect_mm": [
-        8.999999999999998,
-        195.0,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "junkie.AmphetamineReflexes",
-      "page": 5,
-      "rect_mm": [
-        74.0,
-        195.0,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "junkie.BadTrip",
-      "page": 5,
-      "rect_mm": [
-        139.0,
-        195.0,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "junkie.Cough",
-      "page": 5,
-      "rect_mm": [
-        8.999999999999998,
-        104.99999999999996,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "junkie.EverythingIsDrug",
-      "page": 5,
-      "rect_mm": [
-        74.0,
-        104.99999999999996,
-        62.00000000000001,
-        87.0
-      ]
-    },
-    {
-      "id": "junkie.GoingBerserk",
-      "page": 5,
-      "rect_mm": [
-        139.0,
         104.99999999999996,
         62.00000000000001,
         87.0
@@ -734,7 +1617,17 @@
     },
     {
       "id": "junkie.LethalHeroinDose",
-      "page": 5,
+      "page": 8,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.MethDrivenRage",
+      "page": 8,
       "rect_mm": [
         8.999999999999998,
         14.999999999999977,
@@ -744,17 +1637,107 @@
     },
     {
       "id": "junkie.MethDrivenRage",
-      "page": 5,
+      "page": 8,
       "rect_mm": [
         74.0,
         14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.Cough",
+      "page": 8,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.Cough",
+      "page": 9,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
         62.00000000000001,
         87.0
       ]
     },
     {
       "id": "junkie.PervertedMetabolism",
-      "page": 5,
+      "page": 9,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.PervertedMetabolism",
+      "page": 9,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.AmphetamineReflexes",
+      "page": 9,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.AmphetamineReflexes",
+      "page": 9,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.ToxicBloodDrain",
+      "page": 9,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.Grab",
+      "page": 9,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.Grab",
+      "page": 9,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.Grab",
+      "page": 9,
       "rect_mm": [
         139.0,
         14.999999999999977,
@@ -763,8 +1746,8 @@
       ]
     },
     {
-      "id": "junkie.ToxicBloodDrain",
-      "page": 6,
+      "id": "base.com.RincorsaDalMarciapiede",
+      "page": 10,
       "rect_mm": [
         8.999999999999998,
         195.0,
@@ -773,8 +1756,8 @@
       ]
     },
     {
-      "id": "junkie.character.PatheticBlade",
-      "page": 6,
+      "id": "base.com.FasciaturaColFazzolettaccio",
+      "page": 10,
       "rect_mm": [
         74.0,
         195.0,
@@ -783,8 +1766,8 @@
       ]
     },
     {
-      "id": "junkie.character.RottenSmile",
-      "page": 6,
+      "id": "base.com.FasciaturaColFazzolettaccio",
+      "page": 10,
       "rect_mm": [
         139.0,
         195.0,
@@ -793,8 +1776,8 @@
       ]
     },
     {
-      "id": "bruiser.character.BigBadBruiser",
-      "page": 6,
+      "id": "base.items.PasticcaTrovataSulBancone",
+      "page": 10,
       "rect_mm": [
         8.999999999999998,
         104.99999999999996,
@@ -803,11 +1786,401 @@
       ]
     },
     {
-      "id": "junkie.character.ToxicJunkie",
-      "page": 6,
+      "id": "base.items.PasticcaTrovataSulBancone",
+      "page": 10,
       "rect_mm": [
         74.0,
         104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.items.MarvelousCocktail",
+      "page": 10,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.QuestoLoFiniscoIo",
+      "page": 10,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.bound.CinqueMinutiEVado",
+      "page": 10,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.bound.SpallataAlBancone",
+      "page": 10,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.UltimoGiro",
+      "page": 11,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.TestataDaUltimoGiro",
+      "page": 11,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.TestataDaUltimoGiro",
+      "page": 11,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.GoingBerserk",
+      "page": 11,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.GoingBerserk",
+      "page": 11,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.IlBanconeRegge",
+      "page": 11,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.IlBanconeRegge",
+      "page": 11,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.OffroIo",
+      "page": 11,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.OffroIo",
+      "page": 11,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.RuttoADistanzaSociale",
+      "page": 12,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.AmaroNelBicchiereDiPlastica",
+      "page": 12,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.AmaroNelBicchiereDiPlastica",
+      "page": 12,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.items.RottenBeer",
+      "page": 12,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.items.RottenBeer",
+      "page": 12,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.items.AnotherRottenBeer",
+      "page": 12,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.gigi.QuestoTornaUtile",
+      "page": 12,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.gigi.bound.UnaStrettaEPassa",
+      "page": 12,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.gigi.bound.ColpoDiCacciavite",
+      "page": 12,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.BreakYourToy",
+      "page": 13,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.BreakYourToy",
+      "page": 13,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.gigi.ChiaveDaTredici",
+      "page": 13,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.gigi.ChiaveDaTredici",
+      "page": 13,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.gigi.ColpoDiChiaveInglese",
+      "page": 13,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.gigi.ColpoDiChiaveInglese",
+      "page": 13,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.gigi.SottoIlCofano",
+      "page": 13,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.gigi.LavoroFattoBene",
+      "page": 13,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.GuantiDaOfficina",
+      "page": 13,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.GuantiDaOfficina",
+      "page": 14,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.CascoDaLavoro",
+      "page": 14,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.items.CascoDaLavoro",
+      "page": 14,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.bruiser.TiFaccioSpazio",
+      "page": 14,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.mara.TiStringoLaCurva",
+      "page": 14,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.tossico.UnAssaggino",
+      "page": 14,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.pino.PrimaIlBrindisi",
+      "page": 14,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "base.gigi.UnaStrettaDiProva",
+      "page": 14,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
         62.00000000000001,
         87.0
       ]

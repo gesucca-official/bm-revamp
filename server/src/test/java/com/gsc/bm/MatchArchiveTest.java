@@ -50,7 +50,8 @@ class MatchArchiveTest {
         byte[] before = Files.readAllBytes(original); Files.copy(original, copy);
         var migrated = jdbc(copy);
         assertArrayEquals(before, Files.readAllBytes(original));
-        assertEquals(3, migrated.queryForObject("SELECT COUNT(*) FROM BM_SCHEMA_VERSION", Integer.class));
+        // SB-28 (D182 (3)): V004 deletes only the saved decks with cards that left the set; this one has none and stays.
+        assertEquals(4, migrated.queryForObject("SELECT COUNT(*) FROM BM_SCHEMA_VERSION", Integer.class));
         assertEquals(checksum, migrated.queryForObject("SELECT checksum FROM BM_SCHEMA_VERSION WHERE version=1", String.class));
         for (String table : List.of("USR001_CREDENTIALS", "USR002_DECKS", "LOG001_GAMES", "LOG002_WEB_CLIENT")) {
             assertEquals(legacy.queryForList("SELECT * FROM " + table), migrated.queryForList("SELECT * FROM " + table));
@@ -140,12 +141,12 @@ class MatchArchiveTest {
         assertThrows(AccessDeniedException.class, () -> reread.export(game.getGameId(), "stranger"));
         assertThrows(AccessDeniedException.class, () -> reread.export("missing", "a"));
         var initialTree = mapper.readTree(initial).path("data");
-        assertEquals("1.14", initialTree.path("versions").path("rulesVersion").asText());
+        assertEquals("2.0", initialTree.path("versions").path("rulesVersion").asText()); // SB-28 (D183): regulation 2.0
         // Regulation 1.13 (SB-2): the archive also records the version and hash of every set document.
         var sets = initialTree.path("versions").path("sets");
         var ids = new java.util.ArrayList<String>(); sets.fieldNames().forEachRemaining(ids::add);
         assertEquals(List.of("base"), ids);
-        assertEquals("0.1", sets.path("base").path("version").asText());
+        assertEquals("1.0", sets.path("base").path("version").asText()); // SB-28 (D183): Set Base 1.0
         assertTrue(sets.path("base").path("sha256").asText().matches("[0-9a-f]{64}"));
         for (String hash : List.of("codeSha256","rulesSha256","catalogSha256","rulesCatalogSha256")) {
             assertTrue(initialTree.path("versions").path(hash).asText().matches("[0-9a-f]{64}"));

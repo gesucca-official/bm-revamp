@@ -11,6 +11,7 @@ import com.gsc.bm.model.game.status.StatusType;
 
 import java.util.List;
 
+/** «Bottiglia Spaccata», token del Set Base (slot TOKEN): nome e testo breve sono quelli della scheda, D168 (4) applicata in SB-28. */
 public class BrokenBeerBottle extends AbstractItemCard {
 
     public static Status newStatus() { return Status.builder()
@@ -28,8 +29,8 @@ public class BrokenBeerBottle extends AbstractItemCard {
 
     public BrokenBeerBottle() {
         super();
-        setGuiName("Broken Beer Bottle");
-        setGuiEffectDescription("Equip: Hit Damage x1.5, converted to Cut. Removed at turn end after use; may apply again that turn. Independent status per application: regulation 1.1 R05.");
+        setGuiName("Bottiglia Spaccata");
+        setGuiEffectDescription("Quando lo consumi: i tuoi [[HIT]] diventano [[CUT]] e ne infliggi una volta e mezza (equipaggiamento). Dopo il primo uso dura solo fino a fine turno.");
         // Not in the SQLite catalog: role and gains are declared here like the name (regulation 1.7 R07a).
         setGuiRole("OTHER", "—");
         // It converts the holder's hits but deals no damage itself (regulation 1.9 R07a).

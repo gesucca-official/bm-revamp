@@ -20,7 +20,7 @@ function inspect(id,x) {
     const card=b=>profile.collection.cards.find(c=>c.bindingName===b);
     // R02 1.12: a valid deck (own basic, two own bound cards, 20 regular cards, two copies each); only an active open match is needed.
     const regular=['bruiser.Glare','bruiser.StunningBlow','bruiser.SuperImpact','bruiser.YouStop','bruiser.MadeOfStone',
-      'bruiser.SeagullFly','bruiser.HealingBlow','com.ShuffleFeet','com.Grab','com.Steal'];
+      'bruiser.SeagullFly','bruiser.HealingBlow','base.com.ShuffleFeet','com.Grab','com.Steal'];
     const saved=(await o.command({command:'save',deck:{deckId:'restart-deck',
       character:profile.collection.characters.find(c=>c.bindingName==='bruiser.character.BigBadBruiser'),
       basicActionCard:card('com.basic.BruiserGrab'),characterBoundCards:[card('bruiser.character.LittleSmack'),card('bruiser.character.LittleRage')],

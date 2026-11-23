@@ -130,7 +130,8 @@ class CatalogEffectsTest {
         Character a=new BigBadBruiser(),b=new BigBadBruiser();
         new BrokenBeerBottle().applyEffectOnSelf(b); new Glare().applyEffectOnSelf(b);
         effect(new BadEducation(),a,b);
-        assertEquals(85,value(b,Resource.HEALTH)); assertEquals(1,b.getStatuses().size()); assertFalse(b.getStatuses().get(0).isEquip());
+        // SB-28 (D181 (3), lista di SB-27): 8 HIT invece di 10 (Set Base 1.0), con lo stesso stato: 12 invece di 15.
+        assertEquals(88,value(b,Resource.HEALTH)); assertEquals(1,b.getStatuses().size()); assertFalse(b.getStatuses().get(0).isEquip());
     }
     @Test void lot2_badTripThreeTicksIncludingCreationAndNegativeT() {
         Player a=player("a"),b=player("b"); Character c=a.getCharacter();
@@ -212,7 +213,8 @@ class CatalogEffectsTest {
                 assertTrue(m.isValidFor(g).isValid()); g.submitMove(m); g.submitMove(Move.voidMove("b"));
                 owner.getItems().clear(); round(g);
                 assertEquals(card instanceof Steal || card instanceof ToxicGrab?10:20,value(a.getCharacter(),Resource.ALERTNESS));
-                assertEquals(card instanceof BreakYourToy?15:25,value(a.getCharacter(),Resource.VIOLENCE));
+                // SB-28 (D181 (3), lista di SB-27): «Disassemblare» costa 5 V invece di 10.
+                assertEquals(card instanceof BreakYourToy?20:25,value(a.getCharacter(),Resource.VIOLENCE));
                 assertEquals(card instanceof EverythingIsDrug?20:0,value(a.getCharacter(),Resource.TOXICITY));
                 assertEquals(card instanceof EverythingIsDrug?90:100,value(a.getCharacter(),Resource.HEALTH)); // R06 poison
                 assertEquals(0,value(a.getCharacter(),Resource.ALCOHOL)); assertTrue(owner.getItems().isEmpty());

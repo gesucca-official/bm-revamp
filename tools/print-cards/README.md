@@ -2,6 +2,8 @@
 
 Generatore riutilizzabile, senza elenco carte o effetti mantenuto a mano. Non modifica database, regole o client. Richiede Python 3.10+ e **ReportLab**; usa Arial di Windows (incorporato nel PDF), oppure DejaVu Sans su Linux. Nessuna immagine esterna.
 
+Da SB-28 (regolamento 2.0, Set Base 1.0) la stampa legge il **file del set vivo**, `server/src/main/resources/sets/base.json`: lo stesso che legge il server. La versione del set stampata è quella del documento del set (`docs/sets/base.md`, «Set Base 1.0»; il file conserva quella della bozza congelata, 1.7), la versione del regolamento è letta da `docs/game-rules.md`. Il generatore della stampa dello 0.1, che leggeva il catalogo SQLite e le schede del documento del set, è uscito con quel set (archiviato in `docs/history/set-base-0.1.md`).
+
 Da PowerShell, nella radice `E:\bm`:
 
 ```powershell
@@ -9,7 +11,7 @@ python -m pip install -r tools/print-cards/requirements.txt
 python tools/print-cards/generate.py
 ```
 
-Risultati: `output/pdf/botte-micidiali-carte.pdf` e relativo `.manifest.json`, con inventario, copie, coordinate in mm e impronte delle fonti. Il PDF contiene prima i fronti, poi legenda, composizione starter dal database e testo normativo R02-R06. Una copia di ciascuna carta **non è un mazzo starter completo**.
+Risultati: `output/pdf/botte-micidiali-carte.pdf` e relativo `.manifest.json`, con set, versione del regolamento, impronta del file del set, inventario, copie e coordinate in mm. Il PDF contiene i 124 fronti (7 personaggi e 117 carte), poi la guida al tavolo (simboli, lettura della carta, parole chiave, composizione degli starter) e il libretto dei testi completi (125 voci, token compreso). Una copia di ciascuna carta **non è un mazzo**. I due PDF vivi in `output/pdf/` (`botte-micidiali-carte.pdf`, `botte-micidiali-starter.pdf`) sono nel repository e si rigenerano quando cambia il set.
 
 ## Configurazione
 
@@ -22,94 +24,75 @@ python tools/print-cards/generate.py --copies-file tools/print-cards/copies.exam
 python tools/print-cards/generate.py --output output/pdf/prova.pdf
 ```
 
-`--copies-file` accetta un oggetto JSON `identificatore completo: quantità`, senza abbreviazioni. Le quantità sostituiscono `--copies` solo per le carte indicate; 0 omette la carta. Usare `--copies 0 --copies-file ...` per una selezione esclusiva. Gli identificatori sono nel manifest. Il file di esempio è solo un esempio di quantità, non un catalogo duplicato.
+`--copies-file` accetta un oggetto JSON `identificatore completo: quantità` (gli identificatori del file del set, elencati nel manifest), senza abbreviazioni. Le quantità sostituiscono `--copies` solo per le carte indicate; 0 omette la carta. Usare `--copies 0 --copies-file ...` per una selezione esclusiva. Il file di esempio è solo un esempio di quantità.
 
-Opzioni aggiuntive: `--database`, `--rules`, `--annex`, `--font-dir`. Quest'ultima richiede `arial.ttf` + `arialbd.ttf`, oppure `DejaVuSans.ttf` + `DejaVuSans-Bold.ttf`.
+Opzione aggiuntiva: `--font-dir`, che richiede `arial.ttf` + `arialbd.ttf`, oppure `DejaVuSans.ttf` + `DejaVuSans-Bold.ttf`.
 
 ## Stampa degli starter
 
 ```powershell
-# Elenca gli starter senza creare o modificare PDF
+# Elenca i cinque starter (nome e categoria, D182) senza creare PDF
 python tools/print-cards/generate.py --list-starters
-# Un mazzo completo (25 fronti oggi, incluso il personaggio)
-python tools/print-cards/generate.py --starter BigBadBruiser --output output/pdf/starter-bruiser.pdf
-# Tutti gli starter disponibili: attualmente 50 fronti totali
-python tools/print-cards/generate.py --all-starters --output output/pdf/botte-micidiali-starter.pdf
-# Due copie di ogni starter disponibile
+# Un mazzo: 25 fronti, personaggio compreso
+python tools/print-cards/generate.py --starter Mara --output output/pdf/starter-mara.pdf
+# Tutti gli starter: 125 fronti
+python tools/print-cards/generate.py --all-starters
+# Due copie di ogni starter; una selezione (ripetere lo stesso --starter aggiunge un altro mazzo)
 python tools/print-cards/generate.py --all-starters --copies 2 --output output/pdf/starter-doppi.pdf
-# Una selezione di mazzi; ripetere lo stesso --starter aggiunge un altro mazzo
-python tools/print-cards/generate.py --starter BigBadBruiser --starter ToxicJunkie --output output/pdf/starter-selezionati.pdf
-# Aggiungi token o modifica quantità dopo il calcolo dei mazzi
+python tools/print-cards/generate.py --starter Spazienzio --starter Celestina --output output/pdf/starter-selezionati.pdf
+# Token o quantità puntuali dopo il calcolo dei mazzi
 python tools/print-cards/generate.py --all-starters --copies-file tools/print-cards/copies.example.json --output output/pdf/starter-con-token.pdf
 ```
 
-`--starter` accetta identificatore completo, nome breve della classe (per esempio `ToxicJunkie`) o nome visualizzato del personaggio, tra virgolette se contiene spazi. Il confronto ignora maiuscole/minuscole. Se un nome è ambiguo, usare l'identificatore completo mostrato da `--list-starters`. `--starter` è ripetibile; non si combina con `--all-starters`.
+`--starter` accetta l'identificatore del mazzo (anche senza `starter-`), il nome dello starter (Spazienzio, Mara, Celestina, Piera, Beppe), l'identificatore o il nome visualizzato del personaggio, tra virgolette se contiene spazi; maiuscole e minuscole non contano. Con `--all-starters` l'uscita predefinita è `output/pdf/botte-micidiali-starter.pdf`.
 
-La modalità starter conta automaticamente il personaggio, ogni slot delle carte iniziali (basic, bound e last resort) e le quantità delle carte regolari. Le copie condivise tra mazzi si **sommano**, comprese le last resort. I fronti restano raggruppati per carta: per dividerli nei mazzi, seguire le composizioni riportate nella guida. Il manifest registra selezione e quantità finali.
+Un mazzo conta personaggio + base + 2 legate + ultima risorsa + 20 carte = 25 fronti. Le copie condivise fra mazzi si **sommano**; i fronti restano raggruppati per carta e la guida riporta le composizioni per dividerli. `--copies` moltiplica i mazzi, `--copies-file` imposta poi quantità assolute. Il token Bottiglia Spaccata nasce in partita e non fa parte dei mazzi: si aggiunge col JSON (l'esempio ne mette 4).
 
-Con `--starter` o `--all-starters`, **`--copies` moltiplica i mazzi**; `--copies-file` imposta poi quantità assolute per le singole carte. Senza selezione starter, restano valide le opzioni di stampa del catalogo descritte sopra. I token generati in partita non fanno parte degli starter e vanno aggiunti esplicitamente tramite JSON; l'esempio include 4 BrokenBeerBottle.
+## Bozze
 
-Gli starter sono individuati dai proprietari nelle due tabelle SQLite: nessun elenco fisso di personaggi o quantità nel codice. Un nuovo starter con personaggio, carte e riferimenti normativi validi compare automaticamente nell'elenco e in `--all-starters`, usando lo schema attuale delle tabelle. Quantità non positive, riferimenti mancanti, mazzi regolari assenti e sottotipi iniziali non validi vengono segnalati prima di scrivere il PDF. Il regolamento e il gioco non vengono modificati.
+Con `--bozza` la sorgente è una bozza nel formato del file del set invece del set vivo: senza percorso la bozza del repository, `server/src/test/resources/set-base/bozza.json` (7 personaggi, 117 carte, i 5 starter e i mazzi di misura), oppure il percorso indicato. Ogni fronte porta «BOZZA PROVVISORIA» e la guida si apre con l'avviso di bozza non normativa. Uscite: `output/pdf/bozza-set-base.pdf` o `output/pdf/bozza-starter.pdf`, che non vanno aggiunte al repository.
 
-## Nuove carte
+```powershell
+python tools/print-cards/generate.py --bozza
+python tools/print-cards/generate.py --bozza --list-starters
+python tools/print-cards/generate.py --bozza --starter starter-spazienzio --output output/pdf/bozza-starter-spazienzio.pdf
+# I 5 starter-*; con --all-decks anche i mazzi di misura (prova-*, iso-*)
+python tools/print-cards/generate.py --bozza --all-starters --all-decks
+python tools/print-cards/generate.py --bozza altra-bozza.json --copies 0 --copies-file tools/print-cards/copies.example.json
+```
 
-A ogni esecuzione vengono rilette tutte le righe di `CRD001_GUI` e `CRD003_CHARACTERS`, senza limite fisso al numero di carte. Nomi e descrizioni provengono da SQLite; classificazione, costi, priorità, bersagli, risorse iniziali ed effetti sono confrontati/ricavati dalle schede del documento del set, `docs/sets/base.md` (opzione `--set`; dal regolamento 1.13 le carte non sono più in R07). L'allegato `docs/rules-catalog.json` deve dichiarare lo stesso set e la stessa versione. I token, assenti dal database, sono scoperti dalla sezione `tokens` dell'allegato, con effetti dal documento del set. Sulle carte si stampano versione del regolamento e del set. Gli starter sono letti da `DCK001_STARTERS` e `DCK002_STARTERS_CH`.
+Un nome di personaggio con più mazzi di misura e nessuno starter (Sergio Sommerso e Duccio Braccio Teso nella bozza) è ambiguo: l'errore elenca gli identificatori da usare.
 
-Aggiungere carte secondo AGENTS.md: prima aggiornare il documento del set, poi database, allegato, test e client. Non occorre aggiornare questo script per aggiunte nei tipi e formati correnti. Una carta aggiunta **solo al database** causa un errore esplicito: mancherebbero dati normativi sufficienti per stamparla correttamente. Nuovi schemi di tabella o nuove meccaniche/tipologie possono richiedere un'estensione del lettore. Lo script rifiuta testi che non entrano anziché troncarli o ridurne automaticamente il carattere. Gli effetti usano 9 pt; i promemoria 7 pt; gli identificatori 6 pt.
+## Cosa c'è sulla carta e nella guida
 
-L'unico rinvio specifico completato automaticamente è BrokenBeerBottle (SingleUse da R05); la durata di MadeOfStone è nella sua scheda dal regolamento 1.13. Nessun effetto è riscritto per armonizzarlo a vecchie descrizioni. In particolare RottenBeer non equipaggia; AnotherRottenBeer genera il token consumandola. SoberUp non viene esportata perché esclusa dal catalogo/regolamento.
+- **Fronti.** Nome, tipo e rarità (comune, non comune, rara; i personaggi PROTAGONISTA, P, senza pallini: regolamento, R07), costo, priorità, bersaglio, ruolo ed eventuale danno nominale (simbolo e quantità), testo breve, flavour in corsivo a 7,5 pt (D166 (2)), slot e identificatore. Personaggi: risorse iniziali, capacità oggetti con l'immunità, base e legate (2 a scelta). Nella fascia in alto il set («SET BASE 1.0», o «BOZZA PROVVISORIA»); al piede set e versione, versione del regolamento («reg. 2.0») e i primi 12 caratteri dello SHA-256 del file: una stampa vecchia si riconosce dall'impronta, che il manifest riporta intera. Le carte senza `targets` (quelle con classe Java) stampano «Bersaglio: come da testo». Una rarità sconosciuta interrompe la generazione.
+- **Simboli.** I segnaposto `[[H]] [[A]] [[V]] [[T]] [[L]]` e quelli di danno `[[HIT]] [[CUT]] [[POISON]]` (D168 (1)) diventano i simboli vettoriali del client, portati da `client-web/src/symbols.ts` e `readability.ts` in `symbols_pdf.py` (stesse forme e colori, nessun glifo di font). Un segnaposto sconosciuto o non chiuso interrompe la generazione. `SymbolPortTest` confronta colori e forme letterali con i sorgenti TypeScript: se il client cambia un simbolo il test fallisce e `symbols_pdf.py` va riallineato.
+- **Guida.** Rinvio al regolamento e al documento del set, istruzioni di stampa con controllo da 50 mm, legenda dei simboli (risorse, ruoli, danni), lettura della carta, regole delle parole chiave e di ciò che le carte presuppongono (metà e quarti, mai sotto zero, chi si muove prima, Gioca d'anticipo, Rincara, Annuncia, Vulnerabile, stati e durate, equipaggiamento, Immune, fine turno, corazza dell'alcol), ognuna con la regola del regolamento da cui viene (SB-28: i rimandi alle regole del playground, RP-n, sono diventati rimandi al regolamento 2.0 secondo `docs/design/set-base/sb-28/corrispondenza.md`), e composizione dei mazzi stampati (o degli starter con il catalogo).
+- **Testi completi.** Dopo la guida, un libretto con il testo completo (D170) di ogni voce stampata, da `docs/design/set-base/testi/testi-completi.json`: nel catalogo le 125 voci, nei mazzi le voci stampate più il token. In caso di dubbio prevale sul testo breve.
+- **Testi che non entrano.** Non si tronca né si riduce: ogni carta è disposta una volta su una pagina di prova e tutte le carte che non entrano vengono elencate insieme prima di scrivere il PDF. Il flavour conta: un fronte che non entra col flavour è rifiutato e il messaggio dice quanto resterebbe senza. Col formato predefinito 62 × 87 mm entrano tutte (prova d'ingombro di SB-25 B2: `docs/reports/set-base/sb-25/ingombro-stampa.py`).
+- **Riesecuzione.** Il file è riletto a ogni esecuzione; un mazzo non valido (carta mancante, 20 carte, 2 copie, 2 legate del proprio personaggio) è un errore esplicito.
 
 ## Stampa e taglio
 
 - Carta **A4**, stampa a colori, solo fronte, **dimensioni effettive / 100%**, senza adattamento alla pagina e senza modalità senza bordi che ingrandisca il foglio.
-- Impostazioni iniziali: taglio **62 × 87 mm**, 9 fronti per foglio in griglia 3 × 3, spazio di taglio 3 mm. Griglia centrata: margini reali 9 mm orizzontali e 15 mm verticali; segni esterni lunghi 1 mm distanziati di 0,5 mm dalla carta.
-- Prima di stampare tutto, misurare il segmento da 50 mm della legenda e una carta. La precisione finale dipende dalla stampante e dal taglio, non certificabili dal PDF.
+- Impostazioni iniziali: taglio **62 × 87 mm**, 9 fronti per foglio in griglia 3 × 3, spazio di taglio 3 mm. Griglia centrata; segni esterni lunghi 1 mm distanziati di 0,5 mm dalla carta.
+- Prima di stampare tutto, misurare il segmento da 50 mm della guida e una carta. La precisione finale dipende dalla stampante e dal taglio, non certificabili dal PDF.
 - Stampa le sole pagine dei fronti se non serve la guida. Segui i piccoli segni esterni, usando righello e taglierina. Inserisci davanti a una carta di supporto nella sleeve; verifica prima una sleeve reale.
-- Campiture ridotte, fondo bianco, testi e simboli vettoriali. Colori supportati da forme ed etichette per restare distinguibili anche con resa cromatica variabile.
-
-## Bozza del Set Base
-
-Con `--bozza` la sorgente non è il catalogo vivo (SQLite, `docs/sets/base.md`, `docs/rules-catalog.json`) ma la bozza del Set Base, `server/src/test/resources/set-base/bozza.json` (o il percorso indicato): 7 personaggi, 117 carte e i mazzi. Serve a stampare la bozza corrente per giocare di persona. **Non è normativa**: le regole del playground sono in `docs/design/set-base/regole-playground.md` (profilo d50) e la guida le richiama e ne riassume le parole chiave, citando la fonte. Il modo vivo resta invariato (stessi PDF e stessi manifest, byte per byte).
-
-```powershell
-# Le 124 carte della bozza (7 personaggi + 117 carte), una copia ciascuna, più guida e testi completi
-python tools/print-cards/generate.py --bozza
-# Elenca i 26 mazzi (starter-* e mazzi di misura prova-*, iso-*) senza creare PDF
-python tools/print-cards/generate.py --bozza --list-starters
-# Un mazzo: identificatore (anche senza "starter-"), identificatore del personaggio o nome visualizzato
-python tools/print-cards/generate.py --bozza --starter starter-spazienzio --output output/pdf/bozza-starter-spazienzio.pdf
-python tools/print-cards/generate.py --bozza --starter "Beppe Bulletta" --copies 2
-# I 5 starter-*; con --all-decks tutti i 26 mazzi
-python tools/print-cards/generate.py --bozza --all-starters
-python tools/print-cards/generate.py --bozza --all-starters --all-decks
-# Un'altra bozza, quantità puntuali
-python tools/print-cards/generate.py --bozza altra-bozza.json --copies 0 --copies-file tools/print-cards/copies.example.json
-```
-
-Uscite: `output/pdf/bozza-set-base.pdf` (catalogo) oppure `output/pdf/bozza-starter.pdf` (mazzi) con il relativo `.manifest.json`; si cambia con `--output`. Le stampe della bozza non vanno aggiunte al repository: cambiano a ogni revisione.
-
-- **Fronti.** Nome, tipo e rarità (comune, non comune, rara; i personaggi PROTAGONISTA, P, senza pallini: regolamento 1.14, R07), costo, priorità, bersaglio, ruolo ed eventuale danno nominale (simbolo e quantità), testo breve, flavour in corsivo a 7,5 pt sotto il testo (D166 (2)), codice di slot e identificatore. Personaggi: risorse iniziali, capacità oggetti con l'immunità sulla stessa riga, base e legate (2 a scelta). Una rarità sconosciuta interrompe la generazione. Ogni fronte porta «BOZZA PROVVISORIA», la versione del set, il profilo delle regole (`d50`, letto dal titolo di `regole-playground.md`) e i primi 12 caratteri dello SHA-256 di `bozza.json`: una stampa vecchia si riconosce dall'impronta, che il manifest riporta intera. Le carte senza `targets` nella bozza (quelle con classe Java) stampano «Bersaglio: come da testo».
-- **Simboli.** I segnaposto `[[H]] [[A]] [[V]] [[T]] [[L]]` e quelli di danno `[[HIT]] [[CUT]] [[POISON]]` (D168 (1)) diventano i simboli vettoriali del client, portati da `client-web/src/symbols.ts` e `readability.ts` in `symbols_pdf.py` (stesse forme e colori; il contorno scuro di tossicità e alcol sul fondo chiaro come sul tavolo; nessun glifo di font). Un segnaposto sconosciuto o non chiuso interrompe la generazione. `SymbolPortTest` confronta colori e forme letterali con i sorgenti TypeScript: se il client cambia un simbolo il test fallisce e `symbols_pdf.py` va riallineato. Le forme calcolate (stella del danno, ottagono del contrasto, colpo e taglio) sono portate con la stessa formula; il test ne controlla i parametri.
-- **Mazzi.** Conteggio = personaggio + base + 2 legate + ultima risorsa + 20 carte = 25 fronti. Le copie condivise fra mazzi si sommano. `--all-starters` stampa i soli `starter-*` (i giocabili; i `prova-*` e `iso-*` sono mazzi di misura e darebbero 650 fronti); `--all-decks` li include. Un nome di personaggio con più mazzi di misura e nessuno starter (oggi Sergio Sommerso e Duccio Braccio Teso) è ambiguo: l'errore elenca gli identificatori da usare. `--copies` moltiplica i mazzi, `--copies-file` imposta quantità assolute (identificatori della bozza).
-- **Guida.** Avviso di bozza, rinvio a `regole-playground.md`, istruzioni di stampa con controllo da 50 mm, legenda dei simboli (risorse, ruoli, danni), lettura della carta, regole complete delle parole chiave (metà e quarti, mai sotto zero, chi si muove prima, Gioca d’anticipo, Rincara, Annuncia, Vulnerabile, stati e durate, equipaggiamento, Immune, fine turno, corazza dell’alcol; ognuna con la sua fonte) e composizione dei mazzi stampati (o degli starter con il catalogo).
-- **Testi completi.** Dopo la guida, nello stesso PDF, un libretto con il testo completo (D170) di ogni voce stampata, generato da `docs/design/set-base/testi/testi-completi.json`: nel catalogo le 125 voci (7 personaggi, 117 carte e il token Bottiglia Spaccata), nei mazzi le voci stampate più il token. In caso di dubbio prevale sul testo breve. Il manifest riporta `guide_pages`, `full_text_pages` e `full_text_entries`.
-- **Testi che non entrano.** Come nel modo vivo non si tronca né si riduce: ogni carta è disposta una volta su una pagina di prova e tutte le carte che non entrano vengono elencate insieme (identificatore, lunghezza del testo, motivo) prima di scrivere il PDF. Il flavour conta: un fronte che non entra col flavour è rifiutato e il messaggio dice quanto resterebbe senza. Con il formato predefinito 62 × 87 mm entrano tutte, a 9 pt per il testo e 7,5 pt per il flavour (prova d'ingombro di SB-25 B2: `docs/reports/set-base/sb-25/ingombro-stampa.py`, margine minimo 1,33 mm).
-- **Riesecuzione.** Dopo una modifica di `bozza.json` basta rilanciare lo stesso comando: la bozza è riletta a ogni esecuzione e un mazzo non valido (carta mancante, 20 carte, 2 copie, 2 legate del proprio personaggio) è un errore esplicito.
 
 ## Verifiche riproducibili
 
 ```powershell
 python -m pip install pypdf
 python tools/print-cards/verify.py
-python tools/print-cards/test_generator.py   # include i test del modo bozza e del porting dei simboli
-./scripts/build.ps1 -Task Test -Offline
+python tools/print-cards/verify.py output/pdf/botte-micidiali-starter.pdf
+python tools/print-cards/test_generator.py   # set vivo, bozze, mazzi, errori e porting dei simboli
 python scripts/check-rules.py
 # Poppler deve essere disponibile nel PATH per il controllo visivo
 pdftoppm -r 120 -png output/pdf/botte-micidiali-carte.pdf tmp/pdfs/print-cards/page
 # senza Poppler: PyMuPDF (python -m pip install pymupdf), una pagina in PNG
-python -c "import fitz; fitz.open('output/pdf/bozza-set-base.pdf')[0].get_pixmap(dpi=120).save('tmp/pdfs/print-cards/bozza-p01.png')"
+python -c "import fitz; fitz.open('output/pdf/botte-micidiali-carte.pdf')[0].get_pixmap(dpi=120).save('tmp/pdfs/print-cards/p01.png')"
 ```
 
-`verify.py` verifica il PDF predefinito, oppure un percorso come primo argomento: inventario corrente, quantità, dimensioni A4, rettangoli di taglio effettivamente presenti nel PDF, margini, assenza di sovrapposizioni tra carte e presenza dei testi integrali. Il generatore misura tutti i paragrafi prima di pubblicare il risultato, senza riduzione automatica. Revisionare comunque ogni pagina renderizzata, soprattutto dopo aggiunte o modifiche. La verifica del PDF alternativo presuppone le fonti standard del progetto.
+`verify.py` verifica il PDF predefinito, oppure un percorso come primo argomento, contro il file del set nominato nel suo manifest (che non deve essere cambiato dopo la stampa): inventario e quantità (catalogo, mazzi, override), dimensioni A4, rettangoli di taglio effettivamente presenti nel PDF, margini, assenza di sovrapposizioni, nome, identificatore e impronta su ogni foglio, marchio di bozza solo nelle bozze, testi completi presenti e nessun rimando alle regole del playground nella guida. Revisionare comunque le pagine renderizzate, soprattutto dopo aggiunte o modifiche.
 
-La generazione usa solo ReportLab; pypdf e Poppler servono alla verifica. Nessuna modifica alle meccaniche del gioco. Test di regole e unitari non certificano avvio completo di Spring né partita end-to-end.
+La generazione usa solo ReportLab; pypdf e Poppler servono alla verifica. Nessuna modifica alle meccaniche del gioco.

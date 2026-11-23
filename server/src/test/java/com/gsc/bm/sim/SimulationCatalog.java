@@ -22,10 +22,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-/** Catalogo JDBC indipendente dai servizi e dai repository Spring. */
+/**
+ * Catalogo JDBC indipendente dai servizi e dai repository Spring. SB-28: è il catalogo del Set Base 0.1, congelato in
+ * {@value #CATALOG} quando il vivo è passato al Set Base 1.0 (D183); le classi condivise col set nuovo hanno i numeri iniziali
+ * del Set Base 1.0 (lista di SB-27), le sette carte uscite sono nei sorgenti di test.
+ */
 final class SimulationCatalog implements PlayerSource {
     static final String BRUISER = "bruiser.character.BigBadBruiser";
     static final String JUNKIE = "junkie.character.ToxicJunkie";
+    static final String CATALOG = "/set-base/storico/0.1/cards.sqlite";
     private final Map<String, String[]> gui = new LinkedHashMap<>();
     private final Map<String, String[]> special = new LinkedHashMap<>();
     private final Map<String, List<String>> decks = new LinkedHashMap<>();
@@ -40,8 +45,8 @@ final class SimulationCatalog implements PlayerSource {
         this.dataCards = dataCards;
         Path database = Files.createTempFile(outputDirectory(), "catalog-", ".sqlite");
         try {
-            try (InputStream input = SimulationCatalog.class.getResourceAsStream("/cards.sqlite")) {
-                if (input == null) throw new IllegalStateException("Catalogo cards.sqlite assente");
+            try (InputStream input = SimulationCatalog.class.getResourceAsStream(CATALOG)) {
+                if (input == null) throw new IllegalStateException("Catalogo " + CATALOG + " assente");
                 Files.copy(input, database, StandardCopyOption.REPLACE_EXISTING);
             }
             try (Connection connection = DriverManager.getConnection(

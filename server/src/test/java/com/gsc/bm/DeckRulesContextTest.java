@@ -58,14 +58,15 @@ class DeckRulesContextTest extends SqliteContextSupport {
     void savedDeckUnderOlderRulesIsListedButNotPlayed() {
         String user = "sb1-" + java.util.UUID.randomUUID();
         users.save(new UserCredentialsRecord(user, null, "synthetic-hash", "USER"));
+        // SB-28: «Shuffle Feet» left the set with the 0.1; a live card of the Set Base 1.0 takes its place.
         List<String> twenty = new ArrayList<>();
         for (String card : List.of("bruiser.Glare", "bruiser.StunningBlow", "bruiser.SuperImpact", "bruiser.YouStop", "bruiser.MadeOfStone",
-                "com.Grab", "com.Steal", "com.ShuffleFeet", "bruiser.SeagullFly", "bruiser.HealingBlow"))
+                "com.Grab", "com.Steal", "bruiser.ExtremelyViolentBlow", "bruiser.SeagullFly", "bruiser.HealingBlow"))
             twenty.addAll(Collections.nCopies(2, card));
         List<String> bound = List.of("bruiser.character.LittleSmack", "bruiser.character.LittleRage");
         // Saved before 1.12 (straight into the repository): one regular card, valid under 1.11.
         decks.save(new UserDecksRecord(user, "old", new UserStoredDeck("bruiser.character.BigBadBruiser", "com.basic.BruiserGrab",
-                "com.last.Struggle", List.of(), List.of("com.ShuffleFeet"))));
+                "com.last.Struggle", List.of(), List.of("bruiser.ExtremelyViolentBlow"))));
         decks.save(new UserDecksRecord(user, "foreign-bound", new UserStoredDeck("bruiser.character.BigBadBruiser", "com.basic.BruiserGrab",
                 "com.last.Struggle", List.of("bruiser.character.LittleSmack", "junkie.character.PatheticBlade"), twenty)));
         decks.save(new UserDecksRecord(user, "valid", new UserStoredDeck("bruiser.character.BigBadBruiser", "com.basic.BruiserGrab",

@@ -246,9 +246,9 @@ class PlaygroundTest {
         cases.put("gui: nome mancante", new Object[] {(Consumer<ObjectNode>) c -> ((ObjectNode) cardOf(c, "com.Grab").get("gui")).remove("name"), "carta com.Grab", "gui", "name"});
         cases.put("nomi uguali", new Object[] {(Consumer<ObjectNode>) c -> ((ObjectNode) cardOf(c, "com.Grab").get("gui")).put("name", "fai basta"), "gui.name", "bruiser.YouStop"});
         cases.put("java: classe sconosciuta", new Object[] {(Consumer<ObjectNode>) c -> cardOf(c, "com.Grab").put("binding", "com.Grabbo"), "carta com.Grabbo", "classe"});
-        cases.put("java: parametro sconosciuto", new Object[] {(Consumer<ObjectNode>) c -> ((ObjectNode) cardOf(c, "bruiser.YouStop").get("params")).put("alertness", 10), "carta bruiser.YouStop", "params.alertness", "alertnessToTarget"});
+        cases.put("java: parametro sconosciuto", new Object[] {(Consumer<ObjectNode>) c -> ((ObjectNode) cardOf(c, "bruiser.BadEducation").get("params")).put("hit", 8), "carta bruiser.BadEducation", "params.hit", "hitDamage"});
         cases.put("java: parametro mancante", new Object[] {(Consumer<ObjectNode>) c -> ((ObjectNode) cardOf(c, "junkie.LethalHeroinDose").get("params")).remove("threshold"), "carta junkie.LethalHeroinDose", "params.threshold"});
-        cases.put("java: parametro testuale", new Object[] {(Consumer<ObjectNode>) c -> ((ObjectNode) cardOf(c, "bruiser.YouStop").get("params")).put("alertnessToTarget", "10"), "carta bruiser.YouStop", "params.alertnessToTarget", "intero"});
+        cases.put("java: parametro testuale", new Object[] {(Consumer<ObjectNode>) c -> ((ObjectNode) cardOf(c, "bruiser.BadEducation").get("params")).put("hitDamage", "8"), "carta bruiser.BadEducation", "params.hitDamage", "intero"});
         cases.put("java: parametro decimale", new Object[] {(Consumer<ObjectNode>) c -> ((ObjectNode) cardOf(c, "com.items.MarvelousCocktail").get("params")).put("turns", 1.5), "carta com.items.MarvelousCocktail", "params.turns", "intero"});
         cases.put("java: params mancante", new Object[] {(Consumer<ObjectNode>) c -> cardOf(c, "com.Grab").remove("params"), "carta com.Grab", "params"});
         cases.put("java: campo a dati", new Object[] {(Consumer<ObjectNode>) c -> cardOf(c, "com.Grab").set("targets", JSON.createArrayNode().add("SELF")), "carta com.Grab", "targets"});

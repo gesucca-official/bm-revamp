@@ -19,7 +19,7 @@ public class GameFactoryServiceImpl implements GameFactoryService {
 
     private final Environment env;
     private final PlayerFactoryService playerFactoryService;
-    /** SB-16c: the rules of the matches, {@link Ruleset#LIVE} unless the profile bozza chooses the playground ones. */
+    /** The rules of the matches: SB-28, {@link Ruleset#LIVE} (regulation 2.0), or those the profile bozza chooses (SB-16c). */
     private final Ruleset ruleset;
 
     @Autowired
@@ -33,7 +33,7 @@ public class GameFactoryServiceImpl implements GameFactoryService {
     }
 
     private Game withRules(Game game) {
-        if (ruleset != Ruleset.LIVE) game.useRuleset(ruleset);
+        game.useRuleset(ruleset); // SB-28: always explicit, the engine's default is the legacy 1.13 of the old tests
         return game;
     }
 

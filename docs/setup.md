@@ -84,7 +84,9 @@ client web non cambia: il server gli manda le carte e la collezione della bozza.
   Esempio: `./scripts/dev.ps1 -Task Server -Bozza -Com starter-spazienzio -Bot prudente`.
 - **Partite:** l'archivio le marca con `versions.draft` (fonti con SHA-256, set e versione «bozza», riserva, computer e stile),
   oltre al database separato.
-- Senza `-Bozza` il server è quello di sempre: nessuna carta, personaggio o mazzo della bozza è raggiungibile.
+- Senza `-Bozza` il server gioca il set vivo (SB-28): Set Base 1.0 col regolamento 2.0, dal file del set
+  `server/src/main/resources/sets/base.json` impacchettato nel jar, coi cinque starter di D182 (quick ne assegna uno a caso).
+  I mazzi di prova (`prova-*`, `iso-*`) e i numeri di una bozza diversa restano raggiungibili solo col profilo `bozza`.
 
 ## Verifiche
 

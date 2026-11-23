@@ -67,7 +67,7 @@ class ApplicationPersistenceTest extends SqliteContextSupport {
         decks.save(new UserDecksRecord(alice, "one", deck("bruiser.SuperImpact")));
         decks.save(new UserDecksRecord(alice, "two", deck("com.Grab")));
         decks.save(new UserDecksRecord(bob, "one", deck("com.Steal")));
-        decks.save(new UserDecksRecord(alice, "one", deck("com.ShuffleFeet")));
+        decks.save(new UserDecksRecord(alice, "one", deck("bruiser.Glare")));
 
         JdbcTemplate reopened = new JdbcTemplate(ApplicationDatabase.open(DATABASE));
         UserCredentialsRepository reopenedUsers = new UserCredentialsRepository(reopened);
@@ -75,10 +75,11 @@ class ApplicationPersistenceTest extends SqliteContextSupport {
         assertTrue(encoder.matches("synthetic-password", reopenedUsers.findById(alice).orElseThrow().getSaltedHash()));
         assertEquals(1, reopenedUsers.findAllByEmail(alice + "@example.invalid").size());
         assertEquals(2, reopenedDecks.findAllByUsername(alice).size());
-        assertEquals(deck("com.ShuffleFeet"), reopenedDecks.findById(new UserDeckRecordKey(alice, "one")).orElseThrow().getDeck());
+        assertEquals(deck("bruiser.Glare"), reopenedDecks.findById(new UserDeckRecordKey(alice, "one")).orElseThrow().getDeck());
         assertEquals(deck("com.Steal"), reopenedDecks.findById(new UserDeckRecordKey(bob, "one")).orElseThrow().getDeck());
         assertEquals(2, accountService.loadUserAccountInfo(alice).getDecks().size());
-        assertEquals(2, accountService.loadUserAccountInfo(alice).getCollection().getCharacters().size());
+        // SB-28 (D182): the collection is the live Set Base 1.0, seven characters (the 0.1 had two).
+        assertEquals(7, accountService.loadUserAccountInfo(alice).getCollection().getCharacters().size());
         reopenedDecks.deleteById(new UserDeckRecordKey(alice, "one"));
         assertTrue(decks.findById(new UserDeckRecordKey(alice, "one")).isEmpty());
         assertTrue(decks.findById(new UserDeckRecordKey(bob, "one")).isPresent());
@@ -143,7 +144,8 @@ class ApplicationPersistenceTest extends SqliteContextSupport {
 
     @Test
     void realCatalogLoadsAndCannotBeWritten() {
-        assertEquals(37, cards.count());
+        // SB-28 (D182, D183): the live Set Base 1.0, 117 cards (the 0.1 had 37); the two characters of the 0.1 have their starter still.
+        assertEquals(117, cards.count());
         assertEquals(20, deckFactory.craftCharacterStarterDeck("bruiser.character.BigBadBruiser").size());
         assertEquals(20, deckFactory.craftCharacterStarterDeck("junkie.character.ToxicJunkie").size());
         cards.findAll().forEach(record -> assertNotNull(cardFactory.craftCard(record.getClazz()).getName()));

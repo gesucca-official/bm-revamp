@@ -21,11 +21,11 @@ public class ToxicBloodDrain extends AbstractCard implements PrintedEffects.Sour
     @Tunable
     private int turns = 1;
     /**
-     * SB-16g passo 3 (D84), playground draft only: POISON dealt to the target after the transfer. 0 in the live card, which then
-     * behaves exactly as before.
+     * SB-16g passo 3 (D84): POISON dealt to the target after the transfer. SB-28 (SB-27 list): no longer optional, every draft writes
+     * it; 0, read only in the historical drafts written before D84, deals none, so their measurements stay as they were.
      */
-    @Tunable(optional = true)
-    private int poison = 0;
+    @Tunable
+    private int poison = 10;
 
     public ToxicBloodDrain() {
         super();
@@ -49,17 +49,13 @@ public class ToxicBloodDrain extends AbstractCard implements PrintedEffects.Sour
     public List<String> applyEffectOnTarget(Character self, Character target) {
         target.getImmunities().remove(Resource.TOXICITY);
         self.getTimers().add(new Timer("Blood Drain", c -> c.getImmunities().add(Resource.TOXICITY), turns));
-        if (poison <= 0)
-            return List.of(
-                    target.gainResource(Resource.TOXICITY, toxicity)
-            );
         List<String> report = new ArrayList<>();
         report.add(target.gainResource(Resource.TOXICITY, toxicity));
-        report.add(self.inflictDamage(target, new Damage(Damage.DamageType.POISON, poison)));
+        if (poison > 0) report.add(self.inflictDamage(target, new Damage(Damage.DamageType.POISON, poison)));
         return report;
     }
 
-    /** D76: the author's TOXICITY, read after costs, moves to the target (its immunity lifted for a while); D84: then POISON if any. */
+    /** D76: the author's TOXICITY, read after costs, moves to the target (its immunity lifted for a while); D84: then POISON (none at 0). */
     @Override
     public PrintedEffects printedEffects() {
         List<PrintedEffects.Step> steps = new ArrayList<>(List.of(

@@ -16,6 +16,9 @@ async function connect(user) {
   const c=new Client(process.env.BM_URL,user,'synthetic',2500); clients.push(c); await c.connect(); return c;
 }
 async function view(c,id) {return (await c.command({command:'view',gameId:id})).data;}
+// SB-28 (D183): the duels come from the live factory, so they play regulation 2.0. Struggle («Addosso!!!», Set Base 1.0) deals 5 HIT
+// to its player and 10 to the opponent, Rincara 5 (2 a te): the k-th play adds 2(k-1) and 5(k-1); HEALTH stops at 0 (R01).
+const taken=k=>5*k+k*(k-1), dealt=k=>10*k+5*k*(k-1)/2, both=k=>taken(k)+dealt(k);
 async function barrier(c) {await c.command({command:'profile'});}
 function privateView(c,v) {
   assert(Array.isArray(v.players[c.user].cardsInHand));
@@ -92,7 +95,7 @@ async function finish(a,b,id) {
       assert.strictEqual(members.length,2);await Promise.all(members.map(x=>watch(x,id)));
       members.forEach(x=>assert.strictEqual(x.events.filter(e=>e.destination===READY).length,1));
     }
-    for(let turn=0;turn<7;turn++) {
+    for(let turn=0;turn<4;turn++) {
       await Promise.all(Array.from(groups).map(async ([id,[x,y]])=>{
         const marks=[x.events.length,y.events.length];
         const moves=await Promise.all([commandMove(x,id,y.user,'com.last.Struggle'),commandMove(y,id,x.user,'com.last.Struggle')]);
@@ -136,19 +139,19 @@ async function finish(a,b,id) {
       await a.wait('/topic/game/'+id+'/move',acceptedMark);await a.wait('/user/queue/illegalMove',acceptedMark);
       assert((await view(a,id)).pendingMove);assert.strictEqual((await view(b,id)).pendingMove,null);
       assert.deepStrictEqual(await view(c,other),untouched);
-      const roundMark=b.events.length;await accepted(b,await commandMove(b,id,a.user,'com.ShuffleFeet'));
+      const roundMark=b.events.length;await accepted(b,await commandMove(b,id,a.user,'base.com.ShuffleFeet'));
       await b.wait('/topic/game/'+id+'/update',roundMark);
       const after=await view(a,id);assert.strictEqual(after.turn,1);assert(after.players[a.user].character.statuses.length>0);
       assert.deepStrictEqual(await view(c,other),untouched);
       assert(!c.events.slice(mark).some(x=>x.destination.includes(id)));
-      for(let turn=1;turn<=10;turn++) {
+      for(let turn=1;turn<=5;turn++) { // dealt(5) = 100: the fifth Struggle wins
         const m=b.events.length;
-        const moves=await Promise.all([commandMove(a,id,b.user,'com.last.Struggle'),commandMove(b,id,a.user,'com.ShuffleFeet')]);
+        const moves=await Promise.all([commandMove(a,id,b.user,'com.last.Struggle'),commandMove(b,id,a.user,'base.com.ShuffleFeet')]);
         await Promise.all([a.command({command:'move',move:moves[0]}),b.command({command:'move',move:moves[1]})]);
         await b.wait('/topic/game/'+id+'/update',m);
         const v=await view(a,id);assert.strictEqual(v.turn,turn+1);
-        assert.strictEqual(v.players[a.user].character.resources.HEALTH,100-5*turn);
-        assert.strictEqual(v.players[b.user].character.resources.HEALTH,100-10*turn);
+        assert.strictEqual(v.players[a.user].character.resources.HEALTH,100-taken(turn));
+        assert.strictEqual(v.players[b.user].character.resources.HEALTH,Math.max(0,100-dealt(turn)));
         assert.deepStrictEqual(await view(c,other),untouched);
       }
       const final=await view(a,id);assert(final.over);assert.strictEqual(final.winner,a.user);
@@ -156,16 +159,16 @@ async function finish(a,b,id) {
       const rejected=a.events.length;await a.command({command:'move',move:first});await a.wait('/user/queue/illegalMove',rejected);
       assert.deepStrictEqual((await a.command({command:'export',gameId:id})).data,beforeExport);
       const x=await finish(a,b,id);const events=inspectExport(x,[a.user,b.user]);
-      assert.strictEqual(events.filter(x=>x.kind==='MOVE_ACCEPTED').length,22);
-      assert.strictEqual(events.filter(x=>x.kind==='ROUND_COMMITTED').length,11);
+      assert.strictEqual(events.filter(x=>x.kind==='MOVE_ACCEPTED').length,12);
+      assert.strictEqual(events.filter(x=>x.kind==='ROUND_COMMITTED').length,6);
       await denied(e.user,x=>x.command({command:'export',gameId:id}),id);
-      for(let turn=0;turn<7;turn++) {
+      for(let turn=0;turn<4;turn++) {
         const m=c.events.length;
         await Promise.all([accepted(c,await commandMove(c,other,d.user,'com.last.Struggle')),accepted(d,await commandMove(d,other,c.user,'com.last.Struggle'))]);
         await c.wait('/topic/game/'+other+'/update',m);
         const v=await view(c,other);assert.strictEqual(v.turn,turn+1);
-        assert.strictEqual(v.players[c.user].character.resources.HEALTH,100-15*(turn+1));
-        assert.strictEqual(v.players[d.user].character.resources.HEALTH,100-15*(turn+1));
+        assert.strictEqual(v.players[c.user].character.resources.HEALTH,Math.max(0,100-both(turn+1)));
+        assert.strictEqual(v.players[d.user].character.resources.HEALTH,Math.max(0,100-both(turn+1)));
         assert.deepStrictEqual((await a.command({command:'export',gameId:id})).data,x);
       }
       assert.strictEqual((await view(c,other)).winner,'NONE');await finish(c,d,other);

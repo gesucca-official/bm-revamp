@@ -1,6 +1,6 @@
 # Botte Micidiali — Regolamento ufficiale
 
-Versione **1.14 — 22 novembre 2026**. Fonte normativa del gioco, insieme ai documenti di set (R00).
+Versione **2.0 — 23 novembre 2026**. Fonte normativa del gioco, insieme ai documenti di set (R00).
 
 ## R00 — Autorità
 
@@ -8,17 +8,21 @@ Questa prima versione deriva da codice server/client, catalogo SQLite e document
 
 **Regolamento e set (1.13).** Il regolamento governa il sistema: preparazione, tipologie, mazzi, scelta e risoluzione delle mosse, danni, stati, fine turno e informazioni. Ogni set ha un proprio documento in `docs/sets/`, con versione e revisioni proprie, e le sue schede governano le carte del set (R07). Una scheda deroga a una regola di questo regolamento solo se lo dice esplicitamente; in ogni altro caso, e nel dubbio, prevale il regolamento. Il set in vigore è il Set Base, `docs/sets/base.md`.
 
+**Parole chiave (2.0).** Le parole chiave che le carte stampano (Annuncia, Vulnerabile, Gioca d'anticipo, Rincara, In campo, Vendi, immune) sono definite una sola volta, in R07b, e valgono per ogni carta che le usa senza che la scheda le ripeta. Una parola chiave nuova entra solo con una revisione di questo regolamento: deve accorciare davvero i testi e restare intuitiva per chi gioca, e non introduce risorse nuove.
+
 Per modificare il gioco: aggiornare prima versione e testo del documento interessato, motivando la modifica: questo regolamento per il sistema, il documento del set per le sue carte; poi adeguare test, codice, catalogo e documentazione nella stessa modifica. Non cambiare un atteso soltanto per accettare una regressione. Le copie pubblicate in `client-debug/src/assets/docs/` devono essere identiche: `rules.md` per questo regolamento, `sets/` per i documenti di set; `scripts/check-rules.py` controlla l'allineamento. Gli audit precedenti sono storici subordinati. La roadmap non introduce automaticamente regole attive.
 
 ## R01 — Obiettivo e preparazione
 
-Botte Micidiali simula una rissa con carte: vince l'ultimo personaggio vivo; se muoiono tutti si pareggia. Le mosse si scelgono simultaneamente e si risolvono in sequenza.
+Botte Micidiali simula una rissa con carte: vince l'ultimo personaggio vivo; se muoiono tutti si pareggia (R06). Le mosse si scelgono simultaneamente e si risolvono in sequenza.
 
 Modalità: quick contro computer, quick 1v1, quick FFA (tutti contro tutti), open contro computer. Quick assegna casualmente un personaggio con il suo starter, fra quelli indicati dal documento del set; open usa un mazzo salvato dell'umano, conforme a R02, e un bot casuale. Open PvP non è disponibile. La coda 1v1 parte a due iscritti, FFA a cinque; l'avvio anticipato richiede almeno due iscritti. Le code possono includere bot.
 
 Ogni giocatore è rappresentato da una carta personaggio. Le schede complete di tutte le carte del set, comprese quelle personaggio, sono raccolte nel documento del set (R07).
 
-HEALTH è la salute; ALERTNESS determina la precedenza a pari priorità; VIOLENCE è una risorsa di costo; TOXICITY e ALCOHOL sono risorse di costo con effetti periodici. Non esistono tetti o pavimenti generali: le risorse possono essere negative o superare i valori iniziali. L'immunità a una risorsa blocca il suo effetto periodico, non costi, variazioni o qualsiasi danno POISON.
+HEALTH è la salute; ALERTNESS determina la precedenza a pari priorità; VIOLENCE è una risorsa di costo; TOXICITY e ALCOHOL sono risorse di costo con effetti periodici; ALCOHOL fa anche da corazza (R05). Non esistono tetti: le risorse possono superare i valori iniziali. L'immunità a una risorsa è definita in R07b.
+
+**Pavimento a zero (2.0).** Nessuna risorsa scende sotto zero, HEALTH compresa: chi perde più di quanto ha, per un costo, un danno o una perdita, arriva a 0 e lì si ferma. Un personaggio a HEALTH 0 è **a terra**: durante il turno non colpisce (R04), e se lo è ancora a fine turno è morto (R06).
 
 **Risorse di partenza (1.11).** Ogni personaggio ha tutte e cinque le risorse fin dalla preparazione: quelle che la sua scheda non indica partono da 0. La risorsa speciale della scheda è quella che parte da un valore diverso da zero. Una risorsa a 0 si legge, si paga, si guadagna e si perde come le altre, e gli effetti periodici di R06 non scattano finché non supera 0: per esempio, una carta che aggiunge alla propria TOXICITY il suo valore assoluto, giocata da chi non ha mai ricevuto TOXICITY, aggiunge abs(0) = 0. Gli esempi con le carte del set sono nel documento del set.
 
@@ -30,7 +34,7 @@ Il gioco distingue **carte personaggio, carte azione e carte oggetto**. Questa d
 |---|---|---|
 | **Carta personaggio** | Il combattente controllato dal giocatore, con risorse iniziali, capacità di oggetti e immunità | È assegnata o scelta nella preparazione e rappresenta il personaggio per tutta la partita. Non fa parte del mazzo di pesca, non occupa la mano e non si gioca come mossa. Le carte personaggio disponibili sono elencate nel documento del set. |
 | **Carta azione** | Una mossa del personaggio, con bersaglio, priorità, eventuali costi ed effetti | Si trova in mano e si sceglie per presentare una mossa secondo R03. Il sottotipo stabilisce come entra in mano e se viene scartata dopo l'uso. |
-| **Carta oggetto** | Un oggetto disponibile sul campo, vicino a un personaggio | Fa parte del mazzo regolare. Quando viene pescata va subito sul campo e si pesca ancora; non rimane in mano. Per consumarla o interagire con essa occorre un'azione che bersaglia oggetti, come una presa o un furto. La pesca da sola non ne attiva l'effetto. |
+| **Carta oggetto** | Un oggetto disponibile sul campo, vicino a un personaggio | Fa parte del mazzo regolare. Quando viene pescata va subito sul campo e si pesca ancora; non rimane in mano. Per consumarla o interagire con essa occorre un'azione che bersaglia oggetti, come una presa o un furto. La pesca da sola non ne attiva l'effetto. Un oggetto non fa nulla finché non è consumato, salvo un effetto «In campo» scritto sulla carta (R07b). |
 
 ### Sottotipi delle carte azione
 
@@ -45,7 +49,7 @@ L'espressione **carte regolari del mazzo** comprende azioni regolari e carte ogg
 
 ### Token oggetto ed equipaggiamenti
 
-Un **token oggetto** è un oggetto creato da un effetto, anziché pescato dal mazzo iniziale. Sul campo segue le stesse regole degli oggetti, compreso il limite di capacità; non costituisce una quarta tipologia principale di carta. I token di un set sono elencati nel suo documento.
+Un **token oggetto** è un oggetto creato da un effetto, anziché pescato dal mazzo iniziale. Sul campo segue le stesse regole degli oggetti, compreso il limite di capacità; non costituisce una quarta tipologia principale di carta. I token di un set sono elencati nel suo documento. Il token oggetto non va confuso con il **gettone** di R07b, che è uno stato del giocatore e non sta sul campo.
 
 Un **equipaggiamento (equip)** è invece uno stato del personaggio, regolato da R05. Un oggetto o un token può produrlo quando viene consumato: l'oggetto sul campo e lo stato equipaggiato sono due elementi distinti. Per esempio, consumare un token che equipaggia rimuove il token dal campo e aggiunge il relativo stato.
 
@@ -53,11 +57,11 @@ Un **equipaggiamento (equip)** è invece uno stato del personaggio, regolato da 
 
 Ogni starter contiene 20 carte regolari (azioni e oggetti), oltre a una basic, due character-bound e una last resort. Basic, bound e last resort di ogni starter sono indicate nel documento del set; le composizioni esatte sono nel suo allegato, `rules-catalog.json`.
 
-Si mescola il mazzo regolare, si mettono basic e bound in mano e si tentano le pescate mancanti a sei. Un oggetto pescato va automaticamente vicino al personaggio e provoca un'altra pesca. Superata la capacità degli oggetti scompare il più vecchio, anche per furti, scambi e token. A mazzo vuoto si aggiunge la last resort solo se non è già in mano: la mano può restare sotto sei. Non si rimescolano gli scarti.
+Si mescola il mazzo regolare, si mettono basic e bound in mano e si tentano le pescate mancanti a sei. Un oggetto pescato va automaticamente vicino al personaggio e provoca un'altra pesca. Superata la capacità degli oggetti scompare il più vecchio, anche per furti, scambi e token. A mazzo vuoto si aggiunge la last resort solo se non è già in mano: la mano può restare sotto sei. Non si rimescolano gli scarti; il mazzo si mischia di nuovo solo dopo una ricerca (R02a).
 
 Le azioni regolari possono essere gratuite e vengono scartate dopo l'uso. Basic e bound persistono. Una bound richiede lo scarto di un'altra carta in mano che non sia basic, bound o last resort; lo scarto avviene all'inizio del suo effetto. Una basic non richiede scarto, ma può richiedere un oggetto: non garantisce una mossa sempre giocabile.
 
-Dopo ogni mossa risolta si scarta la carta giocata quando previsto e, se la mano è sotto sei, si effettua **una sola pesca**, con eventuale catena di oggetti. Non si riempie tutta la mano. La last resort si scarta e può essere ripescata immediatamente.
+Dopo ogni mossa risolta si scarta la carta giocata quando previsto e, se la mano è sotto sei, si effettua **una sola pesca**, con eventuale catena di oggetti, oppure la ricerca che la sostituisce (R02a). Non si riempie tutta la mano. La last resort si scarta e può essere ripescata immediatamente.
 
 **Costruzione del mazzo (1.12).** Ogni mazzo, starter o personalizzato, è formato da:
 
@@ -71,11 +75,27 @@ Basic e bound di ciascun personaggio, e se una last resort è generica o riserva
 
 Le **carte iniziali** sono sempre tre: la basic e le due bound. Personaggio, last resort e mazzo regolare non entrano in questo conteggio. La last resort entra solo con la pesca a mazzo vuoto. Le pescate di preparazione completano la mano fino a sei secondo le regole sopra.
 
+## R02a — Ricerca al posto della pesca (2.0)
+
+Una carta può **sostituire la pesca che segue la sua mossa** con la **ricerca** nel mazzo di una carta indicata per nome. Nelle carte la ricerca si scrive con la parola chiave Annuncia (R07b), che ne dice anche le conseguenze.
+
+1. **Quando.** La ricerca prende il posto dell'unica pesca di R02, dopo lo scarto della carta giocata: avviene solo se quella pesca ci sarebbe, cioè se la mano è sotto sei. Una mossa annullata non cerca e pesca normalmente (R04).
+2. **Quali carte.** Può cercare una carta che si gioca e poi pesca: un'azione regolare, una bound o una last resort. Una basic, che resta in mano senza pescare, e un oggetto non cercano.
+3. **Cosa si cerca.** Solo carte che vanno in mano, mai oggetti. La carta indica uno o due nomi esatti, distinti; con due nomi il giocatore ne sceglie uno quando gioca la carta (R03).
+4. **Esito.** Se nel mazzo c'è una copia del nome cercato, quella copia va in mano e si mostra a tutti; la catena di oggetti di R02 non scatta, perché non si pesca. Se non c'è, si pesca normalmente, con l'eventuale catena di oggetti.
+5. **Dopo ogni ricerca il mazzo si mischia**, trovata o no, con uno o due nomi.
+6. **Carta di ricerca scartata.** Una carta che cerca, usata come scarto di una bound, non cerca. Una carta trovata e scartata più tardi esce dalla mano come ogni altra.
+7. **Nulla cambia il mazzo fra la giocata e la ricerca.** Nessuna carta tocca il mazzo di un altro giocatore e l'autore pesca solo dopo la propria ricerca; se succedesse, la partita si ferma con un errore (R08) invece di cercare in un mazzo diverso da quello visto alla giocata.
+
+Due ricerche nello stesso turno, di giocatori diversi, si eseguono ciascuna nell'ordine della propria mossa (R04). La ricerca di chi è a terra segue la sua mossa: se la mossa si annulla (R04), non cerca.
+
 ## R03 — Scelta della mossa
 
-Si sceglie una carta in mano, il bersaglio previsto e le eventuali scelte aggiuntive. SELF indica sé, OPPONENT un avversario, NEAR_ITEM un proprio oggetto, FAR_ITEM un oggetto avversario. Per gli oggetti si indicano separatamente proprietario e nome. Per una bound si indica la carta da scartare.
+Si sceglie una carta in mano, il bersaglio previsto e le eventuali scelte aggiuntive. SELF indica sé, OPPONENT un avversario, NEAR_ITEM un proprio oggetto, FAR_ITEM un oggetto avversario. Per gli oggetti si indicano separatamente proprietario e nome. Per una bound si indica la carta da scartare. Per una carta con «Annuncia X o Y» (R07b) si può indicare il nome scelto: deve essere uno dei nomi stampati e avere almeno una copia nel mazzo; se la mossa non lo dice vale il primo nome stampato fra quelli con una copia nel mazzo.
 
 Una mossa ordinaria richiede carta in mano, costi disponibili, nessuna mossa già presentata da quel giocatore e scarto/oggetto richiesti presenti. L'invio non paga i costi. Un secondo invio non sostituisce la prima scelta.
+
+**Costi pagati con quello che si ha (2.0).** Ogni costo richiede, all'invio, almeno quella quantità della risorsa. Un costo in HEALTH richiede di più: non si paga se porterebbe a 0 o sotto, quindi serve una HEALTH maggiore del costo.
 
 I morti senza mossa ricevono una mossa vuota. **Un giocatore vivo con un mazzo conforme a R02 ha sempre una mossa (1.12).** Finché il mazzo regolare ha carte, dopo ogni mossa presentata, anche annullata, si ripesca: la mano resta piena e contiene, oltre a basic e bound, tre carte regolari, quindi una bound si gioca scartandone una. A mazzo vuoto entra la last resort, gratuita e sempre giocabile. Per questo ogni set rispetta due vincoli (1.13): nessuna bound e nessuna last resort bersaglia oggetti, e ogni last resort è gratuita. Non esiste il «passo». Il bot prova carte e bersagli casuali e, se non trovasse mosse valide, passerebbe con mossa vuota: con mazzi conformi il caso non si presenta.
 
@@ -84,27 +104,31 @@ Le lacune del server nel controllo di identità, bersagli ordinari, compatibilit
 ## R04 — Risoluzione del turno
 
 1. Si attende una mossa per partecipante, comprese quelle automatiche; una partita già finita non avvia un altro turno.
-2. Si eliminano le mosse già vuote; tutte le altre pagano i costi prima di qualsiasi effetto.
-3. Si ordina per priorità decrescente, poi ALERTNESS decrescente **dopo i costi**. A parità di entrambi vale l'ordine d'inserimento nella partita.
-4. L'ordine resta fissato. Ogni carta applica logica speciale, effetti su sé, effetti sul bersaglio; una bound scarta prima la carta aggiuntiva.
-5. Seguono scarto della carta giocata e pesca secondo R02.
+2. Si eliminano le mosse già vuote; tutte le altre pagano i costi prima di qualsiasi effetto. Si paga con quello che si ha (R03) e nessuna risorsa scende sotto zero (R01).
+3. Si ordina per priorità decrescente, poi ALERTNESS decrescente **dopo i costi**. A parità di entrambi vale l'ordine d'inserimento nella partita. Le mosse con la stessa priorità e la stessa ALERTNESS dopo i costi formano un **gruppo di velocità** (2.0); i gruppi si susseguono in quest'ordine.
+4. L'ordine resta fissato. All'inizio di ogni gruppo di velocità si annullano le mosse degli autori a terra (sotto). Ogni carta, nell'ordine, applica logica speciale, effetti su sé, effetti sul bersaglio; una bound scarta prima la carta aggiuntiva.
+5. Seguono scarto della carta giocata e pesca secondo R02, o la ricerca che la sostituisce (R02a).
 6. Esaurite le mosse, ogni personaggio ancora vivo esegue R06; il turno aumenta e si determina l'esito.
 
-Una mossa già presentata continua anche se l'autore muore prima di agire o durante il proprio effetto. Un bersaglio morto durante il turno può ricevere gli effetti già programmati. Il turno non si interrompe alla prima morte.
+**Chi è a terra non colpisce (2.0).** La mossa di un autore a terra (R01) all'inizio del proprio gruppo di velocità si annulla, salvo che bersagli l'autore stesso o un suo oggetto vicino. Dentro un gruppo le mosse restano simultanee: un autore portato a terra da una mossa del suo stesso gruppo risolve comunque la propria, e una mossa continua anche se l'autore cade durante il proprio effetto. Il registro del turno dice il motivo dell'annullamento («a terra»).
 
-Una mossa annullata durante la risoluzione non produce effetti, ma ha già pagato e procede con scarto/pesca. Una bound annullata non scarta la carta aggiuntiva. Una mossa già vuota rimossa prima dei costi non pesca.
+Una mossa su di sé già presentata si risolve anche da terra: una cura, per esempio, può riportare l'autore sopra 0 prima della fine del turno, e chi non è più a terra a fine turno resta in partita (salvataggio in extremis). Un bersaglio a terra può ricevere gli effetti già programmati. Il turno non si interrompe alla prima morte.
 
-Una carta che bersaglia un oggetto lo ricontrolla alla risoluzione: se l'oggetto è scomparso non lo consuma, non lo ruba e non lo distrugge, ma applica gli altri suoi effetti; restano costi, scarto e pesca.
+Una mossa annullata durante la risoluzione non produce effetti, ma ha già pagato e procede con scarto/pesca; non cerca (R02a). Una bound annullata non scarta la carta aggiuntiva. Una mossa già vuota rimossa prima dei costi non pesca.
+
+Una carta che bersaglia un oggetto lo ricontrolla alla risoluzione: se l'oggetto è scomparso non lo consuma, non lo ruba e non lo distrugge, ma applica gli altri suoi effetti; restano costi, scarto e pesca. La vendita (Vendi, R07b) fa eccezione: il ricavato è la condizione stampata della vendita, non un altro effetto, e senza l'oggetto non si ottiene.
 
 ## R05 — Danni e stati
 
-Danni: HIT, CUT, POISON. Si applicano stati OUTPUT dell'autore, INPUT del destinatario, poi variazione HEALTH con i relativi stati di risorsa. Gli autodanni via inflictDamage attraversano entrambi i passaggi; il veleno periodico parte da INPUT.
+Danni: HIT, CUT, POISON. Si applicano stati OUTPUT dell'autore, INPUT del destinatario, poi la corazza dell'alcol (sotto) e infine la variazione HEALTH con i relativi stati di risorsa. Gli autodanni via inflictDamage attraversano entrambi i passaggi; il veleno periodico parte da INPUT.
 
 Gli stati di danno compatibili si applicano cumulativamente nell'ordine di aggiunta. Una conversione di tipo modifica quali stati successivi sono compatibili. Ogni trasformazione numerica tronca verso zero. Per variazioni di risorsa si applica **solo il primo stato compatibile**, senza composizione o controllo INPUT/OUTPUT.
 
-Guadagnare n aggiunge abs(n); perdere n sottrae abs(n), prima degli stati. Svuotare porta a zero senza modificatori. Il filtro inviato al destinatario da inflictDamage include GOOD e BAD per ogni sottoinsieme ordinario, anche vuoto: una carta che limita gli stati dell'autore, per esempio ai soli GOOD, non limita quelli del bersaglio.
+**Corazza dell'alcol (2.0).** Chi ha ALCOHOL (L) maggiore di 0 riduce ogni danno HIT ricevuto di L/4, divisione intera, dopo gli stati e senza scendere sotto zero. Non riduce CUT né POISON. Vale per tutti, anche sui danni a sé. È una regola del sistema, non uno stato: nessuno stato la toglie, e la sola L conta, al momento del danno.
 
-Uno stato senza durata persiste. Una durata d diminuisce a fine turno; lo stato scompare solo sotto zero: d=0 copre il turno corrente, d=1 anche il successivo. SingleUse imposta durata zero dopo l'uso: può applicarsi ancora nello stesso turno. Gli equip sono stati che un effetto può rimuovere, se la sua scheda lo prevede.
+Guadagnare n aggiunge abs(n); perdere n sottrae abs(n), prima degli stati. Svuotare porta a zero senza modificatori. Nessuna variazione porta una risorsa sotto zero (R01). Il filtro inviato al destinatario da inflictDamage include GOOD e BAD per ogni sottoinsieme ordinario, anche vuoto: una carta che limita gli stati dell'autore, per esempio ai soli GOOD, non limita quelli del bersaglio.
+
+Uno stato senza durata persiste. Una durata d diminuisce a fine turno; lo stato scompare solo sotto zero: d=0 copre il turno corrente, d=1 anche il successivo. SingleUse imposta durata zero dopo l'uso: può applicarsi ancora nello stesso turno. Gli equip sono stati che un effetto può rimuovere, se la sua scheda lo prevede. Un gettone (R07b) è uno stato del giocatore e segue queste regole, salvo la durata, che dice la sua parola chiave.
 
 **Isolamento degli stati (1.1):** ogni applicazione di uno stato crea uno stato distinto. Durata e consumo non sono condivisi fra applicazioni, personaggi o partite: ogni stato parte dalla durata della sua scheda, e uno stato singleUse segue la regola precedente.
 
@@ -112,12 +136,17 @@ Uno stato senza durata persiste. Una durata d diminuisce a fine turno; lo stato 
 
 Per ogni personaggio vivo all'inizio della propria fase, nell'ordine:
 
-1. Se TOXICITY > 0 e non immune: POISON pari a TOXICITY/2, divisione intera. TOXICITY non cala automaticamente.
+1. Se TOXICITY > 0 e non immune (R07b): POISON pari a TOXICITY/2, divisione intera. TOXICITY non cala automaticamente.
 2. Se ALCOHOL > 0 e non immune: perde ALERTNESS pari ad ALCOHOL/2; poi ALCOHOL pari ad ALCOHOL/2 + 1.
-3. Ogni timer diminuisce di uno; a zero o meno esegue l'effetto e scompare. Conta anche il turno di creazione. Nessuna precedenza garantita fra timer simultanei.
-4. Si decrementano e rimuovono gli stati secondo R05.
+3. Ogni timer diminuisce di uno; a zero o meno esegue l'effetto e scompare. Conta anche il turno di creazione. **I timer che scadono nello stesso turno si eseguono in ordine di creazione (2.0).**
+4. Si decrementano e rimuovono gli stati secondo R05; con loro cadono i gettoni Vulnerabile finiti (R07b).
+5. **(2.0)** Agiscono gli effetti «In campo» degli oggetti vicini, un oggetto alla volta dal più vecchio (R07b), se il personaggio non è morto nei punti precedenti.
 
-La fase iniziata prosegue anche se il veleno uccide. Chi era già morto prima della fase non esegue effetti periodici, timer o scadenze. HEALTH <= 0 significa morto. Un solo superstite vince; zero superstiti significa patta. Nessun premio o aggiornamento Elo. L'uscita dalla sessione è distinta dall'esito.
+Dopo le fasi di tutti i personaggi si tolgono le carte mostrate che non valgono più (Annuncia, R07b).
+
+La fase iniziata prosegue anche se il veleno uccide. Chi era già morto prima della fase non esegue effetti periodici, timer o scadenze. HEALTH a 0 significa morto: per il pavimento di R01 la HEALTH non scende sotto. Un solo superstite vince; zero superstiti significa patta. **Nessuno spareggio (2.0):** senza superstiti la patta resta, qualunque sia la HEALTH di inizio turno o il modo in cui si è caduti. Nessun premio o aggiornamento Elo. L'uscita dalla sessione è distinta dall'esito.
+
+A fine partita, e per un giocatore eliminato o in forfait, si tolgono i suoi gettoni e le sue carte mostrate (R07b).
 
 ### Clock, forfait e disconnessione (1.5, I14/I23)
 
@@ -137,7 +166,7 @@ Non si ripristinano partite giocabili, mosse o clock; gli ultimi dati osservati 
 
 Le carte stanno nei documenti di set (R00), uno per set, in `docs/sets/`; il set in vigore è il Set Base, `docs/sets/base.md`. Un documento di set contiene l'inventario delle sue carte e dei suoi token, gli starter, una **scheda normativa** per ogni carta, compresi i personaggi, e i campi descrittivi di R07a. Ha una versione propria, con revisioni motivate, e un allegato con nomi visualizzati e composizioni degli starter, a cui il catalogo SQLite deve corrispondere. Le carte personaggio appartengono al set a tutti gli effetti; hanno una scheda propria e vengono predisposte alla preparazione secondo R01a.
 
-Convenzioni delle schede: identificatori stabili delle classi; i nomi visualizzati sono nell'allegato. Ogni riga indica tipologia e, dove previsto, sottotipo. V=VIOLENCE, A=ALERTNESS, T=TOXICITY, L=ALCOHOL; —=nessun costo risorse. Effetti prima dei modificatori R05; t è il valore al momento dell'effetto, dopo i costi. Una bound richiede lo scarto R02 anche se la scheda non lo ripete; le durate seguono R05. La scheda di un personaggio indica HEALTH, ALERTNESS, risorsa speciale, capacità di oggetti e immunità iniziale; le altre risorse partono da 0 (R01).
+Convenzioni delle schede: identificatori stabili delle classi; i nomi visualizzati sono nell'allegato. Ogni riga indica tipologia e, dove previsto, sottotipo. V=VIOLENCE, A=ALERTNESS, T=TOXICITY, L=ALCOHOL; —=nessun costo risorse. Effetti prima dei modificatori R05; t è il valore al momento dell'effetto, dopo i costi. Una bound richiede lo scarto R02 anche se la scheda non lo ripete; le durate seguono R05. La scheda di un personaggio indica HEALTH, ALERTNESS, risorsa speciale, capacità di oggetti e immunità iniziale; le altre risorse partono da 0 (R01). Le schede usano le parole chiave di R07b e, quando le citano, rimandano alla regola («regolamento, Rnn»). Il documento del set è generato dal file del set, il cui formato (come il file scrive una carta e che cosa il caricatore accetta) è descritto in `docs/formato-file-set.md`: non è una regola del gioco.
 
 **Rarità (1.14).** Ogni carta può avere una rarità, COMMON, UNCOMMON, RARE o PROTAGONIST, oppure nessuna. È un dato del catalogo indicato dal documento del set: non è un effetto, non cambia costi, bersagli, priorità o risoluzione e non limita la costruzione dei mazzi. PROTAGONIST, in breve P, segue le stesse regole delle altre: nessun effetto sul gioco né sulla costruzione dei mazzi.
 
@@ -175,9 +204,86 @@ Non entrano nel danno nominale:
 
 Il danno nominale e il suo importo stanno nel catalogo SQLite accanto a ruolo e guadagni; un token lo dichiara nella propria classe.
 
+## R07b — Parole chiave (2.0)
+
+Ogni parola chiave è definita qui una volta sola e vale per ogni carta che la stampa (R00). La scheda dice i numeri e le scelte della carta (nomi cercati, guadagni, importi, effetto); la regola dice come funziona. Un effetto stampato su una sola carta che contraddice una parola chiave vale solo se la scheda lo dice esplicitamente (R00).
+
+### Annuncia
+
+> **Annuncia X.** Al posto della pesca che segue la tua mossa cerchi nel mazzo una carta di nome X. Se lo trovi: la mostri, ottieni il premio e diventi Vulnerabile. Se non lo trovi: peschi normalmente e ottieni il ripiego.
+
+1. **La ricerca.** È la ricerca di R02a, per un solo nome esatto X, mai un oggetto. Con **«Annuncia X o Y»** la carta stampa due nomi distinti, nell'ordine; il giocatore ne sceglie uno quando gioca la carta (R03), fra quelli che hanno almeno una copia nel mazzo in quel momento; se ce n'è uno solo la scelta è automatica; se non ce n'è nessuno la ricerca fallisce. La ricerca avviene dopo la mossa, sul nome scelto.
+2. **Se lo trovi.** La carta va in mano e quella copia si mostra a tutti; si applicano solo i guadagni «Se lo trovi» della carta, dopo la ricerca; chi ha cercato diventa **Vulnerabile**, con un gettone legato al nome trovato (con due nomi: quello scelto e trovato; l'altro non c'entra).
+3. **Se non lo trovi** (con due nomi: se nel mazzo non c'è né X né Y): si pesca normalmente, si applicano solo i guadagni «Se non lo trovi», ridotti e scritti sulla carta, e non si crea alcun gettone né carta mostrata. Il ripiego sostituisce il premio, non si somma, e non toglie gettoni già presenti.
+4. **Premio con due nomi.** Una carta con due nomi ha un solo premio «Se lo trovi», pensato per il primo nome stampato, il colpo per cui la carta è fatta.
+5. **Carta mostrata.** La copia trovata si mostra a faccia in su finché resta in mano e finché non giochi una carta con quel nome; dopo uno scarto resta soltanto il segnalino col nome. È un promemoria per tutti, non uno stato fisico della carta. Quando il suo gettone finisce per una giocata del nome, la carta mostrata cade con lui a fine turno; se il gettone è tolto da un effetto che toglie gli stati, la carta resta mostrata finché è in mano.
+6. **Mossa annullata.** Una carta con Annuncia la cui mossa si annulla non cerca e pesca normalmente (R02a); scartata per giocare una bound non cerca niente.
+7. **Registro.** Il registro del turno e la vista pubblica dicono i nomi annunciati, quello scelto e se è stato trovato.
+
+### Vulnerabile e gettone
+
+Un **gettone** è un segno che un effetto lascia sul giocatore, legato a un nome. È uno stato del personaggio (R05) e ne segue le regole, salvo la durata, che dice la parola chiave; non è un oggetto e non sta sul campo (R01a). Nel Set Base l'unico gettone è quello di Vulnerabile.
+
+> **Vulnerabile.** Subisci una volta e mezza i danni HIT, CUT e POISON che subiresti, veleno di fine turno compreso. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta col nome trovato.
+
+1. **Effetto.** Ogni gettone Vulnerabile è uno stato INPUT di chi lo porta che moltiplica per 1,5 i danni HIT, CUT e POISON ricevuti, compreso il POISON periodico di R06, troncando come ogni stato (R05).
+2. **Più gettoni** sono indipendenti: ciascuno è uno stato distinto (R05, isolamento), applicato nell'ordine di aggiunta, quindi due gettoni moltiplicano per 1,5 due volte (circa ×2,25, con un troncamento per passo); nessuna fusione e nessun tetto speciale.
+3. **Quando si soddisfa.** Una qualsiasi carta col nome trovato, giocata dal portatore, anche parata o annullata, soddisfa il gettone; lo scarto non lo soddisfa. Si soddisfa **un solo gettone** per giocata: il più vecchio ancora attivo fra quelli esistenti prima della mossa. Una ricerca del proprio nome non soddisfa il gettone che crea. I promemoria dello stesso nome rimasti senza gettone cadono a fine turno insieme a lui.
+4. **Fine del gettone soddisfatto.** Il gettone resta per tutto il turno della giocata, contro ogni gruppo di velocità e contro il veleno di fine turno, e cade con la scadenza degli stati di quel fine turno (R06, punto 4).
+5. **Uscita senza giocare.** Se a fine turno nessuna copia del nome è più né in mano né nel mazzo, il gettone resta per tutto il turno successivo, effetti di fine turno compresi, poi cade. Finché una copia è in mano o nel mazzo non ha scadenza.
+6. **Effetti che tolgono tutti gli stati** tolgono anche i gettoni Vulnerabile, che sono stati: se lo fanno prima di un danno nello stesso effetto, quel danno non è moltiplicato. La carta mostrata resta finché è in mano (Annuncia, punto 5).
+7. **Fine partita.** A fine partita, a eliminazione e a forfait gettoni e carte mostrate si tolgono (R06).
+
+### Gioca d'anticipo
+
+> **Gioca d'anticipo: E.** Se questa mossa si risolve **prima** della mossa del bersaglio, applica anche E.
+
+1. «Prima» vuol dire in un **gruppo di velocità precedente** (R04): priorità più alta, oppure stessa priorità e ALERTNESS più alta dopo i costi. Nello stesso gruppo le mosse sono simultanee: nessun anticipo, anche se l'ordine d'inserimento le mette in fila.
+2. Si decide **quando la mossa si risolve**, guardando l'ordine già fissato (R04, punti 3–4): se il bersaglio ha una mossa in un gruppo successivo, E si applica, dopo gli effetti scritti prima.
+3. **Il bersaglio non gioca** (nessuna mossa, mossa vuota tolta prima dei costi, eliminato o forfait): nessun anticipo.
+4. **La mossa del bersaglio sarà annullata più tardi**, da una carta o perché a terra all'inizio del suo gruppo: l'anticipo vale.
+5. **La propria mossa è annullata:** nessun effetto, quindi nessun anticipo.
+6. **Il bersaglio è già a terra** ma la sua mossa è ancora in attesa in un gruppo successivo: l'anticipo vale.
+7. Con più avversari conta solo la mossa del giocatore bersagliato.
+
+Il registro del turno scrive «Gioca d'anticipo: sì» o «no» per ogni mossa con la parola chiave, e la mossa pubblica lo dice.
+
+### Rincara
+
+> **Rincara X (Y a sé).** Per ogni volta che hai già giocato questa carta nella partita, +X ai danni al bersaglio e +Y ai danni a sé.
+
+- Si conta **per giocatore e per titolo**: le tue giocate di questa carta; quelle dell'avversario non contano.
+- **Conta ogni giocata, anche annullata**: la mossa è stata mostrata e pagata.
+- Il contatore è **informazione pubblica** (R08): la mossa pubblica porta il numero delle giocate precedenti per le carte con la parola chiave.
+
+### In campo
+
+> **In campo: E.** Finché l'oggetto è in campo, alla fine di ogni turno chi lo ha vicino subisce E.
+
+1. È una deroga scritta sulla carta alla regola che un oggetto non fa nulla finché non è consumato (R01a), solo per quell'effetto.
+2. **Agisce a fine turno su chi ha l'oggetto vicino in quel momento**, dopo gli altri suoi effetti di fine turno (R06, punto 5), un oggetto alla volta dal più vecchio.
+3. **Conta dove l'oggetto è, non da dove viene:** rubato, scambiato o copiato, colpisce chi lo ha ora; agisce anche nel turno in cui arriva.
+4. **Fuori dal campo non agisce:** consumato, venduto (la vendita non dà nemmeno questo effetto), distrutto o scalzato dalla capacità (R02) prima della fine del turno, niente. Chi è morto non ha effetti di fine turno (R06), nemmeno se lo uccide il veleno dello stesso fine turno.
+5. **Non è un danno:** è una perdita o un guadagno di risorsa, che stati, equip e parate non cambiano. Vale il pavimento a zero (R01): su una risorsa a zero non costa nulla.
+6. **Non tocca mai HEALTH,** quindi da solo non uccide nessuno. La TOXICITY che dà avvelena dal turno dopo; a chi è immune resta la risorsa senza il veleno.
+
+### Vendi
+
+> **Vendi il tuo oggetto: E.** L'oggetto bersagliato esce dal campo senza il suo effetto e ottieni E.
+
+1. Si gioca su un proprio oggetto (NEAR_ITEM, R03): il giocatore lo sceglie col bersaglio, e senza oggetti la carta non si gioca.
+2. **Si decide alla risoluzione:** se l'oggetto bersagliato è ancora fra i propri, esce dal campo **senza il suo effetto** (nessun guadagno, immunità, equip, timer o effetto In campo) e va negli scarti come un oggetto consumato; il registro del turno lo dice; poi si applica E, il ricavato.
+3. **Se l'oggetto è sparito prima** (rubato, distrutto, scalzato dalla capacità) non si vende e non si ottiene niente: il ricavato è la condizione della vendita, non un altro effetto nel senso di R04.
+
+### Immune
+
+> **Immune a una risorsa.** Gli effetti periodici di quella risorsa non ti colpiscono.
+
+L'immunità a una risorsa blocca il suo effetto periodico di fine turno (R06): niente veleno da TOXICITY, niente perdita di ALERTNESS e di ALCOHOL da ALCOHOL. Non blocca costi, guadagni, perdite, né alcun danno POISON. La scheda del personaggio dice le immunità iniziali; una carta può darne o toglierne, e la sua scheda dice fino a quando.
+
 ## R08 — Informazioni e confini
 
-Le viste di gioco mostrano la mano solo al proprietario, risorse e oggetti a tutti; non mostrano l'ordine del mazzo. Questo non certifica sicurezza di API debug e log. La collezione espone l'intero catalogo a tutti, senza economia o proprietà individuale.
+Le viste di gioco mostrano la mano solo al proprietario, risorse e oggetti a tutti; non mostrano l'ordine del mazzo. Sono pubbliche anche le carte mostrate e i gettoni (R07b), l'esito di ogni ricerca (nomi annunciati, nome scelto, trovato o no), l'anticipo e il contatore di Rincara. Questo non certifica sicurezza di API debug e log. La collezione espone l'intero catalogo a tutti, senza economia o proprietà individuale.
 
 Nel servizio partite, invio e risoluzione sono una transazione locale in memoria: se una risoluzione fallisce si ripristina lo stato precedente all'ultimo comando, incluse mosse gia in attesa, mani, mazzi, risorse, stati e timer. Non si pubblicano viste o report di turni parziali; il mittente riceve un errore e puo ritentare. La lettura delle viste usa snapshot coerenti. Logging e notifiche dopo commit non annullano il round; un crash non e coperto da questo rollback.
 
@@ -185,11 +291,13 @@ Restano separati: autenticazione, validazione degli input, persistenza e contest
 
 ## R09 — Fonti e verifica
 
-Fonti iniziali: Game, Move, Player, ComPlayer, Character, Status, tutte le classi model/cards, factory, code e viste del server; editor mazzi client; cards.sqlite; documenti locali. La vecchia ricognizione è conservata in `docs/reports/game-rules-audit-2026-10-23.md` come storico.
+Fonti iniziali: Game, Move, Player, ComPlayer, Character, Status, tutte le classi model/cards, factory, code e viste del server; editor mazzi client; cards.sqlite; documenti locali. La vecchia ricognizione è conservata in `docs/reports/game-rules-audit-2026-10-23.md` come storico. Le regole entrate nella 2.0 vengono dalle regole del playground 1.9 (`docs/design/set-base/regole-playground.md`), storiche dalla 2.0; la corrispondenza è in `docs/design/set-base/sb-28/corrispondenza.md`.
 
 Mappa test e risultati: `docs/rules-conformance.md`. Verifica dal workspace: `./scripts/build.ps1 -Task Test -Offline` e `python scripts/check-rules.py`. La copertura è dichiarata per casi, non come prova esaustiva di tutte le combinazioni.
 
 ## Revisioni
+
+- **2.0 — 23 novembre 2026, SB-28 (regole del Set Base 1.0):** entrano nel regolamento, come regole di sistema, le regole con cui il Set Base 1.0 è stato progettato, misurato e approvato, finora valide solo nel playground (regole del playground 1.9: RP-1, RP-2, RP-4…RP-21, RP-23…RP-25, RP-27, RP-29). R01: pavimento a zero per tutte le risorse, HEALTH compresa, e definizione di «a terra»; l'immunità passa in R07b. R02a, nuova: la ricerca al posto della pesca, col mazzo che si mischia dopo ogni ricerca. R03: costi pagati solo con quello che si ha (un costo in HEALTH non porta a 0) e scelta del nome per «Annuncia X o Y». R04: gruppi di velocità, chi è a terra all'inizio del proprio gruppo non colpisce (salvo mosse su di sé), salvataggio in extremis conservato; la mossa annullata non cerca; la vendita non dà il ricavato senza l'oggetto. R05: corazza dell'alcol, L/4 sui danni HIT ricevuti. R06: timer simultanei in ordine di creazione (P4), effetti «In campo» dopo gli altri effetti di fine turno, nessuno spareggio, gettoni e carte mostrate tolti a fine partita, eliminazione e forfait. R07b, nuova: le parole chiave Annuncia, Vulnerabile e gettone, Gioca d'anticipo, Rincara, In campo, Vendi e immune, definite una volta sola; «Ultimo colpo» (RP-3) non entra, perché nessuna carta del Set Base 1.0 lo usa (D183). R08: carte mostrate, gettoni, esito delle ricerche, anticipo e contatore di Rincara sono pubblici. Le regole del formato del file del set (RP-22, RP-26, RP-28) non sono regole del gioco e stanno nella descrizione del formato. Decisioni del proprietario del piano Set Base: D50 (12 novembre 2026, regole di sistema, «sì, applichiamola»; punto 8, «A»: nel playground fino al trasferimento, poi nel regolamento con P4), D73 («Si paga quel che c'è»), D78 (14 novembre 2026, parole chiave: «possiamo inventare tutte le keyword ragionevoli che ci consentono di avere testi delle carte piu concisi, purche non diventino un rebus»; le definizioni entrano nel regolamento al trasferimento), D71, D72, D97, D121, D130, D171, D179, D180 per le singole regole, e la proposta di SB-28 con D182 e D183. Motivazione: il Set Base 1.0 sostituisce lo 0.1 nella partita viva e le sue carte non si giocano senza queste regole; la versione è maggiore perché cambiano risoluzione, costi, danni, risorse e fine turno, non solo un dettaglio. Le partite archiviate restano leggibili con la versione registrata. Al passaggio i mazzi personalizzati salvati che contengono carte dello 0.1 uscite dal set si cancellano (D182).
 
 - **1.14 — 22 novembre 2026, SB-24 (rarità P):** R07 ammette una quarta rarità, PROTAGONIST (in breve P), accanto a COMMON, UNCOMMON e RARE; come le altre è un dato descrittivo del catalogo, senza effetti sul gioco né sulla costruzione dei mazzi. Decisioni del proprietario D137 del piano Set Base (18 novembre 2026: «tutti i personaggi vorrei che avessero una rarità loro, P, che funziona un po' come la mythic rarity di mtga»), D144 e D166 (5) (22 novembre 2026: «andiamo con la fase B»). Motivazione: i sette personaggi del Set Base in progettazione hanno una rarità propria; frequenza nelle buste e jolly si progettano con l'economia (EC-0) e non sono regole del gioco. Il codice di catalogo PROTAGONIST è una scelta dell'esecutore, inglese come gli altri tre e con l'iniziale P. Nessuna regola, effetto, costo, priorità, bersaglio, starter o bilanciamento cambia; il Set Base 0.1 della partita viva resta senza rarità.
 

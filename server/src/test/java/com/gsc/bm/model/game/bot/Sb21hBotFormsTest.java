@@ -100,7 +100,7 @@ class Sb21hBotFormsTest {
     @Test
     void theLiveRulesReadNoNewForm() {
         BotView.CardSeen guarded = bound("Guarded", 2, Card.CardTarget.SELF, "DEFENSE", gain(Resource.VIOLENCE, 5), shield(Damage.DamageType.HIT));
-        BotView v = view(Ruleset.LIVE, seat("me", 40, Map.of()), List.of(guarded), List.of(new BotView.RevealedSeen(1, hit("Impact", 0, 25, 35), 3, null)));
+        BotView v = view(Ruleset.LEGACY, seat("me", 40, Map.of()), List.of(guarded), List.of(new BotView.RevealedSeen(1, hit("Impact", 0, 25, 35), 3, null)));
         StyleSupport.Plan p = new StyleSupport.Plan(new StyleSupport.Situation(v), v.legalMoves().get(0));
         assertFalse(p.guardForm);
         assertEquals(0, p.guard, 1e-9);

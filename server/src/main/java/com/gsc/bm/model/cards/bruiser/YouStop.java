@@ -6,7 +6,6 @@ import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.PrintedEffects;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
-import com.gsc.bm.model.cards.Tunable;
 
 import java.util.List;
 import java.util.Map;
@@ -15,8 +14,6 @@ import java.util.Set;
 public class YouStop extends AbstractCard implements PrintedEffects.Source {
 
     private boolean countered = false;
-    @Tunable
-    private int alertnessToTarget = 10;
 
     public YouStop() {
         super();
@@ -42,13 +39,12 @@ public class YouStop extends AbstractCard implements PrintedEffects.Source {
     @Override
     public List<String> applyEffectOnTarget(Character self, Character target) {
         if (countered)
-            return List.of("Countered Target's own Move",
-                    target.gainResource(Resource.ALERTNESS, alertnessToTarget));
+            return List.of("Countered Target's own Move");
         else
             return List.of("You were too slow and didn't countered anything.");
     }
 
-    /** D76: voids the target's later move; the target then gains ALERTNESS. */
+    /** D76: voids the target's later move. SB-28 (SB-27 list): the ALERTNESS the target gained in Set Base 0.1 is gone with that set. */
     @Override
     public PrintedEffects printedEffects() {
         return new PrintedEffects(List.of(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.COUNTER_TARGET).onTarget(true).build()));

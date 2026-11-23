@@ -64,8 +64,8 @@ class QuickFfaCliTest extends SqliteContextSupport {
                 org.springframework.util.SerializationUtils.serialize(fixture))).when(players).craftRandomPlayer(user);
         }
         doAnswer(i -> new com.gsc.bm.model.game.ComPlayer(new BigBadBruiser(),
-            cards.craftCard("com.ShuffleFeet"), List.of(), cards.craftCard("com.last.Struggle"),
-            java.util.stream.IntStream.range(0,50).mapToObj(n -> cards.craftCard("com.ShuffleFeet")).collect(java.util.stream.Collectors.toList())))
+            cards.craftCard("base.com.ShuffleFeet"), List.of(), cards.craftCard("com.last.Struggle"),
+            java.util.stream.IntStream.range(0,50).mapToObj(n -> cards.craftCard("base.com.ShuffleFeet")).collect(java.util.stream.Collectors.toList())))
             .when(players).craftRandomComPlayer();
         Path root=Path.of("..").toAbsolutePath().normalize();
         Path controls=Files.createTempDirectory(Path.of("target"),"i17b-clock-").toAbsolutePath();
