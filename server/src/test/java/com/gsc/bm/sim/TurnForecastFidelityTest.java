@@ -25,7 +25,7 @@ class TurnForecastFidelityTest {
     @Test
     void theForecastMatchesTheEngineTurnByTurn() throws Exception {
         // SB-16i (D97): the 1.5 frozen, both arms as before, and the 1.6 of bozza.json with its three new effects.
-        Draft armA = Draft.fromClasspath(SetBaseArms.FROZEN_15);
+        Draft armA = BozzeStoriche.fromClasspath(SetBaseArms.FROZEN_15);
         check(armA, "A");
         check(SetBaseArms.arm("B", armA), "B"); // SB-16g passo 3 (D82): the Bancone of arm B is a public effect too.
         check(Draft.fromClasspath("/set-base/bozza.json"), "1.6");
@@ -38,8 +38,8 @@ class TurnForecastFidelityTest {
         check(Draft.fromClasspath("/set-base/bozza.json"), "malus");
         // SB-21h (D159, D160): the measured candidate, with the defense of one turn plus a gain, the partial cleanup and the two Java
         // variants (counter on «Annuncia», heal from 1 to 30): the starters among themselves, then a variant deck in one seat.
-        check(Draft.fromClasspath(Sb21h.CANDIDATE), "1.6");
-        check(Draft.fromClasspath(Sb21h.CANDIDATE), "sb21h");
+        check(BozzeStoriche.fromClasspath(Sb21h.CANDIDATE), "1.6");
+        check(BozzeStoriche.fromClasspath(Sb21h.CANDIDATE), "sb21h");
     }
 
     private static void check(Draft draft, String arm) throws Exception {

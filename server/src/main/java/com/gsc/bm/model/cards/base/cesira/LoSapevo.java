@@ -6,17 +6,17 @@ import com.gsc.bm.model.game.Move;
 import java.util.List;
 
 /**
- * SB-17, CES-AR3 del Set Base («Lo sapevo», D106 (3)): annulla la mossa del bersaglio se arriva dopo; se annulla il colpo che il
- * bersaglio ha annunciato, il suo gettone resta. È un effetto stampato solo su questa carta (R00): la regola generale RP-15 non cambia,
- * e la carta annunciata giocata toglie il gettone anche se annullata da altro. La partita lo applica solo con le regole del playground
- * ({@link Move#isKeepsToken()}, D108).
+ * «Copione Già Visto», slot CES-AR3 del Set Base: la scheda è quella del documento del set. Annulla la mossa dell'avversario scelto se
+ * deve ancora risolversi e nessun'altra carta l'ha già annullata; se la carta annullata ha il nome a cui è legato il Vulnerabile
+ * dell'avversario, quella giocata non lo fa finire. È un effetto di questa sola carta (R00): la carta annunciata annullata da altro
+ * toglie il Vulnerabile come sempre. La partita lo applica con le regole del playground ({@link Move#isKeepsToken()}).
  */
 public class LoSapevo extends Contromossa {
 
     @Override
     protected void onVoided(Move voided) { voided.setKeepsToken(true); }
 
-    /** SB-17: voids the target's later move; the voided move does not satisfy its author's token. */
+    /** Voids the target's later move; the voided move does not satisfy its author's token. */
     @Override
     public PrintedEffects printedEffects() {
         return new PrintedEffects(List.of(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.COUNTER_TARGET).onTarget(true)

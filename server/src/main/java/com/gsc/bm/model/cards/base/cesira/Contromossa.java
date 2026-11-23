@@ -14,9 +14,9 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * SB-17, contromosse di Sergio (CES-AR2 «Ricatto», CES-AR3 «Lo sapevo»): annullano la mossa del bersaglio se arriva dopo, come
- * {@code YouStop}, con un effetto stampato in più che la sottoclasse dichiara. Solo bozza del Set Base: la partita viva non le conosce
- * (SB-28). Costo e priorità arrivano dalla bozza.
+ * Le contromosse di Sergio Sommerso nel Set Base: «Buon Vecchio Ricatto» (CES-AR2), «Copione Già Visto» (CES-AR3) e «Discutiamone in
+ * Privato» (CES-BO1); le schede sono quelle del documento del set. Annullano la mossa dell'avversario scelto se deve ancora risolversi,
+ * con la condizione o l'effetto in più che la sottoclasse dichiara. Costo e priorità sono nel file del set.
  * <p>
  * Una mossa già annullata (per esempio da un'altra contromossa) non si annulla di nuovo e non dà l'effetto in più.
  */
@@ -45,7 +45,7 @@ public abstract class Contromossa extends AbstractCard implements PrintedEffects
                 });
     }
 
-    /** SB-21h: whether the card voids this pending card; every pending card by default («Ricatto», «Lo sapevo»). */
+    /** Whether the card voids this pending card; every pending card by default (CES-AR2, CES-AR3). */
     protected boolean voids(Card pending) { return true; }
 
     /** What the card prints beyond the void, on the move just voided. */

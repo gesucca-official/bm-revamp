@@ -10,14 +10,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * SB-17, CES-AR2 del Set Base («Ricatto», D106 (2), al posto di {@code WhatchaDoin}): annulla la mossa del bersaglio se arriva dopo;
- * se era un colpo, gli infligge {@code percent}% del suo danno base, dello stesso tipo, troncato. Il danno base è quello stampato
- * ({@link PrintedEffects#baseDamage}): mai le parti lette dalle risorse, dagli oggetti o dalle giocate, e mai le risorse di Sergio.
+ * «Buon Vecchio Ricatto», slot CES-AR2 del Set Base: la scheda è quella del documento del set. Annulla la mossa dell'avversario scelto
+ * se deve ancora risolversi e nessun'altra carta l'ha già annullata; se era un attacco, gli infligge {@code percent}% dei suoi danni
+ * fissi, dello stesso tipo, arrotondando per difetto. I danni fissi sono quelli stampati contro l'avversario
+ * ({@link PrintedEffects#baseDamage}): mai le parti lette dalle risorse o dagli oggetti, mai Rincara. Il numero è nel file del set.
  */
 public class Ricatto extends Contromossa {
 
+    /** La parte dei danni fissi rimandata, in percento. */
     @Tunable
-    private int percent = 50;
+    private int percent;
 
     private float factor() { return percent / 100f; }
 
@@ -28,7 +30,7 @@ public class Ricatto extends Contromossa {
         return reflected;
     }
 
-    /** SB-17: voids the target's later move and reflects {@code percent}% of its base damage. */
+    /** Voids the target's later move and reflects {@code percent}% of its base damage. */
     @Override
     public PrintedEffects printedEffects() {
         return new PrintedEffects(List.of(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.COUNTER_TARGET).onTarget(true)

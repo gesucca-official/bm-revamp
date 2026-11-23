@@ -42,9 +42,10 @@ class PotenzaD82Test {
 
     @BeforeAll static void load() throws Exception {
         StarterRedesignTest.load();
-        a = Draft.fromClasspath(SetBaseArms.FROZEN_15); // SB-16i (D97): historical measure of the 1.5, read from the frozen copy.
+        a = BozzeStoriche.fromClasspath(SetBaseArms.FROZEN_15); // SB-16i (D97): historical measure of the 1.5, read from the frozen copy.
         b = SetBaseArms.arm("B", a);
-        stepTwo = JSON.readTree(Files.readString(Path.of("../docs/reports/set-base/sb-16g-2b2/draft.json")));
+        // SB-27 (D177 (1)): the step-two snapshot read through the same adaptation as the 1.5, so the comparison stays like for like.
+        stepTwo = BozzeStoriche.adatta(JSON.readTree(Files.readString(Path.of("../docs/reports/set-base/sb-16g-2b2/draft.json"))));
     }
 
     static JsonNode card(JsonNode root, String binding) { return StarterBalanceMeasureTest.card(root, binding); }
@@ -85,7 +86,7 @@ class PotenzaD82Test {
         assertEquals(json("{'TOXICITY':20}"), card(now, ASSAGGINO).get("self").get(0).get("foundGains"));
         assertEquals(json("{'turns':1,'poison':12}"), card(now, TRAVASO).get("params"));
         assertEquals(json("{'TOXICITY':10}"), card(now, TRAVASO).get("cost"));
-        assertEquals(json("{'base':18,'selfHit':0}"), card(now, ESTASI).get("params"));
+        assertEquals(json("{'base':18,'perAlcohol':1}"), card(now, ESTASI).get("params")); // SB-27 (D177 (1)): selfHit 0 dropped, perAlcohol 1 written by BozzeStoriche
         assertTrue(card(now, RUTTO).get("java").asBoolean());
         assertEquals(json("{'base':14,'perAlcohol':2}"), card(now, RUTTO).get("params"));
         assertEquals(json("{'ALCOHOL':5}"), card(now, RUTTO).get("cost"));

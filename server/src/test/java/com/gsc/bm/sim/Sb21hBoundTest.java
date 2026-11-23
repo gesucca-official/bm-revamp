@@ -35,7 +35,7 @@ class Sb21hBoundTest {
     private static Draft draft;
 
     @BeforeAll
-    static void load() throws Exception { draft = Draft.fromClasspath(Sb21h.CANDIDATE); }
+    static void load() throws Exception { draft = BozzeStoriche.fromClasspath(Sb21h.CANDIDATE); }
 
     private static Card card(String name, String json) {
         try {

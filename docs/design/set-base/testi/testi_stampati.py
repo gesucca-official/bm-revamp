@@ -52,7 +52,7 @@ PARAMETRI_JAVA = {
     "junkie.ToxicBloodDrain": "turns poison",
     "com.items.MarvelousCocktail": "alcohol toxicity turns poison",
     "base.pino.UltimoGiro": "base selfHit perPlay perPlaySelf",
-    "base.pino.GoingBerserk": "base selfHit",
+    "base.pino.GoingBerserk": "base",
     "base.pino.RuttoADistanzaSociale": "base perAlcohol",
     "com.items.AnotherRottenBeer": "alcohol",
     "bruiser.BreakYourToy": "",
@@ -61,7 +61,7 @@ PARAMETRI_JAVA = {
     "base.cesira.LoSapevo": "",
     "base.com.ShuffleFeet": "",
     "base.items.SantinoDellaPortinaia": "turns",
-    "base.com.BeggingMoney": "alertnessFromTarget",
+    "base.com.BeggingMoney": "",
     "bruiser.BadEducation": "hitDamage",
     "base.cesira.bound.NeRiparliamoFuori": "",
     "base.rocco.bound.MiRialzo": "heal healthAtLeast healthAtMost",  # SB-21z (D161 (3)): healthAtLeast 1 (vivo) non si stampa
@@ -254,7 +254,7 @@ def verifica_carta(carta, nomi):
             raise ValueError("java: deve valere true")
         binding = carta["binding"]
         scelta(binding, JAVA, "binding Java")
-        facoltativi = "perAlcohol maxDamage" if binding == "base.pino.GoingBerserk" else ""
+        facoltativi = "perAlcohol" if binding == "base.pino.GoingBerserk" else ""
         campi(carta["params"], "params", PARAMETRI_JAVA.get(binding, ""), facoltativi)
         for nome, valore in carta["params"].items():
             intero(valore, f"params.{nome}")
@@ -327,9 +327,6 @@ def guadagni_nominali(passi):
 
 def nominali_java(carta):
     binding, params = carta["binding"], carta["params"]
-    # La sottoclasse della bozza ha soppresso la sottrazione della classe viva.
-    if params.get("alertnessFromTarget", 0):
-        raise ValueError("params.alertnessFromTarget: deve essere 0 per base.com.BeggingMoney")
     gains = riepilogo({r: params[k] for k, r in (("alcohol", "ALCOHOL"), ("toxicity", "TOXICITY")) if k in params})
     if binding == "junkie.ToxicBloodDrain":
         danno = f'POISON {params["poison"]}' if params["poison"] else "—"

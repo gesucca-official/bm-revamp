@@ -14,7 +14,7 @@
   "ingressi": [
     {
       "file": "server/src/test/resources/set-base/bozza.json",
-      "sha256": "a8930edeb822028918d8fcd4c78fce2e4ffda007b2edca883ff48528290b527d"
+      "sha256": "325926e35d371ad169848a5930924472ddfdd94a71b73a959fac0ed2dda83d8d"
     },
     {
       "file": "docs/design/set-base/testi/testi-completi.json",
@@ -28,7 +28,7 @@
   "uscite": [
     {
       "file": "client-debug/sets/base.md",
-      "sha256": "247da9a74f0d6c22852aa75d94bbb134bb6de1599b64720443d552efa60cfd9d"
+      "sha256": "c04f6126b4d9ce005d2fb3a9e7b82c2238b11315903bb71e63130c6f3ed86bd7"
     },
     {
       "file": "sets/base.json",
@@ -36,7 +36,7 @@
     },
     {
       "file": "sets/base.md",
-      "sha256": "247da9a74f0d6c22852aa75d94bbb134bb6de1599b64720443d552efa60cfd9d"
+      "sha256": "c04f6126b4d9ce005d2fb3a9e7b82c2238b11315903bb71e63130c6f3ed86bd7"
     },
     {
       "file": "cards.sqlite",

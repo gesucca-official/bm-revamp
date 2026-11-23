@@ -10,11 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * SB-21h (D159 (1c), D160 (1)), CES-BO1 del Set Base, nome di lavoro «Ne riparliamo fuori»: bound variante di Sergio. Annulla la mossa
- * del bersaglio se deve ancora risolversi e la sua carta contiene «Annuncia» (un passo di ricerca); altrimenti non fa nulla. Le op
- * a dati non esprimono la condizione, quindi è una classe Java (proposta della Fase A, «Motore e dati»). Solo bozza del Set Base:
- * la partita viva non la conosce (SB-28). Costo, priorità e rarità arrivano dalla bozza; lo scarto R02 alla risoluzione, come
- * {@code AbstractCharacterBoundCard}.
+ * «Discutiamone in Privato», slot CES-BO1 del Set Base, legata a Sergio Sommerso: la scheda è quella del documento del set. Annulla la
+ * mossa dell'avversario scelto se deve ancora risolversi, nessun'altra carta l'ha già annullata e la sua carta contiene Annuncia (un
+ * passo di ricerca); altrimenti non fa nulla. Lo scarto di R02 avviene all'inizio dell'effetto, come in
+ * {@code AbstractCharacterBoundCard}. Costo, priorità e rarità sono nel file del set.
  */
 public class NeRiparliamoFuori extends Contromossa {
 
@@ -37,7 +36,7 @@ public class NeRiparliamoFuori extends Contromossa {
         return PrintedEffects.searches(pending);
     }
 
-    /** SB-21h: voids the target's later move only if its card contains «Annuncia». */
+    /** Voids the target's later move only if its card contains «Annuncia». */
     @Override
     public PrintedEffects printedEffects() {
         return new PrintedEffects(List.of(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.COUNTER_TARGET).onTarget(true)

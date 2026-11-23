@@ -13,23 +13,20 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * SB-15, GIG-AR5 del Set Base («Lavoro fatto bene», la rara di Gigi): HIT pari a {@code base} più {@code perItem} per ogni oggetto
- * proprio sul campo.
+ * «Lavoro Fatto Bene», slot GIG-AR5 del Set Base: la scheda è quella del documento del set. L'avversario subisce HIT pari a
+ * {@code base} più {@code perItem} per ogni oggetto che l'autore ha in campo.
  * <p>
- * I passi dati leggono una risorsa dell'autore, non il numero dei suoi oggetti (decisione D35 della griglia: «una classe Java nuova per
- * la rara di Gigi»). La classe conta gli oggetti nella logica speciale, dopo i costi e prima degli effetti (R04), e poi colpisce. Contano
- * gli oggetti ancora sul campo, token compresi; gli equip sono oggetti già consumati e sono stati, non oggetti, quindi non contano.
- * <p>
- * Vive nei sorgenti di test: la partita viva non la conosce (SB-28). Costo e priorità arrivano dalla bozza.
+ * Gli oggetti si contano nella logica speciale, all'inizio della risoluzione e dopo i costi (regolamento, R04): contano anche i token;
+ * gli equipaggiamenti no, perché sono stati e non oggetti. Numeri, costo e priorità sono nel file del set; ognuno è obbligatorio.
  */
 public class LavoroFattoBene extends AbstractCard implements PrintedEffects.Source {
 
-    /** Il danno fisso, a tavolo vuoto. */
+    /** Il danno fisso, senza oggetti. */
     @Tunable
-    private int base = 6;
+    private int base;
     /** Il danno in più per ogni oggetto proprio sul campo. */
     @Tunable
-    private int perItem = 4;
+    private int perItem;
 
     /** Gli oggetti dell'autore contati alla risoluzione. */
     private int items;
@@ -55,7 +52,7 @@ public class LavoroFattoBene extends AbstractCard implements PrintedEffects.Sour
         return List.of(self.inflictDamage(target, new Damage(Damage.DamageType.HIT, base + perItem * items)));
     }
 
-    /** D76: HIT of base plus perItem for each own item counted after costs. */
+    /** HIT of base plus perItem for each own item counted after costs. */
     @Override
     public PrintedEffects printedEffects() {
         return new PrintedEffects(List.of(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.DAMAGE).onTarget(true)

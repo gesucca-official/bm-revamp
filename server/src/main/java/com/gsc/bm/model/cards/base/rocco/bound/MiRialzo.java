@@ -12,19 +12,22 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * SB-21h (D159 (1c), D160 (1)), ROC-BO2 del Set Base, nome di lavoro «Mi rialzo dal marciapiede»: bound variante di Duccio. Se alla
- * risoluzione Duccio ha da {@code healthAtLeast} a {@code healthAtMost} HEALTH, recupera {@code heal} HEALTH; altrimenti nulla. Sempre giocabile. Le op a
- * dati non esprimono la condizione, quindi è una classe Java (proposta della Fase A, «Motore e dati»). Solo bozza del Set Base (SB-28).
- * Costo, priorità e rarità arrivano dalla bozza; lo scarto R02 lo fa {@link AbstractCharacterBoundCard}.
+ * «Rialziamoci e Partite!», slot ROC-BO2 del Set Base, legata a Duccio Braccio Teso: la scheda è quella del documento del set. Se alla
+ * risoluzione l'autore ha da {@code healthAtLeast} a {@code healthAtMost} H, guadagna {@code heal} H; altrimenti niente. Si gioca su
+ * di sé, quindi si risolve anche a terra. Numeri, costo, priorità e rarità sono nel file del set; ognuno è obbligatorio. Lo scarto di
+ * R02 lo fa {@link AbstractCharacterBoundCard}.
  */
 public class MiRialzo extends AbstractCharacterBoundCard implements PrintedEffects.Source {
 
+    /** La H guadagnata. */
     @Tunable
-    private int heal = 4;
+    private int heal;
+    /** La H minima per guadagnare. */
     @Tunable
-    private int healthAtLeast = 1;
+    private int healthAtLeast;
+    /** La H massima per guadagnare. */
     @Tunable
-    private int healthAtMost = 30;
+    private int healthAtMost;
 
     public MiRialzo() {
         super(Character.class);
@@ -49,7 +52,7 @@ public class MiRialzo extends AbstractCharacterBoundCard implements PrintedEffec
         return null;
     }
 
-    /** SB-21h: +{@code heal} HEALTH to the author, only with {@code healthAtLeast} to {@code healthAtMost} HEALTH when it applies. */
+    /** +{@code heal} HEALTH to the author, only with {@code healthAtLeast} to {@code healthAtMost} HEALTH when it applies. */
     @Override
     public PrintedEffects printedEffects() {
         return new PrintedEffects(List.of(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.GAIN).resource(Resource.HEALTH)

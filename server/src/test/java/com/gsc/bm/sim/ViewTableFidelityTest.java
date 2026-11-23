@@ -22,7 +22,7 @@ class ViewTableFidelityTest {
     @Test
     void equivalenceAndTwoTurnFidelity() throws Exception {
         // SB-16i (D97): the 1.5 frozen, both arms with their probe regressions, and the 1.6 of bozza.json.
-        Draft a = Draft.fromClasspath(SetBaseArms.FROZEN_15);
+        Draft a = BozzeStoriche.fromClasspath(SetBaseArms.FROZEN_15);
         check(a, "A", true);
         check(SetBaseArms.arm("B", a), "B", true);
         check(Draft.fromClasspath(DRAFT), "1.6", false);
@@ -33,8 +33,8 @@ class ViewTableFidelityTest {
         // SB-19 B2 (D130, RP-27): a deck with the items of the «In campo» effect in one seat (alternating), the starters in the other.
         check(Draft.fromClasspath(DRAFT), "malus", false);
         // SB-21h (D159, D160): the measured candidate with the new bounds, the starters and then a variant deck in one seat.
-        check(Draft.fromClasspath(Sb21h.CANDIDATE), "1.6", false);
-        check(Draft.fromClasspath(Sb21h.CANDIDATE), "sb21h", false);
+        check(BozzeStoriche.fromClasspath(Sb21h.CANDIDATE), "1.6", false);
+        check(BozzeStoriche.fromClasspath(Sb21h.CANDIDATE), "sb21h", false);
     }
 
     /** SB-19 B2: the decks of the «malus» arm, by seed: the two items, Scatto Repentino, «Lo rivendo»; Steal is in two starters. */

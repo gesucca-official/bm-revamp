@@ -34,11 +34,12 @@ class Correzione15Test {
 
     @BeforeAll static void load() throws Exception {
         StarterRedesignTest.load();
-        a = Draft.fromClasspath(SetBaseArms.FROZEN_15); // SB-16i (D97): historical measure of the 1.5, read from the frozen copy.
+        a = BozzeStoriche.fromClasspath(SetBaseArms.FROZEN_15); // SB-16i (D97): historical measure of the 1.5, read from the frozen copy.
         b = SetBaseArms.arm("B", a);
     }
 
-    static JsonNode snapshot(String name) throws Exception { return JSON.readTree(Files.readString(STEP3.resolve(name))); }
+    /** SB-27 (D177 (1)): the snapshot read through the same adaptation as the draft, so the comparison stays like for like. */
+    static JsonNode snapshot(String name) throws Exception { return BozzeStoriche.adatta(JSON.readTree(Files.readString(STEP3.resolve(name)))); }
 
     /** Every card equal to the snapshot except the three; for those, only the expected fields, with the 1.5 values. */
     static void onlyTheThreeNumbersChange(JsonNode before, JsonNode now) {

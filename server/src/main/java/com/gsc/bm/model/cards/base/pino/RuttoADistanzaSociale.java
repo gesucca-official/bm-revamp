@@ -14,24 +14,23 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * SB-16g passo 3 (proposta 1.4, D82, D84), PIN-AR5 del Set Base («Rutto a distanza sociale»): spende tutta la L residua.
+ * «Rutto a Bruciapelo», slot PIN-AR5 del Set Base: la scheda è quella del documento del set. Nell'ordine: si legge la L che resta
+ * dopo il costo (la L spesa); la si spende tutta; l'avversario perde A pari alla L spesa; poi subisce HIT pari a {@code base} più
+ * {@code perAlcohol} volte la L spesa.
  * <p>
- * Con i passi dati l'azzeramento su sé arriverebbe prima degli effetti sul bersaglio e il «doppio» della L non si scrive. Come
- * {@link GoingBerserk}, la classe memorizza la L dell'autore nella logica speciale, dopo il costo; poi, su sé, azzera la L; infine il
- * bersaglio perde A pari alla L memorizzata e subisce HIT pari a {@code base} più {@code perAlcohol} volte la stessa L.
- * <p>
- * Solo nella bozza del Set Base: la partita viva non la conosce (SB-28). Costo e priorità arrivano dalla bozza.
+ * Gli effetti su sé vengono prima di quelli sul bersaglio (regolamento, R04): per questo la L si legge nella logica speciale, dopo i
+ * costi e prima dell'azzeramento. Numeri, costo e priorità sono nel file del set; ognuno è obbligatorio.
  */
 public class RuttoADistanzaSociale extends AbstractCard implements PrintedEffects.Source {
 
     /** Il danno fisso. */
     @Tunable
-    private int base = 14;
+    private int base;
     /** Il danno per ogni punto di L spesa. */
     @Tunable
-    private int perAlcohol = 2;
+    private int perAlcohol;
 
-    /** La L dell'autore letta alla risoluzione, dopo il costo e prima di azzerarla. */
+    /** La L spesa: quella dell'autore all'inizio della risoluzione, dopo il costo. */
     private int alcohol;
 
     public RuttoADistanzaSociale() {
@@ -57,7 +56,7 @@ public class RuttoADistanzaSociale extends AbstractCard implements PrintedEffect
                 self.inflictDamage(target, new Damage(Damage.DamageType.HIT, base + perAlcohol * alcohol)));
     }
 
-    /** D84: ALCOHOL emptied; the target loses ALERTNESS equal to the ALCOHOL read after costs, then HIT of base plus perAlcohol times it. */
+    /** ALCOHOL emptied; the target loses ALERTNESS equal to the ALCOHOL read after costs, then HIT of base plus perAlcohol times it. */
     @Override
     public PrintedEffects printedEffects() {
         return new PrintedEffects(List.of(

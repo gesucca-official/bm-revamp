@@ -26,9 +26,9 @@ class GoingBerserkTest {
         draft = Draft.fromClasspath("/set-base/bozza.json");
     }
 
+    // SB-27 (D177 (1), owner's answer to STOP 1/2): perAlcohol is no longer optional; the case with the parameter omitted is deleted.
     @Test
-    void estasiUsesOneHitPerAlcoholWhenTheParameterIsOmitted() {
-        assertEstasi(estasiWith(null), 1, 30);
+    void estasiUsesOneHitPerAlcoholWithTheParameterAtOne() {
         assertEstasi(estasiWith(1), 1, 30);
     }
 

@@ -69,10 +69,10 @@ class StarterLotMeasureTest {
     static final Path ROUND_3 = Path.of("../docs/reports/set-base/sb-16e/round-3/draft.json");
 
     @Test void variantsChangeOnlyTheDeclaredNumbers() throws Exception {
-        Draft draft = Draft.fromFile(ROUND_3);
+        Draft draft = BozzeStoriche.fromFile(ROUND_3);
         JsonNode base = draft.json();
         // SB-16e2 adopted variant (c) under D56/D38: the current draft is exactly the measured profile.
-        assertEquals(variant(draft, "c").json(), Draft.fromFile(Path.of("../docs/reports/set-base/sb-16e2/c/draft.json")).json());
+        assertEquals(variant(draft, "c").json(), BozzeStoriche.fromFile(Path.of("../docs/reports/set-base/sb-16e2/c/draft.json")).json());
         Map<String, Set<String>> touched = Map.of("control", Set.of(), "a", Set.of(CHARGE_PIERA),
                 "b", Set.of(LAST_CELESTINA, LAST_PIERA), "c", Set.of(CHARGE_PIERA, LAST_CELESTINA, LAST_PIERA));
         for (String name : ORDER) {

@@ -278,7 +278,7 @@ class SetBaseDraftTest {
     @Test
     void theListinoBaseFromTheDraftHasTheNewContexts() throws Exception {
         // D79 removes the double generic slots used by these historical SB-11/SB-15 price probes.
-        Draft draft = Draft.fromFile(java.nio.file.Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json"));
+        Draft draft = BozzeStoriche.fromFile(java.nio.file.Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json"));
         JsonNode json = draft.json();
         Draft base = Listino.setBaseContexts(draft, 7);
         for (String ctx : List.of(Listino.SPAZIENZIO, Listino.MARA)) {
@@ -412,7 +412,7 @@ class SetBaseDraftTest {
     @Test
     void theListinoBaseHasTheToxicContextAndItsBoundCurves() throws Exception {
         // D79 removes the double generic slots used by these historical SB-11/SB-15 price probes.
-        Draft draft = Draft.fromFile(java.nio.file.Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json"));
+        Draft draft = BozzeStoriche.fromFile(java.nio.file.Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json"));
         JsonNode json = draft.json();
         Draft base = Listino.setBaseContexts(draft, 7);
         List<String> spec = Listino.SET_BASE_CONTEXTS.get(Listino.TOSSICO);
@@ -495,7 +495,7 @@ class SetBaseDraftTest {
         JsonNode berserk = card("base.pino.GoingBerserk"), last = card("base.pino.UltimoGiro"), testata = card("base.pino.TestataDaUltimoGiro");
         assertEquals(10, berserk.get("params").get("base").asInt(), "D156: Giro secco 10 + L spesa");
         assertEquals(1, berserk.get("params").get("perAlcohol").asInt(), "D156");
-        assertEquals(0, berserk.get("params").get("selfHit").asInt());
+        assertFalse(berserk.get("params").has("selfHit"), "SB-27 (D177 (1)): selfHit 0 only switched the self-damage off; it left the draft");
         assertEquals("HIT 10+x", berserk.get("gui").get("damageAmount").asText(), "D149");
         assertTrue(berserk.get("gui").get("description").asText().contains("Spendi tutta la tua [[L]]. Infliggi [[HIT]] all'avversario pari a 10 più la [[L]] spesa."), "D156, D173: il verbo dei danni");
         assertEquals(10, last.get("params").get("base").asInt(), "SB-21z (D162), prima 12");
@@ -607,7 +607,7 @@ class SetBaseDraftTest {
     @Test
     void theListinoBaseHasThePinoContextAndItsBoundCurves() throws Exception {
         // D79 removes the double generic slots used by these historical SB-11/SB-15 price probes.
-        Draft draft = Draft.fromFile(java.nio.file.Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json"));
+        Draft draft = BozzeStoriche.fromFile(java.nio.file.Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json"));
         JsonNode json = draft.json();
         Draft base = Listino.setBaseContexts(draft, 7);
         List<String> spec = Listino.SET_BASE_CONTEXTS.get(Listino.PINO);
@@ -965,7 +965,7 @@ class SetBaseDraftTest {
     @Test
     void theListinoBaseHasTheGigiContextAndItsBoundCurves() throws Exception {
         // D79 removes the double generic slots used by these historical SB-11/SB-15 price probes.
-        Draft draft = Draft.fromFile(java.nio.file.Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json"));
+        Draft draft = BozzeStoriche.fromFile(java.nio.file.Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json"));
         JsonNode json = draft.json();
         Draft base = Listino.setBaseContexts(draft, 7);
         List<String> spec = Listino.SET_BASE_CONTEXTS.get(Listino.GIGI);

@@ -141,6 +141,8 @@ class Bozza16Test {
                 // D149 and SB-21f: exact changes to the draft cards, with the rest of each card still checked.
                 if (b.equals("base.pino.GoingBerserk")) {
                     ((ObjectNode) expected.path("params")).put("base", 10).put("perAlcohol", 1);
+                    // SB-27 (D177 (1)): selfHit 0 only switched the self-damage off; it left the draft with its logic.
+                    ((ObjectNode) expected.path("params")).remove("selfHit");
                 }
                 if (b.equals("base.pino.QuestoLoFiniscoIo"))
                     ((ObjectNode) expected.path("self").path(0)).put("amount", 15);
@@ -212,6 +214,6 @@ class Bozza16Test {
             assertEquals(n[1], damage.stream().filter(PrintedEffects.Step::isOnTarget).findFirst().orElseThrow().getPerPlay(), b);
         });
         assertTrue(draft.character("base.character.Mara").searchShuffle(), "the setting reaches the characters of the draft");
-        assertFalse(Draft.fromClasspath(SetBaseArms.FROZEN_15).character("base.character.Mara").searchShuffle());
+        assertFalse(BozzeStoriche.fromClasspath(SetBaseArms.FROZEN_15).character("base.character.Mara").searchShuffle());
     }
 }

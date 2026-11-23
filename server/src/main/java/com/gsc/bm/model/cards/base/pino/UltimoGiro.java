@@ -1,44 +1,81 @@
 package com.gsc.bm.model.cards.base.pino;
 
+import com.gsc.bm.model.Character;
+import com.gsc.bm.model.Damage;
+import com.gsc.bm.model.Resource;
+import com.gsc.bm.model.cards.AbstractCard;
+import com.gsc.bm.model.cards.PrintedEffects;
 import com.gsc.bm.model.cards.Tunable;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 /**
- * SB-14, LR-PIN del Set Base («L'ultimo giro»): la last resort di Pino, con la stessa logica di {@link GoingBerserk} (decisione B1).
- * Esiste come sottoclasse perché la bozza lega una carta Java al nome della sua classe e prende dalla classe l'essere last resort;
- * i numeri ({@code base 6}, {@code selfHit 5}) arrivano dalla bozza.
+ * «Ultimo Giro», slot LR-PIN del Set Base, l'ultima risorsa di Piera Pinot: la scheda è quella del documento del set. Nell'ordine: si
+ * legge la L all'inizio della risoluzione (la L spesa); l'autore subisce {@code selfHit} HIT, prima di spendere la L; spende tutta la
+ * L; l'avversario subisce HIT pari a {@code base} più la L spesa.
  * <p>
- * SB-16i («Rincara X (Y a sé)», D95, D97): per ogni giocata precedente della carta da parte del suo autore, +{@code perPlay} HIT al
- * bersaglio e +{@code perPlaySelf} HIT a sé. Parametri facoltativi, 0 se la bozza non li scrive: le bozze storiche restano uguali.
- * Il contatore lo tiene la partita, solo con le regole del playground.
+ * Rincara {@code perPlay} ({@code perPlaySelf} a te): per ogni giocata precedente della carta da parte del suo autore, anche annullata,
+ * i HIT all'avversario crescono di {@code perPlay} e quelli a sé di {@code perPlaySelf}. Il contatore lo tiene la partita, solo con le
+ * regole del playground. Numeri, costo e priorità sono nel file del set; ognuno è obbligatorio.
  */
-public class UltimoGiro extends GoingBerserk {
+public class UltimoGiro extends AbstractCard implements PrintedEffects.Source {
 
-    @Tunable(optional = true)
-    private int perPlay = 0;
-    @Tunable(optional = true)
-    private int perPlaySelf = 0;
+    /** Il danno fisso all'avversario. */
+    @Tunable
+    private int base;
+    /** Il danno a sé. */
+    @Tunable
+    private int selfHit;
+    /** Rincara: i HIT in più all'avversario per giocata precedente. */
+    @Tunable
+    private int perPlay;
+    /** Rincara: i HIT in più a sé per giocata precedente. */
+    @Tunable
+    private int perPlaySelf;
 
-    /** The earlier plays of this card by its author, read when the move starts resolving. */
+    /** La L spesa: quella dell'autore all'inizio della risoluzione. */
+    private int alcohol;
+    /** Le giocate precedenti della carta da parte del suo autore, lette all'inizio della risoluzione. */
     private int plays;
 
     public UltimoGiro() {
         super();
+        setCanTarget(Set.of(CardTarget.OPPONENT));
+        setCost(Map.of());
         setLastResort(true);
     }
 
     @Override
     public void applyOtherUnfathomableLogic(Game g, Move m) {
-        super.applyOtherUnfathomableLogic(g, m);
-        plays = g.getRuleset().playground() ? g.getSelf(m).getCharacter().playsOf(getName()) : 0;
+        Character self = g.getSelf(m).getCharacter();
+        alcohol = Math.max(0, self.getResources().getOrDefault(Resource.ALCOHOL, 0));
+        plays = g.getRuleset().playground() ? self.playsOf(getName()) : 0;
     }
 
-    @Override protected int extraBase() { return perPlay * plays; }
+    @Override
+    public List<String> applyEffectOnSelf(Character self) {
+        return List.of(
+                self.inflictDamage(self, new Damage(Damage.DamageType.HIT, selfHit + perPlaySelf * plays)),
+                self.emptyResource(Resource.ALCOHOL));
+    }
 
-    @Override protected int extraSelf() { return perPlaySelf * plays; }
+    @Override
+    public List<String> applyEffectOnTarget(Character self, Character target) {
+        return List.of(self.inflictDamage(target, new Damage(Damage.DamageType.HIT, base + alcohol + perPlay * plays)));
+    }
 
-    @Override protected int perPlayTarget() { return perPlay; }
-
-    @Override protected int perPlaySelf() { return perPlaySelf; }
+    /** Self HIT, ALCOHOL emptied, HIT of base plus the ALCOHOL read at the start of the resolution; «Rincara» on both damages. */
+    @Override
+    public PrintedEffects printedEffects() {
+        return new PrintedEffects(List.of(
+                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.DAMAGE).onTarget(false).damageType(Damage.DamageType.HIT)
+                        .base(selfHit).perPlay(perPlaySelf).build(),
+                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.EMPTY).resource(Resource.ALCOHOL).build(),
+                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.DAMAGE).onTarget(true).damageType(Damage.DamageType.HIT)
+                        .base(base).of(Resource.ALCOHOL).atStart(true).perPlay(perPlay).build()));
+    }
 }

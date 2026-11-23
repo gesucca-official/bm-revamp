@@ -33,22 +33,17 @@ class EstasiDamageCapTest {
         draft = Draft.fromClasspath("/set-base/bozza.json");
     }
 
+    // SB-27 (D177 (1), owner's answer to STOP 1/2): the maxDamage cap is gone with its parameter; the five cases with a cap (and the
+    // one with maxDamage 0) are deleted. The uncapped case stays: engine and both bot models agree on 10 + 2 x the L spent.
     @ParameterizedTest
     @CsvSource(value = {
-            "omesso, 20, 50",
-            "0,      20, 50",
-            "35,      6, 22",
-            "30,     10, 30",
-            "35,     20, 35",
-            "30,     20, 30"
-    }, nullValues = "omesso")
-    void capsD149DamageInTheEngineAndBothBotModels(Integer cap, int alcohol, int expectedHit) {
+            "20, 50"
+    })
+    void uncappedDamageAgreesInTheEngineAndBothBotModels(int alcohol, int expectedHit) {
         ObjectNode json = draft.json().deepCopy();
         ObjectNode params = (ObjectNode) StarterBalanceMeasureTest.card(json, ESTASI).get("params");
         // D156 changes the delivered draft. Keep the D149 input for this cap experiment.
         params.put("perAlcohol", 2);
-        params.remove("maxDamage");
-        if (cap != null) params.put("maxDamage", cap);
         Card card = Draft.parse("Estasi D150", json).card(ESTASI);
 
         Player author = player("starter-pino", "a", List.of(card), List.of());
@@ -69,7 +64,7 @@ class EstasiDamageCapTest {
         PrintedEffects.Step hit = ((PrintedEffects.Source) card).printedEffects().getSteps().stream()
                 .filter(step -> step.isOnTarget() && step.getKind() == PrintedEffects.Kind.DAMAGE)
                 .findFirst().orElseThrow();
-        assertEquals(cap == null ? 0 : cap, hit.getCap());
+        assertEquals(0, hit.getCap());
         assertEquals(500 - expectedHit, target.getResources().get(Resource.HEALTH), "motore");
         assertEquals(0, author.getResources().get(Resource.ALCOHOL), "motore");
         assertEquals(List.of(Map.of(author.getPlayerId(), 500, target.getPlayerId(), 500 - expectedHit)), variants,

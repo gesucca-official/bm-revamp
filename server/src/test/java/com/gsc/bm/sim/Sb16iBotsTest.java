@@ -140,7 +140,7 @@ class Sb16iBotsTest {
 
     /** Proposal, section 6: against a shown lethal Impatto (priority 0) a Sgommata (priority 1) comes first and scales it (1.6: halves it, a save). */
     static Set<String> kept(String draftPath) throws Exception {
-        Draft d = Draft.fromClasspath(draftPath);
+        Draft d = BozzeStoriche.fromClasspath(draftPath); // SB-27 (D177): the 1.5 is a historical draft
         List<BotView.CardSeen> hand = new ArrayList<>();
         for (String b : List.of("base.mara.CinghiataDiTraverso", "base.mara.Sgommata", "base.mara.TraDueParaurti", "base.com.Spintone"))
             hand.add(BotView.publicText(d.card(b)));
