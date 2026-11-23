@@ -100,14 +100,14 @@
    "slot": "SPA-BO2",
    "nome": "SVEGLIAMOCI - MA TU NO",
    "tipo": "carta",
-   "breve": "Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario.",
+   "breve": "Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. Infliggi 2 [[HIT]] all'avversario.",
    "completo": [
     "Azione legata a SPAZIENZIO DE LA UCCISO (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua [[T]]. 2. Perdi un quarto della tua [[L]]. 3. Infliggi 2 [[HIT]] all'avversario.",
     "La tua [[T]] e la tua [[L]] si leggono quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.",
     "Nessuna risorsa scende sotto 0 (regole del playground, RP-4).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 2 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 [[HIT]]."
    ]
   },
   "base.spazienzio.bound.TestaAlMuro": {
@@ -125,14 +125,14 @@
    "slot": "MAR-BO1",
    "nome": "Sventare l'Assassinio",
    "tipo": "carta",
-   "breve": "Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[CUT]] all'avversario.",
+   "breve": "Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. Infliggi 2 [[CUT]] all'avversario.",
    "completo": [
     "Azione legata a Mara Contromano (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua [[T]]. 2. Perdi un quarto della tua [[L]]. 3. Infliggi 2 [[CUT]] all'avversario.",
     "La tua [[T]] e la tua [[L]] si leggono quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.",
     "Nessuna risorsa scende sotto 0 (regole del playground, RP-4).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 2 [[CUT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 [[CUT]]."
    ]
   },
   "base.mara.bound.CambioMarcia": {
@@ -161,38 +161,38 @@
    "slot": "LR-STR",
    "nome": "Addosso!!!",
    "tipo": "carta",
-   "breve": "Subisci 5 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te).",
+   "breve": "Subisci 5 [[HIT]]. Infliggi 10 [[HIT]] all'avversario. Rincara 5 (2 a te).",
    "completo": [
     "Ultima risorsa, generica (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Subisci 5 [[HIT]]: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. Più 2 per ogni volta che l'hai già giocata (Rincara, sotto). 2. Infliggi 10 [[HIT]] all'avversario. Più 5 per ogni volta che l'hai già giocata (Rincara, sotto).",
     "Rincara 5 (2 a te) (regole del playground, sezione 4): per ogni volta che hai già giocato questa carta in questa partita, anche annullata, i danni all'avversario crescono di 5 e quelli che infliggi a te stesso di 2; le giocate dell'avversario non contano.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 10 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 [[HIT]]."
    ]
   },
   "bruiser.SuperImpact": {
    "slot": "SPA-AR1",
    "nome": "GARGANTUESCO IMPATTO SUL TU",
    "tipo": "carta",
-   "breve": "25 [[V]]: 35 [[HIT]] all'avversario.",
+   "breve": "25 [[V]]: infliggi 35 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 25 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 0. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 35 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 35 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 35 [[HIT]]."
    ]
   },
   "bruiser.ExtremelyViolentBlow": {
    "slot": "SPA-AR2",
    "nome": "SPEDIAMOTI DUNQUE IN O-AHIO",
    "tipo": "carta",
-   "breve": "10 [[V]]: [[HIT]] all'avversario pari a 6 più metà della [[V]] che ti resta.",
+   "breve": "10 [[V]]: infliggi [[HIT]] all'avversario pari a 6 più metà della [[V]] che ti resta.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 10 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi all'avversario [[HIT]] pari a 6 più metà della [[V]] che ti resta.",
     "La tua [[V]] si legge quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 6 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 6 [[HIT]]."
    ]
   },
   "bruiser.Glare": {
@@ -230,39 +230,39 @@
    "slot": "MAR-AR1",
    "nome": "Lazo del Rider",
    "tipo": "carta",
-   "breve": "20 [[A]]: [[CUT]] all'avversario pari a 20 più metà della [[A]] che ti resta. Gioca d'anticipo: 5 [[CUT]] all'avversario.",
+   "breve": "20 [[A]]: infliggi [[CUT]] all'avversario pari a 20 più metà della [[A]] che ti resta. Gioca d'anticipo: infliggi 5 [[CUT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 20 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Infliggi all'avversario [[CUT]] pari a 20 più metà della [[A]] che ti resta. 2. Gioca d'anticipo (regole del playground, sezione 4): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più [[A]] dopo i costi, succede anche questo: infliggi 5 [[CUT]] all'avversario. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere.",
     "La tua [[A]] si legge quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 20 [[CUT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 20 [[CUT]]."
    ]
   },
   "base.mara.Sgommata": {
    "slot": "MAR-AR2",
    "nome": "Sgommata",
    "tipo": "carta",
-   "breve": "15 [[A]]: 25 [[CUT]] all'avversario. Gioca d'anticipo: in questo turno l'avversario infligge tre quarti dei danni che infliggerebbe.",
+   "breve": "15 [[A]]: infliggi 25 [[CUT]] all'avversario. Gioca d'anticipo: in questo turno l'avversario infligge tre quarti dei danni che infliggerebbe.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 15 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Infliggi 25 [[CUT]] all'avversario. 2. Gioca d'anticipo (regole del playground, sezione 4): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più [[A]] dopo i costi, succede anche questo: l'avversario riceve lo stato negativo «Sgommata», uno per ciascuno di [[HIT]], [[CUT]] e [[POISON]]: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, l'avversario infligge tre quarti dei danni che infliggerebbe, arrotondando per difetto. Vale anche sui [[HIT]], [[CUT]] e [[POISON]] che l'avversario si infligge da solo. Non cambia i danni delle mosse che si sono risolte prima. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere.",
     "Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applicano uno dopo l'altro, nell'ordine in cui sono stati presi (regolamento, R05).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 25 [[CUT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 25 [[CUT]]."
    ]
   },
   "base.mara.SorpassoInCurva": {
    "slot": "MAR-AR3",
    "nome": "Agilità Innaturale",
    "tipo": "carta",
-   "breve": "L'avversario perde 8 [[A]]. 4 [[CUT]] all'avversario. Gioca d'anticipo: +4 [[A]].",
+   "breve": "L'avversario perde 8 [[A]]. Infliggi 4 [[CUT]] all'avversario. Gioca d'anticipo: +4 [[A]].",
    "completo": [
     "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 2. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Gioca d'anticipo (regole del playground, sezione 4): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più [[A]] dopo i costi, succede anche questo: guadagni 4 [[A]]. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere. 2. L'avversario perde 8 [[A]]. 3. Infliggi 4 [[CUT]] all'avversario.",
     "Nessuna risorsa scende sotto 0 (regole del playground, RP-4).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 4 [[CUT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 4 [[CUT]]."
    ]
   },
   "base.mara.TraDueParaurti": {
@@ -300,37 +300,37 @@
    "slot": "GEN-05",
    "nome": "GABBIANO, DUNQUE VOLIAMOTI",
    "tipo": "carta",
-   "breve": "10 [[V]]: 20 [[HIT]] all'avversario. Su questo danno contano solo i tuoi stati positivi.",
+   "breve": "10 [[V]]: infliggi 20 [[HIT]] all'avversario. Su questo danno contano solo i tuoi stati positivi.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 10 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 20 [[HIT]] all'avversario. Su questo danno contano solo i tuoi stati positivi (gli equipaggiamenti sono stati positivi); gli stati dell'avversario contano tutti (regolamento, R05).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 20 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 20 [[HIT]]."
    ]
   },
   "base.com.MattoneDelCantiere": {
    "slot": "GEN-06",
    "nome": "Foratone da 28",
    "tipo": "carta",
-   "breve": "15 [[V]]: 25 [[HIT]] all'avversario.",
+   "breve": "15 [[V]]: infliggi 25 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 15 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 0. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 25 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 25 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 25 [[HIT]]."
    ]
   },
   "bruiser.HealingBlow": {
    "slot": "GEN-07",
    "nome": "ORMALE GUARIAMOTI",
    "tipo": "carta",
-   "breve": "20 [[V]]: 30 [[HIT]] all'avversario. Azzeri la [[T]] e la [[L]] dell'avversario.",
+   "breve": "20 [[V]]: infliggi 30 [[HIT]] all'avversario. Azzeri la [[T]] e la [[L]] dell'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 20 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Infliggi 30 [[HIT]] all'avversario. 2. Azzeri la [[T]] dell'avversario: scende a 0 qualunque valore abbia. 3. Azzeri la [[L]] dell'avversario: scende a 0 qualunque valore abbia.",
     "Nessuna risorsa scende sotto 0 (regole del playground, RP-4).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 30 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 30 [[HIT]]."
    ]
   },
   "base.com.TartarugaSulMarciapiede": {
@@ -359,24 +359,24 @@
    "slot": "GEN-17",
    "nome": "Sputo nel Posacenere",
    "tipo": "carta",
-   "breve": "5 [[A]]: 10 [[POISON]] all'avversario.",
+   "breve": "5 [[A]]: infliggi 10 [[POISON]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 5 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 10 [[POISON]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 10 [[POISON]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 [[POISON]]."
    ]
   },
   "base.com.Spintone": {
    "slot": "GEN-18",
    "nome": "Spintone",
    "tipo": "carta",
-   "breve": "8 [[HIT]] all'avversario.",
+   "breve": "Infliggi 8 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 8 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 8 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 8 [[HIT]]."
    ]
   },
   "com.items.CocktailOnTheGround": {
@@ -468,12 +468,12 @@
    "slot": "TOS-BO1",
    "nome": "Fondo del Posacenere",
    "tipo": "carta",
-   "breve": "+2 [[T]]. 2 [[CUT]] all'avversario.",
+   "breve": "+2 [[T]]. Infliggi 2 [[CUT]] all'avversario.",
    "completo": [
     "Azione legata a Celestina Bucatina (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Guadagni 2 [[T]]. 2. Infliggi 2 [[CUT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 2 [[CUT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 [[CUT]]."
    ]
   },
   "base.tossico.bound.RaschiareIlFondo": {
@@ -503,13 +503,13 @@
    "slot": "LR-TOS",
    "nome": "L'Ultimo Tiro",
    "tipo": "carta",
-   "breve": "Subisci 2 [[HIT]]. 8 [[POISON]] all'avversario. L'avversario guadagna 4 [[T]]. Rincara 5.",
+   "breve": "Subisci 2 [[HIT]]. Infliggi 8 [[POISON]] all'avversario. L'avversario guadagna 4 [[T]]. Rincara 5.",
    "completo": [
     "Ultima risorsa, riservata a Celestina Bucatina (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Subisci 2 [[HIT]]: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. 2. Infliggi 8 [[POISON]] all'avversario. Più 5 per ogni volta che l'hai già giocata (Rincara, sotto). 3. L'avversario guadagna 4 [[T]].",
     "Rincara 5 (regole del playground, sezione 4): per ogni volta che hai già giocato questa carta in questa partita, anche annullata, i danni all'avversario crescono di 5; le giocate dell'avversario non contano.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 8 [[POISON]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 8 [[POISON]]."
    ]
   },
   "junkie.MethDrivenRage": {
@@ -526,12 +526,12 @@
    "slot": "TOS-AR2",
    "nome": "Tossicone Scatarrante",
    "tipo": "carta",
-   "breve": "10 [[T]]: 20 [[POISON]] all'avversario. L'avversario guadagna 5 [[T]].",
+   "breve": "10 [[T]]: infliggi 20 [[POISON]] all'avversario. L'avversario guadagna 5 [[T]].",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 10 [[T]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Infliggi 20 [[POISON]] all'avversario. 2. L'avversario guadagna 5 [[T]].",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 20 [[POISON]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 20 [[POISON]]."
    ]
   },
   "junkie.PervertedMetabolism": {
@@ -560,12 +560,12 @@
    "slot": "TOS-AR5",
    "nome": "Trascinare nel Tunnel",
    "tipo": "carta",
-   "breve": "10 [[T]]: dai all'avversario tutta la [[T]] che ti resta e togligli l'immunità a [[T]]. 10 [[POISON]] all'avversario. A fine turno diventi immune a [[T]].",
+   "breve": "10 [[T]]: dai all'avversario tutta la [[T]] che ti resta e togligli l'immunità a [[T]]. Infliggi 10 [[POISON]] all'avversario. A fine turno diventi immune a [[T]].",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 10 [[T]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la [[T]] che ti resta dopo aver pagato il costo. 2. Perdi tutta quella [[T]]. 3. Togli all'avversario l'immunità a [[T]], anche quella del suo personaggio; resta tolta finché un'altra carta non gliela ridà (regolamento, R01 e R06). 4. L'avversario guadagna la [[T]] che hai perso. 5. Infliggi 10 [[POISON]] all'avversario. 6. Alla fine di questo turno, dopo il veleno di fine turno, diventi immune a [[T]]: la tua [[T]] non ti avvelena più a fine turno finché un'altra carta non ti toglie l'immunità; costi, guadagni, perdite e danni [[POISON]] restano (regolamento, R01 e R06).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 10 [[POISON]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 [[POISON]]."
    ]
   },
   "com.Grab": {
@@ -582,12 +582,12 @@
    "slot": "GEN-12",
    "nome": "Estrema Fretta di Alcolizzarsi",
    "tipo": "carta",
-   "breve": "10 [[A]]: +5 [[V]]. 10 [[HIT]] all'avversario.",
+   "breve": "10 [[A]]: +5 [[V]]. Infliggi 10 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 10 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 0. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Guadagni 5 [[V]]. 2. Infliggi 10 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 10 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 [[HIT]]."
    ]
   },
   "base.com.FasciaturaColFazzolettaccio": {
@@ -646,14 +646,14 @@
    "slot": "PIN-BO2",
    "nome": "Violenta Spruzzata di Seltz",
    "tipo": "carta",
-   "breve": "Perdi un quarto della tua [[T]]. 2 [[HIT]] all'avversario.",
+   "breve": "Perdi un quarto della tua [[T]]. Infliggi 2 [[HIT]] all'avversario.",
    "completo": [
     "Azione legata a Piera Pinot (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua [[T]]. 2. Infliggi 2 [[HIT]] all'avversario.",
     "La tua [[T]] si legge quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.",
     "Nessuna risorsa scende sotto 0 (regole del playground, RP-4).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 2 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 [[HIT]]."
    ]
   },
   "base.pino.bound.Coccio": {
@@ -672,39 +672,39 @@
    "slot": "LR-PIN",
    "nome": "Ultimo Giro",
    "tipo": "carta",
-   "breve": "Subisci 2 [[HIT]]. Spendi tutta la tua [[L]]. [[HIT]] all'avversario pari a 10 più la [[L]] spesa. Rincara 4 (2 a te).",
+   "breve": "Subisci 2 [[HIT]]. Spendi tutta la tua [[L]]. Infliggi [[HIT]] all'avversario pari a 10 più la [[L]] spesa. Rincara 4 (2 a te).",
    "completo": [
     "Ultima risorsa, riservata a Piera Pinot (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la tua [[L]]: è la [[L]] spesa. 2. Subisci 2 [[HIT]]: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci; arriva prima di spendere la [[L]], quindi la corazza dell'alcol lo riduce (regole del playground, RP-6). 3. Spendi tutta la tua [[L]]: scende a 0. 4. Infliggi all'avversario [[HIT]] pari a 10 più la [[L]] spesa.",
     "Rincara 4 (2 a te) (regole del playground, sezione 4): per ogni volta che hai già giocato questa carta in questa partita, anche annullata, i [[HIT]] all'avversario crescono di 4 e quelli che infliggi a te stesso di 2; le giocate dell'avversario non contano.",
     "La [[L]] spesa è quella letta all'inizio della risoluzione, prima di ogni altro effetto della carta.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 10 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 [[HIT]]."
    ]
   },
   "base.pino.TestataDaUltimoGiro": {
    "slot": "PIN-AR1",
    "nome": "Scompenso da Ultimo Giro",
    "tipo": "carta",
-   "breve": "5 [[L]]: subisci 5 [[HIT]]. 35 [[HIT]] all'avversario.",
+   "breve": "5 [[L]]: subisci 5 [[HIT]]. Infliggi 35 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 5 [[L]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Subisci 5 [[HIT]]: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. 2. Infliggi 35 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 35 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 35 [[HIT]]."
    ]
   },
   "base.pino.GoingBerserk": {
    "slot": "PIN-AR2",
    "nome": "Alla Goccia",
    "tipo": "carta",
-   "breve": "Spendi tutta la tua [[L]]. [[HIT]] all'avversario pari a 10 più la [[L]] spesa.",
+   "breve": "Spendi tutta la tua [[L]]. Infliggi [[HIT]] all'avversario pari a 10 più la [[L]] spesa.",
    "completo": [
     "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la tua [[L]]: è la [[L]] spesa. 2. Spendi tutta la tua [[L]]: scende a 0. 3. Infliggi all'avversario [[HIT]] pari a 10 più la [[L]] spesa.",
     "La [[L]] spesa è quella letta all'inizio della risoluzione, prima di ogni altro effetto della carta.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 10 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 [[HIT]]."
    ]
   },
   "base.pino.IlBanconeRegge": {
@@ -732,13 +732,13 @@
    "slot": "PIN-AR5",
    "nome": "Rutto a Bruciapelo",
    "tipo": "carta",
-   "breve": "5 [[L]]: spendi tutta la [[L]] che ti resta. L'avversario perde [[A]] pari alla [[L]] spesa. [[HIT]] all'avversario pari a 15 più il doppio della [[L]] spesa.",
+   "breve": "5 [[L]]: spendi tutta la [[L]] che ti resta. L'avversario perde [[A]] pari alla [[L]] spesa. Infliggi [[HIT]] all'avversario pari a 15 più il doppio della [[L]] spesa.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 5 [[L]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la [[L]] che ti resta dopo aver pagato il costo: è la [[L]] spesa. 2. Spendi tutta la tua [[L]]: scende a 0. 3. L'avversario perde [[A]] pari alla [[L]] spesa; non scende sotto 0 (regole del playground, RP-4). 4. Infliggi all'avversario [[HIT]] pari a 15 più il doppio della [[L]] spesa.",
     "La [[L]] spesa è quella letta all'inizio della risoluzione, prima di ogni altro effetto della carta.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 15 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 15 [[HIT]]."
    ]
   },
   "base.items.AmaroNelBicchiereDiPlastica": {
@@ -797,12 +797,12 @@
    "slot": "GIG-BO2",
    "nome": "Colpo col Cacciavite",
    "tipo": "carta",
-   "breve": "+2 [[V]]. 2 [[HIT]] all'avversario.",
+   "breve": "+2 [[V]]. Infliggi 2 [[HIT]] all'avversario.",
    "completo": [
     "Azione legata a Beppe Bulletta (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Guadagni 2 [[V]]. 2. Infliggi 2 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 2 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 [[HIT]]."
    ]
   },
   "base.gigi.bound.Lima": {
@@ -830,25 +830,25 @@
    "slot": "GIG-AR2",
    "nome": "Chiave da Tredici",
    "tipo": "carta",
-   "breve": "10 [[V]]: 20 [[CUT]] all'avversario.",
+   "breve": "10 [[V]]: infliggi 20 [[CUT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 10 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 20 [[CUT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 20 [[CUT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 20 [[CUT]]."
    ]
   },
   "base.gigi.ColpoDiChiaveInglese": {
    "slot": "GIG-AR3",
    "nome": "Preparare il Lavoro",
    "tipo": "carta",
-   "breve": "4 [[CUT]] all'avversario. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15 [[V]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]].",
+   "breve": "Infliggi 4 [[CUT]] all'avversario. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15 [[V]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]].",
    "completo": [
     "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 4 [[CUT]] all'avversario.",
     "Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Chiave da Tredici» o «Lavoro Fatto Bene»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano; guadagni 15 [[V]] e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 [[V]]. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, [[HIT]], [[CUT]] e [[POISON]], veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 4 [[CUT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 4 [[CUT]]."
    ]
   },
   "base.gigi.SottoIlCofano": {
@@ -866,12 +866,12 @@
    "slot": "GIG-AR5",
    "nome": "Lavoro Fatto Bene",
    "tipo": "carta",
-   "breve": "10 [[V]]: [[HIT]] all'avversario pari a 15 più 4 per ogni tuo oggetto in campo.",
+   "breve": "10 [[V]]: infliggi [[HIT]] all'avversario pari a 15 più 4 per ogni tuo oggetto in campo.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 10 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve infliggi all'avversario [[HIT]] pari a 15 più 4 per ogni oggetto che hai in campo. Gli oggetti si contano all'inizio della risoluzione, dopo i costi: contano anche i token; gli equipaggiamenti no, perché sono stati e non oggetti.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 15 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 15 [[HIT]]."
    ]
   },
   "base.items.GuantiDaOfficina": {
@@ -940,13 +940,13 @@
    "slot": "GIG-AR6",
    "nome": "Metodo Empirico",
    "tipo": "carta",
-   "breve": "4 [[CUT]] all'avversario. Annuncia «Lavoro Fatto Bene» o «Chiave da Tredici». Se lo trovi: +10 [[V]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]].",
+   "breve": "Infliggi 4 [[CUT]] all'avversario. Annuncia «Lavoro Fatto Bene» o «Chiave da Tredici». Se lo trovi: +10 [[V]] e diventi Vulnerabile. Se non lo trovi: +5 [[V]].",
    "completo": [
     "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 4 [[CUT]] all'avversario.",
     "Annuncia «Lavoro Fatto Bene» o «Chiave da Tredici» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Lavoro Fatto Bene» o «Chiave da Tredici»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano; guadagni 10 [[V]] e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 [[V]]. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, [[HIT]], [[CUT]] e [[POISON]], veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 4 [[CUT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 4 [[CUT]]."
    ]
   },
   "base.cesira.LoMettoInConto": {
@@ -984,14 +984,14 @@
    "slot": "CES-BO2",
    "nome": "Tecnica Manipolatoria",
    "tipo": "carta",
-   "breve": "Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario.",
+   "breve": "Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. Infliggi 2 [[HIT]] all'avversario.",
    "completo": [
     "Azione legata a Sergio Sommerso (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua [[T]]. 2. Perdi un quarto della tua [[L]]. 3. Infliggi 2 [[HIT]] all'avversario.",
     "La tua [[T]] e la tua [[L]] si leggono quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.",
     "Nessuna risorsa scende sotto 0 (regole del playground, RP-4).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 2 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 [[HIT]]."
    ]
   },
   "base.cesira.bound.FareIlVago": {
@@ -1009,14 +1009,14 @@
    "slot": "CES-AR1",
    "nome": "Opportuna Distrazione",
    "tipo": "carta",
-   "breve": "5 [[A]]: l'avversario perde 10 [[A]]. 4 [[HIT]] all'avversario. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[A]].",
+   "breve": "5 [[A]]: l'avversario perde 10 [[A]]. Infliggi 4 [[HIT]] all'avversario. Annuncia «Segreto di Pulcinella» o «Conto Salato». Se lo trovi: +15 [[A]] e diventi Vulnerabile. Se non lo trovi: +5 [[A]].",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 5 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. L'avversario perde 10 [[A]]. 2. Infliggi 4 [[HIT]] all'avversario.",
     "Annuncia «Segreto di Pulcinella» o «Conto Salato» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Segreto di Pulcinella» o «Conto Salato»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano; guadagni 15 [[A]] e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 [[A]]. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, [[HIT]], [[CUT]] e [[POISON]], veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.",
     "Nessuna risorsa scende sotto 0 (regole del playground, RP-4).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 4 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 4 [[HIT]]."
    ]
   },
   "base.cesira.Ricatto": {
@@ -1048,76 +1048,76 @@
    "slot": "CES-AR4",
    "nome": "Conto Salato",
    "tipo": "carta",
-   "breve": "5 [[A]]: 8 [[HIT]] all'avversario. Se l'avversario è Vulnerabile: 6 [[HIT]] all'avversario.",
+   "breve": "5 [[A]]: infliggi 8 [[HIT]] all'avversario. Se l'avversario è Vulnerabile: infliggi 6 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 5 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Infliggi 8 [[HIT]] all'avversario. 2. Se, quando questo effetto si applica, l'avversario è Vulnerabile, cioè ha almeno un gettone di vulnerabilità di qualunque carta (regole del playground, RP-14–RP-21): infliggi 6 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 8 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 8 [[HIT]]."
    ]
   },
   "base.cesira.LoSannoTutti": {
    "slot": "CES-AR5",
    "nome": "Segreto di Pulcinella",
    "tipo": "carta",
-   "breve": "15 [[A]]: 25 [[HIT]] all'avversario.",
+   "breve": "15 [[A]]: infliggi 25 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 15 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 25 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 25 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 25 [[HIT]]."
    ]
   },
   "base.cesira.Malelingue": {
    "slot": "CES-AR6",
    "nome": "Scherzo Oltre il Limite",
    "tipo": "carta",
-   "breve": "10 [[A]]: l'avversario perde [[A]] pari a metà della [[A]] che ti resta. [[HIT]] all'avversario pari a 5 più metà della [[A]] che ti resta.",
+   "breve": "10 [[A]]: l'avversario perde [[A]] pari a metà della [[A]] che ti resta. Infliggi [[HIT]] all'avversario pari a 5 più metà della [[A]] che ti resta.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 10 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. L'avversario perde [[A]] pari a metà della [[A]] che ti resta. 2. Infliggi all'avversario [[HIT]] pari a 5 più metà della [[A]] che ti resta.",
     "La tua [[A]] si legge quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.",
     "Nessuna risorsa scende sotto 0 (regole del playground, RP-4).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 5 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 5 [[HIT]]."
    ]
   },
   "bruiser.StunningBlow": {
    "slot": "GEN-09",
    "nome": "STORDIAMOTI HO DETTO",
    "tipo": "carta",
-   "breve": "10 [[V]]: l'avversario perde 10 [[A]]. 10 [[HIT]] all'avversario.",
+   "breve": "10 [[V]]: l'avversario perde 10 [[A]]. Infliggi 10 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 10 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. L'avversario perde 10 [[A]]. 2. Infliggi 10 [[HIT]] all'avversario.",
     "Nessuna risorsa scende sotto 0 (regole del playground, RP-4).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 10 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 [[HIT]]."
    ]
   },
   "base.com.Sgambetto": {
    "slot": "GEN-23",
    "nome": "Sgambetto",
    "tipo": "carta",
-   "breve": "10 [[A]]: l'avversario perde 10 [[V]]. 5 [[HIT]] all'avversario.",
+   "breve": "10 [[A]]: l'avversario perde 10 [[V]]. Infliggi 5 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 10 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. L'avversario perde 10 [[V]]. 2. Infliggi 5 [[HIT]] all'avversario.",
     "Nessuna risorsa scende sotto 0 (regole del playground, RP-4).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 5 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 5 [[HIT]]."
    ]
   },
   "base.com.EstasiDaCocaEtilene": {
    "slot": "GEN-24",
    "nome": "Estasi da Coca Etilene",
    "tipo": "carta",
-   "breve": "10 [[T]] + 10 [[L]]: 40 [[HIT]] all'avversario.",
+   "breve": "10 [[T]] + 10 [[L]]: infliggi 40 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 10 [[T]] e 10 [[L]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 40 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 40 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 40 [[HIT]]."
    ]
   },
   "base.com.ShuffleFeet": {
@@ -1134,13 +1134,13 @@
    "slot": "GEN-22",
    "nome": "Svegliaaah!",
    "tipo": "carta",
-   "breve": "5 [[A]]: azzeri la [[L]] dell'avversario. 4 [[HIT]] all'avversario.",
+   "breve": "5 [[A]]: azzeri la [[L]] dell'avversario. Infliggi 4 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 5 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Azzeri la [[L]] dell'avversario: scende a 0 qualunque valore abbia. 2. Infliggi 4 [[HIT]] all'avversario.",
     "Nessuna risorsa scende sotto 0 (regole del playground, RP-4).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 4 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 4 [[HIT]]."
    ]
   },
   "base.items.SantinoDellaPortinaia": {
@@ -1167,14 +1167,14 @@
    "slot": "ROC-BO1",
    "nome": "Rinfrescata Arrogante",
    "tipo": "carta",
-   "breve": "Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. 2 [[HIT]] all'avversario.",
+   "breve": "Perdi un quarto della tua [[T]] e un quarto della tua [[L]]. Infliggi 2 [[HIT]] all'avversario.",
    "completo": [
     "Azione legata a Duccio Braccio Teso (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua [[T]]. 2. Perdi un quarto della tua [[L]]. 3. Infliggi 2 [[HIT]] all'avversario.",
     "La tua [[T]] e la tua [[L]] si leggono quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.",
     "Nessuna risorsa scende sotto 0 (regole del playground, RP-4).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 2 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 [[HIT]]."
    ]
   },
   "base.rocco.bound.MiRialzo": {
@@ -1202,25 +1202,25 @@
    "slot": "LR-ROC",
    "nome": "Non Mi Hai Fatto Niente",
    "tipo": "carta",
-   "breve": "Subisci 6 [[HIT]]. 10 [[HIT]] all'avversario. Rincara 5 (2 a te).",
+   "breve": "Subisci 6 [[HIT]]. Infliggi 10 [[HIT]] all'avversario. Rincara 5 (2 a te).",
    "completo": [
     "Ultima risorsa, generica (regolamento, R01a). Nessun costo in risorse. Priorità 0. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Subisci 6 [[HIT]]: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. Più 2 per ogni volta che l'hai già giocata (Rincara, sotto). 2. Infliggi 10 [[HIT]] all'avversario. Più 5 per ogni volta che l'hai già giocata (Rincara, sotto).",
     "Rincara 5 (2 a te) (regole del playground, sezione 4): per ogni volta che hai già giocato questa carta in questa partita, anche annullata, i danni all'avversario crescono di 5 e quelli che infliggi a te stesso di 2; le giocate dell'avversario non contano.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 10 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 [[HIT]]."
    ]
   },
   "base.rocco.NoccheSbucciate": {
    "slot": "ROC-AR1",
    "nome": "Nocche Sbucciate",
    "tipo": "carta",
-   "breve": "15 [[H]]: 20 [[HIT]] all'avversario.",
+   "breve": "15 [[H]]: infliggi 20 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 15 [[H]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 0. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 20 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 20 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 20 [[HIT]]."
    ]
   },
   "base.rocco.Incassare": {
@@ -1238,50 +1238,50 @@
    "slot": "ROC-AR3",
    "nome": "E Allora...?",
    "tipo": "carta",
-   "breve": "10 [[H]]: in questo turno subisci metà dei [[HIT]] che subiresti. 8 [[HIT]] all'avversario.",
+   "breve": "10 [[H]]: in questo turno subisci metà dei [[HIT]] che subiresti. Infliggi 8 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 10 [[H]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Ottieni lo stato positivo «E Allora...?»: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci metà dei [[HIT]] che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima. 2. Infliggi 8 [[HIT]] all'avversario.",
     "Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applicano uno dopo l'altro, nell'ordine in cui sono stati presi (regolamento, R05).",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 8 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 8 [[HIT]]."
    ]
   },
   "base.rocco.Capocciata": {
    "slot": "ROC-AR4",
    "nome": "Craniata Patriottica",
    "tipo": "carta",
-   "breve": "30 [[H]]: 25 [[HIT]] all'avversario.",
+   "breve": "30 [[H]]: infliggi 25 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 30 [[H]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 0. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 25 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 25 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 25 [[HIT]]."
    ]
   },
   "base.rocco.TeLoSpiegoIo": {
    "slot": "ROC-AR5",
    "nome": "La Storia la Scrivono i Vincitori",
    "tipo": "carta",
-   "breve": "4 [[HIT]] all'avversario. Annuncia «Craniata Patriottica» o «Testa Dura». Se lo trovi: +6 [[H]] e diventi Vulnerabile. Se non lo trovi: +2 [[H]].",
+   "breve": "Infliggi 4 [[HIT]] all'avversario. Annuncia «Craniata Patriottica» o «Testa Dura». Se lo trovi: +6 [[H]] e diventi Vulnerabile. Se non lo trovi: +2 [[H]].",
    "completo": [
     "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 4 [[HIT]] all'avversario.",
     "Annuncia «Craniata Patriottica» o «Testa Dura» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Craniata Patriottica» o «Testa Dura»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano; guadagni 6 [[H]] e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 2 [[H]]. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, [[HIT]], [[CUT]] e [[POISON]], veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 4 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 4 [[HIT]]."
    ]
   },
   "base.rocco.TestaDura": {
    "slot": "ROC-AR6",
    "nome": "Testa Dura",
    "tipo": "carta",
-   "breve": "35 [[H]]: 30 [[HIT]] all'avversario.",
+   "breve": "35 [[H]]: infliggi 30 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 35 [[H]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 0. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve: infliggi 30 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 30 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 30 [[HIT]]."
    ]
   },
   "base.com.BeggingMoney": {
@@ -1298,24 +1298,24 @@
    "slot": "GEN-08",
    "nome": "AMMALIAMOTI DI BOTTE",
    "tipo": "carta",
-   "breve": "15 [[V]]: 10 [[HIT]] all'avversario. L'avversario guadagna 10 [[T]].",
+   "breve": "15 [[V]]: infliggi 10 [[HIT]] all'avversario. L'avversario guadagna 10 [[T]].",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 15 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Infliggi 10 [[HIT]] all'avversario. 2. L'avversario guadagna 10 [[T]].",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 10 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 [[HIT]]."
    ]
   },
   "bruiser.BadEducation": {
    "slot": "GEN-10",
    "nome": "PERMESSO SCUSA PUOI SMETTERLA",
    "tipo": "carta",
-   "breve": "5 [[V]]: togli all'avversario i suoi equipaggiamenti. 8 [[HIT]] all'avversario.",
+   "breve": "5 [[V]]: togli all'avversario i suoi equipaggiamenti. Infliggi 8 [[HIT]] all'avversario.",
    "completo": [
     "Azione regolare (regolamento, R01a). Costo: 5 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
     "Quando la carta si risolve, nell'ordine: 1. Togli all'avversario tutti i suoi equipaggiamenti: sono stati, non oggetti in campo (regolamento, R01a e R05). 2. Infliggi 8 [[HIT]] all'avversario.",
     "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
-    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: 8 [[HIT]]."
+    "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 8 [[HIT]]."
    ]
   },
   "bruiser.CantFeelAnything": {

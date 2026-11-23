@@ -497,14 +497,14 @@ class SetBaseDraftTest {
         assertEquals(1, berserk.get("params").get("perAlcohol").asInt(), "D156");
         assertEquals(0, berserk.get("params").get("selfHit").asInt());
         assertEquals("HIT 10+x", berserk.get("gui").get("damageAmount").asText(), "D149");
-        assertTrue(berserk.get("gui").get("description").asText().contains("Spendi tutta la tua [[L]]. [[HIT]] all'avversario pari a 10 più la [[L]] spesa."), "D156");
+        assertTrue(berserk.get("gui").get("description").asText().contains("Spendi tutta la tua [[L]]. Infliggi [[HIT]] all'avversario pari a 10 più la [[L]] spesa."), "D156, D173: il verbo dei danni");
         assertEquals(10, last.get("params").get("base").asInt(), "SB-21z (D162), prima 12");
         assertEquals(2, last.get("params").get("selfHit").asInt(), "SB-16e2, D56/D38");
         assertEquals("HIT 10+x", last.get("gui").get("damageAmount").asText());
-        assertTrue(last.get("gui").get("description").asText().contains("Subisci 2 [[HIT]]. Spendi tutta la tua [[L]]. [[HIT]] all'avversario pari a 10 più la [[L]] spesa."));
+        assertTrue(last.get("gui").get("description").asText().contains("Subisci 2 [[HIT]]. Spendi tutta la tua [[L]]. Infliggi [[HIT]] all'avversario pari a 10 più la [[L]] spesa."), "D173");
         assertEquals(35, testata.get("target").get(0).get("amount").asInt(), "SB-21f: compenso starter D149 (4), D153");
         assertEquals("HIT 35", testata.get("gui").get("damageAmount").asText());
-        assertTrue(testata.get("gui").get("description").asText().contains("subisci 5 [[HIT]]. 35 [[HIT]] all'avversario"));
+        assertTrue(testata.get("gui").get("description").asText().contains("subisci 5 [[HIT]]. Infliggi 35 [[HIT]] all'avversario"), "D173");
         // D34, punto 7: la bound di L dà al massimo +10, testi compresi.
         JsonNode cinque = card("base.pino.bound.CinqueMinutiEVado");
         int alcohol = cinque.get("self").get(0).get("amount").asInt();
@@ -733,7 +733,7 @@ class SetBaseDraftTest {
 
         assertEquals(Map.of(Resource.TOXICITY, 10, Resource.ALCOHOL, 10), estasi.getCost());
         assertEquals(Set.of(Card.CardTarget.OPPONENT), estasi.getCanTarget());
-        assertEquals("10 [[T]] + 10 [[L]]: 40 [[HIT]] all'avversario.", estasi.getEffect(), "SB-25 B1: il testo breve, senza slot");
+        assertEquals("10 [[T]] + 10 [[L]]: infliggi 40 [[HIT]] all'avversario.", estasi.getEffect(), "SB-25 B1: il testo breve, senza slot; D173: il verbo dei danni");
         Map<Resource, Integer> own = celestina.getCharacter().getResources();
         own.putAll(estasi.getCost());
         for (Resource missing : estasi.getCost().keySet()) {

@@ -507,11 +507,11 @@ def frasi_passi(passi, sede, nomi, costo):
             valore = passo["amount"]
             tipo = danno(passo["type"])
             if "of" in importo(valore):
-                testo = f"{tipo} all'avversario pari a {quota(valore, costo)}" if contro else (
+                testo = f"infliggi {tipo} all'avversario pari a {quota(valore, costo)}" if contro else (
                     f"subisci {tipo} pari a {quota(valore, costo)}")
             else:
                 n = importo(valore)["base"]
-                testo = f"{n} {tipo} all'avversario" if contro else f"subisci {n} {tipo}"
+                testo = f"infliggi {n} {tipo} all'avversario" if contro else f"subisci {n} {tipo}"
             if "applying" in passo:
                 tipi = passo["applying"]
                 if tipi == ["GOOD"]:
@@ -652,7 +652,7 @@ def breve_java(carta):
     if b == "junkie.AmphetamineReflexes":
         return "Annulli le mosse contro di te che si risolvono dopo la tua."
     if b == "junkie.ToxicBloodDrain":
-        veleno = f" {p['poison']} [[POISON]] all'avversario." if p["poison"] else ""
+        veleno = f" Infliggi {p['poison']} [[POISON]] all'avversario." if p["poison"] else ""
         return (f"Dai all'avversario tutta la [[T]] che ti resta e togligli l'immunità a [[T]].{veleno} "
                 f"{fine_timer(p['turns'])} diventi immune a [[T]].")
     if b == "com.items.MarvelousCocktail":
@@ -660,23 +660,23 @@ def breve_java(carta):
                 f"{fine_timer(p['turns'])} perdi tutte le immunità e tutti gli stati, poi subisci {p['poison']} [[POISON]].")
     if b == "base.pino.UltimoGiro":
         rincara = f"Rincara {p['perPlay']}" + (f" ({p['perPlaySelf']} a te)" if p.get("perPlaySelf") else "")
-        return (f"{autodanno}Spendi tutta la tua [[L]]. [[HIT]] all'avversario pari a {p['base']} più la [[L]] spesa. "
+        return (f"{autodanno}Spendi tutta la tua [[L]]. Infliggi [[HIT]] all'avversario pari a {p['base']} più la [[L]] spesa. "
                 f"{rincara}.")
     if b == "base.pino.GoingBerserk":
         spesa = "tutta la [[L]] che ti resta" if costo.get("ALCOHOL") else "tutta la tua [[L]]"
         tetto = f", al massimo {p['maxDamage']}" if p.get("maxDamage") else ""
-        return (f"{autodanno}Spendi {spesa}. [[HIT]] all'avversario pari a {p['base']} più "
+        return (f"{autodanno}Spendi {spesa}. Infliggi [[HIT]] all'avversario pari a {p['base']} più "
                 f"{quanto_spesa(p.get('perAlcohol', 1))}{tetto}.")
     if b == "base.pino.RuttoADistanzaSociale":
         spesa = "tutta la [[L]] che ti resta" if costo.get("ALCOHOL") else "tutta la tua [[L]]"
         return (f"Spendi {spesa}. L'avversario perde [[A]] pari alla [[L]] spesa. "
-                f"[[HIT]] all'avversario pari a {p['base']} più {quanto_spesa(p['perAlcohol'])}.")
+                f"Infliggi [[HIT]] all'avversario pari a {p['base']} più {quanto_spesa(p['perAlcohol'])}.")
     if b == "com.items.AnotherRottenBeer":
         return f"Quando lo consumi: +{p['alcohol']} [[L]]. Accanto a te compare una {TOKEN_NOME}."
     if b == "bruiser.BreakYourToy":
         return "Distruggi un oggetto dell'avversario."
     if b == "base.gigi.LavoroFattoBene":
-        return f"[[HIT]] all'avversario pari a {p['base']} più {p['perItem']} per ogni tuo oggetto in campo."
+        return f"Infliggi [[HIT]] all'avversario pari a {p['base']} più {p['perItem']} per ogni tuo oggetto in campo."
     if b == "base.cesira.Ricatto":
         frazione = FRAZIONI_PERCENTO.get(p["percent"])
         if frazione is None:
@@ -692,7 +692,7 @@ def breve_java(carta):
     if b == "base.com.BeggingMoney":
         return "Copia accanto a te un oggetto a caso dell'avversario."
     if b == "bruiser.BadEducation":
-        return f"Togli all'avversario i suoi equipaggiamenti. {p['hitDamage']} [[HIT]] all'avversario."
+        return f"Togli all'avversario i suoi equipaggiamenti. Infliggi {p['hitDamage']} [[HIT]] all'avversario."
     if b == "base.cesira.bound.NeRiparliamoFuori":
         return "Annulli la mossa dell'avversario se deve ancora risolversi e contiene Annuncia."
     if b == "base.rocco.bound.MiRialzo":
@@ -1099,7 +1099,7 @@ def note_danni(carta, ctx, tipi):
     fissi = danni_fissi(carta)
     if ctx.ricatto and fissi and carta["binding"] != "base.cesira.Ricatto":
         note.append(f"Danni fissi, quelli che «{ctx.ricatto}» rimanda: "
-                    + elenco(f"{v} {danno(t)}" for t, v in fissi.items()) + ".")
+                    + "infliggi " + elenco(f"{v} {danno(t)}" for t, v in fissi.items()) + ".")
     return note
 
 
@@ -1432,13 +1432,21 @@ GERGO = (
     ("parola vietata", re.compile(r"\b[Bb]ersagli(?:o|a|ano|are)\b|\b[Aa]utore\b|\ba sé\b")),
 )
 RIMANDO_REGOLE = ("rimando al regolamento", re.compile(r"\bR\d{2}[a-z]?\b|\bRP-\d|[Rr]egolamento|regole del playground"))
+# D173: una quantità di danno ha davanti il suo verbo, «infliggi» o «subisci», nella stessa frase: un numero o una frazione davanti al
+# simbolo di un tipo di danno, oppure il simbolo seguito da «pari a». Un elenco («subisci metà dei [[HIT]] e tre quarti dei [[CUT]]»)
+# ha il verbo una volta sola, in testa.
+SIMBOLO_DANNO = r"\[\[(?:HIT|CUT|POISON)\]\]"
+FRAZIONE_DANNO = r"(?:metà dei|un quarto dei|tre quarti dei|il doppio dei|una volta e mezza i|una volta e un quarto i)"
+QUANTITA_DANNO = re.compile(r"(?:\b\d+ |\b" + FRAZIONE_DANNO + " )" + SIMBOLO_DANNO + "|" + SIMBOLO_DANNO + r"(?: all'avversario)? pari a")
+ELENCO_DANNI = re.compile(r"(?:(?:\b\d+ |\b" + FRAZIONE_DANNO + " )" + SIMBOLO_DANNO + r"(?:, | e ))+$")
+VERBO_DANNO = re.compile(r"\b(?:[Ii]nfligg\w*|[Ss]ubisc\w*|[Ss]ubir\w*)\b")
 LETTERA_ISOLATA = re.compile(r"(?<![\w'’\[])([A-Za-z])(?![\w'’\]])")  # «a», «e», «i», «o» sono parole italiane
 
 
 def gergo(testo, slot_noti, completo=False):
     """I problemi di gergo di un testo stampato (SB-25 B1): nel testo breve niente ×, formule, abbreviazioni, lettere isolate fuori
-    dai segnaposto, rimandi al regolamento, «bersaglio», «autore», «a sé», codici di slot; nel testo completo le stesse regole tranne
-    i rimandi al regolamento. I nomi di carta citati fra «» e i segnaposto [[…]] non si guardano."""
+    dai segnaposto, rimandi al regolamento, «bersaglio», «autore», «a sé», codici di slot, quantità di danno senza «infliggi» o
+    «subisci» davanti (D173); nel testo completo le stesse regole tranne i rimandi al regolamento. I nomi di carta citati fra «» e i segnaposto [[…]] non si guardano."""
     if not isinstance(testo, str):
         return []
     pulito = CITAZIONE.sub("«»", SEGNAPOSTO.sub("[[]]", testo))
@@ -1449,6 +1457,12 @@ def gergo(testo, slot_noti, completo=False):
             continue
         problemi.append(f"lettera isolata: «{m[1]}» alla posizione {m.start() + 1}")
         break
+    citato = CITAZIONE.sub("«»", testo)  # qui i segnaposto dei danni servono
+    for m in QUANTITA_DANNO.finditer(citato):
+        frase = re.split(r"[.:;] ", ELENCO_DANNI.sub("", citato[:m.start()]))[-1]
+        if not VERBO_DANNO.search(frase):
+            problemi.append(f"danno senza verbo: «{m[0]}» alla posizione {m.start() + 1}")
+            break
     codici = [c for c in slot_noti if re.search(r"(?<![\w-])" + re.escape(c) + r"(?![\w-])", pulito)]
     if codici:
         problemi.append(f"codice di slot: «{codici[0]}»")

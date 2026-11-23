@@ -1,5 +1,99 @@
 # SB-25 — Testi delle carte per i giocatori
 
+## Verbi dei danni (D173)
+
+Esecutore, 23 novembre 2026, sul commit di base `4a6395e`. Passo diretto ([D173](../../set-base-decisioni.md#decisioni-del-proprietario)),
+prompt della regia. Evidenze: `ingombro-stampa.json` e `ingombro-client.json` in [sb-25/](sb-25/), rigenerate; pagina
+[revisione-b.html](../../design/set-base/sb-25/revisione-b.html) rigenerata.
+
+### Esito
+
+**Consegnato, nessuno STOP sul testo; due domande per la regia (sotto).** In ogni testo che vede il giocatore una quantità di danno ha
+davanti «infliggi» o «subisci». I testi completi cambiano solo per il verbo; nessun numero, costo, priorità, bersaglio o regola cambia.
+
+**Conteggio prima e dopo, con lo stesso criterio.** Una quantità di danno è un numero o una frazione davanti al simbolo di un tipo di
+danno, oppure il simbolo seguito da «pari a»; ha il verbo se «infliggi/infligge», «subisci/subisce» o il condizionale sta nella stessa
+frase; un elenco come «subisci metà dei `[[HIT]]` e tre quarti dei `[[CUT]]`» ha il verbo una volta, in testa.
+
+| | prima | dopo |
+|---|---|---|
+| testi brevi con un danno senza verbo | 46 su 125 | 0 |
+| frasi dei testi completi | 46 | 0 |
+| stati (nome e descrizione) e token | 0 | 0 |
+
+La regia aveva contato 40 brevi: con questo criterio sono 46, perché entrano anche i «`[[HIT]]` all'avversario pari a …» delle carte che
+spendono una risorsa (Ultimo Giro, Alla Goccia, Rutto a Bruciapelo, Lavoro Fatto Bene, Lazo del Rider e simili) e le carte con un
+autodanno prima del danno («Subisci 5 `[[HIT]]`. 10 `[[HIT]]` …»). Le 46 frasi dei completi sono tutte la stessa: la nota «Danni fissi,
+quelli che «Buon Vecchio Ricatto» rimanda: …». Gli stati dicevano già «subisce» / «infligge» e il token «ne infliggi una volta e mezza»:
+niente da cambiare.
+
+### Cosa cambia
+
+- **`docs/design/set-base/testi/testi_stampati.py`, testo breve:** le carte a dati dicono «infliggi 10 `[[HIT]]` all'avversario» e
+  «infliggi `[[HIT]]` all'avversario pari a …», anche dentro «Gioca d'anticipo:» e «Se l'avversario è Vulnerabile:»; le carte Java
+  (Trascinare nel Tunnel, Ultimo Giro, Alla Goccia, Rutto a Bruciapelo, Lavoro Fatto Bene, PERMESSO SCUSA PUOI SMETTERLA) aprono la frase
+  col verbo.
+- **Testo completo:** la nota dei danni fissi diventa «…rimanda: infliggi 2 `[[HIT]]`.» (con due tipi, «infliggi 2 `[[HIT]]` e 3
+  `[[CUT]]`»). Il resto è identico, verificato paragrafo per paragrafo (46 paragrafi cambiati, un verbo ciascuno).
+- **Regola di forma nel controllo:** `gergo()` respinge una quantità di danno senza verbo nella stessa frase («danno senza verbo»), nel
+  breve e nel completo, così le meccaniche future non la perdono. `controlla-testi.py` e `genera-testi.py` non cambiano.
+- **File scritti da `genera-testi.py --scrivi`:** `bozza.json` (46 `gui.description`, nient'altro: confrontato campo per campo con la
+  versione di partenza, il resto della bozza è identico) e `testi-completi.json` (46 brevi, 46 paragrafi).
+- **Evidenze e pagina:** `ingombro-stampa.json`, `ingombro-client.json`, `revisione-b.html` rigenerati. `simboli.json` non cambia: i
+  simboli non dipendono dai testi, quindi non è rigenerato. `frasi.py` e il glossario non cambiano: la regola di forma è nel generatore.
+- **Fuori dall'elenco del perimetro, conseguenze meccaniche di D173 (domanda 1):** `SetBaseDraftTest.java`, quattro attesi di testo
+  breve (Alla Goccia, Ultimo Giro, Scompenso da Ultimo Giro, Estasi da Cocaetilene) ora col verbo, con «D173» nel messaggio; e
+  `docs/design/set-base/bozza-di-riferimento.md`, il documento generato dalla bozza, riscritto da `genera-bozza-di-riferimento.py
+  --scrivi` (174 righe, tutte per il verbo, più l'impronta; `--verifica` torna allineato).
+
+Esempi: «Subisci 5 `[[HIT]]`. 10 `[[HIT]]` all'avversario. Rincara 5 (2 a te).» diventa «Subisci 5 `[[HIT]]`. Infliggi 10 `[[HIT]]`
+all'avversario. Rincara 5 (2 a te).»; «5 `[[A]]`: 10 `[[POISON]]` all'avversario.» diventa «5 `[[A]]`: infliggi 10 `[[POISON]]`
+all'avversario.»; «Gioca d'anticipo: 5 `[[CUT]]` all'avversario» diventa «Gioca d'anticipo: infliggi 5 `[[CUT]]` all'avversario».
+
+**Impronta di `server/src/test/resources/set-base/bozza.json`:**
+`a8930edeb822028918d8fcd4c78fce2e4ffda007b2edca883ff48528290b527d` (era `ea5f77b6b36a88298ad2756b14e40ba8e40afcb14b9dd468ee572ba42a2047ac`):
+cambiano solo i testi brevi.
+
+### Scelte prese
+
+1. **Il verbo sta nella frase del danno, non in quella di contorno.** Dopo un costo il testo resta in minuscola («10 `[[V]]`: infliggi 20
+   `[[HIT]]` all'avversario»). Nel completo il verbo della nota dei danni fissi è «infliggi», come per chi gioca la carta (il lettore è
+   chi la gioca; «Buon Vecchio Ricatto» rimanda una frazione di quei danni).
+2. **«Rincara 4 (2 a te)» e «crescono di 4» non cambiano.** Non sono danni con un simbolo ma l'aumento per giocata, definito dalla parola
+   chiave nelle regole del playground. Se il proprietario vuole il verbo anche lì, è una frase nuova da scrivere (domanda 2).
+3. **Una regola nel controllo, non solo nel generatore.** È il modo perché la forma resti valida per le meccaniche future (D173 (1)).
+
+### Verifiche
+
+| Verifica | Esito |
+|---|---|
+| `controlla-numeri.py` | nessuna violazione (0) |
+| `testi/controlla-testi.py` | 117 carte e 44 stati, 125 testi completi coincidono, nessun gergo (con la regola nuova) |
+| `controlla-nomi.py` | 125 voci, 0 violazioni |
+| `numeri-invariati.py` | verde: numeri, dati e regole identici; cambiano solo descrizioni e stati |
+| `sb-25/prova-controlla-testi.py` | tutti i casi come attesi |
+| `ingombro-stampa.py` | 124 fronti, 124 entrano col flavour; margine minimo 1,33 mm (Mara Contromano, un personaggio: invariato); i 46 fronti allungati (di 9 o 18 caratteri) hanno margine minimo 10,01 mm come prima |
+| `ingombro-client.mjs` (jar non rifatto: la bozza si legge da file) | 117 carte; 1366×768 e 844×390: testo e testo più flavour entrano tutti nella vista dell'ispezione, margini minimi 444 e 155 px come prima, 0 errori di pagina |
+| `tools/print-cards/test_generator.py` | 16 verdi (stampa un `UnicodeDecodeError` di un sottoprocesso: non verificato se preesistente) |
+| `tools/print-cards/verify.py` | OK (40 voci, 40 fronti) |
+| `./scripts/build.ps1 -Task Test -Offline` | 979 test, 0 rossi. Il primo giro aveva 2 rossi in `SetBaseDraftTest` (testo breve atteso senza verbo), il secondo un terzo, emerso dopo i primi due: aggiornati i quattro attesi con D173, poi verde |
+| `check-rules.py` | verde (regolamento 1.14, 39 carte, SQLite integro) |
+| `check-links.py` | 465 file, 8 link rotti, tutti nelle cartelle Carriera (noti) |
+| `genera-bozza-di-riferimento.py --verifica` | allineato (dopo `--scrivi`) |
+
+### Non verificato
+
+L'aspetto della carta stampata e dell'ispezione non è guardato carta per carta: le prove misurano l'ingombro. Il PDF vivo in
+`output/pdf/` non è rigenerato (SB-28).
+
+### Domande per la regia
+
+1. `SetBaseDraftTest.java` (quattro attesi) e `bozza-di-riferimento.md` sono fuori dall'elenco del perimetro ma si rompono per D173 (test
+   rosso, documento generato indietro): li ho aggiornati con i loro mezzi e citando D173. Se preferisci altrimenti, i due file si
+   riportano alla base con `git checkout 4a6395e -- <file>`.
+2. «Rincara N» (e «crescono di N» nel completo) dice un aumento di danno senza simbolo e senza verbo: lo lascio com'è (scelta 2). Vuoi
+   che anche lì ci sia il verbo?
+
 ## Simbolo del veleno (D172)
 
 Esecutore, 22 novembre 2026, sul commit di base `4def5bf`. Passo diretto ([D172](../../set-base-decisioni.md#decisioni-del-proprietario)),
