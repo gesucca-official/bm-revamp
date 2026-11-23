@@ -76,27 +76,27 @@ TOKEN_STATO = {"op": "status", "statusType": "GOOD", "flow": "OUTPUT", "property
 TOKEN_SORGENTE = JAVA_SRC / "com/tokens/BrokenBeerBottle.java"
 TOKEN_CREATO_DA = "com.items.AnotherRottenBeer"
 
-# Dove il giocatore trova la regola intera (D170 (2)). Le parole chiave del playground entrano nel regolamento a SB-28: allora
-# cambiano solo queste righe.
+# Dove il giocatore trova la regola intera (D170 (2)). SB-28, Fase A: le regole del playground entrano nel regolamento 2.0
+# candidato (docs/design/set-base/sb-28/game-rules-2.0.md, corrispondenza in sb-28/corrispondenza.md); cambiano solo queste righe.
 RIMANDI = {
     "tipi": "regolamento, R01a",
     "costo": "regolamento, R04",
     "stati": "regolamento, R05",
     "equip": "regolamento, R01a e R05",
-    "immune": "regolamento, R01 e R06",
+    "immune": "regolamento, R07b",
     "risorse": "regolamento, R01",
     "oggetti": "regolamento, R02",
     "annulla": "regolamento, R04",
-    "corazza": "regole del playground, RP-6",
-    "pavimento": "regole del playground, RP-4",
-    "a terra": "regole del playground, RP-1",
-    "annuncia": "regole del playground, RP-13–RP-24",
-    "vulnerabile": "regole del playground, RP-14–RP-21",
-    "anticipo": "regole del playground, sezione 4",
-    "rincara": "regole del playground, sezione 4",
-    "vendi": "regole del playground, RP-25",
-    "in campo": "regole del playground, RP-27",
-    "scarto": "regole del playground, RP-11",
+    "corazza": "regolamento, R05",
+    "pavimento": "regolamento, R01",
+    "a terra": "regolamento, R04",
+    "annuncia": "regolamento, R02a e R07b",
+    "vulnerabile": "regolamento, R07b",
+    "anticipo": "regolamento, R07b",
+    "rincara": "regolamento, R07b",
+    "vendi": "regolamento, R07b",
+    "in campo": "regolamento, R07b",
+    "scarto": "regolamento, R02a",
 }
 
 

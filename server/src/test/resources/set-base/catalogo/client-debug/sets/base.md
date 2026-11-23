@@ -143,7 +143,7 @@ Personaggio (regolamento, R01a). Parti con 65 H e 45 A; V, T e L partono da 0 (r
 
 `junkie.character.ToxicJunkie` · slot PG-TOS
 
-Personaggio (regolamento, R01a). Parti con 65 H, 35 A e 20 T; V e L partono da 0 (regolamento, R01). Puoi tenere 2 oggetti vicino a te: quando ne arriva uno in più, anche rubato, scambiato, copiato o creato, sparisce il più vecchio (regolamento, R02). Sei immune a T: la tua T non fa effetto a fine turno; costi, guadagni, perdite e danni POISON restano, e un'altra carta può toglierti l'immunità (regolamento, R01 e R06). La tua azione base è «Desiderio Incontrollabile».
+Personaggio (regolamento, R01a). Parti con 65 H, 35 A e 20 T; V e L partono da 0 (regolamento, R01). Puoi tenere 2 oggetti vicino a te: quando ne arriva uno in più, anche rubato, scambiato, copiato o creato, sparisce il più vecchio (regolamento, R02). Sei immune a T: la tua T non fa effetto a fine turno; costi, guadagni, perdite e danni POISON restano, e un'altra carta può toglierti l'immunità (regolamento, R07b). La tua azione base è «Desiderio Incontrollabile».
 
 #### Piera Pinot — Personaggio · PROTAGONIST
 
@@ -203,9 +203,9 @@ Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua T. 2. Perd
 
 La tua T e la tua L si leggono quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 HIT.
 
@@ -217,7 +217,7 @@ Azione legata a SPAZIENZIO DE LA UCCISO (regolamento, R01a). Nessun costo in ris
 
 Quando la carta si risolve, nell'ordine: 1. Subisci 4 HIT: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. 2. Guadagni 8 V.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 #### GARGANTUESCO IMPATTO SUL TU — Azione, Regolare · UNCOMMON · Costo 25 V · Priorità 0
 
@@ -227,7 +227,7 @@ Azione regolare (regolamento, R01a). Costo: 25 V, che paghi prima di ogni effett
 
 Quando la carta si risolve: infliggi 35 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 35 HIT.
 
@@ -241,7 +241,7 @@ Quando la carta si risolve: infliggi all'avversario HIT pari a 6 più metà dell
 
 La tua V si legge quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 6 HIT.
 
@@ -251,7 +251,7 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 6 HIT.
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 0. Si gioca su di te.
 
-Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 25 V e 15 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 V e 5 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
+Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 25 V e 15 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 V e 5 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
 
 #### NON GIOCARE COL COLTELLO NO — Azione, Regolare · COMMON · Costo — · Priorità 0
 
@@ -277,7 +277,7 @@ Quando la carta si risolve, se la mossa dell'avversario che hai scelto deve anco
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 0. Si gioca su di te.
 
-Annuncia «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 V e 15 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 V e 5 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
+Annuncia «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 V e 15 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 V e 5 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
 
 ### Mara Contromano
 
@@ -289,7 +289,7 @@ Azione base di Mara Contromano (regolamento, R01a). Nessun costo in risorse. Pri
 
 Quando la carta si risolve, nell'ordine: 1. Perdi 5 A. 2. Consumi il tuo oggetto che hai scelto: esce dal campo e ne ottieni l'effetto «Quando lo consumi». Se quando la carta si risolve non è più fra i tuoi oggetti (rubato, distrutto, scalzato da un altro), non consumi niente, ma gli altri effetti della carta valgono (regolamento, R04).
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Sventare l'Assassinio — Azione, Legata al personaggio · COMMON · Costo — · Priorità 1
 
@@ -301,7 +301,7 @@ Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua T. 2. Perd
 
 La tua T e la tua L si leggono quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).
 
@@ -323,9 +323,9 @@ Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applican
 
 Azione legata a Mara Contromano (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 2. Si gioca contro un avversario, che scegli.
 
-Quando la carta si risolve: Gioca d'anticipo (regole del playground, sezione 4): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più A dopo i costi, succede anche questo: l'avversario perde 4 A. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere.
+Quando la carta si risolve: Gioca d'anticipo (regolamento, R07b): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più A dopo i costi, succede anche questo: l'avversario perde 4 A. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Lazo del Rider — Azione, Regolare · RARE · Costo 20 A · Priorità 1
 
@@ -333,7 +333,7 @@ Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
 
 Azione regolare (regolamento, R01a). Costo: 20 A, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.
 
-Quando la carta si risolve, nell'ordine: 1. Infliggi all'avversario CUT pari a 20 più metà della A che ti resta. 2. Gioca d'anticipo (regole del playground, sezione 4): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più A dopo i costi, succede anche questo: infliggi 5 CUT all'avversario. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere.
+Quando la carta si risolve, nell'ordine: 1. Infliggi all'avversario CUT pari a 20 più metà della A che ti resta. 2. Gioca d'anticipo (regolamento, R07b): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più A dopo i costi, succede anche questo: infliggi 5 CUT all'avversario. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere.
 
 La tua A si legge quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.
 
@@ -347,7 +347,7 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 20 CUT.
 
 Azione regolare (regolamento, R01a). Costo: 15 A, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.
 
-Quando la carta si risolve, nell'ordine: 1. Infliggi 25 CUT all'avversario. 2. Gioca d'anticipo (regole del playground, sezione 4): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più A dopo i costi, succede anche questo: l'avversario riceve lo stato negativo «Sgommata», uno per ciascuno di HIT, CUT e POISON: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, l'avversario infligge tre quarti dei danni che infliggerebbe, arrotondando per difetto. Vale anche sui HIT, CUT e POISON che l'avversario si infligge da solo. Non cambia i danni delle mosse che si sono risolte prima. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere.
+Quando la carta si risolve, nell'ordine: 1. Infliggi 25 CUT all'avversario. 2. Gioca d'anticipo (regolamento, R07b): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più A dopo i costi, succede anche questo: l'avversario riceve lo stato negativo «Sgommata», uno per ciascuno di HIT, CUT e POISON: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, l'avversario infligge tre quarti dei danni che infliggerebbe, arrotondando per difetto. Vale anche sui HIT, CUT e POISON che l'avversario si infligge da solo. Non cambia i danni delle mosse che si sono risolte prima. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere.
 
 Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applicano uno dopo l'altro, nell'ordine in cui sono stati presi (regolamento, R05).
 
@@ -361,9 +361,9 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 25 CUT.
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 2. Si gioca contro un avversario, che scegli.
 
-Quando la carta si risolve, nell'ordine: 1. Gioca d'anticipo (regole del playground, sezione 4): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più A dopo i costi, succede anche questo: guadagni 4 A. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere. 2. L'avversario perde 8 A. 3. Infliggi 4 CUT all'avversario.
+Quando la carta si risolve, nell'ordine: 1. Gioca d'anticipo (regolamento, R07b): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più A dopo i costi, succede anche questo: guadagni 4 A. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere. 2. L'avversario perde 8 A. 3. Infliggi 4 CUT all'avversario.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).
 
@@ -385,7 +385,7 @@ Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applican
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 2. Si gioca su di te.
 
-Annuncia «Sgommata» o «Lazo del Rider» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Sgommata» o «Lazo del Rider»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
+Annuncia «Sgommata» o «Lazo del Rider» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Sgommata» o «Lazo del Rider»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
 
 #### Traiettoria Imprevedibile — Azione, Regolare · UNCOMMON · Costo — · Priorità 2
 
@@ -393,7 +393,7 @@ Annuncia «Sgommata» o «Lazo del Rider» (regole del playground, RP-13–RP-24
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 2. Si gioca su di te.
 
-Annuncia «Lazo del Rider» o «Sgommata» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Lazo del Rider» o «Sgommata»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 20 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
+Annuncia «Lazo del Rider» o «Sgommata» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Lazo del Rider» o «Sgommata»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 20 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
 
 ### Celestina Bucatina
 
@@ -437,7 +437,7 @@ Quando la carta si risolve, nell'ordine: 1. Guadagni H pari a un quarto della tu
 
 La tua T si legge quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### L'Ultimo Tiro — Azione, Ultima risorsa · UNCOMMON · Costo — · Priorità 1
 
@@ -447,9 +447,9 @@ Ultima risorsa, riservata a Celestina Bucatina (regolamento, R01a). Nessun costo
 
 Quando la carta si risolve, nell'ordine: 1. Subisci 2 HIT: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. 2. Infliggi 8 POISON all'avversario. Più 5 per ogni volta che l'hai già giocata (Rincara, sotto). 3. L'avversario guadagna 4 T.
 
-Rincara 5 (regole del playground, sezione 4): per ogni volta che hai già giocato questa carta in questa partita, anche annullata, i danni all'avversario crescono di 5; le giocate dell'avversario non contano.
+Rincara 5 (regolamento, R07b): per ogni volta che hai già giocato questa carta in questa partita, anche annullata, i danni all'avversario crescono di 5; le giocate dell'avversario non contano.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 8 POISON.
 
@@ -459,7 +459,7 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 8 POISON.
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su di te.
 
-Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Tossicone Scatarrante» o «Trascinare nel Tunnel»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 10 T e 5 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 T. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
+Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Tossicone Scatarrante» o «Trascinare nel Tunnel»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 10 T e 5 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 T. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
 
 #### Tossicone Scatarrante — Azione, Regolare · UNCOMMON · Costo 10 T · Priorità 1
 
@@ -483,7 +483,7 @@ Quando la carta si risolve, nell'ordine: 1. Guadagni H pari a metà della tua T.
 
 La tua T si legge quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Riflessi Aumentati dalla Speed — Azione, Regolare · UNCOMMON · Costo 10 T · Priorità 2
 
@@ -499,7 +499,7 @@ Quando la carta si risolve annulli la mossa di ogni avversario che si gioca cont
 
 Azione regolare (regolamento, R01a). Costo: 10 T, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.
 
-Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la T che ti resta dopo aver pagato il costo. 2. Perdi tutta quella T. 3. Togli all'avversario l'immunità a T, anche quella del suo personaggio; resta tolta finché un'altra carta non gliela ridà (regolamento, R01 e R06). 4. L'avversario guadagna la T che hai perso. 5. Infliggi 10 POISON all'avversario. 6. Alla fine di questo turno, dopo il veleno di fine turno, diventi immune a T: la tua T non ti avvelena più a fine turno finché un'altra carta non ti toglie l'immunità; costi, guadagni, perdite e danni POISON restano (regolamento, R01 e R06).
+Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la T che ti resta dopo aver pagato il costo. 2. Perdi tutta quella T. 3. Togli all'avversario l'immunità a T, anche quella del suo personaggio; resta tolta finché un'altra carta non gliela ridà (regolamento, R07b). 4. L'avversario guadagna la T che hai perso. 5. Infliggi 10 POISON all'avversario. 6. Alla fine di questo turno, dopo il veleno di fine turno, diventi immune a T: la tua T non ti avvelena più a fine turno finché un'altra carta non ti toglie l'immunità; costi, guadagni, perdite e danni POISON restano (regolamento, R07b).
 
 Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).
 
@@ -511,7 +511,7 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 POISON.
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su di te.
 
-Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Trascinare nel Tunnel» o «Tossicone Scatarrante»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 20 T e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 T. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
+Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Trascinare nel Tunnel» o «Tossicone Scatarrante»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 20 T e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 T. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
 
 ### Piera Pinot
 
@@ -543,9 +543,9 @@ Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua T. 2. Infl
 
 La tua T si legge quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 HIT.
 
@@ -559,7 +559,7 @@ Quando la carta si risolve, nell'ordine: 1. Guadagni A pari a metà della tua L.
 
 La tua L si legge quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Ultimo Giro — Azione, Ultima risorsa · UNCOMMON · Costo — · Priorità 1
 
@@ -567,13 +567,13 @@ Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
 
 Ultima risorsa, riservata a Piera Pinot (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.
 
-Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la tua L: è la L spesa. 2. Subisci 2 HIT: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci; arriva prima di spendere la L, quindi la corazza dell'alcol lo riduce (regole del playground, RP-6). 3. Spendi tutta la tua L: scende a 0. 4. Infliggi all'avversario HIT pari a 10 più la L spesa.
+Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la tua L: è la L spesa. 2. Subisci 2 HIT: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci; arriva prima di spendere la L, quindi la corazza dell'alcol lo riduce (regolamento, R05). 3. Spendi tutta la tua L: scende a 0. 4. Infliggi all'avversario HIT pari a 10 più la L spesa.
 
-Rincara 4 (2 a te) (regole del playground, sezione 4): per ogni volta che hai già giocato questa carta in questa partita, anche annullata, i HIT all'avversario crescono di 4 e quelli che infliggi a te stesso di 2; le giocate dell'avversario non contano.
+Rincara 4 (2 a te) (regolamento, R07b): per ogni volta che hai già giocato questa carta in questa partita, anche annullata, i HIT all'avversario crescono di 4 e quelli che infliggi a te stesso di 2; le giocate dell'avversario non contano.
 
 La L spesa è quella letta all'inizio della risoluzione, prima di ogni altro effetto della carta.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 HIT.
 
@@ -585,7 +585,7 @@ Azione regolare (regolamento, R01a). Costo: 5 L, che paghi prima di ogni effetto
 
 Quando la carta si risolve, nell'ordine: 1. Subisci 5 HIT: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. 2. Infliggi 35 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 35 HIT.
 
@@ -599,7 +599,7 @@ Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legg
 
 La L spesa è quella letta all'inizio della risoluzione, prima di ogni altro effetto della carta.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 HIT.
 
@@ -619,7 +619,7 @@ Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applican
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su di te.
 
-Annuncia «Alla Goccia» o «Rutto a Bruciapelo» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Alla Goccia» o «Rutto a Bruciapelo»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 L e 35 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 L e 10 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
+Annuncia «Alla Goccia» o «Rutto a Bruciapelo» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Alla Goccia» o «Rutto a Bruciapelo»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 L e 35 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 L e 10 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
 
 #### Rutto a Bruciapelo — Azione, Regolare · RARE · Costo 5 L · Priorità 1
 
@@ -627,11 +627,11 @@ Annuncia «Alla Goccia» o «Rutto a Bruciapelo» (regole del playground, RP-13�
 
 Azione regolare (regolamento, R01a). Costo: 5 L, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.
 
-Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la L che ti resta dopo aver pagato il costo: è la L spesa. 2. Spendi tutta la tua L: scende a 0. 3. L'avversario perde A pari alla L spesa; non scende sotto 0 (regole del playground, RP-4). 4. Infliggi all'avversario HIT pari a 15 più il doppio della L spesa.
+Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la L che ti resta dopo aver pagato il costo: è la L spesa. 2. Spendi tutta la tua L: scende a 0. 3. L'avversario perde A pari alla L spesa; non scende sotto 0 (regolamento, R01). 4. Infliggi all'avversario HIT pari a 15 più il doppio della L spesa.
 
 La L spesa è quella letta all'inizio della risoluzione, prima di ogni altro effetto della carta.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 15 HIT.
 
@@ -641,7 +641,7 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 15 HIT.
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su di te.
 
-Annuncia «Rutto a Bruciapelo» o «Alla Goccia» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Rutto a Bruciapelo» o «Alla Goccia»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 L e 35 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 L e 10 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
+Annuncia «Rutto a Bruciapelo» o «Alla Goccia» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Rutto a Bruciapelo» o «Alla Goccia»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 L e 35 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 L e 10 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
 
 ### Beppe Bulletta
 
@@ -671,7 +671,7 @@ Azione legata a Beppe Bulletta (regolamento, R01a). Nessun costo in risorse. Per
 
 Quando la carta si risolve, nell'ordine: 1. Guadagni 2 V. 2. Infliggi 2 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 HIT.
 
@@ -681,7 +681,7 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 HIT.
 
 Azione legata a Beppe Bulletta (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 0. Si gioca su di te.
 
-Quando la carta si risolve: ottieni l'equipaggiamento positivo «Affilare gli Utensili»: da quando la carta si risolve fino alla fine del prossimo turno, effetti di fine turno compresi, i HIT che infliggi diventano CUT e ne infliggi tre quarti, arrotondando per difetto; da CUT non li cambiano più gli stati su HIT presi dopo questo, ma quelli su CUT, e la corazza dell'alcol non li riduce (regole del playground, RP-6). Vale anche sui HIT che infliggi a te stesso. Non cambia i danni delle mosse che si sono risolte prima. È un equipaggiamento: «PERMESSO SCUSA PUOI SMETTERLA» lo toglie (regolamento, R01a e R05).
+Quando la carta si risolve: ottieni l'equipaggiamento positivo «Affilare gli Utensili»: da quando la carta si risolve fino alla fine del prossimo turno, effetti di fine turno compresi, i HIT che infliggi diventano CUT e ne infliggi tre quarti, arrotondando per difetto; da CUT non li cambiano più gli stati su HIT presi dopo questo, ma quelli su CUT, e la corazza dell'alcol non li riduce (regolamento, R05). Vale anche sui HIT che infliggi a te stesso. Non cambia i danni delle mosse che si sono risolte prima. È un equipaggiamento: «PERMESSO SCUSA PUOI SMETTERLA» lo toglie (regolamento, R01a e R05).
 
 Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applicano uno dopo l'altro, nell'ordine in cui sono stati presi (regolamento, R05).
 
@@ -713,7 +713,7 @@ Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gi
 
 Quando la carta si risolve: infliggi 4 CUT all'avversario.
 
-Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Chiave da Tredici» o «Lavoro Fatto Bene»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 V e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 V. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
+Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Chiave da Tredici» o «Lavoro Fatto Bene»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 V e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 V. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
 
 Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).
 
@@ -737,7 +737,7 @@ Azione regolare (regolamento, R01a). Costo: 10 V, che paghi prima di ogni effett
 
 Quando la carta si risolve infliggi all'avversario HIT pari a 15 più 4 per ogni oggetto che hai in campo. Gli oggetti si contano all'inizio della risoluzione, dopo i costi: contano anche i token; gli equipaggiamenti no, perché sono stati e non oggetti.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 15 HIT.
 
@@ -749,7 +749,7 @@ Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gi
 
 Quando la carta si risolve: infliggi 4 CUT all'avversario.
 
-Annuncia «Lavoro Fatto Bene» o «Chiave da Tredici» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Lavoro Fatto Bene» o «Chiave da Tredici»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 10 V e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 V. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
+Annuncia «Lavoro Fatto Bene» o «Chiave da Tredici» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Lavoro Fatto Bene» o «Chiave da Tredici»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 10 V e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 V. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
 
 Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05).
 
@@ -771,7 +771,7 @@ Quando la carta si risolve, nell'ordine: 1. Guadagni 8 A. 2. Consumi il tuo ogge
 
 Azione legata a Sergio Sommerso (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 2. Si gioca contro un avversario, che scegli.
 
-Quando la carta si risolve, se la mossa dell'avversario che hai scelto deve ancora risolversi e la sua carta contiene Annuncia (regole del playground, RP-13–RP-24), la annulli; altrimenti non succede niente. Deve ancora risolversi vuol dire che viene dopo la tua nell'ordine di risoluzione del turno: priorità più bassa, oppure pari priorità e meno A dopo i costi, oppure pari priorità e pari A se il suo giocatore viene dopo di te nell'ordine d'inserimento nella partita (regolamento, R04). Una mossa annullata non ha effetti, ma il suo costo è già pagato e il suo giocatore pesca come sempre (regolamento, R04).
+Quando la carta si risolve, se la mossa dell'avversario che hai scelto deve ancora risolversi e la sua carta contiene Annuncia (regolamento, R02a e R07b), la annulli; altrimenti non succede niente. Deve ancora risolversi vuol dire che viene dopo la tua nell'ordine di risoluzione del turno: priorità più bassa, oppure pari priorità e meno A dopo i costi, oppure pari priorità e pari A se il suo giocatore viene dopo di te nell'ordine d'inserimento nella partita (regolamento, R04). Una mossa annullata non ha effetti, ma il suo costo è già pagato e il suo giocatore pesca come sempre (regolamento, R04).
 
 Se un'altra carta l'ha già annullata, non succede niente.
 
@@ -785,9 +785,9 @@ Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua T. 2. Perd
 
 La tua T e la tua L si leggono quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 HIT.
 
@@ -809,11 +809,11 @@ Azione regolare (regolamento, R01a). Costo: 5 A, che paghi prima di ogni effetto
 
 Quando la carta si risolve, nell'ordine: 1. L'avversario perde 10 A. 2. Infliggi 4 HIT all'avversario.
 
-Annuncia «Segreto di Pulcinella» o «Conto Salato» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Segreto di Pulcinella» o «Conto Salato»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
+Annuncia «Segreto di Pulcinella» o «Conto Salato» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Segreto di Pulcinella» o «Conto Salato»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 A e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 A. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 4 HIT.
 
@@ -829,7 +829,7 @@ Se un'altra carta l'ha già annullata, non succede niente.
 
 Se l'hai annullata ed era un attacco, infliggi all'avversario metà dei suoi danni fissi, dello stesso tipo, arrotondando per difetto. I danni fissi sono quelli scritti sulla sua carta contro l'avversario: non la parte letta dalle risorse o dagli oggetti, non Rincara, non i danni di Gioca d'anticipo e di «Se l'avversario è Vulnerabile»; i danni che la sua carta infliggeva a lui stesso non contano. Il testo completo di ogni carta li dice.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 #### Copione Già Visto — Azione, Regolare · UNCOMMON · Costo 10 A · Priorità 2
 
@@ -841,7 +841,7 @@ Quando la carta si risolve, se la mossa dell'avversario che hai scelto deve anco
 
 Se un'altra carta l'ha già annullata, non succede niente.
 
-Se la carta che annulli ha il nome a cui è legato il Vulnerabile dell'avversario, quella giocata non lo fa finire: l'avversario resta Vulnerabile finché non gioca un'altra carta con quel nome (regole del playground, RP-14–RP-21).
+Se la carta che annulli ha il nome a cui è legato il Vulnerabile dell'avversario, quella giocata non lo fa finire: l'avversario resta Vulnerabile finché non gioca un'altra carta con quel nome (regolamento, R07b).
 
 #### Conto Salato — Azione, Regolare · UNCOMMON · Costo 5 A · Priorità 1
 
@@ -849,9 +849,9 @@ Se la carta che annulli ha il nome a cui è legato il Vulnerabile dell'avversari
 
 Azione regolare (regolamento, R01a). Costo: 5 A, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.
 
-Quando la carta si risolve, nell'ordine: 1. Infliggi 8 HIT all'avversario. 2. Se, quando questo effetto si applica, l'avversario è Vulnerabile, cioè ha almeno un gettone di vulnerabilità di qualunque carta (regole del playground, RP-14–RP-21): infliggi 6 HIT all'avversario.
+Quando la carta si risolve, nell'ordine: 1. Infliggi 8 HIT all'avversario. 2. Se, quando questo effetto si applica, l'avversario è Vulnerabile, cioè ha almeno un gettone di vulnerabilità di qualunque carta (regolamento, R07b): infliggi 6 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 8 HIT.
 
@@ -863,7 +863,7 @@ Azione regolare (regolamento, R01a). Costo: 15 A, che paghi prima di ogni effett
 
 Quando la carta si risolve: infliggi 25 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 25 HIT.
 
@@ -877,9 +877,9 @@ Quando la carta si risolve, nell'ordine: 1. L'avversario perde A pari a metà de
 
 La tua A si legge quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 5 HIT.
 
@@ -889,7 +889,7 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 5 HIT.
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su un tuo oggetto, che scegli.
 
-Quando la carta si risolve: vendi il tuo oggetto che hai scelto: esce dal campo senza il suo effetto (nessun guadagno, immunità, equipaggiamento o effetto In campo) e va negli scarti, poi guadagni 8 H. Se quando la carta si risolve l'oggetto non è più fra i tuoi (rubato, distrutto, scalzato da un altro), non vendi niente e non guadagni niente (regole del playground, RP-25).
+Quando la carta si risolve: vendi il tuo oggetto che hai scelto: esce dal campo senza il suo effetto (nessun guadagno, immunità, equipaggiamento o effetto In campo) e va negli scarti, poi guadagni 8 H. Se quando la carta si risolve l'oggetto non è più fra i tuoi (rubato, distrutto, scalzato da un altro), non vendi niente e non guadagni niente (regolamento, R07b).
 
 ### Duccio Braccio Teso
 
@@ -911,9 +911,9 @@ Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua T. 2. Perd
 
 La tua T e la tua L si leggono quando l'effetto si applica: dopo i costi, dopo le mosse che si sono risolte prima della tua e dopo gli effetti che lo precedono su questa carta. Metà e quarti si arrotondano per difetto.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 HIT.
 
@@ -923,7 +923,7 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 HIT.
 
 Azione legata a Duccio Braccio Teso (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 0. Si gioca su di te.
 
-Quando la carta si risolve, se hai da 1 a 30 H, guadagni 4 H; altrimenti niente. La H si legge in quel momento, dopo le mosse che si sono risolte prima della tua. La carta si gioca su di te, quindi si risolve anche se sei a terra (regole del playground, RP-1), ma a 0 H non recuperi niente.
+Quando la carta si risolve, se hai da 1 a 30 H, guadagni 4 H; altrimenti niente. La H si legge in quel momento, dopo le mosse che si sono risolte prima della tua. La carta si gioca su di te, quindi si risolve anche se sei a terra (regolamento, R04), ma a 0 H non recuperi niente.
 
 #### (Dis)onore alla Bandiera — Azione, Legata al personaggio · UNCOMMON · Costo — · Priorità 2
 
@@ -943,9 +943,9 @@ Ultima risorsa, generica (regolamento, R01a). Nessun costo in risorse. Priorità
 
 Quando la carta si risolve, nell'ordine: 1. Subisci 6 HIT: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. Più 2 per ogni volta che l'hai già giocata (Rincara, sotto). 2. Infliggi 10 HIT all'avversario. Più 5 per ogni volta che l'hai già giocata (Rincara, sotto).
 
-Rincara 5 (2 a te) (regole del playground, sezione 4): per ogni volta che hai già giocato questa carta in questa partita, anche annullata, i danni all'avversario crescono di 5 e quelli che infliggi a te stesso di 2; le giocate dell'avversario non contano.
+Rincara 5 (2 a te) (regolamento, R07b): per ogni volta che hai già giocato questa carta in questa partita, anche annullata, i danni all'avversario crescono di 5 e quelli che infliggi a te stesso di 2; le giocate dell'avversario non contano.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 HIT.
 
@@ -957,7 +957,7 @@ Azione regolare (regolamento, R01a). Costo: 15 H, che paghi prima di ogni effett
 
 Quando la carta si risolve: infliggi 20 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 20 HIT.
 
@@ -981,7 +981,7 @@ Quando la carta si risolve, nell'ordine: 1. Ottieni lo stato positivo «E Allora
 
 Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applicano uno dopo l'altro, nell'ordine in cui sono stati presi (regolamento, R05).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 8 HIT.
 
@@ -993,7 +993,7 @@ Azione regolare (regolamento, R01a). Costo: 30 H, che paghi prima di ogni effett
 
 Quando la carta si risolve: infliggi 25 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 25 HIT.
 
@@ -1005,9 +1005,9 @@ Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gi
 
 Quando la carta si risolve: infliggi 4 HIT all'avversario.
 
-Annuncia «Craniata Patriottica» o «Testa Dura» (regole del playground, RP-13–RP-24): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Craniata Patriottica» o «Testa Dura»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 6 H e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 2 H. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regole del playground, RP-11). Vulnerabile (regole del playground, RP-14–RP-21): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
+Annuncia «Craniata Patriottica» o «Testa Dura» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Craniata Patriottica» o «Testa Dura»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 6 H e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 2 H. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, HIT, CUT e POISON, veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 4 HIT.
 
@@ -1019,7 +1019,7 @@ Azione regolare (regolamento, R01a). Costo: 35 H, che paghi prima di ogni effett
 
 Quando la carta si risolve: infliggi 30 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 30 HIT.
 
@@ -1039,7 +1039,7 @@ Quando la carta si risolve: consumi il tuo oggetto che hai scelto: esce dal camp
 
 Azione regolare (regolamento, R01a). Costo: 10 A, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 0. Si gioca su un oggetto di un avversario, che scegli.
 
-Quando la carta si risolve prendi l'oggetto dell'avversario che hai scelto e lo metti vicino a te: da quel momento è tuo. Se così superi gli oggetti che puoi tenere, sparisce il tuo oggetto più vecchio (regolamento, R02). Se l'oggetto non c'è più, non prendi niente. Un effetto In campo dell'oggetto, da quel momento, agisce su di te (regole del playground, RP-27).
+Quando la carta si risolve prendi l'oggetto dell'avversario che hai scelto e lo metti vicino a te: da quel momento è tuo. Se così superi gli oggetti che puoi tenere, sparisce il tuo oggetto più vecchio (regolamento, R02). Se l'oggetto non c'è più, non prendi niente. Un effetto In campo dell'oggetto, da quel momento, agisce su di te (regolamento, R07b).
 
 #### Scatto Repentino — Azione, Regolare · UNCOMMON · Costo — · Priorità −1
 
@@ -1047,7 +1047,7 @@ Quando la carta si risolve prendi l'oggetto dell'avversario che hai scelto e lo 
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità -1. Si gioca contro un avversario, che scegli.
 
-Quando la carta si risolve scambi tutti i tuoi oggetti con tutti quelli dell'avversario che hai scelto. Se uno dei due riceve più oggetti di quanti ne può tenere, spariscono i più vecchi fra quelli che riceve (regolamento, R02). Gli effetti In campo seguono gli oggetti (regole del playground, RP-27).
+Quando la carta si risolve scambi tutti i tuoi oggetti con tutti quelli dell'avversario che hai scelto. Se uno dei due riceve più oggetti di quanti ne può tenere, spariscono i più vecchi fra quelli che riceve (regolamento, R02). Gli effetti In campo seguono gli oggetti (regolamento, R07b).
 
 #### Ce l'Hai Due Spicci? — Azione, Regolare · RARE · Costo — · Priorità 0
 
@@ -1065,7 +1065,7 @@ Azione regolare (regolamento, R01a). Costo: 10 V, che paghi prima di ogni effett
 
 Quando la carta si risolve: infliggi 20 HIT all'avversario. Su questo danno contano solo i tuoi stati positivi (gli equipaggiamenti sono stati positivi); gli stati dell'avversario contano tutti (regolamento, R05).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 20 HIT.
 
@@ -1077,7 +1077,7 @@ Azione regolare (regolamento, R01a). Costo: 15 V, che paghi prima di ogni effett
 
 Quando la carta si risolve: infliggi 25 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 25 HIT.
 
@@ -1089,9 +1089,9 @@ Azione regolare (regolamento, R01a). Costo: 20 V, che paghi prima di ogni effett
 
 Quando la carta si risolve, nell'ordine: 1. Infliggi 30 HIT all'avversario. 2. Azzeri la T dell'avversario: scende a 0 qualunque valore abbia. 3. Azzeri la L dell'avversario: scende a 0 qualunque valore abbia.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 30 HIT.
 
@@ -1103,7 +1103,7 @@ Azione regolare (regolamento, R01a). Costo: 15 V, che paghi prima di ogni effett
 
 Quando la carta si risolve, nell'ordine: 1. Infliggi 10 HIT all'avversario. 2. L'avversario guadagna 10 T.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 HIT.
 
@@ -1115,9 +1115,9 @@ Azione regolare (regolamento, R01a). Costo: 10 V, che paghi prima di ogni effett
 
 Quando la carta si risolve, nell'ordine: 1. L'avversario perde 10 A. 2. Infliggi 10 HIT all'avversario.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 HIT.
 
@@ -1129,7 +1129,7 @@ Azione regolare (regolamento, R01a). Costo: 5 V, che paghi prima di ogni effetto
 
 Quando la carta si risolve, nell'ordine: 1. Togli all'avversario tutti i suoi equipaggiamenti: sono stati, non oggetti in campo (regolamento, R01a e R05). 2. Infliggi 8 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 8 HIT.
 
@@ -1151,7 +1151,7 @@ Azione regolare (regolamento, R01a). Costo: 10 A, che paghi prima di ogni effett
 
 Quando la carta si risolve, nell'ordine: 1. Guadagni 5 V. 2. Infliggi 10 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 HIT.
 
@@ -1173,7 +1173,7 @@ Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 0. Si gi
 
 Quando la carta si risolve, nell'ordine: 1. Perdi 5 A. 2. Guadagni 10 V.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Due Dita in Gola — Azione, Regolare · UNCOMMON · Costo — · Priorità 1
 
@@ -1183,9 +1183,9 @@ Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gi
 
 Quando la carta si risolve, nell'ordine: 1. Subisci 5 HIT: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. 2. Azzeri la tua T: scende a 0 qualunque valore abbia. 3. Azzeri la tua L: scende a 0 qualunque valore abbia.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 #### Fasciatura d'Emergenza — Azione, Regolare · COMMON · Costo — · Priorità 0
 
@@ -1195,7 +1195,7 @@ Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 0. Si gi
 
 Quando la carta si risolve, nell'ordine: 1. Perdi 5 A. 2. Guadagni 8 H.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Sputo nel Posacenere — Azione, Regolare · COMMON · Costo 5 A · Priorità 1
 
@@ -1217,7 +1217,7 @@ Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gi
 
 Quando la carta si risolve: infliggi 8 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 8 HIT.
 
@@ -1229,7 +1229,7 @@ Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gi
 
 Quando la carta si risolve, nell'ordine: 1. Guadagni 5 A. 2. L'avversario perde 5 A.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Riprendere Fiato — Azione, Regolare · RARE · Costo — · Priorità 0
 
@@ -1247,7 +1247,7 @@ Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applican
 
 Azione regolare (regolamento, R01a). Costo: 5 V, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca su di te.
 
-Quando la carta si risolve: ottieni l'equipaggiamento positivo «Coccio di Bottiglia»: da quando la carta si risolve finché non cambia un danno; dal primo danno che cambia vale ancora, su ogni danno, fino alla fine di quel turno, i HIT che infliggi diventano CUT e ne infliggi una volta e mezza, arrotondando per difetto; da CUT non li cambiano più gli stati su HIT presi dopo questo, ma quelli su CUT, e la corazza dell'alcol non li riduce (regole del playground, RP-6). Vale anche sui HIT che infliggi a te stesso. Non cambia i danni delle mosse che si sono risolte prima. È un equipaggiamento: «PERMESSO SCUSA PUOI SMETTERLA» lo toglie (regolamento, R01a e R05).
+Quando la carta si risolve: ottieni l'equipaggiamento positivo «Coccio di Bottiglia»: da quando la carta si risolve finché non cambia un danno; dal primo danno che cambia vale ancora, su ogni danno, fino alla fine di quel turno, i HIT che infliggi diventano CUT e ne infliggi una volta e mezza, arrotondando per difetto; da CUT non li cambiano più gli stati su HIT presi dopo questo, ma quelli su CUT, e la corazza dell'alcol non li riduce (regolamento, R05). Vale anche sui HIT che infliggi a te stesso. Non cambia i danni delle mosse che si sono risolte prima. È un equipaggiamento: «PERMESSO SCUSA PUOI SMETTERLA» lo toglie (regolamento, R01a e R05).
 
 Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applicano uno dopo l'altro, nell'ordine in cui sono stati presi (regolamento, R05).
 
@@ -1259,9 +1259,9 @@ Azione regolare (regolamento, R01a). Costo: 5 A, che paghi prima di ogni effetto
 
 Quando la carta si risolve, nell'ordine: 1. Azzeri la L dell'avversario: scende a 0 qualunque valore abbia. 2. Infliggi 4 HIT all'avversario.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 4 HIT.
 
@@ -1273,9 +1273,9 @@ Azione regolare (regolamento, R01a). Costo: 10 A, che paghi prima di ogni effett
 
 Quando la carta si risolve, nell'ordine: 1. L'avversario perde 10 V. 2. Infliggi 5 HIT all'avversario.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 5 HIT.
 
@@ -1287,7 +1287,7 @@ Azione regolare (regolamento, R01a). Costo: 10 T e 10 L, che paghi prima di ogni
 
 Quando la carta si risolve: infliggi 40 HIT all'avversario.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 40 HIT.
 
@@ -1299,9 +1299,9 @@ Ultima risorsa, generica (regolamento, R01a). Nessun costo in risorse. Priorità
 
 Quando la carta si risolve, nell'ordine: 1. Subisci 5 HIT: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. Più 2 per ogni volta che l'hai già giocata (Rincara, sotto). 2. Infliggi 10 HIT all'avversario. Più 5 per ogni volta che l'hai già giocata (Rincara, sotto).
 
-Rincara 5 (2 a te) (regole del playground, sezione 4): per ogni volta che hai già giocato questa carta in questa partita, anche annullata, i danni all'avversario crescono di 5 e quelli che infliggi a te stesso di 2; le giocate dell'avversario non contano.
+Rincara 5 (2 a te) (regolamento, R07b): per ogni volta che hai già giocato questa carta in questa partita, anche annullata, i danni all'avversario crescono di 5 e quelli che infliggi a te stesso di 2; le giocate dell'avversario non contano.
 
-Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regole del playground, RP-6).
+Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i HIT che subisce chi ha L si riducono poi di un quarto della sua L, senza scendere sotto 0 (regolamento, R05).
 
 Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 HIT.
 
@@ -1337,7 +1337,7 @@ Quando lo consumi, nell'ordine: 1. Accanto a te compare una Bottiglia Spaccata, 
 
 Oggetto: quando lo peschi va in campo vicino a te; fa effetto quando lo consumi con una carta che si gioca su un tuo oggetto (regolamento, R01a).
 
-Quando lo consumi, nell'ordine: 1. Diventi immune a T e a L: da questo fine turno la tua T non ti avvelena e la tua L non ti fa perdere A né L; costi, guadagni, perdite e danni POISON restano (regolamento, R01 e R06). 2. Guadagni 20 L e 20 T. 3. Alla fine del quinto turno, contando questo, dopo gli effetti di T e L di quel turno (ancora bloccati), perdi tutte le immunità, anche quelle del tuo personaggio, e tutti gli stati: positivi, negativi, equipaggiamenti e Vulnerabile. Poi subisci 20 POISON, che nessuno stato cambia perché non ne hai più. Dal turno dopo la tua T e la tua L tornano a fare effetto a fine turno.
+Quando lo consumi, nell'ordine: 1. Diventi immune a T e a L: da questo fine turno la tua T non ti avvelena e la tua L non ti fa perdere A né L; costi, guadagni, perdite e danni POISON restano (regolamento, R07b). 2. Guadagni 20 L e 20 T. 3. Alla fine del quinto turno, contando questo, dopo gli effetti di T e L di quel turno (ancora bloccati), perdi tutte le immunità, anche quelle del tuo personaggio, e tutti gli stati: positivi, negativi, equipaggiamenti e Vulnerabile. Poi subisci 20 POISON, che nessuno stato cambia perché non ne hai più. Dal turno dopo la tua T e la tua L tornano a fare effetto a fine turno.
 
 #### Amaro nel Bicchiere di Plastica — Oggetto · COMMON · Costo — · Priorità —
 
@@ -1347,7 +1347,7 @@ Oggetto: quando lo peschi va in campo vicino a te; fa effetto quando lo consumi 
 
 Quando lo consumi, nell'ordine: 1. Guadagni 20 L. 2. Perdi 5 A.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Espresso della Macchinetta — Oggetto · COMMON · Costo — · Priorità —
 
@@ -1373,7 +1373,7 @@ Oggetto: quando lo peschi va in campo vicino a te; fa effetto quando lo consumi 
 
 Quando lo consumi, nell'ordine: 1. Azzeri la tua L: scende a 0 qualunque valore abbia. 2. Guadagni 20 A.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Guanti da Officina — Oggetto · UNCOMMON · Costo — · Priorità —
 
@@ -1431,7 +1431,7 @@ Oggetto: quando lo peschi va in campo vicino a te; fa effetto quando lo consumi 
 
 Quando lo consumi, nell'ordine: 1. Guadagni 10 H. 2. Azzeri la tua T: scende a 0 qualunque valore abbia.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Santino di San Briaco — Oggetto · RARE · Costo — · Priorità —
 
@@ -1439,7 +1439,7 @@ Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
 
 Oggetto: quando lo peschi va in campo vicino a te; fa effetto quando lo consumi con una carta che si gioca su un tuo oggetto (regolamento, R01a).
 
-Quando lo consumi diventi immune a L: la tua L non ti fa perdere A né L a fine turno; costi, guadagni e perdite restano (regolamento, R01 e R06). L'immunità finisce alla fine del terzo turno, contando questo, dopo l'effetto di fine turno della L, che quindi resta bloccato in tutti e 3 i turni. La fine toglie l'immunità a L anche se nel frattempo ne avevi un'altra, per esempio da un secondo «Santino di San Briaco».
+Quando lo consumi diventi immune a L: la tua L non ti fa perdere A né L a fine turno; costi, guadagni e perdite restano (regolamento, R07b). L'immunità finisce alla fine del terzo turno, contando questo, dopo l'effetto di fine turno della L, che quindi resta bloccato in tutti e 3 i turni. La fine toglie l'immunità a L anche se nel frattempo ne avevi un'altra, per esempio da un secondo «Santino di San Briaco».
 
 #### Grappa della Casa — Oggetto · RARE · Costo — · Priorità —
 
@@ -1449,7 +1449,7 @@ Oggetto: quando lo peschi va in campo vicino a te; fa effetto quando lo consumi 
 
 Quando lo consumi, nell'ordine: 1. Guadagni 25 L. 2. Perdi 5 A.
 
-Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
+Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Conto del Tavolo Sei — Oggetto · UNCOMMON · Costo — · Priorità —
 
@@ -1457,7 +1457,7 @@ Nessuna risorsa scende sotto 0 (regole del playground, RP-4).
 
 Oggetto: quando lo peschi va in campo vicino a te; fa effetto quando lo consumi con una carta che si gioca su un tuo oggetto (regolamento, R01a).
 
-In campo (regole del playground, RP-27): finché l'oggetto è in campo, alla fine di ogni turno chi lo ha vicino perde 4 A, dopo i suoi altri effetti di fine turno. Agisce anche nel turno in cui arriva e colpisce chi lo ha in quel momento, anche se l'ha rubato, scambiato o copiato. Non è un danno: stati e parate non lo cambiano, nessuna risorsa scende sotto 0 e la H non cambia mai. Consumato, venduto, distrutto o scalzato prima della fine del turno, non agisce.
+In campo (regolamento, R07b): finché l'oggetto è in campo, alla fine di ogni turno chi lo ha vicino perde 4 A, dopo i suoi altri effetti di fine turno. Agisce anche nel turno in cui arriva e colpisce chi lo ha in quel momento, anche se l'ha rubato, scambiato o copiato. Non è un danno: stati e parate non lo cambiano, nessuna risorsa scende sotto 0 e la H non cambia mai. Consumato, venduto, distrutto o scalzato prima della fine del turno, non agisce.
 
 Quando lo consumi: guadagni 15 V.
 
@@ -1467,7 +1467,7 @@ Quando lo consumi: guadagni 15 V.
 
 Oggetto: quando lo peschi va in campo vicino a te; fa effetto quando lo consumi con una carta che si gioca su un tuo oggetto (regolamento, R01a).
 
-In campo (regole del playground, RP-27): finché l'oggetto è in campo, alla fine di ogni turno chi lo ha vicino guadagna 2 T, dopo i suoi altri effetti di fine turno. Agisce anche nel turno in cui arriva e colpisce chi lo ha in quel momento, anche se l'ha rubato, scambiato o copiato. Non è un danno: stati e parate non lo cambiano, nessuna risorsa scende sotto 0 e la H non cambia mai. Consumato, venduto, distrutto o scalzato prima della fine del turno, non agisce. La T che dà avvelena dal turno dopo; a chi è immune resta la T senza il veleno.
+In campo (regolamento, R07b): finché l'oggetto è in campo, alla fine di ogni turno chi lo ha vicino guadagna 2 T, dopo i suoi altri effetti di fine turno. Agisce anche nel turno in cui arriva e colpisce chi lo ha in quel momento, anche se l'ha rubato, scambiato o copiato. Non è un danno: stati e parate non lo cambiano, nessuna risorsa scende sotto 0 e la H non cambia mai. Consumato, venduto, distrutto o scalzato prima della fine del turno, non agisce. La T che dà avvelena dal turno dopo; a chi è immune resta la T senza il veleno.
 
 Quando lo consumi: guadagni 10 A.
 
@@ -1479,7 +1479,7 @@ Quando lo consumi: guadagni 10 A.
 
 Token oggetto, creato da «Doppio Malto da Discount» (regolamento, R01a): in campo segue le regole degli oggetti, compreso il numero di oggetti che puoi tenere (regolamento, R02). Fa effetto quando lo consumi con una carta che si gioca su un tuo oggetto.
 
-Quando lo consumi ottieni un equipaggiamento positivo: i tuoi HIT diventano CUT e ne infliggi una volta e mezza, arrotondando per difetto; da CUT non li cambiano più gli stati su HIT presi dopo questo, ma quelli su CUT, e la corazza dell'alcol non li riduce (regole del playground, RP-6). Vale anche sui HIT che infliggi a te stesso. Dura finché non cambia un danno; dal primo danno che cambia vale ancora, su ogni danno, fino alla fine di quel turno; «PERMESSO SCUSA PUOI SMETTERLA» lo toglie (regolamento, R01a e R05).
+Quando lo consumi ottieni un equipaggiamento positivo: i tuoi HIT diventano CUT e ne infliggi una volta e mezza, arrotondando per difetto; da CUT non li cambiano più gli stati su HIT presi dopo questo, ma quelli su CUT, e la corazza dell'alcol non li riduce (regolamento, R05). Vale anche sui HIT che infliggi a te stesso. Dura finché non cambia un danno; dal primo danno che cambia vale ancora, su ogni danno, fino alla fine di quel turno; «PERMESSO SCUSA PUOI SMETTERLA» lo toglie (regolamento, R01a e R05).
 
 Ogni Bottiglia Spaccata consumata dà un equipaggiamento suo, indipendente dagli altri (regolamento, R05).
 
@@ -1617,4 +1617,4 @@ Campi descrittivi definiti in R07a, generati dagli stessi dati delle schede; in 
 
 ## Revisioni
 
-- **1.0 candidata — SB-26:** generata dal file del set `server/src/test/resources/set-base/bozza.json` (SHA-256 `325926e35d371ad169848a5930924472ddfdd94a71b73a959fac0ed2dda83d8d`), con i testi completi di SB-25 `docs/design/set-base/testi/testi-completi.json` (SHA-256 `2b3e1a93777d1fb237afe46920d1fb56270c0b2460ee15b04342e36260df1d29`) e gli slot `docs/design/set-base/testi/slot.json` (SHA-256 `48bc14dd58706e7d8ca9bb3583e5d4eaa714bff591233ffb549635a8a35176f7`). Schede = testi completi approvati in D174; testo breve, guadagni e danno nominale dal generatore di SB-25. Sostituirà la 0.1 nella partita viva con SB-28 (D175).
+- **1.0 candidata — SB-26:** generata dal file del set `server/src/test/resources/set-base/bozza.json` (SHA-256 `325926e35d371ad169848a5930924472ddfdd94a71b73a959fac0ed2dda83d8d`), con i testi completi di SB-25 `docs/design/set-base/testi/testi-completi.json` (SHA-256 `ef7cd3ea9e0c3bf0f52dd7c6c6296cdc05b4ac92afc1e5592ca7a9c5158b6ae7`) e gli slot `docs/design/set-base/testi/slot.json` (SHA-256 `48bc14dd58706e7d8ca9bb3583e5d4eaa714bff591233ffb549635a8a35176f7`). Schede = testi completi approvati in D174; testo breve, guadagni e danno nominale dal generatore di SB-25. Sostituirà la 0.1 nella partita viva con SB-28 (D175).
