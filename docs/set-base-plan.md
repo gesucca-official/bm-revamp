@@ -4,7 +4,7 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 23 novembre 2026, dopo le Fasi B e C di SB-28). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 23 novembre 2026, dopo D184). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **2.0** (le regole `d50` del playground entrano nel sistema) e Set Base **1.0** (Fase B di SB-28, se il proprietario la accetta; lo 0.1 è [archiviato](history/set-base-0.1.md)); bozza congelata **1.7** (SB-24, D166); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101) con le correzioni di D139, D149 e D152 (Estasi GEN-24, Giro secco in PIN-AR2), set a 124 carte (D152, D155).
 > - **In corso:** SB-28, **Fasi B e C consegnate, in attesa della partita del proprietario** ([rapporto](reports/set-base/sb-28-report.md#fase-b)): passaggio in un solo commit (regolamento 2.0, Set Base 1.0, file del set in produzione, catalogo vivo a 117 carte, carte dello 0.1 fuori, quick a caso fra i cinque starter, mazzi salvati con carte uscite cancellati), corsa d'identità del giro 20/2 uguale al congelamento, partite CLI con i cinque starter, Sergio e Duccio.
