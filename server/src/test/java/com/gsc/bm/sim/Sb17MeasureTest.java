@@ -108,7 +108,7 @@ class Sb17MeasureTest {
         assertEquals(Ruleset.D50, SimulationRunner.selectedRuleset());
         Path out = Path.of(System.getProperty("sim.sb17Out"));
         Files.createDirectories(out);
-        Draft draft = Draft.selected();
+        Draft draft = SetBaseArms.measureDraft();
         Map<String, BotPolicy> styles = new LinkedHashMap<>();
         for (SoughtHitPolicy.Timing t : SoughtHitPolicy.Timing.values()) for (Map.Entry<String, BotPolicy> s : PlaygroundTest.styles().entrySet()) {
             if (s.getKey().equals("casuale")) continue;

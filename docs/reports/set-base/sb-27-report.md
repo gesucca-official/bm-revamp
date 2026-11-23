@@ -189,7 +189,7 @@ e «Copione Già Visto» leggono le regole del playground (`playground()`), che 
 
 ## Fase B
 
-**Esito della ripresa:** D180 applicata, due casi integrati e identità SB-23 20/2 confermata byte per byte. STOP 2 del contratto sull’identità viva: il banco storico si ferma sullo stesso errore di caricamento anche sulla base. Inventario delle 125 schede completo. La copertura della fase B è parziale. Base del blocco `ed73a7d`, ripresa da `2bbbcbd`.
+**Esito della ripresa:** identità viva confermata e STOP 2 risolto. Tutte le 125 voci hanno almeno un caso verde, con 144 casi ordinari della fase B e 70 della fase A. Il diagnostico sul nome selezionabile del TOKEN apre un nuovo STOP D177. La verifica di tutte le clausole resta aperta. Base del blocco `ed73a7d`, ultima ripresa da `67a01b2`.
 
 Al controllo preliminare erano presenti quattro artefatti non tracciati in `output/pdf/`. Il proprietario ha autorizzato a proseguire: «Procedi lasciandoli al loro posto». Restano fuori dal commit.
 
@@ -296,8 +296,12 @@ Il confronto ha letto tutti i byte dei due file di ciascuna corsa.
   letterali dalla scheda. Le mosse di appoggio sono sintetiche. I casi di Annuncia usano anche il personaggio della bozza. Nel caso del secondo annuncio il seme del banco mantiene nel mazzo la seconda copia fino al secondo annuncio.
 - I due primi rossi su L erano errori nel calcolo del test. A fine turno R06 sottrae metà della L più uno, quindi 10 L
   diventano 4 e 12 L diventano 5. Il giro mirato ha confermato la correzione. I casi e gli attesi della fase A sono intatti.
-- Restano da provare i rami e le clausole assenti dalla tabella, le altre carte a dati, i sette personaggi e il token.
-  Lo STOP è intervenuto prima della valutazione sistematica delle clausole eventualmente non testabili.
+- Restano i rami e le clausole assenti dalla tabella. Le clausole comuni hanno casi rappresentativi, per esempio scelta
+  esplicita e annullamento di Annuncia per SPA-AR3 e SPA-AR6. Restano da completare per tutte le schede che le ripetono,
+  insieme ai casi sull'assenza della mossa bersaglio, sullo scarto dell'ultima copia annunciata e sulla durata individuale.
+- Lo scarto di un oggetto venduto è osservabile come uscita dal campo. Il modello non espone una pila di scarti da leggere.
+  Per l'equipaggiamento OUTPUT di un oggetto, un attacco dell'autore prima del consumo nello stesso turno richiederebbe una
+  seconda mossa dell'autore. Il banco prova i danni dei turni successivi e, per la corazza INPUT, anche il turno di consumo.
 
 ### Verifiche D180
 
@@ -321,25 +325,73 @@ La prova mirata con il codice di produzione della base `2bbbcbd` restituisce lo 
 La correzione D180 è stata ripristinata dopo il confronto e la bozza storica è intatta. L’identità viva resta da verificare.
 Il log del confronto sulla base è in `%TEMP%/bm-sb27-d180-2bbbcbd/live-on-base.log`.
 
-### Domanda per la regia
+### Risoluzione dello STOP 2 — caricatori di misura
 
-1. Il banco di identità viva può leggere la fixture con `BozzeStoriche.fromFile`, l’adattatore approvato in fase A, e rifare il
-   confronto sulla base e sul codice D180? La modifica al test esistente è fuori dal perimetro di questa ripresa. La copertura
-   residua della fase B resta sospesa allo STOP 2.
+La regia ha autorizzato la sostituzione in base alla risposta del proprietario allo STOP 1/2 della fase A:
+«Route the tests that load historical drafts through it». La lacuna risale alla fase A. Il banco vivo era rimasto fuori
+dall’instradamento verso `BozzeStoriche` perché si avvia solo con una proprietà esplicita.
+
+- `ChargeMeasureTest` instrada la fixture del banco vivo con `fromFile`. `DifficileMeasureTest` e `Sb30bProbeTest`
+  instradano le risorse dei rispettivi banchi con `fromClasspath`. `Listino` applica l’adattatore ai tre ingressi
+  di `baseDraft`, usato da `ListinoMeasureTest`.
+- `SetBaseArms.measureDraft` instrada la fonte singola configurabile di `BenchMeasureTest`, `ChargeMeasureTest`,
+  `LethalBotMeasureTest`, `PlaygroundMeasureTest`, `Sb17MeasureTest`, `Sb18MeasureTest`, `Sb19MeasureTest`,
+  `StarterBalanceMeasureTest` e `StarterLotMeasureTest`. Le selezioni di più set conservano la composizione
+  di `Draft.load`. La trasformazione in memoria del braccio B resta com’era.
+- `ListinoAnchorTest` e `StarterRedesignTest` sono test ordinari. `DeckSizePhaseTest` usa già la fixture adattata
+  tramite `DeckSizeVariantsTest`. Il caricatore di produzione e le bozze conservano i contenuti precedenti.
+
+`ChargeMeasureTest#liveBenchOnTheSameHistoricalDraft` ha completato due corse esclusive da 480.000 partite con
+`-Dsim.rules=1.13` e la stessa fixture storica. Primo giro su `2bbbcbd` con i soli caricatori di prova instradati
+(110,78 s). Secondo sul codice `67a01b2` con lo stesso instradamento (111,64 s). Uscite in
+`%TEMP%/bm-sb27-live-reroute-67a01b2/{base,d180}`.
+
+| File | Byte | SHA-256 identico nei due giri |
+|---|---:|---|
+| `final-live.json` | 266.869 | `ca131721c9bd6549c8e302bdfcd959a41b9c99903f911ba6a78f9186641e49a4` |
+| `final-live.md` | 26.112 | `16d3bde4c385cc3a353e1720707dce5e9367f170db1b4a6377407c0c385ecef4` |
+
+Entrambi i file coincidono byte per byte, con le stesse impronte del riferimento vivo storico. L’impronta della
+fixture è rimasta `faf265fad50ee0bedca125209f7008434a73660131f786ad272800235567d7c5`.
+
+### Verifiche della ripresa
+
+- `./scripts/build.ps1 -Task Test -Offline` verde. Server 1.194 casi, zero fallimenti, zero errori, 23 saltati.
+  Client di debug 37 su 37. `BozzeStoricheTest` conferma che il caricatore di prova lascia intatta la bozza 1.7.
+- `check-rules.py`, `check-rules.py --candidate` e `set_catalog.py --check` verdi. SHA-256 di `bozza.json`
+  `325926e35d371ad169848a5930924472ddfdd94a71b73a959fac0ed2dda83d8d`.
+- Il diff da `67a01b2` contiene solo test e documenti autorizzati. `git diff --check` pulito. I due documenti
+  modificati hanno zero link rotti. Il controllo globale segnala gli otto riferimenti mancanti preesistenti
+  di `docs/design/carriere/`. Il contesto Spring e i manifest restano documentati nella verifica D180.
+
+### STOP D177 — nome selezionabile della Bottiglia Spaccata
+
+La scheda TOKEN e OGG-03 chiamano il token «Bottiglia Spaccata». In d50, il consumo di Doppio Malto crea l’oggetto con il
+binding atteso `com.tokens.BrokenBeerBottle`. `Card.getName()` restituisce però `Broken Beer Bottle`. `Game.getItem`
+confronta il nome della mossa con quello restituito dalla carta. Il nome della scheda quindi non individua l’oggetto sul server.
+
+Il [caso diagnostico](sb-27/Sb27BottleNameReproTest.java) è l’unico rosso del giro mirato su oggetti, personaggi e token
+(32 casi). Atteso `Bottiglia Spaccata`, osservato `Broken Beer Bottle`. Per riprodurlo, copiare il sorgente in
+`server/src/test/java/com/gsc/bm/sim/` ed eseguire `Sb27BottleNameReproTest` con Maven offline. Il motore e le schede
+coincidono con `67a01b2`. I casi separati verificano creazione, consumo e durata dell’equipaggiamento con il binding corretto.
+
+1. Il rinvio già registrato per [il testo del token nel client](../../set-base-plan.md#sb-31--adeguamento-del-client)
+   copre anche il nome usato dal server per selezionare il token, oppure va allineato al nome della scheda nel playground?
+   Questa scelta resta alla regia.
 
 ### Inventario e copertura
 
-Le 19 carte speciali riportano i casi e le clausole della fase A. Un trattino indica una voce ancora senza casi della fase B. La tabella indica le sole clausole esercitate prima dello STOP.
+Le 19 carte speciali riportano i casi e le clausole della fase A. Le 106 voci della fase B includono tutte le carte a dati, i personaggi e il token. La tabella indica le sole clausole esercitate prima dello STOP.
 
 | Slot | Nome | Tipo | Classe di test | Casi | Clausole coperte |
 |---|---|---|---|---:|---|
-| PG-SPA | SPAZIENZIO DE LA UCCISO | Personaggio | — | — | — |
-| PG-MAR | Mara Contromano | Personaggio | — | — | — |
-| PG-TOS | Celestina Bucatina | Personaggio | — | — | — |
-| PG-PIN | Piera Pinot | Personaggio | — | — | — |
-| PG-GIG | Beppe Bulletta | Personaggio | — | — | — |
-| PG-CES | Sergio Sommerso | Personaggio | — | — | — |
-| PG-ROC | Duccio Braccio Teso | Personaggio | — | — | — |
+| PG-SPA | SPAZIENZIO DE LA UCCISO | Personaggio | [Sb27CharacterSheetsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CharacterSheetsTest.java) | 1 | H/A/V/T/L iniziali, immunità, basic, capienza e perdita del più vecchio |
+| PG-MAR | Mara Contromano | Personaggio | [Sb27CharacterSheetsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CharacterSheetsTest.java) | 1 | H/A/V/T/L iniziali, immunità, basic, capienza e perdita del più vecchio |
+| PG-TOS | Celestina Bucatina | Personaggio | [Sb27CharacterSheetsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CharacterSheetsTest.java) | 2 | H/A/V/T/L iniziali, immunità, basic, capienza e perdita del più vecchio, T periodica bloccata e POISON diretto applicato |
+| PG-PIN | Piera Pinot | Personaggio | [Sb27CharacterSheetsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CharacterSheetsTest.java) | 1 | H/A/V/T/L iniziali, immunità, basic, capienza e perdita del più vecchio |
+| PG-GIG | Beppe Bulletta | Personaggio | [Sb27CharacterSheetsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CharacterSheetsTest.java) | 1 | H/A/V/T/L iniziali, immunità, basic, capienza e perdita del più vecchio |
+| PG-CES | Sergio Sommerso | Personaggio | [Sb27CharacterSheetsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CharacterSheetsTest.java) | 1 | H/A/V/T/L iniziali, immunità, basic, capienza e perdita del più vecchio |
+| PG-ROC | Duccio Braccio Teso | Personaggio | [Sb27CharacterSheetsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CharacterSheetsTest.java) | 1 | H/A/V/T/L iniziali, immunità, basic, capienza e perdita del più vecchio |
 | SPA-BA | ADOPERIAMOTI | Azione, Base | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 2 | basic gratuita, priorità e bersaglio, consumo del solo oggetto scelto, permanenza in mano, oggetto rubato prima della risoluzione |
 | SPA-BO1 | LIEVE FASTIDIO | Azione, Legata al personaggio | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 2 | bound gratuita, priorità e bersaglio, +5 V, tre quarti di HIT/CUT/POISON e del veleno periodico, cumulo, danno precedente e scadenza |
 | SPA-BO2 | SVEGLIAMOCI - MA TU NO | Azione, Legata al personaggio | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | priorità e bersaglio, quarti di T e L arrotondati per difetto, T letta dopo la mossa precedente, 2 HIT, permanenza in mano |
@@ -350,111 +402,111 @@ Le 19 carte speciali riportano i casi e le clausole della fase A. Un trattino in
 | SPA-AR4 | NON GIOCARE COL COLTELLO NO | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | +10 V, metà dei CUT per quattro turni, HIT invariati, ritorno al danno intero al quinto turno |
 | SPA-AR5 | FAI BASTA | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 3 | annulla una mossa ancora da risolvere, che tiene costo e pescata; su una mossa già risolta nulla; a pari priorità e pari A vale l'ordine di entrata |
 | SPA-AR6 | SGOMBERIAMOVI | Azione, Regolare | [Sb27SpazienzioAnnounceTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioAnnounceTest.java), [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 6 | scelta predefinita, esplicita e automatica, premio pieno, ripiego e annullamento, Vulnerabile su HIT/CUT/POISON e sul veleno periodico, secondo annuncio omonimo dopo il timer, fine del gettone attivo e di entrambi i promemoria (D180) |
-| MAR-BA | Requisire al Volo | Azione, Base | — | — | — |
-| MAR-BO1 | Sventare l'Assassinio | Azione, Legata al personaggio | — | — | — |
-| MAR-BO2 | Semaforo Rosso | Azione, Legata al personaggio | — | — | — |
-| MAR-BO3 | Tagliare la Strada | Azione, Legata al personaggio | — | — | — |
-| MAR-AR1 | Lazo del Rider | Azione, Regolare | — | — | — |
-| MAR-AR2 | Sgommata | Azione, Regolare | — | — | — |
-| MAR-AR3 | Agilità Innaturale | Azione, Regolare | — | — | — |
-| MAR-AR4 | Unta e Bisunta | Azione, Regolare | — | — | — |
-| MAR-AR5 | Slalom d'Avvicinamento | Azione, Regolare | — | — | — |
-| MAR-AR6 | Traiettoria Imprevedibile | Azione, Regolare | — | — | — |
-| TOS-BA | Desiderio Incontrollabile | Azione, Base | — | — | — |
-| TOS-BO1 | Fondo del Posacenere | Azione, Legata al personaggio | — | — | — |
-| TOS-BO2 | Rintanarsi nel Cappotto | Azione, Legata al personaggio | — | — | — |
-| TOS-BO3 | Tagliare la Dose | Azione, Legata al personaggio | — | — | — |
-| LR-TOS | L'Ultimo Tiro | Azione, Ultima risorsa | — | — | — |
-| TOS-AR1 | Fare l'Inventario | Azione, Regolare | — | — | — |
-| TOS-AR2 | Tossicone Scatarrante | Azione, Regolare | — | — | — |
-| TOS-AR3 | Metabolismo Corrotto | Azione, Regolare | — | — | — |
+| MAR-BA | Requisire al Volo | Azione, Base | [Sb27MaraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27MaraCardsTest.java) | 2 | perde 5 A prima del consumo, pavimento a zero, oggetto scelto e oggetto distrutto |
+| MAR-BO1 | Sventare l'Assassinio | Azione, Legata al personaggio | [Sb27MaraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27MaraCardsTest.java) | 1 | quarti di T e L arrotondati per difetto, 2 CUT attraverso la corazza, bound in mano |
+| MAR-BO2 | Semaforo Rosso | Azione, Legata al personaggio | [Sb27MaraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27MaraCardsTest.java) | 2 | +5 A, tre quarti sui tre tipi e sul veleno periodico, cumulo, mosse anteriori, scadenza |
+| MAR-BO3 | Tagliare la Strada | Azione, Legata al personaggio | [Sb27MaraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27MaraCardsTest.java) | 3 | −4 A solo al bersaglio, pari gruppo, annullamento successivo, pavimento a zero |
+| MAR-AR1 | Lazo del Rider | Azione, Regolare | [Sb27MaraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27MaraCardsTest.java) | 2 | costo 20 A, metà arrotondata della A residua, 5 CUT in anticipo, pari gruppo dopo i costi |
+| MAR-AR2 | Sgommata | Azione, Regolare | [Sb27MaraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27MaraCardsTest.java) | 2 | costo 15 A, 25 CUT, malus su tre tipi e su autodanno, stesso gruppo e scadenza |
+| MAR-AR3 | Agilità Innaturale | Azione, Regolare | [Sb27MaraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27MaraCardsTest.java) | 1 | 4 CUT, −8 A, pavimento a zero, +4 A solo in anticipo |
+| MAR-AR4 | Unta e Bisunta | Azione, Regolare | [Sb27MaraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27MaraCardsTest.java) | 1 | pagamento prima dell’ordine, rimborso, metà HIT/CUT, POISON intero e scadenza |
+| MAR-AR5 | Slalom d'Avvicinamento | Azione, Regolare | [Sb27MaraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27MaraCardsTest.java) | 1 condiviso | ordine stampato, premio +15 A e Vulnerabile, ricerca vuota e pesca ordinaria |
+| MAR-AR6 | Traiettoria Imprevedibile | Azione, Regolare | [Sb27MaraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27MaraCardsTest.java) | 1 condiviso | ordine inverso, premio +20 A e Vulnerabile, ricerca vuota e pesca ordinaria |
+| TOS-BA | Desiderio Incontrollabile | Azione, Base | [Sb27CelestinaCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CelestinaCardsTest.java) | 2 | +5 T, consumo del solo oggetto scelto, oggetto distrutto, basic in mano |
+| TOS-BO1 | Fondo del Posacenere | Azione, Legata al personaggio | [Sb27CelestinaCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CelestinaCardsTest.java) | 1 | +2 T, 2 CUT attraverso la corazza, bound in mano |
+| TOS-BO2 | Rintanarsi nel Cappotto | Azione, Legata al personaggio | [Sb27CelestinaCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CelestinaCardsTest.java) | 1 | +2 T, tre quarti dei tre tipi e del veleno periodico, scadenza |
+| TOS-BO3 | Tagliare la Dose | Azione, Legata al personaggio | [Sb27CelestinaCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CelestinaCardsTest.java) | 1 | cura di un quarto prima della perdita di metà T, arrotondamenti |
+| LR-TOS | L'Ultimo Tiro | Azione, Ultima risorsa | [Sb27CelestinaCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CelestinaCardsTest.java) | 2 | 2 HIT a sé, 8 POISON e +4 T al bersaglio, Rincara dopo uso e annullamento, ripescata a mazzo vuoto |
+| TOS-AR1 | Fare l'Inventario | Azione, Regolare | [Sb27CelestinaCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CelestinaCardsTest.java) | 1 | ordine stampato, +10 T e +5 A con Vulnerabile, +5 T e pesca ordinaria se assente |
+| TOS-AR2 | Tossicone Scatarrante | Azione, Regolare | [Sb27CelestinaCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CelestinaCardsTest.java) | 1 | costo 10 T, 20 POISON e +5 T sul bersaglio immune |
+| TOS-AR3 | Metabolismo Corrotto | Azione, Regolare | [Sb27CelestinaCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CelestinaCardsTest.java) | 1 | cura di metà T arrotondata dopo una mossa precedente, perdita di tutta T |
 | TOS-AR4 | Riflessi Aumentati dalla Speed | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 5 | annulla una mossa contro di te o contro un tuo oggetto; lascia la mossa che l'avversario gioca su sé e quella già risolta; annulla la mossa di ogni avversario (tre giocatori) |
 | TOS-AR5 | Trascinare nel Tunnel | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 4 | dà la T dopo il costo, poi avvelena (b perde 10 + 10); toglie l'immunità al bersaglio, anche quella del personaggio; ti fa immune solo dopo il veleno di questo turno; non immune prima della fine del turno |
-| TOS-AR6 | Un Assaggino | Azione, Regolare | — | — | — |
-| PIN-BA | Fino all'Ultima Goccia | Azione, Base | — | — | — |
-| PIN-BO1 | Posto Fisso | Azione, Legata al personaggio | — | — | — |
-| PIN-BO2 | Violenta Spruzzata di Seltz | Azione, Legata al personaggio | — | — | — |
-| PIN-BO3 | Schiarirsi le Idee | Azione, Legata al personaggio | — | — | — |
+| TOS-AR6 | Un Assaggino | Azione, Regolare | [Sb27CelestinaCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27CelestinaCardsTest.java) | 1 | ordine stampato, +20 T con Vulnerabile, +5 T e pesca ordinaria se assente |
+| PIN-BA | Fino all'Ultima Goccia | Azione, Base | [Sb27PieraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27PieraCardsTest.java) | 2 | +15 L prima del consumo, birra e acqua, oggetto distrutto e basic in mano |
+| PIN-BO1 | Posto Fisso | Azione, Legata al personaggio | [Sb27PieraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27PieraCardsTest.java) | 1 | +5 L, tre quarti dei tre tipi e del veleno, corazza dopo gli stati, scadenza |
+| PIN-BO2 | Violenta Spruzzata di Seltz | Azione, Legata al personaggio | [Sb27PieraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27PieraCardsTest.java) | 1 | quarto di T arrotondato, 2 HIT soggetti alla corazza, bound in mano |
+| PIN-BO3 | Schiarirsi le Idee | Azione, Legata al personaggio | [Sb27PieraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27PieraCardsTest.java) | 1 | guadagno di A prima della perdita di L, metà arrotondate e decadimento |
 | LR-PIN | Ultimo Giro | Azione, Ultima risorsa | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 5 | HIT 10 + L spesa e 2 a te (2/13); il danno a sé viene prima della spesa, quindi l'armatura alcolica lo riduce (0/22); Rincara conta le giocate annullate e solo le tue (4/14, poi 6/18); ignora le giocate dell'avversario; su Vulnerabile arrotonda per difetto (16) |
-| PIN-AR1 | Scompenso da Ultimo Giro | Azione, Regolare | — | — | — |
+| PIN-AR1 | Scompenso da Ultimo Giro | Azione, Regolare | [Sb27PieraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27PieraCardsTest.java) | 1 | costo 5 L prima dei 5 HIT a sé e dei 35 al bersaglio, corazza basata sulla L residua |
 | PIN-AR2 | Alla Goccia | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 4 | 10 + L spesa (22); senza L 10; armatura del bersaglio (20); Vulnerabile (16) |
-| PIN-AR3 | Avamposto Fortificato al Bancone | Azione, Regolare | — | — | — |
-| PIN-AR4 | Un Altro e Arrivo | Azione, Regolare | — | — | — |
+| PIN-AR3 | Avamposto Fortificato al Bancone | Azione, Regolare | [Sb27PieraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27PieraCardsTest.java) | 1 | tre quarti HIT, metà POISON anche periodico, CUT intero, +5 L e scadenza |
+| PIN-AR4 | Un Altro e Arrivo | Azione, Regolare | [Sb27PieraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27PieraCardsTest.java) | 1 | ordine stampato, premi pieno e ridotto, decadimento, promemoria e Vulnerabile |
 | PIN-AR5 | Rutto a Bruciapelo | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 4 | L dopo il costo, toglie A, HIT 15 + 2 × L (29, b a 3 A); A non sotto 0 (45); con solo il costo non spende altro (15); armatura (27) |
-| PIN-AR6 | Un Altro... Grappino... | Azione, Regolare | — | — | — |
-| GIG-BA | Questo Torna Utile | Azione, Base | — | — | — |
-| GIG-BO1 | Cuffie e Testa Bassa | Azione, Legata al personaggio | — | — | — |
-| GIG-BO2 | Colpo col Cacciavite | Azione, Legata al personaggio | — | — | — |
-| GIG-BO3 | Affilare gli Utensili | Azione, Legata al personaggio | — | — | — |
+| PIN-AR6 | Un Altro... Grappino... | Azione, Regolare | [Sb27PieraCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27PieraCardsTest.java) | 1 | ordine inverso, premi pieno e ridotto, decadimento, promemoria e Vulnerabile |
+| GIG-BA | Questo Torna Utile | Azione, Base | [Sb27BeppeCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27BeppeCardsTest.java) | 2 | +4 V, oggetto scelto e oggetto distrutto, basic in mano |
+| GIG-BO1 | Cuffie e Testa Bassa | Azione, Legata al personaggio | [Sb27BeppeCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27BeppeCardsTest.java) | 1 | +5 V, tre quarti dei tre tipi e del veleno periodico, scadenza |
+| GIG-BO2 | Colpo col Cacciavite | Azione, Legata al personaggio | [Sb27BeppeCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27BeppeCardsTest.java) | 1 | +2 V, 2 HIT e bound in mano |
+| GIG-BO3 | Affilare gli Utensili | Azione, Legata al personaggio | [Sb27BeppeCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27BeppeCardsTest.java) | 3 | conversione in CUT, tre quarti, corazza, scadenza, autodanno, modificatori successivi e rimozione equip |
 | GIG-AR1 | Disassemblare | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 2 | distrugge l'oggetto scelto senza effetto; oggetto già sparito: nulla |
-| GIG-AR2 | Chiave da Tredici | Azione, Regolare | — | — | — |
-| GIG-AR3 | Preparare il Lavoro | Azione, Regolare | — | — | — |
-| GIG-AR4 | Secondo Bagagliaio | Azione, Regolare | — | — | — |
+| GIG-AR2 | Chiave da Tredici | Azione, Regolare | [Sb27BeppeCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27BeppeCardsTest.java) | 1 | costo 10 V, 20 CUT attraverso la corazza |
+| GIG-AR3 | Preparare il Lavoro | Azione, Regolare | [Sb27BeppeCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27BeppeCardsTest.java) | 1 | 4 CUT anche a ricerca fallita, ordine di Annuncia e premi +15/+5 V |
+| GIG-AR4 | Secondo Bagagliaio | Azione, Regolare | [Sb27BeppeCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27BeppeCardsTest.java) | 1 | costo 5 V, metà HIT, tre quarti CUT, POISON intero, +5 V/+5 A e scadenza |
 | GIG-AR5 | Lavoro Fatto Bene | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 5 | 15 senza oggetti; + 4 per oggetto, gettoni compresi (23); equipaggiamenti non contati; oggetti contati all'inizio della sua risoluzione (19); Vulnerabile (22) |
-| GIG-AR6 | Metodo Empirico | Azione, Regolare | — | — | — |
-| CES-BA | Messo in Conto | Azione, Base | — | — | — |
+| GIG-AR6 | Metodo Empirico | Azione, Regolare | [Sb27BeppeCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27BeppeCardsTest.java) | 1 | 4 CUT anche a ricerca fallita, ordine di Annuncia e premi +10/+5 V |
+| CES-BA | Messo in Conto | Azione, Base | [Sb27SergioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SergioCardsTest.java) | 2 | +8 A, solo l’oggetto scelto, guadagno anche se distrutto, basic in mano |
 | CES-BO1 | Discutiamone in Privato | Azione, Legata al personaggio | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 4 | annulla una mossa successiva che Annuncia e resta in mano; lascia risolvere una mossa senza Annuncia; annuncio già risolto o mossa già annullata: nulla |
-| CES-BO2 | Tecnica Manipolatoria | Azione, Legata al personaggio | — | — | — |
-| CES-BO3 | Fare il Vago | Azione, Legata al personaggio | — | — | — |
-| CES-AR1 | Opportuna Distrazione | Azione, Regolare | — | — | — |
+| CES-BO2 | Tecnica Manipolatoria | Azione, Legata al personaggio | [Sb27SergioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SergioCardsTest.java) | 1 | quarti T/L arrotondati, 2 HIT, bound in mano |
+| CES-BO3 | Fare il Vago | Azione, Legata al personaggio | [Sb27SergioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SergioCardsTest.java) | 1 | tre quarti di HIT/CUT/POISON e veleno periodico, scadenza |
+| CES-AR1 | Opportuna Distrazione | Azione, Regolare | [Sb27SergioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SergioCardsTest.java) | 1 | costo 5 A, perdita A e 4 HIT con ricerca riuscita o fallita, premi e pavimento |
 | CES-AR2 | Buon Vecchio Ricatto | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 8 | annulla un attacco e rimanda metà del danno fisso (15); arrotonda per difetto ogni tipo (12, 5 + 5); non attacco: nulla; già risolta: nulla; già annullata: nulla; solo la parte fissa (Lazo 10, Scompenso 17); niente Rincara (Addosso 5); il danno passa per gli stati del bersaglio (Vulnerabile 22) |
 | CES-AR3 | Copione Già Visto | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 4 | annulla una mossa ancora da risolvere; sulla carta annunciata tiene l'avversario Vulnerabile (colpo dopo: 15); su un'altra carta annulla e basta; carta annunciata già annullata: il gettone finisce senza effetto |
-| CES-AR4 | Conto Salato | Azione, Regolare | — | — | — |
-| CES-AR5 | Segreto di Pulcinella | Azione, Regolare | — | — | — |
-| CES-AR6 | Scherzo Oltre il Limite | Azione, Regolare | — | — | — |
-| CES-AR7 | Fiuto per gli Affari | Azione, Regolare | — | — | — |
-| ROC-BA | Prima gli Italiani | Azione, Base | — | — | — |
-| ROC-BO1 | Rinfrescata Arrogante | Azione, Legata al personaggio | — | — | — |
+| CES-AR4 | Conto Salato | Azione, Regolare | [Sb27SergioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SergioCardsTest.java) | 2 | costo 5 A, 8 HIT, altri 6 su Vulnerabile ancora attivo durante la giocata del nome |
+| CES-AR5 | Segreto di Pulcinella | Azione, Regolare | [Sb27SergioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SergioCardsTest.java) | 1 | costo 15 A, 25 HIT prima della corazza |
+| CES-AR6 | Scherzo Oltre il Limite | Azione, Regolare | [Sb27SergioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SergioCardsTest.java) | 1 | costo 10 A, metà arrotondata della A residua, perdita A, HIT variabile e pavimento |
+| CES-AR7 | Fiuto per gli Affari | Azione, Regolare | [Sb27SergioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SergioCardsTest.java) | 2 | vendita senza effetto consumo o In campo, 8 H, nessun guadagno con oggetto distrutto |
+| ROC-BA | Prima gli Italiani | Azione, Base | [Sb27DuccioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27DuccioCardsTest.java) | 2 | oggetto scelto e oggetto distrutto, cura 4 in entrambi, basic in mano |
+| ROC-BO1 | Rinfrescata Arrogante | Azione, Legata al personaggio | [Sb27DuccioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27DuccioCardsTest.java) | 1 | quarti T/L arrotondati e 2 HIT |
 | ROC-BO2 | Rialziamoci e Partite! | Azione, Legata al personaggio | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 3 | cura 4 da 1 a 30 H (30 → 34, 1 → 5), sopra 30 nulla (31); legge la salute dopo le mosse precedenti (35 − 7 + 4 = 32); a terra si risolve e non è annullata, a 0 non dà nulla; resta in mano |
-| ROC-BO3 | (Dis)onore alla Bandiera | Azione, Legata al personaggio | — | — | — |
-| LR-ROC | Non Mi Hai Fatto Niente | Azione, Ultima risorsa | — | — | — |
-| ROC-AR1 | Nocche Sbucciate | Azione, Regolare | — | — | — |
-| ROC-AR2 | Stoico come un Busto di Bronzo | Azione, Regolare | — | — | — |
-| ROC-AR3 | E Allora...? | Azione, Regolare | — | — | — |
-| ROC-AR4 | Craniata Patriottica | Azione, Regolare | — | — | — |
-| ROC-AR5 | La Storia la Scrivono i Vincitori | Azione, Regolare | — | — | — |
-| ROC-AR6 | Testa Dura | Azione, Regolare | — | — | — |
-| GEN-01 | Afferrare | Azione, Regolare | — | — | — |
+| ROC-BO3 | (Dis)onore alla Bandiera | Azione, Legata al personaggio | [Sb27DuccioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27DuccioCardsTest.java) | 1 | +8 A, tre quarti dei tre tipi e veleno periodico, scadenza |
+| LR-ROC | Non Mi Hai Fatto Niente | Azione, Ultima risorsa | [Sb27DuccioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27DuccioCardsTest.java) | 1 | 6/10 HIT, secondo uso 8/15, ripescata a mazzo vuoto |
+| ROC-AR1 | Nocche Sbucciate | Azione, Regolare | [Sb27DuccioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27DuccioCardsTest.java) | 1 | costo 15 H rifiutato a 15, accettato a 16, 20 HIT |
+| ROC-AR2 | Stoico come un Busto di Bronzo | Azione, Regolare | [Sb27DuccioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27DuccioCardsTest.java) | 1 | cura 4 H, dimezza solo HIT, scadenza |
+| ROC-AR3 | E Allora...? | Azione, Regolare | [Sb27DuccioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27DuccioCardsTest.java) | 1 | costo 10 H, dimezza solo HIT subiti, 8 HIT all’avversario e scadenza |
+| ROC-AR4 | Craniata Patriottica | Azione, Regolare | [Sb27DuccioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27DuccioCardsTest.java) | 1 | costo 30 H rifiutato a 30, accettato a 31, 25 HIT |
+| ROC-AR5 | La Storia la Scrivono i Vincitori | Azione, Regolare | [Sb27DuccioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27DuccioCardsTest.java) | 1 | 4 HIT in entrambi gli esiti, Craniata predefinita, +6/+2 H, promemoria e Vulnerabile |
+| ROC-AR6 | Testa Dura | Azione, Regolare | [Sb27DuccioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27DuccioCardsTest.java) | 1 | costo 35 H rifiutato a 35, accettato a 36, 30 HIT |
+| GEN-01 | Afferrare | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 2 | solo l’oggetto scelto, effetto del consumo e oggetto distrutto, scarto della carta |
 | GEN-02 | Furto con Destrezza | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 4 | prende l'oggetto scelto; oltre la capienza perde il proprio più vecchio; oggetto non più lì: nulla; l'effetto «In campo» passa al ladro (Conto, −4 A) |
 | GEN-03 | Scatto Repentino | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 3 | scambia tutti gli oggetti; oltre la capienza perde i più vecchi ricevuti; un lato vuoto: passano tutti, con il loro «In campo» |
 | GEN-04 | Ce l'Hai Due Spicci? | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 5 | copia un oggetto che l'avversario tiene; uno a caso fra due; senza oggetti nulla; oltre la capienza perde il proprio più vecchio; la copia è solo tua |
-| GEN-05 | GABBIANO, DUNQUE VOLIAMOTI | Azione, Regolare | — | — | — |
-| GEN-06 | Foratone da 28 | Azione, Regolare | — | — | — |
-| GEN-07 | ORMALE GUARIAMOTI | Azione, Regolare | — | — | — |
-| GEN-08 | AMMALIAMOTI DI BOTTE | Azione, Regolare | — | — | — |
-| GEN-09 | STORDIAMOTI HO DETTO | Azione, Regolare | — | — | — |
+| GEN-05 | GABBIANO, DUNQUE VOLIAMOTI | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | costo 10 V, 20 HIT, equip positivo sì, stato negativo proprio escluso, entrambi gli stati del bersaglio |
+| GEN-06 | Foratone da 28 | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | costo 15 V e 25 HIT |
+| GEN-07 | ORMALE GUARIAMOTI | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | costo 20 V, 30 HIT prima di azzerare T/L, corazza prima dell’azzeramento |
+| GEN-08 | AMMALIAMOTI DI BOTTE | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | costo 15 V, 10 HIT e +10 T prima del veleno periodico |
+| GEN-09 | STORDIAMOTI HO DETTO | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | costo 10 V, −10 A col pavimento e 10 HIT |
 | GEN-10 | PERMESSO SCUSA PUOI SMETTERLA | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 2 | toglie gli equipaggiamenti, poi 8 HIT; lascia gli altri stati (6, «Guardia») |
-| GEN-11 | GENTILE IL TUO CAREZZO | Azione, Regolare | — | — | — |
-| GEN-12 | Estrema Fretta di Alcolizzarsi | Azione, Regolare | — | — | — |
-| GEN-13 | Tecnica del Carapace Mentale | Azione, Regolare | — | — | — |
-| GEN-14 | Denti Stretti | Azione, Regolare | — | — | — |
-| GEN-15 | Due Dita in Gola | Azione, Regolare | — | — | — |
-| GEN-16 | Fasciatura d'Emergenza | Azione, Regolare | — | — | — |
-| GEN-17 | Sputo nel Posacenere | Azione, Regolare | — | — | — |
-| GEN-18 | Spintone | Azione, Regolare | — | — | — |
-| GEN-19 | Mano Lesta | Azione, Regolare | — | — | — |
-| GEN-20 | Riprendere Fiato | Azione, Regolare | — | — | — |
-| GEN-21 | Coccio di Bottiglia | Azione, Regolare | — | — | — |
-| GEN-22 | Svegliaaah! | Azione, Regolare | — | — | — |
-| GEN-23 | Sgambetto | Azione, Regolare | — | — | — |
-| GEN-24 | Estasi da Coca Etilene | Azione, Regolare | — | — | — |
-| LR-STR | Addosso!!! | Azione, Ultima risorsa | — | — | — |
-| OGG-01 | Negroni Trovato per Terra | Oggetto | — | — | — |
-| OGG-02 | Bionda da 66, Calda | Oggetto | — | — | — |
+| GEN-11 | GENTILE IL TUO CAREZZO | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | costo 5 V, un quarto solo dei HIT, +5 A, scadenza |
+| GEN-12 | Estrema Fretta di Alcolizzarsi | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | costo 10 A, +5 V e 10 HIT |
+| GEN-13 | Tecnica del Carapace Mentale | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | costo 5 A, metà HIT/CUT, POISON intero, +2 H, scadenza |
+| GEN-14 | Denti Stretti | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | −5 A col pavimento e +10 V |
+| GEN-15 | Due Dita in Gola | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | 5 HIT a sé con corazza prima di svuotare T/L |
+| GEN-16 | Fasciatura d'Emergenza | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | −5 A col pavimento e cura da 8 H |
+| GEN-17 | Sputo nel Posacenere | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | costo 5 A, 10 POISON attraverso corazza e immunità T |
+| GEN-18 | Spintone | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | 8 HIT prima della corazza |
+| GEN-19 | Mano Lesta | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | +5 A propria e −5 A al bersaglio col pavimento |
+| GEN-20 | Riprendere Fiato | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | +10 H, HIT e CUT ×1,25, POISON intero, durata e scadenza |
+| GEN-21 | Coccio di Bottiglia | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | costo 5 V, attende il primo HIT, due conversioni nello stesso turno, corazza e scadenza |
+| GEN-22 | Svegliaaah! | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | costo 5 A, azzeramento L prima dei 4 HIT |
+| GEN-23 | Sgambetto | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | costo 10 A, −10 V col pavimento, 5 HIT |
+| GEN-24 | Estasi da Coca Etilene | Azione, Regolare | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | servono entrambe T e L, costo 10+10, 40 HIT senza periodici residui |
+| LR-STR | Addosso!!! | Azione, Ultima risorsa | [Sb27GenericCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27GenericCardsTest.java) | 1 | 5/10 HIT, secondo uso 7/15, ripescata a mazzo vuoto |
+| OGG-01 | Negroni Trovato per Terra | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 1 | pesca in campo, +10 V/+10 L/+2 T solo al consumo |
+| OGG-02 | Bionda da 66, Calda | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 1 | pesca in campo, +10 L solo al consumo |
 | OGG-03 | Doppio Malto da Discount | Oggetto | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 2 | lascia una bottiglia e dà 10 L; bottiglia a capienza piena perde la più vecchia |
 | OGG-04 | Mescolone Micidiale | Oggetto | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 1 | cronologia di cinque turni: T e L bloccate, poi via tutto e veleno. Interazioni del timer con il promemoria riportate in SPA-AR3 e SPA-AR6 |
-| OGG-05 | Amaro nel Bicchiere di Plastica | Oggetto | — | — | — |
-| OGG-06 | Espresso della Macchinetta | Oggetto | — | — | — |
-| OGG-07 | Kebab Abbandonato | Oggetto | — | — | — |
-| OGG-08 | Acqua Minerale Sgasata | Oggetto | — | — | — |
-| OGG-09 | Guanti da Officina | Oggetto | — | — | — |
-| OGG-10 | Giubbotto di Finta Pelle | Oggetto | — | — | — |
-| OGG-11 | Casco da Cantiere | Oggetto | — | — | — |
-| OGG-12 | Pasticca Abbandonata | Oggetto | — | — | — |
-| OGG-13 | Posacenere di Vetro | Oggetto | — | — | — |
-| OGG-14 | Ghiaccio nel Tovagliolo | Oggetto | — | — | — |
+| OGG-05 | Amaro nel Bicchiere di Plastica | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 1 | pesca in campo, +20 L/−5 A al consumo e decadimento |
+| OGG-06 | Espresso della Macchinetta | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 1 | pesca in campo, +15 A solo al consumo |
+| OGG-07 | Kebab Abbandonato | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 1 | pesca in campo, +10 H/+2 T, veleno periodico |
+| OGG-08 | Acqua Minerale Sgasata | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 1 | pesca in campo, azzera L e +20 A al consumo |
+| OGG-09 | Guanti da Officina | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 2 | consumo, soli HIT inflitti ×1,25, scadenza, rimozione con PERMESSO |
+| OGG-10 | Giubbotto di Finta Pelle | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 2 | consumo, solo CUT subiti ×0,75, tre turni, rimozione con PERMESSO |
+| OGG-11 | Casco da Cantiere | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 2 | consumo, solo HIT subiti ×0,75, tre turni, rimozione con PERMESSO |
+| OGG-12 | Pasticca Abbandonata | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 1 | pesca in campo, +10 T solo al consumo e veleno periodico |
+| OGG-13 | Posacenere di Vetro | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 2 | attesa del primo HIT, ×1,5 per due HIT nello stesso turno, scadenza e rimozione con PERMESSO |
+| OGG-14 | Ghiaccio nel Tovagliolo | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 1 | pesca in campo, +10 H e T a zero al consumo |
 | OGG-15 | Santino di San Briaco | Oggetto | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 2 | blocca la L per tre turni contando questo, poi la L agisce (L 4, A 55); un secondo Santino non allunga |
-| OGG-16 | Grappa della Casa | Oggetto | — | — | — |
-| OGG-17 | Conto del Tavolo Sei | Oggetto | — | — | — |
-| OGG-18 | Sigaretta Accesa | Oggetto | — | — | — |
-| TOKEN | Bottiglia Spaccata | Oggetto, Token | — | — | — |
+| OGG-16 | Grappa della Casa | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 1 | pesca in campo, +25 L/−5 A al consumo e decadimento |
+| OGG-17 | Conto del Tavolo Sei | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 2 | In campo nel turno di pesca e dopo la copia, −4 A, pavimento, nessun danno, +15 V e stop dopo consumo |
+| OGG-18 | Sigaretta Accesa | Oggetto | [Sb27ItemCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27ItemCardsTest.java) | 2 | In campo +2 T dopo il veleno, turno di arrivo e furto, immunità, +10 A e stop al consumo |
+| TOKEN | Bottiglia Spaccata | Oggetto, Token | [Sb27BottleTokenTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27BottleTokenTest.java), [Sb27BottleNameReproTest](sb-27/Sb27BottleNameReproTest.java) | 2 verdi e 1 diagnostico rosso | creazione, tipo e binding, permanenza in campo, consumo, stati separati, HIT→CUT ×1,5, corazza, più colpi e scadenza. Nome selezionabile in STOP |

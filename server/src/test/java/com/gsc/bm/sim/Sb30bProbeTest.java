@@ -57,7 +57,7 @@ class Sb30bProbeTest {
     void twoTurnForecastAgainstTheEngine() throws Exception {
         org.junit.jupiter.api.Assumptions.assumeTrue(on("fidelity"));
         long started = System.nanoTime();
-        Draft draft = Draft.fromClasspath(DRAFT);
+        Draft draft = BozzeStoriche.fromClasspath(DRAFT);
         Sb30bWorld.Catalog catalog = new Sb30bWorld.Catalog(draft, DECKS);
         SimulationRunner runner = new SimulationRunner(draft, Ruleset.D50);
         int games = Integer.getInteger("sim.sb30bFidelityGames", 300);
@@ -358,7 +358,7 @@ class Sb30bProbeTest {
         double budget = Double.parseDouble(System.getProperty("sim.sb30bCostBudget", "480"));
         int wanted = Integer.getInteger("sim.sb30bPoints", 60);
         int reference = Integer.getInteger("sim.sb30bReference", 400);
-        Draft draft = Draft.fromClasspath(DRAFT);
+        Draft draft = BozzeStoriche.fromClasspath(DRAFT);
         Sb30bWorld.Catalog catalog = new Sb30bWorld.Catalog(draft, DECKS);
         Search search = new Search(catalog);
         List<Point> points = points(draft, wanted, 7_200_000L, false);
@@ -473,7 +473,7 @@ class Sb30bProbeTest {
     void costOfTheExhaustiveTwoTurnForecast() throws Exception {
         org.junit.jupiter.api.Assumptions.assumeTrue(on("difficile"));
         long started = System.nanoTime();
-        Draft draft = Draft.fromClasspath(DRAFT);
+        Draft draft = BozzeStoriche.fromClasspath(DRAFT);
         Sb30bWorld.Catalog catalog = new Sb30bWorld.Catalog(draft, DECKS);
         List<Point> points = points(draft, Integer.getInteger("sim.sb30bPoints", 150), 7_200_000L, false);
         List<Long> nanos = new ArrayList<>();
@@ -522,7 +522,7 @@ class Sb30bProbeTest {
     void hiddenInformationDoesNotChangeTheChoice() throws Exception {
         org.junit.jupiter.api.Assumptions.assumeTrue(on("hidden"));
         long started = System.nanoTime();
-        Draft draft = Draft.fromClasspath(DRAFT);
+        Draft draft = BozzeStoriche.fromClasspath(DRAFT);
         Sb30bWorld.Catalog catalog = new Sb30bWorld.Catalog(draft, DECKS);
         Search search = new Search(catalog);
         List<Point> points = points(draft, Integer.getInteger("sim.sb30bHiddenPoints", 20), 7_300_000L, true);

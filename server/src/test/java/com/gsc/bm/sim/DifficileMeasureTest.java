@@ -41,7 +41,7 @@ class DifficileMeasureTest {
     void costPerDecision() throws Exception {
         org.junit.jupiter.api.Assumptions.assumeTrue(on("cost"));
         long started = System.nanoTime();
-        Draft draft = Draft.fromClasspath(Sb30bProbeTest.DRAFT);
+        Draft draft = BozzeStoriche.fromClasspath(Sb30bProbeTest.DRAFT);
         Map<String, BotView.CardSeen> catalog = PublicCatalog.of(draft);
         List<Sb30bProbeTest.Point> points = Sb30bProbeTest.points(draft, Integer.getInteger("sim.b5bPoints", 150), 7_200_000L, false);
         List<BotPolicy> styles = List.of(new AggressivePolicy(), new PrudentPolicy(), new ResourceAwarePolicy());
@@ -94,7 +94,7 @@ class DifficileMeasureTest {
     void sanityAgainstTheNormale() throws Exception {
         org.junit.jupiter.api.Assumptions.assumeTrue(on("sanity"));
         long started = System.nanoTime();
-        Draft draft = SetBaseArms.arm("B", Draft.fromClasspath(Sb30bProbeTest.DRAFT));
+        Draft draft = SetBaseArms.arm("B", BozzeStoriche.fromClasspath(Sb30bProbeTest.DRAFT));
         Map<String, BotView.CardSeen> catalog = PublicCatalog.of(draft);
         SimulationRunner runner = new SimulationRunner(draft, Ruleset.D50);
         List<BotPolicy> styles = List.of(new AggressivePolicy(), new PrudentPolicy(), new ResourceAwarePolicy());

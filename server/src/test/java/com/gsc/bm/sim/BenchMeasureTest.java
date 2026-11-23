@@ -34,7 +34,7 @@ class BenchMeasureTest {
     void matrix() throws Exception {
         int games = Integer.parseInt(System.getProperty("sim.bench"));
         long firstSeed = Long.getLong("sim.firstSeed", 7_000_000L);
-        Draft draft = Draft.selected();
+        Draft draft = SetBaseArms.measureDraft();
         Bench.Settings settings = new Bench.Settings(games, firstSeed, list("sim.decks", new ArrayList<>(draft.deckIds())), styles(),
                 threads(), BoundCap.Params.fromSystem(), System.getProperty("sim.note"));
         long start = System.nanoTime();
@@ -58,7 +58,7 @@ class BenchMeasureTest {
     @Test
     @EnabledIfSystemProperty(named = "sim.search", matches = ".+")
     void search() throws Exception {
-        Draft draft = Draft.selected();
+        Draft draft = SetBaseArms.measureDraft();
         String which = System.getProperty("sim.search");
         List<String> characters = "all".equals(which) ? new ArrayList<>(draft.characterIds()) : list("sim.search", List.of());
         DeckSearch.Params standard = DeckSearch.Params.standard(threads());

@@ -366,7 +366,7 @@ class StarterBalanceMeasureTest {
     void observations() throws Exception {
         Path out = Path.of(System.getProperty("sim.sb16eObserve"));
         Files.copy(out.resolve("pairs.json"), Path.of(System.getProperty("java.io.tmpdir"), "bm-sb16e", out.getFileName() + "-pairs-before-discard-fix.json"));
-        observe(Draft.selected(), out);
+        observe(SetBaseArms.measureDraft(), out);
     }
 
     static ObjectNode card(JsonNode root, String binding) {
@@ -409,7 +409,7 @@ class StarterBalanceMeasureTest {
     void round() throws Exception {
         assertEquals(Ruleset.D50, SimulationRunner.selectedRuleset());
         Path out = Path.of(System.getProperty("sim.sb16eOut")); Files.createDirectories(out);
-        long start = System.nanoTime(); Draft draft = Draft.selected();
+        long start = System.nanoTime(); Draft draft = SetBaseArms.measureDraft();
         Files.writeString(out.resolve("draft.json"), JSON.writeValueAsString(draft.json()));
         measureBench(draft, out, "matrix", 2000);
         observe(draft, out);

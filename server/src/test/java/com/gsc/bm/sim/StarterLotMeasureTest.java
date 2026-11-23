@@ -98,7 +98,7 @@ class StarterLotMeasureTest {
     void lot() throws Exception {
         assertEquals(Ruleset.D50, SimulationRunner.selectedRuleset());
         Path root = Path.of(System.getProperty("sim.sb16e2Out"));
-        Draft draft = Draft.selected();
+        Draft draft = SetBaseArms.measureDraft();
         List<String> failures = new ArrayList<>();
         for (String name : ORDER) {
             long start = System.nanoTime();

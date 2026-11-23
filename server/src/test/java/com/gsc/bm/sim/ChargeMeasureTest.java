@@ -217,7 +217,7 @@ class ChargeMeasureTest {
         assertEquals(Ruleset.D50,SimulationRunner.selectedRuleset());
         Path out=Path.of(System.getProperty("sim.chargeOut")); Files.createDirectories(out);
         // SB-16g passo 3 (D82): arm A is the draft, arm B the draft with the Bancone of D67; the rest of the bench is the one of step 2.
-        String arm=SetBaseArms.selected(); Draft reference=SetBaseArms.arm(arm,Draft.selected());
+        String arm=SetBaseArms.selected(); Draft reference=SetBaseArms.arm(arm,SetBaseArms.measureDraft());
         String variant=System.getProperty("sim.deckVariant");
         boolean mixed="mixed".equals(variant);
         Draft draft=variant==null||mixed?reference:DeckSizeVariants.apply(reference,variant);
@@ -335,7 +335,7 @@ class ChargeMeasureTest {
     void liveBenchOnTheSameHistoricalDraft() throws Exception {
         assertEquals(Ruleset.LIVE,SimulationRunner.selectedRuleset());
         Path root=Path.of(System.getProperty("sim.liveReference"));
-        Draft draft=Draft.fromFile(root.resolve("base-draft.json"));
+        Draft draft=BozzeStoriche.fromFile(root.resolve("base-draft.json"));
         Map<String,BotPolicy> styles=new LinkedHashMap<>();
         for(String name:List.of("aggressivo","prudente","risorse","com"))styles.put(name,PlaygroundTest.styles().get(name));
         Bench.Report report=Bench.run(draft,new Bench.Settings(2000,7_000_000L,List.of(DECKS),styles,8,BoundCap.Params.DEFAULT,null));

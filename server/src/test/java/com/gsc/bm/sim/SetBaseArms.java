@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -64,6 +67,21 @@ final class SetBaseArms {
         // Not a classpath source: the bench fingerprints arm B from its JSON (Bench.sha256), arm A from the file.
         if ("B".equals(name)) return carriesArmB(armA.json()) ? armA : Draft.parse(Bench.draftName(armA) + " + bancone-b.json", armB(armA.json()));
         throw new IllegalArgumentException("sim.arm: A or B, not " + name);
+    }
+
+    /** Carica la fonte singola dei banchi, mantenendo la composizione del caricatore per più set. */
+    static Draft measureDraft() throws Exception {
+        String property = System.getProperty("sim.draft");
+        if (property == null || property.isBlank()) return BozzeStoriche.fromClasspath(Draft.CURRENT);
+        List<String> sources = new ArrayList<>();
+        for (String part : property.split(";")) {
+            if (!part.isBlank()) sources.add(part.trim());
+        }
+        if (sources.size() != 1) return Draft.load(sources);
+        String source = sources.get(0);
+        String prefix = "classpath:";
+        return source.startsWith(prefix) ? BozzeStoriche.fromClasspath(source.substring(prefix.length()))
+                : BozzeStoriche.fromFile(Path.of(source));
     }
 
     static String selected() { return System.getProperty("sim.arm", "A"); }

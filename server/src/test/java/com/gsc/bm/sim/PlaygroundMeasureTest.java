@@ -28,7 +28,7 @@ class PlaygroundMeasureTest {
         int games = Integer.parseInt(System.getProperty("sim.playground"));
         if (games < 1) throw new IllegalArgumentException("sim.playground deve essere positivo");
         long firstSeed = Long.getLong("sim.firstSeed", 0L);
-        Draft draft = Draft.selected();
+        Draft draft = SetBaseArms.measureDraft();
         List<String> decks = list("sim.decks", new ArrayList<>(draft.deckIds()));
         for (String deck : decks) if (!draft.deckIds().contains(deck)) throw new IllegalArgumentException("Mazzo assente: " + deck + " (noti: " + draft.deckIds() + ")");
         Map<String, BotPolicy> known = PlaygroundTest.styles();

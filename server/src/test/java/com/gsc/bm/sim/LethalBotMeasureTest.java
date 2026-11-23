@@ -75,7 +75,7 @@ class LethalBotMeasureTest {
         assertEquals(Ruleset.D50, SimulationRunner.selectedRuleset());
         Path out = Path.of(System.getProperty("sim.lethalOut"));
         Files.createDirectories(out);
-        Draft draft = Draft.selected();
+        Draft draft = SetBaseArms.measureDraft();
         Map<String, BotPolicy> styles = new LinkedHashMap<>();
         for (String group : List.of(OLD, NEW))
             for (Map.Entry<String, BotPolicy> s : PlaygroundTest.styles().entrySet()) {

@@ -274,8 +274,8 @@ final class Listino {
     static Draft baseDraft() throws Exception {
         String chosen = System.getProperty("sim.listinoBase");
         if (chosen != null && !chosen.isBlank())
-            return setBaseContexts("set-base".equals(chosen) ? Draft.fromClasspath(SET_BASE) : Draft.fromFile(java.nio.file.Path.of(chosen)), ANCHOR);
-        Draft base = Draft.fromClasspath(BASE);
+            return setBaseContexts("set-base".equals(chosen) ? BozzeStoriche.fromClasspath(SET_BASE) : BozzeStoriche.fromFile(java.nio.file.Path.of(chosen)), ANCHOR);
+        Draft base = BozzeStoriche.fromClasspath(BASE);
         return ANCHOR == DEFAULT_ANCHOR ? base : withAnchor(base, ANCHOR);
     }
 
