@@ -18,7 +18,7 @@
     },
     {
       "file": "docs/design/set-base/testi/testi-completi.json",
-      "sha256": "d897fa37bf5504139684bc8c10d7159051cfe2636fa2757ae0cc36cb4203ec55"
+      "sha256": "2b3e1a93777d1fb237afe46920d1fb56270c0b2460ee15b04342e36260df1d29"
     },
     {
       "file": "docs/design/set-base/testi/slot.json",
@@ -28,19 +28,19 @@
   "uscite": [
     {
       "file": "client-debug/sets/base.md",
-      "sha256": "9161942a4710aac4f23114c74f973593981fa2263b70f69a7136cdb436eae13d"
+      "sha256": "ce6a282c8f1049e4ac74b2c50cdc4f6bd39e40d3ece321849e8c382ac643462c"
     },
     {
       "file": "sets/base.json",
-      "sha256": "ea33d8700bebc5f8671530c7c2021e228bfc45e3ada2f2c907b5c409c11a975a"
+      "sha256": "995c3e31b12eb99d16008a32445b240554b5f6ea456fd7752c92c26c9709b802"
     },
     {
       "file": "sets/base.md",
-      "sha256": "9161942a4710aac4f23114c74f973593981fa2263b70f69a7136cdb436eae13d"
+      "sha256": "ce6a282c8f1049e4ac74b2c50cdc4f6bd39e40d3ece321849e8c382ac643462c"
     },
     {
       "file": "cards.sqlite",
-      "contenuto_sha256": "c176534af85b9055e29b9628846b3e28f889a2ac2d599877c867c78335e84908"
+      "contenuto_sha256": "91fca4f3ef20254c7f5a2a2ab0684d07ad7307520fcbc0c33f64cbbb1a312ebf"
     }
   ]
 }
