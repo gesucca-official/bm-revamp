@@ -1,5 +1,7 @@
 # SB-26 — Generazione del catalogo dal set
 
+**Chiuso il 23 novembre 2026 ([D176](../../set-base-decisioni.md#decisioni-del-proprietario)):** il proprietario ha approvato il documento 1.0 candidato. Dopo la consegna la regia ha aggiunto al repository i due `cards.sqlite` generati, esclusi da `.gitignore`.
+
 Esecutore, 23 novembre 2026, sul commit di base `a5490ea`. Passo diretto ([D175](../../set-base-decisioni.md#decisioni-del-proprietario),
 che prevale sulla [proposta](../../design/set-base/sb-26-proposta.md)), prompt della regia. Evidenze: la prova dell'espansione in
 [sb-26/espansione/](sb-26/espansione/).

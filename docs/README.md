@@ -12,7 +12,7 @@ Una riga corta per filone: chi apre una regia parte da qui e dalla Â«RipartenzaÂ
 
 | Filone | Piano e stato | Macchina | Prossimo passo |
 |---|---|---|---|
-| Set Base | [piano](set-base-plan.md) | portatile | SB-26 (generazione del catalogo dal set); SB-25 chiuso, testi approvati (D174) |
+| Set Base | [piano](set-base-plan.md) | portatile | SB-27 (carte d'effetto speciale in forma definitiva); SB-26 chiuso, catalogo 1.0 candidato (D176) |
 | Client web | [roadmap](client-roadmap.md); [piano C4](client-c4-plan.md), chiusa | l'altra | C5 (playtest finali) |
 | Carriere | [piano CA-0](ca-plan.md); contenuti nella [tabella dei lavori anticipati](product-roadmap.md#lavori-anticipati) | portatile | CA-0b (formato delle carriere 0.1) |
 
