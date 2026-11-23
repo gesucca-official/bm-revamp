@@ -189,36 +189,61 @@ e «Copione Già Visto» leggono le regole del playground (`playground()`), che 
 
 ## Fase B
 
-**Esito:** STOP D177 su SPA-AR3, in attesa della regia. Inventario delle 125 schede completo. Nove casi ordinari della fase B e un caso diagnostico rosso. La copertura della fase B è parziale. Base del blocco: `ed73a7d`.
+**Esito:** nuovo STOP D177 su SPA-AR3 × OGG-04, in attesa della regia. Il primo STOP su SPA-AR3 è risolto con D178. Inventario delle 125 schede completo, dieci casi ordinari della fase B e un nuovo caso diagnostico rosso. La copertura della fase B è parziale. Base del blocco `ed73a7d`, base della ripresa `9449d19`.
 
 Al controllo preliminare erano presenti quattro artefatti non tracciati in `output/pdf/`. Il proprietario ha autorizzato a proseguire: «Procedi lasciandoli al loro posto». Restano fuori dal commit.
 
 ### Scostamento SPA-AR3 — PAZIENZA: FINITA
 
-La [scheda SPA-AR3](../../../server/src/test/resources/set-base/catalogo/sets/base.md)
-dice «la mostri a tutti finché resta in mano». [RP-16 e RP-18](../../design/set-base/regole-playground.md)
+La scheda SPA-AR3 prima di D178 dice «la mostri a tutti finché resta in mano». [RP-16 e RP-18](../../design/set-base/regole-playground.md)
 descrivono la scadenza del promemoria da due prospettive. RP-16 fa cadere gettone e promemoria a fine turno quando si gioca il nome.
 RP-18 lega la visibilità alla copia trovata. Il caso che distingue le letture è giocare l'altra copia, già in mano al momento della ricerca.
 
 1. SPAZIENZIO parte con una copia di «GARGANTUESCO IMPATTO SUL TU» in mano e una nel mazzo. Gioca «PAZIENZA: FINITA»,
    sale a 50 V e 35 A e mostra la copia trovata.
 2. Al turno dopo gioca la copia già in mano. L'avversario subisce 35 HIT, la copia giocata esce e Vulnerabile termina.
-   La copia trovata resta in mano. Atteso dalla frase della scheda: 1 copia mostrata. Osservato: 0.
+   La copia trovata resta in mano. Atteso dalla frase originaria della scheda: 1 copia mostrata. Osservato: 0.
 3. La rimozione di fine turno in `Game.resolveMoves` include i promemoria soddisfatti anche se `Player.holds` conferma che la copia
-   trovata è ancora in mano. Motore, bozza e scheda coincidono con la base del blocco.
+   trovata è ancora in mano. Nel primo giro motore, bozza e scheda coincidevano con la base del blocco.
 
-[Caso JUnit diagnostico](sb-27/Sb27PatienceRevealReproTest.java). Per riprodurlo, copiare il file nella cartella
-`server/src/test/java/com/gsc/bm/sim/` ed eseguire `Sb27PatienceRevealReproTest` con Maven offline. Il giro mirato ha eseguito
-80 casi, con questo unico rosso (`expected: <1> but was: <0>`). I 70 casi della fase A e i nove casi ordinari della fase B sono verdi.
-Il sorgente diagnostico è nel rapporto per poter riprodurre il rosso e tenere la suite ordinaria eseguibile a zero fallimenti.
+Il primo giro mirato aveva rilevato un solo rosso (`expected: <1> but was: <0>`). L'evidenza di quel giro è nel commit `0714493`.
 
-La stessa frase compare nelle schede SPA-AR6, MAR-AR5, MAR-AR6, TOS-AR1, TOS-AR6, PIN-AR4, PIN-AR6, GIG-AR3, GIG-AR6,
-CES-AR1 e ROC-AR5. L'elenco individua le schede da riesaminare con la stessa decisione.
+### Deviazione autorizzata — D178
+
+Il proprietario ha risposto «correggiamo la frase». La decisione conferma che la carta mostrata è un promemoria che finisce con
+Vulnerabile (RP-16 e RP-18). La sola frase `se_trovi` di `testi_stampati.py` dice ora che la copia si mostra finché resta in mano
+e finché dura il Vulnerabile legato a lei. Sono stati rigenerati i testi completi e il catalogo candidato nel commit `361bd7e`.
+Le 12 schede interessate sono SPA-AR3, SPA-AR6, MAR-AR5, MAR-AR6, TOS-AR1, TOS-AR6, PIN-AR4, PIN-AR6, GIG-AR3, GIG-AR6,
+CES-AR1 e ROC-AR5. Il confronto con `9449d19` ha rilevato solo la frase nei 12 testi completi e le impronte dei file derivati,
+anche nel confronto del contenuto SQLite. Testi brevi e tutti i campi `gui` coincidono byte per byte con la base.
+
+Il [caso dell'altra copia](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) è entrato nella suite con
+l'atteso D178 di zero copie visibili. Il giro mirato lo ha confermato. Il vecchio file diagnostico è stato tolto.
+
+### Nuovo scostamento SPA-AR3 × OGG-04 — scadenza del timer di Mescolone Micidiale
+
+La [scheda corretta](../../../server/src/test/resources/set-base/catalogo/sets/base.md) richiede sia che la copia sia in mano sia
+che il Vulnerabile legato duri ancora. RP-29 e la scheda di OGG-04 dicono che alla fine del quinto turno, contando il consumo,
+Mescolone Micidiale rimuove anche Vulnerabile.
+
+1. SPAZIENZIO gioca PAZIENZA: FINITA, trova una copia di GARGANTUESCO IMPATTO SUL TU e la mostra.
+2. Nel turno successivo consuma Mescolone Micidiale. Dopo altri tre turni ha ancora 70 H, Vulnerabile e la copia mostrata.
+3. Al quinto turno dal consumo, il timer scatta, SPAZIENZIO scende a 50 H, tutti i suoi stati Vulnerabile scompaiono e la copia
+   trovata resta in mano. Atteso dalla scheda D178: zero copie mostrate. Osservato: una.
+
+`Game.resolveMoves` trattiene il promemoria quando la copia è ancora in mano e il gettone non è stato soddisfatto da una giocata,
+anche quando il timer lo ha rimosso. `Player.getShownRevealed` filtra per presenza in mano. La vista pubblica usa quel risultato.
+Il motore e la bozza coincidono con la base della ripresa.
+
+[Caso diagnostico](sb-27/Sb27MescoloneRevealReproTest.java). Copiato in `server/src/test/java/com/gsc/bm/sim/` e lanciato con Maven
+offline, è l'unico rosso del giro mirato (82 casi). Fallisce sull'ultima asserzione (`expected: <0> but was: <1>`), dopo aver
+confermato lo scatto del timer e la rimozione del gettone. Il test esistente `MescoloneD171Test`, i 70 casi della fase A e i dieci
+casi ordinari della fase B sono verdi. Il caso rosso è conservato come evidenza separata dalla suite.
 
 ### Banco, scelte e lavoro residuo
 
 - Banco d50 della fase A, estratto in `Sb27Table`. Le prove usano l'ordine del turno di `Game`, carte della bozza e attesi
-  letterali dalla scheda. Le mosse di appoggio sono sintetiche. Il caso diagnostico usa anche il personaggio della bozza.
+  letterali dalla scheda. Le mosse di appoggio sono sintetiche. I due casi su SPA-AR3 usano anche il personaggio della bozza.
 - I due primi rossi su L erano errori nel calcolo del test. A fine turno R06 sottrae metà della L più uno, quindi 10 L
   diventano 4 e 12 L diventano 5. Il giro mirato ha confermato la correzione. I casi e gli attesi della fase A sono intatti.
 - Restano da provare i rami e le clausole assenti dalla tabella, le altre carte a dati, i sette personaggi e il token.
@@ -226,20 +251,20 @@ CES-AR1 e ROC-AR5. L'elenco individua le schede da riesaminare con la stessa dec
 
 ### Verifiche
 
-- `./scripts/build.ps1 -Task Test -Offline` verde. Server: 1.059 casi, zero fallimenti, zero errori, 23 saltati.
-  Client di debug: 37 su 37. Il caso diagnostico resta riproducibile separatamente.
-- `python scripts/check-rules.py` e `python scripts/check-rules.py --candidate` verdi.
+- `./scripts/build.ps1 -Task Test -Offline` verde alla ripresa. Server: 1.060 casi, zero fallimenti, zero errori, 23 saltati.
+  Client di debug: 37 su 37. Il nuovo caso diagnostico resta riproducibile separatamente.
+- `controlla-testi.py`, `python scripts/check-rules.py`, `python scripts/check-rules.py --candidate` e
+  `python tools/set-catalog/set_catalog.py --check` verdi dopo la rigenerazione D178.
 - `python scripts/check-links.py` segnala gli stessi otto riferimenti mancanti sotto `docs/design/carriere/` presenti alla base.
   Rapporto e piano hanno zero link rotti. `git diff --check` pulito.
-- Il diff da `ed73a7d` resta nel perimetro. L'impronta SHA-256 di `bozza.json` è
+- Il diff della ripresa da `9449d19` resta nei perimetri del passo D178 e dei test di fase B. L'impronta SHA-256 di `bozza.json` è
   `325926e35d371ad169848a5930924472ddfdd94a71b73a959fac0ed2dda83d8d`.
 - `TestServerContext` rimandato. La fase interviene sui soli test e documenti.
 
 ### Domanda per la regia
 
-1. Quando si gioca la copia omonima già in mano, il promemoria della copia trovata deve cadere con Vulnerabile (come in RP-16),
-   oppure la copia trovata deve restare visibile finché lascia la mano (come dice SPA-AR3)? La risposta decide se occorre
-   allineare le schede di Annuncia o la regola e il motore.
+1. Quando Mescolone rimuove il Vulnerabile di Annuncia, il motore deve far cadere anche il promemoria pubblico per applicare
+   D178, oppure il timer deve avere un'eccezione esplicita nella regola e nelle schede?
 
 ### Inventario e copertura
 
@@ -260,7 +285,7 @@ Le 19 carte speciali riportano i casi e le clausole della fase A. Un trattino in
 | SPA-BO3 | VIOLENZAZIONE | Azione, Legata al personaggio | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | priorità, costo e bersaglio, 4 HIT a sé e +8 V, permanenza in mano |
 | SPA-AR1 | GARGANTUESCO IMPATTO SUL TU | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | costo 25 V, priorità, 35 HIT al solo avversario scelto |
 | SPA-AR2 | SPEDIAMOTI DUNQUE IN O-AHIO | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | costo 10 V, priorità e bersaglio, 12 HIT da 13 V rimaste, metà arrotondata per difetto |
-| SPA-AR3 | PAZIENZA: FINITA | Azione, Regolare | [Sb27PatienceRevealReproTest](sb-27/Sb27PatienceRevealReproTest.java) | 1 rosso diagnostico | ricerca riuscita, premio e copia mostrata, giocata di altra copia omonima, fine di Vulnerabile e visibilità residua (STOP) |
+| SPA-AR3 | PAZIENZA: FINITA | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java), [Sb27MescoloneRevealReproTest](sb-27/Sb27MescoloneRevealReproTest.java) | 1 verde + 1 diagnostico rosso | ricerca riuscita, premio e copia mostrata, giocata di altra copia omonima e fine del promemoria (D178), rimozione di Vulnerabile col timer di OGG-04 e visibilità residua (STOP) |
 | SPA-AR4 | NON GIOCARE COL COLTELLO NO | Azione, Regolare | [Sb27SpazienzioCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpazienzioCardsTest.java) | 1 | +10 V, metà dei CUT per quattro turni, HIT invariati, ritorno al danno intero al quinto turno |
 | SPA-AR5 | FAI BASTA | Azione, Regolare | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 3 | annulla una mossa ancora da risolvere, che tiene costo e pescata; su una mossa già risolta nulla; a pari priorità e pari A vale l'ordine di entrata |
 | SPA-AR6 | SGOMBERIAMOVI | Azione, Regolare | — | — | — |
@@ -356,7 +381,7 @@ Le 19 carte speciali riportano i casi e le clausole della fase A. Un trattino in
 | OGG-01 | Negroni Trovato per Terra | Oggetto | — | — | — |
 | OGG-02 | Bionda da 66, Calda | Oggetto | — | — | — |
 | OGG-03 | Doppio Malto da Discount | Oggetto | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 2 | lascia una bottiglia e dà 10 L; bottiglia a capienza piena perde la più vecchia |
-| OGG-04 | Mescolone Micidiale | Oggetto | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 1 | cronologia di cinque turni: T e L bloccate, poi via tutto e veleno |
+| OGG-04 | Mescolone Micidiale | Oggetto | [Sb27SpecialCardsTest](../../../server/src/test/java/com/gsc/bm/sim/Sb27SpecialCardsTest.java) | 1 | cronologia di cinque turni: T e L bloccate, poi via tutto e veleno. Interazione del timer con il promemoria riportata in SPA-AR3 |
 | OGG-05 | Amaro nel Bicchiere di Plastica | Oggetto | — | — | — |
 | OGG-06 | Espresso della Macchinetta | Oggetto | — | — | — |
 | OGG-07 | Kebab Abbandonato | Oggetto | — | — | — |
