@@ -4,6 +4,8 @@ Blocco secondo la [proposta](../../design/set-base/sb-28-proposta.md) e [D182](.
 
 ## Fase A
 
+**Approvata il 23 novembre 2026 ([D183](../../set-base-decisioni.md#decisioni-del-proprietario)).** Scelte dell'esecutore accettate per D1, D2, D4, D5, D6, D8; D3: «Ultimo colpo» non entra nel 2.0; D7: avviso e «∞» escono dal regolamento verso le verifiche del client di SB-31; il formato del file del set va in `docs/formato-file-set.md` (Fase B). Le correzioni di D3 e D7 sono state fatte dalla regia nel regolamento candidato e nella corrispondenza.
+
 **Esito: consegnata il 23 novembre 2026, STOP per la lettura del proprietario.** La norma è scritta solo come testo: il
 [regolamento 2.0 candidato](../../design/set-base/sb-28/game-rules-2.0.md), la [corrispondenza](../../design/set-base/sb-28/corrispondenza.md)
 e il documento del Set Base 1.0 candidato rigenerato coi rimandi al regolamento. Nulla di vivo cambia: `docs/game-rules.md`,

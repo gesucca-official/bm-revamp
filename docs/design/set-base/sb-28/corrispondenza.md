@@ -12,7 +12,7 @@ Fase A di SB-28, 23 novembre 2026. Accompagna il [regolamento 2.0 candidato](gam
 |---|---|---|---|
 | RP-1 | Chi è a terra non colpisce, gruppi di velocità, salvataggio in extremis | R04 (punti 3–4, «Chi è a terra non colpisce»); R01 (definizione di «a terra») | Sostituisce la frase 1.14 «continua anche se l'autore muore prima di agire» |
 | RP-2 | Costi pagati solo con quello che si ha; costo in HEALTH mai fino a 0 | R03 («Costi pagati con quello che si ha»); R04 punto 2 | |
-| RP-3 | «Ultimo colpo» | R07b «Ultimo colpo»; richiamato da R03 e R04 | Nessuna carta del Set Base 1.0 lo usa (D3 del rapporto) |
+| RP-3 | «Ultimo colpo» | **Non entra** (D183) | Nessuna carta del Set Base 1.0 lo usa; entrerà con una revisione quando una carta lo userà |
 | RP-4 | Pavimento a zero | R01 («Pavimento a zero»); R05; R06 («HEALTH a 0») | Cade la frase 1.14 «le risorse possono essere negative» |
 | RP-5 | Nessuno spareggio | R06 («Nessuno spareggio») | |
 | RP-6 | Corazza dell'alcol, L/4 sui HIT | R05 («Corazza dell'alcol»); R01 (L come corazza) | |
@@ -26,11 +26,11 @@ Fase A di SB-28, 23 novembre 2026. Accompagna il [regolamento 2.0 candidato](gam
 | RP-14 | Se la trovi: mostrata, premio, gettone ×1,5 | R07b Annuncia punto 2; R07b Vulnerabile punto 1 | |
 | RP-15 | Quale gettone si soddisfa (D180) | R07b Vulnerabile punto 3 | |
 | RP-16 | Fine del gettone soddisfatto | R07b Vulnerabile punto 4; R06 punto 4 | D2 del rapporto |
-| RP-17 | Uscita senza giocare | R07b Vulnerabile punto 5 | L'avviso del client resta nel testo (D7) |
+| RP-17 | Uscita senza giocare | R07b Vulnerabile punto 5 | L'avviso del client esce dal regolamento e va fra le verifiche del client di SB-31 (D183) |
 | RP-18 | Carta mostrata | R07b Annuncia punto 5 (con D179) | |
 | RP-19 | Se non la trovi: ripiego | R07b Annuncia punto 3 | |
 | RP-20 | Più annunci: fattori moltiplicati | R07b Vulnerabile punto 2 | D1 del rapporto: troncamento per passo, come il motore |
-| RP-21 | Gettoni e carte mostrate tolti a fine partita, eliminazione, forfait; «∞» | R06 (paragrafo finale); R07b Vulnerabile punto 7 | |
+| RP-21 | Gettoni e carte mostrate tolti a fine partita, eliminazione, forfait; «∞» | R06 (paragrafo finale); R07b Vulnerabile punto 7 | «∞» sul gettone esce dal regolamento e va fra le verifiche del client di SB-31 (D183) |
 | RP-22 | Formato: `foundGains`, `missedGains`, `turnsIfNotFound`, `cards` | **Formato del file del set** (sezione 3) | Non è una regola del gioco |
 | RP-23 | Premio con due nomi; registro e vista pubblica; scelta nella mossa | R07b Annuncia punti 4 e 7; R03; R08 | I nomi dei campi (`search.card`…) vanno nel formato o in `docs/api.md` |
 | RP-24 | Il mazzo si mischia dopo ogni ricerca | R02a punto 5; R02 | L'impostazione `rules.searchShuffle` va nel formato (sezione 3) |
@@ -67,7 +67,7 @@ Dalla 2.0 il documento del playground diventa storico (R09 lo dice). Il suo «Am
 | R02 | La pesca dopo la mossa può essere sostituita dalla ricerca; il mazzo si mischia dopo una ricerca (gli scarti restano fuori) | RP-8, RP-24 |
 | R02, mazzi salvati | **Nessun cambio di regola.** D182 (3) (mazzi con carte uscite cancellati) è un'operazione sui dati del passaggio, citata nella revisione 2.0 | D182 (3) |
 | R02a | **Nuova:** ricerca al posto della pesca | RP-8…RP-12, RP-24 |
-| R03 | Costi pagati con quello che si ha (HEALTH > costo), salvo «Ultimo colpo»; scelta del nome per «Annuncia X o Y» | RP-2, RP-3, RP-13, RP-23 |
+| R03 | Costi pagati con quello che si ha (HEALTH > costo), scelta del nome per «Annuncia X o Y» | RP-2, RP-13, RP-23 |
 | R04, punti 2–5 | Costi col pavimento; gruppi di velocità; annullamento a inizio gruppo; ricerca al posto della pesca | RP-1, RP-2, RP-8 |
 | R04, autore morto | **Sparisce** «Una mossa già presentata continua anche se l'autore muore prima di agire o durante il proprio effetto». La sostituisce «Chi è a terra non colpisce»: la mossa continua se l'autore cade durante il proprio effetto o nel proprio gruppo; il salvataggio in extremis (D48) resta per le mosse su di sé | RP-1, D50 (1), D48 |
 | R04, mossa annullata | Aggiunto: non cerca | RP-8, RP-12 |
@@ -78,7 +78,7 @@ Dalla 2.0 il documento del playground diventa storico (R09 lo dice). Il suo «Am
 | R06, punto 5 | **Nuovo:** effetti «In campo» | RP-27 |
 | R06, esito | «HEALTH <= 0 significa morto» diventa «HEALTH a 0 significa morto»; nessuno spareggio; gettoni e carte mostrate tolti a fine partita, eliminazione e forfait | RP-4, RP-5, RP-21 |
 | R07 | Le schede usano le parole chiave di R07b e rimandano «regolamento, Rnn» | D170 (2), D78 |
-| R07b | **Nuova:** parole chiave | D78; RP-3, RP-13…RP-21, RP-23, RP-25, RP-27, RP-29, sezione 4 |
+| R07b | **Nuova:** parole chiave | D78; RP-13…RP-21, RP-23, RP-25, RP-27, RP-29, sezione 4 |
 | R08 | Carte mostrate, gettoni, esito delle ricerche, anticipo e contatore di Rincara pubblici | RP-14, RP-18, RP-23, sezione 4 |
 | R09 | Le regole del playground diventano fonte storica | SB-28 |
 | R01a (token), R05 (isolamento), R07 (rarità), R07a, R06 (clock, riavvio) | Invariate | — |
