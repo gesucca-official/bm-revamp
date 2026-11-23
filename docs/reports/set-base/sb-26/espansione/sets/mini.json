@@ -1,0 +1,95 @@
+{
+  "set": "mini",
+  "version": "0.1",
+  "cards": [
+    {
+      "class": "mini.CalcioAlBidone",
+      "name": "Calcio al bidone",
+      "description": "10 [[V]]: infliggi 12 [[HIT]] all'avversario.",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "role": "DAMAGE",
+      "gains": "—",
+      "damage": "HIT",
+      "damageAmount": "HIT 12",
+      "rarity": "RARE",
+      "fullText": [
+        "Azione regolare (regolamento, R01a). Costo: 10 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
+        "Quando la carta si risolve: infliggi 12 [[HIT]] all'avversario.",
+        "Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi per quelli sui danni subiti di chi lo riceve, Vulnerabile compreso, uno dopo l'altro nell'ordine in cui sono stati presi e arrotondando ogni volta per difetto (regolamento, R05); i [[HIT]] che subisce chi ha [[L]] si riducono poi di un quarto della sua [[L]], senza scendere sotto 0 (regole del playground, RP-6).",
+        "Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 12 [[HIT]]."
+      ],
+      "flavour": null
+    },
+    {
+      "class": "mini.RintoccoDiCampana",
+      "name": "Rintocco di campana",
+      "description": "Solo prova di SB-6b. HIT pari a 4 più 3 per oggetto vicino al bersaglio.",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "role": "DAMAGE",
+      "gains": "—",
+      "damage": "HIT",
+      "damageAmount": "HIT 4+x",
+      "rarity": "UNCOMMON",
+      "fullText": [
+        "Solo prova di SB-6b. HIT pari a 4 più 3 per oggetto vicino al bersaglio."
+      ],
+      "flavour": null
+    },
+    {
+      "class": "mini.Spallucce",
+      "name": "Spallucce",
+      "description": "+6 [[A]].",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "role": "RESOURCES",
+      "gains": "+6 A",
+      "damage": "—",
+      "damageAmount": "—",
+      "fullText": [
+        "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 2. Si gioca su di te.",
+        "Quando la carta si risolve: guadagni 6 [[A]]."
+      ],
+      "flavour": null
+    },
+    {
+      "class": "mini.items.LattinaSchiacciata",
+      "name": "Lattina schiacciata",
+      "description": "Quando lo consumi: +8 [[A]].",
+      "type": "Oggetto",
+      "subtype": "—",
+      "role": "RESOURCES",
+      "gains": "+8 A",
+      "damage": "—",
+      "damageAmount": "—",
+      "rarity": "COMMON",
+      "fullText": [
+        "Oggetto: quando lo peschi va in campo vicino a te; fa effetto quando lo consumi con una carta che si gioca su un tuo oggetto (regolamento, R01a).",
+        "Quando lo consumi: guadagni 8 [[A]]."
+      ],
+      "flavour": null
+    },
+    {
+      "class": "mini.spazienzio.bound.Sbuffata",
+      "name": "Sbuffata",
+      "description": "+4 [[V]].",
+      "type": "Azione",
+      "subtype": "Legata al personaggio",
+      "role": "RESOURCES",
+      "gains": "+4 V",
+      "damage": "—",
+      "damageAmount": "—",
+      "rarity": "COMMON",
+      "fullText": [
+        "Azione legata a SPAZIENZIO DE LA UCCISO (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca su di te.",
+        "Quando la carta si risolve: guadagni 4 [[V]]."
+      ],
+      "flavour": null
+    }
+  ],
+  "starters": [],
+  "initialCards": [],
+  "characters": [],
+  "tokens": []
+}

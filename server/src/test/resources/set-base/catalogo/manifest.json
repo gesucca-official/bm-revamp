@@ -1,0 +1,46 @@
+{
+  "nota": "SB-26 (D175): file generati da tools/set-catalog/set_catalog.py; non si modificano a mano. L'impronta di cards.sqlite è quella del contenuto (schema e righe, iterdump), che non dipende dalla libreria SQLite.",
+  "argomenti": [
+    "--set",
+    "server/src/test/resources/set-base/bozza.json",
+    "--testi",
+    "docs/design/set-base/testi/testi-completi.json",
+    "--slot",
+    "docs/design/set-base/testi/slot.json"
+  ],
+  "set": [
+    "base"
+  ],
+  "ingressi": [
+    {
+      "file": "server/src/test/resources/set-base/bozza.json",
+      "sha256": "a8930edeb822028918d8fcd4c78fce2e4ffda007b2edca883ff48528290b527d"
+    },
+    {
+      "file": "docs/design/set-base/testi/testi-completi.json",
+      "sha256": "48555d08efa51ec71190605a118b2e1afd55007b5d449af66230340d035eac8e"
+    },
+    {
+      "file": "docs/design/set-base/testi/slot.json",
+      "sha256": "48bc14dd58706e7d8ca9bb3583e5d4eaa714bff591233ffb549635a8a35176f7"
+    }
+  ],
+  "uscite": [
+    {
+      "file": "client-debug/sets/base.md",
+      "sha256": "247da9a74f0d6c22852aa75d94bbb134bb6de1599b64720443d552efa60cfd9d"
+    },
+    {
+      "file": "sets/base.json",
+      "sha256": "aba0b1c3f805c572872bd3f3fb734054ce0c5e08032e8eebce064ab69400fc82"
+    },
+    {
+      "file": "sets/base.md",
+      "sha256": "247da9a74f0d6c22852aa75d94bbb134bb6de1599b64720443d552efa60cfd9d"
+    },
+    {
+      "file": "cards.sqlite",
+      "contenuto_sha256": "5f637ba8ec7ea1dc57dd919de94581852b5bce700847908b01ebcfbbd08e2c76"
+    }
+  ]
+}

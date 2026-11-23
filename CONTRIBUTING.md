@@ -20,6 +20,15 @@ python scripts/check-rules.py
 python scripts/verify-match-manifests.py
 ```
 
+Per il catalogo candidato del set generato dal file del set (SB-26, [tabella delle aree](docs/aree-protette.md)):
+rigenera, controlla e prova che un disallineamento voluto faccia fallire il controllo:
+
+```powershell
+python -X utf8 tools/set-catalog/set_catalog.py
+python -X utf8 scripts/check-rules.py --candidate
+python -X utf8 tools/set-catalog/prova-errori.py
+```
+
 Il contesto completo verifica anche l'avvio e gli scenari applicativi; i soli
 unit test non lo sostituiscono. Nella proposta descrivere problema, risultato e
 verifiche realmente eseguite, indicando eventuali limiti.
