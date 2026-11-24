@@ -411,3 +411,37 @@ Su richiesta del proprietario: [prompt letterali](prompt-correzioni-3.md), commi
 | Controllo oggettivo | Centrato e senza fiori, ma anche qui la sedia è tornata verso il centro della stanza. |
 | Esito | Conservato per il confronto; posizione laterale non rispettata. |
 | Giudizio del proprietario |  |
+
+## Seduta discreta e scelta di Sergio
+
+Su richiesta del proprietario si riprende Sergio al tavolino laterale, [anteprima della versione 3](anteprime/base.character.Cesira-3.webp), con fiori e inquadratura intera; nessuna generazione o ritaglio per Sergio. Le nuove sedute seguono i [prompt](prompt-correzioni-4.md), committati prima in `f8f2b80`. Strumento `image_gen.imagegen`, modello e riscrittura non esposti, data 2026-11-24.
+
+### Seduta discreta 1 — base.character.Pino
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.character.Pino` |
+| source | `originali/base.character.Pino-5.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2667334 / `da4538e544fc0520e9dcd6fccb502f604ed5be88290fb3897bb20113470a854d` |
+| promptSha256 | `3ca00ae8cdc4e858730e720e9430dbb50e90c6481a69290fe2d937ea20112e0c` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.character.Pino-4.png`: `3e3889ca2545fc0fa36cd1acc66d80a7173c5b03f81bd0090f85d4d4a4253425` |
+| Anteprima | [WebP](anteprime/base.character.Pino-5.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Seduta senza schienale, più scura e con meno contrasto. |
+| Esito | Conservata per il giudizio; nessun tentativo scartato. |
+| Giudizio del proprietario |  |
+
+### Seduta discreta 2 — base.pino.bound.SpallataAlBancone
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.bound.SpallataAlBancone` |
+| source | `originali/base.pino.bound.SpallataAlBancone-5.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2813202 / `2cfc605ffa673554947c53ca9b164931de7fd599b5593d534ec24a8e1b88a8d7` |
+| promptSha256 | `2e1dbb41555ed6af8f8421bdd7227f586e8a9c05da062b7556e2cec8a3511212` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.pino.bound.SpallataAlBancone-4.png`: `196b87f348243d53c206434b7a70d2fff71b749096ea05e863d4abacb0bc483f` |
+| Anteprima | [WebP](anteprime/base.pino.bound.SpallataAlBancone-5.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Seduta senza schienale, più scura e con meno contrasto. Il getto parte dal cannello in asse. |
+| Esito | Conservata per il giudizio; nessun tentativo scartato. |
+| Giudizio del proprietario |  |
