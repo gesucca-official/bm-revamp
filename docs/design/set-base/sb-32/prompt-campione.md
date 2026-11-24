@@ -254,13 +254,13 @@ Da compilare dopo la generazione: file, scheda del registro, giudizio del propri
 
 | # | `bindingName` | File | Scheda | Giudizio del proprietario |
 |---|---|---|---|---|
-| 1 | `bruiser.character.BigBadBruiser` | [anteprima](anteprime/bruiser.character.BigBadBruiser.webp) | [Tentativo 1](registro.md#tentativo-1--bruisercharacterbigbadbruiser) | |
+| 1 | `bruiser.character.BigBadBruiser` | [anteprima](anteprime/bruiser.character.BigBadBruiser.webp) · [variante](anteprime/bruiser.character.BigBadBruiser-2.webp) | [Tentativo 1](registro.md#tentativo-1--bruisercharacterbigbadbruiser) | |
 | 2 | `base.character.Mara` | [anteprima](anteprime/base.character.Mara.webp) | [Tentativo 2](registro.md#tentativo-2--basecharactermara) | |
 | 3 | `junkie.character.ToxicJunkie` | [anteprima](anteprime/junkie.character.ToxicJunkie.webp) | [Tentativo 3](registro.md#tentativo-3--junkiecharactertoxicjunkie) | |
-| 4 | `base.character.Pino` | [anteprima](anteprime/base.character.Pino.webp) | [Tentativo 4](registro.md#tentativo-4--basecharacterpino) | |
+| 4 | `base.character.Pino` | [anteprima](anteprime/base.character.Pino.webp) · [variante](anteprime/base.character.Pino-2.webp) | [Tentativo 4](registro.md#tentativo-4--basecharacterpino) | |
 | 5 | `base.character.Gigi` | [anteprima](anteprime/base.character.Gigi.webp) | [Tentativo 5](registro.md#tentativo-5--basecharactergigi) | |
-| 6 | `base.character.Cesira` | [anteprima](anteprime/base.character.Cesira.webp) | [Tentativo 6](registro.md#tentativo-6--basecharactercesira) | |
-| 7 | `base.character.Rocco` | [anteprima](anteprime/base.character.Rocco.webp) | [Tentativo 7](registro.md#tentativo-7--basecharacterrocco) | |
-| 8 | `base.pino.bound.SpallataAlBancone` | [anteprima](anteprime/base.pino.bound.SpallataAlBancone.webp) | [Tentativo 8](registro.md#tentativo-8--basepinoboundspallataalbancone) | |
+| 6 | `base.character.Cesira` | [anteprima](anteprime/base.character.Cesira.webp) · [variante](anteprime/base.character.Cesira-2.webp) | [Tentativo 6](registro.md#tentativo-6--basecharactercesira) | |
+| 7 | `base.character.Rocco` | [anteprima](anteprime/base.character.Rocco.webp) · [variante](anteprime/base.character.Rocco-2.webp) | [Tentativo 7](registro.md#tentativo-7--basecharacterrocco) | |
+| 8 | `base.pino.bound.SpallataAlBancone` | [anteprima](anteprime/base.pino.bound.SpallataAlBancone.webp) · [variante](anteprime/base.pino.bound.SpallataAlBancone-2.webp) | [Tentativo 8](registro.md#tentativo-8--basepinoboundspallataalbancone) | |
 | 9 | `base.items.PosacenereDiVetro` | [anteprima](anteprime/base.items.PosacenereDiVetro.webp) | [Tentativo 9](registro.md#tentativo-9--baseitemsposaceneredivetro) | |
-| 10 | `com.tokens.BrokenBeerBottle` | Rifiuto; nessun file | [Tentativo 10](registro.md#tentativo-10--comtokensbrokenbeerbottle) | |
+| 10 | `com.tokens.BrokenBeerBottle` | Rifiuto; nessun file · [variante](anteprime/com.tokens.BrokenBeerBottle-2.webp) | [Tentativo 10](registro.md#tentativo-10--comtokensbrokenbeerbottle) | |
