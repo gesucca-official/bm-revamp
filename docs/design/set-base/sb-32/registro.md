@@ -479,3 +479,22 @@ Su richiesta del proprietario: [prompt letterali](prompt-correzioni-5.md), commi
 | Controllo oggettivo | Getto stretto dalla punta del beccuccio, allineato al suo asse; quattro zampe distinguibili e appoggiate. |
 | Esito | Conservata per il giudizio; nessun tentativo scartato. |
 | Giudizio del proprietario |  |
+
+## Punta della matita e posizione di Grappino
+
+Su richiesta del proprietario; [prompt letterale](prompt-correzioni-6.md) committato prima in `cd69e8a`.
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.bound.SpallataAlBancone` |
+| source | `originali/base.pino.bound.SpallataAlBancone-7.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2726699 / `0623245c5b24e51ce40f15666f1768b09bc6b28c2b8d2986dbc6fc53c619c55a` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-24 |
+| Prompt riscritto | non esposto |
+| promptSha256 | `419a078a81bc9f7e544c19affbfb8768d51cf85aa127353d6bdda751e8f0a1bd` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.pino.bound.SpallataAlBancone-6.png`: `ad9484fe9044c21ef0718899b38b1d6413de5456d1435123751053c7e243f37a` |
+| Anteprima | [WebP](anteprime/base.pino.bound.SpallataAlBancone-7.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Punta della matita visibile; Grappino spostato a destra e separato dalla gamba, quattro zampe appoggiate; getto in asse. |
+| Esito | Conservata per il giudizio; nessun tentativo scartato. |
+| Giudizio del proprietario |  |
