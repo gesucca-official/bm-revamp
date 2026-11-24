@@ -347,3 +347,67 @@ Su richiesta del proprietario: [prompt letterali](prompt-correzioni-2.md), commi
 | Controllo oggettivo | Collo di bottiglia con imboccatura integra e un solo bordo fratturato; senza mani. |
 | Esito | Conservata per il giudizio; nessun tentativo scartato. |
 | Giudizio del proprietario |  |
+
+## Ultimi ritocchi
+
+Su richiesta del proprietario: [prompt letterali](prompt-correzioni-3.md), committati prima della generazione in `14fc93c`. Strumento `image_gen.imagegen`, modello non esposto, riscrittura non esposta, data 2026-11-24. Originali precedenti e scartati conservati fuori da git.
+
+### Piera — personaggio
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.character.Pino` |
+| source | `originali/base.character.Pino-4.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2725800 / `3e3889ca2545fc0fa36cd1acc66d80a7173c5b03f81bd0090f85d4d4a4253425` |
+| promptSha256 | `69f657291921da02736f8f2062cdd6ab9b3b9d2945f8a31766401fb0e6081a14` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.character.Pino-3.png`: `c80ab9b915894043b4671079e1e501b1e0f4b28fa7bdbcfbac66c3924afd4e49` |
+| Anteprima | [WebP](anteprime/base.character.Pino-4.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Seduta senza schienale; matita conservata. |
+| Esito | Conservata per il giudizio. |
+| Giudizio del proprietario |  |
+
+### Piera — Seltz
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.bound.SpallataAlBancone` |
+| source | `originali/base.pino.bound.SpallataAlBancone-4.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2842144 / `196b87f348243d53c206434b7a70d2fff71b749096ea05e863d4abacb0bc483f` |
+| promptSha256 | `db1e801ac6f01be727893bc775167f0ca2e856c60f83bc28969555859ef014ee` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.pino.bound.SpallataAlBancone-3.png`: `5f9a459c8cd6100000b64805779b23c835c9f499d30bf835448cdd9c40c32ecd` |
+| Anteprima | [WebP](anteprime/base.pino.bound.SpallataAlBancone-4.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Seduta senza schienale; il getto parte dal cannello e ne segue la direzione. |
+| Esito | Conservata per il giudizio. |
+| Giudizio del proprietario |  |
+
+### Sergio — primo tentativo
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.character.Cesira` |
+| source | `originali/base.character.Cesira-4.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2972035 / `f645f8b64d37a7607cf501f3c82c5b7a699282cb6c1062c1d39d9c23f1f07ee4` |
+| promptSha256 | `d8d4257c1bf15f6549a8bd3684efb997b02f579365c8a58a00648a7a4b302a89` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.character.Cesira-3.png`: `5b43cbc2fe9ab7cb42ec5cec3255295621eedea73d19ed806d434c16372a41ca` |
+| Anteprima | [WebP](anteprime/base.character.Cesira-4.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Centrato e senza fiori, ma la sedia è tornata verso il centro della stanza. |
+| Esito | Scartato per la posizione; ripetuto una volta con lo stesso prompt. |
+| Giudizio del proprietario |  |
+
+### Sergio — secondo tentativo
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.character.Cesira` |
+| source | `originali/base.character.Cesira-5.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2954903 / `a3e3bf7345db417b1ebd369db026c32a029ed388da38dd20b84897fe4ce1af52` |
+| promptSha256 | `d8d4257c1bf15f6549a8bd3684efb997b02f579365c8a58a00648a7a4b302a89` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.character.Cesira-3.png`: `5b43cbc2fe9ab7cb42ec5cec3255295621eedea73d19ed806d434c16372a41ca` |
+| Anteprima | [WebP](anteprime/base.character.Cesira-5.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Centrato e senza fiori, ma anche qui la sedia è tornata verso il centro della stanza. |
+| Esito | Conservato per il confronto; posizione laterale non rispettata. |
+| Giudizio del proprietario |  |
