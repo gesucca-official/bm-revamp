@@ -445,3 +445,37 @@ Su richiesta del proprietario si riprende Sergio al tavolino laterale, [anteprim
 | Controllo oggettivo | Seduta senza schienale, più scura e con meno contrasto. Il getto parte dal cannello in asse. |
 | Esito | Conservata per il giudizio; nessun tentativo scartato. |
 | Giudizio del proprietario |  |
+
+## Ultime correzioni a Piera e Grappino
+
+Su richiesta del proprietario: [prompt letterali](prompt-correzioni-5.md), committati prima in `0608bd2`. Strumento `image_gen.imagegen`, modello e riscrittura non esposti, data 2026-11-24. Le versioni precedenti restano disponibili; giudizio visivo riservato al proprietario.
+
+### Ultima correzione 1 — base.character.Pino
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.character.Pino` |
+| source | `originali/base.character.Pino-6.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2782399 / `fb69129579c48cc38c1501bffe6b8822182b5317e5b30e83a78538012c955acd` |
+| promptSha256 | `01e6e4eee417a3482acf3702b2248b2238902135d93a8d8a0c8283082589bd42` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.character.Pino-5.png`: `da4538e544fc0520e9dcd6fccb502f604ed5be88290fb3897bb20113470a854d` |
+| Anteprima | [WebP](anteprime/base.character.Pino-6.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Seduta rotonda più piccola, senza schienale, con gambe visibili. |
+| Esito | Conservata per il giudizio; nessun tentativo scartato. |
+| Giudizio del proprietario |  |
+
+### Ultima correzione 2 — base.pino.bound.SpallataAlBancone
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.bound.SpallataAlBancone` |
+| source | `originali/base.pino.bound.SpallataAlBancone-6.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2801443 / `ad9484fe9044c21ef0718899b38b1d6413de5456d1435123751053c7e243f37a` |
+| promptSha256 | `cea2ef2ebd4ff920414ef8b5d673238656ab1179c28e943ba4312c4a8cbd1eb9` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.pino.bound.SpallataAlBancone-5.png`: `2cfc605ffa673554947c53ca9b164931de7fd599b5593d534ec24a8e1b88a8d7` |
+| Anteprima | [WebP](anteprime/base.pino.bound.SpallataAlBancone-6.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Getto stretto dalla punta del beccuccio, allineato al suo asse; quattro zampe distinguibili e appoggiate. |
+| Esito | Conservata per il giudizio; nessun tentativo scartato. |
+| Giudizio del proprietario |  |
