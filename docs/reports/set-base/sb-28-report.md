@@ -406,3 +406,70 @@ non era nel perimetro.
    costo) qui in SB-28 o in SB-31? Oggi tocca solo Duccio negli open.
 2. **Domanda 2:** R8 (`VerifyModes`, finestre dopo «Conferma»): correggere lo strumento in un blocco che lo tocca, o lasciarlo nel registro?
 3. La partita del proprietario nel client (comandi nella [Fase C](#fase-c); il jar è rifatto) e il push.
+
+## Correzioni piccole (D186)
+
+**Esito: consegnate il 24 novembre 2026, verifiche verdi, nessun push.** Due correzioni decise da D186 (regia del 24 novembre), senza
+toccare il server né gli attesi. Domanda 1 e domanda 2 qui sopra hanno avuto risposta: la 1 con la correzione (1), la 2 con la
+correzione (2).
+
+### 1. Costo in HEALTH (R03 2.0)
+
+**Causa.** `shortfall` (`client-web/src/readability.ts`) usava `<` su ogni risorsa: con HEALTH uguale al costo mostrava la carta
+pagabile e il server la rifiutava (`Move.healthCostAllowed`: con la regola 2.0, un costo in HEALTH richiede HEALTH maggiore del costo).
+Lo stesso confronto era in `client-web/tools/verify.mjs` (O11).
+
+**Correzione.** `shortfall` ora usa `have<=cost` per un costo in HEALTH positivo e `have<cost` per le altre risorse; il commento dice
+che è il confronto del server. `verify.mjs` usa la stessa regola. Il server non è toccato.
+
+**Eccezione «Ultimo colpo» non portata.** Il server ammette il pagamento a zero con `isLastBlow()`, ma il set vivo non ha
+«Ultimo colpo» (`LiveSet` lo rifiuta, D183 (3)) e il client non ha quel campo: il client segue le regole 2.0 senza eccezione.
+Se un giorno il client mostrasse regole diverse (`LEGACY`), questo punto va rivisto.
+
+**Test.** `client-web/tests/readability.test.ts`, nuovo «R03 2.0 (SB-28, D186)»: HEALTH uguale al costo è un vuoto; HEALTH sopra il
+costo è pagabile; un costo in HEALTH senza HEALTH è un vuoto; altre risorse uguali al costo sono pagabili; costo misto. Il test
+non è stato rieseguito contro il codice precedente: per costruzione, col vecchio `<` HEALTH uguale al costo risultava pagabile e
+l'asserzione sarebbe caduta.
+
+### 2. R8: `VerifyModes` non aspettava la finestra dopo «Conferma»
+
+**Causa.** Dopo «Conferma» il client apre «Scartare l'ultima copia?» (pulsante «Sì, scarta e gioca», che può aprire «Quale carta
+cerchi?»), oppure «Quale carta cerchi?» da sola. Lo strumento cercava «Quale carta cerchi?» con un `count()` immediato e non rispondeva
+mai alla finestra «Scartare»: la mossa non partiva e l'attesa «server answer» scadeva dopo 15 s.
+
+**Correzione.** Un helper `answerConfirm(page, moves, before)` in `verify-modes.mjs`, `verify-decks.mjs` e `verify-resolution.mjs`:
+dopo «Conferma» attende fino a 5 s (sondaggio ogni 100 ms) che si apra una finestra o che parta l'invio; risponde a «Sì, scarta e
+gioca» e a «Quale carta cerchi?» (prima opzione, come prima). Il controllo «exactly one SEND per confirmation» resta com'era; nessuna
+asserzione è stata tolta o allentata. `verify-ffa.mjs` non ha il pattern e non è cambiato.
+
+### Verifiche
+
+Ambiente: temporanei. Server 18080 e anteprima 14321 (la 8080 e la 4320 non sono state toccate); server di ogni verifica su
+`BM_SERVER_PORT=18080` con database temporanei; evidenze in una cartella della sessione (`BM_OUT`), non in `docs/`. Jar
+`server/target` del 24 novembre, 14:14, più recente dell'ultima modifica a `server/src/main` (12:57): nessuna ricostruzione, nessun
+file in `server/target` toccato. Client ricostruito in `client-web/dist` (ignorato da git).
+
+| Verifica | Esito |
+|---|---|
+| `./client-web/run.ps1 -Task Test` (client-web) | verde: 372 test, 0 falliti (`readability.test.ts`: 61, con il nuovo test) |
+| `VerifyModes`, tre giri di seguito | verdi: exit 0 ×3 |
+| `VerifyDecks` (una volta) | verde, exit 0 |
+| `VerifyResolution` (una volta) | verde, exit 0 (`reportConsistency` 66 round, `sumOk` 63, `chainOk` 63) |
+| `VerifyFfa` (una volta) | verde, exit 0 |
+| `tsc --noEmit`, `vite build` | verdi (un avviso di dimensione del chunk, già presente) |
+
+Non è stato rilanciato `VerifyAll`, né `VerifyLayout`/`VerifyAim` (il perimetro era «Verifiche» di questo blocco). Nessun server
+(`TestServerContext`, `Test`) è stato lanciato: il server non è cambiato.
+
+### Scelte prese
+
+- Helper duplicato nei tre strumenti invece di un file condiviso, per non allargare il perimetro (un file nuovo in `tools/`).
+- Attesa massima 5 s e sondaggio ogni 100 ms; i clic su una finestra hanno timeout di 3 s, così un'eventuale finestra sparita non
+  blocca fino al timeout di Playwright.
+- R7 del registro: aggiornate le righe `verify-resolution.mjs` (`125–126` → `139–140`), perché l'helper le ha spostate. Nessun altro
+  cambio al comportamento dello strumento.
+
+### Cosa resta
+
+- La partita del proprietario nel client (la Fase C) e il push: fuori da questo blocco, non fatti.
+- Il client non ha la regola «Ultimo colpo»: se un giorno il client segue `LEGACY`, il controllo HEALTH va rivisto (sopra).

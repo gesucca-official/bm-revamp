@@ -47,6 +47,19 @@ async function join(name){
 const pickMode=async(p,label)=>{await p.page.getByRole('radio',{name:label}).click();};
 const center=h=>h.kind==='hand'?{x:h.x-h.w*.22,y:h.y}:{x:h.x,y:h.y};
 const shuffle=a=>[...a].sort(()=>Math.random()-.5);
+// R8 (rossi-noti, SB-28 D186): after «Conferma» the client may open a dialog before the move leaves: «Scartare l’ultima copia?»
+// (answered with «Sì, scarta e gioca», which may open «Quale carta cerchi?») or «Quale carta cerchi?» alone. Wait a bounded 5 s
+// for a dialog or for the send, and answer each dialog that opens; a move with no dialog is left to the server answer.
+async function answerConfirm(page,moves,before){
+ const end=Date.now()+5000;
+ while(Date.now()<end&&moves()===before){
+  const discard=page.getByRole('button',{name:'Sì, scarta e gioca'}),option=page.getByTestId('search-option');
+  if(await discard.count())await discard.first().click({timeout:3000});
+  else if(await option.count())await option.first().click({timeout:3000});
+  else{await page.waitForTimeout(100);continue;}
+  await page.waitForTimeout(100);
+ }
+}
 
 // One player's loop: try cards and targets through the UI; the server decides legality.
 async function playOut(p){
@@ -71,7 +84,7 @@ async function playOut(p){
    if(s.message.includes('scartare')){let ok=false;for(const r of s.hits.filter(h=>h.kind==='hand'&&h.id!==card.key)){await tap(r);if((await p.state()).discard){ok=true;break;}}if(!ok){await cancel();continue;}}
    if(!(await page.getByTestId('confirm').isEnabled())){await cancel();continue;}
    const before=p.moves;await page.getByTestId('confirm').click();
-   if(await page.getByTestId('search-option').count())await page.getByTestId('search-option').first().click();
+   await answerConfirm(page,()=>p.moves,before);
    s=await p.wait(x=>x.over||x.turn!==turn||x.phase==='pending'||(x.phase==='choose'&&x.message.startsWith('Rifiutata')),15000,'server answer');
    if(s.phase==='choose'&&s.message.startsWith('Rifiutata')&&s.turn===turn){await cancel();continue;}
    assert.equal(p.moves-before,1,`${p.name}: exactly one SEND per confirmation`);sent=true;p.turns++;break;

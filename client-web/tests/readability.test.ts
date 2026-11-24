@@ -15,6 +15,20 @@ test('O11: affordability mirrors the server comparison, missing resources count 
  assert.equal(affordable(c,{VIOLENCE:-5,ALERTNESS:10}),false,'negative resources stay negative');
  assert.equal(affordable(card({cost:{}}),{}),true,'free cards are always payable');
 });
+test('R03 2.0 (SB-28, D186): a HEALTH cost needs HEALTH strictly above it, other resources need at least the cost',()=>{
+ const health=card({cost:{HEALTH:10}});
+ assert.deepEqual(shortfall(health,{HEALTH:10}),['HEALTH'],'HEALTH equal to the cost is a shortfall: it would bring the payer to 0');
+ assert.equal(affordable(health,{HEALTH:10}),false);
+ assert.equal(affordable(health,{HEALTH:11}),true,'HEALTH above the cost is payable');
+ assert.deepEqual(shortfall(health,{HEALTH:9}),['HEALTH']);
+ assert.deepEqual(shortfall(health,{}),['HEALTH'],'missing HEALTH counts as zero');
+ const other=card({cost:{VIOLENCE:10,ALCOHOL:3}});
+ assert.equal(affordable(other,{VIOLENCE:10,ALCOHOL:3}),true,'other resources equal to the cost are fine');
+ assert.deepEqual(shortfall(other,{VIOLENCE:10,ALCOHOL:2}),['ALCOHOL']);
+ const mixed=card({cost:{HEALTH:5,ALCOHOL:3}});
+ assert.equal(affordable(mixed,{HEALTH:6,ALCOHOL:3}),true,'mixed cost: HEALTH above, the other equal');
+ assert.deepEqual(shortfall(mixed,{HEALTH:5,ALCOHOL:2}),['HEALTH','ALCOHOL']);
+});
 test('O11: attenuation is visual only; the card stays selectable and sendable',()=>{
  const m=new Model(fixtures.before,'Tu');const local=m.hand[2];local.card.cost={VIOLENCE:999};
  assert.equal(affordable(local.card,m.view.players.Tu.character.resources),false);

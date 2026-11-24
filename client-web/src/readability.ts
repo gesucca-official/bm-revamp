@@ -8,9 +8,12 @@ export const RESOURCES:Resource[]=['HEALTH','ALERTNESS','VIOLENCE','TOXICITY','A
 export const LETTER:Record<Resource,string>={HEALTH:'H',ALERTNESS:'A',VIOLENCE:'V',TOXICITY:'T',ALCOHOL:'L'};
 const BY_LETTER=Object.fromEntries(Object.entries(LETTER).map(([k,v])=>[v,k])) as Record<string,Resource>;
 
-/** O11: same comparison the server makes when a move is submitted (missing resource counts as 0). */
+/** O11: same comparison the server makes when a move is submitted (missing resource counts as 0). R03 2.0 (SB-28, D186):
+ * a HEALTH cost needs HEALTH strictly above it (Move.healthCostAllowed, the live rules); the other resources need at least the cost.
+ * The server's «Ultimo colpo» exception does not apply: the live set has none (LiveSet, D183 (3)) and the card has no such flag here. */
 export const shortfall=(card:Card,resources:Partial<Record<Resource,number>>)=>
- Object.entries(card.cost).filter(([k,v])=>(resources[k as Resource]??0)<(v??0)).map(([k])=>k as Resource);
+ Object.entries(card.cost).filter(([k,v])=>{const have=resources[k as Resource]??0,cost=v??0;
+  return k==='HEALTH'&&cost>0?have<=cost:have<cost;}).map(([k])=>k as Resource);
 export const affordable=(card:Card,resources:Partial<Record<Resource,number>>)=>shortfall(card,resources).length===0;
 
 /** O26: presentation only. A bound waiting for its discard rests even with focus

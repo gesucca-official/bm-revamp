@@ -63,7 +63,8 @@ async function checkC2a(s){
  for(const k of ['HEALTH','ALERTNESS','VIOLENCE','TOXICITY','ALCOHOL'])assert.ok(r.board.rows.includes(`${{HEALTH:'H',ALERTNESS:'A',VIOLENCE:'V',TOXICITY:'T',ALCOHOL:'L'}[k]} ${shown[k]??0}`),`O13 board shows ${k}`);
  c2a.boardChecks++;if(s.sequence?.running)c2a.boardDuringSequence=(c2a.boardDuringSequence??0)+1;
  for(const card of s.cards){const shown=r.hand.find(h=>h.key===card.key);assert.ok(shown,'card drawn');
-  const payable=Object.entries(card.cost).every(([k,v])=>(res[k]??0)>=v);
+  // R03 2.0 (SB-28, D186): a HEALTH cost needs HEALTH strictly above it; the other resources need at least the cost.
+  const payable=Object.entries(card.cost).every(([k,v])=>k==='HEALTH'&&v>0?(res[k]??0)>v:(res[k]??0)>=v);
   assert.equal(shown.payable,payable,`O11 ${card.name}`);if(!payable){c2a.unpayableSeen++;assert.ok(shown.alpha<1,'O11 dimmed');c2a.unpayableDimmed++;}else if(!s.selected)assert.equal(shown.alpha,1,'payable not dimmed');
   const ref=catalogByName.get(card.name);assert.ok(ref,`catalog has ${card.name}`);
   assert.equal(card.role,ref.role,`O14 role from server for ${card.name}`);assert.equal(shown.role,ref.role);assert.equal(card.gains,ref.gains);

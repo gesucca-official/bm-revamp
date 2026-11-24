@@ -108,6 +108,19 @@ async function addRegular(binding,times){
 
 // SB-28, D184 (6): in the live game (regulation 2.0, R02a) a card that announces two names, both in the deck, asks which one to search: «Conferma» opens
 // the dialog «Quale carta cerchi?» (SB-16i, D97, D102) and the move leaves with the choice. The dialog is the client's own; here the first option answers it.
+// R8 (rossi-noti, SB-28 D186): after «Conferma» the client may open a dialog before the move leaves: «Scartare l’ultima copia?»
+// (answered with «Sì, scarta e gioca», which may open «Quale carta cerchi?») or «Quale carta cerchi?» alone. Wait a bounded 5 s
+// for a dialog or for the send, and answer each dialog that opens; a move with no dialog is left to the server answer.
+async function answerConfirm(page,moves,before){
+ const end=Date.now()+5000;
+ while(Date.now()<end&&moves()===before){
+  const discard=page.getByRole('button',{name:'Sì, scarta e gioca'}),option=page.getByTestId('search-option');
+  if(await discard.count())await discard.first().click({timeout:3000});
+  else if(await option.count())await option.first().click({timeout:3000});
+  else{await page.waitForTimeout(100);continue;}
+  await page.waitForTimeout(100);
+ }
+}
 // --- Open game helpers, as in VerifyFfa ---
 async function playOne(){
  const esc=()=>page.keyboard.press('Escape');
@@ -122,7 +135,7 @@ async function playOne(){
   if(s.message.includes('scartare')){let ok=false;for(const r of s.hits.filter(h=>h.kind==='hand'&&h.id!==c.key)){await tap(r);if((await A.state()).discard){ok=true;break;}}if(!ok){await esc();continue;}}
   if(!(await page.getByTestId('confirm').isEnabled())){await esc();continue;}
   const before=moves();await page.getByTestId('confirm').click();
-  if(await page.getByTestId('search-option').count())await page.getByTestId('search-option').first().click();
+  await answerConfirm(page,moves,before);
   const r=await A.wait(x=>!x||x.phase==='pending'||x.turn!==s.turn||x.over||x.eliminated||(x.phase==='choose'&&x.message.startsWith('Rifiutata')),15000,'server answer');
   assert.equal(moves()-before,1,'one SEND per confirmation');
   if(r&&r.phase==='choose'&&r.message.startsWith('Rifiutata')&&r.turn===s.turn){await esc();continue;}

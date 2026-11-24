@@ -106,6 +106,20 @@ const waitList=(p,n)=>p.page.waitForFunction(n=>document.querySelectorAll('[data
 async function joinFfa(p){await p.page.getByRole('radio',{name:'Tutti contro tutti'}).click();await p.page.getByTestId('quick').click();await p.page.getByTestId('ffa-list').waitFor({timeout:10000});}
 async function addComputers(p,n){for(let i=0;i<n;i++){const before=(await list(p)).length;await p.page.getByTestId('add-computer').click();if(before+1<5)await waitList(p,before+1);}}
 
+// R8 (rossi-noti, SB-28 D186): after «Conferma» the client may open a dialog before the move leaves: «Scartare l’ultima copia?»
+// (answered with «Sì, scarta e gioca», which may open «Quale carta cerchi?») or «Quale carta cerchi?» alone. Wait a bounded 5 s
+// for a dialog or for the send, and answer each dialog that opens; a move with no dialog is left to the server answer.
+async function answerConfirm(page,moves,before){
+ const end=Date.now()+5000;
+ while(Date.now()<end&&moves()===before){
+  const discard=page.getByRole('button',{name:'Sì, scarta e gioca'}),option=page.getByTestId('search-option');
+  if(await discard.count())await discard.first().click({timeout:3000});
+  else if(await option.count())await option.first().click({timeout:3000});
+  else{await page.waitForTimeout(100);continue;}
+  await page.waitForTimeout(100);
+ }
+}
+
 // One move through the UI, as in VerifyFfa; `prefer` orders the hand (synthetic decks aim at the rare cases).
 async function playOne(p,prefer,confirm){
  const {page}=p,esc=()=>page.keyboard.press('Escape');
@@ -124,7 +138,7 @@ async function playOne(p,prefer,confirm){
   if(s.message.includes('scartare')){let ok=false;for(const r of s.hits.filter(h=>h.kind==='hand'&&h.id!==card.key)){await tap(r);if((await p.state()).discard){ok=true;break;}}if(!ok){await esc();continue;}}
   if(!(await page.getByTestId('confirm').isEnabled())){await esc();continue;}
   const before=moves();if(confirm)await confirm(card);else await page.getByTestId('confirm').click();
-  if(await page.getByTestId('search-option').count())await page.getByTestId('search-option').first().click();
+  await answerConfirm(page,moves,before);
   const r=await p.wait(x=>!x||x.phase==='pending'||x.turn!==s.turn||x.over||x.eliminated||(x.phase==='choose'&&x.message.startsWith('Rifiutata')),15000,'server answer');
   assert.equal(moves()-before,1,`${p.name}: one SEND per confirmation`);
   if(r&&r.phase==='choose'&&r.message.startsWith('Rifiutata')&&r.turn===s.turn){await esc();continue;}
