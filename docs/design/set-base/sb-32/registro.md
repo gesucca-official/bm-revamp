@@ -268,3 +268,82 @@ Prompt di modifica committati prima delle generazioni in `3eff495`: [testi e mot
 | Controllo oggettivo | Frammento verde di bottiglia, schegge e goccia su legno; nessuna mano. Il pezzo appare spezzato a entrambe le estremità. |
 | Esito | Conservata per il giudizio; nessun tentativo scartato. |
 | Giudizio del proprietario |  |
+
+## Secondo giro di correzioni
+
+Su richiesta del proprietario: [prompt letterali](prompt-correzioni-2.md), committati prima della generazione in `e55e36b`. Strumento `image_gen.imagegen`, modello non esposto, riscrittura non esposta, data 2026-11-24. Le versioni precedenti restano disponibili; giudizio visivo riservato al proprietario.
+
+### Secondo giro 1 — bruiser.character.BigBadBruiser
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.BigBadBruiser` |
+| source | `originali/bruiser.character.BigBadBruiser-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2921768 / `87485c0c21cea7ffab5ce12fcc0dce50e094ab281f9a12a4a4416e502a039970` |
+| promptSha256 | `0363126fc6288c4eff9e44d2010f371c47de32484bdbc4eed8ba09449fcee387` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/bruiser.character.BigBadBruiser-2.png`: `dd15bf452e0609457625110e89e57c9cc1d75078f85cec53bd8017fc373a1d52` |
+| Anteprima | [WebP](anteprime/bruiser.character.BigBadBruiser-3.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Ombra unita ai piedi, estesa verso destra senza il lobo a sinistra. |
+| Esito | Conservata per il giudizio; nessun tentativo scartato. |
+| Giudizio del proprietario |  |
+
+### Secondo giro 2 — base.character.Pino
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.character.Pino` |
+| source | `originali/base.character.Pino-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2847060 / `c80ab9b915894043b4671079e1e501b1e0f4b28fa7bdbcfbac66c3924afd4e49` |
+| promptSha256 | `01584be69b6a6d8c56ab962e37f3dc6193c6751c0c54c9baecda8d4dbbec3709` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.character.Pino-2.png`: `a70787867bdbb4c69e1fc64b0108f3cd21c9312b9ef4e6182af9fe7f3a18a7f5` |
+| Anteprima | [WebP](anteprime/base.character.Pino-3.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Sedia con schienale e gambe dritte; matita tra i capelli. |
+| Esito | Conservata per il giudizio; nessun tentativo scartato. |
+| Giudizio del proprietario |  |
+
+### Secondo giro 3 — base.pino.bound.SpallataAlBancone
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.bound.SpallataAlBancone` |
+| source | `originali/base.pino.bound.SpallataAlBancone-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2909589 / `5f9a459c8cd6100000b64805779b23c835c9f499d30bf835448cdd9c40c32ecd` |
+| promptSha256 | `b5f313a568884a211595eb371c16027857a799c983a689d5632986820d294c2e` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.pino.bound.SpallataAlBancone-2.png`: `46187d20693bf638d466af5aa520556ea473e4e06eb9ff5f85cee8cf68f93207` |
+| Anteprima | [WebP](anteprime/base.pino.bound.SpallataAlBancone-3.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Sedia con schienale e gambe dritte; matita e spruzzata conservate. |
+| Esito | Conservata per il giudizio; nessun tentativo scartato. |
+| Giudizio del proprietario |  |
+
+### Secondo giro 4 — base.character.Cesira
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.character.Cesira` |
+| source | `originali/base.character.Cesira-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2999935 / `5b43cbc2fe9ab7cb42ec5cec3255295621eedea73d19ed806d434c16372a41ca` |
+| promptSha256 | `e1a5e0a085bbeef448e290d3535fc91569c923cca7f6539f524f4b8ebac267ae` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.character.Cesira-2.png`: `0be0b5754d30cb62ad1d0669f7039f94524ccc1c3f3b0ec6b4bddeb587447e20` |
+| Anteprima | [WebP](anteprime/base.character.Cesira-3.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Sergio seduto a gambe accavallate vicino a un tavolino laterale; calzini e laccio visibili. |
+| Esito | Conservata per il giudizio; nessun tentativo scartato. |
+| Giudizio del proprietario |  |
+
+### Secondo giro 5 — com.tokens.BrokenBeerBottle
+
+| Campo | Valore |
+|---|---|
+| bindingName | `com.tokens.BrokenBeerBottle` |
+| source | `originali/com.tokens.BrokenBeerBottle-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3077741 / `0f71762408d53375578bee3a08a9bf98e0f58378bb2605affe5bb2ee86510114` |
+| promptSha256 | `4d91d2855faa51408c1c6a3c4f7103ceccd08f2cd6f82ffee0cfa108b5ab4587` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/com.tokens.BrokenBeerBottle-2.png`: `4373305b4f2413e2a43193677afe6d4d8747859b7e93e80eff53f92c55dc19e9` |
+| Anteprima | [WebP](anteprime/com.tokens.BrokenBeerBottle-3.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Collo di bottiglia con imboccatura integra e un solo bordo fratturato; senza mani. |
+| Esito | Conservata per il giudizio; nessun tentativo scartato. |
+| Giudizio del proprietario |  |
