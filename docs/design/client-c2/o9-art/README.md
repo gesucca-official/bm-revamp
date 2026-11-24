@@ -8,9 +8,9 @@ licenza né dichiarazione di esclusività dell'output.
 
 | Cosa | Dove |
 |---|---|
-| Atlante distribuito | [client-web/public/art/atlas.webp](../../../../client-web/public/art/atlas.webp): 2048×1536, 8×6 riquadri da 256 px, WebP qualità 76, 566518 byte |
-| Manifest di runtime | [client-web/public/art/manifest.json](../../../../client-web/public/art/manifest.json): griglia, riquadro di ogni `bindingName`, segnaposto |
-| Inventario con provenienza | [assets.json](assets.json): per ogni riquadro sorgente, SHA-256, dimensioni, strumento, modello, data e SHA-256 del prompt |
+| Atlante distribuito | [client-web/public/art/base-0.webp](../../../../client-web/public/art/base-0.webp): 2048×2048, 8×8 riquadri da 256 px, WebP qualità 76, 541608 byte (SB-31 F2: prima `atlas.webp`, 8×6; un atlante per ogni 64 riquadri di un set, `<set>-<n>.webp`) |
+| Manifest di runtime | [client-web/public/art/manifest.json](../../../../client-web/public/art/manifest.json): per ogni atlante set, numero, griglia e, per ogni `bindingName`, il suo riquadro; il segnaposto |
+| Inventario con provenienza | [assets.json](assets.json): per ogni riquadro sorgente, SHA-256, dimensioni, strumento, modello, data e SHA-256 del prompt, e atlante e cella dove è finito; è anche l'elenco che `Atlas` legge |
 | Rigenerazione | `./client-web/run.ps1 -Task Atlas` (sharp 0.35.5 della toolchain C0) |
 
 **Sorgenti fuori da git.** Su decisione del proprietario i 40 PNG (1254×1254,

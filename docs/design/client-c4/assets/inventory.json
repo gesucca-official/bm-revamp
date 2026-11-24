@@ -29,16 +29,16 @@
       ]
     },
     {
-      "file": "art/atlas.webp",
+      "file": "art/base-0.webp",
       "kind": "image",
-      "author": "Progetto Botte Micidiali: 40 illustrazioni generate ex novo con imagegen integrato (O9), una per classe dell'allegato rules-catalog.json; nessuna immagine da Internet, nessun asset di C0 o del debug, nessun pixel riusato",
+      "author": "Progetto Botte Micidiali: 40 illustrazioni del Set Base 0.1 generate ex novo con imagegen integrato (O9), una per classe dell'allegato rules-catalog.json; nessuna immagine da Internet, nessun asset di C0 o del debug, nessun pixel riusato",
       "url": "nessuno: non scaricata",
       "version": "2026-10-27",
       "license": "Diritti riservati del progetto; nessuna licenza concessa, nessuna dichiarazione di esclusivitÃ  dell'output",
-      "modifications": "Ogni PNG (1254x1254) ridotto a 252 px (Lanczos3) con 2 px di bordo copiato, composto in 8x6 riquadri da 256 px e compresso in WebP qualitÃ  76 con sharp 0.35.5; il riquadro 40 Ã¨ un segnaposto tinta unita #30231e; nessun ritocco",
-      "destination": "Illustrazioni delle carte (client-web/src/art.ts, scene.ts e HTML), servito come /art/atlas.webp",
-      "sha256": "839cffc948c6eb7310be00acf3b737c5c52ee0e185000105da81cd5ff79ef956",
-      "bytes": 566518,
+      "modifications": "Ogni PNG (1254x1254) ridotto a 252 px (Lanczos3) con 2 px di bordo copiato, composto in 8x8 riquadri da 256 px e compresso in WebP qualità 76 con sharp 0.35.5; il riquadro 40 è un segnaposto tinta unita #30231e; nessun ritocco. SB-31 F2: l'atlante si chiama come il set (<set>-<n>.webp) e ha 8x8 riquadri (prima atlas.webp, 8x6); stessi riquadri e stesse celle, ricodificati (la compressione con perdita cambia di poco i pixel)",
+      "destination": "Illustrazioni delle carte (client-web/src/art.ts, scene.ts e HTML), servito come /art/base-0.webp; il manifesto dice per ogni classe atlante e riquadro",
+      "sha256": "61e331c0f6f3f14242733602dda0db6439c595f1250c20ae0f83a7023fa74a35",
+      "bytes": 541608,
       "source": {
         "file": "docs/design/client-c2/o9-art/*.png (40 PNG)",
         "sha256": "per ogni riquadro in docs/design/client-c2/o9-art/assets.json",
@@ -59,8 +59,8 @@
       "license": "Diritti riservati del progetto; nessuna licenza concessa",
       "modifications": "C4-5a: metadati del piano e dei tre sprite aggiornati; mappa dei riquadri dellâ€™atlante invariata",
       "destination": "Mappa bindingName -> riquadro letta a runtime (client-web/src/art.ts), servita come /art/manifest.json",
-      "sha256": "912e81baff65e6600a48f2e08950cdaf1392033f743987af6570c29057cbf27c",
-      "bytes": 3212,
+      "sha256": "56bbf91b968b45fe274e49733eef68228c0bcafda6af0270ab572c76c2de0dd3",
+      "bytes": 2371,
       "source": {
         "file": "client-web/tools/atlas.mjs",
         "sha256": "non applicabile",

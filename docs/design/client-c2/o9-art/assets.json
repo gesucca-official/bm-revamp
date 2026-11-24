@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-27",
+  "date": "2026-11-24",
   "scope": "37 cards + 2 characters + 1 token = 40, confirmed by user.",
   "generation": {
     "delivered": 40,
@@ -10,26 +10,34 @@
     "model_evidence": "Embedded C2PA: ChatGPT version gpt-image. Exact backend model identifier not disclosed.",
     "note": "No API/CLI fallback, no existing image pixels reused, no Internet images."
   },
-  "atlas": {
-    "file": "client-web/public/art/atlas.webp",
-    "quality": 76,
-    "width": 2048,
-    "height": 1536,
-    "bytes": 566518,
-    "sha256": "839cffc948c6eb7310be00acf3b737c5c52ee0e185000105da81cd5ff79ef956",
-    "cols": 8,
-    "rows": 6,
-    "cell": 256,
-    "pad": 2,
-    "placeholder": 40
-  },
+  "atlases": [
+    {
+      "set": "base",
+      "atlas": 0,
+      "quality": 76,
+      "width": 2048,
+      "height": 2048,
+      "bytes": 541608,
+      "sha256": "61e331c0f6f3f14242733602dda0db6439c595f1250c20ae0f83a7023fa74a35",
+      "cols": 8,
+      "rows": 8,
+      "cell": 256,
+      "pad": 2,
+      "placeholder": 40,
+      "file": "client-web/public/art/base-0.webp"
+    }
+  ],
   "placeholder": {
     "index": 40,
+    "atlas": 0,
+    "cell": 40,
     "fill": "#30231e"
   },
   "tiles": [
     {
       "index": 0,
+      "atlas": 0,
+      "cell": 0,
       "bindingName": "bruiser.BadEducation",
       "source": "bruiser.BadEducation.png",
       "sourceSha256": "f5e46707add3233b50fc289c0f8f5cc1342a1ca203391139f1165781bae45f80",
@@ -43,6 +51,8 @@
     },
     {
       "index": 1,
+      "atlas": 0,
+      "cell": 1,
       "bindingName": "bruiser.BreakYourToy",
       "source": "bruiser.BreakYourToy.png",
       "sourceSha256": "e3f891fc5abf4aba936c1c8c70cf74f6a61fcd15af94891f0ff1319d977e2622",
@@ -56,6 +66,8 @@
     },
     {
       "index": 2,
+      "atlas": 0,
+      "cell": 2,
       "bindingName": "bruiser.CantFeelAnything",
       "source": "bruiser.CantFeelAnything.png",
       "sourceSha256": "d4d3f0386cd9698936bfa79d996b01c2b8c02a7780c01f14a26d162bd26e977d",
@@ -69,6 +81,8 @@
     },
     {
       "index": 3,
+      "atlas": 0,
+      "cell": 3,
       "bindingName": "bruiser.ExtremelyViolentBlow",
       "source": "bruiser.ExtremelyViolentBlow.png",
       "sourceSha256": "fc5906bc34d9cbe7b7a0f1d590299dcd384e9dc85113bdda5c6fbf906452aed3",
@@ -82,6 +96,8 @@
     },
     {
       "index": 4,
+      "atlas": 0,
+      "cell": 4,
       "bindingName": "bruiser.Glare",
       "source": "bruiser.Glare.png",
       "sourceSha256": "aea04cf2ad6e567a1cb246287a7372b314d8bac4804a949a0fbf6835984ff9ef",
@@ -95,6 +111,8 @@
     },
     {
       "index": 5,
+      "atlas": 0,
+      "cell": 5,
       "bindingName": "bruiser.HealingBlow",
       "source": "bruiser.HealingBlow.png",
       "sourceSha256": "a57d3670a07ac3d35073e9faa8672feb1f2801c6b559b24e685af903f8a8ba78",
@@ -108,6 +126,8 @@
     },
     {
       "index": 6,
+      "atlas": 0,
+      "cell": 6,
       "bindingName": "bruiser.MadeOfStone",
       "source": "bruiser.MadeOfStone.png",
       "sourceSha256": "9afafd9f045400c8006f7ad638f3187535f320e590dd2a1d3ff411808a668787",
@@ -121,6 +141,8 @@
     },
     {
       "index": 7,
+      "atlas": 0,
+      "cell": 7,
       "bindingName": "bruiser.SeagullFly",
       "source": "bruiser.SeagullFly.png",
       "sourceSha256": "d606bd5360b4d223f5f3199fa1d2709a5fd0ee44318e11f79f1c01d964304bd6",
@@ -134,6 +156,8 @@
     },
     {
       "index": 8,
+      "atlas": 0,
+      "cell": 8,
       "bindingName": "bruiser.SickeningBlow",
       "source": "bruiser.SickeningBlow.png",
       "sourceSha256": "f2bc341c248a8f5cf7ca1f5e364c373923ceb90769f62ec40dff9bba740efb7d",
@@ -147,6 +171,8 @@
     },
     {
       "index": 9,
+      "atlas": 0,
+      "cell": 9,
       "bindingName": "bruiser.StunningBlow",
       "source": "bruiser.StunningBlow.png",
       "sourceSha256": "22e46de05993635fffb10ad2b4745e6748147b794012277efe1ace349fdb3a7c",
@@ -160,6 +186,8 @@
     },
     {
       "index": 10,
+      "atlas": 0,
+      "cell": 10,
       "bindingName": "bruiser.SuperImpact",
       "source": "bruiser.SuperImpact.png",
       "sourceSha256": "86d80c5ff5a3d9717652eadd7435123e097fdae22a3e2cb60ab7b7dbbe4c3062",
@@ -173,6 +201,8 @@
     },
     {
       "index": 11,
+      "atlas": 0,
+      "cell": 11,
       "bindingName": "bruiser.WhatchaDoin",
       "source": "bruiser.WhatchaDoin.png",
       "sourceSha256": "0dd205b7435ddd25533ada4b6b7a4d123c802a4adb8fa0224db01b9f3a1f69d5",
@@ -186,6 +216,8 @@
     },
     {
       "index": 12,
+      "atlas": 0,
+      "cell": 12,
       "bindingName": "bruiser.YouStop",
       "source": "bruiser.YouStop.png",
       "sourceSha256": "1e66191f31eac389ff9d757e9f68a1eea28285d9f5a3b6e8d28fb2e6bf37b21c",
@@ -199,6 +231,8 @@
     },
     {
       "index": 13,
+      "atlas": 0,
+      "cell": 13,
       "bindingName": "bruiser.character.BigBadBruiser",
       "source": "bruiser.character.BigBadBruiser.png",
       "sourceSha256": "0f2adfd0fc08b779d57389a0c8c023bb25c268ae3419a9724c97a13cb91c5def",
@@ -212,6 +246,8 @@
     },
     {
       "index": 14,
+      "atlas": 0,
+      "cell": 14,
       "bindingName": "bruiser.character.LittleRage",
       "source": "bruiser.character.LittleRage.png",
       "sourceSha256": "32c7a954707f259f720000584e6dc6ff449ed448d454fe35894413cf3ef93034",
@@ -225,6 +261,8 @@
     },
     {
       "index": 15,
+      "atlas": 0,
+      "cell": 15,
       "bindingName": "bruiser.character.LittleSmack",
       "source": "bruiser.character.LittleSmack.png",
       "sourceSha256": "69ad3838a28f37f4658bba1e02e3b17ad3a4ccf98b87787e3a0af947d731ead0",
@@ -238,6 +276,8 @@
     },
     {
       "index": 16,
+      "atlas": 0,
+      "cell": 16,
       "bindingName": "com.Grab",
       "source": "com.Grab.png",
       "sourceSha256": "6263cf7872560af5b8a27e2b94c7da2621a1af2fbbf057b043b7e2c83e213785",
@@ -251,6 +291,8 @@
     },
     {
       "index": 17,
+      "atlas": 0,
+      "cell": 17,
       "bindingName": "com.ShuffleFeet",
       "source": "com.ShuffleFeet.png",
       "sourceSha256": "0a1547d3b92c8791b6549041ed8bdd00d286f8f3716cf59ea7a153d84ca6ddbb",
@@ -264,6 +306,8 @@
     },
     {
       "index": 18,
+      "atlas": 0,
+      "cell": 18,
       "bindingName": "com.Steal",
       "source": "com.Steal.png",
       "sourceSha256": "ef0a92a2b5161e7abe78c8e9214d2093ce22e5639686df04886beb491dc7db1e",
@@ -277,6 +321,8 @@
     },
     {
       "index": 19,
+      "atlas": 0,
+      "cell": 19,
       "bindingName": "com.basic.BruiserGrab",
       "source": "com.basic.BruiserGrab.png",
       "sourceSha256": "1b0d54c1e39f455426e261bb4c4afdf3e7f8e0f2c4fda369086082cf18fa7443",
@@ -290,6 +336,8 @@
     },
     {
       "index": 20,
+      "atlas": 0,
+      "cell": 20,
       "bindingName": "com.basic.ToxicGrab",
       "source": "com.basic.ToxicGrab.png",
       "sourceSha256": "7dc1f80e4ae8d45549178ab779d4384e697200b52dc4e76d8f6a766eecb6d142",
@@ -303,6 +351,8 @@
     },
     {
       "index": 21,
+      "atlas": 0,
+      "cell": 21,
       "bindingName": "com.items.AnotherRottenBeer",
       "source": "com.items.AnotherRottenBeer.png",
       "sourceSha256": "b2d618ec702cbd9cad86769b8df35c77c0f86fcee247fa372ee24f0862c98daa",
@@ -316,6 +366,8 @@
     },
     {
       "index": 22,
+      "atlas": 0,
+      "cell": 22,
       "bindingName": "com.items.CocktailOnTheGround",
       "source": "com.items.CocktailOnTheGround.png",
       "sourceSha256": "0826b35484922b5839e2bcae873a4293bf3d255a3488457402a09b7fdf976c7b",
@@ -329,6 +381,8 @@
     },
     {
       "index": 23,
+      "atlas": 0,
+      "cell": 23,
       "bindingName": "com.items.MarvelousCocktail",
       "source": "com.items.MarvelousCocktail.png",
       "sourceSha256": "bc78f632583c1c5b7c90d846a93ce9fdd8f41e5a011ad352cf4e507b03cf73f6",
@@ -342,6 +396,8 @@
     },
     {
       "index": 24,
+      "atlas": 0,
+      "cell": 24,
       "bindingName": "com.items.RottenBeer",
       "source": "com.items.RottenBeer.png",
       "sourceSha256": "61542b38e9256da06cf64440e28bf50e9436cadba079f14aee719246fbb1100b",
@@ -355,6 +411,8 @@
     },
     {
       "index": 25,
+      "atlas": 0,
+      "cell": 25,
       "bindingName": "com.last.Struggle",
       "source": "com.last.Struggle.png",
       "sourceSha256": "c86ff0f72411498ebec230e495954738ea525dcb34b0a461a76abbb935a0bdfc",
@@ -368,6 +426,8 @@
     },
     {
       "index": 26,
+      "atlas": 0,
+      "cell": 26,
       "bindingName": "com.tokens.BrokenBeerBottle",
       "source": "com.tokens.BrokenBeerBottle.png",
       "sourceSha256": "88c64da9401ac5f09822f8a3f3dbdd1094c81bb28075bddacef9b9d2e7649465",
@@ -381,6 +441,8 @@
     },
     {
       "index": 27,
+      "atlas": 0,
+      "cell": 27,
       "bindingName": "junkie.AmphetamineReflexes",
       "source": "junkie.AmphetamineReflexes.png",
       "sourceSha256": "51538a763f55044f15f7146cfd62a3a2e54bf07fe129583c99691e7b18a7a164",
@@ -394,6 +456,8 @@
     },
     {
       "index": 28,
+      "atlas": 0,
+      "cell": 28,
       "bindingName": "junkie.BadTrip",
       "source": "junkie.BadTrip.png",
       "sourceSha256": "98950c1d9ec0f01899c939c8565ff9a6b6951d0d3518d018fece7dfd1ef32012",
@@ -407,6 +471,8 @@
     },
     {
       "index": 29,
+      "atlas": 0,
+      "cell": 29,
       "bindingName": "junkie.BeggingMoney",
       "source": "junkie.BeggingMoney.png",
       "sourceSha256": "908a38737f2708a98d58a8bc1b01dda72965856ce024e1da769d52779f982ad5",
@@ -420,6 +486,8 @@
     },
     {
       "index": 30,
+      "atlas": 0,
+      "cell": 30,
       "bindingName": "junkie.Cough",
       "source": "junkie.Cough.png",
       "sourceSha256": "86d809a279a95e86e0da1424744ca147a5b2473dc41de476690be0b5429a2641",
@@ -433,6 +501,8 @@
     },
     {
       "index": 31,
+      "atlas": 0,
+      "cell": 31,
       "bindingName": "junkie.EverythingIsDrug",
       "source": "junkie.EverythingIsDrug.png",
       "sourceSha256": "02fcef9e99cd2ef085cce2a74ea841615ced72651ed084d66ed1b52849110532",
@@ -446,6 +516,8 @@
     },
     {
       "index": 32,
+      "atlas": 0,
+      "cell": 32,
       "bindingName": "junkie.GoingBerserk",
       "source": "junkie.GoingBerserk.png",
       "sourceSha256": "748e22e131ab7a597f8775816ecb3f72a431b26b366de5cfd0ebda95bf40e183",
@@ -459,6 +531,8 @@
     },
     {
       "index": 33,
+      "atlas": 0,
+      "cell": 33,
       "bindingName": "junkie.LethalHeroinDose",
       "source": "junkie.LethalHeroinDose.png",
       "sourceSha256": "f0735b740a757007f171b8f693fa3a2e4cf55bbc74c8a045d1593acb9f452a10",
@@ -472,6 +546,8 @@
     },
     {
       "index": 34,
+      "atlas": 0,
+      "cell": 34,
       "bindingName": "junkie.MethDrivenRage",
       "source": "junkie.MethDrivenRage.png",
       "sourceSha256": "dda5923c381c690b26aef00b70180d46c95fa35f37a37dbd6b2f7401f44c6f07",
@@ -485,6 +561,8 @@
     },
     {
       "index": 35,
+      "atlas": 0,
+      "cell": 35,
       "bindingName": "junkie.PervertedMetabolism",
       "source": "junkie.PervertedMetabolism.png",
       "sourceSha256": "012f38ff4667377f1b03f8f8d4b136d77a7f8079215b3b969b60a407a1012fb9",
@@ -498,6 +576,8 @@
     },
     {
       "index": 36,
+      "atlas": 0,
+      "cell": 36,
       "bindingName": "junkie.ToxicBloodDrain",
       "source": "junkie.ToxicBloodDrain.png",
       "sourceSha256": "e8fe3f022261ec036e26265bbdb49780d8bbf03396c8e4c7dd2bb19767d4b3ef",
@@ -511,6 +591,8 @@
     },
     {
       "index": 37,
+      "atlas": 0,
+      "cell": 37,
       "bindingName": "junkie.character.PatheticBlade",
       "source": "junkie.character.PatheticBlade.png",
       "sourceSha256": "65372c8fab2e121f9467545640529cdd4772d994a3ae11bffa3ec9f9af7d37de",
@@ -524,6 +606,8 @@
     },
     {
       "index": 38,
+      "atlas": 0,
+      "cell": 38,
       "bindingName": "junkie.character.RottenSmile",
       "source": "junkie.character.RottenSmile.png",
       "sourceSha256": "fd3c21e7d565308211afafda5f0dc5e71ccda4b82f19218b1bf0f6188f0590ad",
@@ -537,6 +621,8 @@
     },
     {
       "index": 39,
+      "atlas": 0,
+      "cell": 39,
       "bindingName": "junkie.character.ToxicJunkie",
       "source": "junkie.character.ToxicJunkie.png",
       "sourceSha256": "76b06e6eccbbb3708e80bb8709b5a85ad835b7db9ffc55a7a1a535c43e7709b1",

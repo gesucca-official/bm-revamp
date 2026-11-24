@@ -307,7 +307,6 @@ dialog p,dialog dd,dialog dt {
 .large-card .art {
   width: 100%;
   aspect-ratio: 1;
-  background-image: url('/art/atlas.webp');
 }
 .large-card p {
   font-size: 16px;
@@ -966,7 +965,7 @@ button.info:hover {
   width: 56px;
   height: 56px;
   border-radius: 2px;
-  background: var(--art-placeholder) url('/art/atlas.webp') no-repeat;
+  background: var(--art-placeholder) no-repeat;
 }
 .mini-card {
   position: relative;

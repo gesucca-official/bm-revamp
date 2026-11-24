@@ -198,13 +198,14 @@ try{
   assert.equal(frames.length,124,'117 cards and 7 characters (SB-28, D184 (6); 37 and 2 in the Set Base 0.1)');step('catalogFrames',{cards:frames.length});}
  // SB-28, D184 (6): the images are SB-32's. The atlas draws a tile for the classes of the Set Base 0.1 that stay in the set; every other face shows the
  // placeholder tile of the same atlas (no-img.png). Each face must sit on exactly the tile the client computes for its class, own or placeholder.
- const layout=JSON.parse(await readFile(join(repo,'client-web/public/art/manifest.json'),'utf8')).files.find(f=>f.file==='art/atlas.webp');
- const faceArt=await page.locator('[data-testid=catalog] [data-testid=card-face],[data-testid=catalog] [data-testid=character-face]').evaluateAll(n=>n.map(e=>{const t=e.querySelector('.thumb');return {binding:e.dataset.binding,atlas:!!t&&getComputedStyle(t).backgroundImage.includes('atlas'),pos:t?.style.backgroundPosition??''};}));
+ const layout={files:JSON.parse(await readFile(join(repo,'client-web/public/art/manifest.json'),'utf8')).files.filter(f=>f.tiles)};
+ const faceArt=await page.locator('[data-testid=catalog] [data-testid=card-face],[data-testid=catalog] [data-testid=character-face]').evaluateAll(n=>n.map(e=>{const t=e.querySelector('.thumb');return {binding:e.dataset.binding,image:t?getComputedStyle(t).backgroundImage:'',pos:t?.style.backgroundPosition??''};}));
  const nums=x=>(x.match(/[\d.]+/g)??[]).map(Number);
  let art=0,placeholders=0;
- for(const f of faceArt){const i=artIndex(f.binding,layout),want=nums(artCss(i,layout).backgroundPosition),got=nums(f.pos);
-  assert.ok(f.atlas&&got.length===want.length&&got.every((v,k)=>Math.abs(v-want[k])<0.01),`face of ${f.binding}: its tile or the placeholder (${f.pos} against ${artCss(i,layout).backgroundPosition})`);
-  if(i===layout.placeholder)placeholders++;else art++;}
+ // SB-31 F2: each face sits on the cell of the atlas file the manifest gives for its class (image and position), or on the placeholder cell of the file that has it.
+ for(const f of faceArt){const ref=artIndex(f.binding,layout),css=artCss(ref,layout),want=nums(css.backgroundPosition),got=nums(f.pos),file=layout.files[ref.atlas];
+  assert.ok(f.image.includes(`/${file.file}`)&&got.length===want.length&&got.every((v,k)=>Math.abs(v-want[k])<0.01),`face of ${f.binding}: its tile or the placeholder (${f.image} ${f.pos} against ${file.file} ${css.backgroundPosition})`);
+  if(ref.cell===file.placeholder)placeholders++;else art++;}
  const scroll=await page.evaluate(()=>({page:document.documentElement.scrollWidth<=innerWidth,sheet:(s=>s.scrollHeight>s.clientHeight)(document.querySelector('.sheet'))}));
  await A.shot('01-catalog');
  // C3-5: the same face as the table in the catalog: the nominal damage of the annex as symbols and amounts (no letters), nothing for a card without damage, no priority.

@@ -7,7 +7,8 @@ import {RASTER,imageSize} from '../tools/image-size.mjs';
 const art=(f:string)=>readFileSync(new URL(`../public/art/${f}`,import.meta.url));
 
 test('WebP: the distributed images give the intrinsic sizes recorded for C4-5a',()=>{
- assert.deepEqual(imageSize(art('atlas.webp'),'atlas.webp'),{w:2048,h:1536});
+ // SB-31 F2: the atlases of a set are 8x8 cells of 256 px, named <set>-<n>.webp.
+ assert.deepEqual(imageSize(art('base-0.webp'),'base-0.webp'),{w:2048,h:2048});
  // Owner-selected plane 2 (4 November 2026); the game geometry and all size budgets stay unchanged.
  assert.deepEqual(imageSize(art('table.webp'),'table.webp'),{w:2006,h:784});
  assert.deepEqual(imageSize(art('sottobicchiere.webp'),'sottobicchiere.webp'),{w:937,h:630});

@@ -96,7 +96,7 @@ export function Table({session,model}:{session:Session;model:Model}){
  const end=outcome(view,me,name),summary=shortSummary(toast,panel);
  // D4: on the outcome panel too, the turns resolved without a difference are said, with the way to the last one.
  const jumpNote=roundNote(model.round);
- const inspectedArt=inspection?artIndex(inspection.card?.bindingName||view.players[inspection.owner!]?.character.bindingName||''):0;
+ const inspectedArt=inspection?artIndex(inspection.card?.bindingName||view.players[inspection.owner!]?.character.bindingName||''):{atlas:0,cell:0};
  // SB-16i («Rincara»): the last resorts the character played, from the public counter; null without the counter (archived games, no row then); live games have it.
  const inspectPlays=inspection&&!inspection.card&&view.players[inspection.owner!]?lastResortPlays(view.players[inspection.owner!].character,[...session.catalog,...model.hand.map(c=>c.card)]):null;
  const inspectRole=inspection?.card?roleOf(inspection.card):null,inspectShort=inspection?.card?shortfall(inspection.card,view.players[me]?.character.resources??{}):[];

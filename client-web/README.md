@@ -761,10 +761,11 @@ non sostituisce il dispositivo fisico né la prova umana.
 
 ## Risorse grafiche
 
-`public/art/table.webp` è il piano 2 scelto dal proprietario il 4 novembre 2026: 2006×784, stirato a riempire la scena. `sottobicchiere.webp`, `negroni.webp` e `posacenere.webp` sono sprite con alfa, a scala uniforme e centri proporzionali (modalità S). [Registri e decisione](../docs/design/client-c4/background/layers/NOTA.md), [rapporto C4-5a](../docs/reports/client-c4/c4-5a.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). **O2: chiusa, approvata dal proprietario il 5 novembre 2026** sul tavolo vero; giudizio letterale nel rapporto. O26 e O27 sono assegnate a C4-5a-bis. `atlas.webp` è
-l'atlante O9: 2048×1536, 8×6 riquadri da 256 px con le 40 illustrazioni
-provvisorie, più un segnaposto neutro. `manifest.json` dice quale riquadro spetta
-a ogni `bindingName` (`src/art.ts`); un nome sconosciuto usa il segnaposto.
+`public/art/table.webp` è il piano 2 scelto dal proprietario il 4 novembre 2026: 2006×784, stirato a riempire la scena. `sottobicchiere.webp`, `negroni.webp` e `posacenere.webp` sono sprite con alfa, a scala uniforme e centri proporzionali (modalità S). [Registri e decisione](../docs/design/client-c4/background/layers/NOTA.md), [rapporto C4-5a](../docs/reports/client-c4/c4-5a.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). **O2: chiusa, approvata dal proprietario il 5 novembre 2026** sul tavolo vero; giudizio letterale nel rapporto. O26 e O27 sono assegnate a C4-5a-bis. `base-0.webp` è
+l'atlante O9: 2048×2048, 8×8 riquadri da 256 px con le 40 illustrazioni
+provvisorie, più un segnaposto neutro. `manifest.json` dice quale atlante e quale riquadro spetta
+a ogni `bindingName` (`src/art.ts`): un atlante ogni 64 riquadri di un set, `<set>-<n>.webp`
+(SB-31 F2); un nome sconosciuto usa il segnaposto.
 [Provenienza e scelte](../docs/design/client-c2/o9-art/README.md). Nessun font
 distribuito o remoto; i suoni locali Kenney sono descritti nella sezione C4-7. Simboli e timbri sono vettoriali. Da C4-3 ogni file di `public/` è nell'[inventario](../docs/design/client-c4/assets/README.md)
 e `tests/assets.test.ts` fallisce per un file non registrato o con impronta diversa (vedi «Simboli, font e inventario»).

@@ -4,7 +4,7 @@ import {safeInsets,type Insets} from './safe.ts';
 import {PROPS,backgroundGeometry,placeBackground,type PropId} from './background.ts';
 import {Model,clone,type Target} from './model.ts';
 import {handCardState,guideFocus,guideMotion,GuideRest,hitAt,handSlot,raisedCard,confirmCard,regularCard,type GuideBeat,type GuideFocus,type Posable} from './readability.ts';
-import {artIndex,artFrame,loadAtlas} from './art.ts';
+import {artIndex,artFrame,loadAtlas,type ArtRef} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {plays,seatMarks,NO_CHANGE,nextStop,timeline,statusSequence,beats,hitCues,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline,type StatusFrame} from './resolution.ts';
@@ -71,7 +71,7 @@ hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInf
  drag:Drag|null=null;focused:string|null=null;hovered:string|null=null;
  // K7: a covered object raised by a first touch (touch has no hover); the next touch acts on it.
  peek:string|null=null;
- width=0;height=0;art:Texture[]=[];background!:Sprite;private decor=new Container();private props={} as Record<PropId,Sprite>;private shadows={} as Record<PropId,{node:Graphics;blur:BlurFilter}>;pendingGhost:Container|null=null;
+ width=0;height=0;art:Texture[][]=[];background!:Sprite;private decor=new Container();private props={} as Record<PropId,Sprite>;private shadows={} as Record<PropId,{node:Graphics;blur:BlurFilter}>;pendingGhost:Container|null=null;
  reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;blocked=false;contextLost=false;
  onLayout=()=>{};onInspect=(_v:Inspection)=>{};onState=()=>{};onError=(_v:string)=>{};onHover=(_id:string|null)=>{};
  preview={x:0,y:0};private dropPoint:{x:number;y:number}|null=null;private placed:{key:string;spot:{x:number;y:number}}|null=null;private resizeTimer=0;stats={resizes:0,cancels:[] as string[],inputMs:[] as number[],frames:[] as number[],sequences:0,sequenceMs:[] as number[],flights:0,transfers:0,aggregateDeltas:0,
@@ -123,8 +123,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   // Pixi documents null for detaching; its 8.22 declaration omits the nullable type.
   this.app.renderer.events.setTargetElement(null!);
   host.appendChild(this.app.canvas);this.app.canvas.setAttribute('aria-hidden','true');
-  const [table,atlas,layout,props]=await Promise.all([Assets.load('/art/table.webp'),Assets.load('/art/atlas.webp'),loadAtlas(),Promise.all(PROPS.map(p=>Assets.load<Texture>(`/art/${p.id}.webp`)))]);
-  for(let i=0;i<layout.cols*layout.rows;i++){const f=artFrame(i,layout);this.art.push(new Texture({source:atlas.source,frame:new Rectangle(f.x,f.y,f.size,f.size)}));}
+  const [table,layout,props]=await Promise.all([Assets.load('/art/table.webp'),loadAtlas(),Promise.all(PROPS.map(p=>Assets.load<Texture>(`/art/${p.id}.webp`)))]);
+  // One texture per atlas file of the manifest (a set brings one or more of them); each cell is a frame of its atlas, by [atlas][cell].
+  for(const file of layout.files){const sheet=await Assets.load<Texture>(`/${file.file}`),cells:Texture[]=[];for(let i=0;i<file.cols*file.rows;i++){const f=artFrame(i,file);cells.push(new Texture({source:sheet.source,frame:new Rectangle(f.x,f.y,f.size,f.size)}));}this.art.push(cells);}
   this.background=new Sprite(table);this.background.eventMode='none';this.decor.eventMode='none';this.decor.interactiveChildren=false;
   // All soft ellipses before all props, behind every gameplay node. O24 has no interaction here.
   PROPS.forEach(p=>{const node=new Graphics(),blur=new BlurFilter({strength:3,quality:4,resolution:1});node.eventMode='none';node.filters=[blur];this.shadows[p.id]={node,blur};this.decor.addChild(node);});
@@ -169,10 +170,12 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  private frame(w:number,h:number,kind:FrameKind='regular'){const c=new Container(),shadow=new Graphics();for(const l of cardShadow(w,h))shadow.roundRect(l.x,l.y,l.w,l.h,l.r).fill({color:CARD_SHADOW.color,alpha:l.alpha});c.addChild(shadow);
   const paper=new Graphics().roundRect(-w/2,-h/2,w,h,5).fill(PAPER).stroke({color:INK,width:2});drawFrame(paper as unknown as Pen,kind,w,h);c.addChild(paper);
   const flecks=new Graphics();for(let i=0;i<12;i++)flecks.circle(-w/2+5+(i*23%(w-10)),-h/2+4+(i%2? h-8:0),1+i%2).fill({color:0x795034,alpha:.25});c.addChild(flecks);return c;}
- private face(name:string,art:number,w:number,h:number,footer:string,small=false,sub='',kind:FrameKind='regular'){const c=this.frame(w,h,kind);const titleH=small?h*.27:h*.24, footH=small?h*.17:h*.18;
+ /** The texture of a cell of an atlas; empty if the atlas is not there. */
+ private tile(r:ArtRef){return this.art[r.atlas]?.[r.cell]??Texture.EMPTY;}
+ private face(name:string,art:ArtRef,w:number,h:number,footer:string,small=false,sub='',kind:FrameKind='regular'){const c=this.frame(w,h,kind);const titleH=small?h*.27:h*.24, footH=small?h*.17:h*.18;
   // The written type ends where the art begins, however large the card: at 1366x768 it used to fall half on the art.
   const subSize=Math.max(7,w*.056),subH=Math.max(10,subSize*1.25);
-  const sprite=new Sprite(this.art[art]);sprite.position.set(-w/2+6,-h/2+titleH);sprite.width=w-12;sprite.height=h-titleH-footH-4;c.addChild(sprite);
+  const sprite=new Sprite(this.tile(art));sprite.position.set(-w/2+6,-h/2+titleH);sprite.width=w-12;sprite.height=h-titleH-footH-4;c.addChild(sprite);
   const title=this.text(c,name,0,-h/2+6,small?Math.max(9,w*.105):Math.max(12,w*.11),w-12);
   const maxTitle=titleH-(small?8:subH+5);
   // Each shortening step re-measures the wrapped title: fit once per size, not on every redraw.
@@ -303,7 +306,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   else empty(d);
   // The discard pile is too small for a readable face: frame and art of the top card, its name in «Ultimo turno» and the inspection.
   const s=P.discard,name=this.staged?this.staged.discard:this.pile.top;
-  if(name){const c=cards.find(x=>x.name===name)??plain(name),f=this.frame(s.w,s.h,frameOf(c)),art=new Sprite(this.art[artIndex(c.bindingName)]);art.position.set(-s.w/2+3,-s.w/2+3);art.width=art.height=s.w-6;f.addChild(art);f.position.set(s.x,s.y);f.rotation=.05;this.world.addChild(f);}
+  if(name){const c=cards.find(x=>x.name===name)??plain(name),f=this.frame(s.w,s.h,frameOf(c)),art=new Sprite(this.tile(artIndex(c.bindingName)));art.position.set(-s.w/2+3,-s.w/2+3);art.width=art.height=s.w-6;f.addChild(art);f.position.set(s.x,s.y);f.rotation=.05;this.world.addChild(f);}
   else if(tableFrame(this.height).emptyDiscard)empty(s);
   return {deck:count,discard:name};}
  // C3-L: the cards of the last resolved round in the middle, in resolution order (the first at the bottom), each with its author;
