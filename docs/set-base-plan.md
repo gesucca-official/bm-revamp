@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 24 novembre 2026, dopo D187). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 24 novembre 2026, dopo D188). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **2.0** col **Set Base 1.0** (SB-28, D187): 117 carte, 7 personaggi, un token, cinque starter (base Spazienzio e Mara; avanzati Celestina, Piera, Beppe), quick a caso fra i cinque (D182); formato 20/2 (D94); soglia minima per gli starter (D95). Le regole 1.13 e il catalogo 0.1 restano solo per le partite archiviate e le misure storiche.
 > - **In corso:** nessun blocco. **SB-28 chiuso** il 24 novembre 2026 ([D187](#decisioni-del-proprietario), [report](reports/set-base/sb-28-report.md)): regolamento 2.0 e Set Base 1.0 nella partita viva, catalogo vivo generato dal file del set, mazzi salvati con carte uscite cancellati, client e strumenti adeguati (D183–D186).
-> - **Prossimo:** scelta del proprietario fra SB-30a (bot della quick: alla partita di D187 «sembrano stupidi») e SB-31 (client: flavour nell'ispezione (i), catalogo, stati); SB-29 va riletto dopo D182 (2). Q12 resta aperta. B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura.
-> - **Decisioni da leggere:** D187, D186, D185, D184, D183, D182, D181, D180, D179, D178, D177, D176, D175, D174, D173, D172, D171, D170, D169, D168, D165, D164, D163, D162, D161, D160, D159, D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D187).
+> - **Prossimo:** SB-29 (quick con categorie base e avanzata) come è scritto ([D188](#decisioni-del-proprietario)): prima una proposta breve con il testo di R01 e la risposta a Q1, poi STOP. Dopo, SB-30a (bot: alla partita di D187 «sembrano stupidi») o SB-31 (client). Q12 resta aperta. B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura.
+> - **Decisioni da leggere:** D188, D187, D186, D185, D184, D183, D182, D181, D180, D179, D178, D177, D176, D175, D174, D173, D172, D171, D170, D169, D168, D165, D164, D163, D162, D161, D160, D159, D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D188).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -306,7 +306,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-26 | Generazione del catalogo dal set | SB-25 | [proposta](design/set-base/sb-26-proposta.md) approvata ([D175](#decisioni-del-proprietario)); consegnato il 23 novembre 2026 ([report](reports/set-base/sb-26-report.md)): **chiuso** il 23 novembre 2026 ([D176](#decisioni-del-proprietario)): catalogo 1.0 candidato generato dalla bozza, documento approvato |
 | | SB-27 | Carte d'effetto speciale in forma definitiva | SB-26 | [proposta](design/set-base/sb-27-proposta.md) approvata ([D177](#decisioni-del-proprietario)); **chiuso** il 23 novembre 2026 ([D181](#decisioni-del-proprietario), [report](reports/set-base/sb-27-report.md)): carte speciali in forma definitiva, 125 voci testate contro la scheda; nome del token rinviato a SB-28 (D168 (4)) |
 | | SB-28 | Trasferimento nella partita viva | SB-26, SB-27 | [proposta](design/set-base/sb-28-proposta.md) ([D182](#decisioni-del-proprietario)); **chiuso** il 24 novembre 2026 ([D187](#decisioni-del-proprietario), [report](reports/set-base/sb-28-report.md)): regolamento 2.0 e Set Base 1.0 nella partita viva |
-| Prodotto | SB-29 | Quick con categorie base e avanzata | SB-28 |  |
+| Prodotto | SB-29 | Quick con categorie base e avanzata | SB-28 | da aprire come è scritto ([D188](#decisioni-del-proprietario)) |
 | | SB-30 | Bot nelle partite contro computer | SB-4, SB-28 |  |
 | | SB-31 | Adeguamento del client | SB-28 |  |
 | | SB-32 | Illustrazioni del set | SB-28, SB-31 |  |
@@ -817,6 +817,8 @@ il matchmaking si sistemerà in futuro. Protocollo d'ingresso, `PlayerFactorySer
 **Completamento verificabile.** Le due categorie assegnano solo i propri starter. Quick 1v1 con un base e un avanzato completa regolarmente. FFA verificata. `TestServerContext`, `VerifyModes` e `VerifyFfa` verdi.
 
 **Rischi.** Tocca le modalità O18, da progettare insieme se quell'attività è già partita.
+
+**Si fa come è scritto ([D188](#decisioni-del-proprietario), 24 novembre 2026).** Gli avanzati restano scelti liberamente finché carriere ed economia non porteranno lo sblocco (D182 (2)); le modalità attuali sono strumenti di prova, quindi SB-29 non progetta quelle definitive né O18.
 
 ### SB-30 — Bot nelle partite contro computer
 

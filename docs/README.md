@@ -12,7 +12,7 @@ Una riga corta per filone: chi apre una regia parte da qui e dalla «Ripartenza�
 
 | Filone | Piano e stato | Macchina | Prossimo passo |
 |---|---|---|---|
-| Set Base | [piano](set-base-plan.md) | portatile | SB-28 chiuso (D187): la partita viva gioca il regolamento 2.0 col Set Base 1.0; prossimo SB-30a (bot) o SB-31 (client), a scelta del proprietario |
+| Set Base | [piano](set-base-plan.md) | portatile | SB-28 chiuso (D187); prossimo SB-29 come è scritto (D188), poi SB-30a (bot) o SB-31 (client) |
 | Client web | [roadmap](client-roadmap.md); [piano C4](client-c4-plan.md), chiusa | l'altra | C5 (playtest finali) |
 | Carriere | [piano CA-0](ca-plan.md); contenuti nella [tabella dei lavori anticipati](product-roadmap.md#lavori-anticipati) | portatile | CA-0b (formato delle carriere 0.1) |
 
