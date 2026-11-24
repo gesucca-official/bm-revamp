@@ -6,6 +6,8 @@ Fase B intera, un esecutore. Base `1d150a5` (HEAD all'avvio; D190 registrato per
 
 ## Esito
 
+**Chiuso il 24 novembre 2026** ([D195](../../set-base-decisioni.md#decisioni-del-proprietario)) dopo la partita del proprietario nel client: «ho giocato, funziona tutto: chiudi sb-29». Domande risolte in [D194](../../set-base-decisioni.md#decisioni-del-proprietario).
+
 **Consegnato il 24 novembre 2026, STOP per la lettura del proprietario.** La quick ha la scelta della categoria: regolamento 2.1, Set Base 1.0.1,
 header STOMP `category` sui tre join quick, fabbrica che pesca dentro la categoria, coda mista, due radio «Base / Avanzato» in `client-web`
 (default Base), selettore minimo in `client-debug`, campo `category` nel CLI. Verdi: unitari del server (1506) e di `client-debug` (42),
