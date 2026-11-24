@@ -428,10 +428,11 @@ export type ReportSteps =
   | {verified: true; costs: Step[]; moveCosts: Step[][]; moves: Step[][]; endOfTurn: Step[]}
   | {verified: false; reason: string};
 
-// For resource steps the only form read: "RESOURCE: before->after (delta)", written by one server method, ending the line and preceded at
-// most by a label in parentheses (end-of-turn lines). Any other line, or any other part of a line, is free text and is
-// never interpreted (D1).
-const REGULAR = /^(?:\([^()]*\) )?(HEALTH|ALERTNESS|VIOLENCE|TOXICITY|ALCOHOL): (-?\d+)->(-?\d+) \((-?\d+)\)$/;
+// For resource steps the only form read: "RESOURCE: before->after (delta)", written by one server method, preceded at most by a
+// label in parentheses (end-of-turn lines) and followed at most by one (SB-28, D185: the alcohol armour of R05 2.0, «HEALTH:
+// 55->23 (-32) (ALCOHOL armor: -5 HIT)»: the numbers are the change of HEALTH, the label is not read). Any other line, or any
+// other part of a line, is free text and is never interpreted (D1).
+const REGULAR = /^(?:\([^()]*\) )?(HEALTH|ALERTNESS|VIOLENCE|TOXICITY|ALCOHOL): (-?\d+)->(-?\d+) \((-?\d+)\)(?: \([^()]*\))?$/;
 export function regularLine(line: string): {resource: Resource; from: number; to: number; consistent: boolean} | null {
   const m = REGULAR.exec(line);
   if (!m) return null;

@@ -378,8 +378,9 @@ partenza mostrato differisce da quello del server (`drift` della linea temporale
 `stats.beats`).
 
 **Barre e numeri (D1 riaperta, D5).** `reportSteps` legge solo le righe nella forma
-regolare `RISORSA: a->b (d)`, alla fine della riga e al più dopo un'etichetta tra
-parentesi. Il resto del testo del server non si interpreta mai. La verifica segue R04:
+regolare `RISORSA: a->b (d)`, al più dopo un'etichetta tra parentesi e al più seguita da
+un'altra (SB-28, D185: la corazza dell'alcol di R05 2.0, «HEALTH: 55->23 (-32) (ALCOHOL armor: -5 HIT)»;
+l'etichetta non si legge). Il resto del testo del server non si interpreta mai. La verifica segue R04:
 prima i costi nominali, poi le righe di ogni mossa (`SELF` all'autore, `OPPONENT` al
 bersaglio), poi il fine turno. Ogni riga deve partire da dove ha lasciato il passo
 precedente e i passi devono finire esattamente sulla nuova vista. Allora le plance si

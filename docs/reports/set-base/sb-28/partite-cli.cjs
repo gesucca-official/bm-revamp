@@ -29,7 +29,9 @@ function candidates(view, user) {
   const me = view.players[user], hand = me.cardsInHand, resources = me.character.resources;
   const opponents = Object.keys(view.players).filter(p => p !== user && !view.players[p].character.dead);
   const rank = c => c.lastResort ? 3 : c.basicAction ? 2 : c.characterBound ? 1 : 0;
-  const affordable = c => Object.entries(c.cost || {}).every(([k, v]) => (resources[k] || 0) >= v);
+  // R03 2.0: every cost needs at least that much; a HEALTH cost needs more, since it may not bring its payer to 0 (SB-28, D185 (4):
+  // the one refusal seen, «cant pay health down to zero», was Duccio playing «Craniata Patriottica», 30 H, with 30 HEALTH).
+  const affordable = c => Object.entries(c.cost || {}).every(([k, v]) => k === 'HEALTH' && v > 0 ? (resources[k] || 0) > v : (resources[k] || 0) >= v);
   const out = [];
   for (const card of hand.filter(c => !c.item && affordable(c)).sort((a, b) => rank(a) - rank(b))) {
     const far = card.canTarget.includes('OPPONENT') || card.canTarget.includes('FAR_ITEM');
@@ -51,7 +53,10 @@ function candidates(view, user) {
   return out;
 }
 
-async function play(c, id, user) {
+// SB-28, D185 (4): every refusal is kept with the server's reason, the move sent and the view it was chosen from (the live
+// server has no seed: the game is identified by its id and export, the position by the view). Also on stderr, as it happens.
+const rejections = [];
+async function play(c, id, user, label) {
   await c.command({command: 'watch', gameId: id});
   let view = (await c.command({command: 'view', gameId: id})).data, turns = 0, refused = 0;
   const played = [];
@@ -63,7 +68,13 @@ async function play(c, id, user) {
       const mark = c.events.length;
       await c.command({command: 'move', move: Object.assign({gameId: id, playerId: user}, move)});
       const reply = await next(c, mark, ['/user/queue/illegalMove', '/topic/game/' + id + '/update']);
-      if (reply.destination === '/user/queue/illegalMove') { refused++; continue; }
+      if (reply.destination === '/user/queue/illegalMove') {
+        refused++;
+        const rejection = {game: label, gameId: id, turn: view.turn, reason: reply.data, move, view};
+        rejections.push(rejection);
+        console.error('REJECTED ' + JSON.stringify({game: label, gameId: id, turn: view.turn, reason: reply.data, move}));
+        continue;
+      }
       accepted = true; played.push(move.playedCardName); break;
     }
     assert(accepted, 'No accepted move: the last resort is always playable (R02)');
@@ -127,7 +138,7 @@ async function main() {
       const mark = c.events.length;
       await c.command({command: 'join', mode: 'open/1vCom', deckId: deck.deckId});
       const id = (await c.wait('/user/queue/game/open/1vCom/ready', mark, 15000)).data;
-      const row = await finish(id, 'open1vCom', await play(c, id, user));
+      const row = await finish(id, 'open1vCom', await play(c, id, user, d.id));
       assert.strictEqual(row.character, d.character);
       report.decks.push(Object.assign({deck: d.id, name: d.name || null, category: d.category || null}, row));
     }
@@ -135,12 +146,13 @@ async function main() {
       const mark = c.events.length;
       await c.command({command: 'join', mode: 'quick/1vCom'});
       const id = (await c.wait('/user/queue/game/quick/1vCom/ready', mark, 15000)).data;
-      report.quick.push(await finish(id, 'quick1vCom', await play(c, id, user)));
+      report.quick.push(await finish(id, 'quick1vCom', await play(c, id, user, 'quick-' + i)));
     }
   } finally {
     for (const deck of saved) await c.command({command: 'delete', deck}).catch(() => {});
     await c.close();
   }
+  report.rejections = rejections;
   console.log(JSON.stringify(report, null, 2));
 }
 main().catch(error => { console.error(error.stack); process.exitCode = 1; });

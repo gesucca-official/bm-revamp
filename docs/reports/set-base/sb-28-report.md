@@ -299,3 +299,110 @@ Dopo le mie prove il processo sulla 8080 non risultava più in ascolto: non l'ho
 3. Una mossa rifiutata nelle partite CLI (una su circa 84): da capire se è un caso legale del runner o un difetto; non ripetibile in quattro corse.
 4. SB-31: `STATUS_TEXT` sui nomi dello 0.1 e marcatori `[[…]]` senza lettura nel client; SB-32: immagini (il segnaposto `no-img.png` copre 91 classi).
 5. Rifare il jar prima del push; il push resta del proprietario.
+
+## Ultimo giro (D185)
+
+**Esito: consegnato il 24 novembre 2026, tutte le verifiche richieste verdi** (salvo un rosso intermittente di strumento in `VerifyModes`,
+registrato come R8, sotto). `VerifyResolution` è verde con `c34` intatta e il controllo della pillola raggiunto; la mossa rifiutata era un
+difetto del runner, non del server. Nessun file di `server/src/main` cambiato, quindi nessuna corsa d'identità 20/2. Jar del proprietario
+rifatto. Nessun push, nessun deploy.
+
+### 1. `VerifyResolution` `c34`: causa e correzione
+
+**Causa (una sola, nel client).** Con il regolamento 2.0 la corazza dell'alcol (R05, «Corazza dell'alcol (2.0)») fa scrivere al server la
+riga del danno HIT con un'etichetta **dopo** i numeri: `HEALTH: 55->23 (-32) (ALCOHOL armor: -5 HIT)` (`Character.takeDamage`). I
+numeri sono la variazione vera di HEALTH, quindi la misura di D1 (`reportCheck` di `verify-resolution.mjs`, espressione non ancorata) la
+conta e ricostruisce la vista; `regularLine` del client (`client-web/src/resolution.ts`) accettava un'etichetta tra parentesi solo
+**prima** della forma regolare e chiedeva che la riga finisse sui numeri, quindi saltava la riga. Da qui tutte le firme del rosso: «HEALTH:
+steps end at 50, view 20» (un colpo da 30 non letto), «4 steps, measurement 6», in FFA «12 steps, measurement 13» anche con barre per
+carta (una riga a variazione 0: colpo assorbito tutto dalla corazza) e «HEALTH from 21, previous step left 29» (riga precedente saltata).
+
+**Prova sul server vero.** 12 partite CLI esportate (jar della testa `3676d70`, porta 18080, database temporaneo), ogni stringa con la forma
+`RISORSA: a->b (d)` confrontata con l'espressione del client: 1.348 righe, 1.272 regolari, **le altre 75 tutte della forma
+`HEALTH: N->N (N) (ALCOHOL armor: N HIT)`** nei rapporti delle mosse; nessun'altra forma (l'unica altra stringa è un testo di log
+dell'`ENGINE_REPORT`, non una riga della vista). Le altre regole del 2.0 non scrivono righe di forma nuova: pavimento a zero e costi pagati
+con quello che si ha passano dalla stessa `editResource` (righe regolari; quando il pagato differisce dal costo nominale misura e client
+ripiegano entrambi sui totali); i guadagni delle ricerche sono righe `SELF` regolari; «In campo» scrive `(nome) RISORSA: …`, etichetta in
+testa, già letta; gruppi di velocità, «a terra» e Vulnerabile non cambiano la forma delle righe. **Non è un difetto del server:** la riga è
+corretta e regolare, era il client a non leggerne la forma con l'etichetta in coda.
+
+**Correzione.** `REGULAR` accetta al più un'etichetta tra parentesi anche dopo i numeri, simmetrica a quella in testa; l'etichetta non si
+legge e il resto del testo resta libero (D1). Aggiornati il commento nel codice e la frase «Barre e numeri» del
+[README del client](../../../client-web/README.md#contenuto-e-regia-della-sequenza-c3-4-revisione-d13). `c34` e ogni altro controllo di
+`verify-resolution.mjs` sono invariati.
+
+**Test aggiunti** (`client-web/tests/resolution.test.ts`): la riga con la corazza è regolare e coerente, una con la variazione sbagliata è
+incoerente, due etichette in coda o testo libero in coda restano testo libero; ogni round reale registrato con una riga HEALTH sul
+bersaglio, con l'etichetta della corazza aggiunta, dà gli stessi passi di prima e barre per carta (almeno 3 round). **Mutazioni:** con
+l'espressione vecchia falliscono i due test nuovi; accettando qualsiasi testo in coda fallisce il primo.
+
+**Controllo della pillola.** Il binding `bruiser.ExtremelyViolentBlow` non è uscito dal set vivo: la classe Java è nei sorgenti di test, ma il
+binding è una carta a dati del Set Base 1.0 («SPEDIAMOTI DUNQUE IN O-AHIO», 10 V, `HIT 6+x`, x metà della V che resta). La formula del
+controllo, base del catalogo più metà di (V − costo), è quella della carta viva: il controllo è stato **raggiunto senza cambiarlo**, 4 turni
+con la carta in mano, 0 problemi (V 25, costo 10, pillola «13», etichetta giusta).
+
+**Esito di `VerifyResolution`** (1366×768, server 18081 e anteprima 14321 su database temporaneo): **verde**, `c34` verde in tutte e sei le
+partite (`quick` 17 round per carta; `ffa` 17 per carta e 2 sui totali; `jump`; `humans` 8 per carta; `open` «C3 contrasti» 11 e 1,
+«C3 furti» 8 e 1). I 4 round sui totali (66 misurati, 62 ricostruiti dalle righe) sono tutti un −20 HEALTH senza riga numerica, il veleno
+a timer di «Timer expired …»: è il ripiego previsto da D5, con misura e client d'accordo.
+
+### 2. Mossa rifiutata nelle partite CLI
+
+Il [runner](sb-28/partite-cli.cjs) ora registra **ogni** rifiuto (`rejections` nel JSON e una riga `REJECTED` su stderr) con il motivo del
+server, la mossa inviata, il turno, il `gameId` e la vista da cui la mossa è stata scelta. **Seme:** la partita viva non ne ha (`Player`
+usa `new Random()`), quindi una posizione si identifica con `gameId`, esportazione e vista registrata; il runner non ha casualità.
+
+**Corse:** 41 da 12 partite (492 partite, tutte all'esito) sul jar della testa. Con il runner di prima (corse 1–20) **3 rifiuti in 2 corse**,
+tutti di Duccio e tutti `cant pay health down to zero`: «Craniata Patriottica» (30 H) con 30 HEALTH, «Nocche Sbucciate» (15 H) con 15
+HEALTH due volte. Con il runner corretto (corse 21–41) **0 rifiuti**. Riepilogo: [rifiuti-cli.json](sb-28/rifiuti-cli.json).
+
+**Decisione: difetto del runner.** R03 2.0 («Costi pagati con quello che si ha»): un costo in HEALTH non si paga se porterebbe a 0 o sotto,
+serve una HEALTH **maggiore** del costo. Il server rifiuta giustamente (`Move.healthCostAllowed`); il runner sceglieva le carte con `>=` su
+ogni risorsa. Corretto: per HEALTH serve `>`. Solo le quattro carte di Duccio costano HEALTH (nessuno starter), per questo il caso era raro.
+
+**Trovato di passaggio, non corretto:** il client web ha lo stesso vuoto. `shortfall` (`client-web/src/readability.ts`, commentata «stesso
+confronto del server») usa `<` su ogni risorsa, quindi con HEALTH uguale al costo mostra la carta pagabile e il server la rifiuta. Lo stesso
+confronto è in `client-web/tools/verify.mjs` (riga 66, O11). Riguarda solo Duccio, cioè gli open con un suo mazzo, non la quick. Domanda 1.
+
+### 3. Jar
+
+Prima della ricostruzione **nessun server era in ascolto sulla 8080** (né sulla 4320): nulla da fermare. `./scripts/build.ps1 -Task Server
+-Offline` verde: `server/target/bm-server-0.0.1-SNAPSHOT.jar` delle 14:14 del 24 novembre, senza le classi dello 0.1 spostate nei test.
+
+### Verifiche
+
+| Verifica | Esito |
+|---|---|
+| `client-web` `Test` | verde: 371 su 371 (i 369 di prima più i 2 nuovi) |
+| `client-web` `Build`, `Size` (con `BM_OUT` nella sessione) | verdi; `Size` entro limiti e tetti |
+| `VerifyResolution` | **verde** (sopra) |
+| `VerifyFfa`, `VerifyDecks` | verdi |
+| `VerifyModes` | rosso al primo giro (`B: timeout server answer`), verde al secondo: nuova voce **R8** del [registro dei rossi noti](../rossi-noti.md), strumento (sotto) |
+| `./scripts/build.ps1 -Task Test -Offline` | verde: 1501 test, 0 falliti, 23 saltati; client di debug 37 su 37 |
+| `./scripts/build.ps1 -Task TestServerContext -Offline` (a parte) | verde: 1699 test, 0 falliti, 23 saltati |
+| `python scripts/check-rules.py`, `git diff --check` | verdi |
+| `python scripts/check-links.py` | 22 link rotti, come sulla base: nessuno nuovo |
+| corsa d'identità 20/2 | non rifatta: nessun file del motore cambiato |
+
+Verifiche del client sul jar costruito dalla testa in una cartella della sessione, server 18080/18081 e anteprima 14321 su database
+temporanei; la 8080, la 4320 e `server/target` non sono stati toccati fino alla ricostruzione finale. Evidenze in `%TEMP%` della sessione.
+
+**`VerifyModes`, R8.** Dopo «Conferma» il client può aprire una finestra: «Quale carta cerchi?» (un «Annuncia X o Y» con entrambe nel mazzo)
+o «Scartare l'ultima copia?». Lo strumento cerca la prima con un `count()` immediato, in gara con l'apertura, e alla seconda non risponde:
+la mossa non parte e dopo 15 s scade l'attesa «server answer». La modifica di questo giro tocca solo la lettura delle righe per le barre,
+non questo percorso, e la stessa firma (fase `choose`, messaggio «Controlla la calata e conferma») compare nelle prove della rifinitura,
+prima di questa modifica. Non riprovato sulla base: è intermittente e un verde sulla base non proverebbe nulla. Non corretto: lo strumento
+non era nel perimetro.
+
+### Scelte prese
+
+- L'etichetta in coda è generica (al più una, tra parentesi), come quella in testa, non legata al testo «ALCOHOL armor».
+- Il controllo della pillola resta sul binding `bruiser.ExtremelyViolentBlow`, che è una carta viva: nessuna sostituzione.
+- Il riepilogo dei rifiuti in git è minimo (posizione e risorse); le viste intere restano nei JSON della sessione.
+
+### Cosa resta
+
+1. **Domanda 1:** correggere `shortfall` del client e `verify.mjs` per il costo in HEALTH di R03 2.0 (pagabile solo con HEALTH maggiore del
+   costo) qui in SB-28 o in SB-31? Oggi tocca solo Duccio negli open.
+2. **Domanda 2:** R8 (`VerifyModes`, finestre dopo «Conferma»): correggere lo strumento in un blocco che lo tocca, o lasciarlo nel registro?
+3. La partita del proprietario nel client (comandi nella [Fase C](#fase-c); il jar è rifatto) e il push.

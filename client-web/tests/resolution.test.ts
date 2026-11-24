@@ -235,6 +235,28 @@ test('regular line: only the form RESOURCE: a->b (d), at the end, after at most 
  for(const free of ['Grabbed and consumed Item Negroni Trovato per Terra',"Countered Target's own Move",'Lost HEALTH: 100->95 (-5) somehow','HEALTH: 100 -> 95','Timer expired for MarvelousCocktail effect triggered','POWER: 1->2 (1)'])
   assert.equal(regularLine(free),null,free);
 });
+// SB-28, D185: with rulebook 2.0 the alcohol armour (R05) labels the HIT line after the numbers; the change is still the HEALTH one.
+const ARMOR=' (ALCOHOL armor: -5 HIT)';
+test('regular line: the alcohol armour label after the numbers (R05 2.0) keeps the line regular, the label is not read',()=>{
+ assert.deepEqual(regularLine('HEALTH: 55->23 (-32) (ALCOHOL armor: -5 HIT)'),{resource:'HEALTH',from:55,to:23,consistent:true});
+ assert.deepEqual(regularLine('HEALTH: 80->80 (0) (ALCOHOL armor: -4 HIT)'),{resource:'HEALTH',from:80,to:80,consistent:true});
+ assert.equal(regularLine('HEALTH: 55->23 (-30) (ALCOHOL armor: -5 HIT)')!.consistent,false);
+ // At most one label on each side; free text after the numbers stays free text.
+ for(const free of ['HEALTH: 55->23 (-32) (a) (b)','HEALTH: 55->23 (-32) armor','HEALTH: 55->23 (-32) (ALCOHOL (armor))'])assert.equal(regularLine(free),null,free);
+});
+test('SB-28, D185: a round whose HIT line carries the alcohol armour still moves the bars per card',()=>{
+ let checked=0;
+ for(const name of contiguous){const c=pair(name),before=stepsOf(name);if(!before.verified)continue;
+  const next=clone(c.next);let labelled=0;
+  for(const m of next.resolvedMoves)if(m.moveReport.OPPONENT)m.moveReport.OPPONENT=m.moveReport.OPPONENT.map(l=>/^HEALTH: /.test(l)?(labelled++,l+ARMOR):l);
+  if(!labelled)continue;checked++;
+  const after=reportSteps(c.previous,next,resolve(c.previous,next,c.me,catalog));
+  assert.ok(after.verified,`${name}: ${!after.verified&&after.reason}`);
+  assert.deepEqual(after,before,`${name}: same steps`);
+  assert.equal(timeline(c.previous,next,resolve(c.previous,next,c.me,catalog),catalog)!.bars,'per-card',name);
+ }
+ assert.ok(checked>=3,`rounds with a HEALTH line on the target: ${checked}`);
+});
 const chained=(list:Step[],start:Record<string,Record<string,number>>)=>{const v=structuredClone(start);for(const s of list){assert.equal(v[s.seat][s.resource]??0,s.from,`${s.seat} ${s.resource} chain`);v[s.seat][s.resource]=s.to;}return v;};
 test('every recorded contiguous round: steps chain from the previous view to the new one',()=>{
  for(const name of contiguous){const c=pair(name),r=stepsOf(name);assert.ok(r.verified,`${name}: ${!r.verified&&r.reason}`);if(!r.verified)continue;
