@@ -8,7 +8,7 @@ import {RestError, signUpApi} from '../src/net/rest.ts';
 const source = readFileSync(new URL('../../docs/game-rules.md', import.meta.url), 'utf8');
 const blocks = parseRules(source);
 const headings = (level: number) => blocks.flatMap(b => b.kind === 'heading' && b.level === level ? [b.text] : []);
-// Regulation 1.13 (SB-2): the cards are in the set document, shown on the same page after the regulation.
+// The cards are in the set document, shown on the same page after the regulation (SB-2). SB-28, D184 (2): the documents are now regulation 2.0 and Set Base 1.0.
 const setSource = readFileSync(new URL('../../docs/sets/base.md', import.meta.url), 'utf8');
 const setBlocks = parseRules(setSource);
 type Table = Extract<Block, {kind: 'table'}>;
@@ -17,7 +17,7 @@ const tablesOf = (all: Block[]) => all.filter((b): b is Table => b.kind === 'tab
 test('rules: every heading, the version and the revisions of docs/game-rules.md', () => {
   const expected = [...source.matchAll(/^(#{1,6}) (.*)$/gm)].map(m => `${m[1].length} ${m[2]}`);
   assert.deepEqual(blocks.flatMap(b => b.kind === 'heading' ? [`${b.level} ${b.text}`] : []), expected);
-  assert.deepEqual(headings(2).map(h => h.split(' — ')[0]), ['R00', 'R01', 'R01a', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R07a', 'R08', 'R09', 'Revisioni']);
+  assert.deepEqual(headings(2).map(h => h.split(' — ')[0]), ['R00', 'R01', 'R01a', 'R02', 'R02a', 'R03', 'R04', 'R05', 'R06', 'R07', 'R07a', 'R07b', 'R08', 'R09', 'Revisioni']); // SB-28, D184 (2): regulation 2.0 adds R02a (search) and R07b (keywords)
   assert.equal(rulesVersion(blocks), /Versione \*\*(\S+) —/.exec(source)![1]);
   const revisions = blocks.at(-1) as Extract<Block, {kind: 'list'}>;
   assert.equal(revisions.kind, 'list');
@@ -27,7 +27,7 @@ test('rules: every heading, the version and the revisions of docs/game-rules.md'
 test('set document: every heading, the version and the revisions of docs/sets/base.md', () => {
   const expected = [...setSource.matchAll(/^(#{1,6}) (.*)$/gm)].map(m => `${m[1].length} ${m[2]}`);
   assert.deepEqual(setBlocks.flatMap(b => b.kind === 'heading' ? [`${b.level} ${b.text}`] : []), expected);
-  assert.deepEqual(setBlocks.flatMap(b => b.kind === 'heading' && b.level === 2 ? [b.text.split(' — ')[0]] : []), ['S1', 'S2', 'S3', 'S4', 'S5', 'Revisioni']);
+  assert.deepEqual(setBlocks.flatMap(b => b.kind === 'heading' && b.level === 2 ? [b.text.split(' — ')[0]] : []), ['S1', 'S2', 'S3', 'S4', 'Revisioni']); // SB-28, D184 (2): Set Base 1.0 has four sections; the card sheets (S3) are prose, no longer one table per card
   assert.equal(rulesVersion(setBlocks), /Versione \*\*(\S+) —/.exec(setSource)![1]);
   const revisions = setBlocks.at(-1) as Extract<Block, {kind: 'list'}>;
   assert.equal(revisions.kind, 'list');
@@ -42,12 +42,14 @@ test('rules and set document: tables keep every row and cell (cards in the set, 
     assert.equal(tables.reduce((n, t) => n + 1 + t.rows.length, 0), rows);
     for (const t of tables) for (const r of t.rows) assert.equal(r.length, t.head.length);
   }
-  const characters = tablesOf(setBlocks).find(t => t.head.length > 3 && plain(t.head[3]) === 'HEALTH')!;
-  assert.deepEqual(characters.rows.map(r => plain(r[2])), ['Spazienzio de la Ucciso', 'Tossico del Serraglio']);
-  assert.equal(characters.align[3], 'right');
-  const roles = tablesOf(setBlocks).find(t => t.head.length === 3 && plain(t.head[1]) === 'Ruolo' && plain(t.head[2]) === 'Guadagni a sé')!;
-  assert.ok(roles.rows.some(r => plain(r[0]) === 'BigBadBruiser'));
-  assert.ok(tablesOf(setBlocks).some(t => plain(t.head[6] ?? []) === 'Effetto in ordine'), 'R07 action sheets in the set document');
+  const characters = tablesOf(setBlocks).find(t => t.head.length > 3 && plain(t.head[0]) === 'Personaggio' && plain(t.head[1]) === 'H')!;
+  // SB-28, D184 (2): the character table of S2 has the seven characters of the Set Base 1.0, with the resources as columns H A V T L.
+  assert.equal(characters.rows.length, 7);
+  assert.deepEqual(characters.rows.map(r => plain(r[0])), ['SPAZIENZIO DE LA UCCISO', 'Mara Contromano', 'Celestina Bucatina', 'Piera Pinot', 'Beppe Bulletta', 'Sergio Sommerso', 'Duccio Braccio Teso']);
+  assert.equal(characters.align[1], 'right');
+  const roles = tablesOf(setBlocks).find(t => t.head.length === 6 && plain(t.head[2]) === 'Ruolo' && plain(t.head[3]) === 'Guadagni a sé')!;
+  assert.ok(roles.rows.some(r => plain(r[1]) === 'bruiser.character.BigBadBruiser'));
+  assert.ok(roles.rows.length >= 117, 'S4 lists the cards of the set'); // D184 (2): the sheets are prose in S3; the tables are the lists of S1, the characters of S2 and the roles of S4
   const definitions = tablesOf(blocks).find(t => plain(t.head[0]) === 'Ruolo' && plain(t.head[1]) === 'Significato')!;
   assert.equal(definitions.rows.length, 7);
   assert.ok(!tablesOf(blocks).some(t => plain(t.head[0]) === 'Carta'), 'no card table left in the regulation');

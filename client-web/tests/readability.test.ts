@@ -56,10 +56,14 @@ test('statuses, equipment, immunities and timers become chips with a short summa
  assert.match(chips[1].text,/×0,35.*fine turno/);assert.equal(chips[2].short,'∞');assert.match(chips[3].text,/Server text.*2 turni/);assert.match(chips[4].text,/tra 3 fine turno/);
  assert.equal(new Set(chips.map(x=>x.id)).size,chips.length);
 });
-test('status summaries agree with the multipliers of R07',()=>{
- const r07=readFileSync(new URL('../../docs/sets/base.md',import.meta.url),'utf8').split(/\r?\n/); // card sheets: set document (regulation 1.13)
+// SB-28, D184 (2): the live Set Base 1.0 sheets are prose with Italian status names; the client's short texts (STATUS_TEXT) are still keyed on the
+// English names of the Set Base 0.1 and stay a gap for SB-31 (the client of the new set). They are checked against the sheets of the 0.1,
+// the set they describe, now in the history document; any other name keeps the text the server sends (the live statuses).
+test('status summaries agree with the multipliers of the Set Base 0.1 sheets (docs/history/set-base-0.1.md); the live statuses keep the server text',()=>{
+ const r07=readFileSync(new URL('../../docs/history/set-base-0.1.md',import.meta.url),'utf8').split(/\r?\n/);
  for(const [name,card] of [['YOU CARESS ME','CantFeelAnything'],['ONLY A LITTLE DISCOMFORT','LittleRage'],['NO PATIENCE - Damage Intake Boost','Glare'],['MADE OF STONE','MadeOfStone'],['BROKEN BEER','BrokenBeerBottle']]){
-  const factor=statusText(name,'').match(/×[\d,]+/)![0],row=r07.find(l=>l.startsWith(`| ${card} |`)&&l.includes('×'))!;assert.ok(row.includes(factor),`${name} ${factor} in R07 ${card}`);}
+  const factor=statusText(name,'').match(/×[\d,]+/)![0],row=r07.find(l=>l.startsWith(`| ${card} |`)&&l.includes('×'))!;assert.ok(row.includes(factor),`${name} ${factor} in the 0.1 sheet of ${card}`);}
+ assert.equal(statusText('LIEVE FASTIDIO','Server text'),'Server text','a status of the Set Base 1.0 shows the server text until SB-31');
 });
 const VIEWPORTS:[number,number][]=[[1366,768],[844,390]];
 const blocks=(s:ReturnType<typeof tableLayout>['seats'][number])=>[s.person,...s.items,s.board];

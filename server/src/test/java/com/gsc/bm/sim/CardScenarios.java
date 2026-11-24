@@ -75,7 +75,7 @@ final class CardScenarios {
         Random random = new Random(seed);
         ComPlayer a = java.player(random.nextBoolean() ? SimulationCatalog.BRUISER : SimulationCatalog.JUNKIE, "seat-1", new Random(seed));
         ComPlayer b = java.player(random.nextBoolean() ? SimulationCatalog.BRUISER : SimulationCatalog.JUNKIE, "seat-2", new Random(seed + 1));
-        Game game = new Game(List.of(a, b), "sim", false);
+        Game game = com.gsc.bm.LiveFixtures.legacy(new Game(List.of(a, b), "sim", false));
         arrange(a.getCharacter(), random);
         arrange(b.getCharacter(), random);
         String report;

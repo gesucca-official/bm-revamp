@@ -9,18 +9,25 @@ const entry=read('../public/art/manifest.json').files.find((f:{file:string})=>f.
 const layout:AtlasLayout=entry;
 const classes:string[]=[...catalog.cards,...catalog.characters,...catalog.tokens].map((c:{class:string})=>c.class);
 
-test('O9: every class of the annex has its own tile inside the atlas',()=>{
- assert.equal(classes.length,40);
- const used=new Set<number>();
+// SB-28, D184 (2): the annex is the live Set Base 1.0 (117 cards, 7 characters, 1 token: 125 classes). The atlas still draws the 40 classes
+// of the Set Base 0.1; the images are SB-32's. The 34 classes that stay in the set keep their own tile, the other 91 get the neutral
+// placeholder (no-img.png) until SB-32 draws them, and the 6 classes that left the set (D182, D183) keep a tile no card asks for.
+const LEFT_THE_SET=['bruiser.WhatchaDoin','com.ShuffleFeet','junkie.BadTrip','junkie.BeggingMoney','junkie.EverythingIsDrug','junkie.GoingBerserk'];
+test('O9: every class of the annex has its own tile inside the atlas, or the placeholder while its art is missing (SB-28, D184 (2))',()=>{
+ assert.equal(classes.length,125);
+ const used=new Set<number>();let drawn=0,placeholders=0;
  for(const c of classes){
   const i=artIndex(c,layout);
-  assert.notEqual(i,layout.placeholder,`${c} uses the placeholder`);
+  if(!Object.hasOwn(layout.tiles,c)){assert.equal(i,layout.placeholder,`${c} has no tile: the placeholder`);placeholders++;continue;}
+  drawn++;
+  assert.notEqual(i,layout.placeholder,`${c} has a tile in the manifest but uses the placeholder`);
   assert.ok(Number.isInteger(i)&&i>=0&&i<layout.cols*layout.rows,`${c} out of the grid`);
   assert.ok(!used.has(i),`${c} shares tile ${i}`);used.add(i);
   const f=artFrame(i,layout);
   assert.ok(f.x>=0&&f.y>=0&&f.x+f.size<=entry.width&&f.y+f.size<=entry.height,`${c} frame outside the image`);
  }
- assert.deepEqual(Object.keys(layout.tiles).sort(),[...classes].sort(),'manifest lists exactly the annex classes');
+ assert.equal(drawn,34,'classes of the annex with their own tile');assert.equal(placeholders,91,'classes of the annex on the placeholder until SB-32');
+ assert.deepEqual(Object.keys(layout.tiles).filter(c=>!classes.includes(c)).sort(),[...LEFT_THE_SET].sort(),'the manifest names no class the annex does not know, but the six that left the set');
 });
 
 test('O9: atlas stays within the owner limits',()=>{

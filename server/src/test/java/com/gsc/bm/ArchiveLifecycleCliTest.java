@@ -1,7 +1,6 @@
 package com.gsc.bm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gsc.bm.model.cards.bruiser.character.BigBadBruiser;
 import com.gsc.bm.model.game.*;
 import com.gsc.bm.repo.external.*;
 import com.gsc.bm.service.factories.*;
@@ -53,14 +52,14 @@ class ArchiveLifecycleCliTest extends SqliteContextSupport {
         for(int i=0;i<humans;i++) {
             String user="archive"+mode+scenario+i;accounts.add(user);
             users.createIfAbsent(new UserCredentialsRecord(user,null,encoder.encode("synthetic"),"USER"));
-            var character=new BigBadBruiser();
+            var character=LiveFixtures.character("bruiser.character.BigBadBruiser");
             players.add(new Player(user,character,decks.craftBasicActionStarterCard(character),List.of(),decks.craftLastResortStarterCard(character),List.of()));
         }
         if(humans==1) {
-            var character=new BigBadBruiser();
+            var character=LiveFixtures.character("bruiser.character.BigBadBruiser");
             players.add(new ComPlayer(character,decks.craftBasicActionStarterCard(character),List.of(),decks.craftLastResortStarterCard(character),List.of()));
         }
-        var game=new Game(players,mode,false);String id=game.getGameId();
+        var game=LiveFixtures.live(new Game(players,mode,false));String id=game.getGameId();
         if(mode.equals("quick1vCom")) doReturn(game).when(factory).craftQuick1vComGame(accounts.get(0));
         else if(mode.equals("open1vCom")) doReturn(game).when(factory).craftOpen1vComGame(accounts.get(0),"fixture");
         else doReturn(game).when(factory).craftQuickMultiPlayerGame(anyList(),eq(mode));

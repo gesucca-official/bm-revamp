@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.*;
+import com.gsc.bm.LiveFixtures;
 import static com.gsc.bm.model.game.GameFixtures.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -27,7 +28,7 @@ class LifecycleClockTest {
     final GameSessionServiceImpl service = new GameSessionServiceImpl(mock(ConnectionsService.class), logs,
             mock(ViewExtractorService.class), time);
     Game game(String... users) {
-        Game g = new Game(Arrays.stream(users).map(GameFixtures::player).collect(java.util.stream.Collectors.toList()), "quickFFA", false);
+        Game g = LiveFixtures.live(new Game(Arrays.stream(users).map(GameFixtures::player).collect(java.util.stream.Collectors.toList()), "quickFFA", false));
         service.newGame(g); return g;
     }
     Move move(Game g, String user, String target) { return new Move("last-resort", user, target, g.getGameId(), null); }
@@ -58,8 +59,9 @@ class LifecycleClockTest {
         service.submitMoveToGame(move(g,"c","d"),()->{}); service.submitMoveToGame(move(g,"d","c"),()->{});
         time.now+=30000; service.expireDue();
         assertEquals(Set.of("a","b"),g.getForfeits().keySet()); assertFalse(g.isOver()); assertEquals(1,g.getTurn());
-        assertEquals(100,g.getPlayers().get("a").getResources().get(Resource.HEALTH));
-        assertEquals(85,g.getPlayers().get("c").getResources().get(Resource.HEALTH)); assertEquals(0,outcomes());
+        // SB-28, D184 (1): live game, Spazienzio 70 HEALTH; «Addosso!!!»: c takes 5 of its own and 10 from d: 70 - 15 (before 100 and 85)
+        assertEquals(70,g.getPlayers().get("a").getResources().get(Resource.HEALTH));
+        assertEquals(55,g.getPlayers().get("c").getResources().get(Resource.HEALTH)); assertEquals(0,outcomes());
     }
     @Test void ffaOneSurvivorWinsAndDuplicateLeaveDoesNotRecordTwice() {
         Game g=game("a","b","c"); service.submitMoveToGame(move(g,"c","a"),()->{});
@@ -84,10 +86,8 @@ class LifecycleClockTest {
     }
     Game versusComputer() {
         Player a=player("a");
-        var bot=new ComPlayer(new com.gsc.bm.model.cards.bruiser.character.BigBadBruiser(),
-            named(new com.gsc.bm.model.cards.com.basic.BruiserGrab(),"basic"),List.of(),
-            named(new com.gsc.bm.model.cards.com.last.Struggle(),"last-resort"),List.of());
-        Game g=new Game(List.of(a,bot),"quick1vCom",false); service.newGame(g); return g;
+        var bot=LiveFixtures.computer("ComPlayer_1",LiveFixtures.SPAZIENZIO,1);
+        Game g=LiveFixtures.live(new Game(List.of(a,bot),"quick1vCom",false)); service.newGame(g); return g;
     }
     @ParameterizedTest @ValueSource(longs={29999,30000,30001})
     void reconnectBoundaryAlsoAgainstComputerAndRepeatedDropDoesNotExtend(long elapsed) {

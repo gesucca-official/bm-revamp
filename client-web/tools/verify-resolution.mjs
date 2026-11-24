@@ -124,6 +124,7 @@ async function playOne(p,prefer,confirm){
   if(s.message.includes('scartare')){let ok=false;for(const r of s.hits.filter(h=>h.kind==='hand'&&h.id!==card.key)){await tap(r);if((await p.state()).discard){ok=true;break;}}if(!ok){await esc();continue;}}
   if(!(await page.getByTestId('confirm').isEnabled())){await esc();continue;}
   const before=moves();if(confirm)await confirm(card);else await page.getByTestId('confirm').click();
+  if(await page.getByTestId('search-option').count())await page.getByTestId('search-option').first().click();
   const r=await p.wait(x=>!x||x.phase==='pending'||x.turn!==s.turn||x.over||x.eliminated||(x.phase==='choose'&&x.message.startsWith('Rifiutata')),15000,'server answer');
   assert.equal(moves()-before,1,`${p.name}: one SEND per confirmation`);
   if(r&&r.phase==='choose'&&r.message.startsWith('Rifiutata')&&r.turn===s.turn){await esc();continue;}
@@ -827,22 +828,24 @@ try{
    const mark=A.sent.length;await page.getByTestId('save-deck').click();await page.getByTestId('deck-notice').waitFor({timeout:10000});
    assert.ok(A.sent.slice(mark).some(f=>f.command==='SEND'&&f.headers.destination.startsWith('/app/user/devAlice/deck')),'deck saved');
   }
+  // SB-28, D184 (6): WhatchaDoin, BeggingMoney, ShuffleFeet, EverythingIsDrug and GoingBerserk left the set (D182, D183); their places are taken by
+  // cards of the Set Base 1.0 (data-driven actions and objects), the families being the same: cancel cards, objects to consume, thefts.
   // R02 1.12 (SB-1): two copies at most and two bound cards. Up to C4 these decks had YouStop x7 or Steal x6 and one bound;
   // the same cases now come from wider families of cards: every cancel card of the set, every object, every theft.
   // Counters and objects (Bruiser): YouStop, WhatchaDoin and AmphetamineReflexes cancel later moves (Glare pays for them);
   // objects drawn to the table and grabbed; Cocktail and MarvelousCocktail bring the poison of the lethal end of turn.
-  const counters=['bruiser.YouStop','bruiser.WhatchaDoin','junkie.AmphetamineReflexes','com.Grab','com.basic.BruiserGrab','bruiser.SuperImpact','bruiser.ExtremelyViolentBlow'];
+  const counters=['bruiser.YouStop','base.items.PosacenereDiVetro','junkie.AmphetamineReflexes','com.Grab','com.basic.BruiserGrab','bruiser.SuperImpact','bruiser.ExtremelyViolentBlow'];
   await saveDeck('C3 contrasti','bruiser.character.BigBadBruiser','com.basic.BruiserGrab',['bruiser.character.LittleRage','bruiser.character.LittleSmack'],
-   [['bruiser.YouStop',2],['bruiser.WhatchaDoin',2],['junkie.AmphetamineReflexes',2],['bruiser.Glare',2],['com.items.CocktailOnTheGround',2],
+   [['bruiser.YouStop',2],['base.items.PosacenereDiVetro',2],['junkie.AmphetamineReflexes',2],['bruiser.Glare',2],['com.items.CocktailOnTheGround',2],
     ['com.items.MarvelousCocktail',2],['com.items.AnotherRottenBeer',2],['com.Grab',2],['bruiser.SuperImpact',2],['bruiser.ExtremelyViolentBlow',2]]);
-  // Theft and tokens (Junkie): Steal, BeggingMoney and ShuffleFeet on the computer's objects, AnotherRottenBeer creating a token, EverythingIsDrug.
-  const theft=['com.Steal','junkie.BeggingMoney','com.ShuffleFeet','junkie.EverythingIsDrug','com.Grab','com.basic.ToxicGrab','junkie.MethDrivenRage','junkie.character.PatheticBlade'];
+  // Theft and tokens (Junkie): Steal on the computer's objects, AnotherRottenBeer creating a token, objects of the set to consume.
+  const theft=['com.Steal','base.items.PaninoDelKebab','base.items.GrappaDellaCasa','base.items.PasticcaTrovataSulBancone','com.Grab','com.basic.ToxicGrab','junkie.MethDrivenRage','junkie.character.PatheticBlade'];
   await saveDeck('C3 furti','junkie.character.ToxicJunkie','com.basic.ToxicGrab',['junkie.character.PatheticBlade','junkie.character.RottenSmile'],
-   [['com.Steal',2],['junkie.BeggingMoney',2],['com.ShuffleFeet',2],['com.items.AnotherRottenBeer',2],['junkie.EverythingIsDrug',2],
-    ['com.items.MarvelousCocktail',2],['com.items.CocktailOnTheGround',2],['com.Grab',2],['junkie.MethDrivenRage',2],['junkie.GoingBerserk',2]]);
+   [['com.Steal',2],['base.items.PaninoDelKebab',2],['base.items.GrappaDellaCasa',2],['com.items.AnotherRottenBeer',2],['base.items.PasticcaTrovataSulBancone',2],
+    ['com.items.MarvelousCocktail',2],['com.items.CocktailOnTheGround',2],['com.Grab',2],['junkie.MethDrivenRage',2],['base.com.DentiStretti',2]]);
   const preferBy=list=>s=>{const own=s.hits.some(h=>h.kind==='item'&&h.target.owner===s.me),far=s.hits.some(h=>h.kind==='item'&&h.target.owner!==s.me);
    return name=>{const b=Object.entries(names).find(([,n])=>n===name)?.[0]??'';const i=list.indexOf(b);if(i<0)return 0;
-    if(/Grab|EverythingIsDrug/.test(b)&&!own)return -1;if(/Steal|BeggingMoney/.test(b)&&!far)return -1;return list.length-i;};};
+    if(/Grab/.test(b)&&!own)return -1;if(/Steal/.test(b)&&!far)return -1;return list.length-i;};};
   evidence.blow=[];evidence.blowProblems=[];
   for(const [id,list] of [['C3 contrasti',counters],['C3 furti',theft]]){
    await page.getByTestId('tab-play').click();await page.getByRole('radio',{name:'Con un tuo mazzo'}).click();

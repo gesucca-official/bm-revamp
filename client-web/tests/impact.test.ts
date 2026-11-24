@@ -6,7 +6,7 @@ import {pace,directionProblems,PACE} from '../src/resolution.ts';
 import type {Card} from '../src/contracts.ts';
 const fixtures=JSON.parse(readFileSync(new URL('./fixtures.json',import.meta.url),'utf8'));
 const card=(over:Partial<Card>):Card=>({...fixtures.cards.stop,cost:{},...over});
-// The catalog attachment of regulation 1.10 (rules-catalog.json): the 37 cards with role, nominal damage and amount.
+// The catalog attachment (rules-catalog.json): SB-28 (D184 (2)), the 117 cards of the live Set Base 1.0 with role, nominal damage and amount (the 37 of the 0.1 before).
 const attachment=JSON.parse(readFileSync(new URL('../../docs/rules-catalog.json',import.meta.url),'utf8'));
 const toCard=(c:Record<string,string>)=>card({name:c.name,bindingName:c.class.split('.').pop()!,role:c.role,gains:c.gains,damage:c.damage,damageAmount:c.damageAmount});
 const catalog:Card[]=attachment.cards.map(toCard),tokens:Card[]=attachment.tokens.map(toCard);
@@ -40,9 +40,9 @@ test('C3-5: every polygon symbol has a shape with at least three points, the two
 });
 
 test('C3-5: the impact of every card of the catalog is that of its type of damage, else of its role (O7, D2)',()=>{
- assert.equal(catalog.length,37);
+ assert.equal(catalog.length,117);
  const withType=catalog.filter(c=>damageOf(c).length);
- assert.equal(withType.length,12,'12 cards with a nominal damage (11 HIT, PatheticBlade CUT)');
+ assert.equal(withType.length,46,'46 cards with a nominal damage (34 HIT, 8 CUT, 4 POISON; 12 of 37 in the 0.1), D184 (2)');
  for(const c of catalog){
   const types=damageOf(c).map(e=>e.type),imp=impactOf(c),role=c.role&&Object.hasOwn(ROLES,c.role)?c.role:null;
   const want:ImpactKind[]=types.length?types:role?[role as ImpactKind]:['PLAIN'];
@@ -59,7 +59,8 @@ test('C3-5: the impact of every card of the catalog is that of its type of damag
  assert.deepEqual(impactOf(by('MarvelousCocktail')).kinds,['RESOURCES'],'the poison of its timer is not the card\'s damage');
  assert.deepEqual(impactOf(by('MadeOfStone')).kinds,['DEFENSE']);
  assert.deepEqual(impactOf(by('YouStop')).kinds,['COUNTER']);
- assert.deepEqual(impactOf(by('Cough')).kinds,['DISRUPT']);
+ assert.deepEqual(impactOf(by('ManoLesta')).kinds,['DISRUPT'],'D184 (2): Cough left the set with the 0.1; ManoLesta is a DISRUPT without damage');
+ assert.deepEqual(impactOf(by('Cough')).kinds,['POISON'],'Cough, now in the Set Base 1.0, has a nominal POISON damage: the type wins over the role');
  assert.deepEqual(impactOf(by('Grab')).kinds,['ITEMS']);
  // Older servers: the damage fields are missing, the role decides; a card with neither gets the plain ring.
  assert.deepEqual(impactOf(card({role:'DAMAGE',damage:undefined})).kinds,['DAMAGE']);

@@ -68,7 +68,8 @@ function inspect(x,complete) {
   if(b) await accepted(b,c?c.user:a.user,!c);
   if(c) await accepted(c,a.user,true);
   const round=await view(a);assert.strictEqual(round.turn,1);
-  Object.values(round.players).forEach(p=>assert.strictEqual(p.character.resources.HEALTH,85));
+  // SB-28, D184 (1): live match with Spazienzio of the Set Base 1.0 (70 HEALTH): «Addosso!!!» costs 5 to the author and 10 to the target, 70 - 15 = 55 (before: 100 - 15 = 85)
+  Object.values(round.players).forEach(p=>assert.strictEqual(p.character.resources.HEALTH,55));
   if(scenario==='timeout') {
     if(b) await accepted(b,c?c.user:a.user,false);
     if(c) await accepted(c,b.user,false);

@@ -9,6 +9,7 @@ import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.game.Ruleset;
 import com.gsc.bm.service.session.MatchSnapshot;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
@@ -75,7 +76,14 @@ class SimulationControlTest {
         JsonNode initial = events.get(0).path("data").path("state");
         List<Player> players = new ArrayList<>();
         for (JsonNode seat : initial.path("players")) players.add(player(catalog, seat, name));
+        // SB-28, D184 (1): the rules are those the archive header records. The control replays with the frozen catalog of the Set
+        // Base 0.1 (SimulationCatalog), so it reads archives of regulation 1.13; a 2.0 archive (live matches since SB-28) needs the
+        // catalog of the live set, which this control does not have yet: it stops instead of replaying with the wrong cards.
+        String rules = events.get(0).path("data").path("versions").path("rulesVersion").asText();
+        if (!"1.13".equals(rules))
+            throw new IllegalStateException(name + ": archivio di regolamento " + rules + "; il controllo rigioca solo archivi 1.13 (Set Base 0.1)");
         Game game = new Game(players, initial.path("mode").asText(), false);
+        game.useRuleset(Ruleset.parse(rules));
         String serverId = export.path("gameId").asText();
         tally.games++;
         boolean diverged = !same(game, initial, serverId, name + " INITIAL", tally);

@@ -2,8 +2,7 @@ package com.gsc.bm.model.game;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gsc.bm.api.ws.MoveCommandValidator;
 import com.gsc.bm.model.Resource;
-import com.gsc.bm.model.cards.com.items.RottenBeer;
-import com.gsc.bm.model.cards.com.Steal;
+import com.gsc.bm.LiveFixtures;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
 import static com.gsc.bm.model.game.GameFixtures.*;
@@ -31,21 +30,21 @@ class MoveCommandTest {
         assertThrows(IllegalMoveException.class, () -> command(game,"last-resort","missing", Map.of()));
         assertThrows(IllegalMoveException.class, () -> command(game,"last-resort","SELF", Map.of()));
         assertThrows(IllegalMoveException.class, () -> command(game,"last-resort","bob", Map.of("UNKNOWN","x")));
-        assertTrue(game.getPendingMoves().isEmpty()); assertEquals(100,alice.getResources().get(Resource.HEALTH));
+        assertTrue(game.getPendingMoves().isEmpty()); assertEquals(70,alice.getResources().get(Resource.HEALTH)); // SB-28, D184 (1): Spazienzio of the Set Base 1.0 has 70 HEALTH (before: 100)
     }
     @Test void boundDiscardAndItemsKeepExistingChecksAndSelfConvention() {
         var alice = player("alice"); var bob = player("bob"); var g = duel(alice,bob);
         assertThrows(IllegalMoveException.class, () -> command(g,"bound-two","SELF",Map.of()));
         assertThrows(IllegalMoveException.class, () -> g.submitMove(command(g,"bound-two","SELF",Map.of("DISCARD_ONE","last-resort"))));
-        alice.getCardsInHand().add(named(new com.gsc.bm.model.cards.bruiser.SuperImpact(),"spare"));
+        alice.getCardsInHand().add(LiveFixtures.card("bruiser.SuperImpact","spare"));
         g.submitMove(command(g,"bound-two","SELF",Map.of("DISCARD_ONE","spare")));
         assertEquals(1,g.getPendingMoves().size());
     }
     @Test void nearAndFarItemsRequireRealChoiceWithoutChangingResources() {
         var alice = player("alice"); var bob = player("bob"); var g = duel(alice,bob);
-        alice.getCharacter().getItems().add(named(new RottenBeer(),"near"));
-        bob.getCharacter().getItems().add(named(new RottenBeer(),"far"));
-        alice.getCardsInHand().add(named(new Steal(),"steal"));
+        alice.getCharacter().getItems().add(LiveFixtures.card("com.items.RottenBeer","near"));
+        bob.getCharacter().getItems().add(LiveFixtures.card("com.items.RottenBeer","far"));
+        alice.getCardsInHand().add(LiveFixtures.card("com.Steal","steal"));
         assertThrows(IllegalMoveException.class, () -> command(g,"basic","SELF",Map.of()));
         assertThrows(IllegalMoveException.class, () -> g.submitMove(command(g,"basic","SELF",Map.of("TARGET_ITEM","missing"))));
         Move near = command(g,"basic","SELF",Map.of("TARGET_ITEM","near"));

@@ -319,7 +319,7 @@ class ConsumeEquipStatesTest {
     private static Game game() throws Exception {
         Player a = draft.player("starter-bruiser", "seat-1", new Random(1), null);
         Player b = draft.player("starter-junkie", "seat-2", new Random(2), null);
-        return new Game(List.of(a, b), "sim", false);
+        return com.gsc.bm.LiveFixtures.legacy(new Game(List.of(a, b), "sim", false));
     }
 
     /** Gioca una carta di prova che consuma il Cocktail, presente sul campo oppure sparito prima della risoluzione. */

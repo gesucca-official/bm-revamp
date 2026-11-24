@@ -22,7 +22,7 @@ class MatchArchiveRecoveryTest {
     @TempDir Path directory;
     final ObjectMapper mapper = new ObjectMapper();
     JdbcTemplate jdbc(Path path) { return new JdbcTemplate(ApplicationDatabase.open(path)); }
-    Game game() { var fixture = new MatchArchiveTest(); return new Game(List.of(fixture.player("a"), fixture.player("b")), "quick1v1", false); }
+    Game game() { var fixture = new MatchArchiveTest(); return LiveFixtures.live(new Game(List.of(fixture.player("a"), fixture.player("b")), "quick1v1", false)); }
     MatchArchiveService archive(MatchEventRepository repository, Path journal) {
         return new MatchArchiveService(repository, mapper, new MatchVersions(), new MatchRecoveryJournal(journal, mapper));
     }
@@ -134,8 +134,10 @@ class MatchArchiveRecoveryTest {
         runtime.submitMoveToGame(new Move("struggle","a","b",id,null), notified::incrementAndGet);
         runtime.submitMoveToGame(new Move("struggle","b","a",id,null), notified::incrementAndGet);
         assertEquals(1, notified.get()); assertEquals(1, game.getTurn());
-        assertEquals(85, game.getPlayers().get("a").getResources().get(Resource.HEALTH));
-        assertEquals(-5, game.getPlayers().get("b").getResources().get(Resource.HEALTH));
+        // SB-28, D184 (1): live match, Spazienzio of the Set Base 1.0 (70 HEALTH): «Addosso!!!» costs the author 5 and the opponent 10,
+        // so a: 70 - 15 = 55; b, at 10, goes to the floor of 0 (R07b). Before: 100 - 15 = 85 and -5 on the 1.13 engine, with a header of 2.0.
+        assertEquals(55, game.getPlayers().get("a").getResources().get(Resource.HEALTH));
+        assertEquals(0, game.getPlayers().get("b").getResources().get(Resource.HEALTH));
         var bytes = repo.read(id).stream().map(MatchEventRepository.Entry::getJson).collect(java.util.stream.Collectors.toList());
         assertEquals(List.of("INITIAL","MOVE_ACCEPTED","COMMAND_COMMITTED","MOVE_ACCEPTED","ROUND_READY","ENGINE_REPORT","ROUND_COMMITTED","COMMAND_COMMITTED","OUTCOME"), kinds(repo.read(id)));
         var pool = Executors.newFixedThreadPool(3); var gate = new CountDownLatch(1);

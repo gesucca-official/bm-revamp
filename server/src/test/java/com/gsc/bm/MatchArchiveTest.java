@@ -5,8 +5,6 @@ import com.gsc.bm.conf.db.ApplicationDatabase;
 import com.gsc.bm.model.game.*;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.bruiser.character.*;
-import com.gsc.bm.model.cards.com.basic.BruiserGrab;
-import com.gsc.bm.model.cards.com.last.Struggle;
 import com.gsc.bm.repo.external.MatchEventRepository;
 import com.gsc.bm.repo.external.MatchEventRepository.Entry;
 import com.gsc.bm.service.session.*;
@@ -31,9 +29,10 @@ class MatchArchiveTest {
     MatchArchiveService archive(MatchEventRepository repository) { return new MatchArchiveService(repository, mapper, new MatchVersions()); }
     static <T extends AbstractCard> T named(T card, String name) { card.setGuiName(name); return card; }
     Player player(String name) {
-        return new Player(name, new BigBadBruiser(), named(new BruiserGrab(), "basic"),
-                List.of(named(new LittleSmack(), "bound"), named(new LittleRage(), "rage")),
-                named(new Struggle(), "struggle"), List.of(named(new Struggle(), "regular")));
+        // SB-28, D184 (1): Spazienzio of the Set Base 1.0, the player of the live game (regulation 2.0).
+        return new Player(name, LiveFixtures.character("bruiser.character.BigBadBruiser"), LiveFixtures.card("com.basic.BruiserGrab", "basic"),
+                List.of(LiveFixtures.card("bruiser.character.LittleSmack", "bound"), LiveFixtures.card("bruiser.character.LittleRage", "rage")),
+                LiveFixtures.card("com.last.Struggle", "struggle"), List.of(LiveFixtures.card("com.last.Struggle", "regular")));
     }
     @Test void migratesOnlyAnIsolatedCopyOfV1PreservingEveryLegacyTableAndChecksum() throws Exception {
         Path original = directory.resolve("v1.sqlite"), copy = directory.resolve("copy.sqlite");
@@ -127,7 +126,7 @@ class MatchArchiveTest {
     }
     @Test void snapshotsExportAndRereadAreDetachedAndDoNotRequireLiveGameOrSession() throws Exception {
         Path file = directory.resolve("snapshot.sqlite"); var repo = new MatchEventRepository(jdbc(file)); var archive = archive(repo);
-        Player a = player("a"), b = player("b"); var game = new Game(List.of(a,b), "quick1v1", false);
+        Player a = player("a"), b = player("b"); var game = LiveFixtures.live(new Game(List.of(a,b), "quick1v1", false));
         archive.start(game); String initial = repo.read(game.getGameId()).get(0).getJson();
         assertThrows(AccessDeniedException.class, () -> archive.export(game.getGameId(), "a"));
         b.getResources().put(com.gsc.bm.model.Resource.HEALTH, 0);
@@ -151,12 +150,12 @@ class MatchArchiveTest {
         for (String hash : List.of("codeSha256","rulesSha256","catalogSha256","rulesCatalogSha256")) {
             assertTrue(initialTree.path("versions").path(hash).asText().matches("[0-9a-f]{64}"));
         }
-        assertEquals(100, initialTree.path("state").path("players").get(1).path("resources").path("HEALTH").asInt());
+        assertEquals(70, initialTree.path("state").path("players").get(1).path("resources").path("HEALTH").asInt());
     }
     @Test void failedInitialAndLaterWritesRetainImmutableEvidenceAndRemainPendingForRetry() {
         var repo = mock(MatchEventRepository.class); doThrow(new IllegalStateException("synthetic")).when(repo).commit(anyString(),anyList());
         when(repo.read(anyString())).thenReturn(List.of()); var archive = archive(repo);
-        var game = new Game(List.of(player("a"),player("b")),"quick1v1",false);
+        var game = LiveFixtures.live(new Game(List.of(player("a"),player("b")),"quick1v1",false));
         assertDoesNotThrow(() -> archive.start(game));
         game.getPlayers().get("b").getResources().put(com.gsc.bm.model.Resource.HEALTH,0);
         assertDoesNotThrow(() -> archive.record(game, List.of(new ActionLog("OUTCOME",game))));
@@ -170,12 +169,12 @@ class MatchArchiveTest {
     @Test void mutableStatusesTimersItemsAndDrawOutcomeRemainFrozenInTheArchive() throws Exception {
         var repo = new MatchEventRepository(jdbc(directory.resolve("states.sqlite"))); var archive = archive(repo);
         var a = player("a"); var b = player("b");
-        new com.gsc.bm.model.cards.bruiser.MadeOfStone().applyEffectOnSelf(a.getCharacter());
+        ((AbstractCard) LiveFixtures.card("bruiser.MadeOfStone")).applyEffectOnSelf(a.getCharacter());
         new com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle().applyEffectOnSelf(a.getCharacter());
         a.getCharacter().getTimers().add(new com.gsc.bm.model.game.Timer("synthetic timer", c -> {}, 3));
         a.getCharacter().getImmunities().add(com.gsc.bm.model.Resource.TOXICITY);
-        a.getCharacter().getItems().add(named(new com.gsc.bm.model.cards.com.items.RottenBeer(),"beer"));
-        var game = new Game(List.of(a,b),"quick1v1",false); archive.start(game);
+        a.getCharacter().getItems().add(LiveFixtures.card("com.items.RottenBeer","beer"));
+        var game = LiveFixtures.live(new Game(List.of(a,b),"quick1v1",false)); archive.start(game);
         String frozen = repo.read(game.getGameId()).get(0).getJson();
         a.getCharacter().getStatuses().get(0).aTurnIsPassed(); a.getCharacter().getTimers().iterator().next().timeTick();
         a.getCharacter().getItems().clear();
@@ -205,13 +204,13 @@ class MatchArchiveTest {
         var logger = new GameLoggingServiceImpl(mock(org.springframework.core.env.Environment.class),mock(com.gsc.bm.repo.external.GameLogRepository.class),archive);
         var service = new GameSessionServiceImpl(mock(ConnectionsService.class),logger,mock(com.gsc.bm.service.view.ViewExtractorService.class));
         var a=player("a"); a.getCardsInHand().add(new FaultCard());
-        var game=new Game(List.of(a,player("b")),"quick1v1",false); service.newGame(game);
+        var game=LiveFixtures.live(new Game(List.of(a,player("b")),"quick1v1",false)); service.newGame(game);
         service.submitMoveToGame(new Move("struggle","b","a",game.getGameId(),null),()->fail("not ready"));
         var before=repo.read(game.getGameId()); assertEquals(3,before.size());
         assertThrows(IllegalMoveException.class,()->service.submitMoveToGame(new Move("fault","a","SELF",game.getGameId(),null),()->fail("failed round")));
         assertEquals(before.size(),repo.read(game.getGameId()).size());
         assertEquals(before.get(2).getHash(),repo.read(game.getGameId()).get(2).getHash());
-        assertEquals(100,game.getPlayers().get("a").getResources().get(com.gsc.bm.model.Resource.HEALTH));
+        assertEquals(70,game.getPlayers().get("a").getResources().get(com.gsc.bm.model.Resource.HEALTH));
         assertEquals(1,game.getPendingMoves().size());
         service.submitMoveToGame(new Move("struggle","a","b",game.getGameId(),null),()->{});
         assertEquals(1,game.getTurn()); assertEquals(8,repo.read(game.getGameId()).size());

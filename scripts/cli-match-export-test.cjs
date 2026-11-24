@@ -49,8 +49,9 @@ async function main() {
     assert.strictEqual(JSON.parse(all[2].json).data.pendingMoves.length, 2);
     const result = JSON.parse(all[4].json).data;
     assert.strictEqual(result.resolvedMoves.length, 2);
-    assert.strictEqual(result.players[0].resources.HEALTH, 85);
-    assert.strictEqual(result.players[1].resources.HEALTH, -5);
+    // SB-28, D184 (1): live match, Spazienzio of the Set Base 1.0 (70 HEALTH): 70 - 15 = 55; the bot at 10 goes to the floor of 0 (R07b)
+    assert.strictEqual(result.players[0].resources.HEALTH, 55);
+    assert.strictEqual(result.players[1].resources.HEALTH, 0);
     assert.strictEqual(result.outcome.result, 'win'); assert.strictEqual(result.outcome.winner, process.env.BM_USER);
     assert(Object.keys(result.resolvedMoves[0].report).length > 0);
     await c.command({command: 'leave', gameId: id});

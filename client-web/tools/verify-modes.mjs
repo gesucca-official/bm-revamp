@@ -18,6 +18,8 @@ const browser=await chromium.launch({channel:'msedge',headless:process.env.BM_HE
 // STOMP frames inside SockJS frames: a["MESSAGE\ndestination:...\n\n{...}\u0000"]
 const stompFrames=payload=>{const s=String(payload);if(!s.startsWith('a['))return[];try{return JSON.parse(s.slice(1)).map(raw=>{const [head,...rest]=raw.split('\n\n');const lines=head.split('\n');return{command:lines[0],headers:Object.fromEntries(lines.slice(1).map(l=>[l.slice(0,l.indexOf(':')),l.slice(l.indexOf(':')+1)])),body:rest.join('\n\n').replace(/\u0000$/,'')};});}catch{return[];}};
 
+// SB-28, D184 (6): in the live game (regulation 2.0, R02a) a card that announces two names, both in the deck, asks which one to search: «Conferma» opens
+// the dialog «Quale carta cerchi?» (SB-16i, D97, D102) and the move leaves with the choice. The dialog is the client's own; here the first option answers it.
 async function join(name){
  const {user,password}=accounts[name];
  const context=await browser.newContext({viewport:{width:vw,height:vh}}),page=await context.newPage();
@@ -69,6 +71,7 @@ async function playOut(p){
    if(s.message.includes('scartare')){let ok=false;for(const r of s.hits.filter(h=>h.kind==='hand'&&h.id!==card.key)){await tap(r);if((await p.state()).discard){ok=true;break;}}if(!ok){await cancel();continue;}}
    if(!(await page.getByTestId('confirm').isEnabled())){await cancel();continue;}
    const before=p.moves;await page.getByTestId('confirm').click();
+   if(await page.getByTestId('search-option').count())await page.getByTestId('search-option').first().click();
    s=await p.wait(x=>x.over||x.turn!==turn||x.phase==='pending'||(x.phase==='choose'&&x.message.startsWith('Rifiutata')),15000,'server answer');
    if(s.phase==='choose'&&s.message.startsWith('Rifiutata')&&s.turn===turn){await cancel();continue;}
    assert.equal(p.moves-before,1,`${p.name}: exactly one SEND per confirmation`);sent=true;p.turns++;break;
@@ -88,7 +91,17 @@ function checkPrivacy(me,other,hands){
   assert.ok(Array.isArray(v.players[me.user].cardsInHand),`${me.name}: own hand is an array`);
   assert.equal(typeof v.players[other.user].cardsInHand,'number',`${me.name}: the other hand is only a count`);
   const rest=JSON.parse(JSON.stringify(v));delete rest.resolvedMoves;delete rest.pendingMove;delete rest.timeBasedEffects;
-  for(const pl of Object.values(rest.players))delete pl.character;
+  // SB-28, D184 (3): regulation 2.0, R08 makes public the cards shown by a successful search, `players[].revealed[].card`, and one of them may share its
+  // name with a card in the other hand. Only that card is left out of the text (as in VerifyFfa); `copy` and `turn` and the rest of the view stay checked,
+  // and `slot`, the place in the hand, is for the owner alone.
+  for(const [id,pl] of Object.entries(rest.players)){
+   delete pl.character;
+   for(const r of pl.revealed??[]){
+    assert.deepEqual(Object.keys(r).filter(k=>!['copy','slot','card','turn'].includes(k)),[],`${me.name}: ${id}'s revealed copy has only the public fields`);
+    if(id!==me.user)assert.equal(r.slot,undefined,`${me.name}: the place in ${id}'s hand of a shown copy is not public`);
+    delete r.card;
+   }
+  }
   // The own hand array is the viewer's own (a card drawn on the last turn was never seen by the UI loop): not a leak.
   delete rest.players[me.user].cardsInHand;
   const text=JSON.stringify(rest);

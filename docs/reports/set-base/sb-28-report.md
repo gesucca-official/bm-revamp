@@ -181,3 +181,121 @@ solo se cambia il codice.
 **Non provato:** una partita giocata da una persona nel client (spetta al proprietario); FFA con cinque umani; le altre verifiche
 `Verify…` del client (fra cui `VerifyDecks` e `VerifyResolution`, ancora sullo 0.1); la migrazione su mazzi salvati veri (coperta
 solo da `SetBaseDecksMigrationTest`).
+
+## Rifinitura (D184)
+
+**Esito: consegnata il 24 novembre 2026, con un rosso aperto per la regia: `VerifyResolution` (sotto, punto 6).** Il comportamento di gioco non
+cambia: nessun file di `server/src/main` è stato modificato (solo spostate le classi dello 0.1 non più usate dalla partita viva), quindi la
+corsa d'identità del giro 20/2 non è stata rifatta. Nessun push, nessun deploy. Il server e l'anteprima del proprietario non sono stati toccati.
+
+### Per punto
+
+**1. Fixture al 2.0.** Le fixture che costruiscono `new Game` a mano giocano ora la partita viva: `Ruleset.LIVE`, personaggi e carte del file
+del set (nuova `LiveFixtures`: `set()`, `character`, `card`, `player`, `computer`, `live`, `legacy`). `GameFixtures` è riscritta su
+Spazienzio del Set Base 1.0 (70 HEALTH, base «ADOPERIAMOTI», ultima risorsa «Addosso!!!», legate chiamate `bound-one`/`bound-two` secondo il
+bersaglio); gli attesi sono quelli del 2.0 (HEALTH non scende sotto 0, costi pagati solo con quello che si ha) e ogni numero cambiato dice
+«SB-28, D184 (1)» (MoveTest, MoveCommandTest, RoundIsolationTest, LifecycleClockTest, OutcomeReasonTest, MatchArchiveTest,
+MatchArchiveRecoveryTest, MatchRestartTest, i tre test CLI dell'archivio, QuickCompleteCliTest, DeckRulesContextTest, che ora ripete la regola
+R02 su tutti e cinque gli starter). `LiveCharactersTest` (nuovo) prova che ogni personaggio vivo ha le cinque risorse e che la fixture è
+`LIVE`. Script: `cli-match-export-test.cjs` ha ora intestazione 2.0 e salute 55/0 (era 85/−5), come `cli-archive-lifecycle-test.cjs`;
+`cli-quick-complete-test.cjs` legge la salute iniziale dalla vista e calcola i turni attesi.
+Restano su `Ruleset.LEGACY`, ora **esplicito** (`LegacyFixtures` o `LiveFixtures.legacy`), solo i test che provano il motore 1.13 o il
+simulatore storico con le carte Java dello 0.1: `CatalogEffectsTest`, `MissingResourceTest`, `RulesConformanceTest`, `BotViewTest`,
+`CardScenarios`, `ConsumeEquipStatesTest`, `PlaygroundTest`, `SimulationControlTest`. **Scostamento dalla lettera di D184 (1) da
+confermare:** la lettera dice che restano su 1.13 solo i test che leggono partite archiviate; questi non leggono archivi ma giocano il
+catalogo storico congelato (`/set-base/storico/0.1`), che esiste per riprodurre le misure 1.13. Portarli al 2.0 con le carte vive
+significherebbe riscriverli come test nuovi.
+La lettura di una partita archiviata 1.13 è provata da `ArchivedMatch113Test` (nuovo): gioca una partita 1.13 con le classi dello 0.1,
+la rilegge con un servizio e una connessione nuovi, e controlla intestazione 1.13/0.1, HEALTH iniziale 100, esito, 85/−5, integrità e
+accesso negato a un estraneo. `SimulationControlTest` (controllo di SB-3) ora legge `versions.rulesVersion` dall'esportazione e rifiuta
+quelle che non sono 1.13: il controllo non funziona più su una partita viva 2.0 (la partita viva non è più riproducibile dal catalogo
+storico).
+Non convertiti: le fixture di giocatore di `QuickDuel`, `QuickFfa` e `OpenComplete` (test di contesto) che passano ancora per
+personaggi Java con 100 HEALTH; le partite sono vive (2.0) e i test sono verdi, ma i numeri non sono quelli del set.
+
+**2. `client-web` `Test`.** Sulla base `5870108` (prima del passaggio) era **369 su 369 verde**; dopo `80d5b3b` era 362 su 369 (7 rossi), tutti
+causati dal passaggio. Ora **369 su 369 verde**. Cambiati (ogni atteso cita D184 (2)): `art.test.ts` (125 classi: 34 col riquadro
+proprio, 91 col segnaposto `no-img.png`, le 6 classi uscite tengono un riquadro che nessuna carta chiede), `frames.test.ts` (67 regolari,
+21 legate, 7 base, 4 ultime risorse, 18 oggetti; 117 carte), `impact.test.ts` (117 carte, 46 col danno nominale, `ManoLesta` per DISRUPT
+perché `Cough` ora ha il danno POISON), `public.test.ts` (regolamento: R02a e R07b; documento del set: S1–S4 e Revisioni, tabelle di
+personaggi, starter e ruoli del Set Base 1.0, schede in prosa), `readability.test.ts` (i cinque testi di stato `STATUS_TEXT` si confrontano
+con le righe dello 0.1 in `docs/history/set-base-0.1.md`; uno stato dell'1.0 mostra il testo del server). **Nessun difetto del client emerso
+da `Test`.** Un vuoto resta per SB-31: `STATUS_TEXT` è indicizzato sui nomi inglesi dello 0.1 e i marcatori `[[…]]` dei testi nuovi non hanno
+una lettura nel client.
+
+**3. Riservatezza FFA.** In `verify-ffa.mjs` l'esenzione `delete pl.revealed` è ristretta: si toglie dal testo controllato solo `revealed[].card`
+(la carta mostrata da una ricerca riuscita, pubblica per R08 2.0); `copy` e `turn` e il resto della vista restano nel controllo, un campo
+fuori da `copy`, `slot`, `card`, `turn` fa fallire, e `slot` (il posto nella mano) deve mancare nelle viste degli altri giocatori. La stessa
+esenzione mancava in `verify-modes.mjs`, dove ha fatto fallire il controllo alla prima prova con una carta «solo nella mano dell'altro»
+uguale per nome a una carta mostrata: è stata data la stessa forma stretta.
+
+**4. Classi dello 0.1 non più usate.** Spostate **24 classi** da `server/src/main` a `server/src/test` (stesso pacchetto, `git mv`; non
+cancellate): servono ancora al catalogo storico congelato e al simulatore (`SimulationCatalog` le istanzia per nome) e ai test storici, ma
+la partita viva non le carica: bruiser `CantFeelAnything`, `ExtremelyViolentBlow`, `Glare`, `HealingBlow`, `MadeOfStone`, `SeagullFly`,
+`SickeningBlow`, `StunningBlow`, `SuperImpact`; bruiser/character `BigBadBruiser`, `LittleRage`, `LittleSmack`; com `Grab`, `basic/BruiserGrab`,
+`basic/ToxicGrab`, `items/CocktailOnTheGround`, `last/Struggle`; junkie `Cough`, `LethalHeroinDose`, `MethDrivenRage`,
+`PervertedMetabolism`; junkie/character `PatheticBlade`, `RottenSmile`, `ToxicJunkie`. Restano in `main` le 22 classi di carta che il set
+vivo usa (le 19 `java:true`, più `RottenBeer`, `BrokenBeerBottle` e `Contromossa`, richiamate da altre: bruiser `BadEducation`, `BreakYourToy`, `YouStop`; com `Steal`, `items/AnotherRottenBeer`, `items/MarvelousCocktail`,
+`items/RottenBeer`, `tokens/BrokenBeerBottle`; junkie `AmphetamineReflexes`, `ToxicBloodDrain`; base `cesira/Contromossa`, `LoSapevo`, `Ricatto`,
+`bound/NeRiparliamoFuori`, `com/BeggingMoney`, `com/ShuffleFeet`, `gigi/LavoroFattoBene`, `items/SantinoDellaPortinaia`, `pino/GoingBerserk`,
+`RuttoADistanzaSociale`, `UltimoGiro`, `rocco/bound/MiRialzo`) e le 7 basi comuni (`AbstractCard`, `AbstractCharacterBoundCard`,
+`AbstractItemCard`, `Card`, `LoadableCard`, `PrintedEffects`, `Tunable`). Perché non servono le classi per leggere gli archivi: l'archivio è
+JSON puro (`MatchArchiveService`, `MatchEventRepository`) e non ricostruisce partite giocabili; lo prova `ArchivedMatch113Test` (punto 1).
+I 24 file sono ancora in `server/src/test` e il jar (`server/target`) non li contiene più: **il jar è da rifare** (non l'ho rifatto: vedi sotto).
+
+**5. `ToxicBloodDrain`, controllo `poison > 0`.** Il campo `poison` (`@Tunable`, 10 nel set vivo) è il danno POISON del passo 5 della scheda
+«Trascinare nel Tunnel» (`docs/sets/base.md`: «Infliggi 10 POISON all'avversario», danno fisso 10 POISON). Il controllo `if (poison > 0)`
+salta quel passo, nella logica e nel testo stampato per i bot, solo con `poison = 0`, valore che scrivono ancora le bozze storiche scritte
+prima di D84 (`BozzeStoriche`, `PotenzaD82Test`, `BozzeStoricheTest`): così le loro misure restano quelle. Nella partita viva il valore
+è 10 e il controllo non scatta mai. **La scheda e il codice concordano per la partita viva; non cambia nessun gioco e non ho toccato il
+codice.** Toglierlo cambierebbe le misure storiche (le bozze con `poison = 0` infliggerebbero 0 POISON con un danno da 0 invece di saltare il
+passo): decisione per la regia se si vuole comunque, con una rimisura.
+
+**6. `VerifyDecks` e `VerifyResolution`.**
+- `verify-decks.mjs` adeguato al set vivo: catalogo di 124 facce (117 carte e 7 personaggi), 46 con danno, 33 col riquadro proprio
+  nell'atlante e 91 sul segnaposto (la verifica calcola, con le stesse funzioni del client, il riquadro atteso di ogni faccia); mazzi di prova
+  con carte vive (`TartarugaSulMarciapiede`, `MattoneDelCantiere`, `DentiStretti` al posto delle uscite); tre legate per Spazienzio e per
+  Celestina; due ultime risorse generiche. **Verde.**
+- `verify-resolution.mjs` adeguato: mazzi «C3 contrasti» e «C3 furti» con carte vive al posto di `WhatchaDoin`, `BeggingMoney`, `ShuffleFeet`,
+  `EverythingIsDrug`, `GoingBerserk`. **Rosso su un controllo vero**, non sugli attesi: la regola `c34` (le barre per carta della scena
+  contro la misura delle righe del rapporto). Con le carte vive la scena ripiega sui totali («bars total») anche quando la misura dice che le
+  righe ricostruiscono le viste: per esempio «HEALTH: i passi finiscono a 50, la vista dice 20» e «4 passi, la misura 6»; in FFA «passi
+  7, misura 12». Rossi `quick` (due partite diverse), `ffa`, `humans` e `open` «C3 furti»; verdi `reduced`, `interruptions`, `infoDuel`,
+  `infoFfa`, `infoTouch`, `jump`, `report` e `rule4WithClock`; in `open` «C3 contrasti» ha passato `c34`, ma il controllo della pillola di
+  `ExtremelyViolentBlow`, che viene dopo i due mazzi, non è stato raggiunto. Il ripiego sui totali è il comportamento corretto
+  del client quando non sa ricostruire un turno: la lacuna è nel costruttore dei passi (`reportSteps` in `client-web/src/resolution.ts`),
+  che con le carte e le regole nuove non riproduce le viste, mentre `reportCheck` sì. È un difetto del client rispetto al set 1.0 (adeguamento
+  SB-31), **non l'ho corretto e non ho cambiato l'atteso**; non diagnosticato oltre il sintomo. Prove in `%TEMP%` della sessione, non nel
+  repository.
+- Per far girare le verifiche di gioco serve rispondere alla finestra «Quale carta cerchi?» (SB-16i): con le carte nuove compare spesso
+  (annunci con due nomi nel mazzo), e `verify-modes`, `verify-decks` e `verify-resolution` ora scelgono la prima opzione dopo «Conferma».
+  È una modifica dello strumento, non del client.
+
+### Verifiche
+
+| Verifica | Esito |
+|---|---|
+| `./scripts/build.ps1 -Task Test -Offline` | verde: 1501 test, 0 falliti, 23 saltati; client di debug 37 su 37; `check-rules.py` incluso |
+| `./scripts/build.ps1 -Task TestServerContext -Offline` (a parte) | verde: 1699 test, 0 falliti, 23 saltati |
+| `python scripts/check-rules.py`, `python scripts/verify-match-manifests.py` | verdi (`allChecks: PASS`) |
+| `client-web` `Test` | verde: 369 su 369 (sulla base `5870108` era 369 su 369; sul passaggio 362 su 369) |
+| `VerifyModes` | verde (dopo la risposta alla finestra di ricerca e la stretta di riservatezza) |
+| `VerifyFfa` | verde, con la riservatezza ristretta |
+| `VerifyDecks` | verde |
+| `VerifyResolution` | **rosso**: `c34` in `quick`, `ffa`, `humans`, `open` (furti); gli altri scenari verdi (punto 6) |
+| `docs/reports/set-base/sb-28/partite-cli.cjs` (7 corse da 12 partite; quattro con una copia del runner che registrava i rifiuti, poi tolta) | 12 partite su 12 arrivate all'esito in ogni corsa, 2.0 e Set Base 1.0 registrati; **una** mossa rifiutata in una corsa su sette (Duccio, `illegalMove`), 0 nelle altre; il runner non registra il motivo e non l'ho riprodotto in quattro corse con registrazione |
+
+Le verifiche del client sono state eseguite sul jar costruito dalla copia attuale del sorgente in una cartella della sessione (porta 18080,
+anteprima 14320, database temporaneo): non ho toccato né il server né l'anteprima del proprietario (8080 e 4320), né `server/target`.
+**Il jar del proprietario in `server/target` non è stato rifatto** (resta quello delle 18:19 del 23 novembre): il gioco non cambia, quindi
+può continuare la sua partita; va rifatto (`./scripts/build.ps1 -Task Server -Offline`) prima del push perché non contiene la pulizia.
+Dopo le mie prove il processo sulla 8080 non risultava più in ascolto: non l'ho fermato io, ho chiuso solo i processi sulle porte 18080 e 14320.
+
+### Cosa resta
+
+1. **Decisione della regia su `VerifyResolution`** (`c34`): il client non riproduce per carta i turni del Set Base 1.0. Va a SB-31, oppure
+   si decide una correzione prima del push; lo strumento non è stato allentato.
+2. Confermare lo scostamento del punto 1 (le fixture storiche restano su 1.13, esplicite).
+3. Una mossa rifiutata nelle partite CLI (una su circa 84): da capire se è un caso legale del runner o un difetto; non ripetibile in quattro corse.
+4. SB-31: `STATUS_TEXT` sui nomi dello 0.1 e marcatori `[[…]]` senza lettura nel client; SB-32: immagini (il segnaposto `no-img.png` copre 91 classi).
+5. Rifare il jar prima del push; il push resta del proprietario.

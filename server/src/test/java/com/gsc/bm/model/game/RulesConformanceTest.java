@@ -15,10 +15,15 @@ import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
 import com.gsc.bm.model.game.status.*;
 import org.junit.jupiter.api.Test;
 import java.util.*;
-import static com.gsc.bm.model.game.GameFixtures.*;
+import static com.gsc.bm.model.game.LegacyFixtures.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-/** Normative regression scenarios for docs/game-rules.md v1.1; no Spring/DB. */
+/**
+ * Normative regression scenarios for docs/game-rules.md v1.1; no Spring/DB.
+ * SB-28, D184 (1): a historical test of the engine 1.13 with the Set Base 0.1 (explicitly {@link Ruleset#LEGACY},
+ * {@link LegacyFixtures}); the rules of the live game, regulation 2.0, are tested by RegoleD50Test and the live cards by
+ * Sb27ActionSheetTest.
+ */
 class RulesConformanceTest {
     private Move move(Game g, Player p, String card, String target, Map<Move.AdditionalAction,String> choices) {
         return new Move(card, p.getPlayerId(), target, g.getGameId(), choices);

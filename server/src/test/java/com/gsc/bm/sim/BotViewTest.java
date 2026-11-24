@@ -82,7 +82,7 @@ class BotViewTest {
         Player me = catalog.player(SimulationCatalog.BRUISER, "seat-1", new Random(1), new RandomPolicy());
         Player alive = catalog.player(SimulationCatalog.JUNKIE, "seat-2", new Random(2), new RandomPolicy());
         Player dead = catalog.player(SimulationCatalog.JUNKIE, "seat-3", new Random(3), new RandomPolicy());
-        Game game = new Game(List.of(me, alive, dead), "sim", false);
+        Game game = com.gsc.bm.LiveFixtures.legacy(new Game(List.of(me, alive, dead), "sim", false));
         dead.getCharacter().getResources().put(Resource.HEALTH, 0);
         List<LegalMove> legal = BotView.of(game, "seat-1").legalMoves();
         assertTrue(legal.stream().anyMatch(move -> move.getTargetId().equals("seat-2")));

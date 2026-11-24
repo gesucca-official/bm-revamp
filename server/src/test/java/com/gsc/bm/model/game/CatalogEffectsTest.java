@@ -17,10 +17,15 @@ import com.gsc.bm.model.game.status.*;
 import org.junit.jupiter.api.*;
 import java.util.*;
 import java.util.stream.Stream;
-import static com.gsc.bm.model.game.GameFixtures.*;
+import static com.gsc.bm.model.game.LegacyFixtures.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-/** Small independent lots. Numeric expectations transcribed from R02/R04-R07 v1.3. */
+/**
+ * Small independent lots. Numeric expectations transcribed from R02/R04-R07 v1.3.
+ * SB-28, D184 (1): a historical test of the engine 1.13 with the cards of the Set Base 0.1 (explicitly {@link Ruleset#LEGACY},
+ * {@link LegacyFixtures}), kept for the measurements that run on 1.13. The live cards are tested against their sheets by
+ * Sb27ActionSheetTest and the live rules by RegoleD50Test.
+ */
 class CatalogEffectsTest {
     private int value(Character c, Resource r) { return c.getResources().getOrDefault(r,0); }
     private void effect(AbstractCard card, Character a, Character b) {
@@ -254,7 +259,7 @@ class CatalogEffectsTest {
     @Test void lot3_reflexesMultipleOpponentsAndOtherTargets() {
         Player a=player("a"),b=player("b"),c=player("c"),d=player("d"); a.getResources().put(Resource.TOXICITY,10);
         a.getCardsInHand().add(named(new AmphetamineReflexes(),"reflex"));
-        Game g=new Game(List.of(a,b,c,d),"synthetic ffa",false);
+        Game g=legacy(new Game(List.of(a,b,c,d),"synthetic ffa",false));
         g.submitMove(move(g,a,"reflex","SELF",null)); g.submitMove(move(g,b,"last-resort","a",null));
         g.submitMove(move(g,c,"last-resort","a",null)); g.submitMove(move(g,d,"last-resort","b",null)); round(g);
         assertEquals(100,value(a.getCharacter(),Resource.HEALTH)); assertEquals(90,value(b.getCharacter(),Resource.HEALTH));
@@ -267,7 +272,7 @@ class CatalogEffectsTest {
         a.getResources().put(Resource.TOXICITY,10); a.getCardsInHand().add(named(new AmphetamineReflexes(),"reflex"));
         b.getCardsInHand().add(named(new RottenSmile(),"early")); b.getCardsInHand().add(named(new Glare(),"spare"));
         c.getCardsInHand().add(named(new Glare(),"spare"));
-        Game g=new Game(List.of(a,b,c,d),"counter boundaries",false);
+        Game g=legacy(new Game(List.of(a,b,c,d),"counter boundaries",false));
         g.submitMove(move(g,a,"reflex","SELF",null)); g.submitMove(move(g,b,"early","a",Map.of(Move.AdditionalAction.DISCARD_ONE,"spare")));
         g.submitMove(move(g,c,"bound-two","SELF",Map.of(Move.AdditionalAction.DISCARD_ONE,"spare")));
         g.submitMove(move(g,d,"last-resort","a",null)); round(g);
@@ -283,7 +288,7 @@ class CatalogEffectsTest {
         a.getCharacter().getTimers().add(new Timer("dead",x->fail("dead timer"),1)); new MadeOfStone().applyEffectOnSelf(a.getCharacter());
         b.getResources().put(Resource.HEALTH,1); b.getResources().put(Resource.TOXICITY,10); b.getResources().put(Resource.ALCOHOL,4);
         b.getCharacter().getTimers().add(new Timer("alive phase",x->x.gainResource(Resource.VIOLENCE,7),1));
-        Game g=new Game(List.of(a,b,c),"phase fixture",false); g.submitMove(Move.voidMove("b")); g.submitMove(Move.voidMove("c")); round(g);
+        Game g=legacy(new Game(List.of(a,b,c),"phase fixture",false)); g.submitMove(Move.voidMove("b")); g.submitMove(Move.voidMove("c")); round(g);
         assertEquals(3,a.getCharacter().getStatuses().get(0).getLastsForTurns()); assertEquals(1,a.getCharacter().getTimers().iterator().next().getTimer());
         assertEquals(10,value(a.getCharacter(),Resource.ALCOHOL)); assertEquals(-4,value(b.getCharacter(),Resource.HEALTH));
         assertEquals(18,value(b.getCharacter(),Resource.ALERTNESS)); assertEquals(1,value(b.getCharacter(),Resource.ALCOHOL));

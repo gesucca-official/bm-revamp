@@ -1,7 +1,6 @@
 package com.gsc.bm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gsc.bm.model.cards.bruiser.character.BigBadBruiser;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.game.*;
 import com.gsc.bm.repo.external.*;
@@ -44,17 +43,17 @@ class MatchArchiveCliTest extends SqliteContextSupport {
         String user = fault ? "archiveFault" : "archiveSuccess";
         users.createIfAbsent(new UserCredentialsRecord(user,null,encoder.encode("synthetic"),"USER"));
         users.createIfAbsent(new UserCredentialsRecord(user+"Observer",null,encoder.encode("synthetic"),"USER"));
-        var humanCharacter = new BigBadBruiser();
+        var humanCharacter = LiveFixtures.character("bruiser.character.BigBadBruiser");
         var regular = new ArrayList<com.gsc.bm.model.cards.Card>();
         for (int i=0;i<20;i++) { regular.add(cards.craftCard("com.last.Struggle")); }
         var human = new Player(user,humanCharacter,decks.craftBasicActionStarterCard(humanCharacter),
                 decks.craftCharacterBoundStarterCards(humanCharacter),decks.craftLastResortStarterCard(humanCharacter),regular);
-        var botCharacter = new BigBadBruiser();
+        var botCharacter = LiveFixtures.character("bruiser.character.BigBadBruiser");
         var bot = new ComPlayer(botCharacter,decks.craftBasicActionStarterCard(botCharacter),
                 decks.craftCharacterBoundStarterCards(botCharacter),decks.craftLastResortStarterCard(botCharacter),List.of());
         bot.getCardsInHand().clear(); bot.getCardsInHand().add(cards.craftCard("com.last.Struggle"));
         bot.getResources().put(Resource.HEALTH,10);
-        var game = new Game(List.of(human,bot),"quick1vCom",false); String id = game.getGameId();
+        var game = LiveFixtures.live(new Game(List.of(human,bot),"quick1vCom",false)); String id = game.getGameId();
         doReturn(game).when(gameFactory).craftQuick1vComGame(user);
         if (fault) {
             doThrow(new org.springframework.dao.DataAccessResourceFailureException("synthetic write failure"))
@@ -72,7 +71,11 @@ class MatchArchiveCliTest extends SqliteContextSupport {
             assertTrue(process.waitFor(25,TimeUnit.SECONDS),"CLI did not close");
             assertEquals(0,process.exitValue(),Files.readString(output));
             var result=mapper.readTree(Files.readString(output).trim()); assertTrue(result.path("ok").asBoolean());
-            assertEquals(1,game.getTurn()); assertEquals(85,human.getResources().get(Resource.HEALTH)); assertEquals(-5,bot.getResources().get(Resource.HEALTH));
+            assertEquals(1,game.getTurn());
+            // SB-28, D184 (1): live match (regulation 2.0, the header says 2.0) with Spazienzio of the Set Base 1.0 (70 HEALTH): both play
+            // «Addosso!!!» (5 HIT to oneself, 10 to the opponent): the human 70 - 15 = 55 and the bot, at 10, goes to the floor of 0
+            // (R07b: no resource below zero). Before: 100 - 15 = 85 and -5 on the 1.13 engine, with a header that said 2.0.
+            assertEquals(55,human.getResources().get(Resource.HEALTH)); assertEquals(0,bot.getResources().get(Resource.HEALTH));
             assertEquals(fault ? 1 : 7,events.read(id).size());
             assertFalse(Files.readString(output).contains("synthetic"));
             assertFalse(Files.readString(output).contains("password")); assertFalse(Files.readString(output).contains("saltedHash"));

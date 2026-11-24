@@ -2,8 +2,7 @@ package com.gsc.bm.model.game;
 
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.Card;
-import com.gsc.bm.model.cards.bruiser.SuperImpact;
-import com.gsc.bm.model.cards.com.last.Struggle;
+import com.gsc.bm.LiveFixtures;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,7 +14,7 @@ class MoveTest {
     @Test
     void unaffordableMoveIsRejectedWithoutPendingMoveOrResourceChange() {
         Player alice = player("alice");
-        Card card = named(new SuperImpact(), "impact");
+        Card card = LiveFixtures.card("bruiser.SuperImpact", "impact");
         alice.getCardsInHand().add(card);
         alice.getResources().put(Resource.VIOLENCE, 24);
         Game game = duel(alice, player("bob"));
@@ -31,7 +30,7 @@ class MoveTest {
     void costIsPaidOnlyWhenAppliedAndChangesOnlyTheActingPlayer() {
         Player alice = player("alice");
         Player bob = player("bob");
-        alice.getCardsInHand().add(named(new SuperImpact(), "impact"));
+        alice.getCardsInHand().add(LiveFixtures.card("bruiser.SuperImpact", "impact"));
         Game game = duel(alice, bob);
         Move move = new Move("impact", "alice", "bob", game.getGameId(), null);
 
@@ -45,7 +44,7 @@ class MoveTest {
     @Test
     void secondMoveFromSamePlayerDoesNotReplaceTheFirst() {
         Player alice = player("alice");
-        alice.getCardsInHand().add(named(new SuperImpact(), "impact"));
+        alice.getCardsInHand().add(LiveFixtures.card("bruiser.SuperImpact", "impact"));
         Game game = duel(alice, player("bob"));
         Move first = new Move("impact", "alice", "bob", game.getGameId(), null);
         game.submitMove(first);
@@ -61,8 +60,8 @@ class MoveTest {
         Player bob = player("bob");
         alice.getCardsInHand().clear();
         bob.getCardsInHand().clear();
-        alice.getCardsInHand().add(named(new Struggle(), "alice-action"));
-        bob.getCardsInHand().add(named(new Struggle(), "bob-action"));
+        alice.getCardsInHand().add(LiveFixtures.card("com.last.Struggle", "alice-action"));
+        bob.getCardsInHand().add(LiveFixtures.card("com.last.Struggle", "bob-action"));
         Game game = duel(alice, bob);
         game.submitMove(new Move("alice-action", "alice", "bob", game.getGameId(), null));
         assertFalse(game.isReadyToResolveMoves());
@@ -72,8 +71,10 @@ class MoveTest {
 
         game.resolveMoves(updated -> callbacks[0]++, (turn, events) -> assertEquals(0, turn));
 
-        assertEquals(85, alice.getResources().get(Resource.HEALTH));
-        assertEquals(85, bob.getResources().get(Resource.HEALTH));
+        // SB-28, D184 (1): live game, Spazienzio of the Set Base 1.0 (70 HEALTH), «Addosso!!!» (the sheet of the last resort):
+        // 5 HIT to oneself and 10 to the opponent, 15 each: 70 - 15 = 55 (before: 100 - 15 = 85 with the Set Base 0.1).
+        assertEquals(55, alice.getResources().get(Resource.HEALTH));
+        assertEquals(55, bob.getResources().get(Resource.HEALTH));
         assertEquals(1, game.getTurn());
         assertEquals(2, game.getResolvedMoves().size());
         assertTrue(game.getPendingMoves().isEmpty());

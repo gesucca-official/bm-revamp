@@ -334,7 +334,7 @@ class PlaygroundTest {
         Draft draft = Draft.fromClasspath(SB9);
         com.gsc.bm.model.game.Player rocco = draft.player("prova-rocco", "seat-1", new java.util.Random(1), null);
         com.gsc.bm.model.game.Player mara = draft.player("prova-mara", "seat-2", new java.util.Random(2), null);
-        Game game = new Game(List.of(rocco, mara), "sim", false);
+        Game game = com.gsc.bm.LiveFixtures.legacy(new Game(List.of(rocco, mara), "sim", false));
         Card paid = draft.card("prova.rocco.ColpoPagato");
         rocco.getCardsInHand().add(paid);
         com.gsc.bm.model.game.Move move = new com.gsc.bm.model.game.Move(paid.getName(), "seat-1", "seat-2", game.getGameId(), Map.of());

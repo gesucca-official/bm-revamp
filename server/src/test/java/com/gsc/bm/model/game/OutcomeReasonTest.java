@@ -21,13 +21,11 @@ class OutcomeReasonTest {
             mock(GameLoggingService.class), mock(ViewExtractorService.class), time);
 
     ComPlayer computer(String id, long seed) {
-        return new ComPlayer(id, new com.gsc.bm.model.cards.bruiser.character.BigBadBruiser(),
-                named(new com.gsc.bm.model.cards.com.basic.BruiserGrab(), "basic"), List.of(),
-                named(new com.gsc.bm.model.cards.com.last.Struggle(), "last-resort"), List.of(), new Random(seed));
+        return com.gsc.bm.LiveFixtures.computer(id, com.gsc.bm.LiveFixtures.SPAZIENZIO, seed);
     }
 
     Game start(String type, Player... players) {
-        Game g = new Game(List.of(players), type, false);
+        Game g = com.gsc.bm.LiveFixtures.live(new Game(List.of(players), type, false));
         service.newGame(g);
         return g;
     }
@@ -45,8 +43,9 @@ class OutcomeReasonTest {
         assertEquals(Set.of("a", "b"), g.getForfeits().keySet());
         assertTrue(g.isOver());
         assertTrue(g.getTurn() > 0, "the computers resolved rounds after the forfeits");
-        String winner = g.getWinner().orElseThrow();
-        assertTrue(g.getPlayers().get(winner) instanceof ComPlayer);
+        // SB-28, D184 (1): with the 70 HEALTH of the Set Base 1.0 the three computers may also kill one another in the same round
+        // (draw), as in leaveOfLastHumanInFfaWithComputersEndsByCombat: the winner, if there is one, is a computer.
+        g.getWinner().ifPresent(w -> assertTrue(g.getPlayers().get(w) instanceof ComPlayer));
         assertEquals("combat", g.getOutcomeReason());
         assertEquals(Map.of("a", "move timeout", "b", "move timeout"), g.getForfeits(), "forfeit reasons are unchanged");
     }

@@ -1,8 +1,6 @@
 package com.gsc.bm;
 
 import com.gsc.bm.model.Character;
-import com.gsc.bm.model.cards.bruiser.character.BigBadBruiser;
-import com.gsc.bm.model.cards.junkie.character.ToxicJunkie;
 import com.gsc.bm.repo.external.UserCredentialsRecord;
 import com.gsc.bm.repo.external.UserDecksRecord;
 import com.gsc.bm.repo.external.UserDecksRecord.UserStoredDeck;
@@ -37,11 +35,13 @@ class DeckRulesContextTest extends SqliteContextSupport {
     @Autowired UserAccountService accounts;
 
     @Test
-    void bothStartersFollowTheDeckRules() {
-        for (Character character : List.of(new BigBadBruiser(), new ToxicJunkie())) {
-            String binding = character.getClass().getName().replace(CardFactoryService.BASE_CARDS_PKG, "");
+    void everyStarterFollowsTheDeckRules() {
+        // SB-28, D184 (1): the characters are those of the live set (Set Base 1.0), and so are the five starters.
+        for (String starter : LiveFixtures.set().starters()) {
+            Character character = LiveFixtures.character(LiveFixtures.set().characterOf(starter));
+            String binding = character.getBindingName();
             DeckRules.check(binding, starters.craftBasicActionStarterCard(character), starters.craftCharacterBoundStarterCards(character),
-                    starters.craftLastResortStarterCard(character), starters.craftCharacterStarterDeck(character.getClass().getName()));
+                    starters.craftLastResortStarterCard(character), starters.craftCharacterStarterDeck(binding));
         }
     }
 

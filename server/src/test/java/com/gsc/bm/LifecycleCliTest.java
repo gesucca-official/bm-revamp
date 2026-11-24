@@ -2,7 +2,6 @@ package com.gsc.bm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gsc.bm.model.game.*;
-import com.gsc.bm.model.cards.bruiser.character.BigBadBruiser;
 import com.gsc.bm.repo.external.*;
 import com.gsc.bm.service.factories.*;
 import com.gsc.bm.service.session.*;
@@ -40,7 +39,7 @@ class LifecycleCliTest extends SqliteContextSupport {
     @MockBean Clock clock;
 
     Player human(String user) {
-        var c=new BigBadBruiser();
+        var c=LiveFixtures.character("bruiser.character.BigBadBruiser");
         return new Player(user,c,decks.craftBasicActionStarterCard(c),List.of(),decks.craftLastResortStarterCard(c),List.of());
     }
     @ParameterizedTest
@@ -52,11 +51,11 @@ class LifecycleCliTest extends SqliteContextSupport {
         for(String user:List.of(a,b,c)) { users.createIfAbsent(new UserCredentialsRecord(user,null,encoder.encode("synthetic"),"USER")); }
         List<Player> players=new ArrayList<>(); players.add(human(a));
         if(scenario.startsWith("com")) {
-            var character=new BigBadBruiser();
+            var character=LiveFixtures.character("bruiser.character.BigBadBruiser");
             players.add(new ComPlayer(character,decks.craftBasicActionStarterCard(character),List.of(),
                 decks.craftLastResortStarterCard(character),List.of()));
         } else { players.add(human(b)); if(scenario.equals("ffa")) { players.add(human(c)); } }
-        var game=new Game(players,scenario.startsWith("com") ? "quick1vCom" : "quickFFA",false);
+        var game=LiveFixtures.live(new Game(players,scenario.startsWith("com") ? "quick1vCom" : "quickFFA",false));
         games.newGame(game);
         Path root=Path.of("..").toAbsolutePath().normalize();
         Path controls=Files.createTempDirectory(Path.of("target"),"lifecycle-clock-").toAbsolutePath();

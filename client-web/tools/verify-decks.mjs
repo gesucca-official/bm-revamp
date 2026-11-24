@@ -1,3 +1,5 @@
+// SB-28, D184 (6): adapted to the live game (regulation 2.0, Set Base 1.0: 117 cards, 7 characters, three bound cards for some characters); the images
+// are SB-32's, so a card without art shows the placeholder (no-img.png) and the checks accept it.
 // C2b-4 end-to-end check against the REAL server: catalog, deck editor, save/overwrite/delete and open 1vCom
 // with devAlice. Like VerifyFfa it starts the server itself on a temporary database (the local data is never
 // touched) and stops it at the end. The open game is played through the UI until the outcome.
@@ -12,6 +14,7 @@ import {createWriteStream} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,resolve} from 'node:path';
 import assert from 'node:assert/strict';
+import {artIndex,artCss} from '../src/art.ts';
 
 const repo=resolve(import.meta.dirname,'../..');
 const url=process.env.BM_CLIENT??'http://127.0.0.1:4320';
@@ -103,6 +106,8 @@ async function addRegular(binding,times){
  await page.getByTestId('card-search').fill('');
 }
 
+// SB-28, D184 (6): in the live game (regulation 2.0, R02a) a card that announces two names, both in the deck, asks which one to search: «Conferma» opens
+// the dialog «Quale carta cerchi?» (SB-16i, D97, D102) and the move leaves with the choice. The dialog is the client's own; here the first option answers it.
 // --- Open game helpers, as in VerifyFfa ---
 async function playOne(){
  const esc=()=>page.keyboard.press('Escape');
@@ -117,6 +122,7 @@ async function playOne(){
   if(s.message.includes('scartare')){let ok=false;for(const r of s.hits.filter(h=>h.kind==='hand'&&h.id!==c.key)){await tap(r);if((await A.state()).discard){ok=true;break;}}if(!ok){await esc();continue;}}
   if(!(await page.getByTestId('confirm').isEnabled())){await esc();continue;}
   const before=moves();await page.getByTestId('confirm').click();
+  if(await page.getByTestId('search-option').count())await page.getByTestId('search-option').first().click();
   const r=await A.wait(x=>!x||x.phase==='pending'||x.turn!==s.turn||x.over||x.eliminated||(x.phase==='choose'&&x.message.startsWith('Rifiutata')),15000,'server answer');
   assert.equal(moves()-before,1,'one SEND per confirmation');
   if(r&&r.phase==='choose'&&r.message.startsWith('Rifiutata')&&r.turn===s.turn){await esc();continue;}
@@ -125,7 +131,7 @@ async function playOne(){
  throw new Error('no playable card');
 }
 // Every card the server puts in the own hand must come from the saved deck. Objects near the character are not
-// checked: ShuffleFeet swaps them with the opponent and tokens are created by effects.
+// checked: some cards swap them with the opponent and tokens are created by effects.
 function fromDeck(game,deck){
  const allowed=new Set([deck.basicActionCard,deck.lastResortCard,...deck.characterBoundCards,...deck.regularCards].map(c=>c.bindingName));
  const views=A.views(game),foreign=[];
@@ -176,8 +182,16 @@ try{
  {const want=c=>c.type==='Oggetto'?'item':{Regolare:'regular',Base:'basic','Legata al personaggio':'bound','Ultima risorsa':'lastResort'}[c.subtype];
   const frames=await page.locator('[data-testid=catalog] [data-frame]').evaluateAll(n=>n.map(e=>({binding:e.dataset.binding,frame:e.dataset.frame})));
   for(const f of frames){const c=annex.cards.find(x=>x.class===f.binding);assert.equal(f.frame,c?want(c):'character',`frame of ${f.binding}`);}
-  assert.equal(frames.length,39);step('catalogFrames',{cards:frames.length});}
- const art=await page.locator('[data-testid=catalog] .thumb').evaluateAll(n=>n.filter(e=>getComputedStyle(e).backgroundImage.includes('atlas')&&e.style.backgroundPosition).length);
+  assert.equal(frames.length,124,'117 cards and 7 characters (SB-28, D184 (6); 37 and 2 in the Set Base 0.1)');step('catalogFrames',{cards:frames.length});}
+ // SB-28, D184 (6): the images are SB-32's. The atlas draws a tile for the classes of the Set Base 0.1 that stay in the set; every other face shows the
+ // placeholder tile of the same atlas (no-img.png). Each face must sit on exactly the tile the client computes for its class, own or placeholder.
+ const layout=JSON.parse(await readFile(join(repo,'client-web/public/art/manifest.json'),'utf8')).files.find(f=>f.file==='art/atlas.webp');
+ const faceArt=await page.locator('[data-testid=catalog] [data-testid=card-face],[data-testid=catalog] [data-testid=character-face]').evaluateAll(n=>n.map(e=>{const t=e.querySelector('.thumb');return {binding:e.dataset.binding,atlas:!!t&&getComputedStyle(t).backgroundImage.includes('atlas'),pos:t?.style.backgroundPosition??''};}));
+ const nums=x=>(x.match(/[\d.]+/g)??[]).map(Number);
+ let art=0,placeholders=0;
+ for(const f of faceArt){const i=artIndex(f.binding,layout),want=nums(artCss(i,layout).backgroundPosition),got=nums(f.pos);
+  assert.ok(f.atlas&&got.length===want.length&&got.every((v,k)=>Math.abs(v-want[k])<0.01),`face of ${f.binding}: its tile or the placeholder (${f.pos} against ${artCss(i,layout).backgroundPosition})`);
+  if(i===layout.placeholder)placeholders++;else art++;}
  const scroll=await page.evaluate(()=>({page:document.documentElement.scrollWidth<=innerWidth,sheet:(s=>s.scrollHeight>s.clientHeight)(document.querySelector('.sheet'))}));
  await A.shot('01-catalog');
  // C3-5: the same face as the table in the catalog: the nominal damage of the annex as symbols and amounts (no letters), nothing for a card without damage, no priority.
@@ -186,14 +200,18 @@ try{
   for(const f of faces){const c=annex.cards.find(x=>x.class===f.binding),want=c.damageAmount&&c.damageAmount!=='—'?c.damageAmount.split(',').map(x=>{const m=/^\s*(HIT|CUT|POISON)\s+(\d+)(\+x)?\s*$/.exec(x);return {type:m[1],text:m[3]?`${m[2]}+`:m[2],svg:1};}):[];
    assert.deepEqual(f.pills,want,`catalog face of ${f.binding}: damage pills`);if(want.length)withDamage++;
    assert.ok(!/priorit/i.test(f.text),`catalog face of ${f.binding}: no priority on the face`);assert.ok(!f.lines.some(l=>/\b(HIT|CUT|POISON)\b/.test(l)),`catalog face of ${f.binding}: no type written in letters on the face lines (the effect text below is the catalog's own)`);}
-  assert.equal(withDamage,12,'12 catalog faces with damage');step('catalogDamage',{faces:faces.length,withDamage,characters:shownChars.length,faceTotal:faces.length+shownChars.length});assert.equal(faces.length+shownChars.length,39);}
+  assert.equal(withDamage,46,'46 catalog faces with damage (SB-28, D184 (6); 12 in the Set Base 0.1)');step('catalogDamage',{faces:faces.length,withDamage,characters:shownChars.length,faceTotal:faces.length+shownChars.length});assert.equal(faces.length+shownChars.length,124);}
  step('catalog',{cards:shownCards.length,characters:shownChars.length,total:shownCards.length+shownChars.length,annexVersion:annex.version,withIllustration:art,noHorizontalScroll:scroll.page,sheetScrolls:scroll.sheet});
- assert.equal(shownCards.length+shownChars.length,39);assert.equal(art,39);assert.ok(scroll.page);
+ assert.equal(shownCards.length+shownChars.length,124);
+ // SB-28, D184 (6): the atlas still draws 33 of these 124 faces (SB-32 draws the rest); every other face shows the placeholder, none stays blank.
+ assert.equal(art+placeholders,124,'every face has its own tile or the placeholder');assert.equal(art,33,'faces with their own tile in the atlas (the 34 of the art test, less the token, which has no face)');assert.ok(scroll.page);
  await page.getByTestId('show-catalog').click();
 
  // R02 1.12 (SB-1): the regular cards of the decks of this run, ten actions twice and no item, so hand plus deck stays countable.
- const TEN_B=['bruiser.Glare','bruiser.StunningBlow','bruiser.SuperImpact','bruiser.YouStop','bruiser.MadeOfStone','bruiser.SeagullFly','bruiser.HealingBlow','com.ShuffleFeet','com.Grab','com.Steal'];
- const TEN_J=['junkie.Cough','junkie.BadTrip','junkie.GoingBerserk','junkie.MethDrivenRage','junkie.AmphetamineReflexes','junkie.PervertedMetabolism','junkie.ToxicBloodDrain','com.ShuffleFeet','com.Grab','com.Steal'];
+ // SB-28, D184 (6): ShuffleFeet, BadTrip and GoingBerserk left the set (D182, D183); their places are taken by actions of the Set Base 1.0 (no item).
+ const SWAP='base.com.TartarugaSulMarciapiede';
+ const TEN_B=['bruiser.Glare','bruiser.StunningBlow','bruiser.SuperImpact','bruiser.YouStop','bruiser.MadeOfStone','bruiser.SeagullFly','bruiser.HealingBlow',SWAP,'com.Grab','com.Steal'];
+ const TEN_J=['junkie.Cough','base.com.MattoneDelCantiere','base.com.DentiStretti','junkie.MethDrivenRage','junkie.AmphetamineReflexes','junkie.PervertedMetabolism','junkie.ToxicBloodDrain',SWAP,'com.Grab','com.Steal'];
  const twice=list=>list.flatMap(b=>[b,b]);
  const problemsNow=()=>page.locator('[data-testid=deck-problems] li').allInnerTexts();
  const offered=async title=>(await slot(title)).locator('button.pick').evaluateAll(n=>n.map(e=>e.getAttribute('aria-label')));
@@ -236,15 +254,17 @@ try{
  assert.deepEqual(beforeCharacter,{basic:[],bound:[]});
  assert.equal(bruiserOffer.basicSummary,card('com.basic.BruiserGrab'),'the basic comes with the character');
  assert.deepEqual(bruiserOffer.basic,[`Azione base ${card('com.basic.BruiserGrab')}`]);
- assert.deepEqual([...bruiserOffer.bound].sort(),[`Azione legata ${card('bruiser.character.LittleRage')}`,`Azione legata ${card('bruiser.character.LittleSmack')}`].sort());
- assert.deepEqual(bruiserOffer.last,[`Ultima risorsa ${card('com.last.Struggle')}`]);
+ // SB-28, D184 (6): Spazienzio of the Set Base 1.0 has three bound cards to choose from (two are needed).
+ assert.deepEqual([...bruiserOffer.bound].sort(),[`Azione legata ${card('bruiser.character.LittleRage')}`,`Azione legata ${card('bruiser.character.LittleSmack')}`,`Azione legata ${card('base.spazienzio.bound.TestaAlMuro')}`].sort());
+ // SB-28, D184 (6): the Set Base 1.0 has two generic last resorts («Addosso!!!» and «Non Mi Hai Fatto Niente», sheet of docs/sets/base.md: "Ultima risorsa, generica"); the third, L'Ultimo Tiro, is the Junkie's.
+ assert.deepEqual([...bruiserOffer.last].sort(),[`Ultima risorsa ${card('com.last.Struggle')}`,`Ultima risorsa ${card('base.rocco.NeHoPreseDiPeggio')}`].sort());
  assert.equal(afterToggle,card('bruiser.character.LittleRage'),'a second click leaves the bound');
  assert.equal(thirdCopy,false,'no third copy');
  assert.match(full.counts,/Regolari 20 \/ 20/);assert.deepEqual(full.problems,['Dai un nome al mazzo.']);assert.equal(full.another,false,'no 21st card');
  assert.deepEqual(nineteen,{problems:['Dai un nome al mazzo.','Servono esattamente 20 carte regolari: ne hai 19.'],save:false});
  assert.deepEqual(slash,['Il nome non può contenere «/».']);assert.equal(slashSave,false);
  assert.equal(switched.basicSummary,card('com.basic.ToxicGrab'));assert.equal(switched.bound,'nessuna');
- assert.deepEqual([...switched.boundOffer].sort(),[`Azione legata ${card('junkie.character.PatheticBlade')}`,`Azione legata ${card('junkie.character.RottenSmile')}`].sort());
+ assert.deepEqual([...switched.boundOffer].sort(),[`Azione legata ${card('junkie.character.PatheticBlade')}`,`Azione legata ${card('junkie.character.RottenSmile')}`,`Azione legata ${card('base.tossico.bound.RaschiareIlFondo')}`].sort());
  assert.ok(switched.problems.includes('Scegli 2 azioni legate diverse (ne hai 0).'));
  assert.equal(A.sends(markInvalid).filter(f=>f.headers.destination.includes('/deck')).length,0);
 
@@ -261,17 +281,17 @@ try{
  {const pool=await page.locator('[data-testid=regular-pool] [data-testid=card-face]').evaluateAll(n=>n.map(e=>({text:e.innerText,pills:e.querySelectorAll('.dmg-pill').length})));
   assert.ok(pool.length>0&&pool.every(f=>!/priorit/i.test(f.text)),'editor faces: no priority');assert.ok(pool.some(f=>f.pills>0),'editor faces: damage pills present');step('editorFaces',{faces:pool.length,withDamage:pool.filter(f=>f.pills).length});}
  // Search on the card text, then the deck view: remove one copy with the same name, then put it back.
- await page.getByTestId('card-search').fill('ShuffleFeet');const searched=await page.locator('[data-testid=regular-pool] [data-testid=card-face]').count();
- await page.getByTestId('pool-deck').click();await press(`Togli una copia di ${card('com.ShuffleFeet')}`);
+ await page.getByTestId('card-search').fill(SWAP);const searched=await page.locator('[data-testid=regular-pool] [data-testid=card-face]').count();
+ await page.getByTestId('pool-deck').click();await press(`Togli una copia di ${card(SWAP)}`);
  const deckView=await page.locator('[data-testid=regular-pool] strong').allInnerTexts();await page.getByTestId('card-search').fill('');
  const deckViewAll=await page.locator('[data-testid=regular-pool] strong').allInnerTexts();
  const removedSave=await page.getByTestId('save-deck').isEnabled();
- await page.getByRole('radio',{name:'Collezione'}).click();await addRegular('com.ShuffleFeet',1);
+ await page.getByRole('radio',{name:'Collezione'}).click();await addRegular(SWAP,1);
  const counts=await text('[data-testid=deck-counts]');await A.shot('03-editor');
  await page.getByTestId('save-deck').click();
  const saved=await deckSaved(markSave,'Strano');
  const deckSends=A.sends(markSave).filter(f=>f.headers.destination.startsWith('/app/user/devAlice/deck'));
- step('createAndSave',{searchShuffle:searched,deckViewAfterSearch:deckView,deckView:deckViewAll,saveEnabledAt19:removedSave,counts,sends:deckSends.map(f=>f.headers.destination),
+ step('createAndSave',{searchSwap:searched,deckViewAfterSearch:deckView,deckView:deckViewAll,saveEnabledAt19:removedSave,counts,sends:deckSends.map(f=>f.headers.destination),
   saved:{character:saved.character.bindingName,basic:saved.basicActionCard.bindingName,last:saved.lastResortCard.bindingName,bound:saved.characterBoundCards.map(c=>c.bindingName),regular:saved.regularCards.map(c=>c.bindingName)},listed:await page.locator('[data-testid=deck-list] li strong').allInnerTexts()});
  assert.equal(deckSends.length,1);assert.equal(removedSave,false);
  assert.deepEqual(saved.characterBoundCards.map(c=>c.bindingName),['bruiser.character.LittleSmack','bruiser.character.LittleRage']);

@@ -21,8 +21,9 @@ const WIDTHS=[36,45.6,60,120,214];
 test('C4-4: every class of the annex has the frame of its type',()=>{
  const counts:Record<string,number>={};
  for(const c of annex.cards){const {want,card:wire}=fromAnnex(c);assert.equal(cardType(wire),want,c.class);counts[want]=(counts[want]??0)+1;}
- assert.deepEqual(counts,{regular:26,bound:4,basic:2,lastResort:1,item:4});
- assert.equal(annex.cards.length,37);
+ // SB-28, D184 (2): the annex is the live Set Base 1.0 (117 cards: 67 regular, 21 bound, 7 basic, 4 last resort, 18 items); it was the 37 of the 0.1.
+ assert.deepEqual(counts,{regular:67,bound:21,basic:7,lastResort:4,item:18});
+ assert.equal(annex.cards.length,117);
 });
 
 test('C4-4: the token has its own frame, from bindingName',()=>{
@@ -67,7 +68,7 @@ test('C4-4: the gaps of the dashes stay open on the 36 px card',()=>{
  for(const k of ['bound','token'] as FrameKind[]){const g=gaps(k);assert.ok(g.length>6,k);assert.ok(Math.min(...g)>=2.79,`${k}: ${Math.min(...g)}`);}
 });
 
-test('C4-4: the regular action, 26 cards of 37, keeps the line of today',()=>{
+test('C4-4: the regular action, 67 cards of 117 (SB-28, D184 (2); 26 of 37 in the 0.1), keeps the line of today',()=>{
  assert.deepEqual(frameParts('regular',120,165.6),[{t:'rrect',inset:4,c:0x9b7652,w:1}]);
 });
 

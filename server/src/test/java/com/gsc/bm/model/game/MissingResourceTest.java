@@ -25,11 +25,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static com.gsc.bm.model.game.GameFixtures.*;
+import static com.gsc.bm.model.game.LegacyFixtures.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
+ * SB-28, D184 (1): historical test of the engine 1.13 with the cards of the Set Base 0.1 (explicitly {@link Ruleset#LEGACY}).
+ * The live rule (R01 2.0: every character has its five resources) is proved with the set characters by
+ * {@code LiveCharactersTest}.
+ * <p>
  * Regulation 1.11 R01: every character has all five resources, at 0 when its sheet does not state them.
  * Before 1.11 Spazienzio had no TOXICITY: BadTrip, LethalHeroinDose and PervertedMetabolism, reachable with a custom deck in
  * open 1vCom, threw a NullPointerException during resolution and the service rolled the round back (rules-1.11 report).
@@ -69,7 +73,7 @@ class MissingResourceTest {
         ComPlayer bot = new ComPlayer("ComPlayer_1", new BigBadBruiser(), named(new BruiserGrab(), "basic"),
                 List.of(named(new LittleSmack(), "bound-one"), named(new LittleRage(), "bound-two")),
                 named(new Struggle(), "last-resort"), List.of(), new Random(1));
-        Game game = new Game(List.of(human, bot), "open1vCom", false);
+        Game game = legacy(new Game(List.of(human, bot), "open1vCom", false));
         service.newGame(game);
         int[] published = {0};
         assertDoesNotThrow(() -> service.submitMoveToGame(move(game, "human", "BadTrip", "SELF"), () -> published[0]++));

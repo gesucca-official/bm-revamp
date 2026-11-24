@@ -4,7 +4,7 @@ import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
-import com.gsc.bm.model.cards.bruiser.MadeOfStone;
+import com.gsc.bm.LiveFixtures;
 import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
 import com.gsc.bm.service.session.*;
 import com.gsc.bm.service.view.ViewExtractorService;
@@ -23,8 +23,9 @@ class RoundIsolationTest {
         doThrow(new IllegalStateException("synthetic logger failure")).when(logs).log(any(),any(),any());
         assertDoesNotThrow(()->service.submitMoveToGame(move(game,"bob","last-resort","alice"),()->{ throw new IllegalStateException("synthetic transport failure"); }));
         assertEquals(1,game.getTurn()); assertTrue(game.getPendingMoves().isEmpty());
-        assertEquals(85,game.getPlayers().get("alice").getResources().get(Resource.HEALTH));
-        assertEquals(85,game.getPlayers().get("bob").getResources().get(Resource.HEALTH));
+        // SB-28, D184 (1): live game, Spazienzio 70 HEALTH, «Addosso!!!» 5 to oneself and 10 to the opponent: 70 - 15 (before: 85)
+        assertEquals(55,game.getPlayers().get("alice").getResources().get(Resource.HEALTH));
+        assertEquals(55,game.getPlayers().get("bob").getResources().get(Resource.HEALTH));
     }
     private static CountDownLatch entered, release;
     static class FaultCard extends AbstractCard {
@@ -61,7 +62,7 @@ class RoundIsolationTest {
         var restored=game.getPlayers().get("alice");
         assertEquals(25,restored.getResources().get(Resource.VIOLENCE)); assertEquals(20,restored.getResources().get(Resource.ALERTNESS));
         assertTrue(restored.getCharacter().getTimers().isEmpty()); assertTrue(restored.getCharacter().getStatuses().isEmpty());
-        assertEquals(100,game.getPlayers().get("bob").getResources().get(Resource.HEALTH));
+        assertEquals(70,game.getPlayers().get("bob").getResources().get(Resource.HEALTH)); // D184 (1): 70 HEALTH (before: 100)
         assertEquals(0,notifications[0]); verifyNoInteractions(logs);
         ((FaultCard)game.getCardFromHand("alice","fault")).fail=false;
         service.submitMoveToGame(move(game,"alice","fault","SELF"),()->notifications[0]++);
@@ -71,12 +72,12 @@ class RoundIsolationTest {
     }
     @Test void timerFailureRollsBackEarlierDamageCostsAndCountdown() {
         var service=service(mock(GameLoggingService.class)); var alice=player("alice"); var bob=player("bob");
-        alice.getCardsInHand().add(named(new com.gsc.bm.model.cards.bruiser.SuperImpact(),"impact"));
+        alice.getCardsInHand().add(LiveFixtures.card("bruiser.SuperImpact","impact"));
         bob.getCharacter().getTimers().add(new Timer("failure", c -> { c.loseResource(Resource.ALERTNESS,9); throw new IllegalStateException("timer failure"); },1));
         var game=duel(alice,bob); service.newGame(game);
         service.submitMoveToGame(move(game,"bob","last-resort","alice"),()->{});
         assertThrows(IllegalMoveException.class,()->service.submitMoveToGame(move(game,"alice","impact","bob"),()->fail("not committed")));
-        for(var p:game.getPlayers().values()) { assertEquals(100,p.getResources().get(Resource.HEALTH)); }
+        for(var p:game.getPlayers().values()) { assertEquals(70,p.getResources().get(Resource.HEALTH)); }
         assertEquals(25,game.getPlayers().get("alice").getResources().get(Resource.VIOLENCE));
         assertEquals(1,game.getPlayers().get("bob").getCharacter().getTimers().iterator().next().getTimer());
         assertEquals(1,game.getPendingMoves().size()); assertEquals(0,game.getTurn());
@@ -100,7 +101,7 @@ class RoundIsolationTest {
     @Test void statesAreIndependentAcrossGamesAndRepeatedApplications() {
         var one=duel(player("one"),player("other")); var two=duel(player("two"),player("other"));
         var a=one.getPlayers().get("one").getCharacter(); var b=two.getPlayers().get("two").getCharacter();
-        var card=new MadeOfStone(); card.applyEffectOnSelf(a); card.applyEffectOnSelf(b);
+        var card=(AbstractCard)LiveFixtures.card("bruiser.MadeOfStone"); card.applyEffectOnSelf(a); card.applyEffectOnSelf(b);
         a.getStatuses().get(0).aTurnIsPassed();
         assertEquals(2,a.getStatuses().get(0).getLastsForTurns()); assertEquals(3,b.getStatuses().get(0).getLastsForTurns());
         card.applyEffectOnSelf(a); assertNotSame(a.getStatuses().get(0),a.getStatuses().get(1));

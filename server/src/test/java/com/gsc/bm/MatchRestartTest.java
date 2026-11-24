@@ -24,7 +24,7 @@ class MatchRestartTest {
     }
     Game game(String human) {
         var fixture = new MatchArchiveTest();
-        return new Game(List.of(fixture.player(human), fixture.player("b")), "quick1v1", false);
+        return LiveFixtures.live(new Game(List.of(fixture.player(human), fixture.player("b")), "quick1v1", false));
     }
     List<String> bytes(MatchEventRepository repo, String id) {
         return repo.read(id).stream().map(MatchEventRepository.Entry::getJson).collect(java.util.stream.Collectors.toList());
