@@ -113,3 +113,14 @@ test('C1: a status description ending in a period gets exactly one separator',()
  const text=chipsOf(id,p.character).find(c=>c.title.includes('Custom'))!.text;
  assert.ok(!text.includes('..'));assert.match(text,/prossimo\. finisce/);
 });
+
+// SB-31 F1 (R10, D194 (1)): the touch target of a revealed card (the copy found by a search, drawn at the size of a card back in a fan) is at least 44 px,
+// centred on the card, raised or not; the drawn card is not touched. The scene needs the browser, so this reads its source, as the other scene tests do;
+// VerifyLayout and VerifyFfa measure the hit on real games («revealed-… under 44 px»).
+test('R10: the hit of a revealed card has a floor of 44 px, at rest and raised, and the card drawn keeps its size',()=>{
+ const scene=readFileSync(new URL('../src/scene.ts',import.meta.url),'utf8');
+ assert.match(scene,/const TOUCH_MIN=44;/);
+ assert.match(scene,/kind:'revealed',x:c\.x,y:c\.y,w:Math\.max\(bw,TOUCH_MIN\),h:Math\.max\(bh,TOUCH_MIN\)/);
+ assert.match(scene,/hit\.w=Math\.max\(bw\*1\.6,TOUCH_MIN\);hit\.h=Math\.max\(bh\*1\.6,TOUCH_MIN\)/);
+ assert.match(scene,/const \{w:bw,h:bh\}=seat\.back,c=this\.card\(r\.card,bw,bh,true\)/,'the card is still drawn at the size of a back');
+});

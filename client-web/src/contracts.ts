@@ -33,8 +33,8 @@ export interface Character {
   statuses: Status[]; immunities: Resource[];
   timers: {name: string; timer: number; callback: object}[]; sprite: string | null;
   /**
-   * SB-16i («Rincara», D97), playground rules only: the public counter of this character's plays in the match, voided ones
-   * included, by card name in lower case; always present with those rules (empty before the first play), absent with the live rules.
+   * SB-16i («Rincara», D97): the public counter of this character's plays in the match, voided ones included, by card name in lower case;
+   * present in the live game too (the live ruleset is the playground one; SB-31 F1 checked it in a real game), empty before the first play, absent only in archived games.
    */
   plays?: Record<string, number>;
 }

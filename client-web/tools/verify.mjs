@@ -158,6 +158,10 @@ async function playTurn(game){
   const sent=moves.length;
   if(bound&&!want.bound)await shot('03-bound-discard');
   await page.getByTestId('confirm').click();
+  // SB-31 F1 (R8 of rossi-noti, owner's go-ahead): after «Conferma» the client may ask first, «Scartare l’ultima copia?» (answered «Sì, scarta e gioca», which may open «Quale carta cerchi?») or
+  // «Quale carta cerchi?» alone. Wait a bounded 5 s for a dialog or for the send and answer each dialog that opens, as VerifyDecks, VerifyModes and VerifyResolution do.
+  {const end=Date.now()+5000;while(Date.now()<end&&moves.length===sent){const discard=page.getByRole('button',{name:'Sì, scarta e gioca'}),option=page.getByTestId('search-option');
+   if(await discard.count())await discard.first().click({timeout:3000});else if(await option.count())await option.first().click({timeout:3000});else{await page.waitForTimeout(100);continue;}await page.waitForTimeout(100);}}
   s=await wait(x=>x.over||x.turn!==turn||x.phase==='pending'||(x.phase==='choose'&&x.message.startsWith('Rifiutata')),15000,'server answer');
   assert.equal(moves.length-sent,1,'exactly one SEND per confirmation');
   if(s.phase==='choose'&&s.message.startsWith('Rifiutata')&&s.turn===turn){

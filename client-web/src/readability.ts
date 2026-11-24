@@ -144,7 +144,7 @@ export function revealedNote(r:{copy:number;turn:number;card:Card},owner:string|
 
 /**
  * SB-16i («Rincara», D97): how many times a last resort has been played by its owner, from the public counter of the character view.
- * Null for any other card and without the counter (live rules): nothing new is drawn then.
+ * Null for any other card and without the counter (archived games): nothing new is drawn then.
  */
 export function playsNote(card:Card,c:Character){
  if(!card.lastResort||!c.plays)return null;
@@ -155,7 +155,7 @@ export function playsNote(card:Card,c:Character){
 
 /**
  * SB-16i («Rincara», D97): the last resorts in the counter of a character, with their plays, for the character's inspection; the
- * names come from the cards the client knows. «mai giocata» when none was played; null without the counter (live rules).
+ * names come from the cards the client knows. «mai giocata» when none was played; null without the counter (archived games).
  */
 export function lastResortPlays(c:Character,known:Card[]):string|null{
  if(!c.plays)return null;

@@ -295,7 +295,9 @@ async function scenario(name,{ffa=false,turns=2}){
    if(!old){const scope=`${name}${tag} T${now.turn}`;rec.turns.at(-1).faces=handFaces(now,scope);
     if(t===0){const big=await A.page.evaluate(()=>window.__bm.faces(false)),small=await A.page.evaluate(()=>window.__bm.faces(true));
      rec.catalog={cards:big.length,withDamage:big.filter(c=>c.damage.length).length,rows:big.map(f=>({name:f.name,damage:f.damage.map(d=>`${d.type} ${d.text}`),catalog:f.catalogAmount}))};
-     if(big.length!==37)bad(scope,`the catalog has ${big.length} cards, not 37`);if(rec.catalog.withDamage!==12)bad(scope,`${rec.catalog.withDamage} faces with damage, the catalog has 12`);
+     // SB-31 F1 (R9, D194 (1)): the expected counts come from the annex of the live set, not from the Set Base 0.1 (37 cards, 12 with damage).
+     {const want=annex.cards.length,wantDamage=annex.cards.filter(c=>c.damageAmount&&c.damageAmount!=='—').length;
+      if(big.length!==want)bad(scope,`the catalog has ${big.length} cards, the annex ${want}`);if(rec.catalog.withDamage!==wantDamage)bad(scope,`${rec.catalog.withDamage} faces with damage, the annex has ${wantDamage}`);}
      for(const f of big){frameProblem(scope,f.name,f.frame);for(const m of faceProblems(f,f,{small:false,left:null}))bad(scope,`catalog face of ${f.name}: ${m}`);}
      for(const f of small)for(const m of faceProblems(f,f,{small:true,left:null}))bad(scope,`small face of ${f.name}: ${m}`);
      step(`${name}${tag} catalog faces`,{cards:big.length,withDamage:rec.catalog.withDamage,small:small.filter(f=>f.damage.length).length});

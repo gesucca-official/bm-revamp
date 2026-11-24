@@ -398,6 +398,85 @@ try{
  await page.getByRole('button',{name:'Abbandona la partita'}).click();await page.getByRole('button',{name:'Sì, abbandona'}).click();
  await page.getByTestId('quick').waitFor({timeout:15000});
 
+ // SB-31 F1 (D183 (4); RP-17 and RP-21 of the Set Base 1.0 correspondence): the warning before discarding the last copy of a card that holds a vulnerability token, and the «∞» of the token
+ // chip, in a real open game with the live set. The deck has four cards that announce SuperImpact or ExtremelyViolentBlow (two copies each of SGOMBERIAMOVI and PAZIENZA: FINITA) and a single
+ // SuperImpact. A game whose first hand has an announcer and not SuperImpact plays it on turn 1: the search finds the only copy (hand 1, deck 0), which then holds a token until it is played.
+ // On turn 2 the chip must show «∞» and discarding that copy for a bound card must ask first; discarding another regular card must not. Games that start without the announcer are left.
+ {
+  const S=['base.bruiser.TiFaccioSpazio','bruiser.Glare'],X='bruiser.SuperImpact',FILL=['bruiser.StunningBlow','bruiser.YouStop','bruiser.MadeOfStone','bruiser.SeagullFly','bruiser.HealingBlow',SWAP,'com.Grab'];
+  const same=(a,b)=>a.trim()===b.trim(),act=async sel=>{await page.locator(sel).focus();await page.keyboard.press('Enter');await page.waitForTimeout(100);};
+  const sends=()=>A.sends().filter(f=>/\/app\/game\/[^/]+\/move$/.test(f.headers.destination)).length;
+  const abandon=async()=>{{const e=await A.state();if(e&&(e.over||e.eliminated)){await page.getByRole('button',{name:'Torna all’hub'}).click();await page.getByTestId('quick').waitFor({timeout:15000});return;}}await page.getByLabel('Apri menu').click();await page.getByRole('button',{name:'Abbandona la partita'}).click();await page.getByRole('button',{name:'Sì, abbandona'}).click();await page.getByTestId('quick').waitFor({timeout:15000});};
+  const markL=A.sent.length;
+  await page.getByTestId('tab-collection').click();await page.getByTestId('new-deck').click();
+  await page.getByTestId('deck-name').fill('Ultima');
+  await pickCharacter('bruiser.character.BigBadBruiser');await pickStruggle();
+  await pickBound('bruiser.character.LittleSmack');await pickBound('bruiser.character.LittleRage');
+  await slot('Mazzo regolare');
+  for(const b of [...S,...FILL])await addRegular(b,2);
+  await addRegular(X,1);await addRegular('com.Steal',1);
+  assert.match(await text('[data-testid=deck-counts]'),/Regolari 20 \/ 20/);
+  await page.getByTestId('save-deck').click();
+  const lastDeck=await deckSaved(markL,'Ultima');
+  assert.equal(lastDeck.regularCards.length,20);assert.equal(lastDeck.regularCards.filter(c=>c.bindingName===X).length,1);
+  let game=null,announcer=null,tries=0;
+  while(!announcer&&tries<12){
+   tries++;await startOpen('Ultima');
+   await A.wait(s=>s&&s.phase==='choose'&&s.hits.some(h=>h.kind==='hand'),30000,'last-copy table');
+   const g=A.messages('/user/queue/game/open/1vCom/ready').at(-1).body,hand=A.views(g)[0].players.devAlice.cardsInHand.map(c=>c.bindingName),found=S.find(b=>hand.includes(b));
+   if(found&&!hand.includes(X)){game=g;announcer=found;}else await abandon();
+  }
+  assert.ok(announcer,`no game with an announcer and without ${X} in the first hand after ${tries} tries`);
+  // Turn 1: the announcer on the own character (it plays «su di te»), the search finds the only copy.
+  let s=await A.state();const first=s.order.find(c=>same(c.name,card(announcer)));assert.ok(first,'the announcer is in the hand');
+  await act(`[data-hit="${first.key}"]`);await act('[data-hit="person-devAlice"]');assert.ok((await A.state()).target,'the announcer aims at the own character');
+  {const before=sends();await page.getByTestId('confirm').click();await answerConfirm(page,sends,before);assert.equal(sends()-before,1,'one move');}
+  await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,60000,'turn 1 resolved');
+  s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&!x.sequence.running&&x.hits.some(h=>h.kind==='hand'))),60000,'turn 2');
+  assert.ok(!s.over&&!s.eliminated,'the game goes on');
+  const mine=A.views(game).at(-1).players.devAlice,xName=card(X);
+  assert.ok((mine.lastTokenCopies??[]).some(n=>same(n,xName)),`the server names ${xName} as the last copy that holds a token: ${JSON.stringify(mine.lastTokenCopies)}`);
+  // RP-21: the chip of the token lasts until the card is played: «∞».
+  const chip=s.hits.find(h=>h.kind==='status'&&h.id.startsWith('status-devAlice-vu-'));assert.ok(chip,'a chip for the vulnerability token');
+  await page.locator(`[data-hit="${chip.id}"]`).focus();await page.waitForTimeout(150);
+  const shown=(await A.state()).statusShown;assert.equal(shown?.short,'∞','the chip of a token with no timer shows ∞');
+  await page.keyboard.press('Escape');await page.evaluate(()=>document.activeElement?.blur());await page.waitForTimeout(100);
+  // RP-17: a bound card, aimed at the own character, with the last copy as the discard: «Conferma» asks first and sends nothing.
+  s=await A.state();
+  const bound=s.order.find(c=>same(c.name,card('bruiser.character.LittleRage'))),lastCopy=s.order.find(c=>same(c.name,xName));
+  assert.ok(bound&&lastCopy,'the bound card and the last copy are in the hand');
+  await act(`[data-hit="${bound.key}"]`);await act('[data-hit="person-devAlice"]');await act(`[data-hit="${lastCopy.key}"]`);
+  let st=await A.state();assert.equal(st.selected,bound.key);assert.equal(st.discard,lastCopy.key,'the last copy is the chosen discard');
+  const m0=sends();await page.getByTestId('confirm').click();
+  await page.getByTestId('discard-warning').waitFor({timeout:5000});
+  const warning=await text('[data-testid=discard-warning]');
+  assert.match(warning,/ultima copia/);assert.ok(warning.includes(xName.trim()),`the warning names ${xName}: ${warning}`);assert.equal(sends(),m0,'the warning sends nothing');
+  await A.shot('12-last-copy-warning');
+  await page.getByRole('button',{name:'Torna al tavolo'}).click();await page.waitForTimeout(150);
+  // Another regular card as the discard: no warning, the move leaves.
+  const regularOf=c=>annex.cards.find(a=>same(a.name,c.name))?.subtype==='Regolare';
+  const other=s.order.find(c=>c.key!==lastCopy.key&&regularOf(c));
+  if(other){
+   await act(`[data-hit="${other.key}"]`);st=await A.state();assert.equal(st.discard,other.key,'another regular card is the discard');
+   const before=sends();await page.getByTestId('confirm').click();await answerConfirm(page,sends,before);
+   assert.equal(await page.getByTestId('discard-warning').count(),0,'no warning for a card that is not the last copy');assert.equal(sends()-before,1,'the move leaves');
+   await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,60000,'turn 2 resolved');
+  }
+  step('lastCopyWarning',{tries,announcer,lastTokenCopies:mine.lastTokenCopies,chip:{id:chip.id,short:shown.short,title:shown.title},warning,otherDiscardChecked:!!other});
+  // SB-31 F1 («Rincara», SB-28 D7): with the live rules the character view carries the public counter of plays from the first turn (the last resort enters the hand only when the deck
+  // is empty, too late for a game of a few turns), and the inspection of the own character shows it in its «Last resort» row, here «mai giocata»; the label of the card in hand is a unit test.
+  {const counter=A.views(game).at(-1).players.devAlice.character.plays;assert.ok(counter&&typeof counter==='object','the character view carries the counter of plays with the live rules');
+   await page.locator('[data-hit="person-devAlice"]').focus();await page.keyboard.press('i');
+   await page.getByTestId('inspect-plays').waitFor({timeout:5000});const row=await text('[data-testid=inspect-plays]');
+   assert.match(row,/mai giocata|giocata \d+ vol/,'the inspection of the character shows the counter of its last resort');
+   await page.getByRole('button',{name:'Torna al tavolo'}).click();await page.waitForTimeout(150);
+   step('rincaraCounter',{counter,inspectionRow:row});}
+  await abandon();
+  await page.getByTestId('tab-collection').click();
+  await page.locator('[data-deck="Ultima"]').getByTestId('delete-deck').click();await page.getByTestId('confirm-delete').click();
+  await page.locator('[data-deck="Ultima"]').waitFor({state:'detached',timeout:10000});
+ }
+
  // Deck unavailable (open/1vCom/error): provoked by rewriting the outgoing deckId, not reachable from the UI.
  route.rewrite=['Strano','Assente'];
  const markErr=A.sent.length;

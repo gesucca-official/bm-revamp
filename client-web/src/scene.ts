@@ -14,6 +14,8 @@ import {drawSymbol,drawMark,edgeFor,type Ground,type Pen,type SymbolKind} from '
 import {drawFrame,frameOf,cardShadow,CARD_SHADOW,FRAME_GREY,type FrameKind} from './frames.ts';
 import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,inPlayOf,inPlayText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,revealedNote,playsNote,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,pileTag,tableFrame,shiftLayout,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
+/** SB-31 F1 (R10): the smallest touch target of a card at the table, centred on the card; the drawn card does not change (rule 8 of C3, 44 px). */
+const TOUCH_MIN=44;
 export type Hit={id:string;kind:'hand'|'preview'|'person'|'item'|'status'|'revealed';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 /** `note`: SB-16g 2a, what a card found by a search says (who found it, when, the vulnerability token bound to it). */
 export type Inspection={title:string;card?:Card;owner?:string;note?:string};
@@ -365,9 +367,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
      if(!r){const bk=this.back(seat.back.w,seat.back.h);bk.position.set(b.x+k*f.step,b.y);bk.rotation=k*f.turn;this.world.addChild(bk);continue;}
      const {w:bw,h:bh}=seat.back,c=this.card(r.card,bw,bh,true),note=revealedNote(r,this.name(id),p.character),hid=`revealed-${id}-${r.copy}`;
      c.position.set(b.x+k*f.step,b.y);c.rotation=k*f.turn;this.revealMark(c,bw,bh,note.badge,'bottom');this.world.addChild(c);
-     const hit:Hit={id:hid,kind:'revealed',x:c.x,y:c.y,w:bw,h:bh,angle:c.rotation,target:{owner:id},label:`${r.card.name}, carta di ${this.name(id)}, ${note.label}`,node:c};this.hits.push(hit);
+     const hit:Hit={id:hid,kind:'revealed',x:c.x,y:c.y,w:Math.max(bw,TOUCH_MIN),h:Math.max(bh,TOUCH_MIN),angle:c.rotation,target:{owner:id},label:`${r.card.name}, carta di ${this.name(id)}, ${note.label}`,node:c};this.hits.push(hit);
      // Raised, it also comes down by half its height: the fan sits at the top edge of the table.
-     if(hover===hid||this.peek===hid||this.focused===hid){c.scale.set(1.6);c.y+=bh*.55;hit.y=c.y;hit.w*=1.6;hit.h*=1.6;raised.push(c);}}}
+     if(hover===hid||this.peek===hid||this.focused===hid){c.scale.set(1.6);c.y+=bh*.55;hit.y=c.y;hit.w=Math.max(bw*1.6,TOUCH_MIN);hit.h=Math.max(bh*1.6,TOUCH_MIN);raised.push(c);}}}
    const person=this.face(p.character.name,artIndex(p.character.bindingName),cw,ch,'PERSONAGGIO',true,'','character');person.position.set(x,y);person.rotation=id===me?-.04:.025;this.world.addChild(person);
    const dead=p.character.dead,forfeit=view.forfeits[id],mark=seatMark({dead,forfeit:!!forfeit},this.stamping.has(id));if(mark){person.alpha=.55;this.text(person,mark,0,0,compact?11:16,cw,0xffffff);}
    const r=p.character.resources,summary=RESOURCES.map(k=>`${LETTER[k]} ${r[k]??0}`).join(', ');
@@ -399,7 +401,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    const c=this.card(local.card,H.w,H.h,false,short,leftV(local.card,res));c.position.set(x,y);c.rotation=a;this.world.addChild(c);c.alpha=state.alpha;
    // SB-16g 2a (D58, D69): the own card found by a search is seen by everyone: marked, with the factor of its token.
    const shownUp=this.ownReveal(local.card),upNote=shownUp?revealedNote(shownUp,null,view.players[me].character):null;if(upNote)this.revealMark(c,H.w,H.h,upNote.badge,'top');
-   // SB-16i («Rincara», D97): the own last resort says how many times it was played; only when the view has the counter (playground rules).
+   // SB-16i («Rincara», D97): the own last resort says how many times it was played; only when the view has the counter (every live game; absent in archived ones).
    const played=upNote?null:playsNote(local.card,view.players[me].character);if(played)this.revealMark(c,H.w,H.h,played.badge,'top',false);
    // A card drawn this round appears when its flight from the deck lands; it can be chosen at once all the same (rule 4).
    const coming=this.arriving.has(local.key);if(coming)c.visible=false;
@@ -685,7 +687,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   return c;}
  /** C3-5, for the checks: each card drawn as the hand (or the small card of the round's cascade) draws it, what it shows read back, then thrown away. */
  faceInfos(cards:Card[],small=false){const L=this.layout,w=small?L?.played?.slots[0]?.w??40:L?.hand.w??112,h=small?L?.played?.slots[0]?.h??56:L?.hand.h??w*1.38;
-  return cards.map(c=>{const f=this.card(c,w,h,small,[],null),info=this.faces.get(f)!;f.destroy({children:true});return {name:c.name,catalogDamage:c.damage??null,catalogAmount:c.damageAmount??null,priority:c.priority,item:c.item,cost:c.cost,gains:c.gains??null,...info};});}
+  return cards.map(c=>{const f=this.card(c,w,h,small,[],null),info=this.faces.get(f)!;f.destroy({children:true});return {name:c.name,catalogDamage:c.damage??null,catalogAmount:c.damageAmount??null,priority:c.priority,item:c.item,cost:c.cost,gains:c.gains??null,inPlay:c.inPlay??null,...info};});}
  /** «ANNULLATA», «ELIMINATO»: a wine stamp pressed on a card or a character. */
  private stamp(word:string,compact:boolean,size=1){const c=new Container(),label=this.text(c,word,0,0,(compact?13:20)*size,undefined,0xffe9e9);label.anchor.set(.5);
   const w=label.width+18,h=label.height+8;c.addChildAt(new Graphics().roundRect(-w/2,-h/2,w,h,4).fill({color:WINE,alpha:.92}).stroke({color:0xffd9d9,width:2.5}),0);c.rotation=-.18;return c;}
