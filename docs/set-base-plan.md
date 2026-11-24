@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 24 novembre 2026, dopo D193). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 24 novembre 2026, dopo D194). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **2.0** col **Set Base 1.0** (SB-28, D187): 117 carte, 7 personaggi, un token, cinque starter (base Spazienzio e Mara; avanzati Celestina, Piera, Beppe), quick a caso fra i cinque (D182); formato 20/2 (D94); soglia minima per gli starter (D95). Le regole 1.13 e il catalogo 0.1 restano solo per le partite archiviate e le misure storiche.
 > - **In corso:** SB-29 (Fase B consegnata il 24 novembre 2026), **in attesa:** revisione del [rapporto](reports/set-base/sb-29-report.md), domande 1–4 ([D190](#decisioni-del-proprietario): regolamento 2.1 e Set Base 1.0.1 nella partita viva). **SB-28 chiuso** il 24 novembre 2026 ([D187](#decisioni-del-proprietario), [report](reports/set-base/sb-28-report.md)): regolamento 2.0 e Set Base 1.0 nella partita viva, catalogo vivo generato dal file del set, mazzi salvati con carte uscite cancellati, client e strumenti adeguati (D183–D186).
-> - **Prossimo:** chiusura di SB-29 dopo le risposte alle domande e la prova del proprietario nel client; poi SB-30a (bot: alla partita di D187 «sembrano stupidi») o SB-31 (client, che sblocca anche i lotti di SB-32). **SB-32:** guida di stile e campione approvati in anticipo (D189, D191–D193); lotti fermi. Q12 resta aperta. B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura.
-> - **Decisioni da leggere:** D193, D192, D191, D190, D189, D188, D187, D186, D185, D184, D183, D182, D181, D180, D179, D178, D177, D176, D175, D174, D173, D172, D171, D170, D169, D168, D165, D164, D163, D162, D161, D160, D159, D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D193).
+> - **Prossimo:** chiusura di SB-29 dopo la partita del proprietario nel client (domande risolte in [D194](#decisioni-del-proprietario): rossi R9 e R10 a SB-31, README e setup alla chiusura); poi SB-30a (bot: alla partita di D187 «sembrano stupidi») o SB-31 (client, che sblocca anche i lotti di SB-32). **SB-32:** guida di stile e campione approvati in anticipo (D189, D191–D193); lotti fermi. Q12 resta aperta. B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura.
+> - **Decisioni da leggere:** D194, D193, D192, D191, D190, D189, D188, D187, D186, D185, D184, D183, D182, D181, D180, D179, D178, D177, D176, D175, D174, D173, D172, D171, D170, D169, D168, D165, D164, D163, D162, D161, D160, D159, D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D194).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -841,6 +841,8 @@ il matchmaking si sistemerà in futuro. Protocollo d'ingresso, `PlayerFactorySer
 **Completamento verificabile.** Verifiche di `client-web` verdi a 1366×768 e 844×390, compreso il peso. Costruire un mazzo valido con il catalogo intero è praticabile. Nessuna carta senza effetto visibile o testo leggibile.
 
 **Rischi.** Densità del catalogo a 844×390.
+
+**Da SB-29 ([D194](#decisioni-del-proprietario)).** Rientrano qui i rossi [R9](reports/rossi-noti.md) (`VerifyLayout` aspetta ancora il catalogo 0.1 da 37 carte) e [R10](reports/rossi-noti.md) (bersaglio al tocco `revealed-…` 18×25 px sulle copie scoperte con vulnerabilità ×1,5).
 
 ### SB-32 — Illustrazioni del set
 
