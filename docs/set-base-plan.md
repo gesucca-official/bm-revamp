@@ -4,13 +4,13 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 24 novembre 2026, dopo D195). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 24 novembre 2026, dopo D196). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **2.1** col **Set Base 1.0.1** (SB-28, D187; SB-29, D195): 117 carte, 7 personaggi, un token, cinque starter (base Spazienzio e Mara; avanzati Celestina, Piera, Beppe); nella quick si sceglie la categoria e lo starter esce a caso al suo interno, senza scelta uno qualunque dei cinque (D190); formato 20/2 (D94); soglia minima per gli starter (D95). Le regole 1.13 e il catalogo 0.1 restano solo per le partite archiviate e le misure storiche.
-> - **In corso:** nessun blocco. **SB-29 chiuso** il 24 novembre 2026 ([D195](#decisioni-del-proprietario), [rapporto](reports/set-base/sb-29-report.md)): regolamento 2.1 e Set Base 1.0.1, quick con scelta della categoria. SB-28 chiuso con [D187](#decisioni-del-proprietario).
-> - **Prossimo:** scelta del proprietario fra SB-30a (bot: alla partita di D187 «sembrano stupidi») e SB-31 (client, con i rossi R9 e R10; sblocca anche i lotti di SB-32). **SB-32:** guida di stile e campione approvati in anticipo (D189, D191–D193); lotti fermi fino alle carte finali e a SB-31. Q12 resta aperta. B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura.
+> - **In corso:** SB-31, Fase A approvata ([D196](#decisioni-del-proprietario)); prossima F1+F2 (rossi R9 e R10, verifiche di D183 (4), atlanti per set). **SB-29 chiuso** il 24 novembre 2026 ([D195](#decisioni-del-proprietario), [rapporto](reports/set-base/sb-29-report.md)).
+> - **Prossimo:** SB-31 in fila: F1+F2, F3 (ispezione, stati, token, rarità), F4 (catalogo, editor, O15), F5 (consolidamento). Dopo F2 possono partire i lotti di SB-32 (guida e campione approvati, D189, D191–D193); C5 del client dopo la chiusura di SB-31. Poi SB-30a (bot: «sembrano stupidi», D187). Q12 resta aperta. B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura.
 > - **In attesa:** revisione della [proposta di SB-31](design/set-base/sb-31-proposta.md#domande) (Fase A), domande 1–7.
-> - **Decisioni da leggere:** D195, D194, D193, D192, D191, D190, D189, D188, D187, D186, D185, D184, D183, D182, D181, D180, D179, D178, D177, D176, D175, D174, D173, D172, D171, D170, D169, D168, D165, D164, D163, D162, D161, D160, D159, D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D195).
+> - **Decisioni da leggere:** D196, D195, D194, D193, D192, D191, D190, D189, D188, D187, D186, D185, D184, D183, D182, D181, D180, D179, D178, D177, D176, D175, D174, D173, D172, D171, D170, D169, D168, D165, D164, D163, D162, D161, D160, D159, D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D196).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -309,7 +309,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-28 | Trasferimento nella partita viva | SB-26, SB-27 | [proposta](design/set-base/sb-28-proposta.md) ([D182](#decisioni-del-proprietario)); **chiuso** il 24 novembre 2026 ([D187](#decisioni-del-proprietario), [report](reports/set-base/sb-28-report.md)): regolamento 2.0 e Set Base 1.0 nella partita viva |
 | Prodotto | SB-29 | Quick con categorie base e avanzata | SB-28 | **chiuso** il 24 novembre 2026 ([D195](#decisioni-del-proprietario), [rapporto](reports/set-base/sb-29-report.md)): regolamento 2.1 e Set Base 1.0.1, quick con scelta della categoria; proposta approvata in [D190](#decisioni-del-proprietario), domande in [D194](#decisioni-del-proprietario) |
 | | SB-30 | Bot nelle partite contro computer | SB-4, SB-28 |  |
-| | SB-31 | Adeguamento del client | SB-28 | [proposta](design/set-base/sb-31-proposta.md) (Fase A) consegnata il 24 novembre 2026: cinque fasi F1–F5; in attesa delle domande 1–7 |
+| | SB-31 | Adeguamento del client | SB-28 | [proposta](design/set-base/sb-31-proposta.md) (Fase A) approvata il 24 novembre 2026 ([D196](#decisioni-del-proprietario)): F1+F2, poi F3, F4, F5 in fila |
 | | SB-32 | Illustrazioni del set | SB-28, SB-31 | Fase A anticipata ([D189](#decisioni-del-proprietario)): [guida di stile](design/set-base/sb-32/guida-stile.md) e [campione](design/set-base/sb-32/prompt-campione.md) approvati il 24 novembre 2026 ([D191](#decisioni-del-proprietario)–[D193](#decisioni-del-proprietario)); lotti fermi fino alle carte finali e a SB-31 |
 | | SB-33 | Consolidamento e giudizio del proprietario | tutti |  |
 
@@ -848,6 +848,8 @@ il matchmaking si sistemerà in futuro. Protocollo d'ingresso, `PlayerFactorySer
 **Da SB-29 ([D194](#decisioni-del-proprietario)).** Rientrano qui i rossi [R9](reports/rossi-noti.md) (`VerifyLayout` aspetta ancora il catalogo 0.1 da 37 carte) e [R10](reports/rossi-noti.md) (bersaglio al tocco `revealed-…` 18×25 px sulle copie scoperte con vulnerabilità ×1,5).
 
 **Fase A (24 novembre 2026).** [Proposta](design/set-base/sb-31-proposta.md): inventario di 26 voci con origine e fase, Q4 (raccomandata l'opzione B: O15 intero, di O16 solo il perimetro), cinque fasi (F1 rossi e verifiche; F2 atlanti per set, parallela a F3; F3 ispezione, stati, token e rarità; F4 catalogo ed editor; F5 consolidamento); catture di catalogo ed editor in [sb-31/](design/set-base/sb-31/catalog-844x390.jpg). In attesa delle domande 1–7.
+
+**Fase A approvata il 24 novembre 2026 ([D196](#decisioni-del-proprietario))** come raccomandato: opzione B per Q4, campo `character` nell'allegato, testi dal client, catalogo minimo, raggruppamento solo nell'ispezione, atlanti 8×8; F1 e F2 in un solo esecutore, poi F3, F4, F5 in fila.
 
 ### SB-32 — Illustrazioni del set
 
