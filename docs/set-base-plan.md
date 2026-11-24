@@ -881,7 +881,7 @@ Con la proposta; nessuna blocca i primi blocchi.
 
 | ID | Domanda | Proposta | Quando |
 |---|---|---|---|
-| Q1 | Avversari computer in quick | Stessa categoria dell'umano in 1vCom; qualunque starter nei bot aggiunti alla FFA | SB-29 |
+| Q1 | Avversari computer in quick | Stessa categoria dell'umano in 1vCom; qualunque starter nei bot aggiunti alla FFA | **Risolta** in SB-29 ([D190](#decisioni-del-proprietario)) |
 | Q3 | Anticipare il bot sulle carte attuali | Sì, se si dimostra utile dopo SB-4. Dato di SB-4: con le carte attuali il Junkie euristico schiaccia Bruiser, da decidere prima di anticipare | Dopo SB-4 |
 | Q4 | Deckbuilder O15 e O16 | Anticiparli in SB-31, perché con 120 carte l'editor attuale difficilmente basta. Da valutare insieme a O17 e O18 | Prima di SB-31 |
 | Q5 | Numero massimo di giri | 3, prima di tornare dal proprietario | SB-20 |
