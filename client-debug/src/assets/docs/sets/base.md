@@ -1,6 +1,6 @@
 # Botte Micidiali — Set Base
 
-Versione **1.0 — 23 novembre 2026**. Documento del set `base`, con le schede normative delle sue carte (regolamento, R00 e R07). Richiede il regolamento 2.0.
+Versione **1.0.1 — 24 novembre 2026**. Documento del set `base`, con le schede normative delle sue carte (regolamento, R00 e R07). Richiede il regolamento 2.1.
 
 Questo documento è generato da `tools/set-catalog/set_catalog.py --vivo` dal file del set `server/src/main/resources/sets/base.json`, che lo stesso comando ricava dalla bozza `server/src/test/resources/set-base/bozza.json` (versione 1.7 del file) togliendo i mazzi di prova: non si modifica a mano, si cambia la bozza e si rigenera (decisioni D175 e D183 del piano Set Base; il formato del file è descritto in `docs/formato-file-set.md`). Il regolamento governa il sistema, le schede governano le carte: una scheda deroga a una regola solo se lo dice esplicitamente. La scheda normativa di ogni carta è il suo **testo completo**; il testo breve stampato sulla carta è nell'allegato ed è descrittivo: in caso di dubbio prevale la scheda. Ruoli, guadagni e danno nominale sono descrittivi (R07a).
 
@@ -14,7 +14,7 @@ Rarità (R07): 42 COMMON, 56 UNCOMMON, 19 RARE, 7 PROTAGONIST.
 
 Ogni starter è conforme a R02: 20 carte regolari, oltre alla base, alle due legate scelte e all'ultima risorsa. Le composizioni sono qui e nell'allegato.
 
-Ogni starter ha un nome e una categoria (D182): **base** Spazienzio e Mara; **avanzati** Celestina, Piera e Beppe. La quick assegna a caso uno dei 5 starter, base o avanzato (R01).
+Ogni starter ha un nome e una categoria (D182): **base** Spazienzio e Mara; **avanzati** Celestina, Piera e Beppe. Nella quick si sceglie la categoria e lo starter esce a caso al suo interno (R01).
 
 | Starter | Nome | Categoria | Personaggio | Base | Legate | Ultima risorsa |
 |---|---|---|---|---|---|---|
@@ -1617,4 +1617,6 @@ Campi descrittivi definiti in R07a, generati dagli stessi dati delle schede; in 
 
 ## Revisioni
 
-- **1.0 — 23 novembre 2026, SB-28:** il Set Base entra nella partita viva e sostituisce la 0.1, archiviata in `docs/history/set-base-0.1.md`. **Richiede il regolamento 2.0**, che porta nel sistema le regole del playground con cui il set è stato bilanciato (D50, D78, D183). Generata dal file del set `server/src/main/resources/sets/base.json` (SHA-256 `de7088d20b90095d4d489aa55a373ff2b1256a8bfdfe8badd459f71fd24b89ba`), ricavato dalla bozza `server/src/test/resources/set-base/bozza.json` (SHA-256 `a969dff08aaa80895f9345c6f1d5787699469c90adc806e3880c48e58e964f9b`), con i testi completi di SB-25 `docs/design/set-base/testi/testi-completi.json` (SHA-256 `ef7cd3ea9e0c3bf0f52dd7c6c6296cdc05b4ac92afc1e5592ca7a9c5158b6ae7`) e gli slot `docs/design/set-base/testi/slot.json` (SHA-256 `48bc14dd58706e7d8ca9bb3583e5d4eaa714bff591233ffb549635a8a35176f7`). Schede = testi completi approvati in D174, coi rimandi al regolamento (D183); testo breve, guadagni e danno nominale dal generatore di SB-25; starter con nome e categoria (D182). Al passaggio i mazzi personalizzati salvati che contengono carte dello 0.1 uscite dal set si cancellano (D182 (3)).
+- **1.0.1 — 24 novembre 2026, SB-29 (D190):** cambia solo la frase di S1 sulla quick: si sceglie la categoria, base o avanzato, e lo starter esce a caso al suo interno (R01, regolamento 2.1). Nessuna carta cambia. **Richiede il regolamento 2.1.**
+
+- **1.0 — 23 novembre 2026, SB-28:** il Set Base entra nella partita viva e sostituisce la 0.1, archiviata in `docs/history/set-base-0.1.md`. **Richiedeva il regolamento 2.0**, che porta nel sistema le regole del playground con cui il set è stato bilanciato (D50, D78, D183). Generata dal file del set `server/src/main/resources/sets/base.json` (SHA-256 `de7088d20b90095d4d489aa55a373ff2b1256a8bfdfe8badd459f71fd24b89ba`), ricavato dalla bozza `server/src/test/resources/set-base/bozza.json` (SHA-256 `a969dff08aaa80895f9345c6f1d5787699469c90adc806e3880c48e58e964f9b`), con i testi completi di SB-25 `docs/design/set-base/testi/testi-completi.json` (SHA-256 `ef7cd3ea9e0c3bf0f52dd7c6c6296cdc05b4ac92afc1e5592ca7a9c5158b6ae7`) e gli slot `docs/design/set-base/testi/slot.json` (SHA-256 `48bc14dd58706e7d8ca9bb3583e5d4eaa714bff591233ffb549635a8a35176f7`). Schede = testi completi approvati in D174, coi rimandi al regolamento (D183); testo breve, guadagni e danno nominale dal generatore di SB-25; starter con nome e categoria (D182). Al passaggio i mazzi personalizzati salvati che contengono carte dello 0.1 uscite dal set si cancellano (D182 (3)).

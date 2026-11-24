@@ -39,10 +39,10 @@ DEFAULT_SET = "server/src/test/resources/set-base/bozza.json"
 DEFAULT_TEXTS = "docs/design/set-base/testi/testi-completi.json"
 DEFAULT_SLOT = "docs/design/set-base/testi/slot.json"
 DEFAULT_OUT = None  # SB-28: the SB-26 candidate folder became the live catalog (--vivo)
-DEFAULT_VERSIONS = {"base": "1.0"}
+DEFAULT_VERSIONS = {"base": "1.0.1"}
 # SB-28: the live catalog. The set document says the date and the regulation it requires; every output has its live place.
-LIVE_DATE = "23 novembre 2026"
-LIVE_RULES = "2.0"
+LIVE_DATE = "24 novembre 2026"  # SB-29: date of the live version 1.0.1; the 1.0 revision keeps its own date
+LIVE_RULES = "2.1"  # SB-29 (D190): the live set requires regulation 2.1
 LIVE_SET_FILE = "server/src/main/resources/sets/base.json"
 LIVE_TEST_DECKS = "server/src/test/resources/set-base/mazzi-prova.json"
 LIVE_MANIFEST = "docs/sets/manifest.json"
@@ -400,7 +400,7 @@ def set_document(cat, s):
             by_category = {c: [d["name"] for d in starters if d["category"] == c] for c in ("base", "avanzato")}
             out.append("Ogni starter ha un nome e una categoria (D182): **base** " + " e ".join(by_category["base"])
                        + "; **avanzati** " + ", ".join(by_category["avanzato"][:-1]) + " e " + by_category["avanzato"][-1]
-                       + f". La quick assegna a caso uno dei {len(starters)} starter, base o avanzato (R01).")
+                       + f". Nella quick si sceglie la categoria e lo starter esce a caso al suo interno (R01).")
             out.append("")
             out += ["| Starter | Nome | Categoria | Personaggio | Base | Legate | Ultima risorsa |", "|---|---|---|---|---|---|---|"]
         else:
@@ -480,8 +480,11 @@ def set_document(cat, s):
         note = (" Il generatore dei testi di SB-25 non conosce " + ", ".join(f"`{b}`" for b in from_file)
                 + ": per queste carte testo breve, guadagni, danno nominale e scheda sono il testo del file.")
     if cat.live:
-        out.append(f"- **{version} — {LIVE_DATE}, SB-28:** il Set Base entra nella partita viva e sostituisce la 0.1, archiviata in "
-                   f"`docs/history/set-base-0.1.md`. **Richiede il regolamento {LIVE_RULES}**, che porta nel sistema le regole "
+        out.append(f"- **1.0.1 — {LIVE_DATE}, SB-29 (D190):** cambia solo la frase di S1 sulla quick: si sceglie la categoria, base o avanzato, e lo "
+                   f"starter esce a caso al suo interno (R01, regolamento {LIVE_RULES}). Nessuna carta cambia. **Richiede il regolamento {LIVE_RULES}.**")
+        out.append("")
+        out.append(f"- **1.0 — 23 novembre 2026, SB-28:** il Set Base entra nella partita viva e sostituisce la 0.1, archiviata in "
+                   f"`docs/history/set-base-0.1.md`. **Richiedeva il regolamento 2.0**, che porta nel sistema le regole "
                    "del playground con cui il set è stato bilanciato (D50, D78, D183). Generata dal file del set " + inputs[0]
                    + f", ricavato dalla bozza `{DEFAULT_SET}` (SHA-256 `{sha256(s.source_raw)}`), con " + " e ".join(inputs[1:])
                    + ". Schede = testi completi approvati in D174, coi rimandi al regolamento (D183); testo breve, guadagni e "
