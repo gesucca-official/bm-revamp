@@ -40,7 +40,7 @@ Generazioni del 24 novembre 2026; giudizio visivo riservato al proprietario. Pro
 | Anteprima | [WebP](anteprime/base.character.Mara.webp), lato lungo 512 px, qualità 80 |
 | Esito / scarto | Conservato per giudizio; non scartato. |
 | Controllo oggettivo | Casco in mano, cuffie, zaino e bici visibili; ginocchia al margine inferiore. |
-| Giudizio del proprietario |  |
+| Giudizio del proprietario | Scelta: versione 1 ([D192](../../../set-base-decisioni.md#decisioni-del-proprietario), punto 1). |
 
 ## Tentativo 3 — junkie.character.ToxicJunkie
 
@@ -57,7 +57,7 @@ Generazioni del 24 novembre 2026; giudizio visivo riservato al proprietario. Pro
 | Anteprima | [WebP](anteprime/junkie.character.ToxicJunkie.webp), lato lungo 512 px, qualità 80 |
 | Esito / scarto | Conservato per giudizio; non scartato. |
 | Controllo oggettivo | Capelli rossi, tuta e oggetto incartato visibili; accovacciata. |
-| Giudizio del proprietario |  |
+| Giudizio del proprietario | Scelta: versione 1 ([D192](../../../set-base-decisioni.md#decisioni-del-proprietario), punto 1). |
 
 ## Tentativo 4 — base.character.Pino
 
@@ -91,7 +91,7 @@ Generazioni del 24 novembre 2026; giudizio visivo riservato al proprietario. Pro
 | Anteprima | [WebP](anteprime/base.character.Gigi.webp), lato lungo 512 px, qualità 80 |
 | Esito / scarto | Conservato per giudizio; non scartato. |
 | Controllo oggettivo | Salopette con due bretelle, braccia incrociate e tasche senza attrezzi; segni spinosi illeggibili su maglia e avambraccio. |
-| Giudizio del proprietario |  |
+| Giudizio del proprietario | Scelta: versione 1 ([D192](../../../set-base-decisioni.md#decisioni-del-proprietario), punto 1). |
 
 ## Tentativo 6 — base.character.Cesira
 
@@ -159,7 +159,7 @@ Generazioni del 24 novembre 2026; giudizio visivo riservato al proprietario. Pro
 | Anteprima | [WebP](anteprime/base.items.PosacenereDiVetro.webp), lato lungo 512 px, qualità 80 |
 | Esito / scarto | Conservato per giudizio; non scartato. |
 | Controllo oggettivo | Posacenere verde con mozziconi, cenere e fumo; il materiale appare opaco e simile alla ceramica vietata, non chiaramente vetro. |
-| Giudizio del proprietario |  |
+| Giudizio del proprietario | Scelta: versione 1 ([D192](../../../set-base-decisioni.md#decisioni-del-proprietario), punto 1). |
 
 ## Tentativo 10 — com.tokens.BrokenBeerBottle
 
@@ -286,7 +286,7 @@ Su richiesta del proprietario: [prompt letterali](prompt-correzioni-2.md), commi
 | Anteprima | [WebP](anteprime/bruiser.character.BigBadBruiser-3.webp), 512 px, qualità 80 |
 | Controllo oggettivo | Ombra unita ai piedi, estesa verso destra senza il lobo a sinistra. |
 | Esito | Conservata per il giudizio; nessun tentativo scartato. |
-| Giudizio del proprietario |  |
+| Giudizio del proprietario | Scelta: versione 3 ([D192](../../../set-base-decisioni.md#decisioni-del-proprietario), punto 1). |
 
 ### Secondo giro 2 — base.character.Pino
 
@@ -346,7 +346,7 @@ Su richiesta del proprietario: [prompt letterali](prompt-correzioni-2.md), commi
 | Anteprima | [WebP](anteprime/com.tokens.BrokenBeerBottle-3.webp), 512 px, qualità 80 |
 | Controllo oggettivo | Collo di bottiglia con imboccatura integra e un solo bordo fratturato; senza mani. |
 | Esito | Conservata per il giudizio; nessun tentativo scartato. |
-| Giudizio del proprietario |  |
+| Giudizio del proprietario | Scelta: versione 3 ([D192](../../../set-base-decisioni.md#decisioni-del-proprietario), punto 1). |
 
 ## Ultimi ritocchi
 
@@ -463,7 +463,7 @@ Su richiesta del proprietario: [prompt letterali](prompt-correzioni-5.md), commi
 | Anteprima | [WebP](anteprime/base.character.Pino-6.webp), 512 px, qualità 80 |
 | Controllo oggettivo | Seduta rotonda più piccola, senza schienale, con gambe visibili. |
 | Esito | Conservata per il giudizio; nessun tentativo scartato. |
-| Giudizio del proprietario |  |
+| Giudizio del proprietario | Scelta: versione 6 ([D192](../../../set-base-decisioni.md#decisioni-del-proprietario), punto 1). |
 
 ### Ultima correzione 2 — base.pino.bound.SpallataAlBancone
 
@@ -497,4 +497,48 @@ Su richiesta del proprietario; [prompt letterale](prompt-correzioni-6.md) commit
 | Anteprima | [WebP](anteprime/base.pino.bound.SpallataAlBancone-7.webp), 512 px, qualità 80 |
 | Controllo oggettivo | Punta della matita visibile; Grappino spostato a destra e separato dalla gamba, quattro zampe appoggiate; getto in asse. |
 | Esito | Conservata per il giudizio; nessun tentativo scartato. |
-| Giudizio del proprietario |  |
+| Giudizio del proprietario | Scelta: versione 7 ([D192](../../../set-base-decisioni.md#decisioni-del-proprietario), punto 1). |
+
+## Scelte del campione D192
+
+Il proprietario ha scelto Spazienzio 3, Mara 1, Celestina 1, Piera 6, Beppe 1, Seltz 7, Posacenere 1 e Bottiglia Spaccata 3. Sergio dalla 3 e Duccio dalla 2 attendono il giudizio sulle nuove versioni. Nessuna illustrazione O9 si conserva: stile diverso e volti riconoscibili nel furto; tutto il set si genera nuovo ([D192](../../../set-base-decisioni.md#decisioni-del-proprietario), punti 1–3).
+
+## Reinquadratura D192
+
+[Prompt letterali](prompt-correzioni-7.md) committati prima in `b8c6d30`; un tentativo per personaggio, nessuno scartato o ripetuto. Modello e riscrittura non esposti; nessun campo negativo separato. Originali fuori da git, copie inalterate dei risultati. [Scheda di confronto](giudizio-correzioni-7.html). La somiglianza e la leggibilità rimangono al giudizio del proprietario.
+
+### Sergio — versione 6
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.character.Cesira` |
+| source | `originali/base.character.Cesira-6.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2495665 / `20a8762a59ad23339fea1d280b623e15ee12330d62ede8d1413132188477e5f5` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-24 |
+| Prompt riscritto | non esposto |
+| promptSha256 | `fe3827829eba7e28df44cd9516642f809e3bb1e6504df5d131462461979405c0` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.character.Cesira-3.png`: `5b43cbc2fe9ab7cb42ec5cec3255295621eedea73d19ed806d434c16372a41ca` |
+| Anteprima | [WebP](anteprime/base.character.Cesira-6.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Figura intera e grande, seduta al tavolino con fiori; sigaretta, calzini spaiati e laccio visibili; sfondo più scuro e morbido. |
+| Esito | Conservata per il giudizio; nessun tentativo scartato. |
+| Giudizio del proprietario | In attesa del giudizio sulla versione D192. |
+
+**Verifiche del giro D192:** `python scripts/check-rules.py` verde; `python scripts/check-links.py` segnala i 22 collegamenti storici già annotati sopra, nessuno nei file SB-32; `git diff --check` senza segnalazioni. Le anteprime e i riferimenti della scheda sono verificati localmente. Nessun atteso o comportamento di gioco modificato. Scelta presa: originali fuori da git come nei giri precedenti. In attesa del giudizio del proprietario sulle sole due reinquadrature.
+
+### Duccio — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.character.Rocco` |
+| source | `originali/base.character.Rocco-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2242193 / `f31be33c2643998c559db77059279b1b96ef1af43f7751f788f583afeca0f475` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-24 |
+| Prompt riscritto | non esposto |
+| promptSha256 | `0b614fb139f68480899c6a8e1976f1b3cef3c1e96f401e135c108c02ffb0d549` |
+| Allegato effettivo | `docs/design/set-base/sb-32/originali/base.character.Rocco-2.png`: `a1279fceb340342a2d74d1445ce5379357bbbec7c51562d4d55f5ebe4427327d` |
+| Anteprima | [WebP](anteprime/base.character.Rocco-3.webp), 512 px, qualità 80 |
+| Controllo oggettivo | Figura intera e grande, cocktail e mano sul cuore visibili, mignolo alzato; aquila e tatuaggio conservati; sfondo più scuro e morbido. |
+| Esito | Conservata per il giudizio; nessun tentativo scartato. |
+| Giudizio del proprietario | In attesa del giudizio sulla versione D192. |

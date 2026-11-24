@@ -34,7 +34,7 @@ Solo file del progetto, **mai immagini da Internet**, screenshot di altri giochi
 | Grammatica dell'illustrazione di carta | [`docs/design/client-c0/r1/card.png`](../../client-c0/r1/card.png), R1 approvato: **solo** la finestra illustrata, non l'uomo raffigurato, la cornice o i testi | 4e575d0d7dc9ca43e410ccf7e94b9e16adffd32bafbd6fa7039b6aa5302f259a |
 | Grappino, se il riferimento di Piera, che lo mostra già, non basta | [`docs/design/carriere/asset/tutorial/sprite/grappino-seduto.webp`](../../carriere/asset/tutorial/sprite/grappino-seduto.webp) | edbe7fe0699e12a9981783782870ec43e5b7a1ecd4bbbfa892dc1d9ff6004e93 |
 
-Non sono riferimenti: le illustrazioni provvisorie di O9 (salvo come candidate da conservare, [sotto](#illustrazioni-o9-conservabili)),
+Non sono riferimenti: le illustrazioni provvisorie di O9 (nessuna conservata, [sotto](#illustrazioni-o9-conservabili)),
 l'immagine di Spazienzio del client debug, le prove scartate dell'identikit. Al massimo **due allegati** per prompt, perché lo strumento
 non mescoli troppe fonti.
 
@@ -46,10 +46,10 @@ non mescoli troppe fonti.
   verde bottiglia, bordeaux, petrolio smorzato, avorio consumato. Mai giallo e nero dominanti, niente neon, oro o ornamenti fantasy.
   L'unico colore fuori palette è il rosa del cocktail di Duccio, piccolo.
 - **Luce:** calda e sporca, da lampade a muro o da sopra, una direzione chiara; ombre profonde ma non nere piene, così il soggetto resta
-  leggibile anche sulla carta scura.
+  leggibile anche sulla carta scura. Le ombre proiettate seguono la direzione della luce e ancorano figure e arredi al suolo (D192).
 - **Ambiente:** il Serraglio, lo stesso bar dello sfondo del tavolo e di `s2-interno`: bancone di legno, bottiglie, sgabelli bordeaux
   rattoppati, muri scrostati verde e avorio. Lo sfondo è **semplificato e più scuro del soggetto**: serve a dire «siamo al bar», non a
-  essere guardato. Altri luoghi solo se la nota della carta li chiede (la strada fuori dalla porta).
+  essere guardato; è anche meno nitido del soggetto (D192). Altri luoghi solo se la nota della carta li chiede (la strada fuori dalla porta).
 
 ## Inquadratura e leggibilità
 
@@ -57,14 +57,14 @@ non mescoli troppe fonti.
   carta finita. Se lo strumento dà un altro formato, si annota e non si stira.
 - **Dove si vede:** nell'atlante ogni riquadro è di 256 px, con 252 px utili (2 px di bordo copiato per lato, [O9](../../client-c2/o9-art/README.md));
   sulla carta in tavola l'illustrazione scende a circa **60 px**; nell'ispezione si vede intera, più grande. Quindi:
-  - **un solo soggetto**, centrato, con sagoma grande e chiara, leggibile a 60 px;
+  - **un solo soggetto**, centrato, alto almeno due terzi dell'immagine, con sagoma grande e chiara, leggibile a 60 px (D192);
   - **un'azione sola**, quella del nome della carta, riconoscibile dalla posa prima che dai dettagli;
   - i dettagli di identità (tatuaggi, calzini, ombrellino) premiano l'ispezione ma non devono servire alla lettura in piccolo;
   - niente di essenziale nel 5% esterno: il ridimensionamento e il bordo lo mangiano;
   - forte contrasto di valore fra soggetto e fondo; niente folla, niente scene affollate.
 - **Personaggi:** inquadratura da carta, non da ritratto del dialogo: quadrata, figura dalla testa almeno alle ginocchia o, se l'azione lo
   chiede, a mezzo busto largo, sempre con l'oggetto iconico in vista. Non si specchia mai un personaggio (tatuaggi e dettagli asimmetrici).
-  Domanda aperta al proprietario: [domande](#domande-aperte).
+  La scala rispetto agli arredi del bar deve essere credibile; sgabelli e sedute devono sostenere plausibilmente il peso del personaggio (D192).
 - **Chi non è un personaggio del gioco** (l'avversario, gli avventori) è una **figura in ombra** generica, senza volto riconoscibile, la
   stessa regola delle carriere ([illustrazioni](../../carriere/illustrazioni.md#ritratti-e-sprite)). Così l'avversario non diventa per
   sbaglio uno del cast, e il soggetto si stacca.
@@ -85,7 +85,7 @@ sovrappone il client. Ogni prompt lo ripete nel paragrafo «Avoid».
     riferimento, volute dal proprietario); mappa dei tatuaggi fissa, nessuna scritta; **niente che esca dal naso**; «fumante» vuol dire rabbia, mai vapore.
   - *Mara:* gilet catarifrangente verde acqua su felpa scura, zaino cubico, cuffie, capelli neri lunghi; il casco di stagnola **sempre in
     mano, mai in testa**; nessun marchio di servizi di consegna.
-  - *Piera:* tonda, tutta in nero, chignon con la matita, ciabatte col pelo, bicchierino in mano; Grappino ai piedi dove la nota lo chiede.
+  - *Piera:* tonda, tutta in nero, chignon con la matita appoggiata nei capelli e la punta temperata visibile, ciabatte col pelo, bicchierino in mano; Grappino ai piedi dove la nota lo chiede (D192).
   - *Celestina:* capelli rossi rasati ai lati, tuta **sul viola**, lontana dal bordeaux di Spazienzio, marsupio, scarpe spaiate; la sua
     tossicità si racconta con cose raccolte da terra: **mai** siringhe, polveri, pasticche riconoscibili (per «Pasticca Abbandonata» la
     griglia la fa già coprire con la mano: se ne intravede solo un riflesso colorato).
@@ -117,30 +117,17 @@ luce; composizione per il riquadro piccolo; soggetto e azione; dettagli del pers
 comuni e quelli del personaggio. Il paragrafo «Avoid» si incolla insieme al resto; se lo strumento ha un campo negativo, ci si può spostare
 **senza riscriverlo**, registrando i due testi.
 
+Paragrafo comune di composizione per i prompt futuri (D192):
+
+~~~text
+Composition for a tiny card tile: one centred subject filling at least two thirds of the image height, with a large clear silhouette readable at 60 pixels. Keep the background darker, simpler and less sharp than the subject, with strong value contrast. Keep essential details out of the outer 5% of the image. Give characters and bar furniture a believable relative scale, and make any seat physically plausible for the character's weight. Cast shadows consistently with the direction of the light.
+~~~
+
 ## Illustrazioni O9 conservabili
 
-Delle 40 illustrazioni provvisorie ([O9](../../client-c2/o9-art/README.md)), 34 hanno un `bindingName` ancora nel Set Base; 6 no
-(`bruiser.WhatchaDoin`, `com.ShuffleFeet`, `junkie.BadTrip`, `junkie.BeggingMoney`, `junkie.EverythingIsDrug`, `junkie.GoingBerserk`).
-Confronto fatto sui prompt di O9 e sulle note della griglia, **senza guardare le immagini**: il giudizio è del proprietario.
+Nessuna illustrazione [O9](../../client-c2/o9-art/README.md) si conserva: stile diverso e volti riconoscibili nel furto; tutto il set si genera nuovo ([D192](../../../set-base-decisioni.md#decisioni-del-proprietario), punto 3).
 
-- **Non conservabili:** i due personaggi (`BigBadBruiser` in canottiera avorio, `ToxicJunkie` uomo) e tutte le carte che mostrano il
-  «bruiser in canottiera» o il «junkie» maschio, perché contraddicono l'identikit (Spazienzio a torso nudo, Celestina donna); anche
-  `junkie.LethalHeroinDose`, che mostra una siringa.
-- **Candidate, da guardare** (nessun personaggio del cast, soggetto vicino alla nota):
-
-| `bindingName` | Carta | Nota della griglia | Cosa mostra O9 | Parere |
-|---|---|---|---|---|
-| `com.items.RottenBeer` | Bionda da 66, Calda | Bottiglia da 66 senza etichetta, sudata e tiepida, sul bancone | Grande bottiglia scura aperta, ditate unte, schiuma sgasata, sul bancone | Coincide |
-| `com.items.CocktailOnTheGround` | Negroni Trovato per Terra | Negroni sul pavimento appiccicoso, ghiaccio sciolto, un mozzicone dentro | Tumbler di Negroni con arancia e ghiaccio sporco sul pavimento | Quasi: manca il mozzicone |
-| `com.Grab` | Afferrare | Una mano afferra dal tavolo l'ultimo oggetto rimasto, fra bicchieri vuoti | Una mano afferra una bottiglia verde senza etichetta sul bancone | Quasi |
-| `com.Steal` | Furto con Destrezza | Una mano svelta sfila un oggetto mentre il padrone guarda altrove | Una mano furtiva sfila una bottiglia a un rivale distratto | Coincide, se il rivale regge come figura in ombra |
-| `com.tokens.BrokenBeerBottle` | Bottiglia Spaccata (token) | Il collo di una bottiglia verde spaccata, bordi taglienti | Bottiglia verde spaccata impugnata per il collo come arma | Quasi: c'è una mano |
-| `com.items.MarvelousCocktail` | Mescolone Micidiale | Caraffa di liquido dai colori impossibili, che fuma appena | Bicchiere sbeccato con cocktail a strati bordeaux e verde | Parziale |
-| `com.items.AnotherRottenBeer` | Doppio Malto da Discount | Bottiglia verde senza etichetta, incrinata sul fondo | Bottiglia verde col collo spezzato, il collo accanto | Parziale: rompe la bottiglia, che è il token |
-| `com.last.Struggle` | Addosso!!! | Un avventore in ombra si lancia a testa bassa oltre un tavolo rovesciato | Avventore malconcio che placca un rivale contro un tavolo | Dubbia: figure non in ombra |
-
-Una O9 conservata va comunque confrontata accanto alle nuove (stile di O9: «gritty adult comic», un po' più crudo dell'identikit) e
-rientra nell'atlante con la sua provenienza originale di `o9-art/assets.json`, senza ritocchi.
+Storico delle candidate: `com.items.RottenBeer`, `com.items.CocktailOnTheGround`, `com.Grab`, `com.Steal`, `com.tokens.BrokenBeerBottle`, `com.items.MarvelousCocktail`, `com.items.AnotherRottenBeer`, `com.last.Struggle`.
 
 ## File e nomi
 
@@ -183,5 +170,4 @@ scartati e motivo, giudizio del proprietario.
 
 ## Domande aperte
 
-Sono nella chiusura della Fase A e nel [campione](prompt-campione.md#cosa-giudica-il-proprietario): inquadratura dei personaggi (carta o
-ritratto), quali O9 conservare, originali in git o fuori, appunti della griglia che non coincidono col nome della carta.
+Restano da giudicare le reinquadrature di Sergio e Duccio; gli originali restano fuori da git in attesa della decisione sulla loro conservazione. Le scelte del campione e il destino delle O9 sono in D192.
