@@ -15,6 +15,14 @@
               (click)="$event.stopPropagation()">
         Quick Modes
       </button>
+      <label class="starter-category">Starter
+        <select data-testid="starter-category" [disabled]="sessionService.queued"
+                (change)="sessionService.starterCategory = $any($event.target).value || null">
+          <option value="">Qualunque</option>
+          <option value="base">Base</option>
+          <option value="avanzato">Avanzato</option>
+        </select>
+      </label>
       <mat-menu #quickPlayModes="matMenu">
         <button mat-menu-item (click)="joinGame('quick/1vCom')">Join 1vCom Game</button>
         <button mat-menu-item (click)="joinGame('quick/1v1')">Join 1v1 Game</button>

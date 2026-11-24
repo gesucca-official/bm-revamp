@@ -142,7 +142,7 @@ class BozzaProfileOffContextTest extends SqliteContextSupport {
     void quickPlayersComeFromSqlite() {
         Set<String> catalogCards = liveCards();
         for (int i = 0; i < 50; i++) {
-            for (Player player : List.of(players.craftRandomPlayer("sb8Quick"), players.craftRandomComPlayer())) {
+            for (Player player : List.of(players.craftRandomPlayer("sb8Quick",null), players.craftRandomComPlayer(null))) {
                 // SB-28 (D182 (1)): one of the five starters of the live set.
                 assertTrue(live.starters().stream().map(live.set()::characterOf).anyMatch(player.getCharacter().getBindingName()::equals),
                         player.getCharacter().getBindingName());
@@ -151,7 +151,7 @@ class BozzaProfileOffContextTest extends SqliteContextSupport {
                 all.add(player.getLastResortCard());
                 for (Card card : all) assertTrue(catalogCards.contains(card.getBindingName()), card.getBindingName());
             }
-            assertEquals(ComPlayer.class, players.craftRandomComPlayer().getClass(), "live computer: the random ComPlayer");
+            assertEquals(ComPlayer.class, players.craftRandomComPlayer(null).getClass(), "live computer: the random ComPlayer");
         }
     }
 

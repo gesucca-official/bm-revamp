@@ -7,6 +7,7 @@ import com.gsc.bm.model.cards.bruiser.character.BigBadBruiser;
 import com.gsc.bm.model.cards.junkie.character.ToxicJunkie;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.repo.external.*;
+import com.gsc.bm.service.catalog.LiveSet;
 import com.gsc.bm.service.factories.*;
 import com.gsc.bm.service.session.*;
 import org.junit.jupiter.api.*;
@@ -40,11 +41,14 @@ class QuickDuelCliTest extends SqliteContextSupport {
     @Autowired MatchVersions versions;
     @Autowired ObjectMapper mapper;
     @Autowired @Qualifier("applicationJdbc") JdbcTemplate jdbc;
+    @Autowired LiveSet live;
     @SpyBean PlayerFactoryService players;
     @MockBean Clock clock;
 
     @Test void completeDuelsWithPrivateViewsAndIndependentJournals() throws Exception { run("complete"); }
     @Test void simultaneousJoinsCreateTwoDisjointDuels() throws Exception { run("concurrent-join"); }
+    /** SB-29 (R01 2.1, D190): a base and an advanced human, real starters (the stubs of the accounts answer only a join without category). */
+    @Test void aBaseAndAnAdvancedHumanPlayTheirOwnStarters() throws Exception { run("categories"); }
     @ParameterizedTest @ValueSource(strings={"move-before","move-exact","move-after",
         "reconnect-before","reconnect-exact","reconnect-after","pending-resume","unsubmitted-resume"})
     void duelDeadlinesAndReconnect(String scenario) throws Exception { run(scenario); }
@@ -67,7 +71,7 @@ class QuickDuelCliTest extends SqliteContextSupport {
             var fixture=new Player(user,character,decks.craftBasicActionStarterCard(character),List.of(),
                 cards.craftCard("com.last.Struggle"),regular);
             doAnswer(i -> (Player) org.springframework.util.SerializationUtils.deserialize(
-                org.springframework.util.SerializationUtils.serialize(fixture))).when(players).craftRandomPlayer(user);
+                org.springframework.util.SerializationUtils.serialize(fixture))).when(players).craftRandomPlayer(user,null);
         }
         Path root=Path.of("..").toAbsolutePath().normalize();
         Path controls=Files.createTempDirectory(Path.of("target"),"i17a-clock-").toAbsolutePath();
@@ -76,6 +80,9 @@ class QuickDuelCliTest extends SqliteContextSupport {
             root.resolve("scripts/cli-quick-duel-test.cjs").toString());
         pb.environment().put("BM_URL","http://127.0.0.1:"+port+"/api");
         pb.environment().put("BM_ACCOUNTS",mapper.writeValueAsString(accounts));
+        var starters=new java.util.LinkedHashMap<String,String>();
+        for(String deck:live.starters()) starters.put(live.set().characterOf(deck),live.set().deckCategory(deck));
+        pb.environment().put("BM_STARTERS",mapper.writeValueAsString(starters));
         pb.environment().put("BM_SCENARIO",scenario); pb.environment().put("BM_CONTROLS",controls.toString());
         Process process=pb.redirectErrorStream(true).redirectOutput(output.toFile()).start();
         long until=System.nanoTime()+TimeUnit.SECONDS.toNanos(60); int request=0;

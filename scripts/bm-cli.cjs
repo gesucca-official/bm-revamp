@@ -75,9 +75,9 @@ class Client {
     }
     return this.subs.get(destination);
   }
-  send(destination, data) {
+  send(destination, data, headers = {}) {
     if (this.closed || this.failure) throw new Error("Connection closed");
-    this.stomp.send(destination, {}, data === undefined ? '' : typeof data === 'string' ? data : JSON.stringify(data));
+    this.stomp.send(destination, headers, data === undefined ? '' : typeof data === 'string' ? data : JSON.stringify(data));
   }
   async wait(destination, after, timeout = this.timeout) {
     if (!Number.isFinite(timeout) || timeout <= 0 || !Number.isInteger(after) || after < 0) throw new Error('Invalid wait');
@@ -151,7 +151,9 @@ class Client {
         const d = (c.mode.includes('Com') || c.mode === 'quick/1v1' || c.mode === 'quick/ffa' ? '/user/queue' : '/topic') + '/game/' + c.mode + '/ready';
         await this.subscribe(d);
         if (c.mode === 'quick/ffa') await this.subscribe('/topic/game/quick/ffa/joined');
-        this.send('/app/game/' + c.mode + '/join' + (c.mode === 'open/1vCom' ? '/' + u + '/' + c.deckId : ''), u);
+        // SB-29 (R01 2.1, D190): the quick joins take the starter category as the STOMP header `category`; without it, any starter.
+        const category = c.mode.startsWith('quick/') && typeof c.category === 'string' ? {category: c.category} : {};
+        this.send('/app/game/' + c.mode + '/join' + (c.mode === 'open/1vCom' ? '/' + u + '/' + c.deckId : ''), u, category);
         return {joined: c.mode};
       }
       case 'watch':

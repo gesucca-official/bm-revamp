@@ -49,17 +49,18 @@ class BozzaRulesetTest {
         StaticListableBeanFactory withBozza = new StaticListableBeanFactory();
         withBozza.addBean("bozza", bozza);
         PlayerFactoryService players = new PlayerFactoryService() {
-            @Override public Player craftRandomComPlayer() { return player("com"); }
-            @Override public Player craftRandomPlayer(String playerId) { return player(playerId); }
+            @Override public Player craftRandomComPlayer(String category) { return player("com"); }
+            @Override public Player craftRandomPlayer(String playerId, String category) { return player(playerId); }
+            @Override public String checkCategory(String category) { return category; }
             @Override public Player craftOpenPlayer(String username, String deckId) { return player(username); }
         };
         Game draft = new GameFactoryServiceImpl(development(), players, withBozza.getBeanProvider(BozzaDraft.class))
-                .craftQuick1vComGame("umano");
+                .craftQuick1vComGame("umano", null);
         assertEquals(Ruleset.D50, draft.getRuleset());
         for (Player p : draft.getPlayers().values()) assertEquals(Ruleset.D50, p.getCharacter().ruleset());
 
         Game live = new GameFactoryServiceImpl(new MockEnvironment(), players,
-                new StaticListableBeanFactory().getBeanProvider(BozzaDraft.class)).craftQuick1vComGame("umano");
+                new StaticListableBeanFactory().getBeanProvider(BozzaDraft.class)).craftQuick1vComGame("umano", null);
         // SB-28 (D183): the live game plays regulation 2.0, the d50 rules; before, 1.13.
         assertEquals(Ruleset.LIVE, live.getRuleset());
         assertEquals(Ruleset.D50, Ruleset.LIVE);

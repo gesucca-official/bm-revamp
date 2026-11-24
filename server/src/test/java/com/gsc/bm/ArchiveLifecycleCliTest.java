@@ -60,7 +60,7 @@ class ArchiveLifecycleCliTest extends SqliteContextSupport {
             players.add(new ComPlayer(character,decks.craftBasicActionStarterCard(character),List.of(),decks.craftLastResortStarterCard(character),List.of()));
         }
         var game=LiveFixtures.live(new Game(players,mode,false));String id=game.getGameId();
-        if(mode.equals("quick1vCom")) doReturn(game).when(factory).craftQuick1vComGame(accounts.get(0));
+        if(mode.equals("quick1vCom")) doReturn(game).when(factory).craftQuick1vComGame(accounts.get(0),null);
         else if(mode.equals("open1vCom")) doReturn(game).when(factory).craftOpen1vComGame(accounts.get(0),"fixture");
         else doReturn(game).when(factory).craftQuickMultiPlayerGame(anyList(),eq(mode));
         doAnswer(i->{if(fault.get() && !((List<MatchEventRepository.Entry>)i.getArgument(1)).isEmpty()

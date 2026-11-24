@@ -12,6 +12,8 @@ export class SessionService {
   readonly resumeEvents = new Subject<any>();
   accountError = '';
   gameJoinError = '';
+  /** SB-29 (R01 2.1, D190): starter category sent with the quick joins (`base`, `avanzato`); null sends none, any starter. */
+  starterCategory: string | null = null;
 
 
   // tslint:disable:variable-name

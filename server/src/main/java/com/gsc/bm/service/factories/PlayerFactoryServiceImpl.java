@@ -13,12 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
  * Players of the live game. SB-28 (D182 (1)): quick deals one of the five starters of the live set at random, base and advanced,
- * to every human and to the computer; open plays a deck the account saved.
+ * to every human and to the computer; open plays a deck the account saved. SB-29 (R01 2.1, D190): the human may choose a
+ * category of the set document and the starter is drawn inside it; without a category, among all of them.
  */
 @Service
 public class PlayerFactoryServiceImpl implements PlayerFactoryService {
@@ -28,26 +29,34 @@ public class PlayerFactoryServiceImpl implements PlayerFactoryService {
     private final CharacterFactoryService characterFactoryService;
     private final UserDecksRepository userDecksRepo;
     private final CardFactoryService cards;
+    private final Random random;
 
     @Autowired
     public PlayerFactoryServiceImpl(LiveSet live, CharacterFactoryService characterFactoryService, UserDecksRepository userDecksRepo,
                                     CardFactoryService cards) {
+        this(live, characterFactoryService, userDecksRepo, cards, new Random());
+    }
+
+    /** For the tests: a seeded {@link Random} makes the draws repeatable. */
+    PlayerFactoryServiceImpl(LiveSet live, CharacterFactoryService characterFactoryService, UserDecksRepository userDecksRepo,
+                             CardFactoryService cards, Random random) {
         this.set = live.set();
         this.starters = live.starters();
         this.characterFactoryService = characterFactoryService;
         this.userDecksRepo = userDecksRepo;
         this.cards = cards;
+        this.random = random;
     }
 
     @Override
-    public Player craftRandomComPlayer() {
-        Starter s = new Starter(randomStarter());
+    public Player craftRandomComPlayer(String category) {
+        Starter s = new Starter(randomStarter(category));
         return new ComPlayer(s.character, s.basic, s.bound, s.lastResort, s.regular);
     }
 
     @Override
-    public Player craftRandomPlayer(String playerId) {
-        Starter s = new Starter(randomStarter());
+    public Player craftRandomPlayer(String playerId, String category) {
+        Starter s = new Starter(randomStarter(category));
         return new Player(playerId, s.character, s.basic, s.bound, s.lastResort, s.regular);
     }
 
@@ -66,9 +75,27 @@ public class PlayerFactoryServiceImpl implements PlayerFactoryService {
                 basic, bound, lastResort, regular);
     }
 
-    /** D182 (1): one of the starters of the live set, all with the same chance. */
-    String randomStarter() {
-        return starters.get(ThreadLocalRandom.current().nextInt(starters.size()));
+    @Override
+    public String checkCategory(String category) {
+        if (category == null || category.isBlank()) return null;
+        if (starters.stream().noneMatch(d -> category.equals(set.deckCategory(d))))
+            throw new IllegalArgumentException("Categoria sconosciuta: " + category + " (note: " + categories() + ")");
+        return category;
+    }
+
+    private String categories() {
+        return starters.stream().map(set::deckCategory).distinct().collect(Collectors.joining(", "));
+    }
+
+    /**
+     * D182 (1), R01 2.1: one of the starters of the live set, all with the same chance; with a category, one of that category
+     * starters. The categories are those of the set file: none is named here.
+     */
+    String randomStarter(String category) {
+        List<String> pool = category == null ? starters
+                : starters.stream().filter(d -> category.equals(set.deckCategory(d))).collect(Collectors.toList());
+        if (pool.isEmpty()) throw new IllegalArgumentException("Categoria sconosciuta: " + category + " (note: " + categories() + ")");
+        return pool.get(random.nextInt(pool.size()));
     }
 
     private final class Starter {

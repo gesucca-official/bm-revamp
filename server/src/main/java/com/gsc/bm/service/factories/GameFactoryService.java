@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface GameFactoryService {
 
-    Game craftQuick1vComGame(String playerId);
+    /** SB-29: the human starter is drawn in {@code category} (null: any), and the computer one in the same category (Q1, D190). */
+    Game craftQuick1vComGame(String playerId, String category);
 
     Game craftOpen1vComGame(String username, String deckId);
 

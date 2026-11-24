@@ -7,6 +7,7 @@ import com.gsc.bm.model.cards.bruiser.character.BigBadBruiser;
 import com.gsc.bm.model.cards.junkie.character.ToxicJunkie;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.repo.external.*;
+import com.gsc.bm.service.catalog.LiveSet;
 import com.gsc.bm.service.factories.*;
 import com.gsc.bm.service.session.*;
 import org.junit.jupiter.api.*;
@@ -40,10 +41,11 @@ class QuickFfaCliTest extends SqliteContextSupport {
     @Autowired MatchVersions versions;
     @Autowired ObjectMapper mapper;
     @Autowired @Qualifier("applicationJdbc") JdbcTemplate jdbc;
+    @Autowired LiveSet live;
     @SpyBean PlayerFactoryService players;
     @MockBean Clock clock;
 
-    @ParameterizedTest @ValueSource(strings={"early","full","bots","concurrent","leave",
+    @ParameterizedTest @ValueSource(strings={"early","full","bots","categories","concurrent","leave",
         "batch","all-timeout","move-before","move-exact","move-after",
         "reconnect-before","reconnect-exact","reconnect-after"})
     void ffaQueueAndLifecycle(String scenario) throws Exception { run(scenario); }
@@ -61,12 +63,12 @@ class QuickFfaCliTest extends SqliteContextSupport {
             var fixture=new Player(user,character,decks.craftBasicActionStarterCard(character),List.of(),
                 decks.craftLastResortStarterCard(character),regular);
             doAnswer(i -> (Player) org.springframework.util.SerializationUtils.deserialize(
-                org.springframework.util.SerializationUtils.serialize(fixture))).when(players).craftRandomPlayer(user);
+                org.springframework.util.SerializationUtils.serialize(fixture))).when(players).craftRandomPlayer(user,null);
         }
         doAnswer(i -> new com.gsc.bm.model.game.ComPlayer(new BigBadBruiser(),
             cards.craftCard("base.com.ShuffleFeet"), List.of(), cards.craftCard("com.last.Struggle"),
             java.util.stream.IntStream.range(0,50).mapToObj(n -> cards.craftCard("base.com.ShuffleFeet")).collect(java.util.stream.Collectors.toList())))
-            .when(players).craftRandomComPlayer();
+            .when(players).craftRandomComPlayer(null);
         Path root=Path.of("..").toAbsolutePath().normalize();
         Path controls=Files.createTempDirectory(Path.of("target"),"i17b-clock-").toAbsolutePath();
         Path output=Path.of("target","i17b-"+scenario+".json");
@@ -74,6 +76,9 @@ class QuickFfaCliTest extends SqliteContextSupport {
             root.resolve("scripts/cli-quick-ffa-test.cjs").toString());
         pb.environment().put("BM_URL","http://127.0.0.1:"+port+"/api");
         pb.environment().put("BM_ACCOUNTS",mapper.writeValueAsString(accounts));
+        var starters=new java.util.LinkedHashMap<String,String>();
+        for(String deck:live.starters()) starters.put(live.set().characterOf(deck),live.set().deckCategory(deck));
+        pb.environment().put("BM_STARTERS",mapper.writeValueAsString(starters));
         pb.environment().put("BM_SCENARIO",scenario); pb.environment().put("BM_CONTROLS",controls.toString());
         Process process=pb.redirectErrorStream(true).redirectOutput(output.toFile()).start();
         long until=System.nanoTime()+TimeUnit.SECONDS.toNanos(60); int request=0;
@@ -102,6 +107,12 @@ class QuickFfaCliTest extends SqliteContextSupport {
                 assertThrows(IllegalArgumentException.class,()->games.getGame(id));
             }
             assertFalse(Files.readString(output).contains("synthetic"));
+            if(scenario.equals("categories")) { // SB-29 (D190): the humans asked for their category, the computer of the FFA for none (any starter)
+                verify(players).craftRandomPlayer(prefix+"A","base");
+                verify(players).craftRandomPlayer(prefix+"B","avanzato");
+                verify(players).craftRandomComPlayer(null);
+                verify(players,never()).craftRandomComPlayer(argThat(category -> category != null));
+            }
             Files.copy(output,root.resolve(".build-logs/i17b-"+scenario+"-exports.json"),StandardCopyOption.REPLACE_EXISTING);
         } finally {
             process.destroyForcibly(); reset(players);

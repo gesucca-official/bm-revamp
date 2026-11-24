@@ -38,10 +38,10 @@ public class GameFactoryServiceImpl implements GameFactoryService {
     }
 
     @Override
-    public Game craftQuick1vComGame(String playerId) {
+    public Game craftQuick1vComGame(String playerId, String category) {
         return withRules(new Game(List.of(
-                playerFactoryService.craftRandomPlayer(playerId),
-                playerFactoryService.craftRandomComPlayer()
+                playerFactoryService.craftRandomPlayer(playerId, category),
+                playerFactoryService.craftRandomComPlayer(category)
         ), "quick1vCom", Objects.equals(env.getProperty("log.db"), "N")));
     }
 
@@ -49,7 +49,7 @@ public class GameFactoryServiceImpl implements GameFactoryService {
     public Game craftOpen1vComGame(String username, String deckId) {
         return withRules(new Game(List.of(
                 playerFactoryService.craftOpenPlayer(username, deckId),
-                playerFactoryService.craftRandomComPlayer()
+                playerFactoryService.craftRandomComPlayer(null)
         ), "open1vCom", Objects.equals(env.getProperty("log.db"), "N")));
     }
 
@@ -59,8 +59,8 @@ public class GameFactoryServiceImpl implements GameFactoryService {
         for (QueuedPlayer qp : queuedPlayers)
             players.add(
                     qp.isHuman()
-                            ? playerFactoryService.craftRandomPlayer(qp.getPlayerId())
-                            : playerFactoryService.craftRandomComPlayer()
+                            ? playerFactoryService.craftRandomPlayer(qp.getPlayerId(), qp.getCategory())
+                            : playerFactoryService.craftRandomComPlayer(null) // FFA computers: any starter (Q1, D190)
             );
         return withRules(new Game(players, type, Objects.equals(env.getProperty("log.db"), "N")));
     }

@@ -47,7 +47,7 @@ public class BozzaPlayerFactory implements PlayerFactoryService {
     }
 
     @Override
-    public Player craftRandomComPlayer() {
+    public Player craftRandomComPlayer(String category) { // SB-29: the draft profile draws from its pool and ignores the category
         String deck = BozzaDraft.FROM_POOL.equals(bozza.com()) ? fromPool() : bozza.com();
         Deck d = deck(deck);
         BotPolicy policy = bozza.newPolicy();
@@ -57,7 +57,7 @@ public class BozzaPlayerFactory implements PlayerFactoryService {
     }
 
     @Override
-    public Player craftRandomPlayer(String playerId) {
+    public Player craftRandomPlayer(String playerId, String category) {
         Deck d = deck(fromPool());
         return new Player(playerId, d.character, d.basic, d.bound, d.lastResort, d.regular);
     }
@@ -69,6 +69,9 @@ public class BozzaPlayerFactory implements PlayerFactoryService {
         DeckRules.check(d.character.getBindingName(), d.basic, d.bound, d.lastResort, d.regular);
         return new Player(username, d.character, d.basic, d.bound, d.lastResort, d.regular);
     }
+
+    @Override
+    public String checkCategory(String category) { return saved.checkCategory(category); }
 
     private String fromPool() {
         List<String> pool = bozza.pool();

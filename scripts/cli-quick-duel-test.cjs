@@ -106,6 +106,33 @@ async function finish(a,b,id) {
     }
     for(const [id,[x,y]] of groups) {const v=await view(x,id);assert(v.over);assert.strictEqual(v.winner,'NONE');await finish(x,y,id);}
     checks.push('four concurrent joins, exactly two disjoint matches; concurrent moves and complete draws');
+  } else if(scenario==='categories') {
+    // SB-29 (R01 2.1, D190): one human asks for `base`, the other for `avanzato`; the starters are the real ones (no fixture) and the
+    // queue is mixed. BM_STARTERS maps each starter character to its category, as the set file says.
+    const starters=JSON.parse(process.env.BM_STARTERS), want={[a.user]:'base',[b.user]:'avanzato'};
+    const marks=[a.events.length,b.events.length];
+    await Promise.all([a.command({command:'join',mode:'quick/1v1',category:want[a.user]}),b.command({command:'join',mode:'quick/1v1',category:want[b.user]})]);
+    const ready=[await a.wait(READY,marks[0]),await b.wait(READY,marks[1])];assert.strictEqual(ready[0].data,ready[1].data);
+    const id=ready[0].data;await Promise.all([watch(a,id),watch(b,id)]);
+    const start=await view(a,id);privateView(a,start);
+    for(const user of [a.user,b.user]) assert.strictEqual(starters[start.players[user].character.bindingName],want[user],user+' gets a starter of '+want[user]);
+    checks.push('1v1 with a base and an advanced human: each real starter is of the chosen category');
+    // The duel is completed with the last resort of each starter (always in the hand), aimed at the opponent when it admits one.
+    const lastResort=async(client,other)=>{
+      const v=await view(client,id), card=v.players[client.user].cardsInHand.find(x=>x.lastResort);
+      assert(card,'last resort in hand of '+client.user);
+      return {gameId:id,playerId:client.user,playedCardName:card.name,targetId:card.canTarget.includes('OPPONENT')?other.user:client.user,choices:null};
+    };
+    for(let turn=0;turn<30;turn++) {
+      if((await view(a,id)).over) break;
+      const m=[a.events.length,b.events.length];
+      const moves=await Promise.all([lastResort(a,b),lastResort(b,a)]);
+      await Promise.all([a.command({command:'move',move:moves[0]}),b.command({command:'move',move:moves[1]})]);
+      await Promise.all([a.wait('/topic/game/'+id+'/update',m[0]),b.wait('/topic/game/'+id+'/update',m[1])]);
+    }
+    assert((await view(a,id)).over,'the duel completes');
+    const x=await finish(a,b,id);inspectExport(x,[a.user,b.user]);
+    checks.push('the mixed duel completes with real starters; exports agree');
   } else {
     // Repeated join must leave one slot while a second distinct human is still absent.
     await a.command({command:'join',mode:'quick/1v1'});await barrier(a);

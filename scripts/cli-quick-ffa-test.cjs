@@ -160,6 +160,25 @@ async function round(members,id,targets) {
     for(const x of [a,b,c,d,e]) await x.command({command:'leave-queue'});
     const again=await start([d,e]);await d.command({command:'leave',gameId:again});await finish([d,e],again);
     checks.push('join/start race: disjoint membership, capacity, one ready, requeue and second start');
+  } else if(scenario==='categories') {
+    // SB-29 (R01 2.1, D190): a base and an advanced human and a computer in the same FFA: the queue is mixed, each human has a real
+    // starter of the chosen category, the computer any starter (the runner stubs it and checks it was asked for none), and the public
+    // list of the queue does not show the category. BM_STARTERS maps each starter character to its category (the set file).
+    const starters=JSON.parse(process.env.BM_STARTERS), want={[a.user]:'base',[b.user]:'avanzato'};
+    for(const x of [a,b]) await x.command({command:'join',mode:'quick/ffa',category:want[x.user]});
+    await barrier(a);await barrier(b);
+    const listed=a.events.filter(e=>e.destination==='/topic/game/quick/ffa/joined').pop();
+    assert.deepStrictEqual(listed.data.map(p=>p.playerId).sort(),[a.user,b.user].sort());
+    listed.data.forEach(p=>assert(!('category' in p),'the public queue does not carry the category'));
+    await b.command({command:'add-bot'});await barrier(b);await b.command({command:'start'});
+    const id=(await a.wait(READY,0)).data;assert.strictEqual((await b.wait(READY,0)).data,id);
+    await watch(a,id);await watch(b,id);
+    const v=await view(a,id);privateView(a,v);assert.strictEqual(Object.keys(v.players).length,3);
+    for(const x of [a,b]) assert.strictEqual(starters[v.players[x.user].character.bindingName],want[x.user],x.user+' gets a starter of '+want[x.user]);
+    await a.command({command:'leave',gameId:id});assert(!(await view(b,id)).over);
+    await b.command({command:'leave',gameId:id});assert((await view(b,id)).over);
+    await finish([a,b],id);
+    checks.push('mixed FFA with a base human, an advanced human and a computer: starters of the chosen categories; the public list hides the category');
   } else if(scenario==='bots') {
     await join(a);for(let n=0;n<8;n++) await join(a);
     assert(!a.events.some(e=>e.destination===READY));

@@ -61,7 +61,7 @@ async function main() {
       assert.strictEqual(initial.configuration.botPolicy,'random');
       assert.strictEqual(initial.versions.rulesVersion,process.env.BM_RULES_VERSION);
       assert.deepStrictEqual(initial.versions.sets,JSON.parse(process.env.BM_SETS));
-      assert.strictEqual(initial.versions.sets.base.version,'1.0'); // SB-28 (D182): Set Base 1.0
+      assert.strictEqual(initial.versions.sets.base.version,'1.0.1'); // SB-29 (D190): Set Base 1.0.1 (1.0 in SB-28, D182)
       assert.strictEqual(initial.state.players[0].initialDeckDrawOrder.length,match===0?20:0);
       for(const key of ['codeSha256','rulesSha256','catalogSha256','rulesCatalogSha256']) assert(/^[a-f0-9]{64}$/.test(initial.versions[key]),key);
       assert.strictEqual(initial.state.players[0].character,user==='i13Junkie'?'junkie.character.ToxicJunkie':'bruiser.character.BigBadBruiser');

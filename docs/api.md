@@ -41,6 +41,8 @@ La vista aggiunge `turn`, `pendingMove` del solo titolare (null se assente), `fo
 
 Il server applica i termini assoluti anche sui comandi, oltre al controllo periodico: la frequenza del controllo non estende i 30 s. Termini identici sono applicati insieme, termini diversi in ordine; poi superstiti ed eventuale risoluzione. Un submit già accettato ferma il solo clock mossa del mittente; il drop apre un clock distinto che i tentativi di connessione senza resume non azzerano. `resume` ripetuto dopo scadenza ripropone il risultato, senza spostare il termine. Leave/logout confermano la presa visione: al successivo accesso si torna all'hub; l'ultima ricevuta resta soltanto per idempotenza dei leave. L'export persistito resta disponibile.
 
+**Categoria della quick (SB-29, regolamento 2.1, D190).** I tre join quick accettano l'header STOMP `category` con una categoria del documento del set (oggi `base` e `avanzato`, minuscolo, confronto esatto): lo starter dell'umano esce a caso in quella categoria e, nella quick contro computer, anche quello del computer; i computer della FFA e dell'open restano fra tutti gli starter. Header assente o vuoto: uno starter qualunque dei cinque. Valore sconosciuto: rifiuto su `/user/queue/game/error` prima di accodare o creare la partita. Il corpo resta il solo playerId. La coda non tiene conto delle categorie e la lista pubblica FFA non le mostra.
+
 Un join mentre esiste una partita da riprendere/lasciare è rifiutato, senza crearne un'altra; gli errori quick arrivano su `/user/queue/game/error`, gli errori open mantengono il canale precedente. La coda non duplica lo stesso umano e aggiorna i presenti dopo un'uscita. Violazioni di identità/destinazione restano errori di trasporto. Dettagli normativi dei due clock in [R06](game-rules.md), prove in [report I14/I23](reports/i14-i23-report.md).
 
 > Stato corrente 24 ottobre 2026: CLI I26 implementato ([guida](cli.md)); I19a aggiunge l'export autenticato del match quick concluso. Le sezioni di pianificazione e i censimenti datati sotto rimangono storici.
@@ -124,9 +126,9 @@ Tutti i comandi sotto riportati richiedono il prefisso `/app`. Le destinazioni `
 | `/user/{username}/account` | vuoto | user `/account/data`: UserAccountInfo o null | [UserController](../server/src/main/java/com/gsc/bm/api/ws/UserController.java) |
 | `/user/{username}/deck` | UserGuiDeck JSON | salva/sovrascrive, restituisce account a user `/account/data` | stesso controller |
 | `/user/{username}/deck/delete` | UserGuiDeck (usa deckId) | elimina, restituisce account | stesso controller |
-| `/game/quick/1vCom/join` | playerId, stringa semplice | user `/game/quick/1vCom/ready`: gameId | [QuickGameQueuesController](../server/src/main/java/com/gsc/bm/api/ws/QuickGameQueuesController.java) |
-| `/game/quick/1v1/join` | playerId stringa | `/user/queue/game/quick/1v1/ready`: gameId privato ai due partecipanti quando coda completa (I17a) | stesso controller |
-| `/game/quick/ffa/join` | playerId stringa | `/topic/game/quick/ffa/joined`: lista QueuedPlayer; `/user/queue/game/quick/ffa/ready` privato ai partecipanti se completa | stesso controller |
+| `/game/quick/1vCom/join` | playerId, stringa semplice; header STOMP `category` facoltativo (SB-29) | user `/game/quick/1vCom/ready`: gameId | [QuickGameQueuesController](../server/src/main/java/com/gsc/bm/api/ws/QuickGameQueuesController.java) |
+| `/game/quick/1v1/join` | playerId stringa; header `category` facoltativo | `/user/queue/game/quick/1v1/ready`: gameId privato ai due partecipanti quando coda completa (I17a) | stesso controller |
+| `/game/quick/ffa/join` | playerId stringa; header `category` facoltativo | `/topic/game/quick/ffa/joined`: lista QueuedPlayer (senza la categoria); `/user/queue/game/quick/ffa/ready` privato ai partecipanti se completa | stesso controller |
 | `/game/quick/ffa/join/com` | vuoto | stessa lista joined e ready privato FFA; aggiunge bot | stesso controller |
 | `/game/quick/ffa/start` | vuoto | `/user/queue/game/quick/ffa/ready`: gameId se almeno 2; aggiornamento joined | stesso controller |
 | `/game/open/1vCom/join/{username}/{deckId}` | ignorato dal metodo | user `/game/open/1vCom/ready`: gameId | [OpenGameQueuesController](../server/src/main/java/com/gsc/bm/api/ws/OpenGameQueuesController.java) |

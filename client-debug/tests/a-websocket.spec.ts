@@ -80,6 +80,19 @@ tests.push({name: mode + ' join sends once while pending and consumes one privat
 }});
 }
 
+// SB-29 (R01 2.1, D190): the quick joins carry the starter category as the STOMP header `category`; unset sends none (any starter), the open never sends it.
+for (const [mode, category] of [['quick/1vCom', 'avanzato'], ['quick/1v1', 'base'], ['quick/ffa', 'avanzato'], ['quick/1vCom', null], ['open/1vCom', 'avanzato']] as [string, string | null][]) {
+tests.push({name: mode + ' join sends the category header ' + (category || '(none)'), run: async () => {
+  const state = new SessionService();
+  state.starterCategory = category;
+  const service = new WebsocketService(state);
+  const sent: any[] = [];
+  (service as any).stompClient = {subscribe: () => ({unsubscribe: () => {}}), send: (_destination, headers) => sent.push(headers)};
+  service.joinGame('alice', mode, () => {}, {deckId: 'selected'} as any);
+  assert.deepEqual(sent, [mode.startsWith('quick/') && category ? {category} : {}]);
+}});
+}
+
 tests.push({name: 'open rejection releases loading and subscriptions, retry sends selected deck', run: async () => {
   const state = new SessionService();
   const service = new WebsocketService(state);

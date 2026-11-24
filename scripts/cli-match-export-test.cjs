@@ -41,9 +41,9 @@ async function main() {
       ['INITIAL', 'MOVE_ACCEPTED', 'ROUND_READY', 'ENGINE_REPORT', 'ROUND_COMMITTED', 'COMMAND_COMMITTED', 'OUTCOME']);
     const initial = JSON.parse(all[0].json).data;
     assert.strictEqual(initial.state.mode, 'quick1vCom'); assert.strictEqual(initial.state.players.length, 2);
-    assert.strictEqual(initial.versions.rulesVersion, '2.0'); // SB-28 (D183): regulation 2.0
+    assert.strictEqual(initial.versions.rulesVersion, '2.1'); // SB-29 (D190): regulation 2.1 (2.0 in SB-28, D183)
     assert.deepStrictEqual(Object.keys(initial.versions.sets), ['base']);
-    assert.strictEqual(initial.versions.sets.base.version, '1.0'); // SB-28 (D182): Set Base 1.0
+    assert.strictEqual(initial.versions.sets.base.version, '1.0.1'); // SB-29 (D190): Set Base 1.0.1 (1.0 in SB-28, D182)
     assert(/^[a-f0-9]{64}$/.test(initial.versions.sets.base.sha256));
     assert.strictEqual(initial.state.players[0].initialDeckDrawOrder.length, 20);
     assert.strictEqual(JSON.parse(all[2].json).data.pendingMoves.length, 2);

@@ -54,7 +54,7 @@ class MatchArchiveCliTest extends SqliteContextSupport {
         bot.getCardsInHand().clear(); bot.getCardsInHand().add(cards.craftCard("com.last.Struggle"));
         bot.getResources().put(Resource.HEALTH,10);
         var game = LiveFixtures.live(new Game(List.of(human,bot),"quick1vCom",false)); String id = game.getGameId();
-        doReturn(game).when(gameFactory).craftQuick1vComGame(user);
+        doReturn(game).when(gameFactory).craftQuick1vComGame(user,null);
         if (fault) {
             doThrow(new org.springframework.dao.DataAccessResourceFailureException("synthetic write failure"))
                     .when(events).append(eq(id),argThat(batch -> batch != null && !batch.isEmpty() && batch.get(0).getSequence() > 0));
