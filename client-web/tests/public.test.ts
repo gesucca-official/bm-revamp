@@ -31,7 +31,8 @@ test('set document: every heading, the version and the revisions of docs/sets/ba
   assert.equal(rulesVersion(setBlocks), /Versione \*\*(\S+) —/.exec(setSource)![1]);
   const revisions = setBlocks.at(-1) as Extract<Block, {kind: 'list'}>;
   assert.equal(revisions.kind, 'list');
-  assert.deepEqual(revisions.items.map(i => /^(\d+\.\d+) —/.exec(plain(i))?.[1]), [...setSource.matchAll(/^- \*\*(\d+\.\d+) —/gm)].map(m => m[1]));
+  // SB-29 (D190): the Set Base is 1.0.1, so a revision number has two or three parts.
+  assert.deepEqual(revisions.items.map(i => /^(\d+(?:\.\d+)+) —/.exec(plain(i))?.[1]), [...setSource.matchAll(/^- \*\*(\d+(?:\.\d+)+) —/gm)].map(m => m[1]));
 });
 
 test('rules and set document: tables keep every row and cell (cards in the set, R07a definitions in the rules), with the alignment', () => {

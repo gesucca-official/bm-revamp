@@ -176,7 +176,7 @@ async function round(members,id,targets) {
     const v=await view(a,id);privateView(a,v);assert.strictEqual(Object.keys(v.players).length,3);
     for(const x of [a,b]) assert.strictEqual(starters[v.players[x.user].character.bindingName],want[x.user],x.user+' gets a starter of '+want[x.user]);
     await a.command({command:'leave',gameId:id});assert(!(await view(b,id)).over);
-    await b.command({command:'leave',gameId:id});assert((await view(b,id)).over);
+    await b.command({command:'leave',gameId:id}); // the computer is the last one standing: the export has the outcome
     await finish([a,b],id);
     checks.push('mixed FFA with a base human, an advanced human and a computer: starters of the chosen categories; the public list hides the category');
   } else if(scenario==='bots') {

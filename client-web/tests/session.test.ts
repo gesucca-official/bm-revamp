@@ -18,7 +18,7 @@ function duel(turn = 1): View {
 }
 
 class FakeServer implements Connector {
-  sent: {destination: string; body: string}[] = [];
+  sent: {destination: string; body: string; headers?: Record<string, string>}[] = [];
   handlers = new Map<string, (body: string) => void>();
   drops: (() => void)[] = [];
   valid = true; connects = 0;
@@ -29,7 +29,7 @@ class FakeServer implements Connector {
     this.handlers = handlers;
     return {
       subscribe: async (destination, handler) => { handlers.set(destination, handler); return () => { handlers.delete(destination); }; },
-      send: (destination, body = '') => { this.sent.push({destination, body}); },
+      send: (destination, body = '', headers) => { this.sent.push(headers ? {destination, body, headers} : {destination, body}); },
       close: () => {}, drop: () => this.drops.at(-1)!()
     };
   }
@@ -58,7 +58,7 @@ async function inHub() {
 async function inGame(view = duel()) {
   const ctx = await inHub();
   ctx.session.join('quick/1vCom'); await flush();
-  assert.deepEqual(ctx.server.sent.at(-1), {destination: '/app/game/quick/1vCom/join', body: 'Tu'});
+  assert.deepEqual(ctx.server.sent.at(-1), {destination: '/app/game/quick/1vCom/join', body: 'Tu', headers: {category: 'base'}});
   ctx.server.deliver('/user/queue/game/quick/1vCom/ready', 'g1'); await flush();
   assert.deepEqual(ctx.server.sent.at(-1), {destination: '/app/game/g1/Tu/view', body: ''});
   ctx.server.deliver('/user/queue/game/g1/view', view);
@@ -173,7 +173,7 @@ test('outcome, leave acknowledgement and a new quick game', async () => {
   assert.deepEqual(server.sent.at(-1), {destination: '/app/game/g1/Tu/leave', body: ''});
   server.deliver('/user/queue/game/g1/leave', 'true'); await flush();
   assert.equal(session.model, null); assert.equal(session.phase, 'queue');
-  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1vCom/join', body: 'Tu'});
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1vCom/join', body: 'Tu', headers: {category: 'base'}});
 });
 
 test('queue error returns to the hub with the server message', async () => {
@@ -187,7 +187,7 @@ test('1v1: joins on its own ready channel and plays like any game', async () => 
   const {session, server} = await inHub();
   session.join('quick/1v1'); await flush();
   assert.equal(session.queued, 'quick/1v1');
-  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1v1/join', body: 'Tu'});
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1v1/join', body: 'Tu', headers: {category: 'base'}});
   assert.ok(!server.handlers.has('/user/queue/game/quick/1vCom/ready'));
   server.deliver('/user/queue/game/quick/1v1/ready', 'g1'); await flush();
   assert.equal(session.queued, null); assert.ok(!server.handlers.has('/user/queue/game/quick/1v1/ready'), 'queue subscription closed');
@@ -205,7 +205,7 @@ test('new game repeats the mode just played (D11)', async () => {
   session.leave('again'); await flush();
   server.deliver('/user/queue/game/g1/leave', 'true'); await flush();
   assert.equal(session.phase, 'queue'); assert.equal(session.queued, 'quick/1v1');
-  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1v1/join', body: 'Tu'});
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1v1/join', body: 'Tu', headers: {category: 'base'}});
 });
 
 test('leaving the queue: ACK closes the subscriptions and returns to an active hub', async () => {
@@ -346,7 +346,7 @@ test('P13: FFA subscribes the ready and the public list before joining; the list
   const {session, server} = await inHub();
   session.join('quick/ffa'); await flush();
   assert.ok(server.handlers.has('/user/queue/game/quick/ffa/ready')); assert.ok(server.handlers.has(QUEUE));
-  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/ffa/join', body: 'Tu'});
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/ffa/join', body: 'Tu', headers: {category: 'base'}});
   server.deliver(QUEUE, [entry('Tu')]);
   assert.deepEqual(session.ffaQueue, [entry('Tu')]);
   server.deliver(QUEUE, [entry('Tu'), bot(), entry('devBob')]);
@@ -404,7 +404,7 @@ test('D11: new game after an FFA repeats the FFA; after a rejoin a five-seat gam
   server.deliver('/user/queue/game/f1/view', Object.assign(five(3), {over: true, winner: 'devBob', outcomeReason: 'combat'}));
   session.leave('again'); await flush();
   server.deliver('/user/queue/game/f1/leave', 'true'); await flush();
-  assert.equal(session.queued, 'quick/ffa'); assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/ffa/join', body: 'Tu'});
+  assert.equal(session.queued, 'quick/ffa'); assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/ffa/join', body: 'Tu', headers: {category: 'base'}});
   // A fresh login that resumes a five-seat game does not know the queue: the view says FFA.
   const again = new FakeServer(), other = new Session(again, timers());
   await other.login('Tu', 'secret'); await flush();
@@ -412,7 +412,7 @@ test('D11: new game after an FFA repeats the FFA; after a rejoin a five-seat gam
   again.deliver('/user/queue/account/data', account); await flush();
   other.leave('again'); await flush();
   again.deliver('/user/queue/game/f1/leave', 'true'); await flush();
-  assert.deepEqual(again.sent.at(-1), {destination: '/app/game/quick/ffa/join', body: 'Tu'});
+  assert.deepEqual(again.sent.at(-1), {destination: '/app/game/quick/ffa/join', body: 'Tu', headers: {category: 'base'}});
 });
 
 test('P33: in the FFA another player\'s forfeit keeps the game going; own death keeps watching until the outcome', async () => {
@@ -519,4 +519,41 @@ test('switching hub tab clears the messages of the previous tab', async () => {
   assert.ok(session.error);
   session.clearMessages();
   assert.equal(session.error, '');
+});
+
+// SB-29 (R01 2.1, D190): the quick joins carry the starter category as the STOMP header `category`, base by default; the open does not.
+for (const mode of ['quick/1vCom', 'quick/1v1', 'quick/ffa'] as const) {
+  test(`SB-29: ${mode} sends the chosen category in the header, base without a choice`, async () => {
+    const {session, server} = await inHub();
+    assert.equal(session.category, 'base', 'default Base');
+    session.setCategory('avanzato');
+    session.join(mode); await flush();
+    assert.deepEqual(server.sent.at(-1), {destination: `/app/game/${mode}/join`, body: 'Tu', headers: {category: 'avanzato'}});
+    const other = await inHub();
+    other.session.join(mode); await flush();
+    assert.deepEqual(other.server.sent.at(-1), {destination: `/app/game/${mode}/join`, body: 'Tu', headers: {category: 'base'}});
+  });
+}
+
+test('SB-29: the category is remembered for the session and repeated by «new game»', async () => {
+  const {session, server} = await inHub();
+  session.join('quick/1vCom', null, 'avanzato'); await flush();
+  assert.equal(session.category, 'avanzato', 'an explicit category on join is remembered');
+  server.deliver('/user/queue/game/quick/1vCom/ready', 'g1'); await flush();
+  server.deliver('/user/queue/game/g1/view', {...duel(), over: true, winner: 'Tu'});
+  session.leave('again'); await flush();
+  server.deliver('/user/queue/game/g1/leave', 'true'); await flush();
+  assert.equal(server.count('/app/game/quick/1vCom/join'), 2);
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1vCom/join', body: 'Tu', headers: {category: 'avanzato'}});
+});
+
+test('SB-29: a category that is not in the table is ignored; the open join has no header', async () => {
+  const {session, server} = await inHub();
+  session.setCategory('esperto');
+  assert.equal(session.category, 'base');
+  session.join('open/1vCom', 'Strano', 'avanzato'); await flush();
+  const sent = server.sent.at(-1)!;
+  assert.equal(sent.destination, '/app/game/open/1vCom/join/Tu/Strano');
+  assert.equal('headers' in sent, false, 'the open plays a saved deck: no category');
+  assert.equal(session.category, 'base', 'the open does not change the quick category');
 });

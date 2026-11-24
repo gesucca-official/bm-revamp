@@ -40,7 +40,7 @@ export const stompConnector: Connector = {
             client.watchForReceipt(receipt, () => { clearTimeout(wait); ok(() => { try { subscription.unsubscribe(); } catch { /* transport already gone */ } }); });
             const subscription = client.subscribe(destination, message => handler(message.body), {receipt});
           }),
-          send: (destination, body = '') => client.publish({destination, body}),
+          send: (destination, body = '', headers) => client.publish(headers ? {destination, body, headers} : {destination, body}),
           close: () => { closing = true; void client.deactivate(); },
           drop: () => { (client.webSocket as {close(): void} | undefined)?.close(); }
         });

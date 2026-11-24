@@ -793,6 +793,21 @@ button.info:hover {
 .mode:disabled:not(.on) {
   opacity: .55;
 }
+/* SB-29: the starter category of the quick modes, two radios in a row under the mode hint. */
+.category {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sheet.hub .category .modes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+.category p {
+  margin: 0;
+}
 .presence h2 {
   margin: 0;
   font-size: 16px;

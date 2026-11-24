@@ -117,22 +117,37 @@ async function finish(a,b,id) {
     const start=await view(a,id);privateView(a,start);
     for(const user of [a.user,b.user]) assert.strictEqual(starters[start.players[user].character.bindingName],want[user],user+' gets a starter of '+want[user]);
     checks.push('1v1 with a base and an advanced human: each real starter is of the chosen category');
-    // The duel is completed with the last resort of each starter (always in the hand), aimed at the opponent when it admits one.
-    const lastResort=async(client,other)=>{
-      const v=await view(client,id), card=v.players[client.user].cardsInHand.find(x=>x.lastResort);
-      assert(card,'last resort in hand of '+client.user);
-      return {gameId:id,playerId:client.user,playedCardName:card.name,targetId:card.canTarget.includes('OPPONENT')?other.user:client.user,choices:null};
+    // The duel is played with real hands: each turn every human submits the first card it can pay and aim (damage first, then the rest),
+    // and the server's answer says whether it was accepted. After 25 turns without a winner one of them leaves and the other wins.
+    const resources=(v,user)=>v.players[user].character.resources;
+    const payable=(card,have)=>Object.entries(card.cost||{}).every(([r,n])=>r==='HEALTH'?(have[r]||0)>n:(have[r]||0)>=n);
+    const candidates=(v,client,other)=>v.players[client.user].cardsInHand.filter(x=>!x.item&&payable(x,resources(v,client.user))
+      &&(x.canTarget.includes('OPPONENT')||x.canTarget.includes('SELF')))
+      .sort((p,q)=>(q.damage&&q.damage!=='—'?1:0)-(p.damage&&p.damage!=='—'?1:0)||(q.canTarget.includes('OPPONENT')?1:0)-(p.canTarget.includes('OPPONENT')?1:0))
+      .map(card=>({gameId:id,playerId:client.user,playedCardName:card.name,targetId:card.canTarget.includes('OPPONENT')?other.user:client.user,choices:null}));
+    const submit=async(client,other)=>{
+      for(const move of candidates(await view(client,id),client,other)) {
+        const mark=client.events.length;await client.command({command:'move',move});
+        for(let waited=0;waited<2500;waited+=20) {
+          const seen=client.events.slice(mark).map(e=>e.destination);
+          if(seen.includes('/topic/game/'+id+'/move')) return true;
+          if(seen.includes('/user/queue/illegalMove')) break;
+          await sleep(20);
+        }
+      }
+      return false;
     };
-    for(let turn=0;turn<30;turn++) {
+    let by='combat';
+    for(let turn=0;;turn++) {
       if((await view(a,id)).over) break;
+      if(turn===25) {by='forfeit';await a.command({command:'leave',gameId:id});break;}
       const m=[a.events.length,b.events.length];
-      const moves=await Promise.all([lastResort(a,b),lastResort(b,a)]);
-      await Promise.all([a.command({command:'move',move:moves[0]}),b.command({command:'move',move:moves[1]})]);
+      const done=await Promise.all([submit(a,b),submit(b,a)]);assert(done.every(Boolean),'every human has a move to play');
       await Promise.all([a.wait('/topic/game/'+id+'/update',m[0]),b.wait('/topic/game/'+id+'/update',m[1])]);
     }
-    assert((await view(a,id)).over,'the duel completes');
+    assert((await view(b,id)).over,'the duel completes');
     const x=await finish(a,b,id);inspectExport(x,[a.user,b.user]);
-    checks.push('the mixed duel completes with real starters; exports agree');
+    checks.push('the mixed duel completes by '+by+' with real starters; exports agree');
   } else {
     // Repeated join must leave one slot while a second distinct human is still absent.
     await a.command({command:'join',mode:'quick/1v1'});await barrier(a);

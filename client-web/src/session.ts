@@ -5,6 +5,10 @@ import {serverMessage} from './deck.ts';
 
 export type Phase = 'login' | 'connecting' | 'hub' | 'queue' | 'game' | 'lost';
 export type Mode = 'quick/1vCom' | 'quick/1v1' | 'quick/ffa' | 'open/1vCom';
+/** SB-29 (R01 2.1, D190): the starter categories of the set document, with the label shown; the quick joins send the id in the STOMP header `category`. */
+export const CATEGORIES: {id: string; label: string}[] = [{id: 'base', label: 'Base'}, {id: 'avanzato', label: 'Avanzato'}];
+export const DEFAULT_CATEGORY = 'base';
+export const isQuick = (mode: Mode) => mode.startsWith('quick/');
 const FFA_SEATS = 5;
 export type Trace = {at: number; channel: string; body: string};
 export type Timers = {set(fn: () => void, ms: number): number; clear(id: number): void};
@@ -153,8 +157,13 @@ export class Session {
   }
   private deckDone(error: string | null) { const reply = this.deckReply; this.deckReply = null; this.deckBusy = false; reply?.(error); this.emit(); }
 
-  join(mode: Mode, deckId: string | null = this.openDeck) {
+  /** The starter category of the quick modes, kept for the whole session ("new game" repeats it); the client always sends it. */
+  category = DEFAULT_CATEGORY;
+  setCategory(category: string) { if (CATEGORIES.some(c => c.id === category) && category !== this.category) { this.category = category; this.emit(); } }
+
+  join(mode: Mode, deckId: string | null = this.openDeck, category: string = this.category) {
     if (this.phase !== 'hub' || !this.link || (mode === 'open/1vCom' && !deckId)) return;
+    if (isQuick(mode)) this.category = category;
     const link = this.link, generation = this.generation, token = ++this.queueToken;
     const stale = () => generation !== this.generation || token !== this.queueToken;
     if (mode === 'open/1vCom') this.openDeck = deckId;
@@ -176,7 +185,9 @@ export class Session {
     Promise.all(subscriptions).then(unsubs => {
       if (stale()) { unsubs.forEach(unsub => unsub()); return; }
       this.queueSubs.push(...unsubs); this.joined = true;
-      link.send(mode === 'open/1vCom' ? `/app/game/open/1vCom/join/${this.user}/${deckId}` : `/app/game/${mode}/join`, this.user);
+      // SB-29: the quick joins carry the category as a header, the open does not (it plays a saved deck).
+      if (mode === 'open/1vCom') link.send(`/app/game/open/1vCom/join/${this.user}/${deckId}`, this.user);
+      else link.send(`/app/game/${mode}/join`, this.user, {category});
     }, () => { if (!stale()) this.close('Il server non ha confermato la coda.'); });
   }
 
