@@ -542,3 +542,163 @@ Il proprietario ha scelto Spazienzio 3, Mara 1, Celestina 1, Piera 6, Beppe 1, S
 | Controllo oggettivo | Figura intera e grande, cocktail e mano sul cuore visibili, mignolo alzato; aquila e tatuaggio conservati; sfondo più scuro e morbido. |
 | Esito | Conservata per il giudizio; nessun tentativo scartato. |
 | Giudizio del proprietario | In attesa del giudizio sulla versione D192. |
+
+
+## Lotto 1 — Spazienzio
+
+[Prompt letterali](lotto-01-spazienzio.md), commit `d548e84`. Le sette associazioni indicate come inferite derivano dal soggetto visibile e dall’ordine dei file prodotti, coerente con l’ordine dei prompt; la chiamata parallela è stata interrotta senza restituire la mappatura tecnica. Le impronte dei prompt per queste immagini sono quindi **attribuite per inferenza**, non prova tecnica. Le copie originali con nomi `non-attribuito-exec-*` sono conservate fuori da git. Gli esiti della prima chiamata interrotta per VIOLENZAZIONE e SVEGLIAMOCI sono ignoti, non classificabili come rifiuti. Una nuova chiamata per ciascuna ha dato rispettivamente un rifiuto e un’immagine. Nessun’altra ripetizione. Modello e riscrittura del prompt non esposti.
+
+### SGOMBERIAMOVI
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.bruiser.TiFaccioSpazio` |
+| promptSha256 | `873249a86ca3ae2812bbaa26bda1895150222ade1e533cd1e496d5d65640a206` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| Allegati effettivi | `spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| source | `originali/base.bruiser.TiFaccioSpazio.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2945418 / `b887ffe1d1d2896789fe663f7f52bc1d3af64f0df52ff77c73f41a067116a531` |
+| Anteprima | [WebP](anteprime/base.bruiser.TiFaccioSpazio.webp), 512 px, qualità 80 |
+| Associazione | certa |
+| Controllo a 60 px | Soggetto grande e contrastato; sgabello riconoscibile, gesto leggibile. |
+| Esito | Conservata provvisoriamente; giudizio del proprietario in attesa. |
+
+### VIOLENZAZIONE
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.spazienzio.bound.TestaAlMuro` |
+| promptSha256 | `108fc8a422288aa38b94b8f500921042385496b981578d4ea1dc041f32d8fdc6` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| Allegati effettivi | `spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Esito | Rifiuto `moderation_blocked` in uscita (self-harm, violence), ID `e29b02ea-14b2-4b13-b55f-0d3105476051`; nessun file. Non ripetuto. |
+| Controllo a 60 px | Non possibile. |
+
+### SPEDIAMOTI DUNQUE IN O-AHIO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.ExtremelyViolentBlow` |
+| promptSha256 | `1b18f104197c068ff24e24a2bcf6137beba851c4b9a56b2d12585f90aff8a57f` (attribuzione inferita) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| Allegati effettivi | `spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| source | `originali/bruiser.ExtremelyViolentBlow.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2822764 / `e477d1735a916f199feebabce60c2a2fc0bb832a5784e6bff90da6461279590f` |
+| Anteprima | [WebP](anteprime/bruiser.ExtremelyViolentBlow.webp), 512 px, qualità 80 |
+| Associazione | inferita: exec-1a9977ef |
+| Controllo a 60 px | Figura grande; avversario piccolo e vicino al bordo, il lancio è meno evidente a 60 px. Da giudicare. |
+| Esito | Conservata provvisoriamente; giudizio del proprietario in attesa. |
+
+### PAZIENZA: FINITA
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.Glare` |
+| promptSha256 | `9b43e183759b9c12c1100d0b644d18dc642dfdd4c6f9bee6c9813d23df5117bd` (attribuzione inferita) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| Allegati effettivi | `spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| source | `originali/bruiser.Glare.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2935670 / `159edd6b685ebfc61bb9bfdb367c44a76241d068765cfe6aca4de9578ec52dea` |
+| Anteprima | [WebP](anteprime/bruiser.Glare.webp), 512 px, qualità 80 |
+| Associazione | inferita: exec-144f8b68 |
+| Controllo a 60 px | Figura grande e distinta; pugni visibili, espressione meno leggibile in piccolo. |
+| Esito | Conservata provvisoriamente; giudizio del proprietario in attesa. |
+
+### NON GIOCARE COL COLTELLO NO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.MadeOfStone` |
+| promptSha256 | `2425a76d54d8fad1155bf86004b61b2eea1158edefafefbb5c14b0b0413c6d7c` (attribuzione inferita) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| Allegati effettivi | `spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| source | `originali/bruiser.MadeOfStone.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3042807 / `ea252054a321bd159ef4bdfa7af9055f66662411a8578bc8da67ea7b90b862b1` |
+| Anteprima | [WebP](anteprime/bruiser.MadeOfStone.webp), 512 px, qualità 80 |
+| Associazione | inferita: exec-0bbc7dc8 |
+| Controllo a 60 px | Il coltello è molto piccolo a 60 px; il personaggio sembra seduto e non afferra la lama come richiesto. Dubbia. |
+| Esito | Conservata provvisoriamente; giudizio del proprietario in attesa. |
+
+### GARGANTUESCO IMPATTO SUL TU
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.SuperImpact` |
+| promptSha256 | `171c13ad56988ec14d67c2a5ff1a22c32c15bd45ce5a394c85b3a211fb7852fe` (attribuzione inferita) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| Allegati effettivi | `spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| source | `originali/bruiser.SuperImpact.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3035976 / `0460a5ac00ccea4a9043416dd97852460789b34d72660e550634f81293ede1c1` |
+| Anteprima | [WebP](anteprime/bruiser.SuperImpact.webp), 512 px, qualità 80 |
+| Associazione | inferita: exec-9876cd8c |
+| Controllo a 60 px | Soggetto grande; il pugno e la figura scura sono vicini e il contatto si perde un poco a 60 px. Da giudicare. |
+| Esito | Conservata provvisoriamente; giudizio del proprietario in attesa. |
+
+### FAI BASTA
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.YouStop` |
+| promptSha256 | `b53007639defa5f58b4b8bdfd19fbcf20de2f66620d0242468a69fa4f1a62f38` (attribuzione inferita) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| Allegati effettivi | `spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| source | `originali/bruiser.YouStop.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3008731 / `ccc846db66e7f6b58cc2e5bfdb5f1fee2595857d271e6d914c220f2f5612dc2b` |
+| Anteprima | [WebP](anteprime/bruiser.YouStop.webp), 512 px, qualità 80 |
+| Associazione | inferita: exec-8664917b |
+| Controllo a 60 px | Figura grande e contrastata; la presa sul polso è minuta a 60 px. Da giudicare. |
+| Esito | Conservata provvisoriamente; giudizio del proprietario in attesa. |
+
+### LIEVE FASTIDIO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.LittleRage` |
+| promptSha256 | `5f5db4a4465233aeab1736cf576609d8d7078f92a51289b043f07744b9d0a229` (attribuzione inferita) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| Allegati effettivi | `spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| source | `originali/bruiser.character.LittleRage.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2827083 / `36cfb9493565b2218c6fbf71ff04016d438c744b91b2d134f2920eb7214b42e3` |
+| Anteprima | [WebP](anteprime/bruiser.character.LittleRage.webp), 512 px, qualità 80 |
+| Associazione | inferita: exec-95b9c6ab |
+| Controllo a 60 px | Figura grande con pugni chiusi; somiglia molto a PAZIENZA: FINITA e la sfumatura di irritazione si perde. Dubbia. |
+| Esito | Conservata provvisoriamente; giudizio del proprietario in attesa. |
+
+### SVEGLIAMOCI - MA TU NO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.LittleSmack` |
+| promptSha256 | `86a0939574cc6c0146183318fd5aa07f4bb896d6a914f17efacde24d87b74408` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| Allegati effettivi | `spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| source | `originali/bruiser.character.LittleSmack-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3016996 / `575bb2c0ee6acf4403d2126261450bc9f18b0a1261fc6341bd26cf994f92a604` |
+| Anteprima | [WebP](anteprime/bruiser.character.LittleSmack-2.webp), 512 px, qualità 80 |
+| Associazione | certa; ripetizione dopo chiamata interrotta senza esito |
+| Controllo a 60 px | Figura grande; schiaffo leggibile, ma avversario e mano sono vicini al bordo. Da giudicare. |
+| Esito | Conservata provvisoriamente; giudizio del proprietario in attesa. |
+
+### ADOPERIAMOTI
+
+| Campo | Valore |
+|---|---|
+| bindingName | `com.basic.BruiserGrab` |
+| promptSha256 | `a1e11c51f1b697ed773451fbb7569c9c14e3a47687a242b385fe05aa422ff1c5` (attribuzione inferita) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| Allegati effettivi | `spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| source | `originali/com.basic.BruiserGrab.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2870430 / `409e9fb5ce399a9983f440ee186785a6be808702e9956f8fa214b163cdde0696` |
+| Anteprima | [WebP](anteprime/com.basic.BruiserGrab.webp), 512 px, qualità 80 |
+| Associazione | inferita: exec-932921fa |
+| Controllo a 60 px | Figura grande; bottiglia alzata visibile, ma non appare presa dal bancone. Da giudicare. |
+| Esito | Conservata provvisoriamente; giudizio del proprietario in attesa. |
