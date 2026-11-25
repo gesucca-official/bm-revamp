@@ -280,3 +280,47 @@ Edit the attached square playing-card illustration. Preserve Spazienzio’s iden
 
 Spazienzio is bald, enormous and bare-chested, with a short bristly beard, the fixed tattoo map and burgundy tracksuit trousers with side stripes. Nothing comes out of his nose; no steam. Keep the hand-inked European comic style, warm dirty light and bar palette. One centred subject filling at least two thirds of the height, readable at 60 pixels, against a darker, simpler, softer bar background. Keep essential details out of the outer 5%. Any opponent is a generic shadowy figure without a recognizable face. Avoid text, letters, numbers, pseudo-lettering, signatures, watermarks, logos, brands, blood, crowds, card frames, mirroring, photographic or 3D style.
 ~~~
+
+## Secondo giudizio: correzioni del lotto 1
+
+Prompt letterali da committare prima della generazione; impronte degli allegati originali fuori da git.
+
+### SPEDIAMOTI DUNQUE IN O-AHIO
+
+Allegato: `originali/bruiser.ExtremelyViolentBlow.png`, SHA-256 `e477d1735a916f199feebabce60c2a2fc0bb832a5784e6bff90da6461279590f`.
+
+~~~text
+Edit the attached square illustration for a playing card. Preserve Spazienzio’s bald head, enormous build, short bristly beard, fixed tattoo map, bare chest and burgundy striped tracksuit trousers, the dark bar setting and hand-inked European comic style. Make the punch and the flying opponent physically coherent: Spazienzio’s fist contacts the opponent’s torso, the extended arm and the opponent’s backward trajectory share one clear diagonal, with both figures in the same consistent perspective and believable scale. Keep the original image’s composition and character identity.
+
+Keep Spazienzio large, at least two thirds of image height, readable at 60 pixels against a darker, simpler background. Keep essential action away from the outer 5%. No blood, text, letters, numbers, logos, brands, watermarks, card frame, steam, recognizable opponent face or real person likeness; do not mirror Spazienzio.
+~~~
+
+### GARGANTUESCO IMPATTO SUL TU
+
+Allegato: `originali/bruiser.SuperImpact-2.png`, SHA-256 `bfe161c03698b1dd68df3a5095a01b2c836d88f916673883584b4bbcdf044d4d`.
+
+~~~text
+Edit the attached square illustration for a playing card. Preserve Spazienzio’s bald head, enormous build, short bristly beard, fixed tattoo map, bare chest and burgundy striped tracksuit trousers, the dark bar setting and hand-inked European comic style. Replace both shoes with the character’s open-toed dark slide sandals over white socks. Preserve the dynamic punch and everything else.
+
+Keep Spazienzio large, at least two thirds of image height, readable at 60 pixels against a darker, simpler background. Keep essential action away from the outer 5%. No blood, text, letters, numbers, logos, brands, watermarks, card frame, steam, recognizable opponent face or real person likeness; do not mirror Spazienzio.
+~~~
+
+### LIEVE FASTIDIO
+
+Allegato: `originali/bruiser.character.LittleRage-2.png`, SHA-256 `99ac18386436758edb84d281581f13e8d12a19c58f0c2081e2773c99bca139f1`.
+
+~~~text
+Edit the attached square illustration for a playing card. Preserve Spazienzio’s bald head, enormous build, short bristly beard, fixed tattoo map, bare chest and burgundy striped tracksuit trousers, the dark bar setting and hand-inked European comic style. A faceless shadowy opponent punches Spazienzio directly in the face. The fist clearly touches his cheek, but Spazienzio is completely unharmed and unmoved, wearing a clearly visible malicious smile. Show the face and contact large and readable.
+
+Keep Spazienzio large, at least two thirds of image height, readable at 60 pixels against a darker, simpler background. Keep essential action away from the outer 5%. No blood, text, letters, numbers, logos, brands, watermarks, card frame, steam, recognizable opponent face or real person likeness; do not mirror Spazienzio.
+~~~
+
+### SVEGLIAMOCI - MA TU NO
+
+Allegato: `originali/bruiser.character.LittleSmack-3.png`, SHA-256 `0da8cd215cf4c50c0e16a3f3b8416e65d8df86be1251161bd62009004e6bdb70`.
+
+~~~text
+Edit the attached square illustration for a playing card. Preserve Spazienzio’s bald head, enormous build, short bristly beard, fixed tattoo map, bare chest and burgundy striped tracksuit trousers, the dark bar setting and hand-inked European comic style. Show Spazienzio delivering a simultaneous double open-handed slap to a faceless shadowy opponent, one palm against each cheek. Both arms, wrists, palms and fingers must be anatomically coherent and clearly separated. The opponent looks dazed through posture and comic impact marks, with no recognizable facial identity.
+
+Keep Spazienzio large, at least two thirds of image height, readable at 60 pixels against a darker, simpler background. Keep essential action away from the outer 5%. No blood, text, letters, numbers, logos, brands, watermarks, card frame, steam, recognizable opponent face or real person likeness; do not mirror Spazienzio.
+~~~
