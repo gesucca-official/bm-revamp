@@ -8,7 +8,7 @@ import {ROLES,roleOf} from './readability.ts';
 import {frameOf,type FrameKind} from './frames.ts';
 import {entryOf,loadAnnex,rarityOf,setIds} from './annex.ts';
 import {CardFrame,Cost,DamagePills,EffectText,Gains,Mark,PressButton,RarityMark,resourceNames,targetNames} from './ui.tsx';
-import {BOUND_CARDS,GENERIC,INITIAL_CARDS,MAX_COPIES,NO_FILTERS,REGULAR_CARDS,addRegular,allowedLastResorts,canAdd,catalogOrder,characterOrder,copies,copiesOf,deckBar,deckBarText,deckSummary,editCopy,emptyDraft,filterCards,initialCards,
+import {activeFilters,BOUND_CARDS,GENERIC,INITIAL_CARDS,MAX_COPIES,NO_FILTERS,REGULAR_CARDS,addRegular,allowedLastResorts,canAdd,catalogOrder,characterOrder,copies,copiesOf,deckBar,deckBarText,deckSummary,editCopy,emptyDraft,filterCards,initialCards,
  isFiltering,matchesCharacter,ownBasics,ownBounds,payload,problems,removeRegular,setBasic,setCharacter,setLastResort,setName,shown,toggleBound,type Draft,type Filters,type Pool} from './deck.ts';
 
 // C4-4: the miniature is a small card with the frame of the table around the art.
@@ -40,7 +40,12 @@ const RARITIES:[string,string][]=[['COMMON','Comune'],['UNCOMMON','Non comune'],
  */
 function FilterBar({filters,onChange,characters,withCharacters,shown,total}:{filters:Filters;onChange:(f:Filters)=>void;characters:CharacterCard[];withCharacters:boolean;shown:number;total:number}){
  const set=(key:keyof Filters)=>(e:React.ChangeEvent<HTMLInputElement|HTMLSelectElement>)=>onChange({...filters,[key]:e.target.value}),sets=setIds();
- return <div className="filter-bar" data-testid="filter-bar" role="group" aria-label="Filtri">
+ // SB-31 F5 (D199 (26)): on a low screen (CSS, max-height 550 px) the fields hide behind the «Filtri» button; on a wide one the button is not drawn and the fields stay open.
+ const [open,setOpen]=useState(false),active=activeFilters(filters);
+ useEffect(()=>{if(!open)return;const onKey=(e:KeyboardEvent)=>{if(e.key==='Escape')setOpen(false);};document.addEventListener('keydown',onKey);return()=>document.removeEventListener('keydown',onKey);},[open]);
+ return <div className={open?'filter-bar open':'filter-bar'} data-testid="filter-bar" role="group" aria-label="Filtri">
+  <PressButton className="filters-toggle" data-testid="filters-toggle" aria-expanded={open} aria-pressed={open} onClick={()=>setOpen(o=>!o)}>{active>0?`Filtri (${active})`:'Filtri'}</PressButton>
+  <div className="filter-fields" data-testid="filter-fields">
   <label>Personaggio<select data-testid="filter-character" value={filters.character} onChange={set('character')}><option value="">Tutti</option><option value={GENERIC}>Generiche</option>
    {characters.map(c=><option key={c.bindingName} value={c.bindingName}>{c.name}</option>)}</select></label>
   <label>Rarità<select data-testid="filter-rarity" value={filters.rarity} onChange={set('rarity')}><option value="">Tutte</option>
@@ -48,6 +53,7 @@ function FilterBar({filters,onChange,characters,withCharacters,shown,total}:{fil
   <label>Tipo<select data-testid="filter-type" value={filters.type} onChange={set('type')}><option value="">Tutti</option><option value="action">Azioni</option><option value="item">Oggetti</option></select></label>
   {sets.length>1&&<label>Set<select data-testid="filter-set" value={filters.set} onChange={set('set')}><option value="">Tutti</option>{sets.map(s=><option key={s} value={s}>{s}</option>)}</select></label>}
   <label className="filter-search">Cerca<input data-testid="card-search" type="search" value={filters.term} onChange={set('term')} placeholder="nome o testo"/></label>
+  </div>
   <div className="filter-state"><span role="status" data-testid="filter-count">{shown} di {total} carte</span>
    {isFiltering(filters)&&<PressButton data-testid="filter-reset" onClick={()=>onChange(NO_FILTERS)}>Azzera i filtri</PressButton>}</div>
  </div>;

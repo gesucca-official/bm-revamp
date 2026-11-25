@@ -81,6 +81,8 @@ export interface Filters { character: string; rarity: string; type: string; set:
 export const NO_FILTERS: Filters = {character: '', rarity: '', type: '', set: '', term: ''};
 export const GENERIC = 'generic';
 export const isFiltering = (f: Filters) => Object.values(f).some(v => v !== '');
+/** SB-31 F5 (D199 (26)): how many filters are on, the number the «Filtri» button shows (a search term counts as one). */
+export const activeFilters = (f: Filters) => Object.values(f).filter(v => v !== '').length;
 /** The character a card is of: the `character` of the annex (written from the slot), else what the card says itself; null = generic. */
 export const characterOf = (c: Card): string | null => entryOf(c.bindingName)?.character ?? c.exclusiveToCharacter ?? c.boundToCharacter ?? null;
 const hasTerm = (value: unknown, term: string) => !term || JSON.stringify(value).toUpperCase().includes(term.toUpperCase());

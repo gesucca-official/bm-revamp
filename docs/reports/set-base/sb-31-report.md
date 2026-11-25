@@ -419,3 +419,140 @@ Mazzo di Duccio costruito con l'editor (sopra) e giocato in partite open vere co
 24. **Filtro del set**: oggi un solo set, il controllo non compare; con un'espansione l'allegato dovrà dire il set di ogni carta (`set` nel generatore): va deciso con il formato delle espansioni, non ora. Va bene così?
 25. **Riepilogo del mazzo di sola lettura**: toccare una carta del riepilogo per toglierla (come nella vista «Mazzo») è O16, non l'ho fatto. Lo vuole nella piena?
 26. **Barra e filtri a 844×390**: se le catture mostrano troppo ingombro, preferisce i filtri dietro un solo tasto «Filtri» (aperti su richiesta) nell'opzione minima?
+
+
+## F5 — Consolidamento
+
+Ultima fase: tasto «Filtri» a 844×390, R14 e R13, matrice `VerifyAll`, riepilogo finale. Base `b67a429`. Nessun cambio al server, alle regole, alle immagini, al tavolo o alla geometria della scena; niente di O16 e O17. **SB-31 non è chiuso**: lo chiude la regia dopo la partita del proprietario.
+
+### Cosa cambia
+
+- **«Filtri» a 844×390 (D199 (26)).** In `collection.tsx` la barra dei filtri ha un tasto «Filtri» (`filters-toggle`): 88×44 px, etichetta «Filtri» e, con filtri accesi, «Filtri (n)» (`activeFilters` in `deck.ts`: conta i campi non vuoti, ricerca compresa). Si chiude con un secondo tocco o con Esc. I campi stanno in `filter-fields`; «n di m carte» e «Azzera i filtri» (`filter-state`) restano fuori e sempre a portata di mano. Solo sotto `max-height:550px` i campi sono chiusi all'inizio; sopra (1366×768, 1920×1080) il tasto non è disegnato e `filter-fields` è `display:contents`, quindi la pagina è quella di F4.
+- **`VerifyDecks`** (`verify-decks.mjs`): helper `openFilters`/`closeFilters`/`searchFor`; passo `filtersButton` (a 1366×768 niente tasto e campi aperti; a 844×390 tasto ≥44 px, chiuso all'inizio, etichetta, conteggio «Filtri (1)» e «Filtri (2)», Esc, secondo tocco, «Azzera» in vista, almeno una faccia intera sulla prima schermata) e passo `editorFiltersClosed` (con i filtri chiusi: le facce intere del pool e la barra del mazzo nello schermo). Sono due test nuovi in `catalog-filters.test.ts` (conteggio; sorgente: tocco, Esc, etichetta, stato fuori dai campi, 44 px, chiuso/non disegnato).
+- **R14** (strumento): il passo `lastCopyWarning` rigioca la partita (fino a 6 volte) se il computer ha annullato la mossa che annuncia, riconosciuta da `resolvedMoves` (`void`, `playerId`, `playedCardName`); nessuna asserzione allentata: ogni rigiocata è registrata (`replays`, `replayed`) e, esaurite le 6, il passo è rosso con il messaggio di prima. Il passo ora riporta quante rigiocate e quanti tentativi.
+
+### Catture (prima/dopo)
+
+`docs/reports/set-base/sb-31/f5-<misura>-<catalogo|editor>-<prima|dopo>.jpg` a 1366×768 e a 844×390 («prima» = le catture di F4); `f5-844x390-catalogo-filtri-aperti.jpg`. A 1366×768 il dopo è uguale al prima. A 844×390 con i filtri chiusi nel catalogo si vedono tre facce intere sulla prima schermata, nell'editor sei facce del pool e la barra del mazzo (327–375 su 390).
+
+### Verifiche (macchina ferma, una corsa esclusiva per volta)
+
+| Verifica | Esito |
+|---|---|
+| client-web `Test` | 403 test verdi |
+| `Build` | verde |
+| `Size` | `jsGzip` 399 546 (tetto 512 000), `totalGzip` 1 782 875 (tetto 4 MB); texture 31 923 352 B = 63,4 % di 48 MiB (margine 18 408 296) |
+| `VerifyDecks` 844×390 e 1366×768 | verdi, 6 corse per misura (12 in tutto) per R14; 0 rigiocate naturali; `filtersButton`: tasto 88×44, tre facce intere (844×390); `editorFiltersClosed` verde |
+| `python scripts/check-rules.py` | verde |
+| `python scripts/check-links.py` | 22 link rotti, i 22 noti (nessuno nuovo) |
+| `git diff --check` | pulito (solo avvisi CRLF) |
+
+### Mutazioni (ogni controllo nuovo deve diventare rosso; file ripristinati)
+
+- **M22**, il pannello «Filtri» non si chiude mai (né secondo tocco né Esc): `VerifyDecks` rosso su `filtersButton`.
+- **M23**, il conteggio dei filtri attivi sbagliato di uno: rosso sia il test unitario sia l'etichetta in `VerifyDecks`.
+- **M24**, la rigiocata di R14 tolta con la partita che annulla l'annuncio (simulato con un gancio temporaneo, poi tolto): il passo `lastCopyWarning` è rosso con il messaggio di prima. Con la rigiocata lo stesso gancio dà verde.
+
+### R14 — chiusa
+
+12 corse verdi (6 per misura, nessuna rigiocata naturale: l'annuncio non è stato annullato dal computer) più la prova simulata della rigiocata. Il registro la sposta in «Chiuse».
+
+### R13 — attribuzione
+
+`VerifyLayout` 750×292 con `BM_SCENARIOS=ffa`, una corsa alla volta, 16 corse sulla base `5692be4` e 16 su HEAD con F5. Si contano i `problems` senza le righe `ffa-750x292 O<n>:` (i problemi O26 dello scarto, R11: la base ancora li ha, 4 corse su 16 con 66–72 in tutto).
+
+| | corse | con 23 problemi | con il totale in più |
+|---|---|---|---|
+| base `5692be4` | 16 | 16 | **0** |
+| HEAD (F5) | 16 | 15 | **1** (totale 37, corsa 11) |
+
+La corsa rossa ha in più solo righe `close-up` (posto sopra un altro posto, sopra la mano, posto «placed») al turno 1, per le carte giocate dai computer in quella partita; nessuna riga di geometria diversa e `BASE_750` verde. **Attribuzione: non provata al client.** Una corsa su 16 contro zero su 16 non basta a separare il client dalla partita (R13 era comparsa in 3 corse su 10 con F3). Come prevede il metodo, se i conteggi alti sono solo su HEAD si bisecava in `76fd55c`: **non l'ho fatto** (una bisezione vuole almeno 15 corse per commit, circa 25 minuti l'una: vedi domanda 28). Non è un rosso da fermarsi: nel client non si è mai mostrato un cambio di geometria; resta aperta come R13.
+
+### VerifyAll, matrice completa
+
+`-Parallel 4 -Split resolution,ffa`, 25 giri, 2 h 27 min: **19 verdi su 25, 6 rossi** (`public` ×2, `resolution` ×2, `ffa` ×2); non è stato pubblicato (`-Publish` pubblica solo una corsa tutta verde): il registro della corsa e gli estratti dei fallimenti sono in `sb-31/verifyall/`; le riprove da soli in `sb-31/verifyall/alone/`. I rossi, uno per uno:
+
+| Parte | Messaggio | Attribuzione |
+|---|---|---|
+| `public` 1366×768 e 844×390 | `deepStrictEqual` sull'indice delle regole: vuole `R00…R07a, R08…` senza `R02a` e `R07b` | **Strumento**: dal regolamento 2.1 (SB-29, `cb60a86`) l'indice ha `R02a` e `R07b`; `verify-public.mjs` aspetta il vecchio elenco. Rosso identico sulla base `b67a429` (esportata, `alone/hv-public.txt`). Non è del client. **Non in registro: nuovo** |
+| `resolution` 844×390, scenario `open` | `fill` su `card-search` in timeout (`addRegular`, `verify-resolution.mjs:832`) | **Mia modifica + strumento**: a 844×390 i filtri ora sono chiusi e `verify-resolution.mjs` riempie la ricerca senza aprirli (come ho dovuto fare in `verify-decks.mjs`). Il file è fuori dal perimetro del prompt: non l'ho toccato. **Nuovo, da correggere** (domanda 27) |
+| `resolution` 1366×768, scenario `open` | «server exited (1)» | Avvio del server nella corsa in parallelo; **verde da solo** (`alone/mv2-resopen1366.txt`) |
+| `resolution` 1366×768 e 844×390, scenario `ffa` | «ffa: scene rule c4s» (`discard built 3, seen 2`, `label … readable 0/407 ms`, `target not darkened`) | Misure di tempo della scena sotto carico (si leggono i frame ai millisecondi); **verde da solo** a 1366×768 (`alone/mv2-resffa.txt`); 844×390 non rilanciato da solo |
+| `resolution` 844×390, scenario `info` | clic intercettato da `overlay` | Tempi; **verde da solo** (`alone/mv2-resinfo844.txt`) |
+| `ffa` 1366×768, scenario `two` | `TypeError … reading 'value'` in pagina | **Verde da solo** 3 volte su 3 con F5 (`alone/mv-two-*`) e 2 su 2 sulla base (`alone/hv-two-*`): non ripresentato |
+| `ffa` 844×390, scenario `two` | `waitForFunction` 2000 ms | **Verde da solo** (`alone/mv2-ffa844.txt`) |
+
+In breve: un rosso che è mio (la ricerca chiusa a 844×390 in `verify-resolution.mjs`), uno che è dello strumento e c'era già (`public`, regolamento 2.1) e cinque intermittenti della corsa in parallelo che da soli sono verdi. **La matrice non è tutta verde**: lo dico, non la dichiaro verde. Nelle parti verdi (test, build, size, verify ×3, aim, layout 1366×768/844×390/1920×1080, modes, lifecycle, profile, decks ×2, `resolution` info/humans/quick/jump/report/reduced/interrupt/infoFfa/infoTouch, `ffa` timeout/five/drop/leave/queue/start) non è comparso nulla.
+
+### Rossi
+
+- **Registro:** R13 aggiornata (1/16 su HEAD contro 0/16 sulla base, non attribuita); R14 chiusa. R1, R2, R3, R4, R7 invariati (R2: `VerifyAim`/`VerifyLayout` desktop verdi nella fase da sole).
+- **Nuovi, non in registro** (messi nel registro come R15, R16 e R17 in attesa di conferma della regia): R15 `public` (strumento, regolamento 2.1), R16 `VerifyResolution` 844×390 `open` (filtri chiusi, mia modifica più strumento), R17 intermittenze della matrice in parallelo (cinque parti verdi da sole).
+
+### Riepilogo finale: le 26 voci dell'inventario ([proposta, sezione 1](../../design/set-base/sb-31-proposta.md#1-inventario))
+
+Commit: F1 `a119871`, F2 `3e3771f`, F3 `76fd55c`, F4 `902d94e`, F5 questo commit; decisioni D196 `d92f74e`, D197 `5692be4`, D198 `cea8285`, D199 `b67a429`.
+
+| # | Voce | Esito |
+|---|---|---|
+| 1 | Flavour nell'ispezione | **fatta**, F3 (`76fd55c`) |
+| 2 | Tasto «Testo completo» | **fatta**, F3 |
+| 3 | Promemoria delle parole chiave | **fatta**, F3 (sette frasi, D198 (8)) |
+| 4 | Segnalini e stati coi simboli dei danni | **fatta**, F3 |
+| 5 | `STATUS_TEXT`/`TIMER_TEXT` sui nomi del set | **fatta**, F3 |
+| 6 | Stati con lo stesso nome raggruppati | **fatta**, F3 (nell'ispezione) |
+| 7 | Token: testo italiano dall'allegato | **fatta**, F3 |
+| 8 | Simboli di rarità | **fatta**, F3 (ispezione) e F4 (catalogo, `902d94e`) |
+| 9 | Catalogo ed editor con filtri | **fatta**, F4 (opzione minima: personaggio, rarità, tipo, ricerca; il set non compare finché è uno solo) |
+| 10 | Scelta di due legate | **fatta**: già c'era; verificata e riepilogata, F4 |
+| 11 | Conteggio verso 20 | **fatta**, F4 (barra del mazzo) e F5 (barra in vista a 844×390 con i filtri chiusi) |
+| 12 | O15 riepilogo; O16 deckbuilder | **O15 fatto** in F4; **O16 fuori** (perimetro di Q4, D196) |
+| 13 | Ordine stabile dei personaggi | **fatta**, F4 |
+| 14 | R9 | **fatta**, F1 (`a119871`) |
+| 15 | R10 | **fatta**, F1 |
+| 16 | Avviso ultima copia e «∞» come verifiche | **fatta**, F1 (verificata col vivo; in F5 resta nel passo `lastCopyWarning`, con R14 chiusa) |
+| 17 | Contatore di Rincara | **fatta**, F1 (prova e commenti) |
+| 18 | Leggibilità di immunità, timer, equip, L e A | **fatta**, F3 (con la voce 5) |
+| 19 | Velocità di ogni mossa | **fuori**: osservazione da prova umana, non richiesta dal set (C5 o SB-33) |
+| 20 | Motivo dell'annullamento | **fuori**: chiusa in SB-16f0 |
+| 21 | Maiuscolo dei nomi | **fuori**: deciso nei dati |
+| 22 | Costo in SALUTE | **fuori**: chiusa; il costo in partita viva non si è potuto provare (solo Duccio ha carte con quel costo, F3) |
+| 23 | Parole chiave inglesi di `CRD002_KEYWORDS` | **fuori**: invisibili nel client web |
+| 24 | Più atlanti per set | **fatta**, F2 (`3e3771f`): atlanti 8×8, tetto C4 48 MiB |
+| 25 | `VerifyResolution` `c34`, `shortfall`, R8 | **fuori**: chiuse in SB-28 |
+| 26 | Densità dell'hub a 844×390 | **fuori**: non del catalogo |
+
+Fatte 18, fuori 7, spostate 0; la voce 12 è fatta a metà (O15 sì, O16 fuori per D196).
+
+**Numeri di Size** (F5): JS 399 546 B gzip, totale 1 782 875 B gzip, texture 31 923 352 B (63,4 % di 48 MiB, margine 18 408 296). Con i lotti di SB-32 saranno due atlanti, circa 48,7 MB col resto (proposta, sezione 10).
+
+### Lista del proprietario per la partita
+
+Prima di cominciare: `git pull`, jar rifatto (`./scripts/build.ps1 -Task Server -Offline`), client ricostruito e servito (`./client-web/run.ps1 -Task Serve`; per l'iPhone `-Task Physical`). Su PC a 1366×768 e a 844×390 (finestra stretta o telefono in orizzontale).
+
+1. **Una partita veloce per categoria.** Una quick di base e una avanzata: finisce, l'esito si vede, nessun errore nel tavolo. Lo starter esce a caso dentro la categoria (D190): guarda il personaggio che ti capita.
+2. **Una partita open con un mazzo costruito nell'editor, coi filtri.** Collezione → Nuovo mazzo → scegli un personaggio, l'ultima risorsa e due legate; da «Mazzo regolare» usa i filtri (personaggio, rarità, tipo, ricerca) per arrivare a 20 carte, al più 2 copie. La barra del mazzo (n / 20, legate, ultima risorsa) deve restare in vista e il tocco apre il riepilogo. Salva, avvia la partita open e controlla che la mano venga dal tuo mazzo.
+3. **Ispezione (i) di qualche carta.** Flavour sotto il testo breve; «Testo completo» scambia e un secondo tocco torna indietro; i promemoria delle parole chiave (Annuncia, Vulnerabile, Gioca d'anticipo, Rincara, In campo, Vendi, immune) con le sette frasi di D198 (8); la rarità (1–3 pallini, «P» per i personaggi) accanto al tipo.
+4. **Stati e gettone.** Dopo una carta che dà Vulnerabile guarda il segnalino sul tavolo (italiano, senza `[[…]]`), l'ispezione del personaggio (simboli dei danni, stati con lo stesso nome raggruppati) e il gettone «∞» finché la carta resta in mano; scartare l'ultima copia di quella carta deve avvisare.
+5. **Il tasto «Filtri» a misura di telefono (844×390).** Catalogo e «Mazzo regolare»: chiusi, i filtri non coprono lo schermo e si vede almeno una riga di carte; il tasto dice «Filtri» e, con filtri accesi, «Filtri (n)»; si chiude con un secondo tocco (o Esc); «n di m carte» e «Azzera i filtri» restano a portata di mano; a 1366×768 i filtri sono sempre aperti, come prima.
+6. **iPhone: memoria delle texture con l'atlante** (proposta, sezione 10). Prima di SB-32 le illustrazioni sono il segnaposto nero di `base-0.webp` (2048×2048, 31,9 MB decodificati, 63,4 % del tetto di 48 MiB); con i lotti di SB-32 saranno due atlanti (circa 48,7 MB col resto). Su iPhone, aprendo l'hub, un'intera partita e l'editor di seguito, controlla che la pagina non si ricarichi da sola, che non diventi bianca e che il tavolo resti fluido; se succede, annota quale schermata e dopo quante.
+
+### Non verificato
+
+- Il costo in SALUTE in partita viva (solo Duccio ha carte con quel costo e non ha uno starter), già detto in F3.
+- `resolution` 844×390 `ffa` da solo (rosso in matrice per tempi; non rilanciato).
+- Catture di Edge via Playwright su PC, non un dispositivo fisico: il tocco vero e la memoria delle texture su iPhone sono nella lista.
+
+### Da dichiarare
+
+- `verify-resolution.mjs` non è stato toccato (fuori dal perimetro) e per questo `VerifyResolution` 844×390 `open` è rosso.
+- Nel rapporto «prima» delle catture è F4 (`902d94e`), non una ricostruzione.
+- Il lavoro dei lotti di SB-32 e i PDF di `output/pdf` presenti nell'albero di lavoro non sono in questo commit.
+
+### Domande (numerazione unica F1–F5)
+
+27. **`verify-resolution.mjs` a 844×390**: `addRegular` (riga 832) riempie `card-search` senza aprire i filtri. Posso correggerlo con lo stesso aiuto di `verify-decks.mjs` (aprire, riempire, chiudere) in un blocco con perimetro, o in un giro di F5?
+28. **R13**: 1 corsa su 16 contro 0 su 16 sulla base. Bisecare in `76fd55c` (circa 25 minuti per commit) o lasciarla aperta come dipendente dalla partita?
+29. **R15** (`public` aspetta l'indice senza `R02a` e `R07b`): conferma come voce del registro e correzione dello strumento in un blocco?
+30. **R17** (cinque parti verdi da sole, rosse in `-Parallel 4`): le accetto come intermittenze del giro in parallelo (famiglia di R7), o vuole una seconda matrice completa prima della chiusura?
+31. **Chiusura di SB-31**: aspetta la lista del proprietario e la correzione della domanda 27, o si chiude con le voci aperte nel registro?

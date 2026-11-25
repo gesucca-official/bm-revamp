@@ -1,0 +1,37 @@
+RUN 1 844x390
+exit 0 
+15:34:08 lastCopyWarning {"tries":1,"replays":0,"replayed":[],"announcer":"base.bruiser.TiFaccioSpazio","lastTokenCopies":["GARGANTUESCO IMPATTO SUL TU"],"chip"
+RUN 1 1366x768
+exit 0 
+15:35:18 lastCopyWarning {"tries":2,"replays":0,"replayed":[],"announcer":"base.bruiser.TiFaccioSpazio","lastTokenCopies":["GARGANTUESCO IMPATTO SUL TU"],"chip"
+RUN 2 844x390
+exit 0 
+15:36:48 lastCopyWarning {"tries":3,"replays":0,"replayed":[],"announcer":"base.bruiser.TiFaccioSpazio","lastTokenCopies":["GARGANTUESCO IMPATTO SUL TU"],"chip"
+RUN 2 1366x768
+exit 0 
+15:38:17 lastCopyWarning {"tries":5,"replays":0,"replayed":[],"announcer":"base.bruiser.TiFaccioSpazio","lastTokenCopies":["GARGANTUESCO IMPATTO SUL TU"],"chip"
+RUN 3 844x390
+exit 0 
+15:39:55 lastCopyWarning {"tries":2,"replays":0,"replayed":[],"announcer":"bruiser.Glare","lastTokenCopies":["GARGANTUESCO IMPATTO SUL TU"],"chip":{"id":"status
+RUN 3 1366x768
+exit 0 
+15:41:09 lastCopyWarning {"tries":2,"replays":0,"replayed":[],"announcer":"base.bruiser.TiFaccioSpazio","lastTokenCopies":["GARGANTUESCO IMPATTO SUL TU"],"chip"
+RUN 4 844x390
+exit 0 
+15:42:40 lastCopyWarning {"tries":1,"replays":0,"replayed":[],"announcer":"bruiser.Glare","lastTokenCopies":["GARGANTUESCO IMPATTO SUL TU"],"chip":{"id":"status
+RUN 4 1366x768
+exit 0 
+15:43:56 lastCopyWarning {"tries":1,"replays":0,"replayed":[],"announcer":"bruiser.Glare","lastTokenCopies":["GARGANTUESCO IMPATTO SUL TU"],"chip":{"id":"status
+RUN 5 844x390
+exit 0 
+15:45:00 lastCopyWarning {"tries":2,"replays":0,"replayed":[],"announcer":"bruiser.Glare","lastTokenCopies":["GARGANTUESCO IMPATTO SUL TU"],"chip":{"id":"status
+RUN 5 1366x768
+exit 0 
+15:46:12 lastCopyWarning {"tries":1,"replays":0,"replayed":[],"announcer":"bruiser.Glare","lastTokenCopies":["GARGANTUESCO IMPATTO SUL TU"],"chip":{"id":"status
+RUN 6 844x390
+exit 0 
+15:47:48 lastCopyWarning {"tries":1,"replays":0,"replayed":[],"announcer":"bruiser.Glare","lastTokenCopies":["GARGANTUESCO IMPATTO SUL TU"],"chip":{"id":"status
+RUN 6 1366x768
+exit 0 
+15:49:00 lastCopyWarning {"tries":3,"replays":0,"replayed":[],"announcer":"bruiser.Glare","lastTokenCopies":["GARGANTUESCO IMPATTO SUL TU"],"chip":{"id":"status
+DONE

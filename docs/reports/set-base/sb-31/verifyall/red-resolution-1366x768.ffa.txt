@@ -1,0 +1,20 @@
+16:41:00 server {"database":"temporary","jar":"target/bm-server-0.0.1-SNAPSHOT.jar"}
+16:47:45 ffa {"gameId":"6353d2bd78802399f0ae5379331a752ba846d863ee97bc011b55d6bd11f43327","turns":16,"views":31,"modelProblems":[],"repeatedViewDiffs":[],"timerOrderOnly":[],"scene":{"1":{"ok":true,"violations":[]},"2":{"ok":true,"violations":[]},"3":{"ok":true,"violations":[]},"6":{"ok":true,"violations":[]},"c32":{"ok":true,"violations":[]},"c34":{"ok":true,"violations":[]},"d13":{"ok":true,"violations":[]},"c4s":{"ok":false,"violations":["6353d2bd78802399f0ae5379331a752ba846d863ee97bc011b55d6bd11f43327/2: discard built 3, seen 2","6353d2bd78802399f0ae5379331a752ba846d863ee97bc011b55d6bd11f43327/2: label ComPlayer_4236 ALCOHOL readable 407 ms"]}},"k1":"0 of 14 sequences cancelled by view","ends":"compl
+AssertionError [ERR_ASSERTION]: ffa: scene rule c4s
++ actual - expected
+
++ [
++   '6353d2bd78802399f0ae5379331a752ba846d863ee97bc011b55d6bd11f43327/2: discard built 3, seen 2',
++   '6353d2bd78802399f0ae5379331a752ba846d863ee97bc011b55d6bd11f43327/2: label ComPlayer_4236 ALCOHOL readable 407 ms'
++ ]
+- []
+
+    at summarise (file:///E:/bm/client-web/tools/verify-resolution.mjs:511:55)
+    at file:///E:/bm/client-web/tools/verify-resolution.mjs:749:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [Array],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}

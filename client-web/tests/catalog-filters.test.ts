@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {keywordsOf,setAnnex,setIds,type Annex} from '../src/annex.ts';
 import type {Card,CharacterCard} from '../src/contracts.ts';
-import {GENERIC,NO_FILTERS,addRegular,characterOf,characterOrder,deckBar,deckBarText,deckSummary,emptyDraft,filterCards,isFiltering,matchesCharacter,setCharacter,setLastResort,shown,toggleBound,
+import {GENERIC,NO_FILTERS,activeFilters,addRegular,characterOf,characterOrder,deckBar,deckBarText,deckSummary,emptyDraft,filterCards,isFiltering,matchesCharacter,setCharacter,setLastResort,shown,toggleBound,
   BOUND_CARDS,REGULAR_CARDS} from '../src/deck.ts';
 
 // SB-31 F4 (D196 (4), D198): filters of the catalog and the editor, the stable order of the characters and the deck bar, on the 117 cards of the live annex.
@@ -110,4 +110,23 @@ test('the summary of the deck: parts, bound cards and regular cards with their c
 test('D198 (8): the reminder of Vulnerabile is the sentence of the owner, with the symbols of the damages',()=>{
  const v=keywordsOf('Se lo trovi: diventi Vulnerabile.').find(k=>k.id==='vulnerable')!;
  assert.equal(v.sentence,'Subisci una volta e mezza i danni [[HIT]], [[CUT]] e [[POISON]] fino alla fine del turno in cui giochi una carta col nome trovato.');
+});
+
+// SB-31 F5 (D199 (26)): the «Filtri» button of a low screen counts the filters that are on, and the panel closes with Esc or a second tap.
+test('the «Filtri» button counts the active filters, a search term included (D199 (26))',()=>{
+ assert.equal(activeFilters(NO_FILTERS),0);
+ assert.equal(activeFilters(f({character:GENERIC})),1);
+ assert.equal(activeFilters(f({character:GENERIC,rarity:'RARE',type:'item',term:'colpo'})),4);
+ assert.equal(activeFilters(f({term:'x'})),isFiltering(f({term:'x'}))?1:0);
+});
+test('the «Filtri» panel opens on a tap and closes on a second tap or Esc; the count and the reset stay outside it (source)',()=>{
+ const tsx=readFileSync(new URL('../src/collection.tsx',import.meta.url),'utf8'),css=readFileSync(new URL('../src/style.css',import.meta.url),'utf8');
+ assert.match(tsx,/setOpen\(o=>!o\)/,'a second tap closes');
+ assert.match(tsx,/e\.key==='Escape'\)setOpen\(false\)/,'Esc closes');
+ assert.match(tsx,/active>0\?`Filtri \(\$\{active\}\)`:'Filtri'/,'the label carries the number of active filters');
+ const state=tsx.indexOf('className="filter-state"'),fields=tsx.indexOf('className="filter-fields"'),close=tsx.indexOf('</div>',fields);
+ assert.ok(state>close,'«n di m carte» and «Azzera i filtri» are not inside the collapsible fields');
+ assert.match(css,/@media\(max-height:550px\)\s*\{\s*\.filters-toggle\s*\{[^}]*min-height: 44px/,'the button is at least 44 px at the compact size');
+ assert.match(css,/\.filter-bar \.filter-fields\s*\{[^}]*display: none/,'closed at the compact size');
+ assert.match(css,/\.filters-toggle\s*\{\s*display: none/,'not drawn on a wide screen');
 });

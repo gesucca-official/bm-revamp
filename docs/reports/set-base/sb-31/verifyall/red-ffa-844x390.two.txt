@@ -1,0 +1,9 @@
+17:02:13 server {"database":"temporary","jar":"target/bm-server-0.0.1-SNAPSHOT.jar"}
+page.waitForFunction: Timeout 2000ms exceeded.
+    at afterInput (E:\bm\client-web\tools\verify-ffa.mjs:132:33)
+    at async tap (E:\bm\client-web\tools\verify-ffa.mjs:135:129)
+    at async playOne (E:\bm\client-web\tools\verify-ffa.mjs:140:191)
+    at async playToEnd (E:\bm\client-web\tools\verify-ffa.mjs:213:3)
+    at async file:///E:/bm/client-web/tools/verify-ffa.mjs:297:17 {
+  name: 'TimeoutError'
+}

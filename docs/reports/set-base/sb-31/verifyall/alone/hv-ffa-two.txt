@@ -1,0 +1,4 @@
+18:22:28 server {"database":"temporary","jar":"E:/bm/server/target/bm-server-0.0.1-SNAPSHOT.jar"}
+18:24:42 twoHumansThreeComputers {"gameId":"22f4027ebc155075b71584affa3785dea9117b17e1d8637d6a86a83a033e1f3e","characters":{"ComPlayer_5270":"Piera Pinot","devAlice":"Mara Contromano","devBob":"SPAZIENZIO DE LA UCCISO","ComPlayer_1666":"Beppe Bulletta","ComPlayer_1830":"Mara Contromano"},"inspectedComputer":{"owner":"ComPlayer_5270","label":"Computer 1, Piera Pinot, salute 80; risorse H 80, A 15, V 0, T 0, L 15; mazzo 16 carte","text":"Piera Pinot Computer 1 · ID ComPlayer_5270 · P Salute 80 Allerta 15 Violenza 0 Tossicità 0 Alcol 15 Oggetti 1 / 2 Mazzo 16 carte Last resort mai giocata Stati, immunità e timer Nessuno. Torna a
+18:24:43 k7 {"mouse":null,"touch":null,"raiseOnly":null}
+exit 0

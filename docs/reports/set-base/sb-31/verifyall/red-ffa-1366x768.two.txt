@@ -1,0 +1,19 @@
+17:02:07 server {"database":"temporary","jar":"target/bm-server-0.0.1-SNAPSHOT.jar"}
+17:05:05 twoHumansThreeComputers {"gameId":"56f9967602a607ce22a69c0b1b77736ddb70e57050c784df866dad122446da85","characters":{"ComPlayer_1331":"Piera Pinot","devAlice":"Mara Contromano","ComPlayer_9534":"Mara Contromano","ComPlayer_5386":"Celestina Bucatina","devBob":"SPAZIENZIO DE LA UCCISO"},"inspectedComputer":{"owner":"ComPlayer_1331","label":"Computer 1, Piera Pinot, salute 80; risorse H 80, A 15, V 0, T 0, L 15; mazzo 16 carte","text":"Piera Pinot Computer 1 · ID ComPlayer_1331 · P Salute 80 Allerta 15 Violenza 0 Tossicità 0 Alcol 15 Oggetti 1 / 2 Mazzo 16 carte Last resort mai giocata Stati, immunità e timer Nessuno. Tor
+17:05:06 k7 {"mouse":null,"touch":null,"raiseOnly":null}
+AssertionError [ERR_ASSERTION]: no page errors
++ actual - expected
+
++ [
++   "A: TypeError: Cannot read properties of undefined (reading 'value')"
++ ]
+- []
+
+    at file:///E:/bm/client-web/tools/verify-ffa.mjs:371:9 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [Array],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}

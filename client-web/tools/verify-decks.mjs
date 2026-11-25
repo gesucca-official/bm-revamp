@@ -98,12 +98,16 @@ async function radioArrows(group,role,scope){
  return out;
 }
 const deckSaved=async(from,id)=>{await page.getByTestId('deck-notice').waitFor({timeout:10000});return A.account().decks.find(d=>d.deckId===id);};
+// SB-31 F5 (D199 (26)): at the compact size the filter fields hide behind «Filtri»; the tool opens the panel to use a field and closes it again, as a player would.
+const openFilters=async()=>{const t=page.getByTestId('filters-toggle');if(await t.isVisible()&&(await t.getAttribute('aria-expanded'))!=='true')await t.click();};
+const closeFilters=async()=>{const t=page.getByTestId('filters-toggle');if(await t.isVisible()&&(await t.getAttribute('aria-expanded'))==='true')await t.click();};
+const searchFor=async v=>{await openFilters();await page.getByTestId('card-search').fill(v);await closeFilters();};
 let names={},characters={};
 const card=binding=>{const n=names[binding];assert.ok(n,`catalog has ${binding}`);return n;};
 async function addRegular(binding,times){
- await page.getByTestId('card-search').fill(binding);
+ await searchFor(binding);
  for(let i=0;i<times;i++)await press(`Aggiungi una copia di ${card(binding)}`);
- await page.getByTestId('card-search').fill('');
+ await searchFor('');
 }
 
 // SB-28, D184 (6): in the live game (regulation 2.0, R02a) a card that announces two names, both in the deck, asks which one to search: «Conferma» opens
@@ -221,7 +225,7 @@ try{
  assert.equal(art+placeholders,124,'every face has its own tile or the placeholder');assert.equal(art,33,'faces with their own tile in the atlas (the 34 of the art test, less the token, which has no face)');assert.ok(scroll.page);
  // SB-31 F4 (D196 (4), D197 (4), D198 (9)): the filters of the catalog intersect, the characters come in the order by name (the same at every start), every face shows the rarity of the print.
  {
-  const pick=(id,value)=>page.getByTestId(id).selectOption(value);
+  const pick=async(id,value)=>{await openFilters();await page.getByTestId(id).selectOption(value);await closeFilters();};
   const listed=async()=>({cards:await page.locator('[data-testid=catalog] [data-testid=card-face]').evaluateAll(n=>n.map(e=>e.dataset.binding)),chars:await page.locator('[data-testid=catalog] [data-testid=character-face]').evaluateAll(n=>n.map(e=>e.dataset.binding))});
   const reset=async()=>{const b=page.getByTestId('filter-reset');if(await b.count())await b.click();};
   const same=(got,want,what)=>assert.deepEqual([...got].sort(),[...want].sort(),what);
@@ -260,6 +264,41 @@ try{
   await reset();assert.equal(await text('[data-testid=filter-count]'),'124 di 124 carte');assert.equal((await listed()).cards.length,117);
   step('catalogFilters',{perCharacter,generic:generic.cards.length,mara:{alone,rare:two.cards.length,rareAction:three.cards.length},rarityMarks:marks.length,characterOrder:wantOrder});
  }
+
+ // SB-31 F5 (D199 (26)): at the compact size (844×390) the filters of the catalog hide behind a «Filtri» button of at least 44 px that counts the active filters; opened, it shows them,
+ // and it closes with a second tap or Escape; «n di m carte» and «Azzera i filtri» stay in reach. On the first screen of the catalog, closed, a whole card row is visible. At 1366×768 the
+ // button is not drawn and the fields are open as before.
+ {
+  const compact=vh<=550,toggle=page.getByTestId('filters-toggle'),fieldsShown=()=>page.getByTestId('filter-fields').isVisible();
+  const box=async sel=>page.locator(sel).first().evaluate(e=>{const r=e.getBoundingClientRect();return {top:r.top,bottom:r.bottom,h:r.height,viewport:innerHeight};});
+  await page.getByTestId('filter-reset').count()&&await page.getByTestId('filter-reset').click();
+  if(!compact){
+   assert.equal(await toggle.isVisible(),false,'wide screen: no «Filtri» button');assert.equal(await fieldsShown(),true,'wide screen: the fields stay open');
+   step('filtersButton',{compact,button:false,fieldsOpen:true});
+  }else{
+   assert.equal(await toggle.isVisible(),true,'compact: the «Filtri» button is drawn');assert.equal(await fieldsShown(),false,'compact: the fields are closed at the start');
+   assert.equal((await toggle.innerText()).trim(),'Filtri','no filter on: just «Filtri»');
+   const tb=await toggle.boundingBox();assert.ok(tb.height>=44&&tb.width>=44,`the button is at least 44 px: ${tb.width}×${tb.height}`);
+   assert.equal(await page.getByTestId('filter-count').isVisible(),true,'«n di m carte» stays in reach with the filters closed');
+   // The first screen: scrolled to the top, the filters closed, one whole card row of the catalog is visible.
+   await page.evaluate(()=>{const s=document.querySelector('.sheet');if(s)s.scrollTop=0;window.scrollTo(0,0);});await page.waitForTimeout(150);
+   const row=await page.locator('[data-testid=catalog] [data-testid=character-face],[data-testid=catalog] [data-testid=card-face]').evaluateAll(n=>n.map(e=>{const r=e.getBoundingClientRect();return {top:r.top,bottom:r.bottom,vh:innerHeight};}).filter(r=>r.top>=0&&r.bottom<=r.vh).length);
+   assert.ok(row>=1,`the first screen of the catalog shows at least one whole card row (${row} whole faces)`);
+   const bounds=await toggle.boundingBox();assert.ok(bounds.y+bounds.height<=vh,'the button is on the first screen');
+   await A.shot('catalog-filters-closed');
+   // Open: the fields show, the label counts the filters that are on.
+   await toggle.click();assert.equal(await fieldsShown(),true,'a tap opens the fields');assert.equal(await toggle.getAttribute('aria-expanded'),'true');
+   await page.getByTestId('filter-rarity').selectOption('RARE');assert.equal((await toggle.innerText()).trim(),'Filtri (1)');
+   await page.getByTestId('filter-type').selectOption('action');assert.equal((await toggle.innerText()).trim(),'Filtri (2)','two filters on: «Filtri (2)»');
+   await A.shot('catalog-filters-open');
+   await page.keyboard.press('Escape');await page.waitForTimeout(100);assert.equal(await fieldsShown(),false,'Escape closes the fields');
+   assert.equal((await toggle.innerText()).trim(),'Filtri (2)','closing keeps the filters and the count');assert.equal(await page.getByTestId('filter-reset').isVisible(),true,'«Azzera i filtri» stays in reach');
+   assert.match(await text('[data-testid=filter-count]'),/ di 124 carte$/);assert.notEqual(await text('[data-testid=filter-count]'),'124 di 124 carte');
+   await toggle.click();assert.equal(await fieldsShown(),true);await toggle.click();assert.equal(await fieldsShown(),false,'a second tap closes the fields');
+   await page.getByTestId('filter-reset').click();assert.equal((await toggle.innerText()).trim(),'Filtri');
+   step('filtersButton',{compact,button:{w:tb.width,h:tb.height},wholeFacesOnFirstScreen:row});
+  }
+ }
  await page.getByTestId('show-catalog').click();
 
  // R02 1.12 (SB-1): the regular cards of the decks of this run, ten actions twice and no item, so hand plus deck stays countable.
@@ -273,7 +312,7 @@ try{
  const pickCharacter=async b=>(await slot('Personaggio')).getByRole('button',{name:`Personaggio ${characters[b]}`,exact:true}).click();
  const pickBound=async b=>(await slot('Azioni legate')).getByRole('button',{name:`Azione legata ${card(b)}`,exact:true}).click();
  const pickStruggle=async()=>(await slot('Ultima risorsa')).getByRole('button',{name:`Ultima risorsa ${card('com.last.Struggle')}`,exact:true}).click();
- const canAddCopy=async binding=>{await page.getByTestId('card-search').fill(binding);const on=await page.getByRole('button',{name:`Aggiungi una copia di ${card(binding)}`,exact:true}).isEnabled();await page.getByTestId('card-search').fill('');return on;};
+ const canAddCopy=async binding=>{await searchFor(binding);const on=await page.getByRole('button',{name:`Aggiungi una copia di ${card(binding)}`,exact:true}).isEnabled();await searchFor('');return on;};
  const removeCopy=async binding=>{await page.getByTestId('pool-deck').click();await press(`Togli una copia di ${card(binding)}`);await page.getByRole('radio',{name:'Collezione'}).click();};
  const summary=async title=>(await page.locator('details.slot summary',{hasText:title}).locator('b').innerText()).trim();
 
@@ -338,6 +377,19 @@ try{
   await slot('Mazzo regolare');await addRegular('bruiser.Glare',2);await addRegular('bruiser.StunningBlow',1);
   assert.equal(await barText(),'Regolari 3 / 20 · legate 2 / 2 · ultima risorsa ✓');
   assert.match(await text('[data-testid=deck-counts]'),/^Regolari 3 \/ 20/);
+  // SB-31 F5 (D199 (26)): in the editor at the compact size the filters of «Mazzo regolare» are closed behind «Filtri»: with the pool at the top of the screen one whole card row of
+  // the pool is visible together with the deck bar. (A wide screen has no button and the fields are open.)
+  {
+   const toggle=page.getByTestId('filters-toggle').last(),pool=page.getByTestId('regular-pool');
+   if(low){
+    assert.equal(await toggle.isVisible(),true,'editor, compact: the «Filtri» button is drawn');assert.equal(await page.getByTestId('filter-fields').last().isVisible(),false,'editor, compact: the fields are closed');
+    const tb=await toggle.boundingBox();assert.ok(tb.height>=44,`the editor button is at least 44 px: ${tb.height}`);
+    await pool.evaluate(e=>e.scrollIntoView({block:'start'}));await page.waitForTimeout(150);
+    const seen=await page.evaluate(()=>{const f=[...document.querySelectorAll('[data-testid=regular-pool] [data-testid=card-face]')].map(e=>e.getBoundingClientRect()).filter(r=>r.top>=0&&r.bottom<=innerHeight).length,b=document.querySelector('[data-testid=deck-bar]').getBoundingClientRect();return {faces:f,bar:{top:b.top,bottom:b.bottom},viewport:innerHeight};});
+    assert.ok(seen.faces>=1,`editor, compact: a whole card row of the pool on the first screen of the pool (${JSON.stringify(seen)})`);assert.ok(seen.bar.top>=-1&&seen.bar.bottom<=seen.viewport+1,`the deck bar stays in place: ${JSON.stringify(seen.bar)}`);
+    await A.shot('editor-filters-closed');step('editorFiltersClosed',seen);
+   }else assert.equal(await toggle.isVisible(),false,'editor, wide: no «Filtri» button');
+  }
   // Fixed: after scrolling the sheet to the end and back, the bar is where it should be and inside the viewport.
   const where={};
   for(const [name,top] of [['end',true],['start',false]]){
@@ -375,9 +427,9 @@ try{
  {const pool=await page.locator('[data-testid=regular-pool] [data-testid=card-face]').evaluateAll(n=>n.map(e=>({text:e.innerText,pills:e.querySelectorAll('.dmg-pill').length})));
   assert.ok(pool.length>0&&pool.every(f=>!/priorit/i.test(f.text)),'editor faces: no priority');assert.ok(pool.some(f=>f.pills>0),'editor faces: damage pills present');step('editorFaces',{faces:pool.length,withDamage:pool.filter(f=>f.pills).length});}
  // Search on the card text, then the deck view: remove one copy with the same name, then put it back.
- await page.getByTestId('card-search').fill(SWAP);const searched=await page.locator('[data-testid=regular-pool] [data-testid=card-face]').count();
+ await searchFor(SWAP);const searched=await page.locator('[data-testid=regular-pool] [data-testid=card-face]').count();
  await page.getByTestId('pool-deck').click();await press(`Togli una copia di ${card(SWAP)}`);
- const deckView=await page.locator('[data-testid=regular-pool] strong').allInnerTexts();await page.getByTestId('card-search').fill('');
+ const deckView=await page.locator('[data-testid=regular-pool] strong').allInnerTexts();await searchFor('');
  const deckViewAll=await page.locator('[data-testid=regular-pool] strong').allInnerTexts();
  const removedSave=await page.getByTestId('save-deck').isEnabled();
  await page.getByRole('radio',{name:'Collezione'}).click();await addRegular(SWAP,1);
@@ -500,23 +552,31 @@ try{
   await page.getByTestId('save-deck').click();
   const lastDeck=await deckSaved(markL,'Ultima');
   assert.equal(lastDeck.regularCards.length,20);assert.equal(lastDeck.regularCards.filter(c=>c.bindingName===X).length,1);
-  let game=null,announcer=null,tries=0;
-  while(!announcer&&tries<12){
-   tries++;await startOpen('Ultima');
+  // SB-31 F5 (D199 (22), R14): the computer picks its move at random and may void the announcing move («FAI BASTA» on it): no search then, no token. The game is then replayed,
+  // at most REPLAYS times; a missing token with the announcing move NOT voided still fails, with the same message.
+  const REPLAYS=6;let game=null,announcer=null,tries=0,replays=0,s=null,mine=null;const xName=card(X),replayed=[];
+  for(;;){
+  announcer=null;game=null;let attempts=0;
+  while(!announcer&&attempts<12){
+   tries++;attempts++;await startOpen('Ultima');
    await A.wait(s=>s&&s.phase==='choose'&&s.hits.some(h=>h.kind==='hand'),30000,'last-copy table');
    const g=A.messages('/user/queue/game/open/1vCom/ready').at(-1).body,hand=A.views(g)[0].players.devAlice.cardsInHand.map(c=>c.bindingName),found=S.find(b=>hand.includes(b));
    if(found&&!hand.includes(X)){game=g;announcer=found;}else await abandon();
   }
-  assert.ok(announcer,`no game with an announcer and without ${X} in the first hand after ${tries} tries`);
+  assert.ok(announcer,`no game with an announcer and without ${X} in the first hand after ${attempts} tries`);
   // Turn 1: the announcer on the own character (it plays «su di te»), the search finds the only copy.
-  let s=await A.state();const first=s.order.find(c=>same(c.name,card(announcer)));assert.ok(first,'the announcer is in the hand');
+  s=await A.state();const first=s.order.find(c=>same(c.name,card(announcer)));assert.ok(first,'the announcer is in the hand');
   await act(`[data-hit="${first.key}"]`);await act('[data-hit="person-devAlice"]');assert.ok((await A.state()).target,'the announcer aims at the own character');
   {const before=sends();await page.getByTestId('confirm').click();await answerConfirm(page,sends,before);assert.equal(sends()-before,1,'one move');}
   await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,60000,'turn 1 resolved');
   s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&!x.sequence.running&&x.hits.some(h=>h.kind==='hand'))),60000,'turn 2');
   assert.ok(!s.over&&!s.eliminated,'the game goes on');
-  const mine=A.views(game).at(-1).players.devAlice,xName=card(X);
-  assert.ok((mine.lastTokenCopies??[]).some(n=>same(n,xName)),`the server names ${xName} as the last copy that holds a token: ${JSON.stringify(mine.lastTokenCopies)}`);
+  mine=A.views(game).at(-1).players.devAlice;
+  if((mine.lastTokenCopies??[]).some(n=>same(n,xName)))break;
+  const voided=A.views(game).flatMap(v=>v.resolvedMoves??[]).some(m=>m.playerId==='devAlice'&&m.void&&same(m.playedCardName,card(announcer)));
+  assert.ok(voided&&replays<REPLAYS,`the server names ${xName} as the last copy that holds a token: ${JSON.stringify(mine.lastTokenCopies)}${voided?` (the announcing move was voided ${replays+1} times in a row)`:''}`);
+  replays++;replayed.push({announcer,voided});await abandon();
+  }
   // RP-21: the chip of the token lasts until the card is played: «∞».
   const chip=s.hits.find(h=>h.kind==='status'&&h.id.startsWith('status-devAlice-vu-'));assert.ok(chip,'a chip for the vulnerability token');
   await page.locator(`[data-hit="${chip.id}"]`).focus();await page.waitForTimeout(150);
@@ -543,7 +603,7 @@ try{
    assert.equal(await page.getByTestId('discard-warning').count(),0,'no warning for a card that is not the last copy');assert.equal(sends()-before,1,'the move leaves');
    await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,60000,'turn 2 resolved');
   }
-  step('lastCopyWarning',{tries,announcer,lastTokenCopies:mine.lastTokenCopies,chip:{id:chip.id,short:shown.short,title:shown.title},warning,otherDiscardChecked:!!other});
+  step('lastCopyWarning',{tries,replays,replayed,announcer,lastTokenCopies:mine.lastTokenCopies,chip:{id:chip.id,short:shown.short,title:shown.title},warning,otherDiscardChecked:!!other});
   // SB-31 F1 («Rincara», SB-28 D7): with the live rules the character view carries the public counter of plays from the first turn (the last resort enters the hand only when the deck
   // is empty, too late for a game of a few turns), and the inspection of the own character shows it in its «Last resort» row, here «mai giocata»; the label of the card in hand is a unit test.
   {const counter=A.views(game).at(-1).players.devAlice.character.plays;assert.ok(counter&&typeof counter==='object','the character view carries the counter of plays with the live rules');
@@ -561,7 +621,7 @@ try{
  // SB-31 F4 (D196 (4); the check of the proposal, section 8): a valid deck built from the full catalog and through the filters (the character, the generic common actions) is saved
  // and accepted by the server: the regular cards of the character come from the character filter, the others from «generic, common, action»; then it starts an open game.
  {
-  const DUC='base.character.Rocco',pickF=(id,v)=>page.getByTestId(id).selectOption(v);
+  const DUC='base.character.Rocco',pickF=async(id,v)=>{await openFilters();await page.getByTestId(id).selectOption(v);await closeFilters();};
   const regularOf=c=>c.subtype==='Regolare'&&c.type==='Azione';
   const poolBindings=()=>page.locator('[data-testid=regular-pool] [data-testid=card-face]').evaluateAll(n=>n.map(e=>e.dataset.binding));
   const markF=A.sent.length;

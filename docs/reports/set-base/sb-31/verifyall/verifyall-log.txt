@@ -1,0 +1,178 @@
+
+> bm-client-web@0.0.0 verify:all
+> node tools/verify-all.mjs --publish=docs/reports/set-base/sb-31/verifyall --parallel=4 --split=resolution,ffa
+
+[16:40:20] jar: rebuilding from source (scripts/build.ps1 -Task Server -Offline) …
+[16:40:40] build verified: HEAD 4ba375a + uncommitted changes, jar 2026-11-25T16:40:40.263Z (75cccaafdcda25b2) rebuilt
+[16:40:40] ▶ test
+[16:40:44] ✔ test (4 s)
+[16:40:44] ▶ build
+[16:40:47] ✔ build (3 s)
+[16:40:47] ▶ size
+[16:40:47] ✔ size (0 s)
+[16:40:47] dist verified: 29 files, sha256 f8e1596cd0b64a57
+[16:40:48] parallel: 4 slots, servers 18080,18081,18082,18083, previews 14320,14321,14322,14323 (same dist)
+[16:40:48] ▶ resolution-1366x768.info (slot 2)
+[16:40:48] ▶ resolution-844x390.ffa (slot 1)
+[16:40:48] ▶ resolution-844x390.info (slot 3)
+[16:40:48] ▶ resolution-1366x768.ffa (slot 0)
+[16:42:09] ✘ resolution-844x390.info (81 s, slot 3)
+[16:42:09] ▶ resolution-1366x768.open (slot 3)
+[16:42:14] ✘ resolution-1366x768.open (5 s, slot 3)
+[16:42:14] ▶ resolution-844x390.open (slot 3)
+[16:42:56] ✘ resolution-844x390.open (43 s, slot 3)
+[16:42:56] ▶ resolution-1366x768.infoFfa (slot 3)
+[16:46:55] ✔ resolution-1366x768.info (367 s, slot 2)
+[16:46:55] ▶ resolution-1366x768.infoTouch (slot 2)
+[16:47:48] ✘ resolution-1366x768.ffa (420 s, slot 0)
+[16:47:48] ▶ resolution-844x390.infoFfa (slot 0)
+[16:48:16] ✔ resolution-1366x768.infoFfa (319 s, slot 3)
+[16:48:16] ▶ resolution-844x390.infoTouch (slot 3)
+[16:49:49] ✘ resolution-844x390.ffa (541 s, slot 1)
+[16:49:49] ▶ resolution-1366x768.humans (slot 1)
+[16:50:43] ✔ resolution-1366x768.infoTouch (228 s, slot 2)
+[16:50:43] ▶ resolution-844x390.humans (slot 2)
+[16:53:16] ✔ resolution-1366x768.humans (208 s, slot 1)
+[16:53:16] ▶ resolution-1366x768.quick (slot 1)
+[16:53:29] ✔ resolution-844x390.infoTouch (313 s, slot 3)
+[16:53:29] ▶ resolution-844x390.quick (slot 3)
+[16:53:48] ✔ resolution-844x390.infoFfa (360 s, slot 0)
+[16:53:56] slot 0: shared server up on 18080
+[16:53:56] ▶ verify-1366x768 (slot 0)
+[16:54:17] ✔ resolution-844x390.humans (214 s, slot 2)
+[16:54:17] ▶ lifecycle-1366x768 (slot 2)
+[16:55:16] ✔ resolution-1366x768.quick (120 s, slot 1)
+[16:55:16] ▶ lifecycle-844x390 (slot 1)
+[16:55:40] ✔ verify-1366x768 (104 s, slot 0)
+[16:55:40] ▶ modes-1366x768 (slot 0)
+[16:56:17] ✔ modes-1366x768 (37 s, slot 0)
+[16:56:17] ▶ verify-844x390 (slot 0)
+[16:56:22] ✔ resolution-844x390.quick (173 s, slot 3)
+[16:56:22] ▶ resolution-1366x768.report (slot 3)
+[16:57:05] ✔ lifecycle-1366x768 (168 s, slot 2)
+[16:57:05] ▶ resolution-844x390.report (slot 2)
+[16:58:05] ✔ lifecycle-844x390 (169 s, slot 1)
+[16:58:05] ▶ ffa-1366x768.timeout (slot 1)
+[16:58:05] ✔ verify-844x390 (108 s, slot 0)
+[16:58:05] ▶ modes-844x390 (slot 0)
+[16:58:56] ✔ resolution-1366x768.report (155 s, slot 3)
+[16:58:56] ▶ ffa-844x390.timeout (slot 3)
+[16:59:04] ✔ modes-844x390 (59 s, slot 0)
+[16:59:04] ▶ verify-1920x1080 (slot 0)
+[16:59:49] ✔ resolution-844x390.report (164 s, slot 2)
+[16:59:49] ▶ ffa-1366x768.five (slot 2)
+[17:01:01] ✔ verify-1920x1080 (117 s, slot 0)
+[17:01:02] ▶ ffa-1366x768.drop (slot 0)
+[17:01:03] ✔ ffa-844x390.timeout (126 s, slot 3)
+[17:01:03] ▶ ffa-844x390.five (slot 3)
+[17:01:13] ✔ ffa-1366x768.timeout (188 s, slot 1)
+[17:01:13] ▶ ffa-844x390.drop (slot 1)
+[17:01:57] ✔ ffa-844x390.five (54 s, slot 3)
+[17:01:57] ▶ ffa-1366x768.two (slot 3)
+[17:02:03] ✔ ffa-1366x768.drop (62 s, slot 0)
+[17:02:03] ▶ ffa-844x390.two (slot 0)
+[17:02:07] ✔ ffa-1366x768.five (138 s, slot 2)
+[17:02:07] ▶ ffa-1366x768.leave (slot 2)
+[17:05:09] ✘ ffa-1366x768.two (192 s, slot 3)
+[17:05:09] ✘ ffa-844x390.two (185 s, slot 0)
+[17:05:09] ▶ resolution-1366x768.jump (slot 3)
+[17:05:10] ▶ ffa-844x390.leave (slot 0)
+[17:06:05] ✔ resolution-1366x768.jump (56 s, slot 3)
+[17:06:05] ▶ resolution-844x390.jump (slot 3)
+[17:06:28] ✔ ffa-844x390.leave (78 s, slot 0)
+[17:06:28] ▶ ffa-1366x768.start (slot 0)
+[17:06:57] ✔ resolution-844x390.jump (52 s, slot 3)
+[17:06:57] ▶ ffa-844x390.start (slot 3)
+[17:07:35] ✔ ffa-1366x768.start (67 s, slot 0)
+[17:07:35] ▶ profile-1366x768 (slot 0)
+[17:08:06] ✔ ffa-844x390.start (69 s, slot 3)
+[17:08:06] ▶ profile-844x390 (slot 3)
+[17:08:26] ✔ profile-1366x768 (51 s, slot 0)
+[17:08:26] ▶ decks-1366x768 (slot 0)
+[17:08:54] ✔ profile-844x390 (48 s, slot 3)
+[17:08:54] ▶ decks-844x390 (slot 3)
+[17:09:40] ✔ decks-1366x768 (73 s, slot 0)
+[17:09:40] ▶ resolution-1366x768.interrupt (slot 0)
+[17:10:07] ✔ resolution-1366x768.interrupt (28 s, slot 0)
+[17:10:07] ▶ resolution-844x390.interrupt (slot 0)
+[17:10:11] ✔ decks-844x390 (77 s, slot 3)
+[17:10:11] ▶ ffa-1366x768.queue (slot 3)
+[17:10:24] ✔ ffa-1366x768.queue (13 s, slot 3)
+[17:10:24] ▶ resolution-1366x768.reduced (slot 3)
+[17:10:36] ✔ resolution-844x390.interrupt (28 s, slot 0)
+[17:10:36] ▶ ffa-844x390.queue (slot 0)
+[17:10:40] ✔ resolution-1366x768.reduced (17 s, slot 3)
+[17:10:40] ▶ resolution-844x390.reduced (slot 3)
+[17:10:49] ✔ ffa-844x390.queue (13 s, slot 0)
+[17:10:49] ▶ public-1366x768 (slot 0)
+[17:10:58] ✘ public-1366x768 (9 s, slot 0)
+[17:10:58] ▶ public-844x390 (slot 0)
+[17:11:00] ✔ resolution-844x390.reduced (19 s, slot 3)
+[17:11:06] ✘ public-844x390 (8 s, slot 0)
+[17:16:21] ✘ ffa-844x390.drop (908 s, slot 1)
+[17:17:18] ✘ ffa-1366x768.leave (911 s, slot 2)
+[17:17:18] pool done in 2190 s
+[17:17:33] ▶ aim-1366x768 (slot 0)
+[17:21:09] ✔ aim-1366x768 (216 s, slot 0)
+[17:21:09] ▶ layout-1366x768 (slot 0)
+[17:23:56] ✔ layout-1366x768 (167 s, slot 0)
+[17:23:56] ▶ aim-844x390 (slot 0)
+[17:27:08] ✔ aim-844x390 (192 s, slot 0)
+[17:27:08] ▶ layout-844x390 (slot 0)
+[17:29:46] ✔ layout-844x390 (158 s, slot 0)
+[17:29:46] ▶ layout-1920x1080 (slot 0)
+[17:32:27] ✔ layout-1920x1080 (161 s, slot 0)
+
+build: HEAD 4ba375a + uncommitted · jar 2026-11-25T16:40:40.263Z 75cccaafdcda25b2 (rebuilt)
+
+verification  measure    result  duration
+test          —          OK      4 s
+build         —          OK      3 s
+size          —          OK      0 s
+verify        1366x768   OK      1 min 44 s
+modes         1366x768   OK      37 s
+lifecycle     1366x768   OK      2 min 48 s
+lifecycle     844x390    OK      2 min 49 s
+verify        844x390    OK      1 min 48 s
+modes         844x390    OK      59 s
+verify        1920x1080  OK      1 min 57 s
+profile       1366x768   OK      51 s
+profile       844x390    OK      48 s
+decks         1366x768   OK      1 min 13 s
+decks         844x390    OK      1 min 17 s
+public        1366x768   FAIL    9 s
+public        844x390    FAIL    8 s
+aim           1366x768   OK      3 min 36 s
+layout        1366x768   OK      2 min 47 s
+aim           844x390    OK      3 min 12 s
+layout        844x390    OK      2 min 38 s
+layout        1920x1080  OK      2 min 41 s
+resolution    844x390    FAIL    33 min 08 s
+resolution    1366x768   FAIL    32 min 03 s
+ffa           844x390    FAIL    23 min 53 s
+ffa           1366x768   FAIL    26 min 11 s
+
+PARALLEL (4 slots; solo: aim,layout; split: resolution,ffa): wall clock 52 min 09 s, pool 36 min 30 s, solo phase 14 min 54 s; durations below are per job (split: sum of the parts), not wall clock
+
+total 147 min 24 s · 19/25 green · FAILED: public 1366x768, public 844x390, resolution 844x390, resolution 1366x768, ffa 844x390, ffa 1366x768
+
+WARNINGS (no threshold or expectation was changed):
+ - Working tree has uncommitted changes in verified paths: M client-web/src/collection.tsx;  M client-web/src/deck.ts;  M client-web/src/style.css;  M client-web/tools/verify-decks.mjs
+ - VACUOUS? verify-844x390.json: .checks.c2a.unpayableSeen = 0
+ - public-1366x768.json: evidence says ok=false
+ - public-844x390.json: evidence says ok=false
+ - resolution-844x390.json: evidence says ok=false
+ - resolution-1366x768.json: evidence says ok=false
+ - ffa-844x390.json: evidence says ok=false
+ - ffa-1366x768.json: evidence says ok=false
+[17:32:28] NOT publishing to docs/reports/set-base/sb-31/verifyall: there are failures. Evidence stays in C:\Users\gesucca\AppData\Local\Temp\bm-verify-all-2026-11-25T16-40-20-019Z-JH4hJT\evidence
+
+evidence (temporary, not tracked): C:\Users\gesucca\AppData\Local\Temp\bm-verify-all-2026-11-25T16-40-20-019Z-JH4hJT\evidence
+logs: C:\Users\gesucca\AppData\Local\Temp\bm-verify-all-2026-11-25T16-40-20-019Z-JH4hJT\logs
+client-web VerifyAll exited with code 1
+At E:\bm\client-web\run.ps1:49 char:27
++ ... TCODE -ne 0){throw "client-web $Task exited with code $LASTEXITCODE"}
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (client-web VerifyAll exited with code 1:String) [], RuntimeException
+    + FullyQualifiedErrorId : client-web VerifyAll exited with code 1
+ 

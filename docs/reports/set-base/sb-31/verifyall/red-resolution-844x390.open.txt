@@ -1,0 +1,25 @@
+16:42:22 server {"database":"temporary","jar":"target/bm-server-0.0.1-SNAPSHOT.jar"}
+locator.fill: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByTestId('card-search')[22m
+[2m    - locator resolved to <input value="" type="search" data-testid="card-search" placeholder="nome o testo"/>[22m
+[2m    - fill("bruiser.YouStop")[22m
+[2m  - attempting fill action[22m
+[2m    2 × waiting for element to be visible, enabled and editable[22m
+[2m      - element is not visible[22m
+[2m    - retrying fill action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and editable[22m
+[2m      - element is not visible[22m
+[2m    - retrying fill action[22m
+[2m      - waiting 100ms[22m
+[2m    59 × waiting for element to be visible, enabled and editable[22m
+[2m       - element is not visible[22m
+[2m     - retrying fill action[22m
+[2m       - waiting 500ms[22m
+
+    at addRegular (E:\bm\client-web\tools\verify-resolution.mjs:832:81)
+    at saveDeck (E:\bm\client-web\tools\verify-resolution.mjs:841:66)
+    at async file:///E:/bm/client-web/tools/verify-resolution.mjs:852:3 {
+  name: 'TimeoutError'
+}

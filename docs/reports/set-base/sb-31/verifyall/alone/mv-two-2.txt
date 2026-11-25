@@ -1,0 +1,4 @@
+18:28:32 server {"database":"temporary","jar":"E:/bm/server/target/bm-server-0.0.1-SNAPSHOT.jar"}
+18:31:47 twoHumansThreeComputers {"gameId":"7ff56cc116f71419d7b32586085ec83b9114e5732bf453bc04f20890d6fb0cca","characters":{"ComPlayer_5084":"Beppe Bulletta","devAlice":"SPAZIENZIO DE LA UCCISO","ComPlayer_5482":"Mara Contromano","devBob":"SPAZIENZIO DE LA UCCISO","ComPlayer_523":"SPAZIENZIO DE LA UCCISO"},"inspectedComputer":{"owner":"ComPlayer_5084","label":"Computer 1, Beppe Bulletta, salute 75; risorse H 75, A 25, V 25, T 0, L 0; mazzo 14 carte","text":"Beppe Bulletta Computer 1 · ID ComPlayer_5084 · P Salute 75 Allerta 25 Violenza 25 Tossicità 0 Alcol 0 Oggetti 3 / 3 Mazzo 14 carte Last resort mai giocata Stati, immunità
+18:31:48 k7 {"mouse":null,"touch":null,"raiseOnly":null}
+exit 0

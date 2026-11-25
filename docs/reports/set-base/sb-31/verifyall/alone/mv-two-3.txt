@@ -1,0 +1,4 @@
+18:31:56 server {"database":"temporary","jar":"E:/bm/server/target/bm-server-0.0.1-SNAPSHOT.jar"}
+18:34:43 twoHumansThreeComputers {"gameId":"6b9ed1e95b8896dc070e87e333919c9474164342502c348b6adeb9f34ad7ef96","characters":{"ComPlayer_9859":"Mara Contromano","ComPlayer_1164":"Mara Contromano","devAlice":"SPAZIENZIO DE LA UCCISO","devBob":"Mara Contromano","ComPlayer_5610":"Piera Pinot"},"inspectedComputer":{"owner":"ComPlayer_9859","label":"Computer 1, Mara Contromano, salute 65; risorse H 65, A 45, V 0, T 0, L 0; mazzo 16 carte","text":"Mara Contromano Computer 1 · ID ComPlayer_9859 · P Salute 65 Allerta 45 Violenza 0 Tossicità 0 Alcol 0 Oggetti 1 / 2 Mazzo 16 carte Last resort mai giocata Stati, immunità e timer Nessuno. 
+18:34:44 k7 {"mouse":null,"touch":null,"raiseOnly":null}
+exit 0

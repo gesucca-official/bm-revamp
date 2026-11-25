@@ -1,0 +1,3 @@
+Error: server exited (1); log in C:\Users\gesucca\AppData\Local\Temp\bm-resolution-4tZvsp
+    at startServer (file:///E:/bm/client-web/tools/verify-resolution.mjs:60:35)
+    at async file:///E:/bm/client-web/tools/verify-resolution.mjs:519:2

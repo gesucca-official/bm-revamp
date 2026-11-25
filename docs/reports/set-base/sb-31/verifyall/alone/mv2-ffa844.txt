@@ -1,0 +1,4 @@
+18:39:33 server {"database":"temporary","jar":"E:/bm/server/target/bm-server-0.0.1-SNAPSHOT.jar"}
+18:41:57 twoHumansThreeComputers {"gameId":"aa35dbca82f36a0929eb4cf207f000c0bafbf6e34be741b79e20286565956e26","characters":{"ComPlayer_4127":"Celestina Bucatina","ComPlayer_2056":"Beppe Bulletta","devAlice":"Mara Contromano","devBob":"SPAZIENZIO DE LA UCCISO","ComPlayer_7423":"Celestina Bucatina"},"inspectedComputer":{"owner":"ComPlayer_4127","label":"Computer 1, Celestina Bucatina, salute 65; risorse H 65, A 35, V 0, T 20, L 0; mazzo 16 carte","text":"Celestina Bucatina Computer 1 · ID ComPlayer_4127 · P Salute 65 Allerta 35 Violenza 0 Tossicità 20 Alcol 0 Oggetti 1 / 2 Mazzo 16 carte Last resort mai giocata Stati, immunità 
+18:41:58 k7 {"mouse":null,"touch":null,"raiseOnly":null}
+exit 0

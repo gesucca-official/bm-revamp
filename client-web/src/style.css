@@ -1299,6 +1299,38 @@ button.danger {
   font-size: 13px;
   color: var(--text-muted);
 }
+/* SB-31 F5 (D199 (26)): on a wide screen the fields are laid out as before (display: contents) and the button is not drawn; on a low one (max-height 550 px, the compact table's size) they hide behind «Filtri». */
+.filter-fields {
+  display: contents;
+}
+.filters-toggle {
+  display: none;
+}
+@media(max-height:550px) {
+  .filters-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 88px;
+    order: 0;
+  }
+  .filter-bar .filter-state {
+    order: 1;
+    flex: 1 1 auto;
+  }
+  .filter-bar .filter-fields {
+    order: 2;
+    flex: 1 1 100%;
+    display: none;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    align-items: flex-end;
+  }
+  .filter-bar.open .filter-fields {
+    display: flex;
+  }
+}
 .deck-bar {
   order: -1;
   position: sticky;

@@ -1,0 +1,20 @@
+16:41:00 server {"database":"temporary","jar":"target/bm-server-0.0.1-SNAPSHOT.jar"}
+16:49:46 ffa {"gameId":"71552c1988d949d530939e3ccb58a9ab94b713e8c2c3bda76d841a09321849d8","turns":22,"views":43,"modelProblems":[],"repeatedViewDiffs":[],"timerOrderOnly":[],"scene":{"1":{"ok":true,"violations":[]},"2":{"ok":true,"violations":[]},"3":{"ok":true,"violations":[]},"6":{"ok":true,"violations":[]},"c32":{"ok":true,"violations":[]},"c34":{"ok":true,"violations":[]},"d13":{"ok":true,"violations":[]},"c4s":{"ok":false,"violations":["71552c1988d949d530939e3ccb58a9ab94b713e8c2c3bda76d841a09321849d8/2: label ComPlayer_1513 HEALTH readable 0 ms","71552c1988d949d530939e3ccb58a9ab94b713e8c2c3bda76d841a09321849d8/2 card 1 GABBIANO, DUNQUE VOLIAMOTI: the target was not darkened (255)"]}},"k1":"0 of 21 s
+AssertionError [ERR_ASSERTION]: ffa: scene rule c4s
++ actual - expected
+
++ [
++   '71552c1988d949d530939e3ccb58a9ab94b713e8c2c3bda76d841a09321849d8/2: label ComPlayer_1513 HEALTH readable 0 ms',
++   '71552c1988d949d530939e3ccb58a9ab94b713e8c2c3bda76d841a09321849d8/2 card 1 GABBIANO, DUNQUE VOLIAMOTI: the target was not darkened (255)'
++ ]
+- []
+
+    at summarise (file:///E:/bm/client-web/tools/verify-resolution.mjs:511:55)
+    at file:///E:/bm/client-web/tools/verify-resolution.mjs:749:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [Array],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}

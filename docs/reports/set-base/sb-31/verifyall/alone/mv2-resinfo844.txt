@@ -1,0 +1,5 @@
+18:50:18 server {"database":"temporary","jar":"E:/bm/server/target/bm-server-0.0.1-SNAPSHOT.jar"}
+18:54:27 infoDuel {"rounds":25,"lost":0,"firstLoss":null,"newGameAfterLoss":null,"byAction":{"let it run":{"rounds":3,"lost":0},"tap":{"rounds":3,"lost":0},"skip":{"rounds":3,"lost":0},"card during the sequence":{"rounds":3,"lost":0},"inspection during the sequence":{"rounds":3,"lost":0},"rest on the (i) through the close-ups":{"rounds":3,"lost":0},"rest on the (i) of the card sent":{"rounds":2,"lost":0},"rest on the (i) of an object":{"rounds":1,"lost":0},"to the (i) right after ✓, mouse only":{"rounds":2,"lost":0},"new game":{"rounds":2,"lost":0}},"hovered":232,"pressed":74}
+18:54:27 reportConsistency {"rounds":0,"sumOk":0,"chainOk":0}
+18:54:27 casesOnRealServer {"seen":{},"missing":["impactHIT","impactRole","impactVoid","impactCUT","outcomeBanner","void","itemConsumed","itemFromOther","drawnToTable","death","deathWithMove","lethalEndOfTurn","boundDiscard","over","jump","rejoinSame"]}
+exit 0
