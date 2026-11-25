@@ -829,7 +829,11 @@ try{
   const account=JSON.parse(A.messages('/user/queue/account/data').at(-1).body),names={},chars={};
   for(const c of account.collection.cards)names[c.bindingName]=c.name;for(const c of account.collection.characters)chars[c.bindingName]=c.name;
   const page=A.page,slot=async title=>{const s=page.locator('details.slot',{has:page.locator('summary',{hasText:title})});if(!(await s.evaluate(d=>d.open)))await s.locator('summary').click();return s;};
-  const addRegular=async(binding,times)=>{await page.getByTestId('card-search').fill(binding);for(let i=0;i<times;i++)await page.getByRole('button',{name:`Aggiungi una copia di ${names[binding]}`,exact:true}).click();await page.getByTestId('card-search').fill('');};
+  // F5b (D200 (27)): the filter fields sit in the «Filtri» panel at phone size; same pattern as verify-decks (no-op on wide screens).
+  const openFilters=async()=>{const t=page.getByTestId('filters-toggle');if(await t.isVisible()&&(await t.getAttribute('aria-expanded'))!=='true')await t.click();};
+  const closeFilters=async()=>{const t=page.getByTestId('filters-toggle');if(await t.isVisible()&&(await t.getAttribute('aria-expanded'))==='true')await t.click();};
+  const searchFor=async v=>{await openFilters();await page.getByTestId('card-search').fill(v);await closeFilters();};
+  const addRegular=async(binding,times)=>{await searchFor(binding);for(let i=0;i<times;i++)await page.getByRole('button',{name:`Aggiungi una copia di ${names[binding]}`,exact:true}).click();await searchFor('');};
   async function saveDeck(id,character,basic,bound,regular){
    await page.getByTestId('tab-collection').click();await page.getByTestId('new-deck').click();
    await page.getByTestId('deck-name').fill(id);

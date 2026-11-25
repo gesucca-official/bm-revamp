@@ -556,3 +556,49 @@ Prima di cominciare: `git pull`, jar rifatto (`./scripts/build.ps1 -Task Server 
 29. **R15** (`public` aspetta l'indice senza `R02a` e `R07b`): conferma come voce del registro e correzione dello strumento in un blocco?
 30. **R17** (cinque parti verdi da sole, rosse in `-Parallel 4`): le accetto come intermittenze del giro in parallelo (famiglia di R7), o vuole una seconda matrice completa prima della chiusura?
 31. **Chiusura di SB-31**: aspetta la lista del proprietario e la correzione della domanda 27, o si chiude con le voci aperte nel registro?
+
+## F5b — Correzioni degli strumenti dopo F5
+
+Base `8aaba3e` (D200). Perimetro: `verify-resolution.mjs`, `verify-public.mjs`, registro dei rossi, questo rapporto, piano. Niente in `src/`, server, regole, immagini.
+
+### Cosa cambia
+
+- `verify-resolution.mjs`: `addRegular` apre il pannello «Filtri» prima di riempire `card-search` e lo chiude dopo, con gli stessi `openFilters`/`closeFilters`/`searchFor` di `verify-decks.mjs` (nessun effetto sugli schermi larghi). Era l'unico punto dello strumento che riempie o sceglie un filtro.
+- `verify-public.mjs`: l'indice atteso delle regole è l'elenco letterale e completo dei titoli `##` di `docs/game-rules.md` 2.1, nell'ordine del documento (verificato sui titoli: R00, R01, R01a, R02, R02a, R03, R04, R05, R06, R07, R07a, R07b, R08, R09, Revisioni, più il nome del set). Nessuna asserzione allentata.
+
+### Verifiche (una corsa esclusiva per volta, macchina ferma)
+
+Tutte con `VerifyAll -ReuseClient -Only 'test,build,size,<verifica>' -Measures <misura>` (giro dichiarato, non pubblicabile; `BM_SCENARIOS` per lo scenario). **`-ReuseClient`** perché sulla 4320 c'era già un `vite preview` non mio (avviato alle 11:36, PID 43328): non l'ho fermato, e `VerifyAll` senza l'opzione si rifiuta di partire (primo tentativo, uscita 2 in 3 s, scartato). Il jar è stato ricostruito dalla prima corsa e riusato dopo.
+
+| Corsa | Esito |
+|---|---|
+| `Test`, `Build`, `Size` (in ogni corsa) | verdi |
+| `VerifyPublic` 1366×768 | **rosso**: l'indice ora passa; si ferma alla riga 135, `assert.ok(r07>=0&&r07a>=0,'card sheets and R07a values present in the set document')` |
+| `VerifyPublic` 844×390 | **rosso**, stessa asserzione |
+| `VerifyResolution` `open` 844×390 | verde |
+| `VerifyResolution` `open` 1366×768 | verde |
+| `VerifyResolution` `ffa` 844×390, da solo | verde (prima volta da solo) |
+| `VerifyResolution` `ffa` 1366×768 | verde |
+| `VerifyDecks` 844×390 | verde (nessuna regressione) |
+
+**Rosso di `VerifyPublic`, attribuzione.** Lo strumento cerca nel documento del set due tabelle per intestazione: `Carta|Tipologia|Sottotipo|Costo|Priorità|Bersaglio|Effetto in ordine` (schede) e `Carta|Ruolo|Guadagni a sé`. Dal Set Base 1.0 (SB-28, `80d5b3b`) `docs/sets/base.md` non ha più le schede in tabella (sono sezioni `###` per personaggio, S3) e l'unica tabella con i ruoli è `Carta|Identificatore|Ruolo|Guadagni a sé|Danno nominale|Importo nominale` (S4, riga 1490). L'asserzione è quindi vecchia, non una regressione del client. Adeguarla (nuove intestazioni, o togliere il controllo delle schede in tabella e le sue righe `r07Rows`/`r07aRows` e `assert.ok(!dom.tables.some(t=>t[0][0]==='Carta'))` che hanno lo stesso presupposto) cambia che cosa si asserisce: **mi fermo come da contratto** e lo chiedo (domanda 32). R15 resta aperta.
+
+### Mutazioni (file ripristinati; `git diff` finale solo le due correzioni)
+
+- **M25** (`addRegular` senza `openFilters`, `fill` diretto su `card-search`): `VerifyResolution` `open` 844×390 **rossa**, `TimeoutError` in attesa di `card-search` (il campo esiste ma non è visibile).
+- **M26** (R07b tolto dall'indice atteso): `VerifyPublic` 1366×768 **rossa** sull'indice, con `+ 'R07b'` nella differenza.
+
+### Registro
+
+- R16 chiusa (evidenza: `open` verde a 844×390 e 1366×768, M25).
+- R15 resta aperta con la nuova attribuzione (l'indice è corretto, M26 lo prova; resta la riga 135).
+- R13: nota «non bisecata per decisione del proprietario (D200 (28))». R17: nota «accettata come intermittenza del giro in parallelo, famiglia di R7 (D200 (30))». Nessuna seconda matrice.
+
+### Da dichiarare
+
+- `-ReuseClient`: la build servita sulla 4320 non è dichiarata come mia (il `Build` della corsa riscrive `dist`, che quell'anteprima serve dal disco). Le corse non sono equivalenti al consolidamento.
+- Non ho scritto la riga D200 né toccato altro fuori perimetro. Non è stato fatto push.
+
+### Domande
+
+32. **`verify-public.mjs` riga 135 (e le righe collegate)**: vuole che adegui il controllo alle tabelle del Set Base 1.0 (S4 per il ruolo; le schede in sezioni `###` invece che in tabella: cambia l'asserzione sui contenuti) in un blocco con perimetro, dopo la sua decisione su cosa deve restare asserito?

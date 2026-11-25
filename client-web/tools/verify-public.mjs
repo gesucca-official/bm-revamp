@@ -129,7 +129,7 @@ try{
  step('rules',rulesCheck);
  assert.equal(rulesCheck.version,/Versione \*\*(\S+) —/.exec(rules)[1]);
  assert.ok(rulesCheck.headingsEqual,'headings equal to docs/game-rules.md');
- assert.deepEqual(dom.index,['R00','R01','R01a','R02','R03','R04','R05','R06','R07','R07a','R08','R09','Revisioni',setName]);
+ assert.deepEqual(dom.index,['R00','R01','R01a','R02','R02a','R03','R04','R05','R06','R07','R07a','R07b','R08','R09','Revisioni',setName]);
  assert.deepEqual(rulesCheck.revisions,sourceRevisions);
  assert.ok(rulesCheck.tablesEqual,'every table cell equal to the source');
  assert.ok(r07>=0&&r07a>=0,'card sheets and R07a values present in the set document');
