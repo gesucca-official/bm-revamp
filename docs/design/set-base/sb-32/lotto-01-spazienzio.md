@@ -368,3 +368,51 @@ Edit the attached square illustration for a playing card. Preserve Spazienzio’
 
 Communicate strong movement, action and violent force through pose and comic motion marks. Keep the subject large and readable at 60 pixels against a darker, simpler background, essential action away from the outer 5%. No blood, text, letters, numbers, logos, watermarks, card frame, steam or recognizable opponent face; do not mirror Spazienzio.
 ~~~
+
+## Quarto giudizio: correzioni del lotto 1
+
+Prompt letterali committati prima della generazione; gli allegati in `originali/` sono fuori da git.
+
+### GARGANTUESCO IMPATTO SUL TU
+
+`bruiser.SuperImpact`. Allegati: `originali/bruiser.SuperImpact-4.png`: `525d313f805ea598af1d78a2c10c8265695db65f8308eb13d3b2b72c68f17aaa`; `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0`.
+
+~~~text
+Edit the attached square playing-card illustration (Attachment 1), using Attachment 2 for the dive bar background, palette and light. Keep Spazienzio exactly as he is in Attachment 1: framing from head to hips, bald, enormous, bare-chested with short bristly beard, the exact same fixed tattoo map, burgundy tracksuit trousers with side stripes, furious face with clenched teeth and furrowed brow, the powerful punch, and the bold comic motion marks and impact burst.
+
+Replace the unclear target figure on the right with a clearly shaped, readable opponent: a faceless shadowy man in dark worn clothes whose head, shoulders, arms, torso and legs are clearly defined. Spazienzio’s huge fist lands squarely in the opponent’s stomach, making him fold over and recoil backward from the impact with his feet lifting off the floor. Keep the opponent’s face completely dark and unrecognizable, and keep essential action away from the outer 5%.
+
+Replace the flat black background behind them with the dark dive bar of Attachment 2 (wooden bar shelves with unlabelled bottles, counter, peeling green-and-ivory wall, warm wall-lamp light), rendered darker, simpler and less sharp than Spazienzio and his target, with strong value contrast and warm dirty light from one clear direction. Maintain the hand-inked European comic style and bar palette (walnut and tobacco browns, dusty bottle green, oxblood burgundy, muted petrol, worn ivory), readable at 60 pixels. No blood, text, letters, numbers, pseudo-lettering, logos, brands, watermarks, card frame, steam, anything coming out of the nose, recognizable opponent face or real person likeness; do not mirror Spazienzio.
+~~~
+
+### LIEVE FASTIDIO
+
+`bruiser.character.LittleRage`. Allegati: `originali/bruiser.character.LittleRage-4.png`: `6040aa38b656669552614c8720c98b7c8599a31e77a4295d9a1541857a71abe4`; `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0`.
+
+~~~text
+Edit the attached square playing-card illustration (Attachment 1), using Attachment 2 for the dive bar background, palette and light. Preserve the exact composition, chest-up close-up framing, Spazienzio’s pose, identity, fixed tattoo map, burgundy striped tracksuit trousers, malicious smile, the shadowy opponent’s fist pressing into his squished cheek, and the comic impact mark and motion lines.
+
+Bring all colours back to the bar palette: make Spazienzio’s skin noticeably less saturated and less orange (earthy weathered flesh tones under warm dirty bar light rather than bright orange), keep the trousers oxblood burgundy with worn ivory side stripes, and use walnut and tobacco browns, dusty bottle green, muted petrol and worn ivory with deep shadows that never become flat black.
+
+Replace the flat black background behind him with the dark dive bar of Attachment 2 (wooden shelves with unlabelled bottles, bar counter, peeling green-and-ivory wall, warm wall-lamp light), rendered darker, simpler and less sharp than Spazienzio so the close-up figure and fist impact keep strong value contrast and read clearly at 60 pixels. Maintain the hand-inked European comic style. No blood, text, letters, numbers, pseudo-lettering, logos, brands, watermarks, card frame, steam, anything coming out of the nose, recognizable opponent face or real person likeness, dominant yellow-and-black or neon; do not mirror Spazienzio.
+~~~
+
+### SVEGLIAMOCI - MA TU NO
+
+`bruiser.character.LittleSmack`. Allegati: `docs/design/set-base/identikit/riferimenti/spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0`.
+
+~~~text
+Create one new square illustration, 1024 x 1024 pixels or larger, aspect ratio 1:1, opaque, preferably an original PNG: the action artwork for a playing card of the original project Botte Micidiali. Full-bleed artwork only, not a card mockup: no frame, no border, no lettering.
+
+Attachment 1 is the approved character reference: draw the same man with the same face, body and fixed tattoo map. Do not copy its pose, framing or plain background. Attachment 2 is the approved interior of the same dive bar: use it for the setting, palette and light, simplified and kept darker than the subject.
+
+Style: hand-inked European comic, irregular dark contours, restrained painted shading, light worn print texture, slightly exaggerated features. Palette: walnut and tobacco browns, dusty bottle green, oxblood burgundy, muted petrol, worn ivory. Warm, dirty light from one clear direction, deep shadows that never become flat black.
+
+Composition for a tiny card tile: one centred subject filling at least two thirds of the image height, with a large clear silhouette readable at 60 pixels. Keep the background darker, simpler and less sharp than the subject, with strong value contrast. Keep essential details out of the outer 5% of the image. Give characters and bar furniture a believable relative scale, and make any seat physically plausible for the character's weight. Cast shadows consistently with the direction of the light.
+
+Subject: Spazienzio delivers one huge open-handed slap with a single massive arm, his open palm and five fingers landing flat and squarely on the side of a faceless shadowy opponent’s head. Show one clear slapping arm and one hand with five anatomically natural fingers at the crisp contact moment, readable at 60 pixels, while Spazienzio’s other arm stays back out of the way. Spazienzio looks angry and solidly unmoved; the shadowy opponent staggers sideways away from the blow, dazed, with sharp comic impact marks and small comic stars above his head; no blood. The dark dive bar (bottles, shelves, warm lamp light) is clearly visible behind them, darker and less sharp than the figures.
+
+Spazienzio is bald, enormous and bare-chested, with a short bristly beard and the same fixed tattoo map as the reference, without lettering. He wears burgundy tracksuit trousers with stripes down the sides. Nothing comes out of his nose; anger is expressed by his face and posture, never steam. Any opponent is a generic dark shadowy figure without a recognizable face.
+
+Avoid: mirroring the character; changing his face or tattoos; text, letters, numbers, pseudo-lettering, signatures, watermarks, logos or brands, including on clothing and bottles; recognizable faces on opponents; other cast members; crowds; blood; steam; anything coming out of the nose; card frames, borders or interface; likeness of any real person; photographic or 3D-rendered style; dominant yellow-and-black, neon, gold ornament; Internet imagery or the look of any existing game.
+~~~
