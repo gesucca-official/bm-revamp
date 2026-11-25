@@ -13,6 +13,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "bruiser.character.BigBadBruiser",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 0. Si gioca su di te.",
         "Annuncia «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «SPEDIAMOTI DUNQUE IN O-AHIO» o «GARGANTUESCO IMPATTO SUL TU»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 [[V]] e 15 [[A]] e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 [[V]] e 5 [[A]]. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, [[HIT]], [[CUT]] e [[POISON]], veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio."
@@ -30,6 +31,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 8",
       "rarity": "UNCOMMON",
+      "character": "base.character.Cesira",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 5 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Infliggi 8 [[HIT]] all'avversario. 2. Se, quando questo effetto si applica, l'avversario è Vulnerabile, cioè ha almeno un gettone di vulnerabilità di qualunque carta (regolamento, R07b): infliggi 6 [[HIT]] all'avversario.",
@@ -49,6 +51,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "RARE",
+      "character": "base.character.Cesira",
       "fullText": [
         "Azione base di Sergio Sommerso (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su un tuo oggetto, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni 8 [[A]]. 2. Consumi il tuo oggetto che hai scelto: esce dal campo e ne ottieni l'effetto «Quando lo consumi». Se quando la carta si risolve non è più fra i tuoi oggetti (rubato, distrutto, scalzato da un altro), non consumi niente, ma gli altri effetti della carta valgono (regolamento, R04)."
@@ -66,6 +69,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Cesira",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su un tuo oggetto, che scegli.",
         "Quando la carta si risolve: vendi il tuo oggetto che hai scelto: esce dal campo senza il suo effetto (nessun guadagno, immunità, equipaggiamento o effetto In campo) e va negli scarti, poi guadagni 8 [[H]]. Se quando la carta si risolve l'oggetto non è più fra i tuoi (rubato, distrutto, scalzato da un altro), non vendi niente e non guadagni niente (regolamento, R07b)."
@@ -83,6 +87,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 25",
       "rarity": "COMMON",
+      "character": "base.character.Cesira",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 15 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve: infliggi 25 [[HIT]] all'avversario.",
@@ -102,6 +107,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Cesira",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 10 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, se la mossa dell'avversario che hai scelto deve ancora risolversi, la annulli; se si è già risolta, o l'avversario non ha una mossa, non succede niente. Deve ancora risolversi vuol dire che viene dopo la tua nell'ordine di risoluzione del turno: priorità più bassa, oppure pari priorità e meno [[A]] dopo i costi, oppure pari priorità e pari [[A]] se il suo giocatore viene dopo di te nell'ordine d'inserimento nella partita (regolamento, R04). Una mossa annullata non ha effetti, ma il suo costo è già pagato e il suo giocatore pesca come sempre (regolamento, R04).",
@@ -121,6 +127,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 5+x",
       "rarity": "RARE",
+      "character": "base.character.Cesira",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 10 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. L'avversario perde [[A]] pari a metà della [[A]] che ti resta. 2. Infliggi all'avversario [[HIT]] pari a 5 più metà della [[A]] che ti resta.",
@@ -142,6 +149,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 4",
       "rarity": "UNCOMMON",
+      "character": "base.character.Cesira",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 5 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. L'avversario perde 10 [[A]]. 2. Infliggi 4 [[HIT]] all'avversario.",
@@ -163,6 +171,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Cesira",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 15 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, se la mossa dell'avversario che hai scelto deve ancora risolversi, la annulli; se si è già risolta, o l'avversario non ha una mossa, non succede niente. Deve ancora risolversi vuol dire che viene dopo la tua nell'ordine di risoluzione del turno: priorità più bassa, oppure pari priorità e meno [[A]] dopo i costi, oppure pari priorità e pari [[A]] se il suo giocatore viene dopo di te nell'ordine d'inserimento nella partita (regolamento, R04). Una mossa annullata non ha effetti, ma il suo costo è già pagato e il suo giocatore pesca come sempre (regolamento, R04).",
@@ -183,6 +192,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 2",
       "rarity": "UNCOMMON",
+      "character": "base.character.Cesira",
       "fullText": [
         "Azione legata a Sergio Sommerso (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua [[T]]. 2. Perdi un quarto della tua [[L]]. 3. Infliggi 2 [[HIT]] all'avversario.",
@@ -204,6 +214,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Cesira",
       "fullText": [
         "Azione legata a Sergio Sommerso (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 2. Si gioca su di te.",
         "Quando la carta si risolve: ottieni lo stato positivo «Fare il Vago», uno per ciascuno di [[HIT]], [[CUT]] e [[POISON]]: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci tre quarti dei danni che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima.",
@@ -222,6 +233,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Cesira",
       "fullText": [
         "Azione legata a Sergio Sommerso (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 2. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, se la mossa dell'avversario che hai scelto deve ancora risolversi e la sua carta contiene Annuncia (regolamento, R02a e R07b), la annulli; altrimenti non succede niente. Deve ancora risolversi vuol dire che viene dopo la tua nell'ordine di risoluzione del turno: priorità più bassa, oppure pari priorità e meno [[A]] dopo i costi, oppure pari priorità e pari [[A]] se il suo giocatore viene dopo di te nell'ordine d'inserimento nella partita (regolamento, R04). Una mossa annullata non ha effetti, ma il suo costo è già pagato e il suo giocatore pesca come sempre (regolamento, R04).",
@@ -536,6 +548,7 @@
       "damage": "CUT",
       "damageAmount": "CUT 20",
       "rarity": "UNCOMMON",
+      "character": "base.character.Gigi",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 10 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve: infliggi 20 [[CUT]] all'avversario.",
@@ -555,6 +568,7 @@
       "damage": "CUT",
       "damageAmount": "CUT 4",
       "rarity": "UNCOMMON",
+      "character": "base.character.Gigi",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve: infliggi 4 [[CUT]] all'avversario.",
@@ -575,6 +589,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 15+x",
       "rarity": "RARE",
+      "character": "base.character.Gigi",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 10 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve infliggi all'avversario [[HIT]] pari a 15 più 4 per ogni oggetto che hai in campo. Gli oggetti si contano all'inizio della risoluzione, dopo i costi: contano anche i token; gli equipaggiamenti no, perché sono stati e non oggetti.",
@@ -594,6 +609,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Gigi",
       "fullText": [
         "Azione base di Beppe Bulletta (regolamento, R01a). Nessun costo in risorse. Priorità 0. Si gioca su un tuo oggetto, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni 4 [[V]]. 2. Consumi il tuo oggetto che hai scelto: esce dal campo e ne ottieni l'effetto «Quando lo consumi». Se quando la carta si risolve non è più fra i tuoi oggetti (rubato, distrutto, scalzato da un altro), non consumi niente, ma gli altri effetti della carta valgono (regolamento, R04)."
@@ -611,6 +627,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "COMMON",
+      "character": "base.character.Gigi",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 5 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Ottieni lo stato positivo «Secondo Bagagliaio»: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci metà dei [[HIT]] che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima. 2. Ottieni lo stato positivo «Secondo Bagagliaio»: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci tre quarti dei [[CUT]] che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima. 3. Guadagni 5 [[V]]. 4. Guadagni 5 [[A]].",
@@ -629,6 +646,7 @@
       "damage": "CUT",
       "damageAmount": "CUT 4",
       "rarity": "UNCOMMON",
+      "character": "base.character.Gigi",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve: infliggi 4 [[CUT]] all'avversario.",
@@ -649,6 +667,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 2",
       "rarity": "COMMON",
+      "character": "base.character.Gigi",
       "fullText": [
         "Azione legata a Beppe Bulletta (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni 2 [[V]]. 2. Infliggi 2 [[HIT]] all'avversario.",
@@ -668,6 +687,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Gigi",
       "fullText": [
         "Azione legata a Beppe Bulletta (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 0. Si gioca su di te.",
         "Quando la carta si risolve: ottieni l'equipaggiamento positivo «Affilare gli Utensili»: da quando la carta si risolve fino alla fine del prossimo turno, effetti di fine turno compresi, i [[HIT]] che infliggi diventano [[CUT]] e ne infliggi tre quarti, arrotondando per difetto; da [[CUT]] non li cambiano più gli stati su [[HIT]] presi dopo questo, ma quelli su [[CUT]], e la corazza dell'alcol non li riduce (regolamento, R05). Vale anche sui [[HIT]] che infliggi a te stesso. Non cambia i danni delle mosse che si sono risolte prima. È un equipaggiamento: «PERMESSO SCUSA PUOI SMETTERLA» lo toglie (regolamento, R01a e R05).",
@@ -686,6 +706,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "COMMON",
+      "character": "base.character.Gigi",
       "fullText": [
         "Azione legata a Beppe Bulletta (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 2. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni 5 [[V]]. 2. Ottieni lo stato positivo «Cuffie e Testa Bassa», uno per ciascuno di [[HIT]], [[CUT]] e [[POISON]]: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci tre quarti dei danni che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima.",
@@ -952,6 +973,7 @@
       "damage": "CUT",
       "damageAmount": "CUT 20+x",
       "rarity": "RARE",
+      "character": "base.character.Mara",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 20 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Infliggi all'avversario [[CUT]] pari a 20 più metà della [[A]] che ti resta. 2. Gioca d'anticipo (regolamento, R07b): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più [[A]] dopo i costi, succede anche questo: infliggi 5 [[CUT]] all'avversario. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere.",
@@ -972,6 +994,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "COMMON",
+      "character": "base.character.Mara",
       "fullText": [
         "Azione base di Mara Contromano (regolamento, R01a). Nessun costo in risorse. Priorità 2. Si gioca su un tuo oggetto, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Perdi 5 [[A]]. 2. Consumi il tuo oggetto che hai scelto: esce dal campo e ne ottieni l'effetto «Quando lo consumi». Se quando la carta si risolve non è più fra i tuoi oggetti (rubato, distrutto, scalzato da un altro), non consumi niente, ma gli altri effetti della carta valgono (regolamento, R04).",
@@ -990,6 +1013,7 @@
       "damage": "CUT",
       "damageAmount": "CUT 25",
       "rarity": "UNCOMMON",
+      "character": "base.character.Mara",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 15 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Infliggi 25 [[CUT]] all'avversario. 2. Gioca d'anticipo (regolamento, R07b): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più [[A]] dopo i costi, succede anche questo: l'avversario riceve lo stato negativo «Sgommata», uno per ciascuno di [[HIT]], [[CUT]] e [[POISON]]: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, l'avversario infligge tre quarti dei danni che infliggerebbe, arrotondando per difetto. Vale anche sui [[HIT]], [[CUT]] e [[POISON]] che l'avversario si infligge da solo. Non cambia i danni delle mosse che si sono risolte prima. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere.",
@@ -1010,6 +1034,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Mara",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 2. Si gioca su di te.",
         "Annuncia «Sgommata» o «Lazo del Rider» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Sgommata» o «Lazo del Rider»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 [[A]] e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 [[A]]. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, [[HIT]], [[CUT]] e [[POISON]], veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio."
@@ -1027,6 +1052,7 @@
       "damage": "CUT",
       "damageAmount": "CUT 4",
       "rarity": "COMMON",
+      "character": "base.character.Mara",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 2. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Gioca d'anticipo (regolamento, R07b): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più [[A]] dopo i costi, succede anche questo: guadagni 4 [[A]]. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere. 2. L'avversario perde 8 [[A]]. 3. Infliggi 4 [[CUT]] all'avversario.",
@@ -1047,6 +1073,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Mara",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 2. Si gioca su di te.",
         "Annuncia «Lazo del Rider» o «Sgommata» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Lazo del Rider» o «Sgommata»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 20 [[A]] e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 [[A]]. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, [[HIT]], [[CUT]] e [[POISON]], veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio."
@@ -1064,6 +1091,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Mara",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 5 [[A]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Ottieni lo stato positivo «Unta e Bisunta», uno per ciascuno di [[HIT]] e [[CUT]]: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci metà dei [[HIT]] e [[CUT]] che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima. 2. Guadagni 5 [[A]].",
@@ -1082,6 +1110,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "COMMON",
+      "character": "base.character.Mara",
       "fullText": [
         "Azione legata a Mara Contromano (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 2. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni 5 [[A]]. 2. Ottieni lo stato positivo «Semaforo Rosso», uno per ciascuno di [[HIT]], [[CUT]] e [[POISON]]: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci tre quarti dei danni che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima.",
@@ -1100,6 +1129,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Mara",
       "fullText": [
         "Azione legata a Mara Contromano (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 2. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve: Gioca d'anticipo (regolamento, R07b): se la tua mossa si risolve in un gruppo di velocità precedente a quello della mossa dell'avversario che hai scelto, cioè con priorità più alta, oppure con pari priorità e più [[A]] dopo i costi, succede anche questo: l'avversario perde 4 [[A]]. Nello stesso gruppo di velocità, o se l'avversario non ha una mossa, no; vale anche se la sua mossa sarà annullata più tardi o se lui è già a terra con la mossa ancora da risolvere.",
@@ -1118,6 +1148,7 @@
       "damage": "CUT",
       "damageAmount": "CUT 2",
       "rarity": "COMMON",
+      "character": "base.character.Mara",
       "fullText": [
         "Azione legata a Mara Contromano (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua [[T]]. 2. Perdi un quarto della tua [[L]]. 3. Infliggi 2 [[CUT]] all'avversario.",
@@ -1139,6 +1170,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 10+x",
       "rarity": "UNCOMMON",
+      "character": "base.character.Pino",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la tua [[L]]: è la [[L]] spesa. 2. Spendi tutta la tua [[L]]: scende a 0. 3. Infliggi all'avversario [[HIT]] pari a 10 più la [[L]] spesa.",
@@ -1159,6 +1191,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "COMMON",
+      "character": "base.character.Pino",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 2. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Ottieni lo stato positivo «Avamposto Fortificato al Bancone»: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci tre quarti dei [[HIT]] che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima. 2. Ottieni lo stato positivo «Avamposto Fortificato al Bancone»: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci metà dei [[POISON]] che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima. 3. Guadagni 5 [[L]].",
@@ -1177,6 +1210,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Pino",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su di te.",
         "Annuncia «Alla Goccia» o «Rutto a Bruciapelo» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Alla Goccia» o «Rutto a Bruciapelo»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 [[L]] e 35 [[A]] e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 [[L]] e 10 [[A]]. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, [[HIT]], [[CUT]] e [[POISON]], veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio."
@@ -1194,6 +1228,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Pino",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su di te.",
         "Annuncia «Rutto a Bruciapelo» o «Alla Goccia» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Rutto a Bruciapelo» o «Alla Goccia»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 15 [[L]] e 35 [[A]] e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 [[L]] e 10 [[A]]. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, [[HIT]], [[CUT]] e [[POISON]], veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio."
@@ -1211,6 +1246,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Pino",
       "fullText": [
         "Azione base di Piera Pinot (regolamento, R01a). Nessun costo in risorse. Priorità 0. Si gioca su un tuo oggetto, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni 15 [[L]]. 2. Consumi il tuo oggetto che hai scelto: esce dal campo e ne ottieni l'effetto «Quando lo consumi». Se quando la carta si risolve non è più fra i tuoi oggetti (rubato, distrutto, scalzato da un altro), non consumi niente, ma gli altri effetti della carta valgono (regolamento, R04)."
@@ -1228,6 +1264,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 15+x",
       "rarity": "RARE",
+      "character": "base.character.Pino",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 5 [[L]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la [[L]] che ti resta dopo aver pagato il costo: è la [[L]] spesa. 2. Spendi tutta la tua [[L]]: scende a 0. 3. L'avversario perde [[A]] pari alla [[L]] spesa; non scende sotto 0 (regolamento, R01). 4. Infliggi all'avversario [[HIT]] pari a 15 più il doppio della [[L]] spesa.",
@@ -1248,6 +1285,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 35",
       "rarity": "COMMON",
+      "character": "base.character.Pino",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 5 [[L]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Subisci 5 [[HIT]]: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. 2. Infliggi 35 [[HIT]] all'avversario.",
@@ -1268,6 +1306,7 @@
       "damageAmount": "HIT 10+x",
       "exclusiveTo": "base.character.Pino",
       "rarity": "UNCOMMON",
+      "character": "base.character.Pino",
       "fullText": [
         "Ultima risorsa, riservata a Piera Pinot (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la tua [[L]]: è la [[L]] spesa. 2. Subisci 2 [[HIT]]: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci; arriva prima di spendere la [[L]], quindi la corazza dell'alcol lo riduce (regolamento, R05). 3. Spendi tutta la tua [[L]]: scende a 0. 4. Infliggi all'avversario [[HIT]] pari a 10 più la [[L]] spesa.",
@@ -1289,6 +1328,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "COMMON",
+      "character": "base.character.Pino",
       "fullText": [
         "Azione legata a Piera Pinot (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 2. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni 5 [[L]]. 2. Ottieni lo stato positivo «Posto Fisso», uno per ciascuno di [[HIT]], [[CUT]] e [[POISON]]: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci tre quarti dei danni che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima.",
@@ -1307,6 +1347,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Pino",
       "fullText": [
         "Azione legata a Piera Pinot (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 0. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni [[A]] pari a metà della tua [[L]]. 2. Perdi metà della tua [[L]].",
@@ -1326,6 +1367,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 2",
       "rarity": "COMMON",
+      "character": "base.character.Pino",
       "fullText": [
         "Azione legata a Piera Pinot (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua [[T]]. 2. Infliggi 2 [[HIT]] all'avversario.",
@@ -1347,6 +1389,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 25",
       "rarity": "UNCOMMON",
+      "character": "base.character.Rocco",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 30 [[H]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 0. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve: infliggi 25 [[HIT]] all'avversario.",
@@ -1366,6 +1409,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 8",
       "rarity": "UNCOMMON",
+      "character": "base.character.Rocco",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 10 [[H]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Ottieni lo stato positivo «E Allora...?»: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci metà dei [[HIT]] che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima. 2. Infliggi 8 [[HIT]] all'avversario.",
@@ -1386,6 +1430,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "COMMON",
+      "character": "base.character.Rocco",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 2. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Ottieni lo stato positivo «Stoico come un Busto di Bronzo»: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci metà dei [[HIT]] che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima. 2. Guadagni 4 [[H]].",
@@ -1424,6 +1469,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 20",
       "rarity": "COMMON",
+      "character": "base.character.Rocco",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 15 [[H]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 0. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve: infliggi 20 [[HIT]] all'avversario.",
@@ -1443,6 +1489,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "RARE",
+      "character": "base.character.Rocco",
       "fullText": [
         "Azione base di Duccio Braccio Teso (regolamento, R01a). Nessun costo in risorse. Priorità 0. Si gioca su un tuo oggetto, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Consumi il tuo oggetto che hai scelto: esce dal campo e ne ottieni l'effetto «Quando lo consumi». Se quando la carta si risolve non è più fra i tuoi oggetti (rubato, distrutto, scalzato da un altro), non consumi niente, ma gli altri effetti della carta valgono (regolamento, R04). 2. Guadagni 4 [[H]]."
@@ -1460,6 +1507,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 4",
       "rarity": "UNCOMMON",
+      "character": "base.character.Rocco",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve: infliggi 4 [[HIT]] all'avversario.",
@@ -1480,6 +1528,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 30",
       "rarity": "RARE",
+      "character": "base.character.Rocco",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 35 [[H]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 0. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve: infliggi 30 [[HIT]] all'avversario.",
@@ -1499,6 +1548,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Rocco",
       "fullText": [
         "Azione legata a Duccio Braccio Teso (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 2. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni 8 [[A]]. 2. Ottieni lo stato positivo «(Dis)onore alla Bandiera», uno per ciascuno di [[HIT]], [[CUT]] e [[POISON]]: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci tre quarti dei danni che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima.",
@@ -1517,6 +1567,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 2",
       "rarity": "UNCOMMON",
+      "character": "base.character.Rocco",
       "fullText": [
         "Azione legata a Duccio Braccio Teso (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua [[T]]. 2. Perdi un quarto della tua [[L]]. 3. Infliggi 2 [[HIT]] all'avversario.",
@@ -1538,6 +1589,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Rocco",
       "fullText": [
         "Azione legata a Duccio Braccio Teso (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 0. Si gioca su di te.",
         "Quando la carta si risolve, se hai da 1 a 30 [[H]], guadagni 4 [[H]]; altrimenti niente. La [[H]] si legge in quel momento, dopo le mosse che si sono risolte prima della tua. La carta si gioca su di te, quindi si risolve anche se sei a terra (regolamento, R04), ma a 0 [[H]] non recuperi niente."
@@ -1555,6 +1607,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "bruiser.character.BigBadBruiser",
       "fullText": [
         "Azione legata a SPAZIENZIO DE LA UCCISO (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 0. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Subisci 4 [[HIT]]: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. 2. Guadagni 8 [[V]].",
@@ -1573,6 +1626,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "junkie.character.ToxicJunkie",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su di te.",
         "Annuncia «Trascinare nel Tunnel» o «Tossicone Scatarrante» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Trascinare nel Tunnel» o «Tossicone Scatarrante»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 20 [[T]] e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 [[T]]. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, [[HIT]], [[CUT]] e [[POISON]], veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio."
@@ -1590,6 +1644,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "COMMON",
+      "character": "junkie.character.ToxicJunkie",
       "fullText": [
         "Azione legata a Celestina Bucatina (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 2. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni 2 [[T]]. 2. Ottieni lo stato positivo «Rintanarsi nel Cappotto», uno per ciascuno di [[HIT]], [[CUT]] e [[POISON]]: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci tre quarti dei danni che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima.",
@@ -1627,6 +1682,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "base.character.Gigi",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 5 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca su un oggetto di un avversario, che scegli.",
         "Quando la carta si risolve distruggi l'oggetto dell'avversario che hai scelto: esce dal campo senza effetto. Se l'oggetto non c'è più, non succede niente."
@@ -1662,6 +1718,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 6+x",
       "rarity": "RARE",
+      "character": "bruiser.character.BigBadBruiser",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 10 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve: infliggi all'avversario [[HIT]] pari a 6 più metà della [[V]] che ti resta.",
@@ -1682,6 +1739,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "bruiser.character.BigBadBruiser",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 0. Si gioca su di te.",
         "Annuncia «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «GARGANTUESCO IMPATTO SUL TU» o «SPEDIAMOTI DUNQUE IN O-AHIO»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 25 [[V]] e 15 [[A]] e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 [[V]] e 5 [[A]]. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, [[HIT]], [[CUT]] e [[POISON]], veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio."
@@ -1719,6 +1777,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "COMMON",
+      "character": "bruiser.character.BigBadBruiser",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 0. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Ottieni lo stato positivo «NON GIOCARE COL COLTELLO NO»: da quando la carta si risolve per 4 turni, contando questo, fino agli effetti di fine turno dell'ultimo compresi, subisci metà dei [[CUT]] che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima. 2. Guadagni 10 [[V]].",
@@ -1795,6 +1854,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 35",
       "rarity": "UNCOMMON",
+      "character": "bruiser.character.BigBadBruiser",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 25 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 0. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve: infliggi 35 [[HIT]] all'avversario.",
@@ -1814,6 +1874,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "bruiser.character.BigBadBruiser",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 5 [[V]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, se la mossa dell'avversario che hai scelto deve ancora risolversi, la annulli; se si è già risolta, o l'avversario non ha una mossa, non succede niente. Deve ancora risolversi vuol dire che viene dopo la tua nell'ordine di risoluzione del turno: priorità più bassa, oppure pari priorità e meno [[A]] dopo i costi, oppure pari priorità e pari [[A]] se il suo giocatore viene dopo di te nell'ordine d'inserimento nella partita (regolamento, R04). Una mossa annullata non ha effetti, ma il suo costo è già pagato e il suo giocatore pesca come sempre (regolamento, R04)."
@@ -1831,6 +1892,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "COMMON",
+      "character": "bruiser.character.BigBadBruiser",
       "fullText": [
         "Azione legata a SPAZIENZIO DE LA UCCISO (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 2. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni 5 [[V]]. 2. Ottieni lo stato positivo «LIEVE FASTIDIO», uno per ciascuno di [[HIT]], [[CUT]] e [[POISON]]: da quando la carta si risolve fino alla fine di questo turno, effetti di fine turno compresi, subisci tre quarti dei danni che subiresti, arrotondando per difetto. Non cambia i danni delle mosse che si sono risolte prima.",
@@ -1849,6 +1911,7 @@
       "damage": "HIT",
       "damageAmount": "HIT 2",
       "rarity": "COMMON",
+      "character": "bruiser.character.BigBadBruiser",
       "fullText": [
         "Azione legata a SPAZIENZIO DE LA UCCISO (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Perdi un quarto della tua [[T]]. 2. Perdi un quarto della tua [[L]]. 3. Infliggi 2 [[HIT]] all'avversario.",
@@ -1904,6 +1967,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "COMMON",
+      "character": "bruiser.character.BigBadBruiser",
       "fullText": [
         "Azione base di SPAZIENZIO DE LA UCCISO (regolamento, R01a). Nessun costo in risorse. Priorità -1. Si gioca su un tuo oggetto, che scegli.",
         "Quando la carta si risolve: consumi il tuo oggetto che hai scelto: esce dal campo e ne ottieni l'effetto «Quando lo consumi». Se quando la carta si risolve non è più fra i tuoi oggetti (rubato, distrutto, scalzato da un altro), non consumi niente, ma gli altri effetti della carta valgono (regolamento, R04)."
@@ -1921,6 +1985,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "junkie.character.ToxicJunkie",
       "fullText": [
         "Azione base di Celestina Bucatina (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su un tuo oggetto, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni 5 [[T]]. 2. Consumi il tuo oggetto che hai scelto: esce dal campo e ne ottieni l'effetto «Quando lo consumi». Se quando la carta si risolve non è più fra i tuoi oggetti (rubato, distrutto, scalzato da un altro), non consumi niente, ma gli altri effetti della carta valgono (regolamento, R04)."
@@ -2026,6 +2091,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "junkie.character.ToxicJunkie",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 10 [[T]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca su di te.",
         "Quando la carta si risolve annulli la mossa di ogni avversario che si gioca contro di te o contro un tuo oggetto e deve ancora risolversi. Deve ancora risolversi vuol dire che viene dopo la tua nell'ordine di risoluzione del turno: priorità più bassa, oppure pari priorità e meno [[A]] dopo i costi, oppure pari priorità e pari [[A]] se il suo giocatore viene dopo di te nell'ordine d'inserimento nella partita (regolamento, R04). Le mosse che si sono già risolte, e quelle che gli avversari giocano su sé stessi o sui propri oggetti, restano. Una mossa annullata non ha effetti, ma il suo costo è già pagato e il suo giocatore pesca come sempre (regolamento, R04)."
@@ -2043,6 +2109,7 @@
       "damage": "POISON",
       "damageAmount": "POISON 20",
       "rarity": "UNCOMMON",
+      "character": "junkie.character.ToxicJunkie",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 10 [[T]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Infliggi 20 [[POISON]] all'avversario. 2. L'avversario guadagna 5 [[T]].",
@@ -2063,6 +2130,7 @@
       "damageAmount": "POISON 8",
       "exclusiveTo": "junkie.character.ToxicJunkie",
       "rarity": "UNCOMMON",
+      "character": "junkie.character.ToxicJunkie",
       "fullText": [
         "Ultima risorsa, riservata a Celestina Bucatina (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Subisci 2 [[HIT]]: è un danno che infliggi a te stesso, quindi contano sia i tuoi stati sui danni che infliggi sia quelli sui danni che subisci. 2. Infliggi 8 [[POISON]] all'avversario. Più 5 per ogni volta che l'hai già giocata (Rincara, sotto). 3. L'avversario guadagna 4 [[T]].",
@@ -2083,6 +2151,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "junkie.character.ToxicJunkie",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su di te.",
         "Annuncia «Tossicone Scatarrante» o «Trascinare nel Tunnel» (regolamento, R02a e R07b): al posto della pesca che segue la tua mossa cerchi nel mazzo una carta col nome «Tossicone Scatarrante» o «Trascinare nel Tunnel»: il nome lo scegli quando giochi questa carta, fra quelli di cui hai ancora almeno una copia nel mazzo (se non scegli, vale il primo dei due). Se la trovi, va in mano e la mostri a tutti finché resta in mano e finché non giochi una carta con quel nome; guadagni 10 [[T]] e 5 [[A]] e diventi Vulnerabile, legato al nome che hai trovato. Se nel mazzo non ce n'è nessuna, peschi normalmente e guadagni 5 [[T]]. I guadagni arrivano dopo la ricerca; dopo ogni ricerca, trovata o no, il mazzo si mischia. Se la tua mossa è annullata non cerchi e peschi normalmente; se scarti questa carta per giocare una carta legata, non cerchi niente (regolamento, R02a). Vulnerabile (regolamento, R07b): subisci una volta e mezza i danni che subiresti, [[HIT]], [[CUT]] e [[POISON]], veleno di fine turno compreso, arrotondando per difetto. Finisce dopo gli effetti di fine turno del turno in cui giochi una carta con il nome trovato, anche se parata o annullata; scartarla non basta. Se a fine turno non ne hai più copie né in mano né nel mazzo, finisce alla fine del turno dopo. Due Vulnerabile si moltiplicano, e ogni carta giocata col nome ne fa finire uno solo, il più vecchio."
@@ -2100,6 +2169,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "COMMON",
+      "character": "junkie.character.ToxicJunkie",
       "fullText": [
         "Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni [[H]] pari a metà della tua [[T]]. 2. Perdi tutta la tua [[T]].",
@@ -2119,6 +2189,7 @@
       "damage": "POISON",
       "damageAmount": "POISON 10",
       "rarity": "RARE",
+      "character": "junkie.character.ToxicJunkie",
       "fullText": [
         "Azione regolare (regolamento, R01a). Costo: 10 [[T]], che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. All'inizio della risoluzione si legge la [[T]] che ti resta dopo aver pagato il costo. 2. Perdi tutta quella [[T]]. 3. Togli all'avversario l'immunità a [[T]], anche quella del suo personaggio; resta tolta finché un'altra carta non gliela ridà (regolamento, R07b). 4. L'avversario guadagna la [[T]] che hai perso. 5. Infliggi 10 [[POISON]] all'avversario. 6. Alla fine di questo turno, dopo il veleno di fine turno, diventi immune a [[T]]: la tua [[T]] non ti avvelena più a fine turno finché un'altra carta non ti toglie l'immunità; costi, guadagni, perdite e danni [[POISON]] restano (regolamento, R07b).",
@@ -2138,6 +2209,7 @@
       "damage": "CUT",
       "damageAmount": "CUT 2",
       "rarity": "COMMON",
+      "character": "junkie.character.ToxicJunkie",
       "fullText": [
         "Azione legata a Celestina Bucatina (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 1. Si gioca contro un avversario, che scegli.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni 2 [[T]]. 2. Infliggi 2 [[CUT]] all'avversario.",
@@ -2157,6 +2229,7 @@
       "damage": "—",
       "damageAmount": "—",
       "rarity": "UNCOMMON",
+      "character": "junkie.character.ToxicJunkie",
       "fullText": [
         "Azione legata a Celestina Bucatina (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 0. Si gioca su di te.",
         "Quando la carta si risolve, nell'ordine: 1. Guadagni [[H]] pari a un quarto della tua [[T]]. 2. Perdi metà della tua [[T]].",
@@ -2623,7 +2696,8 @@
         "Quando lo consumi ottieni un equipaggiamento positivo: i tuoi [[HIT]] diventano [[CUT]] e ne infliggi una volta e mezza, arrotondando per difetto; da [[CUT]] non li cambiano più gli stati su [[HIT]] presi dopo questo, ma quelli su [[CUT]], e la corazza dell'alcol non li riduce (regolamento, R05). Vale anche sui [[HIT]] che infliggi a te stesso. Dura finché non cambia un danno; dal primo danno che cambia vale ancora, su ogni danno, fino alla fine di quel turno; «PERMESSO SCUSA PUOI SMETTERLA» lo toglie (regolamento, R01a e R05).",
         "Ogni Bottiglia Spaccata consumata dà un equipaggiamento suo, indipendente dagli altri (regolamento, R05)."
       ],
-      "flavour": null
+      "flavour": null,
+      "statusText": "I tuoi [[HIT]] diventano [[CUT]] e ne infliggi una volta e mezza, arrotondando per difetto. Dura finché non cambia un danno e, dal primo danno che cambia, fino alla fine di quel turno; «PERMESSO SCUSA PUOI SMETTERLA» lo toglie."
     }
   ]
 }

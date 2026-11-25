@@ -1,4 +1,5 @@
 import type {Card, CharacterCard, UserGuiDeck} from './contracts.ts';
+import {entryOf} from './annex.ts';
 
 /**
  * Deck editor rules: those of regulation 1.12 R02, the same the server applies. The character's own basic (fixed: chosen
@@ -72,13 +73,56 @@ export const removeRegular = (d: Draft, name: string): Draft => {
 export const initialCards = (d: Draft) => (d.basicActionCard ? 1 : 0) + d.characterBoundCards.length;
 
 /**
- * Regular cards shown by the editor: the whole collection or the deck, filtered like the debug search
- * (case-insensitive substring of the serialized card, so name, effect text and fields all match).
+ * SB-31 F4 (D196 (4), D198, O16 in the perimeter): the filters of the catalog and of the regular pool. They intersect: a card must pass every one that is set.
+ * `''` is "all". `character`: `GENERIC` or the binding of a character; `rarity`: the rarity of the annex (COMMON, UNCOMMON, RARE; PROTAGONIST only the characters have);
+ * `type`: `action` or `item`; `set`: the id of a set; `term`: the debug search (case-insensitive substring of the serialized card, so name, text and fields match).
  */
-export const shown = (d: Draft, catalog: Card[], pool: Pool, term: string) => {
-  const t = term.toUpperCase();
-  return (pool === 'deck' ? d.regularCards : catalog).filter(c => isRegular(c) && JSON.stringify(c).toUpperCase().includes(t));
+export interface Filters { character: string; rarity: string; type: string; set: string; term: string }
+export const NO_FILTERS: Filters = {character: '', rarity: '', type: '', set: '', term: ''};
+export const GENERIC = 'generic';
+export const isFiltering = (f: Filters) => Object.values(f).some(v => v !== '');
+/** The character a card is of: the `character` of the annex (written from the slot), else what the card says itself; null = generic. */
+export const characterOf = (c: Card): string | null => entryOf(c.bindingName)?.character ?? c.exclusiveToCharacter ?? c.boundToCharacter ?? null;
+const hasTerm = (value: unknown, term: string) => !term || JSON.stringify(value).toUpperCase().includes(term.toUpperCase());
+export const matchesCard = (c: Card, f: Filters) =>
+  (!f.character || (f.character === GENERIC ? characterOf(c) === null : characterOf(c) === f.character))
+  && (!f.rarity || entryOf(c.bindingName)?.rarity === f.rarity)
+  && (!f.type || (f.type === 'item') === c.item)
+  && (!f.set || entryOf(c.bindingName)?.set === f.set)
+  && hasTerm(c, f.term);
+/** A character face passes the character filter by its own binding; it has no type, and the only rarity it has is the protagonist's. */
+export const matchesCharacter = (c: CharacterCard, f: Filters) =>
+  (!f.character || f.character === c.bindingName) && (!f.rarity || f.rarity === 'PROTAGONIST') && !f.type
+  && (!f.set || entryOf(c.bindingName)?.set === f.set) && hasTerm(c, f.term);
+export const filterCards = (cards: Card[], f: Filters) => cards.filter(c => matchesCard(c, f));
+/**
+ * Stable order of the characters (SB-31 F4, D197 (4)): by name, then by binding. The server sends a set, so its order changes between starts;
+ * the client sorts, with the same key in the catalog, the editor and the character filter.
+ */
+export const characterOrder = (characters: CharacterCard[]) => [...characters].sort((a, b) => a.name.localeCompare(b.name, 'it') || a.bindingName.localeCompare(b.bindingName));
+
+/**
+ * Regular cards shown by the editor: the whole collection or the deck, passed through the filters. A string is the search term alone
+ * (the debug search of before).
+ */
+export const shown = (d: Draft, catalog: Card[], pool: Pool, filters: Filters | string) =>
+  filterCards((pool === 'deck' ? d.regularCards : catalog).filter(isRegular), typeof filters === 'string' ? {...NO_FILTERS, term: filters} : filters);
+
+/**
+ * SB-31 F4 (O15): the fixed bar of the deck editor and the summary it opens. The numbers are those of R02: regular cards over 20, bound cards over 2,
+ * the last resort chosen or not.
+ */
+export const deckBar = (d: Draft) => ({regular: d.regularCards.length, bound: d.characterBoundCards.length, lastResort: d.lastResortCard !== null});
+export const deckBarText = (d: Draft) => {
+  const b = deckBar(d);
+  return `Regolari ${b.regular} / ${REGULAR_CARDS} · legate ${b.bound} / ${BOUND_CARDS} · ultima risorsa ${b.lastResort ? '✓' : '—'}`;
 };
+/** The summary: what the deck has now, by part, with the regular cards grouped by name and their copies. */
+export const deckSummary = (d: Draft) => ({
+  character: d.character?.name ?? null, basic: d.basicActionCard?.name ?? null, lastResort: d.lastResortCard?.name ?? null,
+  bounds: d.characterBoundCards.map(c => c.name),
+  regular: copies(d.regularCards).map(e => ({name: e.card.name, n: e.n, binding: e.card.bindingName})), total: d.regularCards.length,
+});
 
 /** Copies per name in first-appearance order: the deck view groups identical cards. */
 export const copies = (cards: Card[]) => {

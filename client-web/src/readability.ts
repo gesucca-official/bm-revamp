@@ -131,11 +131,11 @@ export function vulnerabilitiesOf(c:Pick<Character,'statuses'>):Vulnerable[]{
  return [...by.entries()].map(([exposure,list])=>{const s=list[0];
   return {exposure,factor:s.factor??1,types:list.map(x=>x.impactedProperty),left:s.lastsForTurns,untilPlayed:s.untilPlayed??null};});
 }
-const DAMAGE_WORDS:Record<string,string>={HIT:'colpo',CUT:'taglio',POISON:'veleno'};
 /** «×1,5»: the factor as the cards write it. */
 export const factorText=(f:number)=>`×${String(Math.round(f*100)/100).replace('.',',')}`;
-const words=(types:string[])=>{const w=types.map(t=>DAMAGE_WORDS[t]??t);return w.length>1?`${w.slice(0,-1).join(', ')} e ${w[w.length-1]}`:w[0]??'';};
-/** The sentence of a vulnerability token: what it multiplies and what ends it (the play of a card with a name, or its time). */
+// SB-31 F4 (D198 (12)): the damage types are placeholders, drawn as symbols in the inspection (`RichText`) and read as words by `plainText` (canvas, screen reader, notes).
+const words=(types:string[])=>{const w=types.map(t=>`[[${t}]]`);return w.length>1?`${w.slice(0,-1).join(', ')} e ${w[w.length-1]}`:w[0]??'';};
+/** The sentence of a vulnerability token: what it multiplies and what ends it (the play of a card with a name, or its time). It holds the placeholders of the damages: `plainText` for a label. */
 export function vulnerabilityText(v:Vulnerable){
  const what=`Danni da ${words(v.types)} ricevuti ${factorText(v.factor)}.`;
  if(v.untilPlayed!==null)return v.left!==null?`${what} Non restano copie di «${v.untilPlayed}» in mano né nel mazzo: finisce alla fine di questo turno.`:
@@ -152,7 +152,7 @@ export function revealedNote(r:{copy:number;turn:number;card:Card},owner:string|
  const held=vulnerabilitiesOf(c).find(v=>v.exposure===r.copy);
  const text=(owner===null?`Carta scoperta: l’hai trovata con una ricerca al turno ${r.turn+1}. La vedono tutti finché resta nella tua mano e finché non giochi una carta con questo nome.`
   :`Carta scoperta: ${owner} l’ha trovata con una ricerca al turno ${r.turn+1}. La vedono tutti finché resta nella sua mano e finché non gioca una carta con questo nome.`)
-  +(held?` ${owner===null?'La tua':'La sua'} vulnerabilità legata a questa carta: ${vulnerabilityText(held)}`:'');
+  +(held?` ${owner===null?'La tua':'La sua'} vulnerabilità legata a questa carta: ${plainText(vulnerabilityText(held))}`:'');
  return {badge:held?`SCOPERTA ${factorText(held.factor)}`:'SCOPERTA',text,label:held?`scoperta, tiene una vulnerabilità ${factorText(held.factor)}`:'scoperta, la vedono tutti'};
 }
 

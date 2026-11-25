@@ -1263,6 +1263,127 @@ button.danger {
 .regular-bar+.small {
   margin-top: 6px;
 }
+/* SB-31 F4 (D196 (4)): filters of the catalog and of the regular pool, and the fixed deck bar of the editor with the O15 summary. The bar sticks to the edge of the sheet, over its padding (22 px, 14 px on a low screen). */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  align-items: flex-end;
+}
+.filter-bar label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 13px;
+  flex: 0 1 150px;
+}
+.filter-bar .filter-search {
+  flex: 1 1 170px;
+}
+.filter-bar select,.filter-bar input {
+  min-height: 44px;
+  font: 14px Arial,sans-serif;
+  color: var(--text);
+  background: var(--bg-panel);
+  border: 2px solid var(--border-panel);
+  border-radius: 4px;
+  padding: 0 6px;
+  box-sizing: border-box;
+  width: 100%;
+}
+.filter-state {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.deck-bar {
+  order: -1;
+  position: sticky;
+  top: -22px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-sheet);
+  border: 2px solid var(--border-panel);
+  border-radius: 6px;
+  box-shadow: 0 2px 0 var(--shadow-control);
+}
+.deck-bar-open {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 8px;
+  width: 100%;
+  box-shadow: none;
+  border: 0;
+  border-radius: 4px;
+}
+.deck-bar-open b {
+  font-variant-numeric: tabular-nums;
+}
+.deck-bar-more {
+  margin-left: auto;
+  font-weight: normal;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.deck-bar .mark {
+  width: 15px;
+  height: 15px;
+  vertical-align: -2px;
+  color: var(--positive);
+}
+.deck-summary {
+  order: 2;
+  max-height: min(50dvh,420px);
+  overflow: auto;
+  padding: 6px 10px 10px;
+  border-top: 2px solid var(--border-panel);
+  font-size: 14px;
+}
+.deck-summary dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 2px 12px;
+  margin: 0 0 6px;
+}
+.deck-summary dt {
+  color: var(--text-muted);
+}
+.deck-summary dd {
+  margin: 0;
+}
+.deck-summary h4 {
+  margin: 4px 0;
+  font-size: 14px;
+  color: var(--error);
+}
+.deck-summary ul {
+  margin: 0;
+  padding-left: 18px;
+  columns: 2 220px;
+}
+@media(max-height:550px) {
+  .deck-bar {
+    order: 99;
+    top: auto;
+    bottom: -14px;
+  }
+  .deck-summary {
+    order: -1;
+    max-height: 48dvh;
+    border-top: 0;
+    border-bottom: 2px solid var(--border-panel);
+  }
+  .deck-bar-open {
+    min-height: 44px;
+    padding: 4px 10px;
+  }
+}
 .pool {
   display: flex;
   gap: 4px;

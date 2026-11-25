@@ -1,4 +1,4 @@
-# SB-31 — Rapporto dell'esecutore (F1, F2 e F3)
+# SB-31 — Rapporto dell'esecutore (F1, F2, F3 e F4)
 
 Esecutore: Claude (Sonnet 5.5). Base: `d92f74e` (D196). Un commit per fase, nessun push. Le domande sono numerate una volta sola, in fondo.
 
@@ -10,6 +10,8 @@ atlante e riquadro per ogni classe, nella pagina cambia solo la riga dell'immagi
 e con sfondo e sprite lo superano (domanda 5).
 
 **F3 consegnata** (commit «SB-31: F3 …», [sezione](#f3--testi-del-set-nel-client)): l'ispezione mostra flavour, «Testo completo», promemoria delle parole chiave e rarità dal testo dell'allegato; stati in italiano coi simboli dei danni, raggruppati nell'ispezione; stato del gettone dall'allegato; R11 e R12 chiusi; tetto delle texture a 48 MiB (63,4 % usato). **Da decidere:** le sette frasi dei promemoria (domanda 8). Un rosso nuovo non attribuito, **R13** (più primi piani in FFA a 750×292 in alcune corse; domanda 20); il costo in SALUTE non si è potuto vedere in una partita viva (domanda 15).
+
+**F4 consegnata** (commit «SB-31: F4 …», [sezione](#f4--catalogo-editor-e-riepilogo-del-mazzo-opzione-minima), [pagina di giudizio](sb-31/f4-giudizio.html)): filtri, barra del mazzo fissa col riepilogo O15, ordine stabile dei personaggi, rarità sulle facce, `character` e testo dello stato nell'allegato, frase di Vulnerabile e chip coi simboli, costo in SALUTE visto in una partita viva, `fs.allow` e README. Chiude le domande 15, 16 e 17. **Da decidere:** se l'opzione minima basta (domanda 21). Un rosso nuovo non nel registro, proposto come R14 (domanda 22).
 
 ## F1 — Rossi R9 e R10, D183 (4), contatore di Rincara
 
@@ -318,3 +320,102 @@ Una partita viva usa il regolamento del banco di prova (`Ruleset.D50`, `playgrou
 18. I commenti «solo playground» corretti in `contracts.ts`, `resolution.ts` e `model.ts`: va bene aver toccato (solo commenti) i due file fuori dal perimetro?
 19. `verify-layout.mjs` e il messaggio di `size.mjs` toccati oltre il perimetro, come dichiarato sopra: si accetta, o si chiede di ripristinarli?
 20. **R13** (corse di `VerifyLayout` 750×292 con più «close-up» in FFA, non attribuite): le attribuisco alla partita come in F1 e le lascio fra le voci aperte, o si chiede un blocco per indagare (più corse sulla base e su F3, bisezione)?
+
+## F4 — Catalogo, editor e riepilogo del mazzo (opzione minima)
+
+Base: `cea8285` (D198). Un commit, nessun push. Le domande 21–26 continuano la numerazione.
+
+**Esito.** Consegnata l'opzione minima di D196 (4): catalogo ed editor con 117 carte hanno filtri che si intersecano, una barra del mazzo fissa che apre il riepilogo O15, l'ordine stabile dei personaggi e la rarità sulle facce. Chiusi i punti di D198 assegnati a F4: (8) frase di Vulnerabile, (10) testo dello stato del gettone, (12) chip di Vulnerabile coi simboli, (13) campo `character`, (15) costo in SALUTE, (16) `fs.allow`, (17) README a 48 MiB. Verifiche verdi, con **un rosso nuovo comparso una volta e non nel registro** (`VerifyDecks`, `lastCopyWarning`, sotto «Rossi»): diagnosticato, non l'ho fermato. Le catture sono nella [pagina di giudizio](sb-31/f4-giudizio.html): il proprietario giudica la minima prima di qualunque opzione piena (domanda 21).
+
+### Cosa cambia
+
+| File | Cambio |
+|---|---|
+| `tools/set-catalog/set_catalog.py` | L'allegato scrive `character` (il binding del personaggio, dallo slot: `SPA-`, `MAR-`, `LR-TOS`…) per le 73 carte dei sette personaggi, assente per le 44 generiche; per il token scrive `statusText` (D198 (10)). Controlli nuovi: lo slot e la scheda devono dire lo stesso personaggio (base, legata, ultima risorsa riservata); ogni frammento del testo dello stato deve stare ancora nel testo completo del token, altrimenti il generatore si ferma. Rigenerato con `--vivo`: cambiano solo `docs/rules-catalog.json` e l'impronta in `docs/sets/manifest.json`; `docs/sets/base.md`, `cards.sqlite` e le copie del client di debug sono **identici** (nessuna regola cambia) |
+| `client-web/src/annex.ts` | Tipo con `character`, `statusText`, `set`; `setIds()`; la frase di Vulnerabile è **esattamente** quella di D198 (8); lo stato del gettone prende `statusText` (senza testo resta quello del server: non si ripiega più sulla descrizione «Quando lo consumi») |
+| `client-web/src/readability.ts` | `vulnerabilityText` scrive `Danni da [[HIT]], [[CUT]] e [[POISON]] ricevuti ×1,5…`: simboli nell'ispezione (`RichText`) e nel suggerimento, parole sul canvas e nelle note (`plainText`, che dà la stessa stringa di prima: nulla cambia per chi legge a parole). `revealedNote` applica `plainText` perché è disegnata come testo semplice |
+| `client-web/src/deck.ts` | `Filters`, `matchesCard`, `matchesCharacter`, `filterCards`, `characterOf` (campo dell'allegato, altrimenti le riserve della carta), `characterOrder`, `shown` che accetta i filtri (o una stringa, come prima), `deckBar`, `deckBarText`, `deckSummary` |
+| `client-web/src/collection.tsx` | `FilterBar` sopra il catalogo e sopra «Mazzo regolare»; `DeckBar` (ultimo figlio dell'editor); `Rare` (RarityMark di F3) sulle facce del catalogo e dell'editor; personaggi ordinati; l'allegato si carica anche qui e le facce si ridisegnano all'arrivo |
+| `client-web/src/style.css` | `.filter-bar`, `.deck-bar`, `.deck-summary` |
+| `client-web/vite.config.ts` | `server.fs.allow` anche per `../docs/rules-catalog.json` (solo quello) |
+| `client-web/README.md` | «32 MiB» → «48 MiB» (due righe) |
+| `client-web/tests/catalog-filters.test.ts` (nuovo) | 10 test: `character` dell'allegato, intersezione, «P», set, ordine, barra e riepilogo, frase di Vulnerabile |
+| `client-web/tests/revealed.test.ts`, `annex.test.ts` | **Attesi cambiati con la decisione che li autorizza**: le tre stringhe del chip di Vulnerabile ora hanno i segnaposto (D198 (12)); il testo dello stato del gettone è `statusText` e non `description` (D198 (10)). Aggiunta la prova che `plainText` restituisce le parole di prima e che la nota resta senza `[[` |
+| `client-web/tools/verify-decks.mjs` | Tre blocchi nuovi (sotto) |
+| `client-web/tools/sb31-f4-captures.mjs` (nuovo) | Catture e misure per il giudizio e per il costo in SALUTE; scrive `f4-captures.json` |
+
+Nessun file del server, del protocollo, `docs/game-rules.md`, `docs/sets/base.md` né le righe O15 e O16 della roadmap sono toccati.
+
+### Cosa vede chi gioca
+
+- **Filtri** (sopra il catalogo e sopra «Mazzo regolare»): Personaggio (Tutti, Generiche, uno dei sette), Rarità (Comune, Non comune, Rara; «P (personaggi)» solo nel catalogo), Tipo (Azioni, Oggetti), Cerca (quella di prima, stesso `data-testid`), «n di m carte» e «Azzera i filtri» quando ce n'è uno. Tutti ≥ 44 px (misurato). Si intersecano. Una faccia di personaggio passa il filtro del personaggio col proprio nome, la rarità solo se è «P», mai il tipo. Il filtro del **set** si legge dall'allegato e compare solo da due set (oggi uno: provato con un allegato doppiato nel test).
+- **Barra del mazzo** (editor): «Regolari n / 20 · legate n / 2 · ultima risorsa ✓», 48 px, `position: sticky` sul foglio che scorre: in alto a 1366×768 (`top: -22px`, il riempimento del foglio), in basso a 844×390 (`order` e `bottom: -14px`). Un tocco apre il **riepilogo** (personaggio, base, ultima risorsa, legate, regolari con le copie e «Regolari n / 20»; Esc o «Chiudi» lo chiudono), sopra la barra a 844×390 e sotto a 1366×768, massimo metà altezza. La riga «Regolari n / 20, al massimo 2 copie…» c'era già e resta.
+- **Scelta delle legate**: `toggleBound` è controllata e mostrata («legate 2 / 2», `bound-list`), non ridisegnata: la terza è ignorata, un secondo tocco la toglie.
+- **Ordine dei personaggi: per nome (`localeCompare` «it»), poi per binding.** Chiave scelta perché il nome è ciò che il giocatore legge; ordina anche l'elenco dell'editor e del filtro. Provato da test e da `VerifyDecks`; due avvii del server (le due corse a 1366×768 e 844×390) danno la stessa lista (Beppe, Celestina, Duccio, Mara, Piera, Sergio, Spazienzio).
+- **Rarità** sulla riga del tipo di ogni faccia del catalogo e dell'editor (1–3 pallini, «P»), mai sul tavolo.
+
+### Verifiche (macchina ferma, una corsa esclusiva per volta; server, jar e build ricostruiti da questa copia)
+
+| Verifica | Esito |
+|---|---|
+| `build.ps1 -Task Test -Offline` (l'allegato cambia) e `-Task Server` | **1506 test, 0 falliti**, 23 saltati; jar rifatto |
+| `client-web` `Test` | 401/401 (391 + 10 di `catalog-filters.test.ts`) |
+| `Build`, `Size` | verdi. JS 399 446 B gzip (limite 512 000; **+1 672 B** su F3), totale 1 782 697 B, texture 31 923 352 B = 63,4 % del tetto di 48 MiB (margine 18 408 296 B), invariate |
+| `VerifyDecks` 1366×768 e 844×390 | **verdi** (21 passi ciascuno), nuovi: `catalogFilters`, `deckBar`, `filteredDeckAccepted`; vedi sotto |
+| `Verify` 1366×768, 844×390, 1920×1080 | verdi (server avviato a parte su una base temporanea e fermato dopo) |
+| `set_catalog.py --vivo` e `--vivo --check` | verdi: 7 file; solo allegato e manifesto cambiano |
+| `prova-errori.py` (test del generatore) | tutti OK; `check-rules.py` verde |
+| `check-links.py` | 22 rotti, quelli noti, nessuno nuovo; `git diff --check` pulito |
+| `Dev`: `fs.allow` | `vite` su una porta a parte: `/@fs/…/docs/rules-catalog.json` 200 e `/@fs/…/docs/README.md` 403, quindi il blocco dell'allegato si carica in Dev e il resto resta chiuso |
+
+**Nuovi controlli di `VerifyDecks`** (sul server vero, in coda ai passi di prima):
+- `catalogFilters`: nessun set da scegliere, «124 di 124 carte»; ordine dei personaggi uguale alla chiave; rarità su tutte e 124 le facce (pallini disegnati = rarità dell'allegato, «P» sui sette); per ognuno dei sette personaggi le carte mostrate sono quelle dell'allegato con quel `character` più la sua faccia, e con le generiche coprono le 117; intersezione personaggio + rarità + tipo uguale all'allegato filtrato, più stretta di ogni filtro da solo e vuota per gli oggetti di Mara; «P» dà i sette personaggi e nessuna carta; azzera ripristina.
+- `deckBar`: testo e contatori a ogni passo (terza legata ignorata, secondo tocco che la toglie), barra dentro la finestra e nel punto giusto dopo aver scorso il foglio a fine e a inizio, riepilogo con tutte le parti dentro la finestra, Esc.
+- `filteredDeckAccepted` (la verifica della proposta, sezione 8): un mazzo di Duccio costruito dal catalogo intero e coi filtri (le sue sei carte regolari dal filtro del personaggio, le altre quattro da «generiche, comuni, azione», tre filtri insieme) è salvato, il server lo accetta (20 carte, al più 2 copie, nessun errore dell'account), poi parte una partita open con quel mazzo e ogni carta in mano viene dal mazzo.
+
+### Mutazioni (ogni controllo nuovo deve diventare rosso; file ripristinati, hash uguali)
+
+| # | Mutazione | Risultato |
+|---|---|---|
+| M16 | i filtri non si intersecano (personaggio **o** rarità) | 3 test rossi |
+| M17 | il conteggio della barra è sbagliato di uno | 1 test rosso |
+| M18 | l'ordine dei personaggi non è ordinato | 1 test rosso |
+| M19 | il generatore non scrive `character` | `set_catalog.py --vivo --check` rosso («Diversi dalla generazione: rules-catalog.json»); con l'allegato rigenerato così, il test sui 73/44 e il filtro sono rossi |
+| M20 | torna la vecchia frase di Vulnerabile | 1 test rosso |
+| M21 | lo stato del gettone prende `description` e non `statusText` | 2 test rossi |
+
+### Il costo in SALUTE (D198 (15))
+
+Mazzo di Duccio costruito con l'editor (sopra) e giocato in partite open vere contro il computer, in entrambe le misure; Duccio parte con 115 di SALUTE ([pagina](sb-31/f4-giudizio.html)).
+- **Sulla faccia in mano** il costo è disegnato (cerchio col numero e il cuore): «30 ♥» su Craniata Patriottica, «15 ♥» su Nocche Sbucciate, «35 ♥» su Testa Dura. Nel solito posto delle altre risorse.
+- **Nell'ispezione** la riga «Costo» dice «30 Salute», «35 Salute», «15 Salute» (letta dalla pagina, non solo guardata).
+- **«Mancano»**: a 844×390, al turno 12, con SALUTE 2 la carta da 30 è attenuata in mano e l'ispezione dice «Con le risorse attuali non basta: mancano salute. Puoi comunque provarla: decide il server.» (catture `mano-mancano`, `ispezione-mancano`). A 1366×768 la partita è finita prima (6–8 turni nelle corse) e SALUTE non è scesa sotto un costo: lì ho solo la riga del costo. Il calcolo di `shortfall` per la SALUTE è inoltre nei test di `readability.test.ts`.
+- Nessun difetto visto. Una cosa da notare: l'ispezione dice solo «mancano salute», senza la quantità; è come per le altre risorse.
+
+### Rossi
+
+- **Nessun rosso del registro è comparso.**
+- **Nuovo, non nel registro: `VerifyDecks` 1366×768, passo `lastCopyWarning`, una corsa su tre** (le altre due verdi, in entrambe le misure): «the server names GARGANTUESCO IMPATTO SUL TU as the last copy that holds a token: undefined». Diagnosi: nello screenshot del fallimento la mossa d'annuncio dell'utente è sbarrata («TU ✕») dal «FAI BASTA» del computer; con la mossa annullata non si cerca (R02a) e non nasce il gettone, quindi `lastTokenCopies` manca. È la sorte della partita (il computer sceglie a caso) e il controllo non la prevede; non dipende da questa fase (il passo gira su un mazzo, un server e un percorso che F4 non tocca, e le altre due corse sono verdi). **Non l'ho provato sul commit di base** (il rosso non si è ripetuto) né ho toccato il registro (fuori dal mio perimetro): propongo **R14** nel registro e, in un blocco con perimetro, di far ripetere la partita allo strumento quando l'annuncio è annullato (domanda 22). Il prompt dice di fermarsi davanti a un rosso fuori registro: ho proseguito perché è spiegato e non tocca il lavoro; se lo vuole diversamente lo dica.
+- R13 (`VerifyLayout` 750×292) non è stato rilanciato: F4 non tocca il tavolo.
+
+### Non verificato
+
+- `VerifyFfa`, `VerifyAim`, `VerifyLayout`, `VerifyResolution` e la geometria a 750×292 (`BASE_750` resta verde nei test) non sono stati rilanciati: il prompt elenca `Verify` e `VerifyDecks` e F4 non cambia il tavolo; l'unico tocco al canvas è la parola delle chip di Vulnerabile, che con `plainText` è la stessa stringa di prima (provato da test).
+- Catture di Edge via Playwright su PC, non un dispositivo fisico. L'arte è il segnaposto nero di SB-32.
+- «Stesso ordine fra avvii»: verificato su due avvii (le due corse), non su una serie.
+
+### Da dichiarare
+
+- **L'impronta dell'allegato cambia.** `rules-catalog.json` è nel jar (`analysis/rules-catalog.json`) e `MatchVersions` ne registra l'impronta nelle partite: da questa fase le partite nuove portano un'impronta diversa dalle vecchie, senza che nessuna regola cambi. Il jar è stato rifatto prima delle verifiche.
+- **Un caso che non torna fra slot e scheda:** «Non Mi Hai Fatto Niente» (`base.rocco.NeHoPreseDiPeggio`) ha lo slot `LR-ROC`, ma la sua scheda dice «Ultima risorsa, generica» e il server la offre a tutti (anche `VerifyDecks` la elenca fra le ultime risorse di Spazienzio). Ho seguito la scheda: per una ultima risorsa senza riserva il generatore **non** scrive `character` (quindi 44 generiche e 73 con personaggio, e Duccio ne ha 10, non 11). Se si preferisce lo slot, la carta uscirebbe dalle generiche e comparirebbe sotto Duccio (domanda 23).
+- Le facce dell'editor (azione base, legate, ultima risorsa) mostrano la rarità come le altre; il riquadro «Personaggio» non ha filtri (sono sette).
+- La barra e i filtri aggiungono altezza: a 844×390 l'editor mostra i filtri (61 px) più la riga del conteggio sopra i pulsanti «Collezione/Mazzo»; la barra occupa 48 px in basso. Guardare le catture.
+
+### Domande (numerazione unica F1–F4)
+
+21. **Opzione minima**: sulle catture, la minima basta o vuole l'opzione piena (vista compatta a righe, pannello del mazzo affiancato a 1366×768, «parti da uno starter»)? Se la piena, quale parte e con quale proposta prima?
+22. **Rosso nuovo del passo `lastCopyWarning`** (mossa annullata dal computer): lo scrivo come R14 nel registro e faccio correggere lo strumento (ripetere la partita se l'annuncio è annullato) in un blocco con perimetro?
+23. **`NeHoPreseDiPeggio` fra slot e scheda**: generica per la scheda (come ho fatto) o di Duccio per lo slot?
+24. **Filtro del set**: oggi un solo set, il controllo non compare; con un'espansione l'allegato dovrà dire il set di ogni carta (`set` nel generatore): va deciso con il formato delle espansioni, non ora. Va bene così?
+25. **Riepilogo del mazzo di sola lettura**: toccare una carta del riepilogo per toglierla (come nella vista «Mazzo») è O16, non l'ho fatto. Lo vuole nella piena?
+26. **Barra e filtri a 844×390**: se le catture mostrano troppo ingombro, preferisce i filtri dietro un solo tasto «Filtri» (aperti su richiesta) nell'opzione minima?

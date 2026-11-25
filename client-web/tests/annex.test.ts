@@ -51,7 +51,7 @@ test('rarity: one to three ticks as in the print, «P» for the characters; the 
 });
 
 test('the status of the token takes its name and text from the annex, not from the class',()=>{
- const t=annex.tokens[0],got=tokenStatusOf('BROKEN BEER')!;assert.equal(got.name,t.name);assert.equal(got.name,'Bottiglia Spaccata');assert.equal(got.text,t.description);
+ const t=annex.tokens[0],got=tokenStatusOf('BROKEN BEER')!;assert.equal(got.name,t.name);assert.equal(got.name,'Bottiglia Spaccata');assert.equal(got.text,t.statusText);assert.notEqual(got.text,t.description,'the text of the status is not the «Quando lo consumi» of the card');
  assert.equal(tokenStatusOf('LIEVE FASTIDIO'),null);setAnnex(null);assert.equal(tokenStatusOf('BROKEN BEER'),null,'without the annex the server text stays');
 });
 
@@ -60,7 +60,7 @@ const base=(over:Partial<Character>):Pick<Character,'statuses'|'immunities'|'tim
 test('SB-31 F3 (D197 (3)): in a live game the token status shows the annex name and text; the Java English of the class never shows',()=>{
  const english='Hit Damage dealt x1.5 and turned to Cut Damage',s=status({name:'BROKEN BEER',description:english,equip:true,singleUse:true,lastsForTurns:null});
  const [chip]=chipsOf('Tu',base({plays:{},statuses:[s]}));
- assert.equal(chip.title,'Equipaggiamento: Bottiglia Spaccata');assert.ok(chip.text.includes(annex.tokens[0].description.replace(/[.\s]+$/,'')),chip.text);assert.ok(!chip.text.includes(english));
+ assert.equal(chip.title,'Equipaggiamento: Bottiglia Spaccata');assert.ok(chip.text.includes(annex.tokens[0].statusText!.replace(/[.\s]+$/,'')),chip.text);assert.ok(!chip.text.includes(english));
  setAnnex(null);assert.ok(chipsOf('Tu',base({plays:{},statuses:[s]}))[0].text.startsWith(english),'chunk not arrived: the server text, never a blank');
 });
 test('SB-31 F3 (D197 (3)): STATUS_TEXT and TIMER_TEXT are for the archived 0.1 games only (no public counter `plays`)',()=>{

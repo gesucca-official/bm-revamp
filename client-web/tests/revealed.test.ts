@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {chipsOf,vulnerabilitiesOf,vulnerabilityText,revealedNote,factorText} from '../src/readability.ts';
+import {chipsOf,vulnerabilitiesOf,vulnerabilityText,revealedNote,factorText,plainText} from '../src/readability.ts';
 import {Model} from '../src/model.ts';
 import {resolve,roundReport,type ReportContext} from '../src/resolution.ts';
 import type {Card,Status,View} from '../src/contracts.ts';
@@ -23,7 +23,7 @@ const token=(id:number,until:string|null,left=0,types=['HIT','CUT','POISON'],fac
  name:'Vulnerable',description:`${t} received x${factor}`,type:'BAD',flow:'INPUT',impactedProperty:t,lastsForTurns:until===null?left:null,equip:false,
  singleUse:false,amountFunction:{},typeFunction:{},exposure:id,factor,...(until!==null?{untilPlayed:until}:{})}));
 const parry:Status={name:'YOU CARESS ME',description:'HIT x0.35',type:'GOOD',flow:'INPUT',impactedProperty:'HIT',lastsForTurns:0,equip:false,singleUse:false,amountFunction:{},typeFunction:{}};
-const BOUND=`Danni da colpo, taglio e veleno ricevuti ×1,5. Finisce alla fine del turno in cui giochi una carta «${strike.name}», quella trovata o un’altra, anche se parata o annullata. Scartarla non basta: se non restano copie in mano né nel mazzo, finisce un turno dopo.`;
+const BOUND=`Danni da [[HIT]], [[CUT]] e [[POISON]] ricevuti ×1,5. Finisce alla fine del turno in cui giochi una carta «${strike.name}», quella trovata o un’altra, anche se parata o annullata. Scartarla non basta: se non restano copie in mano né nel mazzo, finisce un turno dopo.`;
 
 /** A recorded view in the middle of a match: on `seat`, the card found face up with its bound token, or (found false) a timed token. */
 function withReveal(seat:'me'|'other',found=true,left=0){
@@ -43,6 +43,8 @@ test('a token is one chip beside the other statuses; bound to a name it has no t
  const chip=chips.find(c=>c.id===`status-${id}-vu-7`)!;
  assert.equal(chip.kind,'bad');assert.equal(chip.short,'∞');assert.equal(chip.title,'Stato negativo: Vulnerabile ×1,5');
  assert.equal(chip.text,BOUND);
+ // SB-31 F4 (D198 (12)): the chip holds the placeholders of the damages (symbols in the inspection); the canvas and the notes read them as words.
+ assert.ok(chip.text.startsWith('Danni da [[HIT]], [[CUT]] e [[POISON]] ricevuti ×1,5.'));assert.ok(plainText(chip.text).startsWith('Danni da colpo, taglio e veleno ricevuti ×1,5.'));assert.ok(!revealedNote(p.revealed![0],'Mara',p.character).text.includes('[['),'a note is read as plain text');
  // The chip does not depend on the card shown: after a discard the card is no longer face up and the token stays, the same.
  delete p.revealed;assert.equal(chipsOf(id,p.character).find(c=>c.id===`status-${id}-vu-7`)!.text,BOUND);
  assert.ok(v.turn>0);
@@ -51,9 +53,9 @@ test('a token is one chip beside the other statuses; bound to a name it has no t
 test('the token of a failed search is timed, like a normal status',()=>{
  const failed=withReveal('other',false,1),list=vulnerabilitiesOf(failed.p.character);
  assert.deepEqual(list.map(x=>[x.exposure,x.factor,x.types,x.left,x.untilPlayed]),[[7,1.5,['HIT','CUT','POISON'],1,null]]);
- assert.equal(vulnerabilityText(list[0]),'Danni da colpo, taglio e veleno ricevuti ×1,5. La ricerca non ha trovato la carta: dura ancora 1 turno dopo questo.');
+ assert.equal(vulnerabilityText(list[0]),'Danni da [[HIT]], [[CUT]] e [[POISON]] ricevuti ×1,5. La ricerca non ha trovato la carta: dura ancora 1 turno dopo questo.');
  const last=withReveal('other',false,0),chip=chipsOf(last.id,last.p.character).find(c=>c.id.includes('-vu-'))!;
- assert.equal(chip.short,'1');assert.equal(chip.text,'Danni da colpo, taglio e veleno ricevuti ×1,5. La ricerca non ha trovato la carta: finisce a fine turno.');
+ assert.equal(chip.short,'1');assert.equal(chip.text,'Danni da [[HIT]], [[CUT]] e [[POISON]] ricevuti ×1,5. La ricerca non ha trovato la carta: finisce a fine turno.');
  assert.equal(last.p.revealed,undefined);
  const bound=vulnerabilitiesOf(withReveal('other').p.character)[0];assert.equal(bound.left,null);assert.equal(bound.untilPlayed,strike.name);
 });
@@ -63,14 +65,14 @@ test('two tokens: two chips, and the text says that they multiply',()=>{
  const chips=chipsOf(id,p.character).filter(c=>c.id.includes('-vu-'));
  assert.deepEqual(chips.map(c=>c.id),[`status-${id}-vu-7`,`status-${id}-vu-9`]);
  assert.ok(chips.every(c=>c.text.endsWith('Più vulnerabilità si moltiplicano.')));
- assert.ok(chips[1].text.startsWith('Danni da colpo ricevuti ×1,5.'));
+ assert.ok(chips[1].text.startsWith('Danni da [[HIT]] ricevuti ×1,5.'));
  assert.equal(chips[0].short,'∞');assert.equal(chips[1].short,'2');
 });
 
 test('the note of a face-up card: whose, since when, until when, the token bound to it; the badge carries the factor',()=>{
  const {v,p}=withReveal('other'),r=p.revealed![0],n=revealedNote(r,'Mara',p.character);
  assert.equal(n.badge,'SCOPERTA ×1,5');assert.equal(n.label,'scoperta, tiene una vulnerabilità ×1,5');
- assert.equal(n.text,`Carta scoperta: Mara l’ha trovata con una ricerca al turno ${v.turn-1}. La vedono tutti finché resta nella sua mano e finché non gioca una carta con questo nome. La sua vulnerabilità legata a questa carta: ${BOUND}`);
+ assert.equal(n.text,`Carta scoperta: Mara l’ha trovata con una ricerca al turno ${v.turn-1}. La vedono tutti finché resta nella sua mano e finché non gioca una carta con questo nome. La sua vulnerabilità legata a questa carta: ${plainText(BOUND)}`);
  const own=revealedNote(r,null,p.character);
  assert.ok(own.text.startsWith('Carta scoperta: l’hai trovata')&&own.text.includes('finché non giochi una carta con questo nome')&&own.text.includes('La tua vulnerabilità'));
  // Another token, not of this card (a failed search), does not change its badge.

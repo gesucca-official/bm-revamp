@@ -82,6 +82,14 @@ KEYWORDS = [
     ("basicAction", "Basic Action <i>(you can always do this if its conditions are met)</i>"),
 ]
 GROUP_ORDER = {"BA": 0, "BO": 1, "LR": 2, "AR": 3}
+# SB-31 F4 (D198 (10)): the text of the status that the token creates, for the client. Only what the sheet of the token already says
+# (docs/sets/base.md, «Bottiglia Spaccata»): no rule is added. Each fragment must still be in the full text of the token, so a change
+# of the rule stops the generator instead of leaving a stale sentence.
+TOKEN_STATUS_TEXT = ("I tuoi [[HIT]] diventano [[CUT]] e ne infliggi una volta e mezza, arrotondando per difetto. Dura finché non cambia un "
+                     "danno e, dal primo danno che cambia, fino alla fine di quel turno; «PERMESSO SCUSA PUOI SMETTERLA» lo toglie.")
+TOKEN_STATUS_SOURCE = ("i tuoi [[HIT]] diventano [[CUT]] e ne infliggi una volta e mezza, arrotondando per difetto",
+                       "Dura finché non cambia un danno; dal primo danno che cambia vale ancora, su ogni danno, fino alla fine di quel turno",
+                       "«PERMESSO SCUSA PUOI SMETTERLA» lo toglie")
 
 
 def load_texts_module(root=ROOT):
@@ -210,6 +218,21 @@ class Catalog:
         b = card["binding"]
         return card.get("boundTo") or (self.ts.legato_java(b) if card.get("java") else None) or self.ctx.bound.get(b)
 
+    def character_of(self, entry):
+        """SB-31 F4 (D196 (2), D198 (13)): the binding of the character a card is of, read from its slot (SPA-, MAR-, LR-TOS ...);
+        None for a generic action, an item, the token, a generic last resort and any card of a set without slots. Descriptive: no rule reads it."""
+        code = self.slot.get(entry["class"])
+        if not code or entry["type"] == "Personaggio" or entry["subtype"] == "Token":
+            return None
+        prefix, _, rest = code.partition("-")
+        owner = self.char_code.get(rest if prefix == "LR" else prefix)
+        if entry["subtype"] == "Ultima risorsa" and not entry.get("exclusiveTo"):
+            return None  # R01a: a last resort without a reservation is generic, whatever its slot (LR-ROC, «Non Mi Hai Fatto Niente»)
+        expected = entry.get("owner") or entry.get("exclusiveTo")
+        if expected is not None and owner != expected:
+            raise ValueError(f"{entry['class']}: lo slot {code} dice il personaggio {owner}, la scheda {expected}")
+        return owner
+
     def card_entry(self, s, card, full):
         ts, b, gui = self.ts, card["binding"], card["gui"]
         kind, subtype = self.classify(card)
@@ -246,9 +269,13 @@ class Catalog:
         ts = self.ts
         if voce["breve"] != ts.breve_token() or voce["completo"] != ts.completo_token(self.ctx):
             raise ValueError("token: i testi del file non sono quelli del generatore di SB-25")
+        whole = " ".join(voce["completo"])
+        stale = [f for f in TOKEN_STATUS_SOURCE if f not in whole]
+        if stale:
+            raise ValueError("token: il testo dello stato (TOKEN_STATUS_TEXT) non deriva più dal testo completo: manca «" + stale[0] + "»")
         return {"class": ts.TOKEN_BINDING, "name": ts.TOKEN_NOME, "description": voce["breve"], "type": "Oggetto",
                 "subtype": "Token", **TOKEN_ROLE, "rarity": None, "fullText": voce["completo"], "flavour": None,
-                "cost": {}, "priority": None, "textSource": "generatore"}
+                "statusText": TOKEN_STATUS_TEXT, "cost": {}, "priority": None, "textSource": "generatore"}
 
     # ------------------------------------------------------------------------------------------------------- grouping
     def group_of(self, entry):
@@ -535,7 +562,11 @@ def annex(cat, s):
             item["exclusiveTo"] = e["exclusiveTo"]
         if e.get("rarity"):
             item["rarity"] = e["rarity"]
+        if cat.character_of(e):
+            item["character"] = cat.character_of(e)
         item["fullText"], item["flavour"] = e["fullText"], e["flavour"]
+        if e.get("statusText"):
+            item["statusText"] = e["statusText"]
         (tokens if e["subtype"] == "Token" else cards).append(item)
     starters = [d for d in s.data.get("decks", []) if d["id"].startswith("starter-")]
     rows = sorted([d["character"], b, n] for d in starters for b, n in d["cards"].items())

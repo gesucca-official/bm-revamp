@@ -219,6 +219,47 @@ try{
  assert.equal(shownCards.length+shownChars.length,124);
  // SB-28, D184 (6): the atlas still draws 33 of these 124 faces (SB-32 draws the rest); every other face shows the placeholder, none stays blank.
  assert.equal(art+placeholders,124,'every face has its own tile or the placeholder');assert.equal(art,33,'faces with their own tile in the atlas (the 34 of the art test, less the token, which has no face)');assert.ok(scroll.page);
+ // SB-31 F4 (D196 (4), D197 (4), D198 (9)): the filters of the catalog intersect, the characters come in the order by name (the same at every start), every face shows the rarity of the print.
+ {
+  const pick=(id,value)=>page.getByTestId(id).selectOption(value);
+  const listed=async()=>({cards:await page.locator('[data-testid=catalog] [data-testid=card-face]').evaluateAll(n=>n.map(e=>e.dataset.binding)),chars:await page.locator('[data-testid=catalog] [data-testid=character-face]').evaluateAll(n=>n.map(e=>e.dataset.binding))});
+  const reset=async()=>{const b=page.getByTestId('filter-reset');if(await b.count())await b.click();};
+  const same=(got,want,what)=>assert.deepEqual([...got].sort(),[...want].sort(),what);
+  assert.equal(await page.getByTestId('filter-set').count(),0,'one set: the set filter is not shown');assert.equal(await page.getByTestId('filter-reset').count(),0,'no filter set: no reset button');
+  assert.equal(await text('[data-testid=filter-count]'),'124 di 124 carte');
+  // The order of the characters: by name, then binding (the key of `characterOrder`), whatever the server sends.
+  const wantOrder=Object.entries(characters).sort((a,b)=>a[1].localeCompare(b[1],'it')||a[0].localeCompare(b[0])).map(e=>e[0]);
+  assert.deepEqual(shownChars,wantOrder,'the characters of the catalog in the order by name');
+  // The rarity on every face: one to three ticks for a card, «P» for a character.
+  const ticks={COMMON:1,UNCOMMON:2,RARE:3};
+  const marks=await page.locator('[data-testid=catalog] [data-testid=card-face],[data-testid=catalog] [data-testid=character-face]').evaluateAll(n=>n.map(e=>{const r=e.querySelector('[data-testid=rarity]');return {binding:e.dataset.binding,ticks:r?Number(r.dataset.ticks):null,mark:r?r.textContent.trim():null,drawn:r?r.querySelectorAll('i').length:0};}));
+  for(const m of marks){const c=annex.cards.find(x=>x.class===m.binding);
+   if(c){assert.equal(m.ticks,ticks[c.rarity],`rarity of ${m.binding}`);assert.equal(m.drawn,ticks[c.rarity],`ticks drawn on ${m.binding}`);}
+   else{assert.equal(m.ticks,0,`protagonist ${m.binding}`);assert.equal(m.mark,'P');}}
+  // One character: its cards and its face; «generic»: the cards of no character and no character face.
+  const perCharacter={};
+  for(const ch of annex.characters){await pick('filter-character',ch.class);const l=await listed();perCharacter[ch.class]=l.cards.length;
+   same(l.cards,annex.cards.filter(c=>c.character===ch.class).map(c=>c.class),`cards of ${ch.class}`);assert.deepEqual(l.chars,[ch.class]);
+   assert.equal(await text('[data-testid=filter-count]'),`${l.cards.length+1} di 124 carte`);}
+  await pick('filter-character','generic');const generic=await listed();
+  same(generic.cards,annex.cards.filter(c=>!c.character).map(c=>c.class),'generic cards');assert.deepEqual(generic.chars,[]);
+  assert.equal(generic.cards.length+Object.values(perCharacter).reduce((a,b)=>a+b,0),117,'the characters and the generic cards cover the 117');
+  // Intersection: character, rarity and type together; the result is smaller than each filter alone and equals the annex filtered the same way.
+  const mara=annex.characters.find(c=>c.name.startsWith('Mara')).class;
+  await reset();await pick('filter-character',mara);const alone=(await listed()).cards.length;
+  await pick('filter-rarity','RARE');const two=await listed();
+  await pick('filter-type','action');const three=await listed();
+  same(two.cards,annex.cards.filter(c=>c.character===mara&&c.rarity==='RARE').map(c=>c.class),'character and rarity');
+  same(three.cards,annex.cards.filter(c=>c.character===mara&&c.rarity==='RARE'&&c.type!=='Oggetto').map(c=>c.class),'character, rarity and type');
+  assert.ok(two.cards.length>0&&two.cards.length<alone&&three.cards.length<=two.cards.length,'each filter narrows');
+  await pick('filter-type','item');assert.deepEqual((await listed()).cards,[],'Mara has no item: the intersection is empty');assert.equal(await page.getByTestId('catalog-empty').count(),1);
+  // «P» only the characters have; item only the items.
+  await reset();await pick('filter-rarity','PROTAGONIST');{const l=await listed();assert.deepEqual(l.cards,[]);assert.deepEqual(l.chars,wantOrder);}
+  await reset();await pick('filter-type','item');{const l=await listed();same(l.cards,annex.cards.filter(c=>c.type==='Oggetto').map(c=>c.class),'items');assert.deepEqual(l.chars,[]);}
+  await pick('filter-rarity','COMMON');same((await listed()).cards,annex.cards.filter(c=>c.type==='Oggetto'&&c.rarity==='COMMON').map(c=>c.class),'common items');
+  await reset();assert.equal(await text('[data-testid=filter-count]'),'124 di 124 carte');assert.equal((await listed()).cards.length,117);
+  step('catalogFilters',{perCharacter,generic:generic.cards.length,mara:{alone,rare:two.cards.length,rareAction:three.cards.length},rarityMarks:marks.length,characterOrder:wantOrder});
+ }
  await page.getByTestId('show-catalog').click();
 
  // R02 1.12 (SB-1): the regular cards of the decks of this run, ten actions twice and no item, so hand plus deck stays countable.
@@ -281,6 +322,45 @@ try{
  assert.deepEqual([...switched.boundOffer].sort(),[`Azione legata ${card('junkie.character.PatheticBlade')}`,`Azione legata ${card('junkie.character.RottenSmile')}`,`Azione legata ${card('base.tossico.bound.RaschiareIlFondo')}`].sort());
  assert.ok(switched.problems.includes('Scegli 2 azioni legate diverse (ne hai 0).'));
  assert.equal(A.sends(markInvalid).filter(f=>f.headers.destination.includes('/deck')).length,0);
+
+ // SB-31 F4 (O15, D196 (4)): the deck bar counts regular cards over 20, bound cards over 2 and the last resort; it stays on screen while the editor scrolls (at the top on a wide
+ // screen, at the bottom on a low one, 550 px) and opens the summary. The bound choice (toggleBound) is only checked here: a third one is ignored, a second tap leaves it.
+ {
+  const bar=()=>page.getByTestId('deck-bar'),barText=async()=>(await bar().getAttribute('data-text'));
+  const low=vh<=550,sheetRect=()=>page.evaluate(()=>{const s=document.querySelector('.sheet').getBoundingClientRect(),b=document.querySelector('[data-testid=deck-bar]').getBoundingClientRect();return {sheet:{top:s.top,bottom:s.bottom},bar:{top:b.top,bottom:b.bottom,height:b.height,left:b.left,right:b.right},viewport:innerHeight,width:innerWidth};});
+  await page.getByTestId('new-deck').click();
+  assert.equal(await barText(),'Regolari 0 / 20 · legate 0 / 2 · ultima risorsa —');
+  await pickCharacter('bruiser.character.BigBadBruiser');await pickStruggle();
+  await pickBound('bruiser.character.LittleSmack');assert.equal(await barText(),'Regolari 0 / 20 · legate 1 / 2 · ultima risorsa ✓');
+  await pickBound('bruiser.character.LittleRage');await pickBound('base.spazienzio.bound.TestaAlMuro');
+  assert.equal(await barText(),'Regolari 0 / 20 · legate 2 / 2 · ultima risorsa ✓','a third bound is ignored');
+  await pickBound('bruiser.character.LittleRage');assert.equal(await bar().getAttribute('data-bound'),'1','a second tap leaves the bound');await pickBound('bruiser.character.LittleRage');
+  await slot('Mazzo regolare');await addRegular('bruiser.Glare',2);await addRegular('bruiser.StunningBlow',1);
+  assert.equal(await barText(),'Regolari 3 / 20 · legate 2 / 2 · ultima risorsa ✓');
+  assert.match(await text('[data-testid=deck-counts]'),/^Regolari 3 \/ 20/);
+  // Fixed: after scrolling the sheet to the end and back, the bar is where it should be and inside the viewport.
+  const where={};
+  for(const [name,top] of [['end',true],['start',false]]){
+   await page.evaluate(end=>{const s=document.querySelector('.sheet');s.scrollTop=end?s.scrollHeight:0;},top);await page.waitForTimeout(150);where[name]=await sheetRect();const r=where[name];
+   assert.ok(r.bar.top>=-1&&r.bar.bottom<=r.viewport+1,`the bar is inside the viewport (${name}): ${JSON.stringify(r.bar)}`);
+   assert.ok(r.bar.height>=44&&r.bar.height<=70,`the bar is one line high (${name}): ${r.bar.height}`);
+   // At the very end of the scroll the bar rests at the end of the editor, above the padding of the sheet (14 px on a low screen, plus its border).
+   if(low)assert.ok(r.sheet.bottom-r.bar.bottom<=20,`low screen: the bar at the bottom of the sheet (${name}): ${JSON.stringify(r)}`);
+   else if(name==='end')assert.ok(r.bar.top-r.sheet.top<=12,`wide screen: the bar at the top of the sheet once the editor has scrolled (${name}): ${JSON.stringify(r)}`);}
+  assert.ok((await page.evaluate(()=>{const s=document.querySelector('.sheet');return s.scrollHeight>s.clientHeight+200;})),'the editor scrolls (the bar is fixed against something)');
+  // The summary: character, basic, last resort, bound cards, the regular cards with copies over 20; it stays inside the viewport and closes with Escape.
+  await page.evaluate(()=>{document.querySelector('.sheet').scrollTop=0;});
+  await page.getByTestId('deck-bar-open').click();await page.getByTestId('deck-summary').waitFor();
+  assert.equal(await page.getByTestId('deck-bar-open').getAttribute('aria-expanded'),'true');
+  const summaryText=await text('[data-testid=deck-summary]'),sr=await page.getByTestId('deck-summary').evaluate(e=>{const r=e.getBoundingClientRect();return {top:r.top,bottom:r.bottom,h:r.height,viewport:innerHeight};});
+  for(const part of [characters['bruiser.character.BigBadBruiser'],card('com.basic.BruiserGrab'),card('com.last.Struggle'),card('bruiser.character.LittleSmack'),card('bruiser.character.LittleRage'),'Regolari 3 / 20','Legate 2 / 2',`${card('bruiser.Glare')} ×2`,`${card('bruiser.StunningBlow')} ×1`])
+   assert.ok(summaryText.includes(part),`the summary names «${part}»: ${summaryText}`);
+  assert.ok(sr.top>=-1&&sr.bottom<=sr.viewport+1,`the summary is inside the viewport: ${JSON.stringify(sr)}`);
+  await A.shot('02b-deck-summary');
+  await page.keyboard.press('Escape');await page.waitForTimeout(100);assert.equal(await page.getByTestId('deck-summary').count(),0,'Escape closes the summary');
+  step('deckBar',{low,where,summary:summaryText,summaryBox:sr});
+  await page.getByTestId('cancel-edit').click();
+ }
 
  // P19/P21/P22/P23: create "Strano" (Bruiser, both bound cards, ten actions twice), search, remove and put back a copy, save.
  const markSave=A.sent.length;
@@ -476,6 +556,53 @@ try{
   await page.getByTestId('tab-collection').click();
   await page.locator('[data-deck="Ultima"]').getByTestId('delete-deck').click();await page.getByTestId('confirm-delete').click();
   await page.locator('[data-deck="Ultima"]').waitFor({state:'detached',timeout:10000});
+ }
+
+ // SB-31 F4 (D196 (4); the check of the proposal, section 8): a valid deck built from the full catalog and through the filters (the character, the generic common actions) is saved
+ // and accepted by the server: the regular cards of the character come from the character filter, the others from «generic, common, action»; then it starts an open game.
+ {
+  const DUC='base.character.Rocco',pickF=(id,v)=>page.getByTestId(id).selectOption(v);
+  const regularOf=c=>c.subtype==='Regolare'&&c.type==='Azione';
+  const poolBindings=()=>page.locator('[data-testid=regular-pool] [data-testid=card-face]').evaluateAll(n=>n.map(e=>e.dataset.binding));
+  const markF=A.sent.length;
+  await page.getByTestId('tab-collection').click();await page.getByTestId('new-deck').click();await page.getByTestId('deck-name').fill('Duccio');
+  await pickCharacter(DUC);await pickStruggle();
+  const ownBounds=annex.cards.filter(c=>c.subtype==='Legata al personaggio'&&c.character===DUC).map(c=>c.class);assert.equal(ownBounds.length,3,'three bound cards for Duccio');
+  await pickBound(ownBounds[0]);await pickBound(ownBounds[2]);
+  await slot('Mazzo regolare');
+  // The character filter lists, among regular actions, only his own.
+  await pickF('filter-character',DUC);await pickF('filter-type','action');
+  const own=await poolBindings(),wantOwn=annex.cards.filter(c=>regularOf(c)&&c.character===DUC).map(c=>c.class);
+  assert.deepEqual([...own].sort(),[...wantOwn].sort(),'the editor pool through the character filter');assert.ok(own.length>=4);
+  for(const b of own)for(let i=0;i<2;i++)await press(`Aggiungi una copia di ${card(b)}`);
+  // The rest from the generic common actions, through three filters at once.
+  await pickF('filter-character','generic');await pickF('filter-rarity','COMMON');
+  const generic=await poolBindings(),wantGeneric=annex.cards.filter(c=>regularOf(c)&&!c.character&&c.rarity==='COMMON').map(c=>c.class);
+  assert.deepEqual([...generic].sort(),[...wantGeneric].sort(),'the editor pool through three filters');
+  const need=20-own.length*2,take=generic.slice(0,Math.ceil(need/2));assert.ok(take.length*2>=need,'enough generic common actions');
+  let left=need;for(const b of take){for(let i=0;i<2&&left>0;i++,left--)await press(`Aggiungi una copia di ${card(b)}`);}
+  assert.equal(await page.getByTestId('deck-bar').getAttribute('data-text'),'Regolari 20 / 20 · legate 2 / 2 · ultima risorsa ✓');
+  assert.equal(await page.getByTestId('save-deck').isEnabled(),true);
+  await pickF('filter-rarity','');await pickF('filter-character','');await pickF('filter-type','');
+  await A.shot('02c-filtered-deck');
+  await page.getByTestId('save-deck').click();
+  const saved=await deckSaved(markF,'Duccio');
+  assert.ok(saved,'the server saved the deck');assert.equal(saved.character.bindingName,DUC);assert.equal(saved.regularCards.length,20);assert.deepEqual(saved.characterBoundCards.map(c=>c.bindingName),[ownBounds[0],ownBounds[2]]);
+  const perName={};for(const c of saved.regularCards)perName[c.bindingName]=(perName[c.bindingName]??0)+1;assert.ok(Object.values(perName).every(n=>n<=2),'at most two copies');
+  assert.ok(own.every(b=>perName[b]===2),'his own regular cards twice each');
+  assert.equal(A.sends(markF).filter(f=>f.headers.destination.startsWith('/app/user/devAlice/deck')).length,1,'one deck message');
+  assert.equal(A.messages('/user/queue/account/error').length,0,'the server raised no account error');
+  // The server accepts it to play: an open game starts with it (a refused deck would answer «Invalid deck»).
+  const opened=await startOpen('Duccio');
+  await A.wait(s=>s&&s.phase==='choose'&&s.hits.some(h=>h.kind==='hand'),30000,'Duccio table');
+  const g=A.messages('/user/queue/game/open/1vCom/ready').at(-1).body,v=A.views(g)[0].players.devAlice;
+  assert.equal(v.character.bindingName,DUC);assert.equal(v.cardsInHand.length+v.deck,23);assert.deepEqual(fromDeck(g,saved).foreign,[]);
+  step('filteredDeckAccepted',{own,generic:take,regular:Object.keys(perName).length,character:v.character.bindingName,hand:v.cardsInHand.map(c=>c.bindingName),listed:opened.listed});
+  await page.getByLabel('Apri menu').click();await page.getByRole('button',{name:'Abbandona la partita'}).click();await page.getByRole('button',{name:'Sì, abbandona'}).click();
+  await page.getByTestId('quick').waitFor({timeout:15000});
+  await page.getByTestId('tab-collection').click();
+  await page.locator('[data-deck="Duccio"]').getByTestId('delete-deck').click();await page.getByTestId('confirm-delete').click();
+  await page.locator('[data-deck="Duccio"]').waitFor({state:'detached',timeout:10000});
  }
 
  // Deck unavailable (open/1vCom/error): provoked by rewriting the outgoing deckId, not reachable from the UI.

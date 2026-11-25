@@ -71,7 +71,8 @@ export default defineConfig({
   // sockjs-client still reads the Node global in a few browser modules.
   define: {global: 'globalThis'},
   plugins: [accessGate()],
-  // The rules are imported from docs/game-rules.md (D10, src/public.tsx): the dev server may read that one file.
-  server: {host: '127.0.0.1', port, strictPort: true, proxy, fs: {allow: ['.', '../docs/game-rules.md']}},
+  // The rules are imported from docs/game-rules.md (D10, src/public.tsx) and the texts of the set from the annex docs/rules-catalog.json (src/annex.ts, SB-31 D198 (16)):
+  // the dev server may read those files.
+  server: {host: '127.0.0.1', port, strictPort: true, proxy, fs: {allow: ['.', '../docs/game-rules.md', '../docs/rules-catalog.json']}},
   preview: {host: lanHost ?? '127.0.0.1', port, strictPort: true, proxy}
 });
