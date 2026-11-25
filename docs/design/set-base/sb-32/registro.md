@@ -812,3 +812,68 @@ Il proprietario approva «SGOMBERIAMOVI», «PAZIENZA: FINITA» e «FAI BASTA» 
 | Anteprima | [WebP](anteprime/com.basic.BruiserGrab-2.webp), 512 px, qualità 80 |
 | Controllo a 60 px | La mano afferra la bottiglia sul banco senza avversario; l’oggetto è piccolo a 60 px. |
 | Esito | Conservata per il giudizio; nessun tentativo ripetuto. |
+
+
+## Secondo giudizio e correzioni del lotto 1
+
+Il proprietario approva VIOLENZAZIONE e la nuova versione di NON GIOCARE COL COLTELLO NO con «ok». ADOPERIAMOTI resta in attesa. Quattro [prompt](lotto-01-spazienzio.md#secondo-giudizio-correzioni-del-lotto-1) committati in `4f0fdec`; una generazione per prompt, nessun rifiuto o tentativo ripetuto. Modello e riscrittura non esposti.
+
+### SPEDIAMOTI DUNQUE IN O-AHIO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.ExtremelyViolentBlow` |
+| source | `originali/bruiser.ExtremelyViolentBlow-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2583161 / `213e237b325d54631fd66bb4a7450f31451a8828099d5eeffe8341ecf1e36e73` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `1bd4439c42d516861d5ece2f86f14ecf249b1a8ab3dfaf070d207d2f783ad45f` |
+| Allegato effettivo | `originali/bruiser.ExtremelyViolentBlow.png`: `e477d1735a916f199feebabce60c2a2fc0bb832a5784e6bff90da6461279590f` |
+| Anteprima | [WebP](anteprime/bruiser.ExtremelyViolentBlow-3.webp), 512 px, qualità 80 |
+| Controllo | Pugno a contatto e traiettoria coerente; avventore ancora vicino al bordo. |
+| Esito | Conservata per il giudizio. |
+
+### GARGANTUESCO IMPATTO SUL TU
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.SuperImpact` |
+| source | `originali/bruiser.SuperImpact-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2802381 / `8e520d5a2d19bbfeb3bd73bb587d6fce0976570073b8dea731cc10eff029b5c5` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `0141a8da85424ba2970fab6bebafd9d53222c8e5bcd85c18817f0944eefeb56b` |
+| Allegato effettivo | `originali/bruiser.SuperImpact-2.png`: `bfe161c03698b1dd68df3a5095a01b2c836d88f916673883584b4bbcdf044d4d` |
+| Anteprima | [WebP](anteprime/bruiser.SuperImpact-3.webp), 512 px, qualità 80 |
+| Controllo | Ciabatte visibili; dita visibili insieme ai calzini, dettaglio da giudicare. |
+| Esito | Conservata per il giudizio. |
+
+### LIEVE FASTIDIO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.LittleRage` |
+| source | `originali/bruiser.character.LittleRage-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2683217 / `8f3bae1aad9644cc5e611ba34e9698620c01e8ce542d8933dae3d698bf63bd73` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `faa1c147715d403477c5e4015399ce64b4b3aa89db9acbf4b3c279c632cd2cc6` |
+| Allegato effettivo | `originali/bruiser.character.LittleRage-2.png`: `99ac18386436758edb84d281581f13e8d12a19c58f0c2081e2773c99bca139f1` |
+| Anteprima | [WebP](anteprime/bruiser.character.LittleRage-3.webp), 512 px, qualità 80 |
+| Controllo | Pugno sulla guancia e sorriso visibili; espressione piccola a 60 px. |
+| Esito | Conservata per il giudizio. |
+
+### SVEGLIAMOCI - MA TU NO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.LittleSmack` |
+| source | `originali/bruiser.character.LittleSmack-4.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2832624 / `2495c55cb523b1a8c8d09fe06b91351635ae00814184270685d6a920731dbc15` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `8d9e08d8760fa5b36dd9217ba43279677b26521b3fb8bd480569ad249e1c2a01` |
+| Allegato effettivo | `originali/bruiser.character.LittleSmack-3.png`: `0da8cd215cf4c50c0e16a3f3b8416e65d8df86be1251161bd62009004e6bdb70` |
+| Anteprima | [WebP](anteprime/bruiser.character.LittleSmack-4.webp), 512 px, qualità 80 |
+| Controllo | Due mani ai lati della testa; la posizione delle dita e il gesto meritano giudizio. |
+| Esito | Conservata per il giudizio. |
