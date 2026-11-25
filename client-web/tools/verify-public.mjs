@@ -56,7 +56,7 @@ const strip=s=>s.replace(/\*\*|\*|`/g,'').replace(/\[([^\]]*)\]\([^)]*\)/g,'$1')
 const source=async path=>{
  const text=(await readFile(join(repo,path),'utf8')).replace(/^﻿/,'').replace(/\r\n?/g,'\n');
  const tables=[];{let t=null;for(const l of text.split('\n')){if(l.startsWith('|')){if(/^\|[-:| ]+\|$/.test(l))continue;const cells=l.trim().replace(/^\||\|$/g,'').split('|').map(c=>strip(c));if(!t){t=[];tables.push(t);}t.push(cells);}else t=null;}}
- return {text,headings:[...text.matchAll(/^(#{1,6}) (.*)$/gm)].map(m=>`${m[1].length} ${m[2].trim()}`),revisions:[...text.matchAll(/^- \*\*(\d+\.\d+) —/gm)].map(m=>m[1]),
+ return {text,headings:[...text.matchAll(/^(#{1,6}) (.*)$/gm)].map(m=>`${m[1].length} ${m[2].trim()}`),revisions:[...text.matchAll(/^- \*\*(\d+\.\d+(?:\.\d+)?) —/gm)].map(m=>m[1]),
   version:/Versione \*\*(\S+) —/.exec(text)[1],tables};
 };
 const ruleSource=await source('docs/game-rules.md'),setSource=await source('docs/sets/base.md');
@@ -115,16 +115,20 @@ try{
   return {headings:[...r.querySelectorAll('h1,h2,h3,h4')].map(h=>`${h.tagName[1]} ${h.textContent.trim()}`),
    tables:[...r.querySelectorAll('table')].map(t=>[...t.rows].map(row=>[...row.cells].map(c=>c.textContent.trim()))),
    revisions:[...r.querySelectorAll(':scope > ul')].at(-1)?.children.length??0,
-   revisionVersions:[...([...r.querySelectorAll(':scope > ul')].at(-1)?.children??[])].map(li=>/^(\d+\.\d+) —/.exec(li.textContent)?.[1]??null),
+   revisionVersions:[...([...r.querySelectorAll(':scope > ul')].at(-1)?.children??[])].map(li=>/^(\d+\.\d+(?:\.\d+)?) —/.exec(li.textContent)?.[1]??null),
    anchors:r.querySelectorAll('a').length,ids:r.querySelectorAll('[id]').length,html:[...r.querySelectorAll('script,iframe,img')].length,
    text:r.innerText,head:document.querySelector('.rules .public-head').innerText,index:[...document.querySelectorAll('.rules-index button')].map(b=>b.textContent)};},id);
  const dom=await readDoc('rules-text'),setDom=await readDoc('set-text');
- // Regulation 1.13: the card sheets (formerly the R07 and R07a tables) are in the set document.
- const r07=setDom.tables.findIndex(t=>t[0].join('|')==='Carta|Tipologia|Sottotipo|Costo|Priorità|Bersaglio|Effetto in ordine');
- const r07a=setDom.tables.findIndex(t=>t[0].join('|')==='Carta|Ruolo|Guadagni a sé');
+ // Set Base 1.0: the card sheets are the #### headings of the set document (S2 characters, S3 cards), shown as h4;
+ // the roles are the S4 table. Both expectations are read from docs/sets/base.md, not hard-coded.
+ const sheetsSource=setSource.headings.filter(h=>h.startsWith('4 ')).map(h=>h.slice(2));
+ const sheetsDom=setDom.headings.filter(h=>h.startsWith('4 ')).map(h=>h.slice(2));
+ const rolesHeader='Carta|Identificatore|Ruolo|Guadagni a sé|Danno nominale|Importo nominale';
+ const rolesSource=setSource.tables.find(t=>t[0].join('|')===rolesHeader);
+ const rolesIndex=setDom.tables.findIndex(t=>t[0].join('|')===rolesHeader);
  const rulesCheck={version:/Regolamento (\S+)/.exec(dom.head)?.[1],headings:dom.headings.length,headingsEqual:JSON.stringify(dom.headings)===JSON.stringify(sourceHeadings),
   index:dom.index,revisions:dom.revisionVersions,tables:dom.tables.map(t=>t.length),tablesEqual:JSON.stringify(dom.tables)===JSON.stringify(sourceTables),
-  r07Rows:setDom.tables[r07]?.length-1,r07aRows:setDom.tables[r07a]?.length-1,anchors:dom.anchors,ids:dom.ids,rawHtml:dom.html,
+  cardSheets:sheetsDom.length,cardSheetsSource:sheetsSource.length,rolesRows:setDom.tables[rolesIndex]?.length-1,rolesRowsSource:rolesSource?.length-1,anchors:dom.anchors,ids:dom.ids,rawHtml:dom.html,
   textWords:words(dom.text).length,sourceWords:words(rules.replace(/^\|[-:| ]+\|$/gm,'')).length,layout:await layout()};
  step('rules',rulesCheck);
  assert.equal(rulesCheck.version,/Versione \*\*(\S+) —/.exec(rules)[1]);
@@ -132,7 +136,10 @@ try{
  assert.deepEqual(dom.index,['R00','R01','R01a','R02','R02a','R03','R04','R05','R06','R07','R07a','R07b','R08','R09','Revisioni',setName]);
  assert.deepEqual(rulesCheck.revisions,sourceRevisions);
  assert.ok(rulesCheck.tablesEqual,'every table cell equal to the source');
- assert.ok(r07>=0&&r07a>=0,'card sheets and R07a values present in the set document');
+ assert.equal(sheetsSource.length,125,'docs/sets/base.md has 125 #### headings today (Set Base 1.0)');
+ assert.deepEqual(sheetsDom,sheetsSource,'card sheets: the h4 headings of the set page equal, in order, the #### of docs/sets/base.md');
+ assert.ok(rolesIndex>=0&&rolesSource,'roles table S4 present with its header, in the set page and in the source');
+ assert.equal(rulesCheck.rolesRows,rulesCheck.rolesRowsSource,'roles table S4 has as many rows as the source table');
  assert.ok(!dom.tables.some(t=>t[0][0]==='Carta'),'no card table left in the regulation');
  assert.equal(rulesCheck.anchors,0);assert.equal(rulesCheck.ids,0);assert.equal(rulesCheck.rawHtml,0);
  assert.deepEqual(words(dom.text),words(rules.replace(/^\|[-:| ]+\|$/gm,'')),'full text equal to the source, markup aside');

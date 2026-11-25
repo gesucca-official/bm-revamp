@@ -601,4 +601,60 @@ Tutte con `VerifyAll -ReuseClient -Only 'test,build,size,<verifica>' -Measures <
 
 ### Domande
 
-32. **`verify-public.mjs` riga 135 (e le righe collegate)**: vuole che adegui il controllo alle tabelle del Set Base 1.0 (S4 per il ruolo; le schede in sezioni `###` invece che in tabella: cambia l'asserzione sui contenuti) in un blocco con perimetro, dopo la sua decisione su cosa deve restare asserito?
+32. **`verify-public.mjs` riga 135 (e le righe collegate)**: vuole che adegui il controllo alle tabelle del Set Base 1.0 (S4 per il ruolo; le schede in sezioni `###` invece che in tabella: cambia l'asserzione sui contenuti) in un blocco con perimetro, dopo la sua decisione su cosa deve restare asserito? **Risposta: sì del proprietario, applicata in [F5c](#f5c--verifypublic-schede-e-ruolo-del-set-base-10).**
+
+## F5c — VerifyPublic: schede e ruolo del Set Base 1.0
+
+**Esito: chiusa.** `VerifyPublic` verde a 1366×768 e 844×390 (corse reali, `ok: true`, nessun errore di pagina). R15 passa in «Chiuse». Base `7e1dc55`. Commit senza push.
+
+### Cosa cambia
+
+`client-web/tools/verify-public.mjs`, quattro correzioni, tutte sul documento del set:
+
+1. **Schede.** Al posto della tabella `Carta|Tipologia|…` (che il Set Base 1.0 non ha più) il controllo prende dalla fonte i `####` di `docs/sets/base.md` (125, asserito) e li confronta, in ordine, con gli h4 della pagina del set. Nessun numero scritto a mano.
+2. **Ruolo.** La tabella S4 (`Carta|Identificatore|Ruolo|Guadagni a sé|Danno nominale|Importo nominale`) deve esserci nella pagina e nella fonte, con lo stesso numero di righe della fonte (125).
+3. **Revisioni.** Le regex che leggono le revisioni del set (in `source()` e in `readDoc`) accettano tre numeri, `\d+\.\d+(?:\.\d+)?`: la revisione `1.0.1` (SB-29, 24 novembre 2026) prima non veniva letta. Il regolamento ha solo revisioni a due numeri e la sua asserzione non cambia nei valori. È un'estrazione, non un atteso.
+4. **Passo `rules`.** I campi `r07Rows`/`r07aRows` diventano `cardSheets`/`rolesRows`, con il conteggio della fonte accanto. Commento aggiornato.
+
+Riga 136 (nessuna tabella di carte nel regolamento) invariata. Nessun'altra asserzione rimossa, indebolita o con un atteso non letto dalla fonte. Attesi cambiati: quelli delle schede e del ruolo, come da risposta del proprietario alla domanda 1 di F5c (sì). Il controllo delle revisioni non ha attesi nuovi: legge la stessa fonte con l'estrazione corretta.
+
+### Diagnosi delle asserzioni del set
+
+Prima di correggere la regex una corsa diagnostica temporanea (non committata) ha raccolto, invece di lanciarle, le asserzioni del documento del set dalla riga 152 alla 167. Con la sola regex corretta **nessuna** fallisce: versione `1.0.1`, revisioni `['1.0.1','1.0']` uguali alla fonte, tabelle uguali, 21 349 parole uguali a 21 349. Quindi non c'era nulla da correggere oltre la regex, e nessuna asserzione va tolta o indebolita. Il file è stato ripristinato dalla copia salvata, con hash `f6dc7ff0…` come prima.
+
+### Verifiche
+
+| Corsa | Esito |
+|---|---|
+| `VerifyPublic` 1366×768 (reale) | verde, `ok: true`, 0 errori di pagina |
+| `VerifyPublic` 844×390 (reale) | verde, `ok: true`, 0 errori di pagina |
+| Diagnostica 1366×768 (temporanea) | 0 asserzioni del set fallite (righe 152–167) |
+| M27: attesa delle schede senza il primo `####` (`sheetsSource.slice(1)`), 1366×768 | rossa su «card sheets: the h4 headings…» (riga 140) |
+| M28: S4 con una riga in più (`rolesRowsSource+1`), 1366×768 | rossa su «roles table S4 has as many rows…» (riga 142) |
+| M29: regex delle revisioni in `readDoc` riportata a due numeri, 1366×768 | rossa sulle revisioni (riga 154): `[null, '1.0']` contro `['1.0.1', '1.0']` |
+
+Una mutazione per ciascuna correzione (schede, ruolo, regex); dopo ognuna il file è stato ripristinato dalla copia salvata, con hash `f6dc7ff0…` verificato.
+
+**Macchina.** Sulla 4320 ci sono un `vite preview` (PID 43328) e un `npm run serve` (PID 42116), non miei: li ho usati senza fermarli né ricostruirli. La 8080 era libera. Le evidenze sono in `%TEMP%` (`scratchpad\f5c`), non in `docs/reports/client-c2/`.
+
+**Console.** La corsa a 844×390 ha 4 messaggi di risorsa (500, 409, 502, 502) dagli scenari voluti (registrazione senza SMTP, server fermo) e un messaggio del browser «Permissions policy violation: unload»; a 1366×768 gli stessi, senza il 404 che compare nell'evidenza committata di C2b-5. Nessuno è un errore di pagina.
+
+### Rossi
+
+R15 chiusa, con la firma e la causa nel registro. Nessuna voce nuova.
+
+### Non verificato
+
+- Il client di gioco non è cambiato: la verifica è sul verificatore e sulla pagina servita dalla 4320 (non mia).
+- La decisione del proprietario sulla domanda 32 va registrata dalla regia in `docs/set-base-decisioni.md`; questo blocco non la scrive.
+- La sezione SB-31 del piano (paragrafo «F5 accettata… F5b…») dice ancora «R15 aperta»: è fuori perimetro e la regia la aggiorna.
+
+### Scelte prese
+
+- Diagnosi con un wrapper temporaneo sulle asserzioni del set, ripristinato dopo.
+- La regex a tre numeri è applicata a entrambe le estrazioni (fonte e pagina), così il confronto resta simmetrico.
+- Le mutazioni sono una per correzione (M27, M28, M29).
+
+### Domande
+
+Nessuna.
