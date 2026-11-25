@@ -702,3 +702,113 @@ Il proprietario ha scelto Spazienzio 3, Mara 1, Celestina 1, Piera 6, Beppe 1, S
 | Associazione | inferita: exec-932921fa |
 | Controllo a 60 px | Figura grande; bottiglia alzata visibile, ma non appare presa dal bancone. Da giudicare. |
 | Esito | Conservata provvisoriamente; giudizio del proprietario in attesa. |
+
+
+## Giudizio del proprietario e correzioni del lotto 1
+
+Il proprietario approva «SGOMBERIAMOVI», «PAZIENZA: FINITA» e «FAI BASTA» con «ok»; chiede le sette correzioni riportate nei [prompt letterali](lotto-01-spazienzio.md#correzioni-del-giudizio-del-proprietario), commit `370f649`. Una generazione per prompt, nessun nuovo rifiuto o tentativo aggiuntivo. Le versioni precedenti e gli originali restano conservati; modello e riscrittura non esposti.
+
+### Correzione — VIOLENZAZIONE
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.spazienzio.bound.TestaAlMuro` |
+| source | `originali/base.spazienzio.bound.TestaAlMuro-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3139454 / `4685f8fd07cc9f3ddb761190bc734c8f0a83b9258a9c982c56f63e24e44d5fa6` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `352b2ec806de1b8f35ce517539c5288fe28c481c28466d4d9003e374b628d237` |
+| Allegati effettivi | `spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Anteprima | [WebP](anteprime/base.spazienzio.bound.TestaAlMuro-2.webp), 512 px, qualità 80 |
+| Controllo a 60 px | Pugni e testa contro la parete imbottita; soggetto grande. A 60 px il gesto è meno immediato; il corpo è tagliato. Da giudicare. |
+| Esito | Conservata per il giudizio; nessun tentativo ripetuto. |
+
+### Correzione — SPEDIAMOTI DUNQUE IN O-AHIO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.ExtremelyViolentBlow` |
+| source | `originali/bruiser.ExtremelyViolentBlow-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2640323 / `232bbb99ec379ea1a6b6c27ac58ee7f95eea2413a1a2aff9a3cd24786da9f1dc` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `af4beb2a0e2814e549f3a8b401d816eb279114e0cf3b84b46f1bd6c1d045a548` |
+| Allegati effettivi | `originali/bruiser.ExtremelyViolentBlow.png`: `e477d1735a916f199feebabce60c2a2fc0bb832a5784e6bff90da6461279590f` |
+| Anteprima | [WebP](anteprime/bruiser.ExtremelyViolentBlow-2.webp), 512 px, qualità 80 |
+| Controllo a 60 px | Pugno e avversario lungo la stessa diagonale; l’avversario è piccolo e vicino al bordo a 60 px. |
+| Esito | Conservata per il giudizio; nessun tentativo ripetuto. |
+
+### Correzione — NON GIOCARE COL COLTELLO NO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.MadeOfStone` |
+| source | `originali/bruiser.MadeOfStone-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2912944 / `642de452b1856e7bdc30b1f1095552feedfb4e0f96ec242db2430b670bbae8ba` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `3d451900e5c2e58904f5184b72bad0f104537bfc72bbf43bd0c2f6b30c456cca` |
+| Allegati effettivi | `originali/bruiser.MadeOfStone.png`: `ea252054a321bd159ef4bdfa7af9055f66662411a8578bc8da67ea7b90b862b1` |
+| Anteprima | [WebP](anteprime/bruiser.MadeOfStone-2.webp), 512 px, qualità 80 |
+| Controllo a 60 px | La mano stringe l’impugnatura e la lama resta fuori; il coltello è piccolo a 60 px. |
+| Esito | Conservata per il giudizio; nessun tentativo ripetuto. |
+
+### Correzione — GARGANTUESCO IMPATTO SUL TU
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.SuperImpact` |
+| source | `originali/bruiser.SuperImpact-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2966689 / `bfe161c03698b1dd68df3a5095a01b2c836d88f916673883584b4bbcdf044d4d` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `e1179e1d4e74ca58be1032228887c9272d206b0e3fc0c00b8c22b29c0554207b` |
+| Allegati effettivi | `originali/bruiser.SuperImpact.png`: `0460a5ac00ccea4a9043416dd97852460789b34d72660e550634f81293ede1c1` |
+| Anteprima | [WebP](anteprime/bruiser.SuperImpact-2.webp), 512 px, qualità 80 |
+| Controllo a 60 px | Colpo e linee di movimento evidenti; le ciabatte del riferimento sono diventate scarpe, e l’avversario esce dal bordo. Dubbia. |
+| Esito | Conservata per il giudizio; nessun tentativo ripetuto. |
+
+### Correzione — LIEVE FASTIDIO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.LittleRage` |
+| source | `originali/bruiser.character.LittleRage-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2645482 / `99ac18386436758edb84d281581f13e8d12a19c58f0c2081e2773c99bca139f1` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `43aca281121bf60fb65dbcd86f50c9a584d54264439bb453e23465dfd3a24889` |
+| Allegati effettivi | `originali/bruiser.character.LittleRage.png`: `36cfb9493565b2218c6fbf71ff04016d438c744b91b2d134f2920eb7214b42e3` |
+| Anteprima | [WebP](anteprime/bruiser.character.LittleRage-2.webp), 512 px, qualità 80 |
+| Controllo a 60 px | Colpo alla spalla e immobilità visibili; a 60 px il punto d’impatto è piccolo. |
+| Esito | Conservata per il giudizio; nessun tentativo ripetuto. |
+
+### Correzione — SVEGLIAMOCI - MA TU NO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.LittleSmack` |
+| source | `originali/bruiser.character.LittleSmack-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2907445 / `0da8cd215cf4c50c0e16a3f3b8416e65d8df86be1251161bd62009004e6bdb70` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `0582b586de6bf4d88be0b20cfd52baf20ec030dffd715df95604e0da2da58b54` |
+| Allegati effettivi | `originali/bruiser.character.LittleSmack-2.png`: `575bb2c0ee6acf4403d2126261450bc9f18b0a1261fc6341bd26cf994f92a604` |
+| Anteprima | [WebP](anteprime/bruiser.character.LittleSmack-3.webp), 512 px, qualità 80 |
+| Controllo a 60 px | Palmo aperto e polso più coerenti; il contatto è vicino al bordo. |
+| Esito | Conservata per il giudizio; nessun tentativo ripetuto. |
+
+### Correzione — ADOPERIAMOTI
+
+| Campo | Valore |
+|---|---|
+| bindingName | `com.basic.BruiserGrab` |
+| source | `originali/com.basic.BruiserGrab-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2879811 / `7f641a631986c57392b9a6390e7455a3f0c5438339966072850de99d3719075e` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `a4e9d407f6ff588101a4ab5ba992547ef819e81b1f023893e62bcfd6bd48d068` |
+| Allegati effettivi | `originali/com.basic.BruiserGrab.png`: `409e9fb5ce399a9983f440ee186785a6be808702e9956f8fa214b163cdde0696` |
+| Anteprima | [WebP](anteprime/com.basic.BruiserGrab-2.webp), 512 px, qualità 80 |
+| Controllo a 60 px | La mano afferra la bottiglia sul banco senza avversario; l’oggetto è piccolo a 60 px. |
+| Esito | Conservata per il giudizio; nessun tentativo ripetuto. |
