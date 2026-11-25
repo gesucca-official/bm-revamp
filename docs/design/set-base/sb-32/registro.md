@@ -877,3 +877,68 @@ Il proprietario approva VIOLENZAZIONE e la nuova versione di NON GIOCARE COL COL
 | Anteprima | [WebP](anteprime/bruiser.character.LittleSmack-4.webp), 512 px, qualità 80 |
 | Controllo | Due mani ai lati della testa; la posizione delle dita e il gesto meritano giudizio. |
 | Esito | Conservata per il giudizio. |
+
+
+## Terzo giudizio e correzioni del lotto 1
+
+Il proprietario approva ADOPERIAMOTI con «ok» e chiede immagini che comunichino «un senso di movimento, di azione, di violenza». Quattro [prompt](lotto-01-spazienzio.md#terzo-giudizio-correzioni-del-lotto-1) committati in `521a02e`; una generazione per prompt, nessun rifiuto o tentativo ripetuto. Modello e riscrittura non esposti.
+
+### SPEDIAMOTI DUNQUE IN O-AHIO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.ExtremelyViolentBlow` |
+| source | `originali/bruiser.ExtremelyViolentBlow-4.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2488482 / `290f537daaf61af081cc75c0b7608081f550ca876ffead2a34ed73ba139e61a8` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `ed98121f1b46e79d2557428b59e75240736c2decdec19a5a9b2b1b8b7d3a5595` |
+| Allegato effettivo | `originali/bruiser.ExtremelyViolentBlow-3.png`: `213e237b325d54631fd66bb4a7450f31451a8828099d5eeffe8341ecf1e36e73` |
+| Anteprima | [WebP](anteprime/bruiser.ExtremelyViolentBlow-4.webp), 512 px, qualità 80 |
+| Nota | Lancio per i piedi e movimento visibili; Spazienzio indossa scarpe invece delle ciabatte. |
+| Esito | Conservata per il giudizio. |
+
+### GARGANTUESCO IMPATTO SUL TU
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.SuperImpact` |
+| source | `originali/bruiser.SuperImpact-4.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3059863 / `525d313f805ea598af1d78a2c10c8265695db65f8308eb13d3b2b72c68f17aaa` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `81b9250c73480edc0216fcc419efcbb6aa63cd66dc3aed18505fc9a71465692b` |
+| Allegato effettivo | `originali/bruiser.SuperImpact-3.png`: `8e520d5a2d19bbfeb3bd73bb587d6fce0976570073b8dea731cc10eff029b5c5` |
+| Anteprima | [WebP](anteprime/bruiser.SuperImpact-4.webp), 512 px, qualità 80 |
+| Nota | Volto arrabbiato, impatto e movimento marcati; piedi fuori campo. |
+| Esito | Conservata per il giudizio. |
+
+### LIEVE FASTIDIO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.LittleRage` |
+| source | `originali/bruiser.character.LittleRage-4.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3131825 / `6040aa38b656669552614c8720c98b7c8599a31e77a4295d9a1541857a71abe4` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `ed317d0a5fe41f1035d9de080f97b1e3e30a9e0e36ec7efdfd682154816496f2` |
+| Allegato effettivo | `originali/bruiser.character.LittleRage-3.png`: `8f3bae1aad9644cc5e611ba34e9698620c01e8ce542d8933dae3d698bf63bd73` |
+| Anteprima | [WebP](anteprime/bruiser.character.LittleRage-4.webp), 512 px, qualità 80 |
+| Nota | Primo piano con pugno sulla guancia e sorriso; il volto è molto deformato dal colpo. |
+| Esito | Conservata per il giudizio. |
+
+### SVEGLIAMOCI - MA TU NO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.LittleSmack` |
+| source | `originali/bruiser.character.LittleSmack-5.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2928787 / `f96e2d0af68916c80e0f507ee44c07cee51126af496e869ba77af1b3de4dd9b3` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-25 |
+| promptSha256 | `dcc91dfacb0309807c2bea54c0c2c7fab30525df980c8fa0ac5083fb293c8722` |
+| Allegato effettivo | `originali/bruiser.character.LittleSmack-4.png`: `2495c55cb523b1a8c8d09fe06b91351635ae00814184270685d6a920731dbc15` |
+| Anteprima | [WebP](anteprime/bruiser.character.LittleSmack-5.webp), 512 px, qualità 80 |
+| Nota | Due mani ai lati della testa; orecchie coperte e anatomia delle dita da giudicare. |
+| Esito | Conservata per il giudizio. |
