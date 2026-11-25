@@ -20,10 +20,10 @@ export interface Status {
   impactedProperty: string; lastsForTurns: number | null; equip: boolean;
   singleUse: boolean; amountFunction: object; typeFunction: object;
   /**
-   * SB-16g 2a (D64, D66, D69), playground rules only: the vulnerability token of a charge, one status per damage type with the
+   * SB-16g 2a (D64, D66, D69): the vulnerability token of a charge, one status per damage type with the
    * same `exposure`; `factor` multiplies the damage received. `untilPlayed`: the name of the card whose play ends it at turn end (any copy),
    * D71: no timer while copies remain, one whole turn after exhaustion. D72: no token on failed search. Absent on
-   * every other status.
+   * every other status. SB-31 F3: live games have it (the live ruleset is the playground one, SB-28; the vulnerability chip of a live game comes from it, SB-31 F3).
    */
   exposure?: number; factor?: number; untilPlayed?: string;
 }
@@ -39,31 +39,32 @@ export interface Character {
   plays?: Record<string, number>;
 }
 /**
- * SB-16g 2a (D58), playground rules only: a copy found by a search, face up in its owner's hand for everyone until it is played or
- * discarded. `copy` is its stable id, `turn` the turn it was found, `slot` its index in `cardsInHand` (own view only).
+ * SB-16g 2a (D58): a copy found by a search, face up in its owner's hand for everyone until it is played or
+ * discarded. Live games have it (the live ruleset is the playground one, SB-28; seen in a live game by SB-31 F3); archived games do not. `copy` is its stable id, `turn` the turn it was found, `slot` its index in `cardsInHand` (own view only).
  */
 export interface RevealedCard {copy: number; card: Card; turn: number; slot?: number}
 /**
- * `searchable`: SB-16i (D97, D102), own view and playground rules only: for each card in hand announcing two names, by its binding,
+ * `searchable`: SB-16i (D97, D102), own view only: for each card in hand announcing two names, by its binding,
  * the announced names with a copy in the own deck, in printed order (two: the player chooses; one: searched without asking; none:
- * the search will fail). Absent with the live rules.
+ * the search will fail). Live games have it (the dialog «Quale carta cerchi?» opens from it in a live game, SB-31 F3); absent in archived games.
  */
 export interface Player {playerId: string; character: Character; cardsInHand: Card[] | number; deck: number; revealed?: RevealedCard[]; lastTokenCopies?: string[]; searchable?: Record<string, string[]>}
 export interface Command {
   playedCardName: string; playerId: string; targetId: string; gameId: string;
   choices: Partial<Record<'DISCARD_ONE' | 'TARGET_ITEM', string>> | null;
-  /** SB-16i (D102), playground rules only: the binding chosen between the two names of «Annuncia X o Y»; never sent otherwise. */
+  /** SB-16i (D102): the binding chosen between the two names of «Annuncia X o Y»; sent only when the card announces two names and the own view offers both. */
   searchChoice?: string;
 }
 /**
- * SB-16f0 (D56): with the playground rules (profile `bozza`) a move may carry why the engine voided it (`voidReason`, today only
- * «a terra», D50 point 1) and the search that replaced its draw (D50 point 6): the binding searched for, whether a copy was found
- * and the card found, shown to everyone. Both are absent with the live rules.
+ * SB-16f0 (D56): a move may carry why the engine voided it (`voidReason`, today only «a terra», D50 point 1) and the search that replaced its
+ * draw (D50 point 6): the binding searched for, whether a copy was found and the card found, shown to everyone. The live ruleset is the playground one
+ * (SB-28): a live game carries the search and `voidReason` (both seen in live games by SB-31 F3); archived games carry neither.
  */
 export interface MoveSearch {card: string; found: boolean; revealed?: Card; copy?: number; /** SB-16i: the two names announced, in printed order; `card` is the one chosen. */ announced?: string[]}
 /**
- * SB-16i (D97), playground rules only and absent otherwise: `ahead`, for a card with «Gioca d'anticipo», whether it resolved before
- * the target's move; `plays`, for a card with «Rincara», how many times its author had already played it.
+ * SB-16i (D97): `ahead`, for a card with «Gioca d'anticipo», whether it resolved before the target's move (seen in live games by SB-31 F3);
+ * `plays`, for a card with «Rincara», how many times its author had already played it (set by the engine under the live ruleset, Game.java; not met in the games of F3).
+ * Absent only in archived games.
  */
 export interface Move extends Command {
   void: boolean; moveReport: Partial<Record<'SELF' | 'OPPONENT', string[]>>;

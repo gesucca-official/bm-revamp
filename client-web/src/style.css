@@ -332,6 +332,66 @@ dialog p,dialog dd,dialog dt {
   border-top: 1px solid var(--border);
   padding-top: 16px;
 }
+/* SB-31 F3: flavour, full text, keyword reminders, rarity and grouped statuses of the inspection. */
+.full-text.full p {
+  margin: 0 0 8px;
+}
+.flavour {
+  font-style: italic;
+  margin: 8px 0 0;
+}
+.full-text-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  margin: 12px 0 4px;
+}
+.keywords {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 10px 0 0;
+  border-top: 1px dashed var(--border);
+  display: grid;
+  gap: 6px;
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+.keywords .reference {
+  white-space: nowrap;
+  opacity: .72;
+}
+.rarity {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  vertical-align: middle;
+}
+.rarity i {
+  width: .55em;
+  height: .55em;
+  border-radius: 50%;
+  background: currentColor;
+}
+.rarity b {
+  display: inline-block;
+  min-width: 1.3em;
+  text-align: center;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  line-height: 1.2;
+  font-size: .85em;
+}
+.status-group .count {
+  font-weight: bold;
+}
+.status-texts {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+}
+.status-group + .status-group {
+  margin-top: 8px;
+}
 .effect-term {
   white-space: nowrap;
 }

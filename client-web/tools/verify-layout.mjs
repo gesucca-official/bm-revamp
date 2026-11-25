@@ -248,7 +248,10 @@ async function scenarioChips(){const scope=`chips${tag}`,A=await open('A',{hasTo
    const chips=s.hits.filter(h=>h.kind==='status');
    for(const c of chips){const now=await A.state(),person=now.hits.find(h=>h.kind==='person'&&h.target.owner===c.target.owner),chipRow=now.hits.filter(h=>h.kind==='status'&&h.target.owner===c.target.owner);if(!person){bad(scope,`${c.id}: no character`);continue;}
     if(Math.min(person.w,person.h)<44)bad(scope,`${c.id}: character ${person.w}×${person.h}`);const y=person.y-person.h*.25;if(chipRow.some(k=>Math.abs(k.y-y)<=k.h/2))bad(scope,`${c.id}: the tap would land on a chip`);
-    await A.page.touchscreen.tap(person.x,y);await A.page.waitForSelector('dialog[open] .receipt',{timeout:5000}).catch(()=>{});const txt=await A.page.locator('dialog[open] .receipt').innerText().catch(()=>'');const has=txt.replace(/\s+/g,' ').includes(c.label.replace(/\s+/g,' '));
+    await A.page.touchscreen.tap(person.x,y);await A.page.waitForSelector('dialog[open] .receipt',{timeout:5000}).catch(()=>{});// SB-31 F3: the inspection draws the placeholders of a status as symbols (their aria-label is the word the label of the canvas has) and groups the statuses of the same name under one name,
+    // so the chip's title and its description must each be in the text (symbols read as words), no longer as one string «title. description».
+    const txt=await A.page.locator('dialog[open] .receipt').evaluate(e=>{const k=e.cloneNode(true);k.querySelectorAll('[role=img][aria-label]').forEach(n=>n.replaceWith(n.getAttribute('aria-label')));return k.textContent;}).catch(()=>'');
+    const norm=x=>x.replace(/\s+/g,' ').trim(),[labelTitle,...labelRest]=c.label.split('. '),has=!!labelTitle&&norm(txt).includes(norm(labelTitle))&&norm(txt).includes(norm(labelRest.join('. ')));
     rec.chips.push({id:c.id,chip:`${Math.round(c.w)}×${Math.round(c.h)}`,character:`${Math.round(person.w)}×${Math.round(person.h)}`,label:c.label,inInspection:has});if(!has)bad(scope,`${c.id}: «${c.label}» not in the inspection: ${txt.slice(0,300)}`);
     await A.page.getByRole('button',{name:'Torna al tavolo'}).click().catch(()=>{});await A.page.waitForTimeout(650);}
    if(!rec.chips.length)await playOne(A);await A.page.waitForTimeout(200);}

@@ -26,7 +26,7 @@ export class Model {
   get discardWarning(){const name=this.hand.find(x=>x.key===this.discard)?.card.name;
     return this.selectedCard?.characterBound&&name&&this.view.players[this.me].lastTokenCopies?.includes(name)
       ?`Stai scartando l’ultima copia di «${name}», che tiene un gettone. La vulnerabilità resterà fino alla fine del turno successivo.`:null;}
-  /** SB-16i (D97, D102): the names the selected card may search, from the own view (playground rules); two means the player chooses. */
+  /** SB-16i (D97, D102): the names the selected card may search, from the own view (live games have it, SB-31 F3; archived games do not); two means the player chooses. */
   get searchOptions():string[]{const card=this.selectedCard;return card?this.view.players[this.me]?.searchable?.[card.bindingName]??[]:[];}
   get eliminated(){return !!this.view.forfeits[this.me]||!!this.view.players[this.me]?.character.dead;}
   get locked(){return this.phase!=='choose'||this.view.over||this.eliminated;}

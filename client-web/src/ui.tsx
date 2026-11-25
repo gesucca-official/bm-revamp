@@ -1,5 +1,6 @@
 import React,{useLayoutEffect,useRef,useState} from 'react';
 import type {Card,Resource} from './contracts.ts';
+import type {Rarity} from './annex.ts';
 import {RESOURCE_NAMES} from './resolution.ts';
 import {DAMAGE_ACCENT,DAMAGE_COLOR,DAMAGE_NAMES,RES_COLOR,gainsOf,damageOf,damageText,leftV,type DamageType} from './readability.ts';
 import {frameSvg,type FrameKind} from './frames.ts';
@@ -7,7 +8,7 @@ import {MARK_LAYERS,SYMBOL_LAYERS,edgeFor,isDamage,svgParts,symbolColors,textPar
 
 export const resourceNames:Record<string,string>=RESOURCE_NAMES;
 export const targetNames:Record<string,string>={SELF:'Te stesso',OPPONENT:'Un avversario',NEAR_ITEM:'Un tuo oggetto',FAR_ITEM:'Un oggetto avversario'};
-const effect=(c:Card)=>{const doc=new DOMParser().parseFromString(c.effect,'text/html');return (doc.querySelector('p:last-child')?.textContent||doc.body.textContent||'').replace(/\s*Riferimento: Regolamento[\s\S]*$/,'').trim();};
+export const shortText=(c:Card)=>{const doc=new DOMParser().parseFromString(c.effect,'text/html');return (doc.querySelector('p:last-child')?.textContent||doc.body.textContent||'').replace(/\s*Riferimento: Regolamento[\s\S]*$/,'').trim();};
 
 const hex=(n:number)=>`#${n.toString(16).padStart(6,'0')}`;
 /** C4-3: a symbol of symbols.ts in HTML: the same layers the table draws with Pixi, as SVG (catalog, editor, inspection, help). */
@@ -25,12 +26,12 @@ export function MeasuredFrame({kind}:{kind:FrameKind}){const holder=useRef<HTMLS
 export const SymbolMark=({kind,className,colors,px,ground}:{kind:SymbolKind;className?:string;colors?:{main:string;accent?:string};px?:number;ground?:Ground})=>{const edge=edgeFor(kind,ground);
  return <SvgMark layers={SYMBOL_LAYERS[kind]} colors={{...(colors??symbolColors(kind)),...(edge!==undefined?{edge:hex(edge)}:{})}} className={className} px={px}/>;};
 
-/** The text of a card with its placeholders drawn: resources as the coins of the table, types of damage (SB-25, D168 (1)) as DamageMark;
- * the quantity and the adjacent punctuation stay with the symbol when the line wraps. */
-export function EffectText({card}:{card:Card}){
- const text=effect(card),parts=textParts(text);
- if(parts.length===1&&typeof parts[0]==='string')return text;
- return parts.map(p=>{
+/** A text with its placeholders drawn: resources as the coins of the table, types of damage (SB-25, D168 (1)) as DamageMark;
+ * the quantity and the adjacent punctuation stay with the symbol when the line wraps. SB-31 F3: the statuses, the keyword lines and the full text use it too. */
+export function RichText({text}:{text:string}){
+ const parts=textParts(text);
+ if(parts.length===1&&typeof parts[0]==='string')return <>{text}</>;
+ return <>{parts.map((p,i)=>{
   if(typeof p==='string')return p;
   const {index,amount,kind,punctuation}=p;
   if(isDamage(kind)){const name=DAMAGE_NAMES[kind];
@@ -41,7 +42,14 @@ export function EffectText({card}:{card:Card}){
   return <span key={index} className="effect-term">{amount}
    <span className="effect-resource" role="img" aria-label={name} title={name}><SymbolMark kind={kind} ground="light"/></span>
    {punctuation}</span>;
- });
+ })}</>;
+}
+/** The short text of a card with its placeholders drawn. */
+export const EffectText=({card}:{card:Card})=><RichText text={shortText(card)}/>;
+/** SB-31 F3: the rarity of the print (one to three ticks, «P» for the characters); inspection only, never on the faces of the table, where the room is counted. */
+export function RarityMark({rarity}:{rarity:Rarity}){
+ return <span className="rarity" data-testid="rarity" data-ticks={rarity.ticks} role="img" aria-label={`Rarità: ${rarity.label}`} title={`Rarità: ${rarity.label}`}>
+  {rarity.mark?<b>{rarity.mark}</b>:Array.from({length:rarity.ticks},(_,i)=><i key={i}/>)}</span>;
 }
 
 /** ✓ and ✕ as shapes in the colour of the text, in place of the glyphs Impact and Arial lack. */

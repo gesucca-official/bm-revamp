@@ -1,0 +1,1225 @@
+{
+ "date": "2026-11-25T12:27:28.956Z",
+ "url": "http://127.0.0.1:4320",
+ "kind": "Edge via Playwright on PC against a local server on a temporary database; not a physical device",
+ "runs": [
+  {
+   "size": "1366x768",
+   "category": "base",
+   "inspected": [
+    {
+     "name": "Slalom d'Avvicinamento",
+     "class": "base.mara.Slalom",
+     "flavour": "Il complotto non si può smascherare sempre andando dritti al punto: a volte, occorre girarci intorno.",
+     "shortText": "Annuncia «Sgommata» o «Lazo del Rider». Se lo trovi: +15  e diventi Vulnerabile. Se non lo trovi: +5 .",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [
+      {
+       "id": "announce",
+       "text": "Annuncia: Al posto della pesca cerchi nel mazzo la carta annunciata: se la trovi la mostri, ottieni il premio e diventi Vulnerabile; se non la trovi peschi e ottieni il ripiego. (regolamento, R07b)"
+      },
+      {
+       "id": "vulnerable",
+       "text": "Vulnerabile: Subisci una volta e mezza i danni ,  e  finché non giochi una carta col nome trovato. (regolamento, R07b)"
+      }
+     ],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 1389
+    },
+    {
+     "name": "Sgommata",
+     "class": "base.mara.Sgommata",
+     "flavour": "Se qualcuno ordinasse un brodo, se lo vedrebbe arrivare shakerato.",
+     "shortText": "15 : infliggi 25  all'avversario. Gioca d'anticipo: in questo turno l'avversario infligge tre quarti dei danni che infliggerebbe.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [
+      {
+       "id": "ahead",
+       "text": "Gioca d’anticipo: Se questa mossa si risolve prima di quella del bersaglio, ottieni anche l’effetto scritto. (regolamento, R07b)"
+      }
+     ],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 1533
+    },
+    {
+     "name": "Sgommata",
+     "class": "base.mara.Sgommata",
+     "flavour": "Se qualcuno ordinasse un brodo, se lo vedrebbe arrivare shakerato.",
+     "shortText": "15 : infliggi 25  all'avversario. Gioca d'anticipo: in questo turno l'avversario infligge tre quarti dei danni che infliggerebbe.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [
+      {
+       "id": "ahead",
+       "text": "Gioca d’anticipo: Se questa mossa si risolve prima di quella del bersaglio, ottieni anche l’effetto scritto. (regolamento, R07b)"
+      }
+     ],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 1533
+    },
+    {
+     "name": "Requisire al Volo",
+     "class": "base.mara.PresoAlVolo",
+     "flavour": "«No, no! Non è rubare, è intercettare!»",
+     "shortText": "Perdi 5 . Consumi un tuo oggetto.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 517
+    },
+    {
+     "name": "Sventare l'Assassinio",
+     "class": "base.mara.bound.PassoStretto",
+     "flavour": "«Stavi provando ad avvelenarmi, eh? Voi massoni non mollate mai.»",
+     "shortText": "Perdi un quarto della tua  e un quarto della tua . Infliggi 2  all'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 1047
+    },
+    {
+     "name": "Semaforo Rosso",
+     "class": "base.mara.bound.CambioMarcia",
+     "flavour": "«Fermo là! Lo sanno tutti che hai fretta... dovevi schermare i tuoi pensieri con l'alluminio, se volevi tenerteli per te!»",
+     "shortText": "+5 . In questo turno subisci tre quarti dei danni che subiresti.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 801
+    },
+    {
+     "name": "Sputo nel Posacenere",
+     "class": "base.com.SputoDaPosacenere",
+     "flavour": "Ci vogliono un posacenere pieno e nessuna educazione.",
+     "shortText": "5 : infliggi 10  all'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 550
+    },
+    {
+     "name": "Lazo del Rider",
+     "class": "base.mara.CinghiataDiTraverso",
+     "flavour": "«La cinghia dello zaino avrebbe un'altra funzione, ma per combattere gli illuminati bisogna adattarsi.»",
+     "shortText": "20 : infliggi  all'avversario pari a 20 più metà della  che ti resta. Gioca d'anticipo: infliggi 5  all'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [
+      {
+       "id": "ahead",
+       "text": "Gioca d’anticipo: Se questa mossa si risolve prima di quella del bersaglio, ottieni anche l’effetto scritto. (regolamento, R07b)"
+      }
+     ],
+     "rarity": {
+      "ticks": 3,
+      "label": "Rarità: rara",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 1271
+    },
+    {
+     "name": "Unta e Bisunta",
+     "class": "base.mara.TraDueParaurti",
+     "flavour": "«Anni e anni a consegnare kebab mi hanno dotata di una lubrificazione completa. Scivolo via che è un piacere!»",
+     "shortText": "5 : in questo turno subisci metà dei  e  che subiresti. +5 .",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 638
+    }
+   ],
+   "captures": [
+    {
+     "file": "f3-1366x768-base-01-Slalom_d_Avvicinamento-breve.jpg",
+     "name": "Slalom_d_Avvicinamento-breve",
+     "note": "Slalom d'Avvicinamento: testo breve, flavour in corsivo, 2 promemoria, rarità UNCOMMON"
+    },
+    {
+     "file": "f3-1366x768-base-01-Slalom_d_Avvicinamento-breve-sotto.jpg",
+     "name": "Slalom_d_Avvicinamento-breve-sotto",
+     "note": "Slalom d'Avvicinamento: testo breve, flavour in corsivo, 2 promemoria, rarità UNCOMMON (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-1366x768-base-02-Slalom_d_Avvicinamento-completo.jpg",
+     "name": "Slalom_d_Avvicinamento-completo",
+     "note": "Slalom d'Avvicinamento: testo completo (un secondo tocco torna indietro)"
+    },
+    {
+     "file": "f3-1366x768-base-02-Slalom_d_Avvicinamento-completo-sotto.jpg",
+     "name": "Slalom_d_Avvicinamento-completo-sotto",
+     "note": "Slalom d'Avvicinamento: testo completo (un secondo tocco torna indietro) (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-1366x768-base-03-Sgommata-breve.jpg",
+     "name": "Sgommata-breve",
+     "note": "Sgommata: testo breve, flavour in corsivo, 1 promemoria, rarità UNCOMMON"
+    },
+    {
+     "file": "f3-1366x768-base-03-Sgommata-breve-sotto.jpg",
+     "name": "Sgommata-breve-sotto",
+     "note": "Sgommata: testo breve, flavour in corsivo, 1 promemoria, rarità UNCOMMON (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-1366x768-base-04-Sgommata-completo.jpg",
+     "name": "Sgommata-completo",
+     "note": "Sgommata: testo completo (un secondo tocco torna indietro)"
+    },
+    {
+     "file": "f3-1366x768-base-04-Sgommata-completo-sotto.jpg",
+     "name": "Sgommata-completo-sotto",
+     "note": "Sgommata: testo completo (un secondo tocco torna indietro) (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-1366x768-base-05-Sgommata-breve.jpg",
+     "name": "Sgommata-breve",
+     "note": "Sgommata: testo breve, flavour in corsivo, 1 promemoria, rarità UNCOMMON"
+    },
+    {
+     "file": "f3-1366x768-base-05-Sgommata-breve-sotto.jpg",
+     "name": "Sgommata-breve-sotto",
+     "note": "Sgommata: testo breve, flavour in corsivo, 1 promemoria, rarità UNCOMMON (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-1366x768-base-06-Sgommata-completo.jpg",
+     "name": "Sgommata-completo",
+     "note": "Sgommata: testo completo (un secondo tocco torna indietro)"
+    },
+    {
+     "file": "f3-1366x768-base-06-Sgommata-completo-sotto.jpg",
+     "name": "Sgommata-completo-sotto",
+     "note": "Sgommata: testo completo (un secondo tocco torna indietro) (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-1366x768-base-07-stati.jpg",
+     "name": "stati",
+     "note": "Ispezione del personaggio con la lista degli stati (Equipaggiamento: Giubbotto di Finta Pelle)"
+    }
+   ],
+   "statusList": {
+    "owner": "devAlice",
+    "groups": [
+     {
+      "title": "Equipaggiamento: Giubbotto di Finta Pelle",
+      "count": 1,
+      "texts": [
+       "Chi lo ha subisce tre quarti dei  che subirebbe. dura ancora 1 turno dopo questo."
+      ]
+     }
+    ],
+    "rarity": {
+     "ticks": "0",
+     "mark": "P",
+     "label": "Rarità: protagonista"
+    },
+    "placeholders": false,
+    "symbols": 1
+   },
+   "turns": 11
+  },
+  {
+   "size": "1366x768",
+   "category": "avanzato",
+   "inspected": [
+    {
+     "name": "Fino all'Ultima Goccia",
+     "class": "base.pino.QuestoLoFiniscoIo",
+     "flavour": "«Questo... lo finisco io... Non si lascia... il grondino...»",
+     "shortText": "+15 . Consumi un tuo oggetto.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 466
+    },
+    {
+     "name": "Posto Fisso",
+     "class": "base.pino.bound.CinqueMinutiEVado",
+     "flavour": "Lo sgabello è suo da sette ore. Quando va in bagno, lo difende Grappino con le unghie e con i denti.",
+     "shortText": "+5 . In questo turno subisci tre quarti dei danni che subiresti.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 794
+    },
+    {
+     "name": "Violenta Spruzzata di Seltz",
+     "class": "base.pino.bound.SpallataAlBancone",
+     "flavour": "«Il seltz... pulisce la bocca... così... senti di più... la grappa...»",
+     "shortText": "Perdi un quarto della tua . Infliggi 2  all'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 1107
+    },
+    {
+     "name": "Spintone",
+     "class": "base.com.Spintone",
+     "flavour": "Il saluto del Serraglio.",
+     "shortText": "Infliggi 8  all'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 607
+    },
+    {
+     "name": "Spintone",
+     "class": "base.com.Spintone",
+     "flavour": "Il saluto del Serraglio.",
+     "shortText": "Infliggi 8  all'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 607
+    },
+    {
+     "name": "Scompenso da Ultimo Giro",
+     "class": "base.pino.TestataDaUltimoGiro",
+     "flavour": "Il vero ubriacone si distingue anche nell'ultimo atto della serata, cioè lo svenimento molesto.",
+     "shortText": "5 : subisci 5 . Infliggi 35  all'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 814
+    },
+    {
+     "name": "Alla Goccia",
+     "class": "base.pino.GoingBerserk",
+     "flavour": "«Tutto... d'un fiato... non fate... i bambini!»",
+     "shortText": "Spendi tutta la tua . Infliggi  all'avversario pari a 10 più la  spesa.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 842
+    },
+    {
+     "name": "Afferrare",
+     "class": "com.Grab",
+     "flavour": "Al Serraglio vale una regola: quello che hai davanti, finiscilo.",
+     "shortText": "Consumi un tuo oggetto.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 422
+    },
+    {
+     "name": "Avamposto Fortificato al Bancone",
+     "class": "base.pino.IlBanconeRegge",
+     "flavour": "Il bancone è stato installato nel 1974 e Piera ci si appoggia dal 1975.",
+     "shortText": "In questo turno subisci tre quarti dei  e metà dei  che subiresti. +5 .",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 862
+    },
+    {
+     "name": "Un Altro e Arrivo",
+     "class": "base.pino.OffroIo",
+     "flavour": "«Arrivo... arrivo! Un altro... e arrivo...»",
+     "shortText": "Annuncia «Alla Goccia» o «Rutto a Bruciapelo». Se lo trovi: +15 , +35  e diventi Vulnerabile. Se non lo trovi: +5 , +10 .",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [
+      {
+       "id": "announce",
+       "text": "Annuncia: Al posto della pesca cerchi nel mazzo la carta annunciata: se la trovi la mostri, ottieni il premio e diventi Vulnerabile; se non la trovi peschi e ottieni il ripiego. (regolamento, R07b)"
+      },
+      {
+       "id": "vulnerable",
+       "text": "Vulnerabile: Subisci una volta e mezza i danni ,  e  finché non giochi una carta col nome trovato. (regolamento, R07b)"
+      }
+     ],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 1415
+    },
+    {
+     "name": "Un Altro... Grappino...",
+     "class": "base.pino.PrimaIlBrindisi",
+     "flavour": "Ogni volta che lo dice, Grappino abbaia. Un nome poco saggio da affibbiare a un cane di un'alcolista.",
+     "shortText": "Annuncia «Rutto a Bruciapelo» o «Alla Goccia». Se lo trovi: +15 , +35  e diventi Vulnerabile. Se non lo trovi: +5 , +10 .",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [
+      {
+       "id": "announce",
+       "text": "Annuncia: Al posto della pesca cerchi nel mazzo la carta annunciata: se la trovi la mostri, ottieni il premio e diventi Vulnerabile; se non la trovi peschi e ottieni il ripiego. (regolamento, R07b)"
+      },
+      {
+       "id": "vulnerable",
+       "text": "Vulnerabile: Subisci una volta e mezza i danni ,  e  finché non giochi una carta col nome trovato. (regolamento, R07b)"
+      }
+     ],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 1415
+    },
+    {
+     "name": "Rutto a Bruciapelo",
+     "class": "base.pino.RuttoADistanzaSociale",
+     "flavour": "Proibito dalla Convenzione di Ginevra a meno di tre metri di distanza.",
+     "shortText": "5 : spendi tutta la  che ti resta. L'avversario perde  pari alla  spesa. Infliggi  all'avversario pari a 15 più il doppio della  spesa.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 3,
+      "label": "Rarità: rara",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 1018
+    }
+   ],
+   "captures": [
+    {
+     "file": "f3-1366x768-avanzato-01-Fino_all_Ultima_Goccia-breve.jpg",
+     "name": "Fino_all_Ultima_Goccia-breve",
+     "note": "Fino all'Ultima Goccia: testo breve, flavour in corsivo, 0 promemoria, rarità UNCOMMON"
+    },
+    {
+     "file": "f3-1366x768-avanzato-02-Fino_all_Ultima_Goccia-completo.jpg",
+     "name": "Fino_all_Ultima_Goccia-completo",
+     "note": "Fino all'Ultima Goccia: testo completo (un secondo tocco torna indietro)"
+    },
+    {
+     "file": "f3-1366x768-avanzato-02-Fino_all_Ultima_Goccia-completo-sotto.jpg",
+     "name": "Fino_all_Ultima_Goccia-completo-sotto",
+     "note": "Fino all'Ultima Goccia: testo completo (un secondo tocco torna indietro) (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-1366x768-avanzato-03-stati.jpg",
+     "name": "stati",
+     "note": "Ispezione del personaggio con la lista degli stati (Equipaggiamento: Bottiglia Spaccata)"
+    },
+    {
+     "file": "f3-1366x768-avanzato-04-Un_Altro_e_Arrivo-breve.jpg",
+     "name": "Un_Altro_e_Arrivo-breve",
+     "note": "Un Altro e Arrivo: testo breve, flavour in corsivo, 2 promemoria, rarità UNCOMMON"
+    },
+    {
+     "file": "f3-1366x768-avanzato-04-Un_Altro_e_Arrivo-breve-sotto.jpg",
+     "name": "Un_Altro_e_Arrivo-breve-sotto",
+     "note": "Un Altro e Arrivo: testo breve, flavour in corsivo, 2 promemoria, rarità UNCOMMON (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-1366x768-avanzato-05-Un_Altro_e_Arrivo-completo.jpg",
+     "name": "Un_Altro_e_Arrivo-completo",
+     "note": "Un Altro e Arrivo: testo completo (un secondo tocco torna indietro)"
+    },
+    {
+     "file": "f3-1366x768-avanzato-05-Un_Altro_e_Arrivo-completo-sotto.jpg",
+     "name": "Un_Altro_e_Arrivo-completo-sotto",
+     "note": "Un Altro e Arrivo: testo completo (un secondo tocco torna indietro) (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-1366x768-avanzato-06-Un_Altro_Grappino_-breve.jpg",
+     "name": "Un_Altro_Grappino_-breve",
+     "note": "Un Altro... Grappino...: testo breve, flavour in corsivo, 2 promemoria, rarità UNCOMMON"
+    },
+    {
+     "file": "f3-1366x768-avanzato-06-Un_Altro_Grappino_-breve-sotto.jpg",
+     "name": "Un_Altro_Grappino_-breve-sotto",
+     "note": "Un Altro... Grappino...: testo breve, flavour in corsivo, 2 promemoria, rarità UNCOMMON (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-1366x768-avanzato-07-Un_Altro_Grappino_-completo.jpg",
+     "name": "Un_Altro_Grappino_-completo",
+     "note": "Un Altro... Grappino...: testo completo (un secondo tocco torna indietro)"
+    },
+    {
+     "file": "f3-1366x768-avanzato-07-Un_Altro_Grappino_-completo-sotto.jpg",
+     "name": "Un_Altro_Grappino_-completo-sotto",
+     "note": "Un Altro... Grappino...: testo completo (un secondo tocco torna indietro) (in fondo alla finestra)"
+    }
+   ],
+   "statusList": {
+    "owner": "ComPlayer_6660",
+    "groups": [
+     {
+      "title": "Equipaggiamento: Bottiglia Spaccata",
+      "count": 1,
+      "texts": [
+       "Quando lo consumi: i tuoi  diventano  e ne infliggi una volta e mezza (equipaggiamento). Dopo il primo uso dura solo fino a fine turno. resta finché non viene tolto."
+      ]
+     }
+    ],
+    "rarity": {
+     "ticks": "0",
+     "mark": "P",
+     "label": "Rarità: protagonista"
+    },
+    "placeholders": false,
+    "symbols": 2
+   },
+   "turns": 14
+  },
+  {
+   "size": "844x390",
+   "category": "base",
+   "inspected": [
+    {
+     "name": "ADOPERIAMOTI",
+     "class": "com.basic.BruiserGrab",
+     "flavour": "«OGNI COSA HA IL SUO IMPIEGO. QUESTA, NELLA FATTISPECIE, TI FARÀ SMETTERE LA VITA...»",
+     "shortText": "Consumi un tuo oggetto.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 446
+    },
+    {
+     "name": "LIEVE FASTIDIO",
+     "class": "bruiser.character.LittleRage",
+     "flavour": "«IRRITARMI NON FARÀ ALTRO CHE ACCORCIARTI L'ESISTENZA - CHE DI PER SÉ È UN NOBILE OBIETTIVO.»",
+     "shortText": "+5 . In questo turno subisci tre quarti dei danni che subiresti.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 809
+    },
+    {
+     "name": "SVEGLIAMOCI - MA TU NO",
+     "class": "bruiser.character.LittleSmack",
+     "flavour": "«ORSÙ SVEGLIAMOCI - MA TU NO.»",
+     "shortText": "Perdi un quarto della tua  e un quarto della tua . Infliggi 2  all'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 1162
+    },
+    {
+     "name": "GARGANTUESCO IMPATTO SUL TU",
+     "class": "bruiser.SuperImpact",
+     "flavour": "«BWAAARGH! ACCOGLI LA MORTE CHE DISPENSO SUL TU!»",
+     "shortText": "25 : infliggi 35  all'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 658
+    },
+    {
+     "name": "NON GIOCARE COL COLTELLO NO",
+     "class": "bruiser.MadeOfStone",
+     "flavour": "«CARINO QUESTO TUO BASTONCINO, LO FANNO ANCHE DA UOMO O SOLO DA BAMBINO?»",
+     "shortText": "Per 4 turni, contando questo, subisci metà dei  che subiresti. +10 .",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 596
+    },
+    {
+     "name": "NON GIOCARE COL COLTELLO NO",
+     "class": "bruiser.MadeOfStone",
+     "flavour": "«CARINO QUESTO TUO BASTONCINO, LO FANNO ANCHE DA UOMO O SOLO DA BAMBINO?»",
+     "shortText": "Per 4 turni, contando questo, subisci metà dei  che subiresti. +10 .",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 596
+    }
+   ],
+   "captures": [
+    {
+     "file": "f3-844x390-base-01-ADOPERIAMOTI-breve.jpg",
+     "name": "ADOPERIAMOTI-breve",
+     "note": "ADOPERIAMOTI: testo breve, flavour in corsivo, 0 promemoria, rarità COMMON"
+    },
+    {
+     "file": "f3-844x390-base-01-ADOPERIAMOTI-breve-sotto.jpg",
+     "name": "ADOPERIAMOTI-breve-sotto",
+     "note": "ADOPERIAMOTI: testo breve, flavour in corsivo, 0 promemoria, rarità COMMON (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-844x390-base-02-ADOPERIAMOTI-completo.jpg",
+     "name": "ADOPERIAMOTI-completo",
+     "note": "ADOPERIAMOTI: testo completo (un secondo tocco torna indietro)"
+    },
+    {
+     "file": "f3-844x390-base-02-ADOPERIAMOTI-completo-sotto.jpg",
+     "name": "ADOPERIAMOTI-completo-sotto",
+     "note": "ADOPERIAMOTI: testo completo (un secondo tocco torna indietro) (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-844x390-base-03-stati.jpg",
+     "name": "stati",
+     "note": "Ispezione del personaggio con la lista degli stati (Equipaggiamento: Posacenere di Vetro)"
+    },
+    {
+     "file": "f3-844x390-base-03-stati-sotto.jpg",
+     "name": "stati-sotto",
+     "note": "Ispezione del personaggio con la lista degli stati (Equipaggiamento: Posacenere di Vetro) (in fondo alla finestra)"
+    }
+   ],
+   "statusList": {
+    "owner": "devAlice",
+    "groups": [
+     {
+      "title": "Equipaggiamento: Posacenere di Vetro",
+      "count": 1,
+      "texts": [
+       "Chi lo ha infligge una volta e mezza i  che infliggerebbe. Dopo il primo uso dura solo fino a fine turno. resta finché non viene tolto."
+      ]
+     }
+    ],
+    "rarity": {
+     "ticks": "0",
+     "mark": "P",
+     "label": "Rarità: protagonista"
+    },
+    "placeholders": false,
+    "symbols": 1
+   },
+   "turns": 2
+  },
+  {
+   "size": "844x390",
+   "category": "avanzato",
+   "inspected": [
+    {
+     "name": "Preparare il Lavoro",
+     "class": "base.gigi.ColpoDiChiaveInglese",
+     "flavour": "«Prima si prendono le misure. Col calibro, sulla tua faccia.»",
+     "shortText": "Infliggi 4  all'avversario. Annuncia «Chiave da Tredici» o «Lavoro Fatto Bene». Se lo trovi: +15  e diventi Vulnerabile. Se non lo trovi: +5 .",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [
+      {
+       "id": "announce",
+       "text": "Annuncia: Al posto della pesca cerchi nel mazzo la carta annunciata: se la trovi la mostri, ottieni il premio e diventi Vulnerabile; se non la trovi peschi e ottieni il ripiego. (regolamento, R07b)"
+      },
+      {
+       "id": "vulnerable",
+       "text": "Vulnerabile: Subisci una volta e mezza i danni ,  e  finché non giochi una carta col nome trovato. (regolamento, R07b)"
+      }
+     ],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 1821
+    },
+    {
+     "name": "Questo Torna Utile",
+     "class": "base.gigi.QuestoTornaUtile",
+     "flavour": "Non si butta via niente. Tutto si smonta, e si rimonta rivendendolo a caro prezzo.",
+     "shortText": "+4 . Consumi un tuo oggetto.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 468
+    },
+    {
+     "name": "Cuffie e Testa Bassa",
+     "class": "base.gigi.bound.UnaStrettaEPassa",
+     "flavour": "Nelle cuffie, metal estremo. Fuori, qualcuno che urla. Non cambia poi molto in realtà.",
+     "shortText": "+5 . In questo turno subisci tre quarti dei danni che subiresti.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 806
+    },
+    {
+     "name": "Colpo col Cacciavite",
+     "class": "base.gigi.bound.ColpoDiCacciavite",
+     "flavour": "«Croce o taglio? Fa lo stesso: toh!»",
+     "shortText": "+2 . Infliggi 2  all'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 839
+    },
+    {
+     "name": "Disassemblare",
+     "class": "bruiser.BreakYourToy",
+     "flavour": "«Bel lavoro. Chi te l'ha montato, un cane? Ci penso io, va'...»",
+     "shortText": "5 : distruggi un oggetto dell'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 329
+    },
+    {
+     "name": "Chiave da Tredici",
+     "class": "base.gigi.ChiaveDaTredici",
+     "flavour": "La tredici va bene per quasi tutto, soprattutto se prima l'hai affilata. Per il resto, c'è la quattordici.",
+     "shortText": "10 : infliggi 20  all'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 551
+    },
+    {
+     "name": "Spintone",
+     "class": "base.com.Spintone",
+     "flavour": "Il saluto del Serraglio.",
+     "shortText": "Infliggi 8  all'avversario.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 607
+    },
+    {
+     "name": "Furto con Destrezza",
+     "class": "com.Steal",
+     "flavour": "Un attimo fa era lì. Adesso ha cambiato padrone.",
+     "shortText": "10 : prendi un oggetto dell'avversario e mettilo accanto a te.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 530
+    },
+    {
+     "name": "Secondo Bagagliaio",
+     "class": "base.gigi.SottoIlCofano",
+     "flavour": "«Ho dovuto togliere il motore, ma guarda quanto spazio! Ci entro pure io!»",
+     "shortText": "5 : in questo turno subisci metà dei  e tre quarti dei  che subiresti. +5 , +5 .",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 898
+    },
+    {
+     "name": "Lavoro Fatto Bene",
+     "class": "base.gigi.LavoroFattoBene",
+     "flavour": "Più attrezzi spargi in giro, meglio sembra fatto il lavoro. E più puoi farlo pagare.",
+     "shortText": "10 : infliggi  all'avversario pari a 15 più 4 per ogni tuo oggetto in campo.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 3,
+      "label": "Rarità: rara",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 851
+    },
+    {
+     "name": "GABBIANO, DUNQUE VOLIAMOTI",
+     "class": "bruiser.SeagullFly",
+     "flavour": "«QUELLE TUE SOPRACCIGLIA MODELLATE PARLANO CHIARO: PROIETTIAMOTI DUNQUE!»",
+     "shortText": "10 : infliggi 20  all'avversario. Su questo danno contano solo i tuoi stati positivi.",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [],
+     "rarity": {
+      "ticks": 1,
+      "label": "Rarità: comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 812
+    },
+    {
+     "name": "Metodo Empirico",
+     "class": "base.gigi.UnaStrettaDiProva",
+     "flavour": "«Chiave dinamometrica? Per farne cosa? Un quarto di giro alla volta e vediamo se regge.»",
+     "shortText": "Infliggi 4  all'avversario. Annuncia «Lavoro Fatto Bene» o «Chiave da Tredici». Se lo trovi: +10  e diventi Vulnerabile. Se non lo trovi: +5 .",
+     "full": [],
+     "toggle": {
+      "text": "Testo completo",
+      "pressed": "false",
+      "w": 142,
+      "h": 44
+     },
+     "keywords": [
+      {
+       "id": "announce",
+       "text": "Annuncia: Al posto della pesca cerchi nel mazzo la carta annunciata: se la trovi la mostri, ottieni il premio e diventi Vulnerabile; se non la trovi peschi e ottieni il ripiego. (regolamento, R07b)"
+      },
+      {
+       "id": "vulnerable",
+       "text": "Vulnerabile: Subisci una volta e mezza i danni ,  e  finché non giochi una carta col nome trovato. (regolamento, R07b)"
+      }
+     ],
+     "rarity": {
+      "ticks": 2,
+      "label": "Rarità: non comune",
+      "mark": null
+     },
+     "placeholders": false,
+     "fullChars": 1821
+    }
+   ],
+   "captures": [
+    {
+     "file": "f3-844x390-avanzato-01-Preparare_il_Lavoro-breve.jpg",
+     "name": "Preparare_il_Lavoro-breve",
+     "note": "Preparare il Lavoro: testo breve, flavour in corsivo, 2 promemoria, rarità UNCOMMON"
+    },
+    {
+     "file": "f3-844x390-avanzato-01-Preparare_il_Lavoro-breve-sotto.jpg",
+     "name": "Preparare_il_Lavoro-breve-sotto",
+     "note": "Preparare il Lavoro: testo breve, flavour in corsivo, 2 promemoria, rarità UNCOMMON (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-844x390-avanzato-02-Preparare_il_Lavoro-completo.jpg",
+     "name": "Preparare_il_Lavoro-completo",
+     "note": "Preparare il Lavoro: testo completo (un secondo tocco torna indietro)"
+    },
+    {
+     "file": "f3-844x390-avanzato-02-Preparare_il_Lavoro-completo-sotto.jpg",
+     "name": "Preparare_il_Lavoro-completo-sotto",
+     "note": "Preparare il Lavoro: testo completo (un secondo tocco torna indietro) (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-844x390-avanzato-03-stati.jpg",
+     "name": "stati",
+     "note": "Ispezione del personaggio con la lista degli stati (Equipaggiamento: Casco da Cantiere)"
+    },
+    {
+     "file": "f3-844x390-avanzato-03-stati-sotto.jpg",
+     "name": "stati-sotto",
+     "note": "Ispezione del personaggio con la lista degli stati (Equipaggiamento: Casco da Cantiere) (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-844x390-avanzato-04-Metodo_Empirico-breve.jpg",
+     "name": "Metodo_Empirico-breve",
+     "note": "Metodo Empirico: testo breve, flavour in corsivo, 2 promemoria, rarità UNCOMMON"
+    },
+    {
+     "file": "f3-844x390-avanzato-04-Metodo_Empirico-breve-sotto.jpg",
+     "name": "Metodo_Empirico-breve-sotto",
+     "note": "Metodo Empirico: testo breve, flavour in corsivo, 2 promemoria, rarità UNCOMMON (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-844x390-avanzato-05-Metodo_Empirico-completo.jpg",
+     "name": "Metodo_Empirico-completo",
+     "note": "Metodo Empirico: testo completo (un secondo tocco torna indietro)"
+    },
+    {
+     "file": "f3-844x390-avanzato-05-Metodo_Empirico-completo-sotto.jpg",
+     "name": "Metodo_Empirico-completo-sotto",
+     "note": "Metodo Empirico: testo completo (un secondo tocco torna indietro) (in fondo alla finestra)"
+    },
+    {
+     "file": "f3-844x390-avanzato-06-stati-raggruppati-simulato.jpg",
+     "name": "stati-raggruppati-simulato",
+     "note": "SIMULATA: le descrizioni del primo stato copiate due volte nel DOM, per mostrare come si dispone un gruppo di tre stati con lo stesso nome (nel gioco vivo non ne sono comparsi)"
+    },
+    {
+     "file": "f3-844x390-avanzato-06-stati-raggruppati-simulato-sotto.jpg",
+     "name": "stati-raggruppati-simulato-sotto",
+     "note": "SIMULATA: le descrizioni del primo stato copiate due volte nel DOM, per mostrare come si dispone un gruppo di tre stati con lo stesso nome (nel gioco vivo non ne sono comparsi) (in fondo alla finestra)"
+    }
+   ],
+   "statusList": {
+    "owner": "devAlice",
+    "groups": [
+     {
+      "title": "Equipaggiamento: Casco da Cantiere",
+      "count": 1,
+      "texts": [
+       "Chi lo ha subisce tre quarti dei  che subirebbe. dura ancora 1 turno dopo questo."
+      ]
+     }
+    ],
+    "rarity": {
+     "ticks": "0",
+     "mark": "P",
+     "label": "Rarità: protagonista"
+    },
+    "placeholders": false,
+    "symbols": 1
+   },
+   "turns": 14
+  }
+ ],
+ "problems": [],
+ "errors": [],
+ "fields": {
+  "moves": {
+   "ahead": 12,
+   "search": 8,
+   "voidReason": 2
+  },
+  "players": {
+   "revealedMax": 1
+  }
+ }
+}

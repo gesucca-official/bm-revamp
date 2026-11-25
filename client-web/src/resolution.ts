@@ -23,13 +23,13 @@ export type MoveFact = {
   itemGone: boolean;
   /** Only on a contiguous round: an object of the same name appeared at the author's seat in the same round. */
   itemAtAuthor: boolean;
-  /** SB-16f0 (D56), playground rules only, absent otherwise: why the engine voided the move («a terra»). */
+  /** SB-16f0 (D56): why the engine voided the move («a terra»); live games carry it (two moves «a terra» seen by SB-31 F3); archived games do not. */
   voidReason?: string;
-  /** SB-16f0 (D56), playground rules only, absent otherwise: the search that replaced the draw, with the card found shown to everyone. */
+  /** SB-16f0 (D56): the search that replaced the draw, with the card found shown to everyone; live games carry it (seen by SB-31 F3), archived games do not. */
   search?: MoveSearch;
-  /** SB-16i (D97), playground rules only, absent otherwise: for a card with «Gioca d'anticipo», whether it came before the target's move. */
+  /** SB-16i (D97): for a card with «Gioca d'anticipo», whether it came before the target's move; live games carry it (seen by SB-31 F3), archived games do not. */
   ahead?: boolean;
-  /** SB-16i (D97), playground rules only, absent otherwise: for a card with «Rincara», the author's earlier plays of it. */
+  /** SB-16i (D97): for a card with «Rincara», the author's earlier plays of it; set by the engine under the live ruleset, absent in archived games. */
   plays?: number;
 };
 

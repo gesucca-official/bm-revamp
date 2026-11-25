@@ -3,7 +3,7 @@ import {AlphaFilter,Application,Assets,BlurFilter,Container,Graphics,Rectangle,S
 import {safeInsets,type Insets} from './safe.ts';
 import {PROPS,backgroundGeometry,placeBackground,type PropId} from './background.ts';
 import {Model,clone,type Target} from './model.ts';
-import {handCardState,guideFocus,guideMotion,GuideRest,hitAt,handSlot,raisedCard,confirmCard,regularCard,type GuideBeat,type GuideFocus,type Posable} from './readability.ts';
+import {plainText,handCardState,guideFocus,guideMotion,GuideRest,hitAt,handSlot,raisedCard,confirmCard,regularCard,type GuideBeat,type GuideFocus,type Posable} from './readability.ts';
 import {artIndex,artFrame,loadAtlas,type ArtRef} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
@@ -284,7 +284,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    if(this.openStatus===chip.id||this.hovered===chip.id||this.focused===chip.id)g.roundRect(-cw/2-2,-ch/2-2,cw+4,ch+4,ch*.4).stroke({color:0xf1e4c4,width:2});
    this.world.addChild(c);this.chips[chip.id]={...chip,x,y:y-ch/2};
    // Same owner as the character: with a card chosen, a tap here aims at that character.
-   this.hits.push({id:chip.id,kind:'status',x,y,w:cw,h:ch,angle:0,target:{owner:id},label:`${chip.title}. ${chip.text}`,node:c});});}
+   this.hits.push({id:chip.id,kind:'status',x,y,w:cw,h:ch,angle:0,target:{owner:id},label:plainText(`${chip.title}. ${chip.text}`),node:c});});}
  // C3-2, C3-6: the round's overall change of a seat, as the model gives it; nothing computed here. One cell per entry: the symbol of the
  // resource (the one of the boards) or of the objects, and the signed number, in the type size and cells of the plan (readability.ts).
  private seatSummary(plan:StripPlan,marks:SeatMark[]){const {box:b,size}=plan,c=new Container(),g=new Graphics(),row=new Container();c.addChild(g,row);c.position.set(b.x-b.w/2,b.y-b.h/2);

@@ -1,5 +1,6 @@
 import type {Card,Character,Resource,Status} from './contracts.ts';
 import {regular,type LocalCard,type Model} from './model.ts';
+import {tokenStatusOf,timerCardName} from './annex.ts';
 // C2a readability helpers. Pure functions over the authoritative view: they only decide how
 // things look. Costs are never subtracted here and the server stays the judge of legality.
 
@@ -74,7 +75,9 @@ export function meter(value:number,start:number|undefined,health=false):Meter{
 }
 
 /** Statuses, equipment, immunities and timers of a character, as short chips with a summary.
- * Italian text for the statuses of the current set (R07), else the server description. */
+ * SB-31 F3 (D197): a live game (the character has the public counter `plays`) shows the Italian description the server sends, with its
+ * placeholders ([[HIT]]…) for the shell to draw as symbols; the token's status takes its name and text from the annex (annex.ts), the timers the name of
+ * their card. STATUS_TEXT and TIMER_TEXT below are only for the archived Set Base 0.1 games, whose statuses have English names and descriptions. */
 const STATUS_TEXT:Record<string,string>={
  'YOU CARESS ME':'Colpi (HIT) ricevuti ×0,35',
  'ONLY A LITTLE DISCOMFORT':'Colpi (HIT) ricevuti ×0,75',
@@ -88,22 +91,33 @@ const TIMER_TEXT:Record<string,string>={
  'Marvelous Cocktail':'toglie immunità e stati, poi 20 danni da veleno',
 };
 const NAMES:Record<string,string>={TOXICITY:'tossicità',ALCOHOL:'alcol'};
-/** `short` is the consultable text of the chip; an immunity also names its `resource`, which the table draws as the symbol (C4-3). */
+const RESOURCE_WORDS:Record<Resource,string>={HEALTH:'salute',ALERTNESS:'allerta',VIOLENCE:'violenza',TOXICITY:'tossicità',ALCOHOL:'alcol'};
+/** A text with its placeholders as words, for what is read and not drawn (labels of the canvas, the screen reader): «2 [[HIT]]» is «2 colpo». */
+export const plainText=(text:string)=>text.replace(/\[\[(HIT|CUT|POISON|[HAVTL])\]\]/g,(_,k:string)=>(DAMAGE_NAMES as Record<string,string>)[k]??RESOURCE_WORDS[BY_LETTER[k]]);
+/** `short` is the consultable text of the chip; an immunity also names its `resource`, which the table draws as the symbol (C4-3). `text` may hold placeholders: `plainText` for a label. */
 export type Chip={id:string;kind:'good'|'bad'|'equip'|'immunity'|'timer';short:string;title:string;text:string;resource?:Resource};
+/** The text of a status of the archived 0.1 games, in Italian; any other name keeps what the server sends. */
 export const statusText=(name:string,fallback:string)=>STATUS_TEXT[name]??fallback;
 // R05: duration d decreases at turn end and the status disappears below zero (0 = this turn only).
 const lasting=(d:number|null)=>d===null?'resta finché non viene tolto':d<=0?'finisce a fine turno':`dura ancora ${d} turn${d===1?'o':'i'} dopo questo`;
-export function chipsOf(owner:string,c:Pick<Character,'statuses'|'immunities'|'timers'>):Chip[]{
- const chips:Chip[]=[],exposures=vulnerabilitiesOf(c);
+export function chipsOf(owner:string,c:Pick<Character,'statuses'|'immunities'|'timers'|'plays'>):Chip[]{
+ const chips:Chip[]=[],exposures=vulnerabilitiesOf(c),archived=c.plays===undefined;
  c.immunities.forEach(r=>chips.push({id:`status-${owner}-imm-${r}`,kind:'immunity',short:LETTER[r],resource:r,title:`Immune a ${NAMES[r]??r}`,text:'Blocca il suo effetto di fine turno, non costi, variazioni o veleno.'}));
- c.statuses.forEach((s,i)=>{if(s.exposure!==undefined)return;chips.push({id:`status-${owner}-st-${i}`,kind:s.equip?'equip':s.type==='BAD'?'bad':'good',short:s.lastsForTurns===null?'∞':String(Math.max(0,s.lastsForTurns)),
-  title:`${s.equip?'Equipaggiamento':s.type==='BAD'?'Stato negativo':'Stato positivo'}: ${s.name}`,text:`${statusText(s.name,s.description).replace(/[.\s]+$/,'')}. ${s.singleUse&&!s.equip?'Si consuma dopo l’uso; ':''}${lasting(s.lastsForTurns)}.`});});
+ c.statuses.forEach((s,i)=>{if(s.exposure!==undefined)return;const token=archived?null:tokenStatusOf(s.name),name=token?.name??s.name,description=token?token.text:archived?statusText(s.name,s.description):s.description;
+  chips.push({id:`status-${owner}-st-${i}`,kind:s.equip?'equip':s.type==='BAD'?'bad':'good',short:s.lastsForTurns===null?'∞':String(Math.max(0,s.lastsForTurns)),
+  title:`${s.equip?'Equipaggiamento':s.type==='BAD'?'Stato negativo':'Stato positivo'}: ${name}`,text:`${description.replace(/[.\s]+$/,'')}. ${s.singleUse&&!s.equip?'Si consuma dopo l’uso; ':''}${lasting(s.lastsForTurns)}.`});});
  // SB-16g 2a (D69): one chip per vulnerability token (its statuses, one per damage type, together).
  exposures.forEach(v=>chips.push({id:`status-${owner}-vu-${v.exposure}`,kind:'bad',short:v.left===null?'∞':String(Math.max(1,v.left+1)),
   title:`Stato negativo: Vulnerabile ${factorText(v.factor)}`,text:`${vulnerabilityText(v)}${exposures.length>1?' Più vulnerabilità si moltiplicano.':''}`}));
  // R06: timers count down at each turn end and fire at zero.
- c.timers.forEach((tm,i)=>chips.push({id:`status-${owner}-tm-${i}`,kind:'timer',short:String(tm.timer),title:`Timer: ${tm.name}`,text:`${tm.timer<=1?'Scatta a fine turno':`Scatta tra ${tm.timer} fine turno`}: ${TIMER_TEXT[tm.name]??'effetto ritardato'}.`}));
+ c.timers.forEach((tm,i)=>{const card=archived?null:timerCardName(tm.name),what=archived?TIMER_TEXT[tm.name]??'effetto ritardato':card?`effetto di «${card}»`:'effetto ritardato';
+  chips.push({id:`status-${owner}-tm-${i}`,kind:'timer',short:String(tm.timer),title:`Timer: ${card??tm.name}`,text:`${tm.timer<=1?'Scatta a fine turno':`Scatta tra ${tm.timer} fine turno`}: ${what}.`});});
  return chips;
+}
+/** SB-31 F3 (D171 (3), D196 (5)): the list of the inspection groups the statuses of the same name under one name, with their descriptions in a row; the table keeps one chip per status. */
+export type ChipGroup={title:string;chips:Chip[]};
+export function groupChips(chips:Chip[]):ChipGroup[]{
+ const groups:ChipGroup[]=[];for(const c of chips){const g=groups.find(x=>x.title===c.title);if(g)g.chips.push(c);else groups.push({title:c.title,chips:[c]});}return groups;
 }
 
 /**

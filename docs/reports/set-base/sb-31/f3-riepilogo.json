@@ -1,0 +1,89 @@
+{
+ "phase": "SB-31 F3",
+ "date": "2026-11-25",
+ "base": "5692be4",
+ "size": {
+  "jsGzip": 397774,
+  "totalGzip": 1780679,
+  "textureDecodedBytes": 31923352,
+  "ceilingsC4": {
+   "source": "D9 of the C4 plan, revised by the owner on 3 November 2026 and by D197 (5) on 24 November 2026: only the decoded-texture ceiling (MiB, 48 for the Set Base); JS and total have the hard limits only",
+   "textureBytes": {
+    "ceiling": 50331648,
+    "used": 31923352,
+    "margin": 18408296,
+    "usedPercent": 63.4,
+    "pass": true
+   },
+   "pass": true
+  },
+  "budgets": {
+   "js": 512000,
+   "total": 4194304,
+   "atlasSide": 2048,
+   "textureBytes": 67108864
+  },
+  "limitsPass": true,
+  "pass": true
+ },
+ "sizeF2": {
+  "jsGzip": 375904,
+  "totalGzip": 1758614,
+  "textureDecodedBytes": 31923352
+ },
+ "tests": {
+  "before": 379,
+  "after": 391,
+  "newFile": "client-web/tests/annex.test.ts (12 tests)"
+ },
+ "mutations": {
+  "M11": "keyword Vendi not recognised -> 2 tests red",
+  "M12": "hasFullText always true -> 1 test red",
+  "M13": "groupChips does not group -> 1 test red",
+  "M14": "token status text from the class -> 1 test red",
+  "M15": "table.tsx button without the hasFullText(entry) check -> source test red"
+ },
+ "layout750": {
+  "base_full_runs": [
+   48,
+   47,
+   48,
+   48,
+   47,
+   47,
+   48
+  ],
+  "base_ffa_only_runs": [
+   23,
+   23,
+   23,
+   23,
+   23,
+   23,
+   23,
+   23
+  ],
+  "f3_full_runs": [
+   47,
+   76,
+   48,
+   61
+  ],
+  "f3_ffa_only_runs": [
+   23,
+   23,
+   23,
+   23,
+   37,
+   23
+  ],
+  "note": "problem lines; the elevated runs add FFA close-up problems of the same types as R1; registered as R13 (not attributed)"
+ },
+ "verifyFinalBuild": {
+  "Verify": "1366x768, 844x390, 1920x1080 green",
+  "VerifyLayout": "1366x768, 844x390, 1920x1080 green (0 O26)",
+  "VerifyAim keyboard 750x292": "green",
+  "VerifyResolution info 844x390": "green"
+ },
+ "healthCost": "not verifiable live: only base.rocco cards (Duccio, no starter) cost HEALTH; Costo row and cost() unchanged from the base"
+}

@@ -5,6 +5,9 @@ const annex=JSON.parse(await readFile(new URL('../../docs/rules-catalog.json',im
 const catalog=new Map(annex.cards.map(c=>[c.name,c]));
 const bound=c=>catalog.get(c.name)?.subtype==='Legata al personaggio';
 const regular=c=>catalog.get(c.name)?.subtype==='Regolare';
+// SB-31 F3 (R11, D197 (1)): «the own card» is the one whose printed target is the player («Si gioca su di te»), read from the annex like the rest, not a class name:
+// it holds for every starter of the Set Base 1.0.1 (the check once knew only LittleRage of the 0.1, which made it look at the wrong person for any other bound).
+const selfTarget=c=>/Si gioca su di te/.test(catalog.get(c.name)?.fullText?.[0]??'');
 export async function discardPass(p,shot){
  const {page}=p,errors=[],samples=[];
  const escape=async()=>{await page.keyboard.press('Escape');await page.evaluate(()=>document.activeElement?.blur());await page.mouse.move(2,2);await page.waitForTimeout(80);};
@@ -55,7 +58,7 @@ export async function discardPass(p,shot){
   // it chooses the discard. Both paths must remain reachable with a canvas tap.
   for(const aimed of [false,true])for(const c of candidates){
    await escape();await choose(b.key);
-   if(aimed){const self=catalog.get(b.name).class.endsWith('.LittleRage');
+   if(aimed){const self=selfTarget(b);
     s=await p.state();const t=s.hits.find(h=>h.kind==='person'&&(self?h.target.owner===s.me:h.target.owner!==s.me));
     await page.locator(`[data-hit="${t.id}"]`).focus();await page.keyboard.press('Enter');await page.waitForTimeout(80);
     // Reproduce the persistent hand focus which caused the owner's failure.
@@ -75,7 +78,7 @@ export async function discardPass(p,shot){
    check(after,false,`${b.name}-${c.key}-choice-ended`);await prompt(false);
   }
   for(const no of start.cards.filter(c=>!regular(c)&&c.key!==b.key)){
-   await escape();await choose(b.key);s=await p.state();const self=catalog.get(b.name).class.endsWith('.LittleRage');
+   await escape();await choose(b.key);s=await p.state();const self=selfTarget(b);
    const t=s.hits.find(h=>h.kind==='person'&&(self?h.target.owner===s.me:h.target.owner!==s.me));
    await page.locator(`[data-hit="${t.id}"]`).focus();await page.keyboard.press('Enter');await page.waitForTimeout(80);
    s=await p.state();const target=JSON.stringify(s.target),h=s.hits.find(h=>h.id===no.key);

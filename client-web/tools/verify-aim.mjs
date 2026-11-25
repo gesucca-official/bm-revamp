@@ -447,6 +447,18 @@ const focusReport=p=>p.page.evaluate(()=>{const w=window.__kw;return {samples:w.
 // The cards of the hand that a card can be thrown away for (rule R03): regular ones, as the wire view says.
 const regularNames=(s,v)=>new Set(v.players[s.me].cardsInHand.filter(c=>!c.item&&!c.basicAction&&!c.characterBound&&!c.lastResort).map(c=>c.name));
 async function tabTo(p,pred,cap=30,key='Tab'){for(let i=0;i<cap;i++){const a=await active(p);if(a&&pred(a))return a;await press(p,key);}const a=await active(p);return a&&pred(a)?a:null;}
+// R12 (the pattern of R8, SB-31 F3, D197 (3)): after ✓ the client may open «Scartare l’ultima copia?» (answered with «Sì, scarta e gioca», which may open
+// «Quale carta cerchi?») or «Quale carta cerchi?» alone, and the move leaves only after the answer. Answer each dialog that opens from the keyboard (Tab to the
+// first answer, Enter) for a bounded 5 s or until the move is sent; a move with no dialog is left to the server answer. No assertion changes: the SEND count stays checked.
+async function answerDialogsByKeyboard(p,before){
+ const end=Date.now()+5000;
+ while(Date.now()<end&&movesSent(p)===before){
+  if(!(await p.page.locator('dialog[open]').count())){await p.page.waitForTimeout(100);continue;}
+  const a=await tabTo(p,x=>x.test==='search-option'||x.label.startsWith('Sì, scarta e gioca'),12);
+  if(!a)throw new Error(`${p.name}: a dialog is open and no answer can be reached from the keyboard`);
+  await press(p,'Enter');await p.page.waitForTimeout(100);
+ }
+}
 // One move chosen from the keyboard to the point where ✓ has the focus. Returns the card and the target, or null when no card of this hand can go (no target, no discard).
 async function kbdChoose(p,scope,rec,skip=0){
  let s=await p.state();const v=view(p,s);if(!v){bad(scope,'no wire view');return null;}
@@ -522,6 +534,7 @@ async function kbdGame(p,scope,rec,{maxTurns,reduced}){
    const before=movesSent(p);
    // Space also activates (checked once); Enter the other turns.
    await press(p,n===3&&attempt===0?' ':'Enter');
+   await answerDialogsByKeyboard(p,before);
    await p.wait(x=>!x||x.phase==='pending'||x.turn!==s.turn||x.over||x.eliminated||(x.phase==='choose'&&x.message.startsWith('Rifiutata')),15000,'server answer');
    sent=movesSent(p)-before;if(sent!==1)bad(scope,`turn ${s.turn}: ${sent} SEND for one ${n===3&&attempt===0?'Space':'Enter'}`);
    const r=await p.state();if(r&&r.phase==='choose'&&r.turn===s.turn&&r.message.startsWith('Rifiutata')){rec.refused=(rec.refused??0)+1;await press(p,'Escape');await settle(p,150);continue;}
