@@ -27,6 +27,7 @@ import static com.gsc.bm.model.game.status.StatusType.BAD;
 import static com.gsc.bm.model.game.status.StatusType.GOOD;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Stato effettivo durante R04 e durata separata di due applicazioni della stessa carta (R05). */
 class Sb27StatusClausesTest {
@@ -90,34 +91,34 @@ class Sb27StatusClausesTest {
 
     static Stream<Sheet> sheets() {
         return Stream.of(
-                threeQuarters("SPA-BO1", "bruiser.character.LittleRage", "LIEVE FASTIDIO"),
-                guard("SPA-AR4", "bruiser.MadeOfStone", "NON GIOCARE COL COLTELLO NO", Play.SELF, 3, false, damage(CUT, 10)),
-                threeQuarters("MAR-BO2", "base.mara.bound.CambioMarcia", "Semaforo Rosso"),
-                new Sheet("MAR-AR2", "base.mara.Sgommata", "Sgommata", Play.OPPONENT, BAD, OUTPUT, 0, false,
+                threeQuarters("SPA-BO1", SLIGHT_ANNOYANCE, "LIEVE FASTIDIO"),
+                guard("SPA-AR4", DONT_PLAY_WITH_THE_KNIFE, "NON GIOCARE COL COLTELLO NO", Play.SELF, 3, false, damage(CUT, 10)),
+                threeQuarters("MAR-BO2", RED_LIGHT, "Semaforo Rosso"),
+                new Sheet("MAR-AR2", BURNOUT, "Sgommata", Play.OPPONENT, BAD, OUTPUT, 0, false,
                         damage(HIT, 15), damage(CUT, 15), damage(POISON, 15)),
-                guard("MAR-AR4", "base.mara.TraDueParaurti", "Unta e Bisunta", Play.SELF, 0, false, damage(HIT, 10), damage(CUT, 10)),
-                threeQuarters("TOS-BO2", "base.tossico.bound.RaschiareIlFondo", "Rintanarsi nel Cappotto"),
-                threeQuarters("PIN-BO1", "base.pino.bound.CinqueMinutiEVado", "Posto Fisso"),
-                guard("PIN-AR3", "base.pino.IlBanconeRegge", "Avamposto Fortificato al Bancone", Play.SELF, 0, false,
+                guard("MAR-AR4", GREASY_AND_GRIMY, "Unta e Bisunta", Play.SELF, 0, false, damage(HIT, 10), damage(CUT, 10)),
+                threeQuarters("TOS-BO2", BURROW_INTO_THE_COAT, "Rintanarsi nel Cappotto"),
+                threeQuarters("PIN-BO1", REGULAR_SPOT, "Posto Fisso"),
+                guard("PIN-AR3", FORTIFIED_BAR_OUTPOST, "Avamposto Fortificato al Bancone", Play.SELF, 0, false,
                         damage(HIT, 15), damage(POISON, 10)),
-                threeQuarters("GIG-BO1", "base.gigi.bound.UnaStrettaEPassa", "Cuffie e Testa Bassa"),
-                new Sheet("GIG-BO3", "base.gigi.bound.Lima", "Affilare gli Utensili", Play.BOUND, GOOD, OUTPUT, 1, true, new Modifier(HIT, CUT, 15)),
-                guard("GIG-AR4", "base.gigi.SottoIlCofano", "Secondo Bagagliaio", Play.SELF, 0, false, damage(HIT, 10), damage(CUT, 15)),
-                threeQuarters("CES-BO3", "base.cesira.bound.FareIlVago", "Fare il Vago"),
-                threeQuarters("ROC-BO3", "base.rocco.bound.AlzoLaVoce", "(Dis)onore alla Bandiera"),
-                guard("ROC-AR2", "base.rocco.Incassare", "Stoico come un Busto di Bronzo", Play.SELF, 0, false, damage(HIT, 10)),
-                guard("ROC-AR3", "base.rocco.EAllora", "E Allora...?", Play.OPPONENT, 0, false, damage(HIT, 10)),
-                guard("GEN-11", "bruiser.CantFeelAnything", "GENTILE IL TUO CAREZZO", Play.SELF, 0, false, damage(HIT, 5)),
-                guard("GEN-13", "base.com.TartarugaSulMarciapiede", "Tecnica del Carapace Mentale", Play.SELF, 0, false,
+                threeQuarters("GIG-BO1", HEADPHONES_AND_HEAD_DOWN, "Cuffie e Testa Bassa"),
+                new Sheet("GIG-BO3", SHARPEN_THE_TOOLS, "Affilare gli Utensili", Play.BOUND, GOOD, OUTPUT, 1, true, new Modifier(HIT, CUT, 15)),
+                guard("GIG-AR4", SECOND_TRUNK, "Secondo Bagagliaio", Play.SELF, 0, false, damage(HIT, 10), damage(CUT, 15)),
+                threeQuarters("CES-BO3", ACT_VAGUE, "Fare il Vago"),
+                threeQuarters("ROC-BO3", DISHONOUR_TO_THE_FLAG, "(Dis)onore alla Bandiera"),
+                guard("ROC-AR2", STOIC_AS_A_BRONZE_BUST, "Stoico come un Busto di Bronzo", Play.SELF, 0, false, damage(HIT, 10)),
+                guard("ROC-AR3", SO_WHAT, "E Allora...?", Play.OPPONENT, 0, false, damage(HIT, 10)),
+                guard("GEN-11", KIND_YOUR_CARESS, "GENTILE IL TUO CAREZZO", Play.SELF, 0, false, damage(HIT, 5)),
+                guard("GEN-13", MENTAL_CARAPACE_TECHNIQUE, "Tecnica del Carapace Mentale", Play.SELF, 0, false,
                         damage(HIT, 10), damage(CUT, 10)),
-                new Sheet("GEN-20", "base.com.SecondoFiato", "Riprendere Fiato", Play.SELF, BAD, INPUT, 1, false,
+                new Sheet("GEN-20", CATCH_YOUR_BREATH, "Riprendere Fiato", Play.SELF, BAD, INPUT, 1, false,
                         damage(HIT, 25), damage(CUT, 25)),
-                new Sheet("GEN-21", "base.com.CoccioDiBottiglia", "Coccio di Bottiglia", Play.SELF, GOOD, OUTPUT, null, true,
+                new Sheet("GEN-21", BOTTLE_SHARD, "Coccio di Bottiglia", Play.SELF, GOOD, OUTPUT, null, true,
                         new Modifier(HIT, CUT, 30)),
-                new Sheet("OGG-09", "base.items.GuantiDaOfficina", "Guanti da Officina", Play.CONSUME, GOOD, OUTPUT, 2, true, damage(HIT, 25)),
-                guard("OGG-10", "base.items.GiubbottoDiFintaPelle", "Giubbotto di Finta Pelle", Play.CONSUME, 2, true, damage(CUT, 15)),
-                guard("OGG-11", "base.items.CascoDaLavoro", "Casco da Cantiere", Play.CONSUME, 2, true, damage(HIT, 15)),
-                new Sheet("OGG-13", "base.items.PosacenereDiVetro", "Posacenere di Vetro", Play.CONSUME, GOOD, OUTPUT, null, true, damage(HIT, 30)));
+                new Sheet("OGG-09", WORKSHOP_GLOVES, "Guanti da Officina", Play.CONSUME, GOOD, OUTPUT, 2, true, damage(HIT, 25)),
+                guard("OGG-10", FAKE_LEATHER_JACKET, "Giubbotto di Finta Pelle", Play.CONSUME, 2, true, damage(CUT, 15)),
+                guard("OGG-11", SITE_HELMET, "Casco da Cantiere", Play.CONSUME, 2, true, damage(HIT, 15)),
+                new Sheet("OGG-13", GLASS_ASHTRAY, "Posacenere di Vetro", Play.CONSUME, GOOD, OUTPUT, null, true, damage(HIT, 30)));
     }
 
     @ParameterizedTest(name = "{0}")
@@ -153,7 +154,7 @@ class Sb27StatusClausesTest {
         }
     }
 
-    private static String subject(Sheet sheet) { return sheet.binding.equals("base.mara.Sgommata") ? "b" : "s"; }
+    private static String subject(Sheet sheet) { return sheet.binding.equals(BURNOUT) ? "b" : "s"; }
 
     private static Game applyInGame(Sheet sheet, Card original, Probe probe) {
         Player actor = s(sheet.play == Play.CONSUME ? consume() : original, hit(ATTACK, 0, null, "HIT 7"));

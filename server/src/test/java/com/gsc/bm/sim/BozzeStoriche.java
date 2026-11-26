@@ -10,6 +10,8 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.Set;
 
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
+
 /**
  * SB-27 (D177, risposta del proprietario allo STOP 1/2): legge una bozza storica, precedente alla forma definitiva delle carte Java,
  * adattandola in memoria prima del caricamento. Le bozze storiche sono evidenze e non si modificano; il caricatore di produzione
@@ -34,18 +36,18 @@ final class BozzeStoriche {
 
     /** I parametri tolti, per carta: si tolgono solo se valgono 0. */
     static final Map<String, Set<String>> TOLTI = Map.of(
-            "base.pino.GoingBerserk", Set.of("selfHit", "maxDamage"),
-            "base.pino.UltimoGiro", Set.of("maxDamage"),
-            "base.com.BeggingMoney", Set.of("alertnessFromTarget"),
-            "bruiser.YouStop", Set.of("alertnessToTarget"));
+            DOWN_IN_ONE, Set.of("selfHit", "maxDamage"),
+            LAST_ROUND, Set.of("maxDamage"),
+            GOT_ANY_SPARE_CHANGE, Set.of("alertnessFromTarget"),
+            THATS_ENOUGH, Set.of("alertnessToTarget"));
     /** I numeri che la classe di allora usava quando la bozza li taceva, per carta. */
     static final Map<String, Map<String, Integer>> TACIUTI = Map.of(
-            "base.pino.GoingBerserk", Map.of("perAlcohol", 1),
-            "base.pino.UltimoGiro", Map.of("perPlay", 0, "perPlaySelf", 0),
-            "junkie.ToxicBloodDrain", Map.of("poison", 0));
+            DOWN_IN_ONE, Map.of("perAlcohol", 1),
+            LAST_ROUND, Map.of("perPlay", 0, "perPlaySelf", 0),
+            DRAG_INTO_THE_TUNNEL, Map.of("poison", 0));
     /** SB-28: le carte condivise la cui forma del Set Base 0.1 è uscita col set; nelle bozze 0.1 prendono costo e numeri del set vivo. */
-    static final Set<String> CONDIVISE_01 = Set.of("bruiser.YouStop", "junkie.ToxicBloodDrain", "bruiser.BreakYourToy",
-            "bruiser.BadEducation");
+    static final Set<String> CONDIVISE_01 = Set.of(THATS_ENOUGH, DRAG_INTO_THE_TUNNEL, DISASSEMBLE,
+            EXCUSE_ME_SORRY_CAN_YOU_STOP);
     /** Il file del set vivo, da cui le bozze 0.1 prendono le quattro carte condivise. */
     static final String SET_VIVO = "/sets/base.json";
 
@@ -99,7 +101,7 @@ final class BozzeStoriche {
     /** Una bozza del Set Base 0.1: «FAI BASTA» con il guadagno di A dello 0.1 (10). */
     static boolean setBase01(JsonNode draft) {
         for (JsonNode card : draft.path("cards"))
-            if (card.path("binding").asText().equals("bruiser.YouStop") && card.path("params").path("alertnessToTarget").asInt(0) == 10)
+            if (card.path("binding").asText().equals(THATS_ENOUGH) && card.path("params").path("alertnessToTarget").asInt(0) == 10)
                 return true;
         return false;
     }

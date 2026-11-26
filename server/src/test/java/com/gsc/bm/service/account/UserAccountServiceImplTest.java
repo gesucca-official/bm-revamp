@@ -10,6 +10,7 @@ import com.gsc.bm.service.account.model.UserGuiDeck;
 import com.gsc.bm.service.factories.CardFactoryService;
 import com.gsc.bm.service.factories.CharacterFactoryService;
 import com.gsc.bm.service.view.model.deck.CharacterCardView;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -22,14 +23,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 class UserAccountServiceImplTest {
-    private static final String BRUISER = "bruiser.character.BigBadBruiser", JUNKIE = "junkie.character.ToxicJunkie";
+    private static final String BRUISER = SetBaseIds.SPAZIENZIO, JUNKIE = SetBaseIds.CELESTINA;
     // The catalog column C_EXCLUSIVE_TO (regulation 1.12 R02): each basic is reserved to its character, Struggle is generic.
-    private static final Map<String, String> RESERVED = Map.of("com.basic.BruiserGrab", BRUISER, "com.basic.ToxicGrab", JUNKIE);
+    private static final Map<String, String> RESERVED = Map.of(LET_US_USE_YOU, BRUISER, UNCONTROLLABLE_CRAVING, JUNKIE);
     // Ten different regular cards, two copies each: the 20 regular cards of R02 1.12 (two of them are items).
-    private static final List<String> TEN = List.of("bruiser.Glare", "bruiser.StunningBlow", "bruiser.SuperImpact", "bruiser.YouStop",
-            "bruiser.MadeOfStone", "com.Grab", "com.Steal", "com.ShuffleFeet", "com.items.RottenBeer", "com.items.CocktailOnTheGround");
+    private static final List<String> TEN = List.of(PATIENCE_OVER, STUN_YOU_I_SAID, GARGANTUAN_IMPACT_ON_YOU, THATS_ENOUGH,
+            DONT_PLAY_WITH_THE_KNIFE, SetBaseIds.GRAB, SLEIGHT_OF_HAND_THEFT, "com.ShuffleFeet", WARM_BLONDE_66, NEGRONI_FOUND_ON_THE_FLOOR);
 
     private final UserDecksRepository decks = mock(UserDecksRepository.class);
     private UserAccountServiceImpl service(Map<String, String> reserved) {
@@ -68,8 +70,8 @@ class UserAccountServiceImplTest {
         return out;
     }
     private static UserGuiDeck bruiser() {
-        return new UserGuiDeck("Botte", CharacterCardView.builder().bindingName(BRUISER).build(), ref("com.basic.BruiserGrab"),
-                ref("com.last.Struggle"), refs(List.of("bruiser.character.LittleSmack", "bruiser.character.LittleRage")), refs(twice(TEN)));
+        return new UserGuiDeck("Botte", CharacterCardView.builder().bindingName(BRUISER).build(), ref(LET_US_USE_YOU),
+                ref(AT_HIM), refs(List.of(WAKE_UP_BUT_NOT_YOU, SLIGHT_ANNOYANCE)), refs(twice(TEN)));
     }
     private static UserGuiDeck with(UnaryOperator<UserGuiDeck> change) { return change.apply(bruiser()); }
     private static UserGuiDeck regular(List<String> bindings) {
@@ -91,10 +93,10 @@ class UserAccountServiceImplTest {
     @Test void deckIdentifierWithSlashIsRejectedBeforeSaving() {
         UserDecksRepository decks = mock(UserDecksRepository.class);
         CharactersGuiRepository characters = mock(CharactersGuiRepository.class);
-        when(characters.existsById("bruiser.character.BigBadBruiser")).thenReturn(true);
+        when(characters.existsById(SetBaseIds.SPAZIENZIO)).thenReturn(true);
         var service = new UserAccountServiceImpl(mock(UserCredentialsRepository.class), decks, mock(CardsGuiRepository.class),
                 characters, mock(CardFactoryService.class), mock(CharacterFactoryService.class));
-        var character = CharacterCardView.builder().bindingName("bruiser.character.BigBadBruiser").build();
+        var character = CharacterCardView.builder().bindingName(SetBaseIds.SPAZIENZIO).build();
         var error = assertThrows(IllegalArgumentException.class,
                 () -> service.addUserDeck("devAlice", new UserGuiDeck("a/b", character, null, null, List.of(), List.of())));
         assertTrue(error.getMessage().contains("/"));
@@ -110,7 +112,7 @@ class UserAccountServiceImplTest {
     @Test void regularCardsMustBeExactlyTwenty() {
         var service = service(RESERVED);
         List<String> nineteen = new ArrayList<>(twice(TEN)); nineteen.remove(0);
-        List<String> twentyOne = new ArrayList<>(twice(TEN)); twentyOne.add("junkie.Cough");
+        List<String> twentyOne = new ArrayList<>(twice(TEN)); twentyOne.add(PHLEGMY_COUGH);
         refused(service, regular(nineteen), "Exactly 20 regular cards required, found 19");
         refused(service, regular(twentyOne), "Exactly 20 regular cards required, found 21");
         refused(service, regular(List.of()), "Exactly 20 regular cards required, found 0");
@@ -120,32 +122,32 @@ class UserAccountServiceImplTest {
 
     @Test void aThirdCopyIsRefusedForActionsAndItems() {
         var service = service(RESERVED);
-        List<String> glare = new ArrayList<>(twice(TEN)); glare.set(glare.indexOf("bruiser.StunningBlow"), "bruiser.Glare");
-        List<String> beer = new ArrayList<>(twice(TEN)); beer.set(beer.indexOf("bruiser.StunningBlow"), "com.items.RottenBeer");
+        List<String> glare = new ArrayList<>(twice(TEN)); glare.set(glare.indexOf(STUN_YOU_I_SAID), PATIENCE_OVER);
+        List<String> beer = new ArrayList<>(twice(TEN)); beer.set(beer.indexOf(STUN_YOU_I_SAID), WARM_BLONDE_66);
         refused(service, regular(glare), "At most 2 copies per card: bruiser.Glare has 3");
         refused(service, regular(beer), "At most 2 copies per card: com.items.RottenBeer has 3");
     }
 
     @Test void boundCardsMustBeTwoDifferentOfTheCharacter() {
         var service = service(RESERVED);
-        refused(service, bound("bruiser.character.LittleSmack", "junkie.character.PatheticBlade"),
+        refused(service, bound(WAKE_UP_BUT_NOT_YOU, ASHTRAY_BOTTOM),
                 "Bound card of another character: junkie.character.PatheticBlade");
-        refused(service, bound("bruiser.character.LittleSmack", "bruiser.character.LittleSmack"),
+        refused(service, bound(WAKE_UP_BUT_NOT_YOU, WAKE_UP_BUT_NOT_YOU),
                 "Bound cards must be different: bruiser.character.LittleSmack");
-        refused(service, bound("bruiser.character.LittleSmack"), "Two different bound cards of the character required, found 1");
+        refused(service, bound(WAKE_UP_BUT_NOT_YOU), "Two different bound cards of the character required, found 1");
         refused(service, bound(), "Two different bound cards of the character required, found 0");
-        refused(service, bound("bruiser.character.LittleSmack", "bruiser.character.LittleRage", "bruiser.character.LittleSmack"),
+        refused(service, bound(WAKE_UP_BUT_NOT_YOU, SLIGHT_ANNOYANCE, WAKE_UP_BUT_NOT_YOU),
                 "Two different bound cards of the character required, found 3");
-        refused(service, bound("bruiser.character.LittleSmack", "com.Grab"), "Bound card required");
+        refused(service, bound(WAKE_UP_BUT_NOT_YOU, SetBaseIds.GRAB), "Bound card required");
         refused(service, with(d -> new UserGuiDeck(d.getDeckId(), d.getCharacter(), d.getBasicActionCard(), d.getLastResortCard(),
                 null, d.getRegularCards())), "Two different bound cards of the character required, found 0");
     }
 
     @Test void basicMustBeTheCharacterOwn() {
         var service = service(RESERVED);
-        refused(service, with(d -> new UserGuiDeck(d.getDeckId(), d.getCharacter(), ref("com.basic.ToxicGrab"), d.getLastResortCard(),
+        refused(service, with(d -> new UserGuiDeck(d.getDeckId(), d.getCharacter(), ref(UNCONTROLLABLE_CRAVING), d.getLastResortCard(),
                 d.getCharacterBoundCards(), d.getRegularCards())), "Basic of another character: com.basic.ToxicGrab");
-        refused(service, with(d -> new UserGuiDeck(d.getDeckId(), d.getCharacter(), ref("com.Grab"), d.getLastResortCard(),
+        refused(service, with(d -> new UserGuiDeck(d.getDeckId(), d.getCharacter(), ref(SetBaseIds.GRAB), d.getLastResortCard(),
                 d.getCharacterBoundCards(), d.getRegularCards())), "Basic and last resort required");
     }
 
@@ -153,21 +155,21 @@ class UserAccountServiceImplTest {
         var service = service(RESERVED);
         refused(service, with(d -> new UserGuiDeck(d.getDeckId(), d.getCharacter(), d.getBasicActionCard(), null,
                 d.getCharacterBoundCards(), d.getRegularCards())), "Unknown or missing card");
-        refused(service, with(d -> new UserGuiDeck(d.getDeckId(), d.getCharacter(), d.getBasicActionCard(), ref("com.Grab"),
+        refused(service, with(d -> new UserGuiDeck(d.getDeckId(), d.getCharacter(), d.getBasicActionCard(), ref(SetBaseIds.GRAB),
                 d.getCharacterBoundCards(), d.getRegularCards())), "Basic and last resort required");
         // No catalog last resort is reserved yet (D29): a catalog where Struggle belongs to the Junkie stands in for one.
         var reservedStruggle = new java.util.HashMap<>(RESERVED);
-        reservedStruggle.put("com.last.Struggle", JUNKIE);
+        reservedStruggle.put(AT_HIM, JUNKIE);
         refused(service(reservedStruggle), bruiser(), "Last resort reserved to another character: com.last.Struggle");
-        UserGuiDeck junkie = new UserGuiDeck("Tossico", CharacterCardView.builder().bindingName(JUNKIE).build(), ref("com.basic.ToxicGrab"),
-                ref("com.last.Struggle"), refs(List.of("junkie.character.RottenSmile", "junkie.character.PatheticBlade")), refs(twice(TEN)));
+        UserGuiDeck junkie = new UserGuiDeck("Tossico", CharacterCardView.builder().bindingName(JUNKIE).build(), ref(UNCONTROLLABLE_CRAVING),
+                ref(AT_HIM), refs(List.of(CUT_THE_DOSE, ASHTRAY_BOTTOM)), refs(twice(TEN)));
         service(reservedStruggle).addUserDeck("devAlice", junkie);
         verify(decks).save(any());
     }
 
     @Test void specialCardsStayOutOfTheRegularCardsAndUnknownCardsAreRefused() {
         var service = service(RESERVED);
-        for (String special : List.of("bruiser.character.LittleSmack", "com.basic.BruiserGrab", "com.last.Struggle")) {
+        for (String special : List.of(WAKE_UP_BUT_NOT_YOU, LET_US_USE_YOU, AT_HIM)) {
             List<String> cards = new ArrayList<>(twice(TEN)); cards.set(0, special);
             refused(service, regular(cards), "Regular card required");
         }

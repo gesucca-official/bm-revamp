@@ -34,6 +34,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-8: with the normal profile no bean of the draft profile is active, and the catalog seam answers exactly as SQLite does.
@@ -105,7 +106,7 @@ class BozzaProfileOffContextTest extends SqliteContextSupport {
         users.createIfAbsent(new UserCredentialsRecord("sb8Saver", null, encoder.encode("synthetic"), "USER"));
         // A deck that is valid with the live cards except one card out of the set: refused as an unknown card. The starter
         // «Spazienzio» with its last regular card replaced.
-        DraftSourceDeck spazienzio = new DraftSourceDeck(live, "starter-spazienzio");
+        DraftSourceDeck spazienzio = new DraftSourceDeck(live, STARTER_SPAZIENZIO);
         Card out = mock(Card.class);
         when(out.getBindingName()).thenReturn("com.ShuffleFeet");
         List<Card> regular = new ArrayList<>();
@@ -118,7 +119,7 @@ class BozzaProfileOffContextTest extends SqliteContextSupport {
         IllegalArgumentException refused = assertThrows(IllegalArgumentException.class, () -> accounts.addUserDeck("sb8Saver", deck));
         assertEquals("Unknown or missing card", refused.getMessage());
         // Open plays saved decks only: the starters and the test decks are not ready decks of the live game.
-        for (String ready : List.of("starter-mara", "starter-pino", "starter-gigi", "starter-spazienzio", "starter-tossico", "prova-sergio", "prova-duccio"))
+        for (String ready : List.of(STARTER_MARA, STARTER_PIERA, STARTER_BEPPE, STARTER_SPAZIENZIO, STARTER_CELESTINA, "prova-sergio", "prova-duccio"))
             assertThrows(ValueNotFoundException.class, () -> players.craftOpenPlayer("sb8Saver", ready), ready);
     }
 

@@ -3,6 +3,7 @@ package com.gsc.bm.sim;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -12,15 +13,16 @@ import java.util.Map;
 import static com.gsc.bm.model.Resource.*;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Attesi dalle schede di Beppe Bulletta del Set Base 1.0 candidato. */
 class Sb27BeppeCardsTest {
-    private static final String BEPPE = "base.character.Gigi";
-    private static final String BASIC = "base.gigi.QuestoTornaUtile";
-    private static final String LIMA = "base.gigi.bound.Lima";
-    private static final String CHIAVE = "base.gigi.ChiaveDaTredici";
-    private static final String LAVORO = "base.gigi.LavoroFattoBene";
-    private static final String ESPRESSO = "base.items.EspressoDelDistributore";
+    private static final String BEPPE = SetBaseIds.BEPPE;
+    private static final String BASIC = THIS_COMES_IN_HANDY;
+    private static final String LIMA = SHARPEN_THE_TOOLS;
+    private static final String CHIAVE = THIRTEEN_WRENCH;
+    private static final String LAVORO = JOB_WELL_DONE;
+    private static final String ESPRESSO = VENDING_MACHINE_ESPRESSO;
     private static Draft draft;
 
     @BeforeAll
@@ -36,7 +38,7 @@ class Sb27BeppeCardsTest {
     @Test
     void questoTornaUtileGainsFourAndConsumesTheSelectedItem() {
         Game game = game(beppe(card(BASIC)), b());
-        ch(game, BEPPE).getItems().addAll(List.of(card(ESPRESSO), card("com.items.RottenBeer")));
+        ch(game, BEPPE).getItems().addAll(List.of(card(ESPRESSO), card(WARM_BLONDE_66)));
         turn(game, onItem(game, BEPPE, "Questo Torna Utile", BEPPE, "Espresso della Macchinetta"), rest(game, "b"));
         assertEquals(29, res(game, BEPPE, VIOLENCE));
         assertEquals(40, res(game, BEPPE, ALERTNESS));
@@ -46,7 +48,7 @@ class Sb27BeppeCardsTest {
 
     @Test
     void questoTornaUtileRetainsTheGainWhenItCannotConsumeTheDestroyedItem() {
-        Player opponent = b(card("bruiser.BreakYourToy"));
+        Player opponent = b(card(DISASSEMBLE));
         opponent.getCharacter().getResources().put(VIOLENCE, 5);
         Game game = game(beppe(card(BASIC)), opponent);
         ch(game, BEPPE).getItems().add(card(ESPRESSO));
@@ -59,7 +61,7 @@ class Sb27BeppeCardsTest {
 
     @Test
     void cuffieGainsFiveVAndReducesAllDamageIncludingThePeriodicPoison() {
-        Game game = game(beppe(card("base.gigi.bound.UnaStrettaEPassa")), b(hit("Tre danni", 1, null, "HIT 7", "CUT 7", "POISON 7")));
+        Game game = game(beppe(card(HEADPHONES_AND_HEAD_DOWN)), b(hit("Tre danni", 1, null, "HIT 7", "CUT 7", "POISON 7")));
         ch(game, BEPPE).getResources().put(TOXICITY, 10);
         assertArrayEquals(new int[]{18, 0}, turn(game, bound(game, BEPPE, "Cuffie e Testa Bassa", "SELF"),
                 move(game, "b", "Tre danni", BEPPE)));
@@ -70,7 +72,7 @@ class Sb27BeppeCardsTest {
 
     @Test
     void cacciaviteGainsTwoVAndDealsTwoHit() {
-        Game game = game(beppe(card("base.gigi.bound.ColpoDiCacciavite")), b());
+        Game game = game(beppe(card(SCREWDRIVER_HIT)), b());
         assertArrayEquals(new int[]{0, 2}, turn(game, bound(game, BEPPE, "Colpo col Cacciavite", "b"), rest(game, "b")));
         assertEquals(27, res(game, BEPPE, VIOLENCE));
         assertTrue(inHand(game, BEPPE, "Colpo col Cacciavite"));
@@ -110,7 +112,7 @@ class Sb27BeppeCardsTest {
     @Test
     void affilareIsAnEquipmentThatPermessoRemovesBeforeTheHit() {
         Card attack = hit("Colpo di prova", 0, null, "HIT 7");
-        Player remover = b(card("bruiser.BadEducation"));
+        Player remover = b(card(EXCUSE_ME_SORRY_CAN_YOU_STOP));
         remover.getCharacter().getResources().put(VIOLENCE, 5);
         Game game = game(beppe(card(LIMA), attack), remover);
         turn(game, bound(game, BEPPE, "Affilare gli Utensili", "SELF"), rest(game, "b"));
@@ -130,7 +132,7 @@ class Sb27BeppeCardsTest {
 
     @Test
     void secondoBagagliaioPaysFiveAndAppliesDifferentHitAndCutFactorsBeforeItsGains() {
-        Game game = game(beppe(card("base.gigi.SottoIlCofano")), b(hit("Tre danni", 1, null, "HIT 7", "CUT 7", "POISON 7")));
+        Game game = game(beppe(card(SECOND_TRUNK)), b(hit("Tre danni", 1, null, "HIT 7", "CUT 7", "POISON 7")));
         assertArrayEquals(new int[]{15, 0}, turn(game, move(game, BEPPE, "Secondo Bagagliaio", "SELF"),
                 move(game, "b", "Tre danni", BEPPE)), "3 HIT, 5 CUT e 7 POISON");
         assertEquals(25, res(game, BEPPE, VIOLENCE));
@@ -140,12 +142,12 @@ class Sb27BeppeCardsTest {
 
     @Test
     void preparareHitsForFourAndAnnouncesChiaveWithFullOrFallbackGain() {
-        assertAnnouncement("base.gigi.ColpoDiChiaveInglese", "Preparare il Lavoro", CHIAVE, LAVORO, 40);
+        assertAnnouncement(PREPARE_THE_JOB, "Preparare il Lavoro", CHIAVE, LAVORO, 40);
     }
 
     @Test
     void metodoEmpiricoHitsForFourAndAnnouncesLavoroWithFullOrFallbackGain() {
-        assertAnnouncement("base.gigi.UnaStrettaDiProva", "Metodo Empirico", LAVORO, CHIAVE, 35);
+        assertAnnouncement(EMPIRICAL_METHOD, "Metodo Empirico", LAVORO, CHIAVE, 35);
     }
 
     private static void assertAnnouncement(String binding, String name, String first, String second, int foundV) {

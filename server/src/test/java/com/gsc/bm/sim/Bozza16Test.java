@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.PrintedEffects;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
@@ -13,6 +14,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-16i (D97): the 1.6 in {@code bozza.json} against the 1.5 frozen in {@code storico/1.5/bozza.json} (with arm B's Bancone).
@@ -22,25 +24,25 @@ class Bozza16Test {
     static final ObjectMapper JSON = new ObjectMapper();
     static final Map<String, List<String>> PAIRS = new LinkedHashMap<>();
     static {
-        PAIRS.put("bruiser.Glare", List.of("bruiser.SuperImpact", "bruiser.ExtremelyViolentBlow"));
-        PAIRS.put("base.bruiser.TiFaccioSpazio", List.of("bruiser.ExtremelyViolentBlow", "bruiser.SuperImpact"));
-        PAIRS.put("base.mara.Slalom", List.of("base.mara.Sgommata", "base.mara.CinghiataDiTraverso"));
-        PAIRS.put("base.mara.TiStringoLaCurva", List.of("base.mara.CinghiataDiTraverso", "base.mara.Sgommata"));
-        PAIRS.put("junkie.MethDrivenRage", List.of("junkie.Cough", "junkie.ToxicBloodDrain"));
-        PAIRS.put("base.tossico.UnAssaggino", List.of("junkie.ToxicBloodDrain", "junkie.Cough"));
-        PAIRS.put("base.pino.OffroIo", List.of("base.pino.GoingBerserk", "base.pino.RuttoADistanzaSociale"));
-        PAIRS.put("base.pino.PrimaIlBrindisi", List.of("base.pino.RuttoADistanzaSociale", "base.pino.GoingBerserk"));
-        PAIRS.put("base.gigi.ColpoDiChiaveInglese", List.of("base.gigi.ChiaveDaTredici", "base.gigi.LavoroFattoBene"));
-        PAIRS.put("base.gigi.UnaStrettaDiProva", List.of("base.gigi.LavoroFattoBene", "base.gigi.ChiaveDaTredici"));
+        PAIRS.put(PATIENCE_OVER, List.of(GARGANTUAN_IMPACT_ON_YOU, SHIP_YOU_TO_OUCHIO));
+        PAIRS.put(LET_US_CLEAR_YOU_OUT, List.of(SHIP_YOU_TO_OUCHIO, GARGANTUAN_IMPACT_ON_YOU));
+        PAIRS.put(APPROACH_SLALOM, List.of(BURNOUT, RIDERS_LASSO));
+        PAIRS.put(UNPREDICTABLE_TRAJECTORY, List.of(RIDERS_LASSO, BURNOUT));
+        PAIRS.put(TAKE_INVENTORY, List.of(PHLEGMY_COUGH, DRAG_INTO_THE_TUNNEL));
+        PAIRS.put(JUST_A_TASTE, List.of(DRAG_INTO_THE_TUNNEL, PHLEGMY_COUGH));
+        PAIRS.put(ONE_MORE_AND_IM_COMING, List.of(DOWN_IN_ONE, POINT_BLANK_BURP));
+        PAIRS.put(ANOTHER_LITTLE_GRAPPA, List.of(POINT_BLANK_BURP, DOWN_IN_ONE));
+        PAIRS.put(PREPARE_THE_JOB, List.of(THIRTEEN_WRENCH, JOB_WELL_DONE));
+        PAIRS.put(EMPIRICAL_METHOD, List.of(JOB_WELL_DONE, THIRTEEN_WRENCH));
     }
     // SB-20b (D139, D140): numbers cleaned after the 1.6b (Impatto 35 HIT, Paraurti and Tartaruga x0.5, Casco x0.75); the checks on
     // rarity, kind, priority, targets, cost, java and exclusiveTo below still hold for them.
-    static final Set<String> D139 = Set.of("bruiser.SuperImpact", "base.mara.TraDueParaurti", "base.com.TartarugaSulMarciapiede",
-            "base.items.CascoDaLavoro");
+    static final Set<String> D139 = Set.of(GARGANTUAN_IMPACT_ON_YOU, GREASY_AND_GRIMY, MENTAL_CARAPACE_TECHNIQUE,
+            SITE_HELMET);
     static final Set<String> CHANGED = new TreeSet<>(PAIRS.keySet());
     static {
-        CHANGED.addAll(List.of("base.mara.SorpassoInCurva", "base.mara.Sgommata", "base.mara.CinghiataDiTraverso", "com.last.Struggle",
-                "junkie.LethalHeroinDose", "base.pino.UltimoGiro", SetBaseArms.BANCONE));
+        CHANGED.addAll(List.of(UNNATURAL_AGILITY, BURNOUT, RIDERS_LASSO, AT_HIM,
+                THE_LAST_DRAG, LAST_ROUND, SetBaseArms.BANCONE));
         CHANGED.addAll(D139);
     }
 
@@ -86,20 +88,20 @@ class Bozza16Test {
 
     /** SB-21z (D161/D162): the cards the z2 candidate rewrote; their values are checked by SetBaseDraftTest and the reference draft. */
     static final Set<String> SB21Z = Set.of(
-            "bruiser.character.LittleRage", "bruiser.character.LittleSmack", "base.spazienzio.bound.TestaAlMuro",
-            "base.mara.bound.PassoStretto", "base.mara.bound.CambioMarcia", "base.mara.bound.ColpoDiStriscio",
-            "base.mara.CinghiataDiTraverso", "base.mara.SorpassoInCurva", "bruiser.SeagullFly", "base.com.MattoneDelCantiere",
-            "base.com.TartarugaSulMarciapiede", "base.com.SputoDaPosacenere", "com.items.CocktailOnTheGround",
-            "base.items.PaninoDelKebab", "junkie.character.PatheticBlade", "base.tossico.bound.RaschiareIlFondo",
-            "junkie.character.RottenSmile", "junkie.LethalHeroinDose", "junkie.ToxicBloodDrain", "base.com.RincorsaDalMarciapiede",
-            "base.items.PasticcaTrovataSulBancone", "base.pino.bound.CinqueMinutiEVado", "base.pino.bound.SpallataAlBancone",
-            "base.pino.bound.Coccio", "base.pino.UltimoGiro", "base.pino.RuttoADistanzaSociale",
-            "base.gigi.bound.UnaStrettaEPassa", "base.gigi.bound.ColpoDiCacciavite", "base.gigi.bound.Lima",
-            "base.gigi.ChiaveDaTredici", "base.gigi.LavoroFattoBene", "base.cesira.bound.Battutina",
-            "base.cesira.bound.FareIlVago", "bruiser.StunningBlow", "base.com.AcquaInFaccia", "base.rocco.PrimaIo",
-            "base.rocco.bound.Colpetto", "base.rocco.bound.AlzoLaVoce", "base.rocco.NeHoPreseDiPeggio",
-            "base.rocco.NoccheSbucciate", "base.rocco.Incassare", "base.rocco.Capocciata", "base.com.SecondoFiato",
-            "base.items.ContoDelTavoloSei");
+            SLIGHT_ANNOYANCE, WAKE_UP_BUT_NOT_YOU, VIOLENTIZATION,
+            FOIL_THE_ASSASSINATION, RED_LIGHT, CUT_OFF,
+            RIDERS_LASSO, UNNATURAL_AGILITY, SEAGULL_SO_LET_US_FLY_YOU, BIG_HOLLOW_BRICK_28,
+            MENTAL_CARAPACE_TECHNIQUE, SPIT_IN_THE_ASHTRAY, NEGRONI_FOUND_ON_THE_FLOOR,
+            ABANDONED_KEBAB, ASHTRAY_BOTTOM, BURROW_INTO_THE_COAT,
+            CUT_THE_DOSE, THE_LAST_DRAG, DRAG_INTO_THE_TUNNEL, EXTREME_HURRY_TO_GET_DRUNK,
+            ABANDONED_PILL, REGULAR_SPOT, VIOLENT_SELTZER_SPRAY,
+            CLEAR_THE_HEAD, LAST_ROUND, POINT_BLANK_BURP,
+            HEADPHONES_AND_HEAD_DOWN, SCREWDRIVER_HIT, SHARPEN_THE_TOOLS,
+            THIRTEEN_WRENCH, JOB_WELL_DONE, MANIPULATIVE_TECHNIQUE,
+            ACT_VAGUE, STUN_YOU_I_SAID, WAKE_UUUP, ITALIANS_FIRST,
+            ARROGANT_REFRESH, DISHONOUR_TO_THE_FLAG, YOU_DID_NOTHING_TO_ME,
+            SKINNED_KNUCKLES, STOIC_AS_A_BRONZE_BUST, PATRIOTIC_HEADBUTT, CATCH_YOUR_BREATH,
+            TABLE_SIX_BILL);
 
     @Test
     void the16ChangesExactlyWhatD97Approved() throws Exception {
@@ -122,11 +124,11 @@ class Bozza16Test {
             ObjectNode expected = before.deepCopy();
             ObjectNode resources = (ObjectNode) expected.get("resources");
             String id = c.path("id").asText();
-            if (id.equals("base.character.Pino")) resources.put("HEALTH", 80).put("ALCOHOL", 15);
-            if (id.equals("base.character.Mara")) resources.put("HEALTH", 65).put("ALERTNESS", 45);
-            if (id.equals("base.character.Gigi")) resources.put("HEALTH", 75);
-            if (id.equals("bruiser.character.BigBadBruiser")) resources.put("HEALTH", 70);
-            if (id.equals("junkie.character.ToxicJunkie")) resources.put("HEALTH", 65).put("TOXICITY", 20);
+            if (id.equals(SetBaseIds.PIERA)) resources.put("HEALTH", 80).put("ALCOHOL", 15);
+            if (id.equals(SetBaseIds.MARA)) resources.put("HEALTH", 65).put("ALERTNESS", 45);
+            if (id.equals(SetBaseIds.BEPPE)) resources.put("HEALTH", 75);
+            if (id.equals(SetBaseIds.SPAZIENZIO)) resources.put("HEALTH", 70);
+            if (id.equals(SetBaseIds.CELESTINA)) resources.put("HEALTH", 65).put("TOXICITY", 20);
             assertEquals(expected, c, c.path("id").asText());
         }
         // D152 adds GEN-24 and renames the existing PIN-AR2 binding.
@@ -140,23 +142,23 @@ class Bozza16Test {
             if (!CHANGED.contains(b)) {
                 ObjectNode expected = (ObjectNode) withoutPrintedText(before);
                 // D149 and SB-21f: exact changes to the draft cards, with the rest of each card still checked.
-                if (b.equals("base.pino.GoingBerserk")) {
+                if (b.equals(DOWN_IN_ONE)) {
                     ((ObjectNode) expected.path("params")).put("base", 10).put("perAlcohol", 1);
                     // SB-27 (D177 (1)): selfHit 0 only switched the self-damage off; it left the draft with its logic.
                     ((ObjectNode) expected.path("params")).remove("selfHit");
                 }
                 // SB-28 (D181 (3), lista di SB-27): alertnessToTarget 0 di «FAI BASTA» è uscito con la sua logica.
-                if (b.equals("bruiser.YouStop")) ((ObjectNode) expected.path("params")).remove("alertnessToTarget");
-                if (b.equals("base.pino.QuestoLoFiniscoIo"))
+                if (b.equals(THATS_ENOUGH)) ((ObjectNode) expected.path("params")).remove("alertnessToTarget");
+                if (b.equals(TO_THE_LAST_DROP))
                     ((ObjectNode) expected.path("self").path(0)).put("amount", 15);
-                if (b.equals("base.pino.TestataDaUltimoGiro"))
+                if (b.equals(LAST_ROUND_CRASH))
                     ((ObjectNode) expected.path("target").path(0)).put("amount", 35);
                 // SB-21g (D158): compliant imports and the kept compensation to the toxic starter.
-                if (b.equals("base.com.Spintone"))
+                if (b.equals(SHOVE))
                     ((ObjectNode) expected.path("target").path(0)).put("amount", 8);
-                if (b.equals("base.tossico.bound.RaschiareIlFondo"))
+                if (b.equals(BURROW_INTO_THE_COAT))
                     ((ObjectNode) expected.path("self").path(0)).put("amount", 6);
-                if (b.equals("junkie.Cough"))
+                if (b.equals(PHLEGMY_COUGH))
                     ((ObjectNode) expected.path("target").path(0)).put("amount", 20);
                 assertEquals(expected, withoutPrintedText(c), b);
             } else {
@@ -166,7 +168,7 @@ class Bozza16Test {
                 assertEquals(before.path("gui").path("name"), c.path("gui").path("name"));
             }
         }
-        assertEquals(Set.of("base.items.GhiaccioNelTovagliolo", "base.com.DueDitaInGola", "base.com.EstasiDaCocaEtilene"), seen);
+        assertEquals(Set.of(ICE_IN_A_NAPKIN, TWO_FINGERS_DOWN_THE_THROAT, COCAETHYLENE_ECSTASY), seen);
         assertEquals(old.path("cards").size() + 3, now.path("cards").size());
         // Charges: second name, rewards and token of the 1.5 unchanged (D97 (3)-(4)).
         for (Map.Entry<String, List<String>> e : PAIRS.entrySet()) {
@@ -180,9 +182,9 @@ class Bozza16Test {
         }
         // Decks: Mara Steal -> Ghiaccio, Piera one Grab -> Due dita, Beppe one Steal -> Due dita.
         Map<String, Map<String, Integer>> delta = Map.of(
-                "starter-mara", Map.of("com.Steal", -1, "base.items.GhiaccioNelTovagliolo", 1),
-                "starter-pino", Map.of("com.Grab", -1, "base.com.DueDitaInGola", 1),
-                "starter-gigi", Map.of("com.Steal", -1, "base.com.DueDitaInGola", 1));
+                STARTER_MARA, Map.of(SLEIGHT_OF_HAND_THEFT, -1, ICE_IN_A_NAPKIN, 1),
+                STARTER_PIERA, Map.of(SetBaseIds.GRAB, -1, TWO_FINGERS_DOWN_THE_THROAT, 1),
+                STARTER_BEPPE, Map.of(SLEIGHT_OF_HAND_THEFT, -1, TWO_FINGERS_DOWN_THE_THROAT, 1));
         for (JsonNode d : now.path("decks")) {
             JsonNode before = null;
             for (JsonNode o : old.path("decks")) if (o.path("id").equals(d.path("id"))) before = o;
@@ -202,12 +204,12 @@ class Bozza16Test {
         Draft draft = Draft.fromClasspath("/set-base/bozza.json");
         for (Map.Entry<String, List<String>> e : PAIRS.entrySet())
             assertEquals(e.getValue(), PrintedEffects.searchedNames(draft.card(e.getKey())), e.getKey());
-        for (String b : List.of("base.mara.SorpassoInCurva", "base.mara.Sgommata", "base.mara.CinghiataDiTraverso"))
+        for (String b : List.of(UNNATURAL_AGILITY, BURNOUT, RIDERS_LASSO))
             assertTrue(PrintedEffects.hasAhead(draft.card(b)), b);
-        for (String b : List.of("com.last.Struggle", "junkie.LethalHeroinDose", "base.pino.UltimoGiro"))
+        for (String b : List.of(AT_HIM, THE_LAST_DRAG, LAST_ROUND))
             assertTrue(PrintedEffects.hasPerPlay(draft.card(b)), b);
-        Map<String, int[]> perPlay = Map.of("com.last.Struggle", new int[]{2, 5}, "junkie.LethalHeroinDose", new int[]{0, 5},
-                "base.pino.UltimoGiro", new int[]{2, 4}); // SB-21z (D162): niente rincaro a se' per Celestina, 2 a se' per Piera
+        Map<String, int[]> perPlay = Map.of(AT_HIM, new int[]{2, 5}, THE_LAST_DRAG, new int[]{0, 5},
+                LAST_ROUND, new int[]{2, 4}); // SB-21z (D162): niente rincaro a se' per Celestina, 2 a se' per Piera
         perPlay.forEach((b, n) -> {
             Card c = draft.card(b);
             List<PrintedEffects.Step> damage = new ArrayList<>();
@@ -216,7 +218,7 @@ class Bozza16Test {
             assertEquals(n[0], damage.stream().filter(s -> !s.isOnTarget()).findFirst().orElseThrow().getPerPlay(), b + " to self");
             assertEquals(n[1], damage.stream().filter(PrintedEffects.Step::isOnTarget).findFirst().orElseThrow().getPerPlay(), b);
         });
-        assertTrue(draft.character("base.character.Mara").searchShuffle(), "the setting reaches the characters of the draft");
-        assertFalse(BozzeStoriche.fromClasspath(SetBaseArms.FROZEN_15).character("base.character.Mara").searchShuffle());
+        assertTrue(draft.character(SetBaseIds.MARA).searchShuffle(), "the setting reaches the characters of the draft");
+        assertFalse(BozzeStoriche.fromClasspath(SetBaseArms.FROZEN_15).character(SetBaseIds.MARA).searchShuffle());
     }
 }

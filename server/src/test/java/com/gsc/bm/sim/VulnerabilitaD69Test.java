@@ -30,6 +30,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-16g, D69 rivista da D71–D73: gettoni e carta trovata con le sole regole d50.
@@ -649,22 +650,22 @@ class VulnerabilitaD69Test {
         com.fasterxml.jackson.databind.node.ObjectNode root = (com.fasterxml.jackson.databind.node.ObjectNode) Draft.fromClasspath(Listino.SET_BASE).json();
         Draft.parse("bozza.json", root.deepCopy());
         for (JsonNode card : root.get("cards"))
-            if ("bruiser.Glare".equals(card.get("binding").asText()))
+            if (PATIENCE_OVER.equals(card.get("binding").asText()))
                 for (JsonNode step : card.get("self"))
                     if ("search".equals(step.get("op").asText())) {
                         // SB-16i: from the 1.6 the charge announces two names (cards); the check is the same on a single name.
                         ((com.fasterxml.jackson.databind.node.ObjectNode) step).remove("cards");
-                        ((com.fasterxml.jackson.databind.node.ObjectNode) step).put("card", "base.items.PosacenereDiVetro");
+                        ((com.fasterxml.jackson.databind.node.ObjectNode) step).put("card", GLASS_ASHTRAY);
                     }
         Exception refused = assertThrows(Exception.class, () -> Draft.parse("ricerca-di-oggetto.json", root));
         assertTrue(refused.getMessage().contains("una ricerca non può cercare un oggetto (D70)"), refused.getMessage());
         // SB-16i (D94): every name of «Annuncia X o Y» is checked the same way.
         for (JsonNode card : root.get("cards"))
-            if ("bruiser.Glare".equals(card.get("binding").asText()))
+            if (PATIENCE_OVER.equals(card.get("binding").asText()))
                 for (JsonNode step : card.get("self"))
                     if ("search".equals(step.get("op").asText())) {
                         ((com.fasterxml.jackson.databind.node.ObjectNode) step).remove("card");
-                        ((com.fasterxml.jackson.databind.node.ObjectNode) step).putArray("cards").add("bruiser.SuperImpact").add("base.items.PosacenereDiVetro");
+                        ((com.fasterxml.jackson.databind.node.ObjectNode) step).putArray("cards").add(GARGANTUAN_IMPACT_ON_YOU).add(GLASS_ASHTRAY);
                     }
         Exception second = assertThrows(Exception.class, () -> Draft.parse("ricerca-di-oggetto-2.json", root));
         assertTrue(second.getMessage().contains("una ricerca non può cercare un oggetto (D70)"), second.getMessage());

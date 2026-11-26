@@ -9,6 +9,7 @@ import com.gsc.bm.repo.external.MatchEventRepository;
 import com.gsc.bm.repo.external.MatchEventRepository.Entry;
 import com.gsc.bm.service.session.*;
 import com.gsc.bm.service.session.model.ActionLog;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,6 +22,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 class MatchArchiveTest {
     @TempDir Path directory;
@@ -30,9 +32,9 @@ class MatchArchiveTest {
     static <T extends AbstractCard> T named(T card, String name) { card.setGuiName(name); return card; }
     Player player(String name) {
         // SB-28, D184 (1): Spazienzio of the Set Base 1.0, the player of the live game (regulation 2.0).
-        return new Player(name, LiveFixtures.character("bruiser.character.BigBadBruiser"), LiveFixtures.card("com.basic.BruiserGrab", "basic"),
-                List.of(LiveFixtures.card("bruiser.character.LittleSmack", "bound"), LiveFixtures.card("bruiser.character.LittleRage", "rage")),
-                LiveFixtures.card("com.last.Struggle", "struggle"), List.of(LiveFixtures.card("com.last.Struggle", "regular")));
+        return new Player(name, LiveFixtures.character(SetBaseIds.SPAZIENZIO), LiveFixtures.card(LET_US_USE_YOU, "basic"),
+                List.of(LiveFixtures.card(WAKE_UP_BUT_NOT_YOU, "bound"), LiveFixtures.card(SLIGHT_ANNOYANCE, "rage")),
+                LiveFixtures.card(AT_HIM, "struggle"), List.of(LiveFixtures.card(AT_HIM, "regular")));
     }
     @Test void migratesOnlyAnIsolatedCopyOfV1PreservingEveryLegacyTableAndChecksum() throws Exception {
         Path original = directory.resolve("v1.sqlite"), copy = directory.resolve("copy.sqlite");
@@ -119,7 +121,7 @@ class MatchArchiveTest {
     }
     @Test void fullInitialDeckIsCapturedBeforeDealingAndCannotBeEdited() {
         Player player = player("fixture");
-        assertEquals(List.of("com.last.Struggle"), player.getInitialDeckDrawOrder());
+        assertEquals(List.of(AT_HIM), player.getInitialDeckDrawOrder());
         assertTrue(player.getDeck().isEmpty());
         assertThrows(UnsupportedOperationException.class, () -> player.getInitialDeckDrawOrder().clear());
         assertEquals(3, player.getInitialSpecialCards().size());
@@ -202,11 +204,11 @@ class MatchArchiveTest {
     @Test void mutableStatusesTimersItemsAndDrawOutcomeRemainFrozenInTheArchive() throws Exception {
         var repo = new MatchEventRepository(jdbc(directory.resolve("states.sqlite"))); var archive = archive(repo);
         var a = player("a"); var b = player("b");
-        ((AbstractCard) LiveFixtures.card("bruiser.MadeOfStone")).applyEffectOnSelf(a.getCharacter());
+        ((AbstractCard) LiveFixtures.card(DONT_PLAY_WITH_THE_KNIFE)).applyEffectOnSelf(a.getCharacter());
         new com.gsc.bm.model.cards.base.tokens.BrokenBottle().applyEffectOnSelf(a.getCharacter());
         a.getCharacter().getTimers().add(new com.gsc.bm.model.game.Timer("synthetic timer", c -> {}, 3));
         a.getCharacter().getImmunities().add(com.gsc.bm.model.Resource.TOXICITY);
-        a.getCharacter().getItems().add(LiveFixtures.card("com.items.RottenBeer","beer"));
+        a.getCharacter().getItems().add(LiveFixtures.card(WARM_BLONDE_66,"beer"));
         var game = LiveFixtures.live(new Game(List.of(a,b),"quick1v1",false)); archive.start(game);
         String frozen = repo.read(game.getGameId()).get(0).getJson();
         a.getCharacter().getStatuses().get(0).aTurnIsPassed(); a.getCharacter().getTimers().iterator().next().timeTick();

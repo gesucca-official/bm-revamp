@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
+
 /**
  * SB-19 Fase B1 (D129, D130): what the draft gained for the nine slots that were missing (GEN-04, 08, 10, 11, 19, 20, 21, OGG-08, OGG-16)
  * and the nine decks with the additions of {@code docs/reports/set-base/sb-19/make-bozza.py}. The tests about the five starters strip these
@@ -16,13 +18,13 @@ import java.util.Set;
  */
 final class Sb19 {
 
-    static final String ELEMOSINA = "base.com.BeggingMoney", COLPO = "bruiser.SickeningBlow", MALEDUCAZIONE = "bruiser.BadEducation",
-            NON_SENTO_NIENTE = "bruiser.CantFeelAnything", MANO_LESTA = "base.com.ManoLesta", SECONDO_FIATO = "base.com.SecondoFiato",
-            COCCIO = "base.com.CoccioDiBottiglia", MINERALE = "base.items.MezzaMineraleSgasata", GRAPPA = "base.items.GrappaDellaCasa";
+    static final String ELEMOSINA = GOT_ANY_SPARE_CHANGE, COLPO = CHARM_YOU_WITH_BLOWS, MALEDUCAZIONE = EXCUSE_ME_SORRY_CAN_YOU_STOP,
+            NON_SENTO_NIENTE = KIND_YOUR_CARESS, MANO_LESTA = LIGHT_FINGERS, SECONDO_FIATO = CATCH_YOUR_BREATH,
+            COCCIO = BOTTLE_SHARD, MINERALE = FLAT_MINERAL_WATER, GRAPPA = HOUSE_GRAPPA;
     /** The nine cards, in the order of the slots. */
     static final List<String> CARDS = List.of(ELEMOSINA, COLPO, MALEDUCAZIONE, NON_SENTO_NIENTE, MANO_LESTA, SECONDO_FIATO, COCCIO, MINERALE, GRAPPA);
     /** SB-19 B2 (D130): the two items with the «In campo» effect, OGG-17 and OGG-18 (RP-27, RP-28). */
-    static final String CONTO = "base.items.ContoDelTavoloSei", SIGARETTA = "base.items.SigarettaAccesa";
+    static final String CONTO = TABLE_SIX_BILL, SIGARETTA = LIT_CIGARETTE;
     static final List<String> CARDS_B2 = List.of(CONTO, SIGARETTA);
     /** SB-19 B2 (D130): the ten decks of the phase: seven test decks and three isolation decks (make-bozza-b2.py). */
     static final List<String> DECKS_B2 = List.of("prova-b2-spazienzio", "prova-b2-beppe", "prova-b2-sergio-conto", "prova-b2-sergio-sigaretta",
@@ -31,7 +33,7 @@ final class Sb19 {
     static final List<String> DECKS = List.of("prova-b1-spazienzio", "prova-b1-mara", "prova-b1-celestina", "prova-b1-piera", "prova-b1-beppe",
             "prova-b1-sergio", "prova-b1-duccio", "prova-b1-equip", "prova-b1-estasi");
     /** The seven reference decks, in the order of the round: the five starters and the two test decks. */
-    static final List<String> REFERENCES = List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino", "starter-gigi",
+    static final List<String> REFERENCES = List.of(STARTER_SPAZIENZIO, STARTER_MARA, STARTER_CELESTINA, STARTER_PIERA, STARTER_BEPPE,
             Sb17.DECK, Sb18.DECK);
 
     private Sb19() {

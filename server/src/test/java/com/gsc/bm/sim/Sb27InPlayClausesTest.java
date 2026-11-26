@@ -16,32 +16,33 @@ import static com.gsc.bm.model.Resource.*;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** RP-27 sulla carta effettiva, attraverso tutte le transizioni di proprietà e uscita scritte nelle due schede. */
 class Sb27InPlayClausesTest {
-    private static final String ESPRESSO = "base.items.EspressoDelDistributore";
+    private static final String ESPRESSO = VENDING_MACHINE_ESPRESSO;
 
     @BeforeAll
     static void loadDraft() throws Exception { load(); }
 
     static Stream<Arguments> sheets() {
         return Stream.of(
-                arguments("OGG-17", "base.items.ContoDelTavoloSei", "Conto del Tavolo Sei", ALERTNESS, 60, 10, 56, 6, 46),
-                arguments("OGG-18", "base.items.SigarettaAccesa", "Sigaretta Accesa", TOXICITY, 0, 0, 2, 2, 2));
+                arguments("OGG-17", TABLE_SIX_BILL, "Conto del Tavolo Sei", ALERTNESS, 60, 10, 56, 6, 46),
+                arguments("OGG-18", LIT_CIGARETTE, "Sigaretta Accesa", TOXICITY, 0, 0, 2, 2, 2));
     }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("sheets")
     void theftSwapAndCopySelectTheHolderAtTheEndOfTheTurn(String slot, String binding, String name, Resource resource,
                                                           int baseS, int baseB, int activeS, int activeB, int stolenS) {
-        Game theft = game(s(card("com.Steal")), b());
+        Game theft = game(s(card(SLEIGHT_OF_HAND_THEFT)), b());
         ch(theft, "b").getItems().add(card(binding));
         turn(theft, onItem(theft, "s", "Furto con Destrezza", "b", name), rest(theft, "b"));
         assertEquals(List.of(name), items(theft, "s"));
         assertEquals(stolenS, res(theft, "s", resource), slot);
         assertEquals(baseB, res(theft, "b", resource));
 
-        Game swap = game(s(card("base.com.ShuffleFeet")), b());
+        Game swap = game(s(card(SUDDEN_DASH)), b());
         ch(swap, "s").getItems().add(card(binding));
         turn(swap, move(swap, "s", "Scatto Repentino", "b"), rest(swap, "b"));
         assertEquals(List.of(), items(swap, "s"));
@@ -49,7 +50,7 @@ class Sb27InPlayClausesTest {
         assertEquals(baseS, res(swap, "s", resource));
         assertEquals(activeB, res(swap, "b", resource));
 
-        Game copy = game(s(card("base.com.BeggingMoney")), b());
+        Game copy = game(s(card(GOT_ANY_SPARE_CHANGE)), b());
         ch(copy, "b").getItems().add(card(binding));
         turn(copy, move(copy, "s", "Ce l'Hai Due Spicci?", "b"), rest(copy, "b"));
         assertEquals(List.of(name), items(copy, "s"));
@@ -62,13 +63,13 @@ class Sb27InPlayClausesTest {
     @MethodSource("sheets")
     void saleDestructionAndOverflowStopTheInPlayEffect(
             String slot, String binding, String name, Resource resource, int baseS, int baseB, int activeS, int activeB, int stolenS) {
-        Game sale = game(s(card("base.cesira.LoRivendo")), b());
+        Game sale = game(s(card(NOSE_FOR_BUSINESS)), b());
         ch(sale, "s").getItems().add(card(binding));
         assertArrayEquals(new int[]{-8, 0}, turn(sale, onItem(sale, "s", "Fiuto per gli Affari", "s", name), rest(sale, "b")));
         assertEquals(baseS, res(sale, "s", resource), slot);
         assertTrue(items(sale, "s").isEmpty());
 
-        Player destroyer = b(card("bruiser.BreakYourToy"));
+        Player destroyer = b(card(DISASSEMBLE));
         destroyer.getCharacter().getResources().put(VIOLENCE, 5);
         Game destruction = game(s(), destroyer);
         ch(destruction, "s").getItems().add(card(binding));

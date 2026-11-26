@@ -26,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Real queue/controller/session/archive; only the shuffled player fixture and time are controlled. */
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT,
@@ -66,8 +67,8 @@ class QuickFfaCliTest extends SqliteContextSupport {
                 org.springframework.util.SerializationUtils.serialize(fixture))).when(players).craftRandomPlayer(user,null);
         }
         doAnswer(i -> new com.gsc.bm.model.game.ComPlayer(new BigBadBruiser(),
-            cards.craftCard("base.com.ShuffleFeet"), List.of(), cards.craftCard("com.last.Struggle"),
-            java.util.stream.IntStream.range(0,50).mapToObj(n -> cards.craftCard("base.com.ShuffleFeet")).collect(java.util.stream.Collectors.toList())))
+            cards.craftCard(SUDDEN_DASH), List.of(), cards.craftCard(AT_HIM),
+            java.util.stream.IntStream.range(0,50).mapToObj(n -> cards.craftCard(SUDDEN_DASH)).collect(java.util.stream.Collectors.toList())))
             .when(players).craftComPlayer(null,com.gsc.bm.model.game.bot.ComLevel.NORMALE);
         Path root=Path.of("..").toAbsolutePath().normalize();
         Path controls=Files.createTempDirectory(Path.of("target"),"i17b-clock-").toAbsolutePath();

@@ -26,6 +26,7 @@ import java.util.Random;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-19 Fase B2 (D130, regole del playground 1.5): the loader of the field {@code inPlay} (RP-28) and the engine's «In campo»
@@ -253,7 +254,7 @@ class Sb19InPlayTest {
     @Test
     void theTextAndTheViewOfAnItemAreThereOnlyWhenTheItemHasTheEffect() throws Exception {
         assertTrue(JSON.writeValueAsString(conto()).contains("\"inPlay\":\"−4 A\""), "the view carries the text");
-        Card espresso = draft.card("base.items.EspressoDelDistributore");
+        Card espresso = draft.card(VENDING_MACHINE_ESPRESSO);
         assertFalse(JSON.writeValueAsString(espresso).contains("inPlay"), "the views of today stay as they are, byte for byte");
     }
 
@@ -341,7 +342,7 @@ class Sb19InPlayTest {
     @Test
     void whoHasTheItemNowPaysAlsoInTheTurnItArrives() {
         // «Steal» (GEN-02): s takes the Conto from b and pays it at the end of this same turn; b, who had it, does not.
-        Game game = game(Ruleset.D50, player("s", res(), Set.of(), List.of(draft.card("com.Steal"))), player("b", res(Resource.ALERTNESS, 30), Set.of(), List.of()));
+        Game game = game(Ruleset.D50, player("s", res(), Set.of(), List.of(draft.card(SLEIGHT_OF_HAND_THEFT))), player("b", res(Resource.ALERTNESS, 30), Set.of(), List.of()));
         game.getPlayers().get("b").getCharacter().getItems().add(conto());
         turn(game, move(game, "s", "Furto con Destrezza", "b", "Conto del Tavolo Sei"), move(game, "b", "Riempitivo", "SELF", null));
         assertEquals(List.of("Conto del Tavolo Sei"), names(game.getPlayers().get("s").getCharacter()));
@@ -351,7 +352,7 @@ class Sb19InPlayTest {
 
     @Test
     void anItemPassedWithScattoRepentinoCostsTheOtherSide() {
-        Game game = game(Ruleset.D50, player("s", res(), Set.of(), List.of(draft.card("base.com.ShuffleFeet"))), player("b", res(Resource.ALERTNESS, 30), Set.of(), List.of()));
+        Game game = game(Ruleset.D50, player("s", res(), Set.of(), List.of(draft.card(SUDDEN_DASH))), player("b", res(Resource.ALERTNESS, 30), Set.of(), List.of()));
         game.getPlayers().get("s").getCharacter().getItems().add(conto());
         turn(game, move(game, "s", "Scatto Repentino", "b", null), move(game, "b", "Riempitivo", "SELF", null));
         assertEquals(List.of(), names(game.getPlayers().get("s").getCharacter()));
@@ -372,7 +373,7 @@ class Sb19InPlayTest {
 
     @Test
     void aSoldItemGivesNothingNotEvenItsEffect() {
-        Game game = game(Ruleset.D50, player("s", res(Resource.HEALTH, 50), Set.of(), List.of(draft.card("base.cesira.LoRivendo"))),
+        Game game = game(Ruleset.D50, player("s", res(Resource.HEALTH, 50), Set.of(), List.of(draft.card(NOSE_FOR_BUSINESS))),
                 player("b", res(), Set.of(), List.of()));
         game.getPlayers().get("s").getCharacter().getItems().add(conto());
         turn(game, move(game, "s", "Fiuto per gli Affari", "SELF", "Conto del Tavolo Sei"), move(game, "b", "Riempitivo", "SELF", null));
@@ -387,7 +388,7 @@ class Sb19InPlayTest {
         Character c = character("s", 1, res(Resource.ALERTNESS, 10), Set.of());
         c.useRuleset(Ruleset.D50);
         c.getItems().add(conto());
-        c.getItems().add(draft.card("base.items.EspressoDelDistributore"));
+        c.getItems().add(draft.card(VENDING_MACHINE_ESPRESSO));
         assertEquals(List.of("Espresso della Macchinetta"), names(c), "capacity 1: the newest stays (R02)");
         List<String> report = c.resolveTimeBasedEffects();
         assertEquals(10, c.getResources().get(Resource.ALERTNESS));
@@ -398,7 +399,7 @@ class Sb19InPlayTest {
     void theItemWithoutTheEffectKeepsDoingNothingInPlay() {
         Character c = character("s", 3, res(Resource.ALERTNESS, 10), Set.of());
         c.useRuleset(Ruleset.D50);
-        c.getItems().add(draft.card("base.items.EspressoDelDistributore"));
+        c.getItems().add(draft.card(VENDING_MACHINE_ESPRESSO));
         assertTrue(c.resolveTimeBasedEffects().isEmpty(), "R02 stands for every other item");
         assertEquals(10, c.getResources().get(Resource.ALERTNESS));
     }

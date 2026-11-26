@@ -5,6 +5,7 @@ import com.gsc.bm.model.game.*;
 import com.gsc.bm.repo.external.*;
 import com.gsc.bm.service.factories.*;
 import com.gsc.bm.service.session.*;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -39,7 +40,7 @@ class LifecycleCliTest extends SqliteContextSupport {
     @MockBean Clock clock;
 
     Player human(String user) {
-        var c=LiveFixtures.character("bruiser.character.BigBadBruiser");
+        var c=LiveFixtures.character(SetBaseIds.SPAZIENZIO);
         return new Player(user,c,decks.craftBasicActionStarterCard(c),List.of(),decks.craftLastResortStarterCard(c),List.of());
     }
     @ParameterizedTest
@@ -51,7 +52,7 @@ class LifecycleCliTest extends SqliteContextSupport {
         for(String user:List.of(a,b,c)) { users.createIfAbsent(new UserCredentialsRecord(user,null,encoder.encode("synthetic"),"USER")); }
         List<Player> players=new ArrayList<>(); players.add(human(a));
         if(scenario.startsWith("com")) {
-            var character=LiveFixtures.character("bruiser.character.BigBadBruiser");
+            var character=LiveFixtures.character(SetBaseIds.SPAZIENZIO);
             players.add(new ComPlayer(character,decks.craftBasicActionStarterCard(character),List.of(),
                 decks.craftLastResortStarterCard(character),List.of()));
         } else { players.add(human(b)); if(scenario.equals("ffa")) { players.add(human(c)); } }

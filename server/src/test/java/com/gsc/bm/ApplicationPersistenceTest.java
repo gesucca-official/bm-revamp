@@ -9,6 +9,7 @@ import com.gsc.bm.service.factories.CardFactoryService;
 import com.gsc.bm.service.factories.DeckFactoryService;
 import com.gsc.bm.service.account.UserAccountService;
 import com.gsc.bm.service.session.model.ActionLog;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 @SpringBootTest
 @Tag("context")
@@ -56,18 +58,18 @@ class ApplicationPersistenceTest extends SqliteContextSupport {
                 encoder.encode("synthetic-password"), "USER"));
     }
     private UserStoredDeck deck(String card) {
-        return new UserStoredDeck("bruiser.character.BigBadBruiser", "com.basic.BruiserGrab", "com.last.Struggle",
-                List.of("bruiser.character.LittleSmack", "bruiser.character.LittleRage"), List.of(card, card));
+        return new UserStoredDeck(SetBaseIds.SPAZIENZIO, LET_US_USE_YOU, AT_HIM,
+                List.of(WAKE_UP_BUT_NOT_YOU, SLIGHT_ANNOYANCE), List.of(card, card));
     }
 
     @Test
     void accountsAndDecksSurviveReopenWithCompositeIdentity() {
         String alice = id(), bob = id();
         account(alice); account(bob);
-        decks.save(new UserDecksRecord(alice, "one", deck("bruiser.SuperImpact")));
-        decks.save(new UserDecksRecord(alice, "two", deck("com.Grab")));
-        decks.save(new UserDecksRecord(bob, "one", deck("com.Steal")));
-        decks.save(new UserDecksRecord(alice, "one", deck("bruiser.Glare")));
+        decks.save(new UserDecksRecord(alice, "one", deck(GARGANTUAN_IMPACT_ON_YOU)));
+        decks.save(new UserDecksRecord(alice, "two", deck(SetBaseIds.GRAB)));
+        decks.save(new UserDecksRecord(bob, "one", deck(SLEIGHT_OF_HAND_THEFT)));
+        decks.save(new UserDecksRecord(alice, "one", deck(PATIENCE_OVER)));
 
         JdbcTemplate reopened = new JdbcTemplate(ApplicationDatabase.open(DATABASE));
         UserCredentialsRepository reopenedUsers = new UserCredentialsRepository(reopened);
@@ -75,8 +77,8 @@ class ApplicationPersistenceTest extends SqliteContextSupport {
         assertTrue(encoder.matches("synthetic-password", reopenedUsers.findById(alice).orElseThrow().getSaltedHash()));
         assertEquals(1, reopenedUsers.findAllByEmail(alice + "@example.invalid").size());
         assertEquals(2, reopenedDecks.findAllByUsername(alice).size());
-        assertEquals(deck("bruiser.Glare"), reopenedDecks.findById(new UserDeckRecordKey(alice, "one")).orElseThrow().getDeck());
-        assertEquals(deck("com.Steal"), reopenedDecks.findById(new UserDeckRecordKey(bob, "one")).orElseThrow().getDeck());
+        assertEquals(deck(PATIENCE_OVER), reopenedDecks.findById(new UserDeckRecordKey(alice, "one")).orElseThrow().getDeck());
+        assertEquals(deck(SLEIGHT_OF_HAND_THEFT), reopenedDecks.findById(new UserDeckRecordKey(bob, "one")).orElseThrow().getDeck());
         assertEquals(2, accountService.loadUserAccountInfo(alice).getDecks().size());
         // SB-28 (D182): the collection is the live Set Base 1.0, seven characters (the 0.1 had two).
         assertEquals(7, accountService.loadUserAccountInfo(alice).getCollection().getCharacters().size());
@@ -109,7 +111,7 @@ class ApplicationPersistenceTest extends SqliteContextSupport {
         String username = id();
         assertThrows(DataAccessException.class, () -> new TransactionTemplate(transactions).execute(status -> {
             account(username);
-            decks.save(new UserDecksRecord("missing-" + username, "deck", deck("com.Grab")));
+            decks.save(new UserDecksRecord("missing-" + username, "deck", deck(SetBaseIds.GRAB)));
             return null;
         }));
         assertTrue(users.findById(username).isEmpty());
@@ -146,8 +148,8 @@ class ApplicationPersistenceTest extends SqliteContextSupport {
     void realCatalogLoadsAndCannotBeWritten() {
         // SB-28 (D182, D183): the live Set Base 1.0, 117 cards (the 0.1 had 37); the two characters of the 0.1 have their starter still.
         assertEquals(117, cards.count());
-        assertEquals(20, deckFactory.craftCharacterStarterDeck("bruiser.character.BigBadBruiser").size());
-        assertEquals(20, deckFactory.craftCharacterStarterDeck("junkie.character.ToxicJunkie").size());
+        assertEquals(20, deckFactory.craftCharacterStarterDeck(SetBaseIds.SPAZIENZIO).size());
+        assertEquals(20, deckFactory.craftCharacterStarterDeck(SetBaseIds.CELESTINA).size());
         cards.findAll().forEach(record -> assertNotNull(cardFactory.craftCard(record.getClazz()).getName()));
         assertThrows(DataAccessException.class, () -> new JdbcTemplate(catalog).update(
                 "UPDATE CRD001_GUI SET T_GUI_NAME='should-never-write' WHERE C_REF_CLASS='com.Grab'"));

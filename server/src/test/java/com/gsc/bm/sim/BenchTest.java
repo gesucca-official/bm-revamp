@@ -13,6 +13,7 @@ import com.gsc.bm.model.game.bot.BotView;
 import com.gsc.bm.model.game.bot.LegalMove;
 import com.gsc.bm.model.game.bot.PrudentPolicy;
 import com.gsc.bm.model.game.bot.ResourceAwarePolicy;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-7: il banco sa misurare e sa fallire. Ogni invariante viene violato da una bozza costruita apposta (o, per quelli che oggi
@@ -33,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class BenchTest {
     private static final ObjectMapper JSON = new ObjectMapper();
-    private static final String BRUISER = "bruiser.character.BigBadBruiser", JUNKIE = "junkie.character.ToxicJunkie";
+    private static final String BRUISER = SetBaseIds.SPAZIENZIO, JUNKIE = SetBaseIds.CELESTINA;
 
     private static Map<String, BotPolicy> heuristic() {
         Map<String, BotPolicy> styles = new LinkedHashMap<>();
@@ -101,7 +103,7 @@ class BenchTest {
     void costlyBoundAndUnpayableHandAreFlagged() throws Exception {
         ObjectNode root = current();
         ((ObjectNode) root.get("rules")).put("maxCopies", 20);
-        for (String bound : List.of("bruiser.character.LittleSmack", "bruiser.character.LittleRage"))
+        for (String bound : List.of(WAKE_UP_BUT_NOT_YOU, SLIGHT_ANNOYANCE))
             card(root, bound).putObject("cost").put("VIOLENCE", 99);
         addCard(root, dataCard("prova.Impagabile", "\"kind\":\"ACTION\",\"priority\":0,\"targets\":[\"OPPONENT\"],\"cost\":{\"VIOLENCE\":99},"
                 + "\"target\":[{\"op\":\"damage\",\"type\":\"HIT\",\"amount\":1}]", "PROVA IMPAGABILE", "DAMAGE", "HIT", "HIT 1"));
@@ -111,14 +113,14 @@ class BenchTest {
         Bench.Report report = Bench.run(draft, settings(draft, 2, Map.of("aggressivo", new AggressivePolicy()), 1));
         for (String invariant : List.of("senza-mosse", "mossa-vuota", "bound-giocabile")) assertLocated(report, invariant);
         assertTrue(report.checks.counts.get("bound-gratuite") == 2, report.failures());
-        assertTrue(report.failures().contains("bruiser.character.LittleSmack"), report.failures());
+        assertTrue(report.failures().contains(WAKE_UP_BUT_NOT_YOU), report.failures());
     }
 
     /** Una last resort a costo passa solo dalla lettura indulgente: in partita non è giocabile e il banco lo dice. */
     @Test
     void lastResortThatCannotBePlayedIsFlagged() throws Exception {
         ObjectNode root = current();
-        card(root, "com.last.Struggle").putObject("cost").put("VIOLENCE", 999);
+        card(root, AT_HIM).putObject("cost").put("VIOLENCE", 999);
         health(root, 1000);
         Draft draft = Draft.parseLenient("violazione-last-resort.json", root);
         Bench.Report report = Bench.run(draft, settings(draft, 2, Map.of("aggressivo", new AggressivePolicy()), 1));
@@ -215,7 +217,7 @@ class BenchTest {
         assertEquals(BoundCap.USES, clean.uses);
         for (double v : clean.value) assertEquals(5, v, 1e-9);
 
-        BoundCap.Result blade = results.get("junkie.character.PatheticBlade");
+        BoundCap.Result blade = results.get(ASHTRAY_BOTTOM);
         assertTrue(blade.violates() && !blade.residue.isEmpty(), "PatheticBlade lascia T sull'avversario: " + blade.reasons(BoundCap.Params.SB7));
 
         BoundCap.Params loose = new BoundCap.Params(25, 0, BoundCap.Params.SB7.weights);

@@ -6,6 +6,7 @@ import com.gsc.bm.model.game.*;
 import com.gsc.bm.repo.external.*;
 import com.gsc.bm.service.factories.*;
 import com.gsc.bm.service.session.*;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -21,6 +22,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Tag("context")
@@ -43,15 +45,15 @@ class MatchArchiveCliTest extends SqliteContextSupport {
         String user = fault ? "archiveFault" : "archiveSuccess";
         users.createIfAbsent(new UserCredentialsRecord(user,null,encoder.encode("synthetic"),"USER"));
         users.createIfAbsent(new UserCredentialsRecord(user+"Observer",null,encoder.encode("synthetic"),"USER"));
-        var humanCharacter = LiveFixtures.character("bruiser.character.BigBadBruiser");
+        var humanCharacter = LiveFixtures.character(SetBaseIds.SPAZIENZIO);
         var regular = new ArrayList<com.gsc.bm.model.cards.Card>();
-        for (int i=0;i<20;i++) { regular.add(cards.craftCard("com.last.Struggle")); }
+        for (int i=0;i<20;i++) { regular.add(cards.craftCard(AT_HIM)); }
         var human = new Player(user,humanCharacter,decks.craftBasicActionStarterCard(humanCharacter),
                 decks.craftCharacterBoundStarterCards(humanCharacter),decks.craftLastResortStarterCard(humanCharacter),regular);
-        var botCharacter = LiveFixtures.character("bruiser.character.BigBadBruiser");
+        var botCharacter = LiveFixtures.character(SetBaseIds.SPAZIENZIO);
         var bot = new ComPlayer(botCharacter,decks.craftBasicActionStarterCard(botCharacter),
                 decks.craftCharacterBoundStarterCards(botCharacter),decks.craftLastResortStarterCard(botCharacter),List.of());
-        bot.getCardsInHand().clear(); bot.getCardsInHand().add(cards.craftCard("com.last.Struggle"));
+        bot.getCardsInHand().clear(); bot.getCardsInHand().add(cards.craftCard(AT_HIM));
         bot.getResources().put(Resource.HEALTH,10);
         var game = LiveFixtures.live(new Game(List.of(human,bot),"quick1vCom",false)); String id = game.getGameId();
         doReturn(game).when(gameFactory).craftQuick1vComGame(user,null,com.gsc.bm.model.game.bot.ComLevel.FACILE);
@@ -65,7 +67,7 @@ class MatchArchiveCliTest extends SqliteContextSupport {
         pb.environment().put("BM_URL","http://127.0.0.1:"+port+"/api"); pb.environment().put("BM_USER",user); pb.environment().put("BM_PASSWORD","synthetic");
         pb.environment().put("BM_GAME",id); pb.environment().put("BM_FAULT",Boolean.toString(fault));
         pb.environment().put("BM_OBSERVER",user+"Observer");
-        pb.environment().put("BM_MOVE",mapper.writeValueAsString(new Move(cards.craftCard("com.last.Struggle").getName(),user,bot.getPlayerId(),id,null)));
+        pb.environment().put("BM_MOVE",mapper.writeValueAsString(new Move(cards.craftCard(AT_HIM).getName(),user,bot.getPlayerId(),id,null)));
         Process process=pb.redirectErrorStream(true).redirectOutput(output.toFile()).start();
         try {
             assertTrue(process.waitFor(25,TimeUnit.SECONDS),"CLI did not close");

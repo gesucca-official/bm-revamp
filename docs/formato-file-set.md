@@ -16,6 +16,11 @@ che raccoglieva le regole RP-22, RP-26 e RP-28 delle [regole del playground](des
 - **I mazzi di prova**, `server/src/test/resources/set-base/mazzi-prova.json`: un file di soli mazzi (sotto), scritto dallo stesso
   comando. Composto col file vivo (`classpath:/sets/base.json;classpath:/set-base/mazzi-prova.json`) dà la bozza intera sul percorso
   vivo, per le corse d'identità.
+- **Le costanti degli id**, `server/src/test/java/com/gsc/bm/model/cards/base/SetBaseIds.java` (SB-34,
+  [D213](set-base-decisioni.md#decisioni-del-proprietario) (3)): una costante per ogni carta, personaggio, token e starter del set
+  vivo, per i test. La scrive lo stesso comando: gli id vengono dal set, i nomi inglesi dalla
+  [tabella approvata](design/set-base/sb-34/tabella.json). Non si modifica a mano; un id senza riga nella tabella, una riga senza id
+  o due nomi uguali fermano la generazione, quindi una carta nuova entra anche nella tabella.
 
 Il formato è `sb-6b/1`. Le bozze storiche `sb-6a/1` e le espansioni di prova restano leggibili come prima.
 

@@ -5,6 +5,7 @@ import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -19,23 +20,24 @@ import java.util.stream.Stream;
 import static com.gsc.bm.model.Resource.*;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Le clausole di Annuncia si ripetono sulle dodici schede. Ogni scheda usa la propria carta della bozza. */
 class Sb27AnnounceClausesTest {
-    private static final String IMPACT = "bruiser.SuperImpact";
-    private static final String OHIO = "bruiser.ExtremelyViolentBlow";
-    private static final String LAZO = "base.mara.CinghiataDiTraverso";
-    private static final String SGOMMATA = "base.mara.Sgommata";
-    private static final String TOSSICONE = "junkie.Cough";
-    private static final String TUNNEL = "junkie.ToxicBloodDrain";
-    private static final String GOCCIA = "base.pino.GoingBerserk";
-    private static final String RUTTO = "base.pino.RuttoADistanzaSociale";
-    private static final String CHIAVE = "base.gigi.ChiaveDaTredici";
-    private static final String LAVORO = "base.gigi.LavoroFattoBene";
-    private static final String SEGRETO = "base.cesira.LoSannoTutti";
-    private static final String CONTO = "base.cesira.ContoSalato";
-    private static final String CRANIATA = "base.rocco.Capocciata";
-    private static final String TESTA = "base.rocco.TestaDura";
+    private static final String IMPACT = GARGANTUAN_IMPACT_ON_YOU;
+    private static final String OHIO = SHIP_YOU_TO_OUCHIO;
+    private static final String LAZO = RIDERS_LASSO;
+    private static final String SGOMMATA = BURNOUT;
+    private static final String TOSSICONE = PHLEGMY_COUGH;
+    private static final String TUNNEL = DRAG_INTO_THE_TUNNEL;
+    private static final String GOCCIA = DOWN_IN_ONE;
+    private static final String RUTTO = POINT_BLANK_BURP;
+    private static final String CHIAVE = THIRTEEN_WRENCH;
+    private static final String LAVORO = JOB_WELL_DONE;
+    private static final String SEGRETO = OPEN_SECRET;
+    private static final String CONTO = STEEP_BILL;
+    private static final String CRANIATA = PATRIOTIC_HEADBUTT;
+    private static final String TESTA = HARDHEAD;
     private static final String DISCARD = "Scarto di prova";
     private static final String CUT = "CUT di prova";
     private static Draft draft;
@@ -76,29 +78,29 @@ class Sb27AnnounceClausesTest {
     // Risorse della fixture prima di Annuncia: 500 H, 60 A, 30 V, 20 T, 10 L, immunità ai soli periodici.
     static Stream<Sheet> sheets() {
         return Stream.of(
-                new Sheet("SPA-AR3", "bruiser.character.BigBadBruiser", "bruiser.Glare", "PAZIENZA: FINITA",
+                new Sheet("SPA-AR3", SetBaseIds.SPAZIENZIO, PATIENCE_OVER, "PAZIENZA: FINITA",
                         IMPACT, OHIO, "SELF", 0, 500, 75, 55, 20, 10),
-                new Sheet("SPA-AR6", "bruiser.character.BigBadBruiser", "base.bruiser.TiFaccioSpazio", "SGOMBERIAMOVI",
+                new Sheet("SPA-AR6", SetBaseIds.SPAZIENZIO, LET_US_CLEAR_YOU_OUT, "SGOMBERIAMOVI",
                         OHIO, IMPACT, "SELF", 0, 500, 75, 45, 20, 10),
-                new Sheet("MAR-AR5", "base.character.Mara", "base.mara.Slalom", "Slalom d'Avvicinamento",
+                new Sheet("MAR-AR5", SetBaseIds.MARA, APPROACH_SLALOM, "Slalom d'Avvicinamento",
                         SGOMMATA, LAZO, "SELF", 0, 500, 75, 30, 20, 10),
-                new Sheet("MAR-AR6", "base.character.Mara", "base.mara.TiStringoLaCurva", "Traiettoria Imprevedibile",
+                new Sheet("MAR-AR6", SetBaseIds.MARA, UNPREDICTABLE_TRAJECTORY, "Traiettoria Imprevedibile",
                         LAZO, SGOMMATA, "SELF", 0, 500, 80, 30, 20, 10),
-                new Sheet("TOS-AR1", "junkie.character.ToxicJunkie", "junkie.MethDrivenRage", "Fare l'Inventario",
+                new Sheet("TOS-AR1", SetBaseIds.CELESTINA, TAKE_INVENTORY, "Fare l'Inventario",
                         TOSSICONE, TUNNEL, "SELF", 0, 500, 65, 30, 30, 10),
-                new Sheet("TOS-AR6", "junkie.character.ToxicJunkie", "base.tossico.UnAssaggino", "Un Assaggino",
+                new Sheet("TOS-AR6", SetBaseIds.CELESTINA, JUST_A_TASTE, "Un Assaggino",
                         TUNNEL, TOSSICONE, "SELF", 0, 500, 60, 30, 40, 10),
-                new Sheet("PIN-AR4", "base.character.Pino", "base.pino.OffroIo", "Un Altro e Arrivo",
+                new Sheet("PIN-AR4", SetBaseIds.PIERA, ONE_MORE_AND_IM_COMING, "Un Altro e Arrivo",
                         GOCCIA, RUTTO, "SELF", 0, 500, 95, 30, 20, 25),
-                new Sheet("PIN-AR6", "base.character.Pino", "base.pino.PrimaIlBrindisi", "Un Altro... Grappino...",
+                new Sheet("PIN-AR6", SetBaseIds.PIERA, ANOTHER_LITTLE_GRAPPA, "Un Altro... Grappino...",
                         RUTTO, GOCCIA, "SELF", 0, 500, 95, 30, 20, 25),
-                new Sheet("GIG-AR3", "base.character.Gigi", "base.gigi.ColpoDiChiaveInglese", "Preparare il Lavoro",
+                new Sheet("GIG-AR3", SetBaseIds.BEPPE, PREPARE_THE_JOB, "Preparare il Lavoro",
                         CHIAVE, LAVORO, "b", 0, 500, 60, 45, 20, 10),
-                new Sheet("GIG-AR6", "base.character.Gigi", "base.gigi.UnaStrettaDiProva", "Metodo Empirico",
+                new Sheet("GIG-AR6", SetBaseIds.BEPPE, EMPIRICAL_METHOD, "Metodo Empirico",
                         LAVORO, CHIAVE, "b", 0, 500, 60, 40, 20, 10),
-                new Sheet("CES-AR1", "base.character.Cesira", "base.cesira.OhGuardaLa", "Opportuna Distrazione",
+                new Sheet("CES-AR1", SetBaseIds.SERGIO, TIMELY_DISTRACTION, "Opportuna Distrazione",
                         SEGRETO, CONTO, "b", 5, 500, 70, 30, 20, 10),
-                new Sheet("ROC-AR5", "base.character.Rocco", "base.rocco.TeLoSpiegoIo", "La Storia la Scrivono i Vincitori",
+                new Sheet("ROC-AR5", SetBaseIds.DUCCIO, HISTORY_IS_WRITTEN_BY_THE_VICTORS, "La Storia la Scrivono i Vincitori",
                         CRANIATA, TESTA, "b", 0, 506, 60, 30, 20, 10));
     }
 
@@ -136,7 +138,7 @@ class Sb27AnnounceClausesTest {
         Card normal = hit("Pesca ordinaria", 0, null, "HIT 1");
         Card available = card(sheet.first);
         Player actor = actor(sheet, List.of(card(sheet.binding)), List.of(normal, available));
-        Player canceller = player("b", 90, card("bruiser.YouStop"));
+        Player canceller = player("b", 90, card(THATS_ENOUGH));
         canceller.getCharacter().getResources().put(VIOLENCE, 5);
         Game game = game(actor, canceller);
         turn(game, announce(game, sheet), move(game, "b", "FAI BASTA", sheet.actor));
@@ -211,7 +213,7 @@ class Sb27AnnounceClausesTest {
     void playingTheAnnouncedNameSatisfiesVulnerabilityEvenWhenCanceled(Sheet sheet) {
         Card found = card(sheet.first);
         Player actor = actor(sheet, List.of(card(sheet.binding)), List.of(found, filler()));
-        Player canceller = player("b", 90, card("bruiser.YouStop"));
+        Player canceller = player("b", 90, card(THATS_ENOUGH));
         canceller.getCharacter().getResources().put(VIOLENCE, 5);
         Game game = game(actor, canceller);
         turn(game, announce(game, sheet), rest(game, "b"));

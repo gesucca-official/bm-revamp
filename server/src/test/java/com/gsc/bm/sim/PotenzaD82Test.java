@@ -13,6 +13,7 @@ import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.game.bot.BotView;
 import com.gsc.bm.model.game.bot.LegalMove;
 import com.gsc.bm.model.game.bot.TurnForecast;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,7 @@ import java.util.*;
 
 import static com.gsc.bm.sim.StarterRedesignTest.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-16g passo 3: the power of proposal 1.4 (D82) with the targeted support of D84, and the two arms of the final round. The cards
@@ -32,11 +34,11 @@ class PotenzaD82Test {
     static Draft a, b;
     static JsonNode stepTwo;
 
-    static final String IMPATTO = "bruiser.SuperImpact", TI_STRINGO = "base.mara.TiStringoLaCurva", CINGHIATA = "base.mara.CinghiataDiTraverso",
-            DOSE = "junkie.MethDrivenRage", TOSSICONE = "junkie.Cough", ASSAGGINO = "base.tossico.UnAssaggino",
-            TRAVASO = "junkie.ToxicBloodDrain", ESTASI = "base.pino.GoingBerserk", RUTTO = "base.pino.RuttoADistanzaSociale",
-            PREPARO = "base.gigi.ColpoDiChiaveInglese", CHIAVE = "base.gigi.ChiaveDaTredici", STRETTA = "base.gigi.UnaStrettaDiProva",
-            LAVORO = "base.gigi.LavoroFattoBene", COFANO = "base.gigi.SottoIlCofano";
+    static final String IMPATTO = GARGANTUAN_IMPACT_ON_YOU, TI_STRINGO = UNPREDICTABLE_TRAJECTORY, CINGHIATA = RIDERS_LASSO,
+            DOSE = TAKE_INVENTORY, TOSSICONE = PHLEGMY_COUGH, ASSAGGINO = JUST_A_TASTE,
+            TRAVASO = DRAG_INTO_THE_TUNNEL, ESTASI = DOWN_IN_ONE, RUTTO = POINT_BLANK_BURP,
+            PREPARO = PREPARE_THE_JOB, CHIAVE = THIRTEEN_WRENCH, STRETTA = EMPIRICAL_METHOD,
+            LAVORO = JOB_WELL_DONE, COFANO = SECOND_TRUNK;
     static final Set<String> CHANGED = Set.of(IMPATTO, TI_STRINGO, CINGHIATA, DOSE, TOSSICONE, ASSAGGINO, TRAVASO, ESTASI, RUTTO, PREPARO,
             CHIAVE, STRETTA, LAVORO, COFANO);
 
@@ -140,7 +142,7 @@ class PotenzaD82Test {
     // --- Effects against the engine and the public forecast ---------------------------------------------------------------
 
     static Player seat(String deck, String id, Card card, Map<Resource, Integer> resources) {
-        Player p = player(deck, id, card == null ? List.of() : List.of(card), List.of(StarterRedesignTest.draftCard("base.com.Spintone")));
+        Player p = player(deck, id, card == null ? List.of() : List.of(card), List.of(StarterRedesignTest.draftCard(SHOVE)));
         resources.forEach((r, n) -> p.getResources().put(r, n));
         return p;
     }
@@ -162,19 +164,19 @@ class PotenzaD82Test {
 
     @Test void cinghiataReadsTheAlertnessLeftAfterItsCost() {
         for (int[] c : new int[][]{{40, 28}, {25, 20}, {20, 18}}) {
-            Player me = seat("starter-mara", "a", a.card(CINGHIATA), Map.of(Resource.ALERTNESS, c[0]));
+            Player me = seat(STARTER_MARA, "a", a.card(CINGHIATA), Map.of(Resource.ALERTNESS, c[0]));
             Player foe = foe();
             playAndForecast(me, a.card(CINGHIATA), foe, null);
             assertEquals(500 - c[1], foe.getResources().get(Resource.HEALTH), "A " + c[0]);
             assertEquals(c[0] - 20, me.getResources().get(Resource.ALERTNESS));
         }
-        Player poor = seat("starter-mara", "a", a.card(CINGHIATA), Map.of(Resource.ALERTNESS, 19));
+        Player poor = seat(STARTER_MARA, "a", a.card(CINGHIATA), Map.of(Resource.ALERTNESS, 19));
         assertTrue(BotView.of(game(poor, foe()), "a").legalMoves().stream().noneMatch(m -> m.getCard().getBinding().equals(CINGHIATA)));
     }
 
     @Test void ruttoSpendsTheAlcoholLeftAfterItsCostOnBothEffects() {
         for (int[] c : new int[][]{{12, 7}, {5, 0}, {20, 15}}) {
-            Player me = seat("starter-pino", "a", a.card(RUTTO), Map.of(Resource.ALCOHOL, c[0]));
+            Player me = seat(STARTER_PIERA, "a", a.card(RUTTO), Map.of(Resource.ALCOHOL, c[0]));
             Player foe = foe();
             playAndForecast(me, a.card(RUTTO), foe, null);
             assertEquals(40 - c[1], foe.getResources().get(Resource.ALERTNESS), "L " + c[0]);
@@ -187,17 +189,17 @@ class PotenzaD82Test {
 
     @Test void ruttoLosesTheArmourOfTheSpentAlcohol() {
         Card hit = StarterRedesignTest.probeHit(20, 0);
-        Player me = seat("starter-pino", "a", a.card(RUTTO), Map.of(Resource.ALCOHOL, 25));
-        Player foe = seat("starter-tossico", "b", hit, Map.of());
+        Player me = seat(STARTER_PIERA, "a", a.card(RUTTO), Map.of(Resource.ALCOHOL, 25));
+        Player foe = seat(STARTER_CELESTINA, "b", hit, Map.of());
         playAndForecast(me, a.card(RUTTO), foe, hit);
         assertEquals(480, me.getResources().get(Resource.HEALTH), "L spesa prima del colpo avversario: nessuna corazza");
     }
 
     @Test void theBloodDrainAddsItsDirectPoisonAndTheLiveCardDoesNot() {
-        Player me = seat("starter-tossico", "a", a.card(TRAVASO), Map.of(Resource.TOXICITY, 25));
+        Player me = seat(STARTER_CELESTINA, "a", a.card(TRAVASO), Map.of(Resource.TOXICITY, 25));
         Player foe = foe();
         playAndForecast(me, a.card(TRAVASO), foe, null);
-        Player plainMe = seat("starter-tossico", "a", noPoison(), Map.of(Resource.TOXICITY, 25));
+        Player plainMe = seat(STARTER_CELESTINA, "a", noPoison(), Map.of(Resource.TOXICITY, 25));
         Player plainFoe = foe();
         playAndForecast(plainMe, noPoison(), plainFoe, null);
         assertEquals(plainFoe.getResources().get(Resource.HEALTH) - 12, foe.getResources().get(Resource.HEALTH), "12 POISON diretti");
@@ -206,13 +208,13 @@ class PotenzaD82Test {
         // SB-28 (D181 (3), lista di SB-27): the class starts from the set file's 10 POISON, no longer from the 0 of the Set Base 0.1:
         // two report lines and four printed steps; 0, read only in the historical drafts, still deals none.
         DragIntoTheTunnel live = new DragIntoTheTunnel();
-        com.gsc.bm.model.Character x = a.character("junkie.character.ToxicJunkie"), y = a.character("base.character.Mara");
+        com.gsc.bm.model.Character x = a.character(SetBaseIds.CELESTINA), y = a.character(SetBaseIds.MARA);
         int health = y.getResources().get(Resource.HEALTH);
         assertEquals(2, live.applyEffectOnTarget(x, y).size());
         assertEquals(health - 10, y.getResources().get(Resource.HEALTH));
         assertEquals(4, live.printedEffects().getSteps().size());
         DragIntoTheTunnel none = (DragIntoTheTunnel) noPoison();
-        com.gsc.bm.model.Character z = a.character("base.character.Mara");
+        com.gsc.bm.model.Character z = a.character(SetBaseIds.MARA);
         assertEquals(1, none.applyEffectOnTarget(x, z).size());
         assertEquals(health, z.getResources().get(Resource.HEALTH));
         assertEquals(3, none.printedEffects().getSteps().size());
@@ -231,7 +233,7 @@ class PotenzaD82Test {
     @Test void beppesChargesCutAnOpponentWhetherTheSearchFindsOrNot() {
         for (String charge : List.of(PREPARO, STRETTA)) for (boolean found : List.of(true, false)) {
             Card c = a.card(charge), hit = a.card(ChargeFrequency.hit(charge));
-            Player me = player("starter-gigi", "a", List.of(c), found ? List.of(hit) : List.of(StarterRedesignTest.draftCard("base.com.Spintone")));
+            Player me = player(STARTER_BEPPE, "a", List.of(c), found ? List.of(hit) : List.of(StarterRedesignTest.draftCard(SHOVE)));
             Player foe = foe();
             Game g = playAndForecast(me, c, foe, null);
             assertEquals(496, foe.getResources().get(Resource.HEALTH), charge + " found=" + found);
@@ -247,8 +249,8 @@ class PotenzaD82Test {
         for (int arm = 0; arm < 2; arm++) {
             Draft d = arm == 0 ? a : b;
             Card bancone = d.card(SetBaseArms.BANCONE), tossicone = d.card(TOSSICONE);
-            Player me = seat("starter-pino", "a", bancone, Map.of());
-            Player foe = seat("starter-tossico", "b", tossicone, Map.of(Resource.TOXICITY, 10));
+            Player me = seat(STARTER_PIERA, "a", bancone, Map.of());
+            Player foe = seat(STARTER_CELESTINA, "b", tossicone, Map.of(Resource.TOXICITY, 10));
             Game g = playAndForecast(me, bancone, foe, tossicone);
             lost[arm] = 500 - me.getResources().get(Resource.HEALTH);
             assertTrue(me.getCharacter().getStatuses().isEmpty(), "la difesa dura solo il turno");
@@ -265,8 +267,8 @@ class PotenzaD82Test {
     @Test void theBanconeStillHalvesHitAndLeavesCutInBothArms() {
         for (Draft d : List.of(a, b)) {
             Card bancone = d.card(SetBaseArms.BANCONE), hit = StarterRedesignTest.probeHit(20, 0);
-            Player me = seat("starter-pino", "a", bancone, Map.of());
-            Player foe = seat("starter-tossico", "b", hit, Map.of());
+            Player me = seat(STARTER_PIERA, "a", bancone, Map.of());
+            Player foe = seat(STARTER_CELESTINA, "b", hit, Map.of());
             playAndForecast(me, bancone, foe, hit);
             assertEquals(500 - (10 - 5 / 4), me.getResources().get(Resource.HEALTH), "HIT 20 ×0,5, poi la corazza dei 5 L appena presi");
         }
@@ -274,11 +276,11 @@ class PotenzaD82Test {
 
     @Test void theOtherChangedHitsResolveWithTheirNumbersAndForecast() {
         Object[][] cases = {
-                {"starter-spazienzio", IMPATTO, Map.of(Resource.VIOLENCE, 25), 34}, // D90: 1.5, the three numbers below too
-                {"starter-tossico", TOSSICONE, Map.of(Resource.TOXICITY, 10), 18},
-                {"starter-pino", ESTASI, Map.of(Resource.ALCOHOL, 9), 27},
-                {"starter-gigi", CHIAVE, Map.of(Resource.VIOLENCE, 10), 18},
-                {"starter-gigi", LAVORO, Map.of(Resource.VIOLENCE, 10), 14 + 4 * 2},
+                {STARTER_SPAZIENZIO, IMPATTO, Map.of(Resource.VIOLENCE, 25), 34}, // D90: 1.5, the three numbers below too
+                {STARTER_CELESTINA, TOSSICONE, Map.of(Resource.TOXICITY, 10), 18},
+                {STARTER_PIERA, ESTASI, Map.of(Resource.ALCOHOL, 9), 27},
+                {STARTER_BEPPE, CHIAVE, Map.of(Resource.VIOLENCE, 10), 18},
+                {STARTER_BEPPE, LAVORO, Map.of(Resource.VIOLENCE, 10), 14 + 4 * 2},
         };
         for (Object[] c : cases) {
             @SuppressWarnings("unchecked") Map<Resource, Integer> res = (Map<Resource, Integer>) c[2];
@@ -286,7 +288,7 @@ class PotenzaD82Test {
             Player me = seat((String) c[0], "a", card, res);
             if (c[1].equals(LAVORO)) {
                 me.getCharacter().getItems().clear();
-                for (int i = 0; i < 2; i++) me.getCharacter().getItems().add(StarterRedesignTest.draftCard("base.items.CascoDaLavoro"));
+                for (int i = 0; i < 2; i++) me.getCharacter().getItems().add(StarterRedesignTest.draftCard(SITE_HELMET));
             }
             Player foe = foe();
             playAndForecast(me, card, foe, null);
@@ -296,7 +298,7 @@ class PotenzaD82Test {
 
     @Test void sottoIlCofanoGivesFiveAlertnessOnTopOfItsRefund() {
         Card cofano = a.card(COFANO);
-        Player me = seat("starter-gigi", "a", cofano, Map.of(Resource.VIOLENCE, 5, Resource.ALERTNESS, 0));
+        Player me = seat(STARTER_BEPPE, "a", cofano, Map.of(Resource.VIOLENCE, 5, Resource.ALERTNESS, 0));
         playAndForecast(me, cofano, foe(), null);
         assertEquals(5, me.getResources().get(Resource.VIOLENCE));
         assertEquals(5, me.getResources().get(Resource.ALERTNESS));

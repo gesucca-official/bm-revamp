@@ -31,11 +31,12 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 class BozzaCardFactoryTest {
-    private static final String DATA = "bruiser.SuperImpact";
-    private static final String JAVA = "base.cesira.Ricatto";
-    private static final String ROC_AR5 = "base.rocco.TeLoSpiegoIo";
+    private static final String DATA = GARGANTUAN_IMPACT_ON_YOU;
+    private static final String JAVA = GOOD_OLD_BLACKMAIL;
+    private static final String ROC_AR5 = HISTORY_IS_WRITTEN_BY_THE_VICTORS;
     private static final long SEED = 7_000_000L;
 
     @Test
@@ -79,7 +80,7 @@ class BozzaCardFactoryTest {
         Map<Resource, Double> health = Map.of(Resource.HEALTH, 6.0);
         assertEquals(health, ReflectionTestUtils.invokeMethod(gainsReader, "parseGains", "+6 HEALTH"));
         assertEquals(health, ReflectionTestUtils.invokeMethod(gainsReader, "parseGains", roc.getGains()));
-        String fallback = "bruiser.BadEducation";
+        String fallback = EXCUSE_ME_SORRY_CAN_YOU_STOP;
         assertEquals(8, BotView.publicText(factory.craftCard(fallback)).nominalDamage());
         Map<DamageType, Integer> hit = Map.of(DamageType.HIT, 8);
         assertEquals(hit, ReflectionTestUtils.invokeMethod(Countermove.class, "baseDamage", draft.draft().card(fallback)));

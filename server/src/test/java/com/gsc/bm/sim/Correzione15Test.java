@@ -20,6 +20,7 @@ import static com.gsc.bm.sim.PotenzaD82Test.playAndForecast;
 import static com.gsc.bm.sim.PotenzaD82Test.seat;
 import static com.gsc.bm.sim.StarterRedesignTest.foe;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-16g, correction 1.5 (D90): on the reference draft, arm B of step 3 (D89), only three numbers of three cards change. Impatto
@@ -91,7 +92,7 @@ class Correzione15Test {
         assertEquals(json("{'VIOLENCE':10}"), StarterBalanceMeasureTest.card(now, CHIAVE).get("cost"));
         assertEquals(json("{'VIOLENCE':10}"), StarterBalanceMeasureTest.card(now, LAVORO).get("cost"));
         // From zero: PAZIENZA +25 V pays Impatto, Preparo +15 V pays Chiave, Una stretta +10 V pays Lavoro (D63).
-        assertEquals(25, StarterBalanceMeasureTest.card(now, "bruiser.Glare").get("self").get(0).get("foundGains").get("VIOLENCE").asInt());
+        assertEquals(25, StarterBalanceMeasureTest.card(now, PATIENCE_OVER).get("self").get(0).get("foundGains").get("VIOLENCE").asInt());
         assertEquals(15, StarterBalanceMeasureTest.card(now, PotenzaD82Test.PREPARO).get("self").get(0).get("foundGains").get("VIOLENCE").asInt());
         assertEquals(10, StarterBalanceMeasureTest.card(now, PotenzaD82Test.STRETTA).get("self").get(0).get("foundGains").get("VIOLENCE").asInt());
     }
@@ -99,12 +100,12 @@ class Correzione15Test {
     /** The three hits on arm B, resolved by the engine and among the forecast's variants; Lavoro with 0 to 3 own items. */
     @Test void theThreeHitsResolveWithTheirNumbersAndForecast() {
         Object[][] cases = {
-                {"starter-spazienzio", IMPATTO, Map.of(Resource.VIOLENCE, 25), 0, 34},
-                {"starter-gigi", CHIAVE, Map.of(Resource.VIOLENCE, 10), 0, 18},
-                {"starter-gigi", LAVORO, Map.of(Resource.VIOLENCE, 10), 0, 14},
-                {"starter-gigi", LAVORO, Map.of(Resource.VIOLENCE, 10), 1, 18},
-                {"starter-gigi", LAVORO, Map.of(Resource.VIOLENCE, 10), 2, 22},
-                {"starter-gigi", LAVORO, Map.of(Resource.VIOLENCE, 10), 3, 26},
+                {STARTER_SPAZIENZIO, IMPATTO, Map.of(Resource.VIOLENCE, 25), 0, 34},
+                {STARTER_BEPPE, CHIAVE, Map.of(Resource.VIOLENCE, 10), 0, 18},
+                {STARTER_BEPPE, LAVORO, Map.of(Resource.VIOLENCE, 10), 0, 14},
+                {STARTER_BEPPE, LAVORO, Map.of(Resource.VIOLENCE, 10), 1, 18},
+                {STARTER_BEPPE, LAVORO, Map.of(Resource.VIOLENCE, 10), 2, 22},
+                {STARTER_BEPPE, LAVORO, Map.of(Resource.VIOLENCE, 10), 3, 26},
         };
         for (Object[] c : cases) {
             @SuppressWarnings("unchecked") Map<Resource, Integer> res = (Map<Resource, Integer>) c[2];
@@ -112,7 +113,7 @@ class Correzione15Test {
             Player me = seat((String) c[0], "a", card, res);
             if (c[1].equals(LAVORO)) {
                 me.getCharacter().getItems().clear();
-                for (int i = 0; i < (int) c[3]; i++) me.getCharacter().getItems().add(b.card("base.items.CascoDaLavoro"));
+                for (int i = 0; i < (int) c[3]; i++) me.getCharacter().getItems().add(b.card(SITE_HELMET));
             }
             Player foe = foe();
             playAndForecast(me, card, foe, null);

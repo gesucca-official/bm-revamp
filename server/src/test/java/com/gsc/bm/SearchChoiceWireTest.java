@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-16i, client step (D102): through the real protocol (STOMP over WebSocket, validator, engine) a move command may carry
@@ -39,7 +40,7 @@ class SearchChoiceWireTest extends SqliteContextSupport {
         var p = new com.gsc.bm.model.game.Player(id, character, decks.craftBasicActionStarterCard(character),
                 decks.craftCharacterBoundStarterCards(character), decks.craftLastResortStarterCard(character),
                 decks.craftCharacterStarterDeck(character.getBindingName()));
-        p.getCardsInHand().clear(); p.getCardsInHand().add(cards.craftCard("bruiser.SuperImpact"));
+        p.getCardsInHand().clear(); p.getCardsInHand().add(cards.craftCard(GARGANTUAN_IMPACT_ON_YOU));
         return p;
     }
 
@@ -66,7 +67,7 @@ class SearchChoiceWireTest extends SqliteContextSupport {
             String card = alice.getCardsInHand().get(0).getName();
             var command = mapper.createObjectNode().put("playedCardName", card)
                     .put("playerId", "choiceAlice").put("targetId", "choiceBob").put("gameId", id);
-            session.send("/app/game/" + id + "/move", mapper.writeValueAsBytes(command.deepCopy().put("searchChoice", "bruiser.SuperImpact")));
+            session.send("/app/game/" + id + "/move", mapper.writeValueAsBytes(command.deepCopy().put("searchChoice", GARGANTUAN_IMPACT_ON_YOU)));
             byte[] refused = errors.poll(4, TimeUnit.SECONDS);
             assertNotNull(refused);
             assertEquals("no search choice with these rules", new String(refused, StandardCharsets.UTF_8));

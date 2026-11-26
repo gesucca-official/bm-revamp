@@ -1,6 +1,7 @@
 package com.gsc.bm;
 
 import com.gsc.bm.repo.external.*;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.lang.reflect.Type;
 import java.nio.file.*;
 import java.util.concurrent.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Tag("context")
@@ -32,7 +34,7 @@ class WebSocketIdentityTest extends SqliteContextSupport {
         var character = new com.gsc.bm.model.cards.bruiser.character.BigBadBruiser();
         var p = new com.gsc.bm.model.game.Player(id,character,decks.craftBasicActionStarterCard(character),
                 decks.craftCharacterBoundStarterCards(character),decks.craftLastResortStarterCard(character),decks.craftCharacterStarterDeck(character.getBindingName()));
-        p.getCardsInHand().clear(); p.getCardsInHand().add(cards.craftCard("bruiser.SuperImpact"));
+        p.getCardsInHand().clear(); p.getCardsInHand().add(cards.craftCard(GARGANTUAN_IMPACT_ON_YOU));
         return p;
     }
     private StompFrameHandler collect(BlockingQueue<byte[]> queue) {
@@ -45,12 +47,12 @@ class WebSocketIdentityTest extends SqliteContextSupport {
         users.createIfAbsent(new UserCredentialsRecord("roundHuman",null,encoder.encode("synthetic"),"USER"));
         users.createIfAbsent(new UserCredentialsRecord("roundObserver",null,encoder.encode("synthetic"),"USER"));
         var human = wirePlayer("roundHuman");
-        human.getDeck().clear(); human.getDeck().push(cards.craftCard("com.Grab"));
+        human.getDeck().clear(); human.getDeck().push(cards.craftCard(SetBaseIds.GRAB));
         var character = new com.gsc.bm.model.cards.bruiser.character.BigBadBruiser();
         var bot = new com.gsc.bm.model.game.ComPlayer(character,decks.craftBasicActionStarterCard(character),
                 decks.craftCharacterBoundStarterCards(character),decks.craftLastResortStarterCard(character),java.util.List.of());
-        bot.getCardsInHand().clear(); bot.getCardsInHand().add(cards.craftCard("com.last.Struggle"));
-        bot.getDeck().push(cards.craftCard("bruiser.SuperImpact"));
+        bot.getCardsInHand().clear(); bot.getCardsInHand().add(cards.craftCard(AT_HIM));
+        bot.getDeck().push(cards.craftCard(GARGANTUAN_IMPACT_ON_YOU));
         var game = new com.gsc.bm.model.game.Game(java.util.List.of(human,bot),"quick1vCom",false);
         org.mockito.Mockito.doReturn(game).when(gameFactory).craftQuick1vComGame("roundHuman",null,com.gsc.bm.model.game.bot.ComLevel.FACILE);
         var client = newClient(); StompSession session = null, observer = null;
@@ -86,7 +88,7 @@ class WebSocketIdentityTest extends SqliteContextSupport {
             assertEquals(0,human.getResources().get(com.gsc.bm.model.Resource.VIOLENCE));
             // SB-28 (D182): «GARGANTUESCO IMPATTO SUL TU» of the Set Base 1.0 deals 35 HIT (45 in the 0.1); the bot's Struggle costs it 5.
             assertEquals(60,bot.getResources().get(com.gsc.bm.model.Resource.HEALTH));
-            assertEquals(cards.craftCard("com.Grab").getName(),view.path("players").path("roundHuman").path("cardsInHand").get(0).path("name").asText());
+            assertEquals(cards.craftCard(SetBaseIds.GRAB).getName(),view.path("players").path("roundHuman").path("cardsInHand").get(0).path("name").asText());
             assertEquals(0,view.path("players").path("roundHuman").path("deck").asInt());
             assertEquals(1,game.getPendingMoves().size()); // bot has selected exactly one move for the next turn
             assertEquals(bot.getPlayerId(),game.getPendingMoves().get(0).getPlayerId());
@@ -257,11 +259,11 @@ class WebSocketIdentityTest extends SqliteContextSupport {
         var character = new com.gsc.bm.model.cards.bruiser.character.BigBadBruiser();
         var human = new com.gsc.bm.model.game.Player("cliHuman", character, decks.craftBasicActionStarterCard(character),
                 decks.craftCharacterBoundStarterCards(character), decks.craftLastResortStarterCard(character), java.util.List.of());
-        human.getCardsInHand().clear(); human.getCardsInHand().add(cards.craftCard("bruiser.SuperImpact"));
+        human.getCardsInHand().clear(); human.getCardsInHand().add(cards.craftCard(GARGANTUAN_IMPACT_ON_YOU));
         var botCharacter = new com.gsc.bm.model.cards.bruiser.character.BigBadBruiser();
         var bot = new com.gsc.bm.model.game.ComPlayer(botCharacter, decks.craftBasicActionStarterCard(botCharacter),
                 decks.craftCharacterBoundStarterCards(botCharacter), decks.craftLastResortStarterCard(botCharacter), java.util.List.of());
-        bot.getCardsInHand().clear(); bot.getCardsInHand().add(cards.craftCard("com.last.Struggle"));
+        bot.getCardsInHand().clear(); bot.getCardsInHand().add(cards.craftCard(AT_HIM));
         var game = new com.gsc.bm.model.game.Game(java.util.List.of(human, bot), "quick1vCom", false);
         org.mockito.Mockito.doReturn(game).when(gameFactory).craftQuick1vComGame("cliHuman",null,com.gsc.bm.model.game.bot.ComLevel.FACILE);
         Path root = Path.of("..").toAbsolutePath().normalize();
@@ -309,12 +311,12 @@ class WebSocketIdentityTest extends SqliteContextSupport {
         var b=new com.gsc.bm.model.game.Player("cliCardsB",character,decks.craftBasicActionStarterCard(character),
             decks.craftCharacterBoundStarterCards(character),decks.craftLastResortStarterCard(character),java.util.List.of());
         b.getCardsInHand().clear();
-        var steal=cards.craftCard("com.Steal"); var smack=cards.craftCard("bruiser.character.LittleSmack");
-        var spare=cards.craftCard("bruiser.SuperImpact"); var struggle=cards.craftCard("com.last.Struggle");
-        var grab=cards.craftCard("com.basic.ToxicGrab");
+        var steal=cards.craftCard(SLEIGHT_OF_HAND_THEFT); var smack=cards.craftCard(WAKE_UP_BUT_NOT_YOU);
+        var spare=cards.craftCard(GARGANTUAN_IMPACT_ON_YOU); var struggle=cards.craftCard(AT_HIM);
+        var grab=cards.craftCard(UNCONTROLLABLE_CRAVING);
         a.getCardsInHand().addAll(java.util.List.of(steal,smack,spare,struggle));
-        b.getCardsInHand().addAll(java.util.List.of(grab,cards.craftCard("com.last.Struggle")));
-        var beer=cards.craftCard("com.items.AnotherRottenBeer"); character.getItems().add(beer);
+        b.getCardsInHand().addAll(java.util.List.of(grab,cards.craftCard(AT_HIM)));
+        var beer=cards.craftCard(DISCOUNT_DOUBLE_MALT); character.getItems().add(beer);
         var game=new com.gsc.bm.model.game.Game(java.util.List.of(a,b),"cli-cards",false);
         String id=games.newGame(game);
         var rounds=mapper.createArrayNode();

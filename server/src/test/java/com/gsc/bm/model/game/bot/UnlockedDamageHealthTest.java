@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-18 B2 (D126 (2), proposal § 3): {@link StyleSupport.Situation#unlockedDamage} reads a HEALTH cost as the engine does. With d50 a card
@@ -30,11 +31,11 @@ class UnlockedDamageHealthTest {
         // The draft loader is package-private in com.gsc.bm.sim: the public text is read from the file, as BotView would show it.
         JsonNode card = null;
         try (var in = UnlockedDamageHealthTest.class.getResourceAsStream("/set-base/bozza.json")) {
-            for (JsonNode c : new ObjectMapper().readTree(in).get("cards")) if (c.path("binding").asText().equals("base.rocco.Capocciata")) card = c;
+            for (JsonNode c : new ObjectMapper().readTree(in).get("cards")) if (c.path("binding").asText().equals(PATRIOTIC_HEADBUTT)) card = c;
         }
         assertNotNull(card);
         JsonNode gui = card.get("gui");
-        capocciata = new BotView.CardSeen(gui.get("name").asText(), "base.rocco.Capocciata", false, false, false, false, card.get("priority").asInt(),
+        capocciata = new BotView.CardSeen(gui.get("name").asText(), PATRIOTIC_HEADBUTT, false, false, false, false, card.get("priority").asInt(),
                 Set.of(Card.CardTarget.OPPONENT), Map.of(Resource.HEALTH, card.get("cost").get("HEALTH").asInt()), gui.get("role").asText(),
                 gui.get("gains").asText(), gui.get("damage").asText(), gui.get("damageAmount").asText(), card.path("lastBlow").asBoolean(false), null);
         c = capocciata.getCost().get(Resource.HEALTH);

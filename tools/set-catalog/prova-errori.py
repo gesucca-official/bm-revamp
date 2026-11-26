@@ -23,6 +23,7 @@ COPY = [
     "client-debug/src/assets/docs", "server/src/main/java", "server/src/main/resources/cards.sqlite",
     "server/src/main/resources/sets", "server/src/test/resources/set-base/bozza.json",
     "server/src/test/resources/set-base/mazzi-prova.json", "scripts/check-rules.py", "tools/set-catalog/set_catalog.py",
+    "docs/design/set-base/sb-34/tabella.json", "server/src/test/java/com/gsc/bm/model/cards/base/SetBaseIds.java",
 ]
 
 
@@ -58,6 +59,12 @@ def changed_set_file(copy):
     path.write_text(re.sub(r'"priority": 0,', '"priority": 1,', text, count=1), encoding="utf-8", newline="\n")
 
 
+def changed_id_constant(copy):
+    path = copy / "server/src/test/java/com/gsc/bm/model/cards/base/SetBaseIds.java"
+    text = path.read_text(encoding="utf-8")
+    path.write_text(text.replace('"bruiser.Glare"', '"bruiser.Stare"', 1), encoding="utf-8", newline="\n")
+
+
 CASES = [
     ("copia intatta", None, None),
     ("numero cambiato nella scheda (costo)", changed_cost, "cost of the sheet differs from the set file"),
@@ -65,6 +72,7 @@ CASES = [
     ("testo breve cambiato nell'allegato", changed_short_text, "short text differs from the SB-25 generator"),
     ("stile del computer cambiato nella scheda", changed_bot_style, "computer style of the sheet differs from the set file"),
     ("numero cambiato nel file del set dopo la generazione", changed_set_file, "changed after the generation"),
+    ("costante degli id cambiata a mano", changed_id_constant, "SetBaseIds.java: not what the generator writes"),
 ]
 
 

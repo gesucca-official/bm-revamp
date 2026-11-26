@@ -34,6 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-11a: le carte scritte con i passi consume ed equip coincidono con le classi Java che sostituiscono (Grab, BruiserGrab, ToxicGrab e
@@ -83,7 +84,7 @@ class ConsumeEquipTest {
     @Test void itemScenariosCoverPresentAbsentAndVanishedItems() throws Exception {
         int consumed = 0, couldNot = 0, vanished = 0, present = 0;
         for (long seed = 0; seed < CardScenarios.SCENARIOS; seed++) {
-            String outcome = withItems.outcome(java.card("com.basic.BruiserGrab"), seed);
+            String outcome = withItems.outcome(java.card(LET_US_USE_YOU), seed);
             boolean took = outcome.contains("Grabbed and consumed Item"), refused = outcome.contains("Couldn't Grab that Item!");
             assertTrue(took ^ refused, "Una presa riesce oppure no: " + outcome);
             if (took) consumed++;

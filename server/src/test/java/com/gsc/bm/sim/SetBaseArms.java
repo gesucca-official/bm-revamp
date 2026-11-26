@@ -11,13 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
+
 /**
  * SB-16g passo 3 (proposta 1.4, D80, D82): the two arms of the final round. Arm A is the draft as it is; arm B is the same draft with
  * «Il bancone regge, io pure» replaced by {@code set-base/bancone-b.json}, which adds POISON ×0.5 for the turn (D67). Nothing else
  * differs: {@code PotenzaD82Test} checks it. The bench picks the arm with {@code -Dsim.arm=A|B} (A when absent).
  */
 final class SetBaseArms {
-    static final String BANCONE = "base.pino.IlBanconeRegge";
+    static final String BANCONE = FORTIFIED_BAR_OUTPOST;
     static final String ARM_B = "/set-base/bancone-b.json";
     /**
      * SB-16i (D97): the 1.5 frozen byte for byte (arm A; with {@link #ARM_B} it is arm B, the reference 1.5). The tests that

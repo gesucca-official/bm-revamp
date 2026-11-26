@@ -35,6 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-11a, stati costruiti a mano: ciò che il set di oggi non copre (equip in entrata, uso singolo senza conversione, durata che scade
@@ -50,7 +51,7 @@ class ConsumeEquipStatesTest {
         fixtures = DataCards.parse(ConsumeEquipFixtures.read(ConsumeEquipFixtures.PROVE));
         java = new SimulationCatalog();
         draft = Draft.parse("attuale con consume", ConsumeEquipFixtures.convertedCurrent());
-        cocktail = java.card("com.items.CocktailOnTheGround").getName();
+        cocktail = java.card(NEGRONI_FOUND_ON_THE_FLOOR).getName();
     }
 
     // ---- equip in entrata: il Giubbotto ----
@@ -222,7 +223,7 @@ class ConsumeEquipStatesTest {
         Card card = named("prova.basicRocco");
         Game game = game();
         Player self = game.getPlayers().get("seat-1");
-        self.getCharacter().getItems().add(java.card("com.items.CocktailOnTheGround"));
+        self.getCharacter().getItems().add(java.card(NEGRONI_FOUND_ON_THE_FLOOR));
         List<String> first = resolve(card, game, cocktail);
         assertEquals("Grabbed and consumed Item " + cocktail, first.get(0));
         assertTrue(self.getCharacter().getItems().isEmpty(), "L'oggetto esce dal campo");
@@ -240,7 +241,7 @@ class ConsumeEquipStatesTest {
         ((AbstractCard) fixtures.create("prova.coccio")).applyEffectOnSelf(wearer);
         Card card = named("prova.basicRocco");
         Game game = game();
-        game.getPlayers().get("seat-1").getCharacter().getItems().add(java.card("com.items.CocktailOnTheGround"));
+        game.getPlayers().get("seat-1").getCharacter().getItems().add(java.card(NEGRONI_FOUND_ON_THE_FLOOR));
         resolve(card, game, cocktail);
 
         Object[] copy = (Object[]) roundTrip(new Object[] {wearer, card});
@@ -327,7 +328,7 @@ class ConsumeEquipStatesTest {
         Card card = named(binding);
         Game game = game();
         Character self = game.getPlayers().get("seat-1").getCharacter();
-        Card item = java.card("com.items.CocktailOnTheGround");
+        Card item = java.card(NEGRONI_FOUND_ON_THE_FLOOR);
         self.getItems().add(item);
         Move move = move(card, game, item.getName());
         if (!present) self.getItems().remove(item);

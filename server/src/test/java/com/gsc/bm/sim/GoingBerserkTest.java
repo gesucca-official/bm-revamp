@@ -14,10 +14,11 @@ import java.util.List;
 
 import static com.gsc.bm.sim.StarterRedesignTest.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 class GoingBerserkTest {
-    private static final String ESTASI = "base.pino.GoingBerserk";
-    private static final String ULTIMO_GIRO = "base.pino.UltimoGiro";
+    private static final String ESTASI = DOWN_IN_ONE;
+    private static final String ULTIMO_GIRO = LAST_ROUND;
     private static Draft draft;
 
     @BeforeAll
@@ -84,7 +85,7 @@ class GoingBerserkTest {
     }
 
     private static Player pieraWith(Card card, int alcohol) {
-        Player author = player("starter-pino", "a", List.of(card), List.of());
+        Player author = player(STARTER_PIERA, "a", List.of(card), List.of());
         author.getResources().put(Resource.ALCOHOL, alcohol);
         return author;
     }

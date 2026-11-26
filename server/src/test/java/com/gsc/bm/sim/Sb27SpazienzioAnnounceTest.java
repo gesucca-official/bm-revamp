@@ -4,6 +4,7 @@ import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -17,12 +18,13 @@ import static com.gsc.bm.model.Resource.*;
 import static com.gsc.bm.model.cards.Card.CardTarget.SELF;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Clausole comuni alle due schede Annuncia di SPAZIENZIO. */
 class Sb27SpazienzioAnnounceTest {
-    private static final String SPAZIENZIO = "bruiser.character.BigBadBruiser";
-    private static final String IMPACT = "bruiser.SuperImpact";
-    private static final String OHIO = "bruiser.ExtremelyViolentBlow";
+    private static final String SPAZIENZIO = SetBaseIds.SPAZIENZIO;
+    private static final String IMPACT = GARGANTUAN_IMPACT_ON_YOU;
+    private static final String OHIO = SHIP_YOU_TO_OUCHIO;
     private static Draft draft;
 
     static final class Sheet {
@@ -51,8 +53,8 @@ class Sb27SpazienzioAnnounceTest {
 
     static Stream<Sheet> sheets() {
         return Stream.of(
-                new Sheet("PAZIENZA: FINITA", "bruiser.Glare", IMPACT, OHIO, 50),
-                new Sheet("SGOMBERIAMOVI", "base.bruiser.TiFaccioSpazio", OHIO, IMPACT, 40));
+                new Sheet("PAZIENZA: FINITA", PATIENCE_OVER, IMPACT, OHIO, 50),
+                new Sheet("SGOMBERIAMOVI", LET_US_CLEAR_YOU_OUT, OHIO, IMPACT, 40));
     }
 
     @ParameterizedTest(name = "{0}")
@@ -129,7 +131,7 @@ class Sb27SpazienzioAnnounceTest {
         Card ordinaryDraw = hit("Pesca normale", 0, null, "HIT 1");
         Card available = card(sheet.first);
         Player actor = announcing(card(sheet.binding), List.of(ordinaryDraw, available));
-        Player opponent = b(card("bruiser.YouStop"));
+        Player opponent = b(card(THATS_ENOUGH));
         opponent.getCharacter().getResources().put(VIOLENCE, 5);
         Game game = game(actor, opponent);
 

@@ -1,6 +1,7 @@
 package com.gsc.bm.sim;
 
 import com.gsc.bm.model.game.bot.AggressivePolicy;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * supera di più di un errore standard. Con la regola di SB-7 bastava superarlo, e il mazzo finale vagava fra candidati fortunati.
  */
 class SearchMarginTest {
-    private static final String BRUISER = "bruiser.character.BigBadBruiser";
+    private static final String BRUISER = SetBaseIds.SPAZIENZIO;
 
     private static DeckSearch.Params params(double margin) {
         return new DeckSearch.Params(8, 16, 8, 99, 20, 1, 1, 7_100_000L, 7_900_000L, 7_000_007L, margin);

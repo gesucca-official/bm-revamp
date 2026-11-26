@@ -6,6 +6,7 @@ import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.game.bot.*;
 import com.gsc.bm.service.catalog.LiveSet;
 import com.gsc.bm.service.session.model.QueuedPlayer;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.support.StaticListableBeanFactory;
@@ -52,8 +53,8 @@ class ComLevelFactoryTest {
             seen.put(character, policies.styleOf(character));
         }
         // D203 (4), Set Base 1.0.2: Spazienzio and Piera aggressivo, Mara prudente, Celestina and Beppe risorse.
-        assertEquals(Map.of("bruiser.character.BigBadBruiser", "aggressivo", "base.character.Pino", "aggressivo",
-                "base.character.Mara", "prudente", "junkie.character.ToxicJunkie", "risorse", "base.character.Gigi", "risorse"), seen);
+        assertEquals(Map.of(SetBaseIds.SPAZIENZIO, "aggressivo", SetBaseIds.PIERA, "aggressivo",
+                SetBaseIds.MARA, "prudente", SetBaseIds.CELESTINA, "risorse", SetBaseIds.BEPPE, "risorse"), seen);
     }
 
     @Test void facileIsRandomNormaleIsTheMeasuredChainAndEveryPlayerHasItsOwnInstance() {
@@ -77,11 +78,11 @@ class ComLevelFactoryTest {
 
     @Test void aStarterWithoutStyleOrWithAnUnknownOneStopsTheStart() {
         Map<String, String> missing = new HashMap<>();
-        missing.put("base.character.Mara", null);
+        missing.put(SetBaseIds.MARA, null);
         assertThrows(IllegalStateException.class, () -> new ComPolicies(missing));
-        assertThrows(IllegalStateException.class, () -> new ComPolicies(Map.of("base.character.Mara", "furbo")));
+        assertThrows(IllegalStateException.class, () -> new ComPolicies(Map.of(SetBaseIds.MARA, "furbo")));
         assertThrows(IllegalArgumentException.class,
-                () -> new ComPolicies(Map.of("base.character.Mara", "prudente")).styleOf("base.character.Pino"));
+                () -> new ComPolicies(Map.of(SetBaseIds.MARA, "prudente")).styleOf(SetBaseIds.PIERA));
     }
 
     @Test void theLoaderRefusesAStyleOutsideTheVocabulary(@org.junit.jupiter.api.io.TempDir Path dir) throws Exception {

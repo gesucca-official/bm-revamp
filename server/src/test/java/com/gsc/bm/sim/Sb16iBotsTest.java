@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-16i Fase B (D97): what the bots learn. The choice between two announced names, one rule for every bot; the cleaning of
@@ -142,10 +143,10 @@ class Sb16iBotsTest {
     static Set<String> kept(String draftPath) throws Exception {
         Draft d = BozzeStoriche.fromClasspath(draftPath); // SB-27 (D177): the 1.5 is a historical draft
         List<BotView.CardSeen> hand = new ArrayList<>();
-        for (String b : List.of("base.mara.CinghiataDiTraverso", "base.mara.Sgommata", "base.mara.TraDueParaurti", "base.com.Spintone"))
+        for (String b : List.of(RIDERS_LASSO, BURNOUT, GREASY_AND_GRIMY, SHOVE))
             hand.add(BotView.publicText(d.card(b)));
         BotView.Opponent foe = new BotView.Opponent(seat("foe", 60, 30, 20, 0, Map.of()), 5, 10,
-                List.of(new BotView.RevealedSeen(1, BotView.publicText(d.card("bruiser.SuperImpact")), 3, null)));
+                List.of(new BotView.RevealedSeen(1, BotView.publicText(d.card(GARGANTUAN_IMPACT_ON_YOU)), 3, null)));
         BotView v = new BotView(4, new BotView.Self(seat("me", 25, 0, 30, 0, Map.of()), hand, 10, List.of()), List.of(foe), List.of(),
                 Map.of(), Ruleset.D50);
         Set<String> kept = new TreeSet<>();

@@ -14,6 +14,7 @@ import java.util.concurrent.*;
 import static com.gsc.bm.model.game.GameFixtures.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 class RoundIsolationTest {
     @Test void publicationFailureDoesNotUndoCommittedRound() {
@@ -72,7 +73,7 @@ class RoundIsolationTest {
     }
     @Test void timerFailureRollsBackEarlierDamageCostsAndCountdown() {
         var service=service(mock(GameLoggingService.class)); var alice=player("alice"); var bob=player("bob");
-        alice.getCardsInHand().add(LiveFixtures.card("bruiser.SuperImpact","impact"));
+        alice.getCardsInHand().add(LiveFixtures.card(GARGANTUAN_IMPACT_ON_YOU,"impact"));
         bob.getCharacter().getTimers().add(new Timer("failure", c -> { c.loseResource(Resource.ALERTNESS,9); throw new IllegalStateException("timer failure"); },1));
         var game=duel(alice,bob); service.newGame(game);
         service.submitMoveToGame(move(game,"bob","last-resort","alice"),()->{});
@@ -101,7 +102,7 @@ class RoundIsolationTest {
     @Test void statesAreIndependentAcrossGamesAndRepeatedApplications() {
         var one=duel(player("one"),player("other")); var two=duel(player("two"),player("other"));
         var a=one.getPlayers().get("one").getCharacter(); var b=two.getPlayers().get("two").getCharacter();
-        var card=(AbstractCard)LiveFixtures.card("bruiser.MadeOfStone"); card.applyEffectOnSelf(a); card.applyEffectOnSelf(b);
+        var card=(AbstractCard)LiveFixtures.card(DONT_PLAY_WITH_THE_KNIFE); card.applyEffectOnSelf(a); card.applyEffectOnSelf(b);
         a.getStatuses().get(0).aTurnIsPassed();
         assertEquals(2,a.getStatuses().get(0).getLastsForTurns()); assertEquals(3,b.getStatuses().get(0).getLastsForTurns());
         card.applyEffectOnSelf(a); assertNotSame(a.getStatuses().get(0),a.getStatuses().get(1));

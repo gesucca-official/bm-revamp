@@ -7,6 +7,7 @@ import com.gsc.bm.model.game.*;
 import com.gsc.bm.repo.external.*;
 import com.gsc.bm.service.factories.*;
 import com.gsc.bm.service.session.*;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -22,6 +23,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Tag("context")
@@ -38,14 +40,14 @@ class QuickCompleteCliTest extends SqliteContextSupport {
     @SpyBean GameFactoryService factory;
 
     private Game fixture(String user, boolean junkie, boolean draw) {
-        Character ch = junkie ? LiveFixtures.character("junkie.character.ToxicJunkie") : LiveFixtures.character("bruiser.character.BigBadBruiser");
+        Character ch = junkie ? LiveFixtures.character(SetBaseIds.CELESTINA) : LiveFixtures.character(SetBaseIds.SPAZIENZIO);
         List<Card> regular = new ArrayList<>();
         // Homogeneous deck: shuffle remains real but cannot change the fixture.
-        for (int i=0; i<(draw ? 0 : 20); i++) regular.add(cards.craftCard("base.com.ShuffleFeet"));
+        for (int i=0; i<(draw ? 0 : 20); i++) regular.add(cards.craftCard(SUDDEN_DASH));
         // SB-28: the Junkie starter of the Set Base 1.0 has its own last resort; the fixture keeps the generic Struggle («Addosso!!!»).
         Player human = new Player(user,ch,decks.craftBasicActionStarterCard(ch),
-                decks.craftCharacterBoundStarterCards(ch),cards.craftCard("com.last.Struggle"),regular);
-        Character bc = LiveFixtures.character("bruiser.character.BigBadBruiser");
+                decks.craftCharacterBoundStarterCards(ch),cards.craftCard(AT_HIM),regular);
+        Character bc = LiveFixtures.character(SetBaseIds.SPAZIENZIO);
         ComPlayer bot = new ComPlayer(bc,decks.craftBasicActionStarterCard(bc),
                 decks.craftCharacterBoundStarterCards(bc),decks.craftLastResortStarterCard(bc),List.of());
         // No items/discard => basic/bound invalid. Draw retains the only valid action.

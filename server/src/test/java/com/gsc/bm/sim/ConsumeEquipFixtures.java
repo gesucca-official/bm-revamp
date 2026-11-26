@@ -9,12 +9,15 @@ import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-11a: i file e gli strumenti comuni alle prove dei passi consume ed equip. Le carte «prova.*» sono attrezzi di test, non carte del set.
@@ -23,9 +26,9 @@ final class ConsumeEquipFixtures {
     static final ObjectMapper JSON = new ObjectMapper();
     static final String CARDS = "/sb-11a/cards.json", PROVE = "/sb-11a/prove.json", JAVA = "/sb-11a/java-cards.tsv";
     /** Le tre carte dell'attuale che il passo consume rende dati (le classi Java Grab, BruiserGrab, ToxicGrab). */
-    static final List<String> GRABS = List.of("com.Grab", "com.basic.BruiserGrab", "com.basic.ToxicGrab");
+    static final List<String> GRABS = List.of(SetBaseIds.GRAB, LET_US_USE_YOU, UNCONTROLLABLE_CRAVING);
     /** Il token BrokenBeerBottle scritto con il passo equip. */
-    static final String TOKEN = "com.tokens.BrokenBeerBottle";
+    static final String TOKEN = BROKEN_BOTTLE;
 
     private ConsumeEquipFixtures() { }
 
@@ -93,9 +96,9 @@ final class ConsumeEquipFixtures {
         token.set("gui", gui);
         ((ArrayNode) root.get("cards")).add(token);
         ObjectNode bruiser = (ObjectNode) deckOf(root, "starter-bruiser").get("cards"), junkie = (ObjectNode) deckOf(root, "starter-junkie").get("cards");
-        bruiser.put("com.items.CocktailOnTheGround", 1);
+        bruiser.put(NEGRONI_FOUND_ON_THE_FLOOR, 1);
         bruiser.put(TOKEN, 1);
-        junkie.put("com.items.RottenBeer", 1);
+        junkie.put(WARM_BLONDE_66, 1);
         junkie.put(TOKEN, 1);
         return root;
     }

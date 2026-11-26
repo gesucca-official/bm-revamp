@@ -6,6 +6,7 @@ import com.gsc.bm.model.cards.LoadableCard;
 import com.gsc.bm.model.game.ComPlayer;
 import com.gsc.bm.model.game.bot.BotPlayer;
 import com.gsc.bm.model.game.bot.BotPolicy;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -27,8 +28,8 @@ import java.util.Random;
  * del Set Base 1.0 (lista di SB-27), le sette carte uscite sono nei sorgenti di test.
  */
 final class SimulationCatalog implements PlayerSource {
-    static final String BRUISER = "bruiser.character.BigBadBruiser";
-    static final String JUNKIE = "junkie.character.ToxicJunkie";
+    static final String BRUISER = SetBaseIds.SPAZIENZIO;
+    static final String JUNKIE = SetBaseIds.CELESTINA;
     static final String CATALOG = "/set-base/storico/0.1/cards.sqlite";
     private final Map<String, String[]> gui = new LinkedHashMap<>();
     private final Map<String, String[]> special = new LinkedHashMap<>();

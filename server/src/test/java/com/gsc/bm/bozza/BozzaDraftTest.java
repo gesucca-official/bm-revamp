@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** SB-8: the profile bozza starts only for development and only with a valid draft and settings. */
 class BozzaDraftTest {
@@ -35,7 +36,7 @@ class BozzaDraftTest {
     void theSetBaseDraftWithItsFiveStarters() throws Exception {
         BozzaDraft bozza = new BozzaDraft(profiles("local", "bozza"), DRAFT, "", "pool", "risorse");
         // SB-17t: with an empty app.bozza.pool the pool is the five starters; prova-sergio is a test deck, not in the pool.
-        assertEquals(List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino", "starter-gigi"), bozza.pool());
+        assertEquals(List.of(STARTER_SPAZIENZIO, STARTER_MARA, STARTER_CELESTINA, STARTER_PIERA, STARTER_BEPPE), bozza.pool());
         assertNotNull(bozza.newPolicy());
         Map<String, Object> identity = bozza.describe();
         @SuppressWarnings("unchecked") var sources = (List<Map<String, Object>>) identity.get("sources");
@@ -44,19 +45,19 @@ class BozzaDraftTest {
         @SuppressWarnings("unchecked") var sets = (Map<String, Map<String, String>>) identity.get("sets");
         assertEquals("1.7", sets.get("base").get("version"));
         // D76: in d50 the computer is aware of the lethal hit, around the D74 timing (the random style too).
-        var policy = new BozzaDraft(profiles("test", "bozza"), DRAFT, "starter-mara, starter-pino", "starter-mara", "casuale").newPolicy();
+        var policy = new BozzaDraft(profiles("test", "bozza"), DRAFT, "starter-mara, starter-pino", STARTER_MARA, "casuale").newPolicy();
         assertTrue(policy instanceof com.gsc.bm.model.game.bot.LethalAwarePolicy, "D76: il computer d50 vede il colpo letale");
         assertTrue(((com.gsc.bm.model.game.bot.LethalAwarePolicy) policy).inner() instanceof com.gsc.bm.model.game.bot.SoughtHitPolicy,
                 "D74: anche il casuale d50 legge il gettone");
         assertEquals(true, identity.get("lethalAware"));
-        assertNull(new BozzaDraft(profiles("test", "bozza"), DRAFT, "starter-mara, starter-pino", "starter-mara", "casuale", "1.13").newPolicy());
+        assertNull(new BozzaDraft(profiles("test", "bozza"), DRAFT, "starter-mara, starter-pino", STARTER_MARA, "casuale", "1.13").newPolicy());
     }
 
     @Test
     void aTestDeckIsChosenExplicitly() throws Exception {
         var env = profiles("local", "bozza");
         BozzaDraft pooled = new BozzaDraft(env, DRAFT, "prova-sergio, starter-mara", "pool", "risorse");
-        assertEquals(List.of("prova-sergio", "starter-mara"), pooled.pool());
+        assertEquals(List.of("prova-sergio", STARTER_MARA), pooled.pool());
         BozzaDraft computer = new BozzaDraft(env, DRAFT, "", "prova-sergio", "risorse");
         assertEquals("prova-sergio", computer.com());
         assertEquals(5, computer.pool().size());

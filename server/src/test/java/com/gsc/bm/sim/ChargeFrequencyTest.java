@@ -10,11 +10,12 @@ import java.util.*;
 import static com.gsc.bm.sim.StarterRedesignTest.*;
 import static com.gsc.bm.sim.StarterBalanceMeasureTest.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** D79: all ten real charges, including both resource outcomes and public-only forecasting/timing. */
 class ChargeFrequencyTest {
     static Draft draft;
-    static final String OTHER="base.com.Spintone";
+    static final String OTHER=SHOVE;
     static final Resource[] RES={Resource.VIOLENCE,Resource.ALERTNESS,Resource.TOXICITY,Resource.ALCOHOL};
     // Expected at N+1 from zero, after periodic L decay (independent of card parsing).
     // D82 (proposta 1.4): Ti stringo +20 A, Dose +10 T/+5 A, Un assaggino +20 T, Preparo +15 V.
@@ -47,10 +48,10 @@ class ChargeFrequencyTest {
         }
     }
     @Test void preparoSearchesChiaveEvenWhenLavoroIsOnTopAndAnotherChiaveIsHeld() {
-        Card charge=draft.card("base.gigi.ColpoDiChiaveInglese"),chiave=draft.card("base.gigi.ChiaveDaTredici");
-        Player a=zero(8,List.of(charge,chiave),List.of(draft.card("base.gigi.LavoroFattoBene"),draft.card("base.gigi.ChiaveDaTredici")));
+        Card charge=draft.card(PREPARE_THE_JOB),chiave=draft.card(THIRTEEN_WRENCH);
+        Player a=zero(8,List.of(charge,chiave),List.of(draft.card(JOB_WELL_DONE),draft.card(THIRTEEN_WRENCH)));
         Player b=foe();Game g=game(a,b);turn(g,move(g,a,charge,on(charge)),waitMove(g,b));
-        assertEquals("base.gigi.ChiaveDaTredici",resolved(g,"a").getSearchedFor());
+        assertEquals(THIRTEEN_WRENCH,resolved(g,"a").getSearchedFor());
         assertEquals(2,a.getCardsInHand().stream().filter(c->c.getName().equals(chiave.getName())).count());
         turn(g,move(g,a,chiave,"b"),waitMove(g,b));assertTrue(a.getCharacter().getStatuses().isEmpty());
     }
@@ -58,7 +59,7 @@ class ChargeFrequencyTest {
         for(int i=0;i<10;i++)for(boolean found:List.of(false,true)) {
             String[] pair=ChargeFrequency.PAIRS[i];Card charge=draft.card(pair[0]),attack=draft.card(OTHER);
             Player a=zero(i,List.of(charge),found?List.of(draft.card(pair[1])):List.of(draft.card(OTHER)));
-            Player b=player("starter-tossico","b",List.of(attack),List.of());b.getResources().put(Resource.ALERTNESS,0);
+            Player b=player(STARTER_CELESTINA,"b",List.of(attack),List.of());b.getResources().put(Resource.ALERTNESS,0);
             Game g=game(a,b);BotView v=BotView.of(g,"a");
             LegalMove chosen=v.legalMoves().stream().filter(m->m.getCard().getBinding().equals(pair[0])).findFirst().orElseThrow();
             List<Map<String,Integer>> predicted=TurnForecast.variants(v,chosen,new TurnForecast.Threat(v.getOpponents().get(0).getSeat(),BotView.publicText(attack),"a",null));

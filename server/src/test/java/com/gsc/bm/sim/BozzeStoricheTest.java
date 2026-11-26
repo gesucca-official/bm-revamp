@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-27 (D177, risposta del proprietario allo STOP 1/2): l'adattamento delle bozze storiche fa esattamente ciò che {@link BozzeStoriche}
@@ -34,10 +35,10 @@ class BozzeStoricheTest {
     void theFrozen15GainsTheOldDefaultsAndLosesTheZeroSelfHitOnly() throws Exception {
         JsonNode original = resource(SetBaseArms.FROZEN_15);
         ObjectNode expected = original.deepCopy();
-        params(expected, "base.pino.GoingBerserk").remove("selfHit");
-        params(expected, "base.pino.GoingBerserk").put("perAlcohol", 1);
-        params(expected, "base.pino.UltimoGiro").put("perPlay", 0).put("perPlaySelf", 0);
-        params(expected, "bruiser.YouStop").remove("alertnessToTarget"); // SB-28 (D181 (3))
+        params(expected, DOWN_IN_ONE).remove("selfHit");
+        params(expected, DOWN_IN_ONE).put("perAlcohol", 1);
+        params(expected, LAST_ROUND).put("perPlay", 0).put("perPlaySelf", 0);
+        params(expected, THATS_ENOUGH).remove("alertnessToTarget"); // SB-28 (D181 (3))
         assertEquals(expected, BozzeStoriche.adatta(original));
         assertEquals(resource(SetBaseArms.FROZEN_15), original, "the given draft does not change");
     }
@@ -46,9 +47,9 @@ class BozzeStoricheTest {
     void theK1CandidateLosesItsTwoZeroSwitchOffs() throws Exception {
         JsonNode original = resource(Sb21h.CANDIDATE);
         ObjectNode expected = original.deepCopy();
-        params(expected, "base.pino.GoingBerserk").remove("selfHit");
-        params(expected, "base.com.BeggingMoney").remove("alertnessFromTarget");
-        params(expected, "bruiser.YouStop").remove("alertnessToTarget"); // SB-28 (D181 (3))
+        params(expected, DOWN_IN_ONE).remove("selfHit");
+        params(expected, GOT_ANY_SPARE_CHANGE).remove("alertnessFromTarget");
+        params(expected, THATS_ENOUGH).remove("alertnessToTarget"); // SB-28 (D181 (3))
         assertEquals(expected, BozzeStoriche.adatta(original), "Ultimo Giro already has perPlay and perPlaySelf, the drain its poison");
     }
 
@@ -59,9 +60,9 @@ class BozzeStoricheTest {
 
     @Test
     void aNonZeroRemovedParameterIsRefused() throws Exception {
-        String[][] cases = {{"base.pino.GoingBerserk", "selfHit"}, {"base.pino.GoingBerserk", "maxDamage"},
-                {"base.pino.UltimoGiro", "maxDamage"}, {"base.com.BeggingMoney", "alertnessFromTarget"},
-                {"bruiser.YouStop", "alertnessToTarget"}};
+        String[][] cases = {{DOWN_IN_ONE, "selfHit"}, {DOWN_IN_ONE, "maxDamage"},
+                {LAST_ROUND, "maxDamage"}, {GOT_ANY_SPARE_CHANGE, "alertnessFromTarget"},
+                {THATS_ENOUGH, "alertnessToTarget"}};
         for (String[] c : cases) {
             ObjectNode draft = resource(Sb21h.CANDIDATE).deepCopy();
             params(draft, c[0]).put(c[1], 5);
@@ -74,8 +75,8 @@ class BozzeStoricheTest {
     @Test
     void aDrainWithoutPoisonGetsTheOldZero() throws Exception {
         ObjectNode draft = resource(Sb21h.CANDIDATE).deepCopy();
-        params(draft, "junkie.ToxicBloodDrain").remove("poison");
-        assertEquals(0, params(BozzeStoriche.adatta(draft), "junkie.ToxicBloodDrain").get("poison").asInt());
+        params(draft, DRAG_INTO_THE_TUNNEL).remove("poison");
+        assertEquals(0, params(BozzeStoriche.adatta(draft), DRAG_INTO_THE_TUNNEL).get("poison").asInt());
         assertTrue(BozzeStoriche.adatta(resource(Sb21h.CANDIDATE)).toString().contains("\"poison\":12"), "a written poison stays");
     }
 
@@ -109,9 +110,9 @@ class BozzeStoricheTest {
     @Test
     void anythingElseIsLeftToTheStrictLoader() throws Exception {
         ObjectNode draft = resource(Sb21h.CANDIDATE).deepCopy();
-        params(draft, "base.pino.UltimoGiro").put("perAlcohol", 1);
+        params(draft, LAST_ROUND).put("perAlcohol", 1);
         JsonNode adapted = BozzeStoriche.adatta(draft);
-        assertEquals(1, params(adapted, "base.pino.UltimoGiro").get("perAlcohol").asInt(), "not touched");
+        assertEquals(1, params(adapted, LAST_ROUND).get("perAlcohol").asInt(), "not touched");
         assertThrows(Draft.Invalid.class, () -> Draft.parse("ultimo giro con perAlcohol", adapted));
     }
 

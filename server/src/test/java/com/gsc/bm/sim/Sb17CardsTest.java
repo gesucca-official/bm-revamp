@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-17 Fase B (D106–D108), B3 and B4 (D114, D118): the new cards of Sergio Sommerso in the engine, with the d50 rules of the playground. «s» is Sergio, faster
@@ -175,7 +176,7 @@ class Sb17CardsTest {
     @Test
     void ricattoVoidsALaterHitAndReflectsHalfItsBaseDamage() {
         Player b = opponent(List.of(hit("Pugno", 1, "HIT 30")), fillers(10));
-        Game game = game(sergio("base.cesira.Ricatto"), b);
+        Game game = game(sergio(GOOD_OLD_BLACKMAIL), b);
         int[] lost = turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", "Pugno", "s"));
         assertTrue(voided(game, "b"));
         assertArrayEquals(new int[]{0, 15}, lost, "30 HIT voided, 15 HIT to b");
@@ -185,14 +186,14 @@ class Sb17CardsTest {
     @Test
     void ricattoReflectsEachTypeTruncated() {
         Player b = opponent(List.of(hit("Misto", 1, "HIT 10", "CUT 11")), fillers(10));
-        Game game = game(sergio("base.cesira.Ricatto"), b);
+        Game game = game(sergio(GOOD_OLD_BLACKMAIL), b);
         assertArrayEquals(new int[]{0, 10}, turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", "Misto", "s")), "5 HIT + 5 CUT (5,5 truncated)");
     }
 
     @Test
     void ricattoOnAMoveWithoutDamageReflectsNothing() {
         Player b = opponent(List.of(charge()), strikeOnTop());
-        Game game = game(sergio("base.cesira.Ricatto"), b);
+        Game game = game(sergio(GOOD_OLD_BLACKMAIL), b);
         assertArrayEquals(new int[]{0, 0}, turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", "Carica", "SELF")));
         assertTrue(voided(game, "b"));
         assertTrue(tokens(game, "b").isEmpty(), "a voided charge gives no token (D72)");
@@ -201,14 +202,14 @@ class Sb17CardsTest {
     @Test
     void ricattoTooSlowVoidsNothingAndReflectsNothing() {
         Player b = player("b", 90, List.of(hit("Veloce", 2, "HIT 30")), fillers(10)); // same priority, more A: b first
-        Game game = game(sergio("base.cesira.Ricatto"), b);
+        Game game = game(sergio(GOOD_OLD_BLACKMAIL), b);
         assertArrayEquals(new int[]{30, 0}, turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", "Veloce", "s")));
         assertFalse(voided(game, "b"));
     }
 
     @Test
     void ricattoOnTheAnnouncedStrikeReflectsTheBaseAndTheTokenEnds() {
-        Game game = charged(sergio("base.cesira.Ricatto"), opponent(List.of(charge()), strikeOnTop()));
+        Game game = charged(sergio(GOOD_OLD_BLACKMAIL), opponent(List.of(charge()), strikeOnTop()));
         int[] lost = turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", STRIKE, "s"));
         assertTrue(voided(game, "b"));
         assertEquals(0, lost[0]);
@@ -219,11 +220,11 @@ class Sb17CardsTest {
     @Test
     void theBaseDamageIgnoresAheadVariablePartsAndPerPlay() {
         // Cinghiata di traverso: 20 + half the author's A, ahead +5 → base 20 (SB-21z, D162: was 18). Struggle: 10 + 5 per play, 5 + 2 to self → base 10.
-        assertEquals(Map.of(Damage.DamageType.CUT, 20), base("base.mara.CinghiataDiTraverso"));
-        assertEquals(Map.of(Damage.DamageType.HIT, 10), base("com.last.Struggle"));
-        assertEquals(Map.of(Damage.DamageType.HIT, 8), base("base.cesira.ContoSalato"), "the part on the token is not base");
-        assertEquals(Map.of(Damage.DamageType.HIT, 5), base("base.cesira.Malelingue"));
-        assertEquals(Map.of(), base("base.cesira.Ricatto"));
+        assertEquals(Map.of(Damage.DamageType.CUT, 20), base(RIDERS_LASSO));
+        assertEquals(Map.of(Damage.DamageType.HIT, 10), base(AT_HIM));
+        assertEquals(Map.of(Damage.DamageType.HIT, 8), base(STEEP_BILL), "the part on the token is not base");
+        assertEquals(Map.of(Damage.DamageType.HIT, 5), base(PRANK_TOO_FAR));
+        assertEquals(Map.of(), base(GOOD_OLD_BLACKMAIL));
     }
 
     private static Map<Damage.DamageType, Integer> base(String binding) {
@@ -233,9 +234,9 @@ class Sb17CardsTest {
 
     @Test
     void ricattoOnAnAheadHitReflectsOnlyTheBase() {
-        Card cinghiata = draft.card("base.mara.CinghiataDiTraverso");
+        Card cinghiata = draft.card(RIDERS_LASSO);
         Player b = player("b", 40, List.of(cinghiata), fillers(10));
-        Game game = game(sergio("base.cesira.Ricatto"), b);
+        Game game = game(sergio(GOOD_OLD_BLACKMAIL), b);
         assertArrayEquals(new int[]{0, 10}, turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", cinghiata.getName(), "s")),
                 "20 CUT of base (SB-21z, D162), half reflected; the A of b and the ahead bonus do not count");
     }
@@ -244,7 +245,7 @@ class Sb17CardsTest {
     void aReflectionThatDownsTheTargetEndsTheGame() {
         Player b = opponent(List.of(hit("Pugno", 1, "HIT 30")), fillers(10));
         b.getCharacter().getResources().put(Resource.HEALTH, 10);
-        Game game = game(sergio("base.cesira.Ricatto"), b);
+        Game game = game(sergio(GOOD_OLD_BLACKMAIL), b);
         turn(game, move(game, "s", "Buon Vecchio Ricatto", "b"), move(game, "b", "Pugno", "s"));
         assertTrue(game.getPlayers().get("b").getCharacter().isDead(), "15 reflected on 10 health: b is down");
         assertEquals(500, health(game, "s"));
@@ -255,7 +256,7 @@ class Sb17CardsTest {
 
     @Test
     void loSapevoKeepsTheTokenOfTheVoidedStrikeWithoutOtherCopies() {
-        Game game = charged(sergio("base.cesira.LoSapevo", "base.cesira.ContoSalato"), opponent(List.of(charge()), strikeOnTop()));
+        Game game = charged(sergio(SEEN_THAT_SCRIPT, STEEP_BILL), opponent(List.of(charge()), strikeOnTop()));
         assertArrayEquals(new int[]{0, 0}, turn(game, move(game, "s", "Copione Già Visto", "b"), move(game, "b", STRIKE, "s")));
         assertTrue(voided(game, "b"));
         assertFalse(tokens(game, "b").isEmpty(), "the voided strike does not satisfy the token");
@@ -268,7 +269,7 @@ class Sb17CardsTest {
 
     @Test
     void loSapevoKeepsTheTokenWhileAnotherCopyIsInHand() {
-        Game game = charged(sergio("base.cesira.LoSapevo"), opponent(List.of(charge(), strike()), strikeOnTop()));
+        Game game = charged(sergio(SEEN_THAT_SCRIPT), opponent(List.of(charge(), strike()), strikeOnTop()));
         turn(game, move(game, "s", "Copione Già Visto", "b"), move(game, "b", STRIKE, "s"));
         assertTrue(voided(game, "b"));
         for (int n = 1; n <= 3; n++) {
@@ -282,7 +283,7 @@ class Sb17CardsTest {
     @Test
     void loSapevoOnAnUnannouncedMoveOnlyVoids() {
         Player b = opponent(List.of(hit("Pugno", 1, "HIT 30")), fillers(10));
-        Game game = game(sergio("base.cesira.LoSapevo"), b);
+        Game game = game(sergio(SEEN_THAT_SCRIPT), b);
         assertArrayEquals(new int[]{0, 0}, turn(game, move(game, "s", "Copione Già Visto", "b"), move(game, "b", "Pugno", "s")));
         assertTrue(voided(game, "b"));
         assertTrue(tokens(game, "b").isEmpty());
@@ -305,7 +306,7 @@ class Sb17CardsTest {
         List<Card> deck = new ArrayList<>(List.of(filler("Riempitivo")));
         deck.addAll(strikeOnTop()); // the first draw is a filler: the strike is still in the deck for the charge
         Player b = opponent(List.of(charge()), deck);
-        Game game = game(sergio("base.cesira.ContoSalato", "base.cesira.ContoSalato"), b);
+        Game game = game(sergio(STEEP_BILL, STEEP_BILL), b);
         assertEquals(8, turn(game, move(game, "s", "Conto Salato", "b"), move(game, "b", "Riempitivo", "SELF"))[1], "no token");
         turn(game, move(game, "s", "Riempitivo", "SELF"), move(game, "b", "Carica", "SELF"));
         assertFalse(tokens(game, "b").isEmpty());
@@ -320,7 +321,7 @@ class Sb17CardsTest {
                 + "'target':[{'op':'gettone','steps':[{'op':'search','card':'t.Y'}]}]}").replace('\'', '"'))));
         assertThrows(Exception.class, () -> DataCards.definition(JSON.readTree(("{'binding':'t.X','kind':'ACTION','targets':['OPPONENT'],"
                 + "'target':[{'op':'gettone','steps':[{'op':'gettone','steps':[]}]}]}").replace('\'', '"'))));
-        PrintedEffects printed = ((PrintedEffects.Source) draft.card("base.cesira.ContoSalato")).printedEffects();
+        PrintedEffects printed = ((PrintedEffects.Source) draft.card(STEEP_BILL)).printedEffects();
         assertEquals(2, printed.getSteps().stream().filter(st -> st.getKind() == PrintedEffects.Kind.DAMAGE).count());
         assertEquals(1, printed.getSteps().stream().filter(PrintedEffects.Step::isIfToken).count(), "the +6 HIT (B2, D110) only on a token");
     }
@@ -330,18 +331,18 @@ class Sb17CardsTest {
     @Test
     void ohGuardaLaAnnouncesLoSannoTuttiOrContoSalato() {
         // SB-17 B2 (D110): Lo sanno tutti o Conto salato (era Conto salato o Malelingue).
-        assertEquals(List.of("base.cesira.LoSannoTutti", "base.cesira.ContoSalato"), PrintedEffects.searchedNames(draft.card("base.cesira.OhGuardaLa")));
+        assertEquals(List.of(OPEN_SECRET, STEEP_BILL), PrintedEffects.searchedNames(draft.card(TIMELY_DISTRACTION)));
     }
 
     // ---- Lo sanno tutti (CES-AR5, D110 (1)): the unconditional strike ----
 
     @Test
     void loSannoTuttiCostsFifteenAlertnessAndDealsTwentyFiveHit() {
-        Card card = draft.card("base.cesira.LoSannoTutti");
+        Card card = draft.card(OPEN_SECRET);
         assertEquals(1, card.getPriority());
-        assertEquals(Map.of(Damage.DamageType.HIT, 25), base("base.cesira.LoSannoTutti"), "25 nel bilanciamento SB-21g");
+        assertEquals(Map.of(Damage.DamageType.HIT, 25), base(OPEN_SECRET), "25 nel bilanciamento SB-21g");
         Player b = opponent(List.of(filler("Riempitivo")), fillers(10));
-        Game game = game(sergio("base.cesira.LoSannoTutti"), b);
+        Game game = game(sergio(OPEN_SECRET), b);
         int before = game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS);
         assertEquals(25, turn(game, move(game, "s", "Segreto di Pulcinella", "b"), move(game, "b", "Riempitivo", "SELF"))[1]);
         assertEquals(before - 15, game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS), "15 A paid: R3 (20 A) tolta, stato del giro 2 (D112)");
@@ -351,7 +352,7 @@ class Sb17CardsTest {
 
     @Test
     void santinoGivesATemporaryImmunityToAlcohol() {
-        Card santino = draft.card("base.items.SantinoDellaPortinaia");
+        Card santino = draft.card(SAINT_BRIACO_HOLY_CARD);
         Character c = character("s", 10);
         ((com.gsc.bm.model.cards.AbstractCard) santino).applyEffectOnSelf(c);
         assertTrue(c.getImmunities().contains(Resource.ALCOHOL));
@@ -362,14 +363,14 @@ class Sb17CardsTest {
 
     @Test
     void shuffleFeetSwapsTheTraysKeepingCapacities() {
-        Card shuffle = draft.card("base.com.ShuffleFeet");
+        Card shuffle = draft.card(SUDDEN_DASH);
         assertEquals(-1, shuffle.getPriority());
         Map<Resource, Integer> r = new EnumMap<>(Resource.class);
         r.put(Resource.HEALTH, 50);
         r.put(Resource.ALERTNESS, 10);
         Character small = new Draft.DraftCharacter("s", r, 1, Set.of()), large = new Draft.DraftCharacter("b", r, 3, Set.of());
-        small.getItems().add(draft.card("base.items.EspressoDelDistributore"));
-        for (String b : List.of("com.items.CocktailOnTheGround", "base.items.CascoDaLavoro", "base.items.GuantiDaOfficina"))
+        small.getItems().add(draft.card(VENDING_MACHINE_ESPRESSO));
+        for (String b : List.of(NEGRONI_FOUND_ON_THE_FLOOR, SITE_HELMET, WORKSHOP_GLOVES))
             large.getItems().add(draft.card(b));
         ((com.gsc.bm.model.cards.AbstractCard) shuffle).applyEffectOnTarget(small, large);
         assertEquals(List.of("Guanti da Officina"), names(small.getItems()), "the last item fits the capacity 1");
@@ -379,10 +380,10 @@ class Sb17CardsTest {
 
     // ---- Lo metto in conto (CES-BA) and Lo rivendo (CES-AR7, D121; regole del playground 1.4, RP-25, RP-26) ----
 
-    private static final String RIVENDO = "base.cesira.LoRivendo";
+    private static final String RIVENDO = NOSE_FOR_BUSINESS;
     private static final String SANTINO = "Santino di San Briaco", ESPRESSO = "Espresso della Macchinetta", PERONI = "Bionda da 66, Calda";
-    private static final Map<String, String> ITEM_BINDINGS = Map.of(SANTINO, "base.items.SantinoDellaPortinaia",
-            ESPRESSO, "base.items.EspressoDelDistributore", PERONI, "com.items.RottenBeer");
+    private static final Map<String, String> ITEM_BINDINGS = Map.of(SANTINO, SAINT_BRIACO_HOLY_CARD,
+            ESPRESSO, VENDING_MACHINE_ESPRESSO, PERONI, WARM_BLONDE_66);
 
     /** Sergio with Lo rivendo (a regular card since D121) in hand and the given items on the field, oldest first; b only plays fillers. */
     private static Game rivendo(String... items) {
@@ -408,12 +409,12 @@ class Sb17CardsTest {
 
     @Test
     void loMettoInContoIsSergiosBasicAndLoRivendoARegularCard() {
-        Card basic = draft.card("base.cesira.LoMettoInConto");
+        Card basic = draft.card(PUT_ON_THE_TAB);
         assertTrue(basic.isBasicAction());
         assertFalse(basic.isCharacterBound());
         assertEquals(1, basic.getPriority());
         assertEquals(Set.of(Card.CardTarget.NEAR_ITEM), basic.getCanTarget());
-        assertEquals("base.cesira.LoMettoInConto", draft.characterBasic(Sb17.SERGIO), "D121 (1): the basic is back, D118 (1) withdrawn for it");
+        assertEquals(PUT_ON_THE_TAB, draft.characterBasic(Sb17.SERGIO), "D121 (1): the basic is back, D118 (1) withdrawn for it");
         Card card = draft.card(RIVENDO);
         assertFalse(card.isBasicAction(), "D121 (1): Lo rivendo is a deck card");
         assertFalse(card.isCharacterBound());
@@ -423,7 +424,7 @@ class Sb17CardsTest {
 
     @Test
     void loMettoInContoGivesAlertnessThenConsumesTheItem() {
-        Game game = game(sergio("base.cesira.LoMettoInConto"), opponent(List.of(), fillers(10)));
+        Game game = game(sergio(PUT_ON_THE_TAB), opponent(List.of(), fillers(10)));
         game.getPlayers().get("s").getCharacter().getItems().add(draft.card(ITEM_BINDINGS.get(SANTINO)));
         int a = alertness(game, "s");
         Map<Move.AdditionalAction, String> choices = new EnumMap<>(Move.AdditionalAction.class);
@@ -458,7 +459,7 @@ class Sb17CardsTest {
 
     @Test
     void loRivendoOnAnItemDestroyedEarlierInTheTurnGainsNothing() {
-        Card breaker = draft.card("bruiser.BreakYourToy"); // «Smontiamo tutto», priority 1 like Lo rivendo: b is faster (90 A against 60)
+        Card breaker = draft.card(DISASSEMBLE); // «Smontiamo tutto», priority 1 like Lo rivendo: b is faster (90 A against 60)
         Game game = game(sergio(RIVENDO), player("b", 90, List.of(breaker), fillers(10)));
         game.getPlayers().get("b").getCharacter().getResources().put(Resource.VIOLENCE, 10);
         game.getPlayers().get("s").getCharacter().getItems().add(draft.card(ITEM_BINDINGS.get(SANTINO)));
@@ -557,7 +558,7 @@ class Sb17CardsTest {
 
     // ---- Fare il vago (CES-BO3, D118 (4)): the light parry bound ----
 
-    private static final String VAGO = "base.cesira.bound.FareIlVago";
+    private static final String VAGO = ACT_VAGUE;
 
     @Test
     void fareIlVagoIsAParryOfTheTurnWithoutGains() {
@@ -571,7 +572,7 @@ class Sb17CardsTest {
         assertTrue(steps.stream().filter(st -> st.getKind() == PrintedEffects.Kind.STATUS)
                 .allMatch(st -> Math.abs(st.getFactor() - 0.75) < 1e-6), "HIT, CUT and POISON ×0,75");
         assertTrue(steps.stream().noneMatch(st -> st.getKind() == PrintedEffects.Kind.GAIN), "one function only (lesson 2 of SB-4)");
-        assertEquals(List.of("base.cesira.bound.Battutina", VAGO), draft.boundOf(Sb17.DECK));
+        assertEquals(List.of(MANIPULATIVE_TECHNIQUE, VAGO), draft.boundOf(Sb17.DECK));
     }
 
     @Test
@@ -588,9 +589,9 @@ class Sb17CardsTest {
     @Test
     void theBotParriesAShownLethalHitWithFareIlVago() {
         // GARGANTUESCO IMPATTO (HIT 35 in D139, priority 0) shown and payable against 30 health: Fare il vago (priority 2) leaves 35 × 0,75 = 26.
-        BotView.CardSeen impact = BotView.publicText(draft.card("bruiser.SuperImpact"));
+        BotView.CardSeen impact = BotView.publicText(draft.card(GARGANTUAN_IMPACT_ON_YOU));
         BotView v = new BotView(4, new BotView.Self(LethalAwarePolicyTest.seat("me", 30, 30, 10, 0, List.of()),
-                List.of(BotView.publicText(draft.card(VAGO)), BotView.publicText(draft.card("base.com.Spintone"))), 10, List.of()),
+                List.of(BotView.publicText(draft.card(VAGO)), BotView.publicText(draft.card(SHOVE))), 10, List.of()),
                 List.of(new BotView.Opponent(LethalAwarePolicyTest.seat("foe", 60, 20, 30, 0, List.of()), 5, 10,
                         List.of(new BotView.RevealedSeen(1, impact, 3, null)))), List.of(), Map.of(), Ruleset.D50);
         assertEquals(Set.of("Fare il Vago"), offered(v), "the only move that keeps Sergio up");
@@ -599,7 +600,7 @@ class Sb17CardsTest {
                 assertEquals("Fare il Vago", new LethalAwarePolicy(new SoughtHitPolicy(style, SoughtHitPolicy.Timing.ALWAYS))
                         .choose(v, v.legalMoves(), new Random(seed)).getCard().getName(), style.getClass().getSimpleName());
         BotView safe = new BotView(4, new BotView.Self(LethalAwarePolicyTest.seat("me", 60, 30, 10, 0, List.of()),
-                List.of(BotView.publicText(draft.card(VAGO)), BotView.publicText(draft.card("base.com.Spintone"))), 10, List.of()),
+                List.of(BotView.publicText(draft.card(VAGO)), BotView.publicText(draft.card(SHOVE))), 10, List.of()),
                 List.of(new BotView.Opponent(LethalAwarePolicyTest.seat("foe", 60, 20, 30, 0, List.of()), 5, 10,
                         List.of(new BotView.RevealedSeen(1, impact, 3, null)))), List.of(), Map.of(), Ruleset.D50);
         assertEquals(Set.of("Fare il Vago", "Spintone"), offered(safe), "not lethal: nothing is forced");

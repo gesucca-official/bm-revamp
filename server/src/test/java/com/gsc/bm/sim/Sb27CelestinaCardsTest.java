@@ -3,6 +3,7 @@ package com.gsc.bm.sim;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -12,18 +13,19 @@ import java.util.Map;
 import static com.gsc.bm.model.Resource.*;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Attesi dalle schede di Celestina Bucatina del Set Base 1.0 candidato. */
 class Sb27CelestinaCardsTest {
-    private static final String CELESTINA = "junkie.character.ToxicJunkie";
-    private static final String DESIDERIO = "com.basic.ToxicGrab";
-    private static final String FONDO = "junkie.character.PatheticBlade";
-    private static final String CAPPOTTO = "base.tossico.bound.RaschiareIlFondo";
-    private static final String DOSE = "junkie.character.RottenSmile";
-    private static final String ULTIMO = "junkie.LethalHeroinDose";
-    private static final String TOSSICONE = "junkie.Cough";
-    private static final String TUNNEL = "junkie.ToxicBloodDrain";
-    private static final String ESPRESSO = "base.items.EspressoDelDistributore";
+    private static final String CELESTINA = SetBaseIds.CELESTINA;
+    private static final String DESIDERIO = UNCONTROLLABLE_CRAVING;
+    private static final String FONDO = ASHTRAY_BOTTOM;
+    private static final String CAPPOTTO = BURROW_INTO_THE_COAT;
+    private static final String DOSE = CUT_THE_DOSE;
+    private static final String ULTIMO = THE_LAST_DRAG;
+    private static final String TOSSICONE = PHLEGMY_COUGH;
+    private static final String TUNNEL = DRAG_INTO_THE_TUNNEL;
+    private static final String ESPRESSO = VENDING_MACHINE_ESPRESSO;
     private static Draft draft;
 
     @BeforeAll
@@ -40,7 +42,7 @@ class Sb27CelestinaCardsTest {
     void desiderioAddsFiveTAndConsumesOnlyTheChosenObject() {
         Card basic = card(DESIDERIO);
         Game game = game(celestina(basic), b());
-        ch(game, CELESTINA).getItems().addAll(List.of(card(ESPRESSO), card("com.items.RottenBeer")));
+        ch(game, CELESTINA).getItems().addAll(List.of(card(ESPRESSO), card(WARM_BLONDE_66)));
         assertArrayEquals(new int[]{0, 0}, turn(game,
                 onItem(game, CELESTINA, "Desiderio Incontrollabile", CELESTINA, "Espresso della Macchinetta"), rest(game, "b")));
         assertTrue(basic.isBasicAction());
@@ -53,7 +55,7 @@ class Sb27CelestinaCardsTest {
 
     @Test
     void desiderioStillAddsFiveTAfterTheChosenObjectIsDestroyed() {
-        Player opponent = player("b", 90, card("bruiser.BreakYourToy"));
+        Player opponent = player("b", 90, card(DISASSEMBLE));
         opponent.getCharacter().getResources().put(VIOLENCE, 5);
         Game game = game(celestina(card(DESIDERIO)), opponent);
         ch(game, CELESTINA).getItems().add(card(ESPRESSO));
@@ -111,7 +113,7 @@ class Sb27CelestinaCardsTest {
     @Test
     void ultimoTiroIncreasesAfterACanceledPlay() {
         Player actor = player(draft.character(CELESTINA), List.of(), List.of(), card(ULTIMO));
-        Player opponent = b(card("bruiser.YouStop"));
+        Player opponent = b(card(THATS_ENOUGH));
         opponent.getCharacter().getResources().put(VIOLENCE, 5);
         Game game = game(actor, opponent);
 
@@ -138,7 +140,7 @@ class Sb27CelestinaCardsTest {
         Card earlier = data("Regalo precoce",
                 "{'binding':'t.TPrima','kind':'ACTION','priority':2,'targets':['OPPONENT'],"
                         + "'target':[{'op':'gain','resource':'TOXICITY','amount':4}]}");
-        Game game = game(celestina(card("junkie.PervertedMetabolism")), b(earlier));
+        Game game = game(celestina(card(CORRUPTED_METABOLISM)), b(earlier));
         ch(game, CELESTINA).getResources().put(HEALTH, 40);
         ch(game, CELESTINA).getResources().put(TOXICITY, 11);
 
@@ -150,12 +152,12 @@ class Sb27CelestinaCardsTest {
 
     @Test
     void fareInventarioFindsTossiconeAndUsesTheSmallerRewardWhenNeitherNameIsAvailable() {
-        assertAnnouncement("junkie.MethDrivenRage", "Fare l'Inventario", TOSSICONE, TUNNEL, 30, 40);
+        assertAnnouncement(TAKE_INVENTORY, "Fare l'Inventario", TOSSICONE, TUNNEL, 30, 40);
     }
 
     @Test
     void unAssagginoFindsTunnelAndUsesTheSmallerRewardWhenNeitherNameIsAvailable() {
-        assertAnnouncement("base.tossico.UnAssaggino", "Un Assaggino", TUNNEL, TOSSICONE, 40, 35);
+        assertAnnouncement(JUST_A_TASTE, "Un Assaggino", TUNNEL, TOSSICONE, 40, 35);
     }
 
     private static void assertAnnouncement(String binding, String name, String first, String second, int foundT, int foundA) {

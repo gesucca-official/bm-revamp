@@ -3,6 +3,7 @@ package com.gsc.bm.model.game;
 import com.gsc.bm.LiveFixtures;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +22,7 @@ class LiveCharactersTest {
     }
 
     @Test void spazienzioOfTheSetBase10StartsAsHisSheetStates() {
-        Character c = LiveFixtures.character("bruiser.character.BigBadBruiser");
+        Character c = LiveFixtures.character(SetBaseIds.SPAZIENZIO);
         assertEquals(70, c.getResources().get(Resource.HEALTH));
         assertEquals(20, c.getResources().get(Resource.ALERTNESS));
         assertEquals(25, c.getResources().get(Resource.VIOLENCE));

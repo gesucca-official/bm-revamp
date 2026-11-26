@@ -11,6 +11,7 @@ import com.gsc.bm.model.cards.mini.RintoccoDiCampana;
 import com.gsc.bm.model.game.bot.AggressivePolicy;
 import com.gsc.bm.model.game.bot.BotPolicy;
 import com.gsc.bm.model.game.bot.ResourceAwarePolicy;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
@@ -32,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-6b: più set insieme e mini-espansione di prova. La mini si carica col set di oggi (bozza «attuale») e con la bozza del
@@ -82,8 +84,8 @@ class MultiSetTest {
         assertEquals("base", draft.setOfDeck("starter-bruiser"));
 
         // La terza bound di un personaggio esistente, che viene da un altro set.
-        assertEquals(List.of("bruiser.character.LittleRage", "bruiser.character.LittleSmack", SBUFFATA), draft.boundsAvailable(BRUISER));
-        assertEquals(List.of("bruiser.character.LittleSmack", SBUFFATA), draft.boundOf("mini.spazienzio"));
+        assertEquals(List.of(SLIGHT_ANNOYANCE, WAKE_UP_BUT_NOT_YOU, SBUFFATA), draft.boundsAvailable(BRUISER));
+        assertEquals(List.of(WAKE_UP_BUT_NOT_YOU, SBUFFATA), draft.boundOf("mini.spazienzio"));
 
         // La carta Java della mini vive nei sorgenti di test e prende dalla bozza costo, priorità e parametri.
         Card rintocco = draft.card("mini.RintoccoDiCampana");
@@ -376,9 +378,9 @@ class MultiSetTest {
         // Voci dei set: campo set, prefisso, id ripetuti fra set.
         cases.put("campo set su una voce", new Case(mini(m -> cardOf(m, "mini.Spallucce").put("set", "mini")),
                 "mini.json: ", "carta mini.Spallucce", "campo set non ammesso"));
-        cases.put("set su una voce di sb-6a/1", new Case(base(b -> cardOf(b, "com.Grab").put("set", "base")),
+        cases.put("set su una voce di sb-6a/1", new Case(base(b -> cardOf(b, SetBaseIds.GRAB).put("set", "base")),
                 "attuale.json: ", "carta com.Grab", "campo sconosciuto set"));
-        cases.put("rarità in un file sb-6a/1", new Case(base(b -> cardOf(b, "com.Grab").put("rarity", "COMMON")),
+        cases.put("rarità in un file sb-6a/1", new Case(base(b -> cardOf(b, SetBaseIds.GRAB).put("rarity", "COMMON")),
                 "attuale.json: ", "carta com.Grab", "campo sconosciuto rarity"));
         cases.put("carta senza prefisso del set", new Case(mini(m -> cardOf(m, "mini.Spallucce").put("binding", "Spallucce")),
                 "carta Spallucce (set mini)", "«mini.»"));
@@ -418,7 +420,7 @@ class MultiSetTest {
             swap(deckOf((ObjectNode) files.get("mini.json"), "mini.tossico"), "mini.Spallucce", "terzo.Gomitata");
         }, "mazzo mini.tossico (set mini): cards", "terzo.Gomitata è del set terzo", "che il set mini non richiede (richiede: base)"));
         cases.put("set base che usa una carta della mini", new Case(files -> swap(deckOf((ObjectNode) files.get("attuale.json"),
-                "starter-bruiser"), "bruiser.Glare", "mini.CalcioAlBidone"),
+                "starter-bruiser"), PATIENCE_OVER, "mini.CalcioAlBidone"),
                 "mazzo starter-bruiser (set base): cards", "mini.CalcioAlBidone è del set mini", "che il set base non richiede (richiede: nessuno)"));
         cases.put("bound legata a un personaggio di un set non richiesto", new Case(files -> {
             ObjectNode third = thirdSet();
@@ -431,20 +433,20 @@ class MultiSetTest {
         cases.put("bound della mini a un altro personaggio", new Case(mini(m -> ((ArrayNode) deckOf(m, "mini.tossico").get("bound"))
                 .set(1, TextNode.valueOf(SBUFFATA))), "mazzo mini.tossico (set mini)", SBUFFATA, "è legata a " + BRUISER));
         cases.put("tre bound", new Case(mini(m -> ((ArrayNode) deckOf(m, "mini.spazienzio").get("bound"))
-                .add("bruiser.character.LittleRage")), "mazzo mini.spazienzio (set mini)", "bound sono 3", "ne chiede 2"));
+                .add(SLIGHT_ANNOYANCE)), "mazzo mini.spazienzio (set mini)", "bound sono 3", "ne chiede 2"));
         cases.put("bound ripetuta", new Case(mini(m -> ((ArrayNode) deckOf(m, "mini.spazienzio").get("bound"))
                 .set(0, TextNode.valueOf(SBUFFATA))), "mazzo mini.spazienzio (set mini)", "ripetuta"));
         cases.put("bound della mini fra le regolari", new Case(mini(m -> swap(deckOf(m, "mini.spazienzio"), "mini.Spallucce", SBUFFATA)),
                 "mazzo mini.spazienzio (set mini)", "cards." + SBUFFATA, "non vanno fra le carte regolari"));
-        cases.put("mazzo misto da 21", new Case(mini(m -> ((ObjectNode) deckOf(m, "mini.spazienzio").get("cards")).put("com.Grab", 1)),
+        cases.put("mazzo misto da 21", new Case(mini(m -> ((ObjectNode) deckOf(m, "mini.spazienzio").get("cards")).put(SetBaseIds.GRAB, 1)),
                 "mazzo mini.spazienzio (set mini)", "21", "20"));
         cases.put("terza copia di una carta della mini", new Case(mini(m -> {
             ObjectNode cards = (ObjectNode) deckOf(m, "mini.spazienzio").get("cards");
             cards.put("mini.CalcioAlBidone", 3);
-            cards.put("bruiser.SuperImpact", 1);
+            cards.put(GARGANTUAN_IMPACT_ON_YOU, 1);
         }), "mazzo mini.spazienzio (set mini)", "mini.CalcioAlBidone", "3 copie"));
-        cases.put("basic diversa da quella fissa", new Case(mini(m -> deckOf(m, "mini.spazienzio").put("basic", "com.basic.ToxicGrab")),
-                "mazzo mini.spazienzio (set mini)", "com.basic.ToxicGrab", "diversa da quella fissa"));
+        cases.put("basic diversa da quella fissa", new Case(mini(m -> deckOf(m, "mini.spazienzio").put("basic", UNCONTROLLABLE_CRAVING)),
+                "mazzo mini.spazienzio (set mini)", UNCONTROLLABLE_CRAVING, "diversa da quella fissa"));
         cases.put("last resort che non lo è", new Case(mini(m -> deckOf(m, "mini.spazienzio").put("lastResort", "mini.Spallucce")),
                 "mazzo mini.spazienzio (set mini)", "mini.Spallucce", "non è una last resort"));
 

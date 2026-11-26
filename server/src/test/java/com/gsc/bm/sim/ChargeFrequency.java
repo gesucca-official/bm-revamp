@@ -7,19 +7,21 @@ import com.gsc.bm.model.game.bot.*;
 import com.gsc.bm.model.game.status.Status;
 import java.util.*;
 
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
+
 /** D79 bench diagnostics only. Hidden hand/deck checks never reach a bot or change its random stream. */
 final class ChargeFrequency {
     static final String[][] PAIRS = {
-        {"bruiser.Glare", "bruiser.SuperImpact"},
-        {"base.bruiser.TiFaccioSpazio", "bruiser.ExtremelyViolentBlow"},
-        {"base.mara.Slalom", "base.mara.Sgommata"},
-        {"base.mara.TiStringoLaCurva", "base.mara.CinghiataDiTraverso"},
-        {"junkie.MethDrivenRage", "junkie.Cough"},
-        {"base.tossico.UnAssaggino", "junkie.ToxicBloodDrain"},
-        {"base.pino.OffroIo", "base.pino.GoingBerserk"},
-        {"base.pino.PrimaIlBrindisi", "base.pino.RuttoADistanzaSociale"},
-        {"base.gigi.ColpoDiChiaveInglese", "base.gigi.ChiaveDaTredici"},
-        {"base.gigi.UnaStrettaDiProva", "base.gigi.LavoroFattoBene"}
+        {PATIENCE_OVER, GARGANTUAN_IMPACT_ON_YOU},
+        {LET_US_CLEAR_YOU_OUT, SHIP_YOU_TO_OUCHIO},
+        {APPROACH_SLALOM, BURNOUT},
+        {UNPREDICTABLE_TRAJECTORY, RIDERS_LASSO},
+        {TAKE_INVENTORY, PHLEGMY_COUGH},
+        {JUST_A_TASTE, DRAG_INTO_THE_TUNNEL},
+        {ONE_MORE_AND_IM_COMING, DOWN_IN_ONE},
+        {ANOTHER_LITTLE_GRAPPA, POINT_BLANK_BURP},
+        {PREPARE_THE_JOB, THIRTEEN_WRENCH},
+        {EMPIRICAL_METHOD, JOB_WELL_DONE}
     };
     static String hit(String binding) {
         for (String[] pair : PAIRS) if (pair[0].equals(binding)) return pair[1];

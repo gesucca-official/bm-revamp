@@ -14,15 +14,16 @@ import java.util.concurrent.*;
 
 import static com.gsc.bm.sim.StarterBalanceMeasureTest.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-16e2 (D56): one numeric lot after the SB-16e STOP. Control = round 3 profile, plus three fixed variants.
  * Opt-in measurement, never used by the application. Same seeds, matrix, styles and d50 rules as SB-16e.
  */
 class StarterLotMeasureTest {
-    static final String CHARGE_PIERA = "base.pino.OffroIo";
-    static final String LAST_CELESTINA = "junkie.LethalHeroinDose";
-    static final String LAST_PIERA = "base.pino.UltimoGiro";
+    static final String CHARGE_PIERA = ONE_MORE_AND_IM_COMING;
+    static final String LAST_CELESTINA = THE_LAST_DRAG;
+    static final String LAST_PIERA = LAST_ROUND;
     /** Run order: variants first, so a timeout can only cost the control, already measured in SB-16e round 3. */
     static final List<String> ORDER = List.of("a", "b", "c", "control");
 

@@ -5,6 +5,7 @@ import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.base.beppe.Disassemble;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -16,19 +17,20 @@ import static com.gsc.bm.model.Resource.*;
 import static com.gsc.bm.model.cards.Card.CardTarget.*;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Schede MAR del Set Base 1.0 candidato, con attesi scritti dal testo completo. */
 class Sb27MaraCardsTest {
-    private static final String MARA = "base.character.Mara";
-    private static final String REQUISIRE = "base.mara.PresoAlVolo";
-    private static final String SVENTARE = "base.mara.bound.PassoStretto";
-    private static final String SEMAFORO = "base.mara.bound.CambioMarcia";
-    private static final String TAGLIARE = "base.mara.bound.ColpoDiStriscio";
-    private static final String LAZO = "base.mara.CinghiataDiTraverso";
-    private static final String SGOMMATA = "base.mara.Sgommata";
-    private static final String AGILITA = "base.mara.SorpassoInCurva";
-    private static final String UNTA = "base.mara.TraDueParaurti";
-    private static final String ESPRESSO = "base.items.EspressoDelDistributore";
+    private static final String MARA = SetBaseIds.MARA;
+    private static final String REQUISIRE = REQUISITION_ON_THE_FLY;
+    private static final String SVENTARE = FOIL_THE_ASSASSINATION;
+    private static final String SEMAFORO = RED_LIGHT;
+    private static final String TAGLIARE = CUT_OFF;
+    private static final String LAZO = RIDERS_LASSO;
+    private static final String SGOMMATA = BURNOUT;
+    private static final String AGILITA = UNNATURAL_AGILITY;
+    private static final String UNTA = GREASY_AND_GRIMY;
+    private static final String ESPRESSO = VENDING_MACHINE_ESPRESSO;
     private static Draft draft;
 
     @BeforeAll
@@ -54,7 +56,7 @@ class Sb27MaraCardsTest {
     void requisireLosesAlertnessBeforeConsumingTheChosenItem() {
         Card action = card(REQUISIRE);
         Game game = game(mara(3, action), b());
-        ch(game, MARA).getItems().addAll(List.of(card("com.items.RottenBeer"), card(ESPRESSO)));
+        ch(game, MARA).getItems().addAll(List.of(card(WARM_BLONDE_66), card(ESPRESSO)));
         turn(game, onItem(game, MARA, "Requisire al Volo", MARA, "Espresso della Macchinetta"), rest(game, "b"));
 
         assertTrue(action.isBasicAction());
@@ -136,7 +138,7 @@ class Sb27MaraCardsTest {
 
     @Test
     void tagliareWorksEvenWhenTheLaterTargetMoveWillBeCanceled() {
-        Player canceller = player("c", 40, card("bruiser.YouStop"));
+        Player canceller = player("c", 40, card(THATS_ENOUGH));
         canceller.getCharacter().getResources().put(VIOLENCE, 5);
         Game game = game(mara(45, card(TAGLIARE)), player("b", 3), canceller);
         turn(game, bound(game, MARA, "Tagliare la Strada", "b"), rest(game, "b"), move(game, "c", "FAI BASTA", "b"));
@@ -174,7 +176,7 @@ class Sb27MaraCardsTest {
 
     @Test
     void sgommataReducesLaterSelfDamageAndLeavesSameGroupAttacksUnchanged() {
-        Game selfDamage = game(mara(45, card(SGOMMATA)), b(card("base.spazienzio.bound.TestaAlMuro")));
+        Game selfDamage = game(mara(45, card(SGOMMATA)), b(card(VIOLENTIZATION)));
         assertArrayEquals(new int[]{0, 28}, turn(selfDamage, move(selfDamage, MARA, "Sgommata", "b"),
                 bound(selfDamage, "b", "VIOLENZAZIONE", "SELF")), "25 CUT e 3 HIT a sé");
         Game sameGroup = game(mara(45, card(SGOMMATA)), player("b", 30, hit("Pari", 1, null, "HIT 7")));
@@ -213,8 +215,8 @@ class Sb27MaraCardsTest {
 
     @Test
     void slalomAndTraiettoriaUseTheirPrintedOrderAndGiveDifferentRewards() {
-        assertAnnouncement("base.mara.Slalom", "Slalom d'Avvicinamento", SGOMMATA, LAZO, 60);
-        assertAnnouncement("base.mara.TiStringoLaCurva", "Traiettoria Imprevedibile", LAZO, SGOMMATA, 65);
+        assertAnnouncement(APPROACH_SLALOM, "Slalom d'Avvicinamento", SGOMMATA, LAZO, 60);
+        assertAnnouncement(UNPREDICTABLE_TRAJECTORY, "Traiettoria Imprevedibile", LAZO, SGOMMATA, 65);
     }
 
     private static void assertAnnouncement(String binding, String name, String first, String second, int foundAlertness) {

@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 import static com.gsc.bm.sim.StarterBalanceMeasureTest.DECKS;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 class DeckSizeVariantsTest {
     static Draft reference() throws Exception { return SetBaseArms.arm("B", BozzeStoriche.fromClasspath(SetBaseArms.FROZEN_15)); } // SB-16i (D97): historical measure of the 1.5, read from the frozen copy.
@@ -104,7 +105,7 @@ class DeckSizeVariantsTest {
         Draft d=reference(); Player a=measured(d,DECKS[0],"a",new Random(1),null,"ALWAYS/risorse"),
                 b=measured(d,DECKS[1],"b",new Random(2),null,"ALWAYS/com");
         Game g=new Game(List.of(a,b),"counter-fixture",false);
-        Card hit=d.card("bruiser.SuperImpact"); a.getCardsInHand().clear(); a.getCardsInHand().add(hit); a.getCardsInHand().add(d.card(hit.getBindingName()));
+        Card hit=d.card(GARGANTUAN_IMPACT_ON_YOU); a.getCardsInHand().clear(); a.getCardsInHand().add(hit); a.getCardsInHand().add(d.card(hit.getBindingName()));
         Move move=new Move(hit.getName(),"a","b",g.getGameId(),Map.of()); g.getPendingMoves().add(move);
         DeckSizeObserve o=new DeckSizeObserve(); o.accept("ROUND_READY",g);
         turn(g,1); o.accept("ROUND_COMMITTED",g);
@@ -145,11 +146,11 @@ class DeckSizeVariantsTest {
             Draft d=reference(); Player a=measured(d,DECKS[0],"a",new Random(1),null,"ALWAYS/risorse"),
                     b=measured(d,DECKS[1],"b",new Random(2),null,"ALWAYS/risorse");
             Game g=new Game(List.of(a,b),"terminal-fixture",false);
-            Card lr=d.card("com.last.Struggle");a.getCardsInHand().add(lr);
+            Card lr=d.card(AT_HIM);a.getCardsInHand().add(lr);
             Move move=new Move(lr.getName(),"a","b",g.getGameId(),Map.of());g.getPendingMoves().add(move);
             DeckSizeObserve o=new DeckSizeObserve();o.accept("ROUND_READY",g);
             move.setVoid(voided);g.getResolvedMoves().add(move);
-            move.recordSearch("bruiser.SuperImpact",voided?null:d.card("bruiser.SuperImpact"));
+            move.recordSearch(GARGANTUAN_IMPACT_ON_YOU,voided?null:d.card(GARGANTUAN_IMPACT_ON_YOU));
             b.getResources().put(Resource.HEALTH,0);turn(g,1);o.accept("ROUND_COMMITTED",g);
             var c=o.seats.get("a").counts;
             assertEquals(voided?0L:1L,c.getOrDefault("endWithAnyLastResort",0L));

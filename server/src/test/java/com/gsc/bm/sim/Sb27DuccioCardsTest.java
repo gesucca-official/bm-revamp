@@ -4,6 +4,7 @@ import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.IllegalMoveException;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -13,15 +14,16 @@ import java.util.Map;
 import static com.gsc.bm.model.Resource.*;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Attesi dalle schede di Duccio Braccio Teso del Set Base 1.0 candidato. */
 class Sb27DuccioCardsTest {
-    private static final String DUCCIO = "base.character.Rocco";
-    private static final String PRIMA = "base.rocco.PrimaIo";
-    private static final String NOCCHE = "base.rocco.NoccheSbucciate";
-    private static final String CRANIATA = "base.rocco.Capocciata";
-    private static final String TESTA = "base.rocco.TestaDura";
-    private static final String ESPRESSO = "base.items.EspressoDelDistributore";
+    private static final String DUCCIO = SetBaseIds.DUCCIO;
+    private static final String PRIMA = ITALIANS_FIRST;
+    private static final String NOCCHE = SKINNED_KNUCKLES;
+    private static final String CRANIATA = PATRIOTIC_HEADBUTT;
+    private static final String TESTA = HARDHEAD;
+    private static final String ESPRESSO = VENDING_MACHINE_ESPRESSO;
     private static Draft draft;
 
     @BeforeAll
@@ -37,7 +39,7 @@ class Sb27DuccioCardsTest {
     @Test
     void primaGliItalianiConsumesTheItemAndHealsFour() {
         Game game = game(duccio(card(PRIMA)), b());
-        ch(game, DUCCIO).getItems().addAll(List.of(card(ESPRESSO), card("com.items.RottenBeer")));
+        ch(game, DUCCIO).getItems().addAll(List.of(card(ESPRESSO), card(WARM_BLONDE_66)));
         ch(game, DUCCIO).getResources().put(HEALTH, 60);
         assertArrayEquals(new int[]{-4, 0}, turn(game, onItem(game, DUCCIO, "Prima gli Italiani", DUCCIO, "Espresso della Macchinetta"),
                 rest(game, "b")));
@@ -48,7 +50,7 @@ class Sb27DuccioCardsTest {
 
     @Test
     void primaGliItalianiStillHealsFourIfTheItemWasDestroyed() {
-        Player opponent = b(card("bruiser.BreakYourToy"));
+        Player opponent = b(card(DISASSEMBLE));
         opponent.getCharacter().getResources().put(VIOLENCE, 5);
         Game game = game(duccio(card(PRIMA)), opponent);
         ch(game, DUCCIO).getResources().put(HEALTH, 60);
@@ -61,7 +63,7 @@ class Sb27DuccioCardsTest {
 
     @Test
     void rinfrescataRoundsDownBothQuartersThenDealsTwoHit() {
-        Game game = game(duccio(card("base.rocco.bound.Colpetto")), b());
+        Game game = game(duccio(card(ARROGANT_REFRESH)), b());
         ch(game, DUCCIO).getResources().put(TOXICITY, 15);
         ch(game, DUCCIO).getResources().put(ALCOHOL, 15);
         assertArrayEquals(new int[]{6, 2}, turn(game, bound(game, DUCCIO, "Rinfrescata Arrogante", "b"), rest(game, "b")));
@@ -71,7 +73,7 @@ class Sb27DuccioCardsTest {
 
     @Test
     void disonoreGainsEightAAndReducesTheThreeDamageTypesThroughEndOfTurn() {
-        Game game = game(duccio(card("base.rocco.bound.AlzoLaVoce")), b(hit("Tre danni", 1, null, "HIT 7", "CUT 7", "POISON 7")));
+        Game game = game(duccio(card(DISHONOUR_TO_THE_FLAG)), b(hit("Tre danni", 1, null, "HIT 7", "CUT 7", "POISON 7")));
         ch(game, DUCCIO).getResources().put(TOXICITY, 10);
         assertArrayEquals(new int[]{18, 0}, turn(game, bound(game, DUCCIO, "(Dis)onore alla Bandiera", "SELF"),
                 move(game, "b", "Tre danni", DUCCIO)));
@@ -81,7 +83,7 @@ class Sb27DuccioCardsTest {
 
     @Test
     void nonMiHaiFattoNienteIncreasesBothHitsOnItsSecondPlay() {
-        Card action = card("base.rocco.NeHoPreseDiPeggio");
+        Card action = card(YOU_DID_NOTHING_TO_ME);
         Game game = game(player(draft.character(DUCCIO), List.of(), List.of(), action), b());
         assertTrue(action.isLastResort());
         assertArrayEquals(new int[]{6, 10}, turn(game, move(game, DUCCIO, "Non Mi Hai Fatto Niente", "b"), rest(game, "b")));
@@ -119,7 +121,7 @@ class Sb27DuccioCardsTest {
 
     @Test
     void stoicoHealsFourAndHalvesOnlyHitForTheRestOfTheTurn() {
-        Game game = game(duccio(card("base.rocco.Incassare")), b(hit("Tre danni", 1, null, "HIT 7", "CUT 7", "POISON 7")));
+        Game game = game(duccio(card(STOIC_AS_A_BRONZE_BUST)), b(hit("Tre danni", 1, null, "HIT 7", "CUT 7", "POISON 7")));
         ch(game, DUCCIO).getResources().put(HEALTH, 70);
         assertArrayEquals(new int[]{13, 0}, turn(game, move(game, DUCCIO, "Stoico come un Busto di Bronzo", "SELF"),
                 move(game, "b", "Tre danni", DUCCIO)), "3 HIT, 7 CUT e 7 POISON meno la cura di 4");
@@ -128,14 +130,14 @@ class Sb27DuccioCardsTest {
 
     @Test
     void eAlloraPaysTenHealthHalvesIncomingHitAndDealsEightHit() {
-        Game game = game(duccio(card("base.rocco.EAllora")), b(hit("Tre danni", 1, null, "HIT 7", "CUT 7", "POISON 7")));
+        Game game = game(duccio(card(SO_WHAT)), b(hit("Tre danni", 1, null, "HIT 7", "CUT 7", "POISON 7")));
         assertArrayEquals(new int[]{27, 8}, turn(game, move(game, DUCCIO, "E Allora...?", "b"), move(game, "b", "Tre danni", DUCCIO)));
         assertTrue(ch(game, DUCCIO).getStatuses().isEmpty());
     }
 
     @Test
     void laStoriaDealsFourAndAnnouncesCraniataOrDrawsNormallyWithDifferentHealing() {
-        String story = "base.rocco.TeLoSpiegoIo";
+        String story = HISTORY_IS_WRITTEN_BY_THE_VICTORS;
         String name = "La Storia la Scrivono i Vincitori";
         Card found = card(CRANIATA);
         Player actor = player(draft.character(DUCCIO), List.of(card(story)), List.of(card(TESTA), found), null);

@@ -22,6 +22,7 @@ import java.util.Random;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-21h (D159 (1c), D160 (1)): the two variant bounds that the data ops do not express, on the cards of the measured candidate
@@ -31,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class Sb21hBoundTest {
     private static final ObjectMapper JSON = new ObjectMapper();
-    private static final String COUNTER = "base.cesira.bound.NeRiparliamoFuori", RISE = "base.rocco.bound.MiRialzo";
+    private static final String COUNTER = LET_US_DISCUSS_IN_PRIVATE, RISE = LET_US_GET_UP_AND_YOU_GO;
     private static Draft draft;
 
     @BeforeAll

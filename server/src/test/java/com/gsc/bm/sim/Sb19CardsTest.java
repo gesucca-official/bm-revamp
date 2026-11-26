@@ -27,6 +27,7 @@ import java.util.Random;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-19 Fase B1 (D129, D130): the nine cards of the missing slots as the proposal writes them ({@code sb-19-proposta.md} § 3), played with
@@ -273,8 +274,8 @@ class Sb19CardsTest {
     @Test
     void theNineDecksWithTheAdditionsFollowTheRulesOfTheProposal() {
         Map<String, Integer> decksOfCard = new LinkedHashMap<>();
-        List<String> bases = List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino", "starter-gigi", Sb17.DECK, Sb18.DECK,
-                "starter-gigi", "starter-gigi");
+        List<String> bases = List.of(STARTER_SPAZIENZIO, STARTER_MARA, STARTER_CELESTINA, STARTER_PIERA, STARTER_BEPPE, Sb17.DECK, Sb18.DECK,
+                STARTER_BEPPE, STARTER_BEPPE);
         for (int i = 0; i < Sb19.DECKS.size(); i++) {
             String id = Sb19.DECKS.get(i);
             Map<String, Integer> deck = draft.cardsOf(id), base = draft.cardsOf(bases.get(i));
@@ -296,20 +297,20 @@ class Sb19CardsTest {
         // The risk decks of the proposal (§ 4): Grappa in Piera's deck, Estasi ×2 and Grappa ×2 in a starter without L, the equip stack.
         assertEquals(2, draft.cardsOf("prova-b1-piera").get(Sb19.GRAPPA));
         Map<String, Integer> estasi = draft.cardsOf("prova-b1-estasi");
-        assertEquals(2, estasi.get("base.pino.GoingBerserk"));
+        assertEquals(2, estasi.get(DOWN_IN_ONE));
         assertEquals(2, estasi.get(Sb19.GRAPPA));
         Map<String, Integer> equip = draft.cardsOf("prova-b1-equip");
         assertEquals(2, equip.get(Sb19.COCCIO));
-        assertEquals(2, equip.get("base.items.PosacenereDiVetro"));
-        assertEquals(2, equip.get("base.items.GuantiDaOfficina"), "Coccio ×1,5, Posacenere ×1,5 and Guanti ×1,25 in one deck (rischio 3)");
+        assertEquals(2, equip.get(GLASS_ASHTRAY));
+        assertEquals(2, equip.get(WORKSHOP_GLOVES), "Coccio ×1,5, Posacenere ×1,5 and Guanti ×1,25 in one deck (rischio 3)");
         // B1b (report § 6): Mano lesta (DISRUPT) no longer takes the place of damage cards in the decks of Mara and Duccio.
-        Map<String, Integer> mara = draft.cardsOf("prova-b1-mara"), maraBase = draft.cardsOf("starter-mara");
-        assertEquals(maraBase.get("base.com.Spintone"), mara.get("base.com.Spintone"), "Mara keeps her damage cards");
-        assertEquals(maraBase.get("base.com.SputoDaPosacenere"), mara.get("base.com.SputoDaPosacenere"));
-        assertNull(mara.get("base.mara.Slalom"), "Mano lesta takes the place of the two Slalom (A generators)");
+        Map<String, Integer> mara = draft.cardsOf("prova-b1-mara"), maraBase = draft.cardsOf(STARTER_MARA);
+        assertEquals(maraBase.get(SHOVE), mara.get(SHOVE), "Mara keeps her damage cards");
+        assertEquals(maraBase.get(SPIT_IN_THE_ASHTRAY), mara.get(SPIT_IN_THE_ASHTRAY));
+        assertNull(mara.get(APPROACH_SLALOM), "Mano lesta takes the place of the two Slalom (A generators)");
         Map<String, Integer> duccio = draft.cardsOf("prova-b1-duccio"), duccioBase = draft.cardsOf(Sb18.DECK);
-        assertEquals(duccioBase.get("base.com.Spintone"), duccio.get("base.com.Spintone"), "Duccio keeps his damage cards");
-        assertEquals(1, duccio.get("base.rocco.TeLoSpiegoIo"), "Mano lesta takes one Te lo spiego io and the Tartaruga");
-        assertNull(duccio.get("base.com.TartarugaSulMarciapiede"));
+        assertEquals(duccioBase.get(SHOVE), duccio.get(SHOVE), "Duccio keeps his damage cards");
+        assertEquals(1, duccio.get(HISTORY_IS_WRITTEN_BY_THE_VICTORS), "Mano lesta takes one Te lo spiego io and the Tartaruga");
+        assertNull(duccio.get(MENTAL_CARAPACE_TECHNIQUE));
     }
 }

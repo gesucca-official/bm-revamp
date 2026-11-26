@@ -26,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Real queue/controller/session/archive; only the shuffled player fixture and time are controlled. */
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT,
@@ -63,13 +64,13 @@ class QuickDuelCliTest extends SqliteContextSupport {
             users.createIfAbsent(new UserCredentialsRecord(user,null,encoder.encode("synthetic"),"USER"));
             Character character=suffix.equals("B") || suffix.equals("D") ? new ToxicJunkie() : new BigBadBruiser();
             List<Card> regular=new ArrayList<>();
-            if(scenario.equals("complete") && suffix.equals("A")) regular.add(cards.craftCard("bruiser.MadeOfStone"));
+            if(scenario.equals("complete") && suffix.equals("A")) regular.add(cards.craftCard(DONT_PLAY_WITH_THE_KNIFE));
             if(scenario.equals("complete") && suffix.equals("B")) {
-                for(int n=0;n<20;n++) regular.add(cards.craftCard("base.com.ShuffleFeet"));
+                for(int n=0;n<20;n++) regular.add(cards.craftCard(SUDDEN_DASH));
             }
             // SB-28: the Junkie starter of the Set Base 1.0 has its own last resort; the fixture keeps the generic Struggle («Addosso!!!»).
             var fixture=new Player(user,character,decks.craftBasicActionStarterCard(character),List.of(),
-                cards.craftCard("com.last.Struggle"),regular);
+                cards.craftCard(AT_HIM),regular);
             doAnswer(i -> (Player) org.springframework.util.SerializationUtils.deserialize(
                 org.springframework.util.SerializationUtils.serialize(fixture))).when(players).craftRandomPlayer(user,null);
         }

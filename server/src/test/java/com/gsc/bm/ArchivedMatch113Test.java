@@ -22,6 +22,7 @@ import com.gsc.bm.service.session.GameSessionServiceImpl;
 import com.gsc.bm.service.session.MatchArchiveService;
 import com.gsc.bm.service.session.MatchSnapshot;
 import com.gsc.bm.service.session.MatchVersions;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -90,7 +91,7 @@ class ArchivedMatch113Test {
         assertEquals("1.13", initial.path("versions").path("rulesVersion").asText());
         assertEquals("0.1", initial.path("versions").path("sets").path("base").path("version").asText());
         assertEquals(100, initial.path("state").path("players").get(0).path("resources").path("HEALTH").asInt());
-        assertEquals("bruiser.character.BigBadBruiser", initial.path("state").path("players").get(0).path("character").asText());
+        assertEquals(SetBaseIds.SPAZIENZIO, initial.path("state").path("players").get(0).path("character").asText());
         JsonNode last = mapper.readTree(exported.path("events").get(exported.path("events").size() - 1).path("json").asText());
         assertEquals("OUTCOME", last.path("kind").asText());
         assertEquals("a", last.path("data").path("outcome").path("winner").asText());

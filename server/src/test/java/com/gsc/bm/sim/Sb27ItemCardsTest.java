@@ -16,15 +16,16 @@ import static com.gsc.bm.model.Resource.*;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Attesi dalle schede degli oggetti a dati del Set Base 1.0 candidato. */
 class Sb27ItemCardsTest {
-    private static final String CONTO = "base.items.ContoDelTavoloSei";
-    private static final String SIGARETTA = "base.items.SigarettaAccesa";
-    private static final String GUANTI = "base.items.GuantiDaOfficina";
-    private static final String GIUBBOTTO = "base.items.GiubbottoDiFintaPelle";
-    private static final String CASCO = "base.items.CascoDaLavoro";
-    private static final String POSACENERE = "base.items.PosacenereDiVetro";
+    private static final String CONTO = TABLE_SIX_BILL;
+    private static final String SIGARETTA = LIT_CIGARETTE;
+    private static final String GUANTI = WORKSHOP_GLOVES;
+    private static final String GIUBBOTTO = FAKE_LEATHER_JACKET;
+    private static final String CASCO = SITE_HELMET;
+    private static final String POSACENERE = GLASS_ASHTRAY;
 
     @BeforeAll
     static void loadDraft() throws Exception { load(); }
@@ -32,15 +33,15 @@ class Sb27ItemCardsTest {
     // T e L prima del consumo, poi H, A, V, T, L dopo la mossa e R06.
     static Stream<Arguments> resources() {
         return Stream.of(
-                arguments("Negroni Trovato per Terra", "com.items.CocktailOnTheGround", 0, 0, 499, 55, 10, 2, 4),
-                arguments("Bionda da 66, Calda", "com.items.RottenBeer", 0, 0, 500, 55, 0, 0, 4),
-                arguments("Amaro nel Bicchiere di Plastica", "base.items.AmaroNelBicchiereDiPlastica", 0, 0, 500, 45, 0, 0, 9),
-                arguments("Espresso della Macchinetta", "base.items.EspressoDelDistributore", 0, 0, 500, 75, 0, 0, 0),
-                arguments("Kebab Abbandonato", "base.items.PaninoDelKebab", 0, 0, 509, 60, 0, 2, 0),
-                arguments("Acqua Minerale Sgasata", "base.items.MezzaMineraleSgasata", 0, 20, 500, 80, 0, 0, 0),
-                arguments("Pasticca Abbandonata", "base.items.PasticcaTrovataSulBancone", 0, 0, 495, 60, 0, 10, 0),
-                arguments("Ghiaccio nel Tovagliolo", "base.items.GhiaccioNelTovagliolo", 15, 0, 510, 60, 0, 0, 0),
-                arguments("Grappa della Casa", "base.items.GrappaDellaCasa", 0, 0, 500, 43, 0, 0, 12));
+                arguments("Negroni Trovato per Terra", NEGRONI_FOUND_ON_THE_FLOOR, 0, 0, 499, 55, 10, 2, 4),
+                arguments("Bionda da 66, Calda", WARM_BLONDE_66, 0, 0, 500, 55, 0, 0, 4),
+                arguments("Amaro nel Bicchiere di Plastica", AMARO_IN_A_PLASTIC_CUP, 0, 0, 500, 45, 0, 0, 9),
+                arguments("Espresso della Macchinetta", VENDING_MACHINE_ESPRESSO, 0, 0, 500, 75, 0, 0, 0),
+                arguments("Kebab Abbandonato", ABANDONED_KEBAB, 0, 0, 509, 60, 0, 2, 0),
+                arguments("Acqua Minerale Sgasata", FLAT_MINERAL_WATER, 0, 20, 500, 80, 0, 0, 0),
+                arguments("Pasticca Abbandonata", ABANDONED_PILL, 0, 0, 495, 60, 0, 10, 0),
+                arguments("Ghiaccio nel Tovagliolo", ICE_IN_A_NAPKIN, 15, 0, 510, 60, 0, 0, 0),
+                arguments("Grappa della Casa", HOUSE_GRAPPA, 0, 0, 500, 43, 0, 0, 12));
     }
 
     @ParameterizedTest(name = "{0}")
@@ -127,7 +128,7 @@ class Sb27ItemCardsTest {
     @ParameterizedTest(name = "{0}")
     @MethodSource("equipment")
     void permessoRemovesTheEquipmentProducedByConsumption(String name, String binding) {
-        Player opponent = b(card("bruiser.BadEducation"));
+        Player opponent = b(card(EXCUSE_ME_SORRY_CAN_YOU_STOP));
         opponent.getCharacter().getResources().put(VIOLENCE, 5);
         Game game = game(s(consume()), opponent);
         ch(game, "s").getItems().add(card(binding));
@@ -154,7 +155,7 @@ class Sb27ItemCardsTest {
 
     @Test
     void copiedContoActsOnBothOwnersAtTheEndOfItsArrivalTurn() {
-        Game game = game(s(card("base.com.BeggingMoney")), b());
+        Game game = game(s(card(GOT_ANY_SPARE_CHANGE)), b());
         ch(game, "b").getItems().add(card(CONTO));
         turn(game, move(game, "s", "Ce l'Hai Due Spicci?", "b"), rest(game, "b"));
         assertEquals(List.of("Conto del Tavolo Sei"), items(game, "s"));
@@ -178,7 +179,7 @@ class Sb27ItemCardsTest {
 
     @Test
     void sigarettaAlsoAddsTToTheImmunePlayerWhoStealsIt() {
-        Player actor = player(character("s", 60, 3, TOXICITY), List.of(card("com.Steal")), fillers(10), null);
+        Player actor = player(character("s", 60, 3, TOXICITY), List.of(card(SLEIGHT_OF_HAND_THEFT)), fillers(10), null);
         Game game = game(actor, b());
         ch(game, "b").getItems().add(card(SIGARETTA));
 

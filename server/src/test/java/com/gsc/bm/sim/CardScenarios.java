@@ -23,6 +23,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
+
 /**
  * Confronto di due carte fuori dalle partite (nato in SB-5 dentro DataCardsTest, condiviso da SB-6a): stessi campi e stesso
  * risultato su 200 stati casuali, con stati attivi, immunità e risorse mancanti. I giocatori degli scenari vengono dagli starter del catalogo.
@@ -108,8 +110,8 @@ final class CardScenarios {
 
     /** La carta sceglie un oggetto vicino. Il modo dipende dal seme: 0 presente, 1 assente, 2 sparito alla risoluzione, 3 presente con un altro. */
     private String grab(Card card, Game game, ComPlayer player, long seed) throws Exception {
-        List<Card> pool = List.of(java.card("com.items.RottenBeer"), java.card("com.items.CocktailOnTheGround"),
-                java.card("com.items.MarvelousCocktail"), java.card("com.items.AnotherRottenBeer"), new BrokenBottle());
+        List<Card> pool = List.of(java.card(WARM_BLONDE_66), java.card(NEGRONI_FOUND_ON_THE_FLOOR),
+                java.card(LETHAL_MIX), java.card(DISCOUNT_DOUBLE_MALT), new BrokenBottle());
         Random random = new Random(seed * 31 + 7);
         Card item = pool.get(random.nextInt(pool.size()));
         Card other = pool.get((pool.indexOf(item) + 1 + random.nextInt(pool.size() - 1)) % pool.size());

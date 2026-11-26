@@ -22,9 +22,10 @@ import static com.gsc.bm.sim.StarterRedesignTest.game;
 import static com.gsc.bm.sim.StarterRedesignTest.move;
 import static com.gsc.bm.sim.StarterRedesignTest.player;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 class EstasiDamageCapTest {
-    private static final String ESTASI = "base.pino.GoingBerserk";
+    private static final String ESTASI = DOWN_IN_ONE;
     private static Draft draft;
 
     @BeforeAll
@@ -46,7 +47,7 @@ class EstasiDamageCapTest {
         params.put("perAlcohol", 2);
         Card card = Draft.parse("Estasi D150", json).card(ESTASI);
 
-        Player author = player("starter-pino", "a", List.of(card), List.of());
+        Player author = player(STARTER_PIERA, "a", List.of(card), List.of());
         author.getResources().put(Resource.ALCOHOL, alcohol);
         Player target = foe();
         Game game = game(author, target);

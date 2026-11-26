@@ -12,11 +12,12 @@ import java.util.List;
 import static com.gsc.bm.model.Resource.*;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Scheda TOKEN del Set Base 1.0 candidato, dalla creazione alla rimozione dell'equipaggiamento. */
 class Sb27BottleTokenTest {
-    private static final String MALTO = "com.items.AnotherRottenBeer";
-    private static final String BOTTLE = "com.tokens.BrokenBeerBottle";
+    private static final String MALTO = DISCOUNT_DOUBLE_MALT;
+    private static final String BOTTLE = BROKEN_BOTTLE;
 
     @BeforeAll
     static void loadDraft() throws Exception { load(); }

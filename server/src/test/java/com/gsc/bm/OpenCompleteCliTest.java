@@ -9,6 +9,7 @@ import com.gsc.bm.model.game.*;
 import com.gsc.bm.repo.external.*;
 import com.gsc.bm.service.factories.*;
 import com.gsc.bm.service.session.*;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -24,6 +25,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Tag("context")
@@ -46,9 +48,9 @@ class OpenCompleteCliTest extends SqliteContextSupport {
         for (String name : List.of(user,"i16Other"))
             users.createIfAbsent(new UserCredentialsRecord(name,null,encoder.encode("synthetic"),"USER"));
         // R02 1.12 (D20): a deck saved under 1.11, written straight to the repository: listed, refused at the open start.
-        savedDecks.save(new UserDecksRecord(user,"i16-old-rules",new UserDecksRecord.UserStoredDeck("bruiser.character.BigBadBruiser",
-                "com.basic.BruiserGrab","com.last.Struggle",List.of("bruiser.character.LittleSmack","bruiser.character.LittleRage"),
-                List.of("base.com.ShuffleFeet"))));
+        savedDecks.save(new UserDecksRecord(user,"i16-old-rules",new UserDecksRecord.UserStoredDeck(SetBaseIds.SPAZIENZIO,
+                LET_US_USE_YOU,AT_HIM,List.of(WAKE_UP_BUT_NOT_YOU,SLIGHT_ANNOYANCE),
+                List.of(SUDDEN_DASH))));
         // Only the opponent is fixed. Saved human decks, factories, shuffle and dealing stay real.
         doAnswer(call -> {
             Character bc = new BigBadBruiser();

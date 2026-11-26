@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.util.List;
 import java.util.Set;
+import com.gsc.bm.model.cards.base.SetBaseIds;
+
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-18 Fase B (D124): Duccio Braccio Teso and the deck {@code prova-duccio}, first in the draft copies of {@code docs/reports/set-base/sb-18/}.
@@ -15,14 +18,14 @@ import java.util.Set;
  */
 final class Sb18 {
 
-    static final String DUCCIO = "base.character.Rocco";
+    static final String DUCCIO = SetBaseIds.DUCCIO;
     static final String DECK = "prova-duccio";
-    static final String NOCCHE = "base.rocco.NoccheSbucciate", E_ALLORA = "base.rocco.EAllora", CAPOCCIATA = "base.rocco.Capocciata",
-            TESTA_DURA = "base.rocco.TestaDura";
+    static final String NOCCHE = SKINNED_KNUCKLES, E_ALLORA = SO_WHAT, CAPOCCIATA = PATRIOTIC_HEADBUTT,
+            TESTA_DURA = HARDHEAD;
     // SB-21z (D162): Gomitata diventa Mi rialzo.
-    static final List<String> CARDS = List.of("base.rocco.PrimaIo", "base.rocco.bound.Colpetto", "base.rocco.bound.MiRialzo",
-            "base.rocco.bound.AlzoLaVoce", "base.rocco.NeHoPreseDiPeggio", NOCCHE, "base.rocco.Incassare", E_ALLORA, CAPOCCIATA,
-            "base.rocco.TeLoSpiegoIo", TESTA_DURA);
+    static final List<String> CARDS = List.of(ITALIANS_FIRST, ARROGANT_REFRESH, LET_US_GET_UP_AND_YOU_GO,
+            DISHONOUR_TO_THE_FLAG, YOU_DID_NOTHING_TO_ME, NOCCHE, STOIC_AS_A_BRONZE_BUST, E_ALLORA, CAPOCCIATA,
+            HISTORY_IS_WRITTEN_BY_THE_VICTORS, TESTA_DURA);
 
     private Sb18() {
     }

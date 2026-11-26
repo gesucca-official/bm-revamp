@@ -15,6 +15,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * D76: the lethal-aware bot on explicit turns built from the draft's cards. Each case states the numbers that decide it; the
@@ -24,10 +25,10 @@ class LethalAwarePolicyTest {
 
     static Draft draft;
 
-    static final String SUPER_IMPACT = "bruiser.SuperImpact", SGOMMATA = "base.mara.Sgommata", CINGHIATA = "base.mara.CinghiataDiTraverso",
-            PARAURTI = "base.mara.TraDueParaurti", SLALOM = "base.mara.Slalom", SPINTONE = "base.com.Spintone",
-            FASCIATURA = "base.com.FasciaturaColFazzolettaccio", TARTARUGA = "base.com.TartarugaSulMarciapiede",
-            YOU_STOP = "bruiser.YouStop";
+    static final String SUPER_IMPACT = GARGANTUAN_IMPACT_ON_YOU, SGOMMATA = BURNOUT, CINGHIATA = RIDERS_LASSO,
+            PARAURTI = GREASY_AND_GRIMY, SLALOM = APPROACH_SLALOM, SPINTONE = SHOVE,
+            FASCIATURA = EMERGENCY_BANDAGE, TARTARUGA = MENTAL_CARAPACE_TECHNIQUE,
+            YOU_STOP = THATS_ENOUGH;
 
     // SB-16i (D97): the D76 cases are written on the cards of the 1.5, read from the frozen copy; the 1.6 cases are in Sb16iBotsTest.
     @BeforeAll static void load() throws Exception { draft = BozzeStoriche.fromClasspath(SetBaseArms.FROZEN_15); }

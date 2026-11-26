@@ -15,6 +15,7 @@ import static com.gsc.bm.model.Resource.*;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Rincara è del singolo giocatore e conta anche le mosse annullate. */
 class Sb27RincaraClausesTest {
@@ -23,10 +24,10 @@ class Sb27RincaraClausesTest {
 
     static Stream<Arguments> sheets() {
         return Stream.of(
-                arguments("LR-TOS", "junkie.LethalHeroinDose", "L'Ultimo Tiro", 0, 2, 8, 2, 13),
-                arguments("LR-PIN", "base.pino.UltimoGiro", "Ultimo Giro", 3, 2, 13, 4, 17),
-                arguments("LR-ROC", "base.rocco.NeHoPreseDiPeggio", "Non Mi Hai Fatto Niente", 0, 6, 10, 8, 15),
-                arguments("LR-STR", "com.last.Struggle", "Addosso!!!", 0, 5, 10, 7, 15));
+                arguments("LR-TOS", THE_LAST_DRAG, "L'Ultimo Tiro", 0, 2, 8, 2, 13),
+                arguments("LR-PIN", LAST_ROUND, "Ultimo Giro", 3, 2, 13, 4, 17),
+                arguments("LR-ROC", YOU_DID_NOTHING_TO_ME, "Non Mi Hai Fatto Niente", 0, 6, 10, 8, 15),
+                arguments("LR-STR", AT_HIM, "Addosso!!!", 0, 5, 10, 7, 15));
     }
 
     @ParameterizedTest(name = "{0}")
@@ -34,7 +35,7 @@ class Sb27RincaraClausesTest {
     void aCanceledPlayCountsButTheOpponentPlayDoesNot(
             String slot, String binding, String name, int startingL, int firstSelf, int firstTarget, int secondSelf, int secondTarget) {
         Player s = lastResort("s", 60, startingL, card(binding), List.of());
-        Player b = lastResort("b", 90, startingL, card(binding), List.of(card("bruiser.YouStop")));
+        Player b = lastResort("b", 90, startingL, card(binding), List.of(card(THATS_ENOUGH)));
         b.getCharacter().getResources().put(VIOLENCE, 5);
         Game game = game(s, b);
 

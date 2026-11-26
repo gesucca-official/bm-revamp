@@ -2,6 +2,7 @@ package com.gsc.bm;
 import com.gsc.bm.repo.internal.CardsGuiRepository;
 import com.gsc.bm.service.factories.*;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -39,7 +40,7 @@ class CatalogRuntimeTest extends SqliteContextSupport {
             assertTrue(loaded.getDamageAmount().matches("—|(HIT|CUT|POISON) \\d+(\\+x)?(, (HIT|CUT|POISON) \\d+(\\+x)?)*"), loaded.getDamageAmount());
         }));
     }
-    @ParameterizedTest @ValueSource(strings = {"bruiser.character.BigBadBruiser", "junkie.character.ToxicJunkie"})
+    @ParameterizedTest @ValueSource(strings = {SetBaseIds.SPAZIENZIO, SetBaseIds.CELESTINA})
     void startersAndOpeningHand(String binding) {
         var character = characters.craftCharacter(binding);
         var deck = decks.craftCharacterStarterDeck(binding);
@@ -57,7 +58,7 @@ class CatalogRuntimeTest extends SqliteContextSupport {
     }
     @Test void invalidBindingsFailExplicitly() {
         assertThrows(IllegalArgumentException.class, () -> cards.craftCard("missing.NoSuchCard"));
-        assertThrows(IllegalArgumentException.class, () -> characters.craftCharacter("com.Grab"));
-        assertThrows(IllegalArgumentException.class, () -> cards.craftCard("bruiser.character.BigBadBruiser"));
+        assertThrows(IllegalArgumentException.class, () -> characters.craftCharacter(SetBaseIds.GRAB));
+        assertThrows(IllegalArgumentException.class, () -> cards.craftCard(SetBaseIds.SPAZIENZIO));
     }
 }

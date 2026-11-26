@@ -9,12 +9,13 @@ import java.util.List;
 
 import static com.gsc.bm.model.game.GameFixtures.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 class MoveTest {
     @Test
     void unaffordableMoveIsRejectedWithoutPendingMoveOrResourceChange() {
         Player alice = player("alice");
-        Card card = LiveFixtures.card("bruiser.SuperImpact", "impact");
+        Card card = LiveFixtures.card(GARGANTUAN_IMPACT_ON_YOU, "impact");
         alice.getCardsInHand().add(card);
         alice.getResources().put(Resource.VIOLENCE, 24);
         Game game = duel(alice, player("bob"));
@@ -30,7 +31,7 @@ class MoveTest {
     void costIsPaidOnlyWhenAppliedAndChangesOnlyTheActingPlayer() {
         Player alice = player("alice");
         Player bob = player("bob");
-        alice.getCardsInHand().add(LiveFixtures.card("bruiser.SuperImpact", "impact"));
+        alice.getCardsInHand().add(LiveFixtures.card(GARGANTUAN_IMPACT_ON_YOU, "impact"));
         Game game = duel(alice, bob);
         Move move = new Move("impact", "alice", "bob", game.getGameId(), null);
 
@@ -44,7 +45,7 @@ class MoveTest {
     @Test
     void secondMoveFromSamePlayerDoesNotReplaceTheFirst() {
         Player alice = player("alice");
-        alice.getCardsInHand().add(LiveFixtures.card("bruiser.SuperImpact", "impact"));
+        alice.getCardsInHand().add(LiveFixtures.card(GARGANTUAN_IMPACT_ON_YOU, "impact"));
         Game game = duel(alice, player("bob"));
         Move first = new Move("impact", "alice", "bob", game.getGameId(), null);
         game.submitMove(first);
@@ -60,8 +61,8 @@ class MoveTest {
         Player bob = player("bob");
         alice.getCardsInHand().clear();
         bob.getCardsInHand().clear();
-        alice.getCardsInHand().add(LiveFixtures.card("com.last.Struggle", "alice-action"));
-        bob.getCardsInHand().add(LiveFixtures.card("com.last.Struggle", "bob-action"));
+        alice.getCardsInHand().add(LiveFixtures.card(AT_HIM, "alice-action"));
+        bob.getCardsInHand().add(LiveFixtures.card(AT_HIM, "bob-action"));
         Game game = duel(alice, bob);
         game.submitMove(new Move("alice-action", "alice", "bob", game.getGameId(), null));
         assertFalse(game.isReadyToResolveMoves());

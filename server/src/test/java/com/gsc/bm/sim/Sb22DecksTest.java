@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,10 +20,10 @@ class Sb22DecksTest {
 
     static final String DECKS = "/set-base/sb-22/costruiti.json";
     static final Map<String, String> CHARACTERS = new TreeMap<>(Map.of(
-            "sb22.costruito-spazienzio", "bruiser.character.BigBadBruiser", "sb22.costruito-mara", "base.character.Mara",
-            "sb22.costruito-celestina", "junkie.character.ToxicJunkie", "sb22.costruito-piera", "base.character.Pino",
-            "sb22.costruito-beppe", "base.character.Gigi", "sb22.costruito-sergio", "base.character.Cesira",
-            "sb22.costruito-duccio", "base.character.Rocco"));
+            "sb22.costruito-spazienzio", SetBaseIds.SPAZIENZIO, "sb22.costruito-mara", SetBaseIds.MARA,
+            "sb22.costruito-celestina", SetBaseIds.CELESTINA, "sb22.costruito-piera", SetBaseIds.PIERA,
+            "sb22.costruito-beppe", SetBaseIds.BEPPE, "sb22.costruito-sergio", SetBaseIds.SERGIO,
+            "sb22.costruito-duccio", SetBaseIds.DUCCIO));
 
     @Test
     void theSevenConstructedDecksLoadOnTopOfTheDraft() throws Exception {

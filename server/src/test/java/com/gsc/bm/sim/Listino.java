@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.bot.BotPolicy;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -16,6 +17,8 @@ import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-10a: listino di potenza. Duelli fra un mazzo con una carta sonda a numero variabile e un mazzo di riferimento, uguali in tutto
@@ -60,13 +63,13 @@ final class Listino {
     static final String SET_BASE = "/set-base/bozza.json";
     /** Contesto, starter da cui nasce e le due generiche (due copie ciascuna) che lasciano il posto alle àncore. */
     static final Map<String, List<String>> SET_BASE_CONTEXTS = Map.of(
-            SPAZIENZIO, List.of("starter-spazienzio", "bruiser.SeagullFly", "base.com.TartarugaSulMarciapiede"),
-            MARA, List.of("starter-mara", "base.com.Spintone", "base.com.SputoDaPosacenere"),
-            TOSSICO, List.of("starter-tossico", "com.Grab", "base.com.RincorsaDalMarciapiede"),
+            SPAZIENZIO, List.of(STARTER_SPAZIENZIO, SEAGULL_SO_LET_US_FLY_YOU, MENTAL_CARAPACE_TECHNIQUE),
+            MARA, List.of(STARTER_MARA, SHOVE, SPIT_IN_THE_ASHTRAY),
+            TOSSICO, List.of(STARTER_CELESTINA, SetBaseIds.GRAB, EXTREME_HURRY_TO_GET_DRUNK),
             // SB-14: Spintone e Fasciatura, così Grab e gli oggetti (l'economia della L) restano come nello starter.
-            PINO, List.of("starter-pino", "base.com.Spintone", "base.com.FasciaturaColFazzolettaccio"),
+            PINO, List.of(STARTER_PIERA, SHOVE, EMERGENCY_BANDAGE),
             // SB-15: Mattone e Steal, le sole generiche in due copie; restano gli oggetti, gli equip e le carte d'archetipo pagate in V.
-            GIGI, List.of("starter-gigi", "base.com.MattoneDelCantiere", "com.Steal"));
+            GIGI, List.of(STARTER_BEPPE, BIG_HOLLOW_BRICK_28, SLEIGHT_OF_HAND_THEFT));
     /** I contesti del Set Base che esistono solo se la bozza ha il loro starter (SB-13, SB-14, SB-15); Spazienzio e Mara sono obbligatori. */
     static final List<String> OPTIONAL_SET_BASE_CONTEXTS = List.of(TOSSICO, PINO, GIGI);
     private static final ObjectMapper JSON = new ObjectMapper();
@@ -652,11 +655,11 @@ final class Listino {
                 "1 CUT vale " + ANCHOR + " / x HIT", 0, 30, 1, false,
                 x -> handicapProbeMara(id -> hitter(id, Map.of(), 1, "CUT", x))));
         // Carte attuali: la gemella con lo stesso costo e la stessa priorità e x HIT, contro la carta.
-        String[] spazienzio = {"bruiser.Glare", "bruiser.MadeOfStone", "bruiser.CantFeelAnything", "bruiser.HealingBlow", "bruiser.SickeningBlow",
-                "bruiser.StunningBlow", "bruiser.ExtremelyViolentBlow", "bruiser.SeagullFly", "bruiser.SuperImpact", "bruiser.YouStop",
-                "bruiser.WhatchaDoin", "bruiser.BadEducation", "bruiser.BreakYourToy"};
-        String[] tossico = {"junkie.MethDrivenRage", "junkie.Cough", "junkie.GoingBerserk", "junkie.PervertedMetabolism", "junkie.EverythingIsDrug",
-                "junkie.AmphetamineReflexes", "junkie.ToxicBloodDrain", "junkie.BadTrip", "junkie.BeggingMoney", "junkie.LethalHeroinDose"};
+        String[] spazienzio = {PATIENCE_OVER, DONT_PLAY_WITH_THE_KNIFE, KIND_YOUR_CARESS, NOW_LET_US_HEAL_YOU, CHARM_YOU_WITH_BLOWS,
+                STUN_YOU_I_SAID, SHIP_YOU_TO_OUCHIO, SEAGULL_SO_LET_US_FLY_YOU, GARGANTUAN_IMPACT_ON_YOU, THATS_ENOUGH,
+                "bruiser.WhatchaDoin", EXCUSE_ME_SORRY_CAN_YOU_STOP, DISASSEMBLE};
+        String[] tossico = {TAKE_INVENTORY, PHLEGMY_COUGH, "junkie.GoingBerserk", CORRUPTED_METABOLISM, "junkie.EverythingIsDrug",
+                SPEED_BOOSTED_REFLEXES, DRAG_INTO_THE_TUNNEL, "junkie.BadTrip", "junkie.BeggingMoney", THE_LAST_DRAG};
         for (String[] group : new String[][]{spazienzio, tossico}) {
             String ctx = group == spazienzio ? SPAZIENZIO : TOSSICO;
             for (String binding : group) {
@@ -864,12 +867,12 @@ final class Listino {
     }
 
     /** Gli starter su cui SB-11b misura le bound vere: si usano solo se la base li contiene. */
-    static final List<String> STARTERS = List.of("starter-spazienzio", "starter-mara");
+    static final List<String> STARTERS = List.of(STARTER_SPAZIENZIO, STARTER_MARA);
     /**
      * SB-13: gli starter avanzati, misurati allo stesso modo ma nel gruppo «tettoavanzati», così il gruppo «tettostarter» e le sue misure
      * di SB-11b e SB-12a restano quelle di prima. SB-14 aggiunge Pino, SB-15 Gigi.
      */
-    static final List<String> ADVANCED_STARTERS = List.of("starter-tossico", "starter-pino", "starter-gigi");
+    static final List<String> ADVANCED_STARTERS = List.of(STARTER_CELESTINA, STARTER_PIERA, STARTER_BEPPE);
 
     private static List<String> concat(List<String> a, List<String> b) {
         List<String> all = new ArrayList<>(a);
@@ -919,8 +922,8 @@ final class Listino {
                         x -> bound(ctx, e.getValue(), null)));
             }
         }
-        String[][] existing = {{SPAZIENZIO, "bruiser.character.LittleSmack"}, {SPAZIENZIO, "bruiser.character.LittleRage"},
-                {TOSSICO, "junkie.character.PatheticBlade"}, {TOSSICO, "junkie.character.RottenSmile"},
+        String[][] existing = {{SPAZIENZIO, WAKE_UP_BUT_NOT_YOU}, {SPAZIENZIO, SLIGHT_ANNOYANCE},
+                {TOSSICO, ASHTRAY_BOTTOM}, {TOSSICO, CUT_THE_DOSE},
                 {MARA, "prova.mara.ColpoDiStriscio"}, {MARA, "prova.mara.Scarto"}, {ROCCO, "prova.rocco.Colpetto"}, {ROCCO, "prova.rocco.Fiato"},
                 {NEUTRO, "sonda.neutro.Colpetto"}, {NEUTRO, "sonda.neutro.Riparo"}};
         for (String[] e : existing)

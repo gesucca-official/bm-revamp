@@ -5,6 +5,7 @@ import com.gsc.bm.model.game.*;
 import java.util.*;
 import java.util.function.BiConsumer;
 import static com.gsc.bm.sim.StarterBalanceMeasureTest.Counts;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** D83 read-only boundary counters. Turns are one-based; a title is counted once per hand/turn, even with multiple copies. */
 final class DeckSizeObserve implements BiConsumer<String, Game> {
@@ -96,7 +97,7 @@ final class DeckSizeObserve implements BiConsumer<String, Game> {
                 if (anyLastResort) seat.counts.add("endWithAnyLastResort");
                 if (anyChosenLastResort) seat.counts.add("endWithAnyChosenLastResort");
                 if (usedLastResort) seat.counts.add("endAfterAnyLastResort");
-                if (anyLastResort && seat.chosen != null && seat.chosen.getBindingName().equals("com.last.Struggle"))
+                if (anyLastResort && seat.chosen != null && seat.chosen.getBindingName().equals(AT_HIM))
                     seat.counts.add("endWithOwnStruggleChosen");
             }
         }

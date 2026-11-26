@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 import static com.gsc.bm.model.game.GameFixtures.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 class MoveCommandTest {
     private final ObjectMapper mapper = new ObjectMapper();
@@ -36,15 +37,15 @@ class MoveCommandTest {
         var alice = player("alice"); var bob = player("bob"); var g = duel(alice,bob);
         assertThrows(IllegalMoveException.class, () -> command(g,"bound-two","SELF",Map.of()));
         assertThrows(IllegalMoveException.class, () -> g.submitMove(command(g,"bound-two","SELF",Map.of("DISCARD_ONE","last-resort"))));
-        alice.getCardsInHand().add(LiveFixtures.card("bruiser.SuperImpact","spare"));
+        alice.getCardsInHand().add(LiveFixtures.card(GARGANTUAN_IMPACT_ON_YOU,"spare"));
         g.submitMove(command(g,"bound-two","SELF",Map.of("DISCARD_ONE","spare")));
         assertEquals(1,g.getPendingMoves().size());
     }
     @Test void nearAndFarItemsRequireRealChoiceWithoutChangingResources() {
         var alice = player("alice"); var bob = player("bob"); var g = duel(alice,bob);
-        alice.getCharacter().getItems().add(LiveFixtures.card("com.items.RottenBeer","near"));
-        bob.getCharacter().getItems().add(LiveFixtures.card("com.items.RottenBeer","far"));
-        alice.getCardsInHand().add(LiveFixtures.card("com.Steal","steal"));
+        alice.getCharacter().getItems().add(LiveFixtures.card(WARM_BLONDE_66,"near"));
+        bob.getCharacter().getItems().add(LiveFixtures.card(WARM_BLONDE_66,"far"));
+        alice.getCardsInHand().add(LiveFixtures.card(SLEIGHT_OF_HAND_THEFT,"steal"));
         assertThrows(IllegalMoveException.class, () -> command(g,"basic","SELF",Map.of()));
         assertThrows(IllegalMoveException.class, () -> g.submitMove(command(g,"basic","SELF",Map.of("TARGET_ITEM","missing"))));
         Move near = command(g,"basic","SELF",Map.of("TARGET_ITEM","near"));

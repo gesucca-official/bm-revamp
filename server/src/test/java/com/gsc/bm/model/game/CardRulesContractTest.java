@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 class CardRulesContractTest {
     /** Every set entry has an explicit type in R07, including characters and the generated token. */
@@ -51,15 +52,15 @@ class CardRulesContractTest {
         }
         assertEquals(38, roles.size());
         var token = new com.gsc.bm.model.cards.base.tokens.BrokenBottle();
-        assertEquals(roles.get("com.tokens.BrokenBeerBottle")[1], token.getRole());
-        assertEquals(roles.get("com.tokens.BrokenBeerBottle")[2], token.getGains());
-        assertEquals(roles.get("com.tokens.BrokenBeerBottle")[3], token.getDamage());
+        assertEquals(roles.get(BROKEN_BOTTLE)[1], token.getRole());
+        assertEquals(roles.get(BROKEN_BOTTLE)[2], token.getGains());
+        assertEquals(roles.get(BROKEN_BOTTLE)[3], token.getDamage());
         assertEquals("—", token.getDamage(), "the conversion is not the token's own damage (R07a 1.9)");
-        assertEquals(roles.get("com.tokens.BrokenBeerBottle")[4], token.getDamageAmount());
+        assertEquals(roles.get(BROKEN_BOTTLE)[4], token.getDamageAmount());
         assertEquals("—", token.getDamageAmount());
         var factory = new com.gsc.bm.service.factories.CardFactoryServiceImpl(new com.gsc.bm.service.catalog.LiveSet(),
                 org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardKeywordsRepository.class));
-        var blow = (com.gsc.bm.model.cards.AbstractCard) factory.craftCard("bruiser.HealingBlow");
+        var blow = (com.gsc.bm.model.cards.AbstractCard) factory.craftCard(NOW_LET_US_HEAL_YOU);
         assertEquals("DAMAGE", blow.getRole());
         assertEquals("—", blow.getGains());
         assertEquals("HIT", blow.getDamage());
@@ -82,8 +83,8 @@ class CardRulesContractTest {
             assertEquals(row[3].equals("—") ? List.of() : Arrays.asList(row[3].split(", ")),
                     row[4].equals("—") ? List.of() : Arrays.stream(row[4].split(", ")).map(a -> a.split(" ")[0]).collect(Collectors.toList()), row[0]);
         }
-        assertEquals("CUT", rows.stream().filter(r -> r[0].equals("junkie.character.PatheticBlade")).findFirst().orElseThrow()[3]);
-        assertEquals("—", rows.stream().filter(r -> r[0].equals("com.items.MarvelousCocktail")).findFirst().orElseThrow()[3],
+        assertEquals("CUT", rows.stream().filter(r -> r[0].equals(ASHTRAY_BOTTOM)).findFirst().orElseThrow()[3]);
+        assertEquals("—", rows.stream().filter(r -> r[0].equals(LETHAL_MIX)).findFirst().orElseThrow()[3],
                 "timer poison is excluded by R07a 1.9");
     }
 

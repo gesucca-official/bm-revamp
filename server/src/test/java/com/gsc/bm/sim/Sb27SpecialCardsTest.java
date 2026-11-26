@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-27 Fase A (D177 (3)): the 19 cards with a Java class against their sheet in the candidate Set Base 1.0 document
@@ -64,7 +65,7 @@ class Sb27SpecialCardsTest {
 
     // ---- SPA-AR5 «FAI BASTA» (bruiser.YouStop) ----
 
-    private static final String YOU_STOP = "bruiser.YouStop";
+    private static final String YOU_STOP = THATS_ENOUGH;
 
     @Test
     void faiBastaVoidsAMoveStillToResolveWhichKeepsItsCostAndDraw() {
@@ -108,9 +109,9 @@ class Sb27SpecialCardsTest {
 
     // ---- GEN-02 «Furto con Destrezza» (com.Steal) ----
 
-    private static final String STEAL = "com.Steal", SANTINO = "base.items.SantinoDellaPortinaia", ESPRESSO = "base.items.EspressoDelDistributore",
-            CASCO = "base.items.CascoDaLavoro", GUANTI = "base.items.GuantiDaOfficina", NEGRONI = "com.items.CocktailOnTheGround",
-            CONTO = "base.items.ContoDelTavoloSei";
+    private static final String STEAL = SLEIGHT_OF_HAND_THEFT, SANTINO = SAINT_BRIACO_HOLY_CARD, ESPRESSO = VENDING_MACHINE_ESPRESSO,
+            CASCO = SITE_HELMET, GUANTI = WORKSHOP_GLOVES, NEGRONI = NEGRONI_FOUND_ON_THE_FLOOR,
+            CONTO = TABLE_SIX_BILL;
 
     @Test
     void furtoTakesTheChosenItem() {
@@ -153,7 +154,7 @@ class Sb27SpecialCardsTest {
 
     // ---- TOS-AR4 «Riflessi Aumentati dalla Speed» (junkie.AmphetamineReflexes) ----
 
-    private static final String REFLEXES = "junkie.AmphetamineReflexes";
+    private static final String REFLEXES = SPEED_BOOSTED_REFLEXES;
 
     private static Player sReflexes() {
         Player s = s(card(REFLEXES));
@@ -171,11 +172,11 @@ class Sb27SpecialCardsTest {
 
     @Test
     void riflessiVoidsAMoveAgainstYourItem() {
-        Player b = b(card("bruiser.BreakYourToy"));
+        Player b = b(card(DISASSEMBLE));
         b.getCharacter().getResources().put(Resource.VIOLENCE, 10);
         Game game = game(sReflexes(), b);
         ch(game, "s").getItems().add(card(SANTINO));
-        turn(game, move(game, "s", name(REFLEXES), "SELF"), onItem(game, "b", name("bruiser.BreakYourToy"), "s", name(SANTINO)));
+        turn(game, move(game, "s", name(REFLEXES), "SELF"), onItem(game, "b", name(DISASSEMBLE), "s", name(SANTINO)));
         assertTrue(voided(game, "b"));
         assertEquals(List.of(name(SANTINO)), items(game, "s"));
     }
@@ -206,7 +207,7 @@ class Sb27SpecialCardsTest {
 
     // ---- TOS-AR5 «Trascinare nel Tunnel» (junkie.ToxicBloodDrain) ----
 
-    private static final String DRAIN = "junkie.ToxicBloodDrain";
+    private static final String DRAIN = DRAG_INTO_THE_TUNNEL;
 
     @Test
     void trascinareGivesTheTAfterTheCostThenPoisons() {
@@ -262,7 +263,7 @@ class Sb27SpecialCardsTest {
 
     // ---- OGG-04 «Mescolone Micidiale» (com.items.MarvelousCocktail) ----
 
-    private static final String MESCOLONE = "com.items.MarvelousCocktail";
+    private static final String MESCOLONE = LETHAL_MIX;
 
     @Test
     void mescoloneBlocksTAndLForFiveTurnsThenStripsEverythingAndPoisons() {
@@ -293,7 +294,7 @@ class Sb27SpecialCardsTest {
 
     // ---- LR-PIN «Ultimo Giro» (base.pino.UltimoGiro) ----
 
-    private static final String ULTIMO = "base.pino.UltimoGiro";
+    private static final String ULTIMO = LAST_ROUND;
 
     /** Piera with the last resort and an empty deck, so the card comes back to the hand after each play. */
     private static Player piera(int alcohol) {
@@ -346,7 +347,7 @@ class Sb27SpecialCardsTest {
 
     // ---- PIN-AR2 «Alla Goccia» (base.pino.GoingBerserk) ----
 
-    private static final String GOCCIA = "base.pino.GoingBerserk";
+    private static final String GOCCIA = DOWN_IN_ONE;
 
     private static Player sWith(String binding, Resource resource, int amount) {
         Player s = s(card(binding));
@@ -384,7 +385,7 @@ class Sb27SpecialCardsTest {
 
     // ---- PIN-AR5 «Rutto a Bruciapelo» (base.pino.RuttoADistanzaSociale) ----
 
-    private static final String RUTTO = "base.pino.RuttoADistanzaSociale";
+    private static final String RUTTO = POINT_BLANK_BURP;
 
     @Test
     void ruttoReadsTheLAfterTheCostTakesAAndHitsFifteenPlusTwiceIt() {
@@ -418,7 +419,7 @@ class Sb27SpecialCardsTest {
 
     // ---- OGG-03 «Doppio Malto da Discount» (com.items.AnotherRottenBeer) ----
 
-    private static final String MALTO = "com.items.AnotherRottenBeer";
+    private static final String MALTO = DISCOUNT_DOUBLE_MALT;
 
     @Test
     void doppioMaltoLeavesABottleAndGivesTenL() {
@@ -443,7 +444,7 @@ class Sb27SpecialCardsTest {
 
     // ---- GIG-AR1 «Disassemblare» (bruiser.BreakYourToy) ----
 
-    private static final String BREAK = "bruiser.BreakYourToy";
+    private static final String BREAK = DISASSEMBLE;
 
     @Test
     void disassemblareDestroysTheChosenItemWithoutEffect() {
@@ -468,7 +469,7 @@ class Sb27SpecialCardsTest {
 
     // ---- GIG-AR5 «Lavoro Fatto Bene» (base.gigi.LavoroFattoBene) ----
 
-    private static final String LAVORO = "base.gigi.LavoroFattoBene";
+    private static final String LAVORO = JOB_WELL_DONE;
 
     @Test
     void lavoroHitsFifteenWithoutItems() {
@@ -510,7 +511,7 @@ class Sb27SpecialCardsTest {
 
     // ---- CES-BO1 «Discutiamone in Privato» (base.cesira.bound.NeRiparliamoFuori) ----
 
-    private static final String PRIVATO = "base.cesira.bound.NeRiparliamoFuori";
+    private static final String PRIVATO = LET_US_DISCUSS_IN_PRIVATE;
 
     @Test
     void discutiamoneVoidsALaterMoveThatAnnouncesAndStaysInHand() {
@@ -551,7 +552,7 @@ class Sb27SpecialCardsTest {
 
     // ---- CES-AR2 «Buon Vecchio Ricatto» (base.cesira.Ricatto) ----
 
-    private static final String RICATTO = "base.cesira.Ricatto";
+    private static final String RICATTO = GOOD_OLD_BLACKMAIL;
 
     private static int[] ricatto(Player b, String card) {
         Game game = game(s(card(RICATTO)), b);
@@ -598,20 +599,20 @@ class Sb27SpecialCardsTest {
 
     @Test
     void ricattoSendsBackOnlyTheFixedPartAgainstTheOpponent() {
-        Player lazo = player("b", 40, card("base.mara.CinghiataDiTraverso"));
-        assertEquals(10, ricatto(lazo, name("base.mara.CinghiataDiTraverso"))[1], "«Lazo del Rider»: fixed 20 CUT; the part read from A does not count");
-        Player scompenso = b(card("base.pino.TestataDaUltimoGiro"));
+        Player lazo = player("b", 40, card(RIDERS_LASSO));
+        assertEquals(10, ricatto(lazo, name(RIDERS_LASSO))[1], "«Lazo del Rider»: fixed 20 CUT; the part read from A does not count");
+        Player scompenso = b(card(LAST_ROUND_CRASH));
         scompenso.getCharacter().getResources().put(Resource.ALCOHOL, 5);
-        assertEquals(17, ricatto(scompenso, name("base.pino.TestataDaUltimoGiro"))[1],
+        assertEquals(17, ricatto(scompenso, name(LAST_ROUND_CRASH))[1],
                 "«Scompenso da Ultimo Giro»: half of the 35 HIT; its 5 HIT to itself do not count");
     }
 
     @Test
     void ricattoDoesNotSendBackRincara() {
-        Player b = player(character("b", 10, 3), List.of(), fillers(10), card("com.last.Struggle"));
-        b.getCharacter().countPlay(name("com.last.Struggle"));
-        b.getCharacter().countPlay(name("com.last.Struggle"));
-        assertEquals(5, ricatto(b, name("com.last.Struggle"))[1], "«Addosso!!!»: half of the fixed 10 HIT, not of the 10 of Rincara");
+        Player b = player(character("b", 10, 3), List.of(), fillers(10), card(AT_HIM));
+        b.getCharacter().countPlay(name(AT_HIM));
+        b.getCharacter().countPlay(name(AT_HIM));
+        assertEquals(5, ricatto(b, name(AT_HIM))[1], "«Addosso!!!»: half of the fixed 10 HIT, not of the 10 of Rincara");
     }
 
     @Test
@@ -622,7 +623,7 @@ class Sb27SpecialCardsTest {
 
     // ---- CES-AR3 «Copione Già Visto» (base.cesira.LoSapevo) ----
 
-    private static final String COPIONE = "base.cesira.LoSapevo";
+    private static final String COPIONE = SEEN_THAT_SCRIPT;
 
     @Test
     void copioneVoidsAMoveStillToResolve() {
@@ -662,7 +663,7 @@ class Sb27SpecialCardsTest {
 
     // ---- GEN-03 «Scatto Repentino» (base.com.ShuffleFeet) ----
 
-    private static final String SCATTO = "base.com.ShuffleFeet";
+    private static final String SCATTO = SUDDEN_DASH;
 
     @Test
     void scattoSwapsAllTheItems() {
@@ -734,7 +735,7 @@ class Sb27SpecialCardsTest {
 
     // ---- ROC-BO2 «Rialziamoci e Partite!» (base.rocco.bound.MiRialzo) ----
 
-    private static final String RIALZO = "base.rocco.bound.MiRialzo";
+    private static final String RIALZO = LET_US_GET_UP_AND_YOU_GO;
 
     private static int rialzo(int health, Card bMove) {
         Player s = s(card(RIALZO));
@@ -769,7 +770,7 @@ class Sb27SpecialCardsTest {
 
     // ---- GEN-04 «Ce l'Hai Due Spicci?» (base.com.BeggingMoney) ----
 
-    private static final String SPICCI = "base.com.BeggingMoney";
+    private static final String SPICCI = GOT_ANY_SPARE_CHANGE;
 
     @Test
     void spicciCopiesAnItemTheOpponentKeeps() {
@@ -822,7 +823,7 @@ class Sb27SpecialCardsTest {
 
     // ---- GEN-10 «PERMESSO SCUSA PUOI SMETTERLA» (bruiser.BadEducation) ----
 
-    private static final String PERMESSO = "bruiser.BadEducation";
+    private static final String PERMESSO = EXCUSE_ME_SORRY_CAN_YOU_STOP;
 
     @Test
     void permessoRemovesTheEquipmentsThenHitsEight() {

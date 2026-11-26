@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-25 B2, D171 (1): the timer of «Mescolone Micidiale» (com.items.MarvelousCocktail, bozza 1.7), which at the end of the fifth turn
@@ -32,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class MescoloneD171Test {
     private static final ObjectMapper JSON = new ObjectMapper();
-    private static final String MESCOLONE = "com.items.MarvelousCocktail", STRIKE = "Colpo cercato";
+    private static final String MESCOLONE = LETHAL_MIX, STRIKE = "Colpo cercato";
     private static Draft draft;
 
     @BeforeAll

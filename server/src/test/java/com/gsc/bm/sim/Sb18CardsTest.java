@@ -24,6 +24,7 @@ import java.util.Random;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-18 Fase B2 (D126; proposal § 7 without «Ultimo colpo», out by D125 (3)): the HEALTH cost on Duccio's real cards with the d50 rules of
@@ -120,7 +121,7 @@ class Sb18CardsTest {
         draft.character(Sb18.DUCCIO).getResources().forEach((r, v) -> resources.put(r.name(), v));
         assertEquals(115, resources.get("HEALTH"), "D124 (1), D126 (1); reserve R2 of the B2 round");
         assertEquals(15, resources.get("ALERTNESS"));
-        assertEquals("base.rocco.PrimaIo", draft.characterBasic(Sb18.DUCCIO));
+        assertEquals(ITALIANS_FIRST, draft.characterBasic(Sb18.DUCCIO));
         int[] hits = {20, 8, 25, 30}; // SB-21z (D162): was {18, 8, 26, 30}
         int i = 0;
         for (Map.Entry<String, Integer> e : COSTS.entrySet()) {
@@ -130,8 +131,8 @@ class Sb18CardsTest {
             assertEquals("HIT " + hits[i++], gui(e.getKey()).get("damageAmount").asText(), e.getKey() + ": the V3 hits");
         }
         assertEquals(20, draft.cardsOf(Sb18.DECK).values().stream().mapToInt(Integer::intValue).sum(), "prova-duccio: 20 cards (D94)");
-        assertEquals(List.of("base.rocco.bound.Colpetto", "base.rocco.bound.AlzoLaVoce"), draft.boundOf(Sb18.DECK));
-        assertEquals("base.rocco.NeHoPreseDiPeggio", draft.lastResortOf(Sb18.DECK));
+        assertEquals(List.of(ARROGANT_REFRESH, DISHONOUR_TO_THE_FLAG), draft.boundOf(Sb18.DECK));
+        assertEquals(YOU_DID_NOTHING_TO_ME, draft.lastResortOf(Sb18.DECK));
     }
 
     @Test

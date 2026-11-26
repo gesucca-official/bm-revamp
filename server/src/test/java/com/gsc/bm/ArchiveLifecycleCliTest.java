@@ -5,6 +5,7 @@ import com.gsc.bm.model.game.*;
 import com.gsc.bm.repo.external.*;
 import com.gsc.bm.service.factories.*;
 import com.gsc.bm.service.session.*;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -52,11 +53,11 @@ class ArchiveLifecycleCliTest extends SqliteContextSupport {
         for(int i=0;i<humans;i++) {
             String user="archive"+mode+scenario+i;accounts.add(user);
             users.createIfAbsent(new UserCredentialsRecord(user,null,encoder.encode("synthetic"),"USER"));
-            var character=LiveFixtures.character("bruiser.character.BigBadBruiser");
+            var character=LiveFixtures.character(SetBaseIds.SPAZIENZIO);
             players.add(new Player(user,character,decks.craftBasicActionStarterCard(character),List.of(),decks.craftLastResortStarterCard(character),List.of()));
         }
         if(humans==1) {
-            var character=LiveFixtures.character("bruiser.character.BigBadBruiser");
+            var character=LiveFixtures.character(SetBaseIds.SPAZIENZIO);
             players.add(new ComPlayer(character,decks.craftBasicActionStarterCard(character),List.of(),decks.craftLastResortStarterCard(character),List.of()));
         }
         var game=LiveFixtures.live(new Game(players,mode,false));String id=game.getGameId();

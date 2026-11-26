@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
+
 /**
  * SB-28, D184 (1): the fixtures that build a {@link Game} by hand play the live game, regulation 2.0 ({@link Ruleset#LIVE}) with
  * the characters and cards of the live set (Set Base 1.0, file {@code sets/base.json}), as the factory does. Only the tests that
@@ -22,9 +24,9 @@ import java.util.stream.Collectors;
 public final class LiveFixtures {
     private LiveFixtures() { }
 
-    public static final String SPAZIENZIO = "starter-spazienzio";
-    public static final String MARA = "starter-mara";
-    public static final String CELESTINA = "starter-tossico";
+    public static final String SPAZIENZIO = STARTER_SPAZIENZIO;
+    public static final String MARA = STARTER_MARA;
+    public static final String CELESTINA = STARTER_CELESTINA;
 
     private static DraftSource set;
 

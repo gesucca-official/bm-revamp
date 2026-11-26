@@ -3,6 +3,7 @@ package com.gsc.bm.sim;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.cards.base.SetBaseIds;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -15,21 +16,22 @@ import static com.gsc.bm.model.Resource.*;
 import static com.gsc.bm.model.cards.Card.CardTarget.*;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Attesi dalle schede SPA del documento del Set Base 1.0 candidato, con regole d50. */
 class Sb27SpazienzioCardsTest {
     @BeforeAll
     static void loadDraft() throws Exception { load(); }
 
-    private static final String GRAB = "com.basic.BruiserGrab";
-    private static final String RAGE = "bruiser.character.LittleRage";
-    private static final String SMACK = "bruiser.character.LittleSmack";
-    private static final String HEAD = "base.spazienzio.bound.TestaAlMuro";
-    private static final String IMPACT = "bruiser.SuperImpact";
-    private static final String OHIO = "bruiser.ExtremelyViolentBlow";
-    private static final String STONE = "bruiser.MadeOfStone";
-    private static final String BEER = "com.items.RottenBeer";
-    private static final String COCKTAIL = "com.items.CocktailOnTheGround";
+    private static final String GRAB = LET_US_USE_YOU;
+    private static final String RAGE = SLIGHT_ANNOYANCE;
+    private static final String SMACK = WAKE_UP_BUT_NOT_YOU;
+    private static final String HEAD = VIOLENTIZATION;
+    private static final String IMPACT = GARGANTUAN_IMPACT_ON_YOU;
+    private static final String OHIO = SHIP_YOU_TO_OUCHIO;
+    private static final String STONE = DONT_PLAY_WITH_THE_KNIFE;
+    private static final String BEER = WARM_BLONDE_66;
+    private static final String COCKTAIL = NEGRONI_FOUND_ON_THE_FLOOR;
 
     @Test
     void adoperiamotiConsumesOnlyTheChosenItemAndStaysInHand() {
@@ -50,7 +52,7 @@ class Sb27SpazienzioCardsTest {
 
     @Test
     void adoperiamotiDoesNotConsumeAnItemTakenBeforeItResolves() {
-        Card steal = card("com.Steal");
+        Card steal = card(SLEIGHT_OF_HAND_THEFT);
         Game game = game(s(card(GRAB)), player("b", 20, steal));
         ch(game, "s").getItems().addAll(List.of(card(COCKTAIL), card(BEER)));
         turn(game, onItem(game, "s", "ADOPERIAMOTI", "s", "Bionda da 66, Calda"),
@@ -69,7 +71,7 @@ class Sb27SpazienzioCardsTest {
                 move(game, "b", "Colpo misto", "s")), "5 per tipo e 3 POISON periodici");
         assertAll(
                 () -> assertTrue(rage.isCharacterBound()),
-                () -> assertEquals("bruiser.character.BigBadBruiser", rage.getBoundToCharacter()),
+                () -> assertEquals(SetBaseIds.SPAZIENZIO, rage.getBoundToCharacter()),
                 () -> assertEquals(2, rage.getPriority()),
                 () -> assertEquals(Map.of(), rage.getCost()),
                 () -> assertEquals(Set.of(SELF), rage.getCanTarget()),
@@ -165,10 +167,10 @@ class Sb27SpazienzioCardsTest {
     @Test
     void patienceEndsTheRevealWhenTheOtherCopyIsPlayed() throws Exception {
         Draft draft = Draft.fromClasspath("/set-base/bozza.json");
-        String actor = "bruiser.character.BigBadBruiser";
-        Card patience = card("bruiser.Glare");
-        Card alreadyHeld = card("bruiser.SuperImpact");
-        Card found = card("bruiser.SuperImpact");
+        String actor = SetBaseIds.SPAZIENZIO;
+        Card patience = card(PATIENCE_OVER);
+        Card alreadyHeld = card(GARGANTUAN_IMPACT_ON_YOU);
+        Card found = card(GARGANTUAN_IMPACT_ON_YOU);
         Player spazienzio = player(draft.character(actor), List.of(patience, alreadyHeld),
                 List.of(filler(), found, filler()), null);
         Game game = game(spazienzio, b());
@@ -190,10 +192,10 @@ class Sb27SpazienzioCardsTest {
     @Test
     void patienceKeepsTheFoundCopyShownWhenMescoloneRemovesVulnerability() throws Exception {
         Draft draft = Draft.fromClasspath("/set-base/bozza.json");
-        String actor = "bruiser.character.BigBadBruiser";
-        Card patience = card("bruiser.Glare");
-        Card found = card("bruiser.SuperImpact");
-        Card mescolone = card("com.items.MarvelousCocktail");
+        String actor = SetBaseIds.SPAZIENZIO;
+        Card patience = card(PATIENCE_OVER);
+        Card found = card(GARGANTUAN_IMPACT_ON_YOU);
+        Card mescolone = card(LETHAL_MIX);
         Player spazienzio = player(draft.character(actor), List.of(patience, consume()),
                 List.of(filler(), found, filler(), filler(), filler(), filler(), filler()), null);
         Game game = game(spazienzio, b());
@@ -222,16 +224,16 @@ class Sb27SpazienzioCardsTest {
     @Test
     void matchingPlayEndsTheOnlyRemainingVulnerabilityAfterMescolone() throws Exception {
         Draft draft = Draft.fromClasspath("/set-base/bozza.json");
-        String actor = "bruiser.character.BigBadBruiser";
-        Card first = card("bruiser.SuperImpact");
-        Card second = card("bruiser.SuperImpact");
+        String actor = SetBaseIds.SPAZIENZIO;
+        Card first = card(GARGANTUAN_IMPACT_ON_YOU);
+        Card second = card(GARGANTUAN_IMPACT_ON_YOU);
         List<Card> deck = new ArrayList<>(fillers(12));
         deck.add(0, first);
         deck.add(2, second); // Col seme del banco resta nel mazzo fino al secondo annuncio.
         Player spazienzio = player(draft.character(actor),
-                List.of(card("bruiser.Glare"), consume(), card("base.bruiser.TiFaccioSpazio")), deck, null);
+                List.of(card(PATIENCE_OVER), consume(), card(LET_US_CLEAR_YOU_OUT)), deck, null);
         Game game = game(spazienzio, b());
-        ch(game, actor).getItems().add(card("com.items.MarvelousCocktail"));
+        ch(game, actor).getItems().add(card(LETHAL_MIX));
 
         turn(game, move(game, actor, "PAZIENZA: FINITA", "SELF"), rest(game, "b"));
         assertSame(first, spazienzio.getShownRevealed().get(0).getCard());
@@ -261,13 +263,13 @@ class Sb27SpazienzioCardsTest {
     @Test
     void matchingPlayClosesTheStaleReminderEvenWhenItsCopyStaysInHand() throws Exception {
         Draft draft = Draft.fromClasspath("/set-base/bozza.json");
-        String actor = "bruiser.character.BigBadBruiser";
+        String actor = SetBaseIds.SPAZIENZIO;
         Card alreadyHeld = card(IMPACT);
         Card found = card(IMPACT);
-        Player spazienzio = player(draft.character(actor), List.of(card("bruiser.Glare"), consume(), alreadyHeld),
+        Player spazienzio = player(draft.character(actor), List.of(card(PATIENCE_OVER), consume(), alreadyHeld),
                 List.of(filler(), found, filler(), filler(), filler(), filler(), filler()), null);
         Game game = game(spazienzio, b());
-        ch(game, actor).getItems().add(card("com.items.MarvelousCocktail"));
+        ch(game, actor).getItems().add(card(LETHAL_MIX));
 
         turn(game, move(game, actor, "PAZIENZA: FINITA", "SELF"), rest(game, "b"));
         assertSame(found, spazienzio.getShownRevealed().get(0).getCard());

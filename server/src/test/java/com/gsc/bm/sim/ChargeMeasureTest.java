@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 import static com.gsc.bm.sim.StarterBalanceMeasureTest.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * D74, one opt-in round: full matrix, paired policy comparison and event-level token damage. SB-16g passo 3 (D80, D82): the arm is
@@ -144,7 +145,7 @@ class ChargeMeasureTest {
                 }
             }
         }
-        static final Set<String> OFFENSIVE=Set.of("base.gigi.ColpoDiChiaveInglese","base.gigi.UnaStrettaDiProva");
+        static final Set<String> OFFENSIVE=Set.of(PREPARE_THE_JOB,EMPIRICAL_METHOD);
 
         static String bucket(int a) { return a<=0?"0":a<10?"1-9":a<20?"10-19":a<40?"20-39":"40+"; }
 
@@ -185,7 +186,7 @@ class ChargeMeasureTest {
                 }
                 if(mine!=null) {
                     if(mine.isLastResort()){c.counts.add("lastResortPlayed");c.usedLastResort=true;}
-                    if(mine.getBindingName().equals("base.gigi.SottoIlCofano"))c.counts.add("cofanoPlayed");
+                    if(mine.getBindingName().equals(SECOND_TRUNK))c.counts.add("cofanoPlayed");
                     if(mine.getBindingName().equals(SetBaseArms.BANCONE)) {
                         c.counts.add("bancone-turns");
                         for(int t=0;t<2;t++)for(int v=0;v<3;v++)

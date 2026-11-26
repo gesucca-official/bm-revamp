@@ -21,6 +21,7 @@ import static com.gsc.bm.model.Resource.*;
 import static com.gsc.bm.sim.Sb27Table.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** Rami con una mossa bersaglio assente, già annullata o più lenta (RP-1 e sezione 4). */
 class Sb27OpponentTimingTest {
@@ -29,14 +30,14 @@ class Sb27OpponentTimingTest {
 
     static Stream<Arguments> withoutTargetMove() {
         return Stream.of(
-                arguments("SPA-AR5", "bruiser.YouStop", "FAI BASTA", 60, 20, 10, 0),
-                arguments("CES-BO1", "base.cesira.bound.NeRiparliamoFuori", "Discutiamone in Privato", 60, 25, 10, 0),
-                arguments("CES-AR2", "base.cesira.Ricatto", "Buon Vecchio Ricatto", 45, 25, 10, 0),
-                arguments("CES-AR3", "base.cesira.LoSapevo", "Copione Già Visto", 50, 25, 10, 0),
-                arguments("MAR-BO3", "base.mara.bound.ColpoDiStriscio", "Tagliare la Strada", 60, 25, 10, 0),
-                arguments("MAR-AR1", "base.mara.CinghiataDiTraverso", "Lazo del Rider", 40, 25, 10, 40),
-                arguments("MAR-AR2", "base.mara.Sgommata", "Sgommata", 45, 25, 10, 25),
-                arguments("MAR-AR3", "base.mara.SorpassoInCurva", "Agilità Innaturale", 60, 25, 2, 4));
+                arguments("SPA-AR5", THATS_ENOUGH, "FAI BASTA", 60, 20, 10, 0),
+                arguments("CES-BO1", LET_US_DISCUSS_IN_PRIVATE, "Discutiamone in Privato", 60, 25, 10, 0),
+                arguments("CES-AR2", GOOD_OLD_BLACKMAIL, "Buon Vecchio Ricatto", 45, 25, 10, 0),
+                arguments("CES-AR3", SEEN_THAT_SCRIPT, "Copione Già Visto", 50, 25, 10, 0),
+                arguments("MAR-BO3", CUT_OFF, "Tagliare la Strada", 60, 25, 10, 0),
+                arguments("MAR-AR1", RIDERS_LASSO, "Lazo del Rider", 40, 25, 10, 40),
+                arguments("MAR-AR2", BURNOUT, "Sgommata", 45, 25, 10, 25),
+                arguments("MAR-AR3", UNNATURAL_AGILITY, "Agilità Innaturale", 60, 25, 2, 4));
     }
 
     @ParameterizedTest(name = "{0}")
@@ -59,10 +60,10 @@ class Sb27OpponentTimingTest {
 
     static Stream<Arguments> laterMove() {
         return Stream.of(
-                arguments("MAR-BO3", "base.mara.bound.ColpoDiStriscio", "Tagliare la Strada", 60, 6, 0),
-                arguments("MAR-AR1", "base.mara.CinghiataDiTraverso", "Lazo del Rider", 40, 10, 45),
-                arguments("MAR-AR2", "base.mara.Sgommata", "Sgommata", 45, 10, 25),
-                arguments("MAR-AR3", "base.mara.SorpassoInCurva", "Agilità Innaturale", 64, 2, 4));
+                arguments("MAR-BO3", CUT_OFF, "Tagliare la Strada", 60, 6, 0),
+                arguments("MAR-AR1", RIDERS_LASSO, "Lazo del Rider", 40, 10, 45),
+                arguments("MAR-AR2", BURNOUT, "Sgommata", 45, 10, 25),
+                arguments("MAR-AR3", UNNATURAL_AGILITY, "Agilità Innaturale", 64, 2, 4));
     }
 
     @ParameterizedTest(name = "{0}")
@@ -99,7 +100,7 @@ class Sb27OpponentTimingTest {
 
     @Test
     void riflessiSkipsAnAbsentMoveAndStillCancelsTheOtherAttacker() {
-        Player actor = s(card("junkie.AmphetamineReflexes"));
+        Player actor = s(card(SPEED_BOOSTED_REFLEXES));
         actor.getCharacter().getResources().put(TOXICITY, 10);
         Game game = game(actor, b(), c(hit("Colpaccio", 1, null, "HIT 9")));
         assertArrayEquals(new int[]{0, 0, 0}, turn(game, move(game, "s", "Riflessi Aumentati dalla Speed", "SELF"),
@@ -110,7 +111,7 @@ class Sb27OpponentTimingTest {
 
     @Test
     void copioneLeavesAnAlreadyResolvedTargetMoveAlone() {
-        Card copione = card("base.cesira.LoSapevo");
+        Card copione = card(SEEN_THAT_SCRIPT);
         Game game = game(s(copione), b(hit("Colpaccio", 3, null, "CUT 9")));
         assertArrayEquals(new int[]{9, 0}, turn(game, move(game, "s", copione.getName(), "b"),
                 move(game, "b", "Colpaccio", "s")));

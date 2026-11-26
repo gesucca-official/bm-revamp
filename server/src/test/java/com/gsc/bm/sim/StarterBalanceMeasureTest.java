@@ -26,13 +26,14 @@ import java.util.concurrent.*;
 import java.util.function.BiConsumer;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /** SB-16e: opt-in measurements, never used by the application. No policy or engine changes. */
 class StarterBalanceMeasureTest {
     static final ObjectMapper JSON = new ObjectMapper();
-    static final String[] DECKS = {"starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino", "starter-gigi"};
-    static final String[] CHARGES = {"bruiser.Glare", "base.mara.Slalom", "junkie.MethDrivenRage", "base.pino.OffroIo", "base.gigi.ColpoDiChiaveInglese"};
-    static final String[] HITS = {"bruiser.SuperImpact", "base.mara.Sgommata", "junkie.Cough", "base.pino.GoingBerserk", "base.gigi.LavoroFattoBene"};
+    static final String[] DECKS = {STARTER_SPAZIENZIO, STARTER_MARA, STARTER_CELESTINA, STARTER_PIERA, STARTER_BEPPE};
+    static final String[] CHARGES = {PATIENCE_OVER, APPROACH_SLALOM, TAKE_INVENTORY, ONE_MORE_AND_IM_COMING, PREPARE_THE_JOB};
+    static final String[] HITS = {GARGANTUAN_IMPACT_ON_YOU, BURNOUT, PHLEGMY_COUGH, DOWN_IN_ONE, JOB_WELL_DONE};
     static final ThreadLocal<Observed> SOURCE = new ThreadLocal<>();
 
     static class Counts extends TreeMap<String, Long> {
@@ -385,9 +386,9 @@ class StarterBalanceMeasureTest {
             ArrayNode cards = (ArrayNode) root.get("cards");
             for (int i = 0; i < cards.size(); i++) if (cards.get(i).path("binding").asText().equals(CHARGES[n])) cards.set(i, card(old, CHARGES[n]).deepCopy());
         } else if (name.equals("p3-off")) {
-            removeSteps(card(root, "base.com.TartarugaSulMarciapiede"), "gain", "HEALTH");
-            removeSteps(card(root, "base.mara.TraDueParaurti"), "gain", "ALERTNESS");
-            removeSteps(card(root, "base.gigi.SottoIlCofano"), "gain", "VIOLENCE");
+            removeSteps(card(root, MENTAL_CARAPACE_TECHNIQUE), "gain", "HEALTH");
+            removeSteps(card(root, GREASY_AND_GRIMY), "gain", "ALERTNESS");
+            removeSteps(card(root, SECOND_TRUNK), "gain", "VIOLENCE");
         } else if (name.equals("poison-8")) {
             for (JsonNode s : card(root, HITS[2]).path("target")) if (s.path("op").asText().equals("damage")) ((ObjectNode) s).put("amount", 8);
             ((ObjectNode) card(root, HITS[2]).get("gui")).put("damageAmount", "POISON 8");
@@ -396,9 +397,9 @@ class StarterBalanceMeasureTest {
         else throw new IllegalArgumentException(name);
         // Metadata used by bots must follow the experimental effects as well.
         if (name.equals("p3-off")) {
-            ((ObjectNode) card(root, "base.com.TartarugaSulMarciapiede").get("gui")).put("gains", "—");
-            ((ObjectNode) card(root, "base.mara.TraDueParaurti").get("gui")).put("gains", "—");
-            ((ObjectNode) card(root, "base.gigi.SottoIlCofano").get("gui")).put("gains", "—");
+            ((ObjectNode) card(root, MENTAL_CARAPACE_TECHNIQUE).get("gui")).put("gains", "—");
+            ((ObjectNode) card(root, GREASY_AND_GRIMY).get("gui")).put("gains", "—");
+            ((ObjectNode) card(root, SECOND_TRUNK).get("gui")).put("gains", "—");
         }
         if (name.equals("piera-no-a")) ((ObjectNode) card(root, CHARGES[3]).get("gui")).put("gains", "+15 L");
         return base.derive(base.source + " [" + name + "]", root);

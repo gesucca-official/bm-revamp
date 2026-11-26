@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.gsc.bm.model.cards.base.SetBaseIds.*;
 
 /**
  * SB-28 (D182, D183): the live set file carries the five starters with name and category; the test decks left it for a decks-only
@@ -30,7 +31,7 @@ class LiveSetDecksTest {
         Draft live = Draft.fromClasspath(LIVE);
         Draft composed = Draft.load(List.of("classpath:" + LIVE, "classpath:" + TEST_DECKS));
         Draft draft = Draft.fromClasspath(DRAFT);
-        assertEquals(List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino", "starter-gigi"), List.copyOf(live.deckIds()));
+        assertEquals(List.of(STARTER_SPAZIENZIO, STARTER_MARA, STARTER_CELESTINA, STARTER_PIERA, STARTER_BEPPE), List.copyOf(live.deckIds()));
         assertEquals(draft.deckIds(), composed.deckIds());
         assertEquals(draft.cardBindings(), composed.cardBindings());
         for (String deck : draft.deckIds()) {
