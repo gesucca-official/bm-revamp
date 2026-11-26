@@ -1483,3 +1483,22 @@ Prompt preventivi: `0219059`. Tre chiamate, una per prompt; nessun rifiuto, rila
 ### Terzo giudizio del proprietario — lotto 2
 
 26 novembre 2026: Requisire al Volo 3 e Sgommata 3 approvate («ok»). Tagliare la Strada 3: tutto perfetto salvo la presa; la mano deve reggere la manopola più lontana dall’osservatore. Nuovo prompt preventivo per la sola correzione locale, versione 4. Nove carte approvate, una in attesa.
+
+### Tagliare la Strada — versione 4
+
+Prompt preventivo `b7c1bfc`. Una chiamata; nessun rifiuto, rilancio o tentativo scartato.
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.bound.ColpoDiStriscio` |
+| promptSha256 | `84dc30880d2067b898fae2b8ae79246b2c00b4db67653758a083b9fe31d0893c` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `originali/base.mara.bound.ColpoDiStriscio-3.png`: `594d73132c74b3f67b507b97d4e5e7822cb9f2a8f5bdcebd8c7e09eb5cc17a23` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.bound.ColpoDiStriscio-4.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2677163 / `ea55dcc4876bdead5ad3acad353601c06aaa579cacc05eee792fc134997d37fb` |
+| Anteprima | [WebP](anteprime/base.mara.bound.ColpoDiStriscio-4.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Presa spostata sulla manopola lontana; quella vicina è libera. Il dettaglio richiede la vista grande. |
+| Giudizio del proprietario | In attesa. |
