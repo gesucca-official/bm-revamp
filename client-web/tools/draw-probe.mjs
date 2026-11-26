@@ -1,3 +1,4 @@
+// SB-30a: explicitly choose FACILE through the hub radio: preserve the former random opponent, short games and existing checks. FFA stays server-selected NORMALE.
 // C4-8b, option 0 chosen by the owner on 11 November 2026 («Misura, poi sfocature»): a MEASUREMENT tool, not a check. It changes no
 // threshold and asserts nothing about the game; it only says where the time of the table goes and where the isolated long frames fall.
 // Like VerifyLayout it starts the server on a temporary database (port 8080 free, ./client-web/run.ps1 -Task Serve running, jar built)
@@ -143,7 +144,7 @@ async function scenario(name,ffa){
  try{
   if(ffa){await A.page.getByRole('radio',{name:'Tutti contro tutti'}).click();await A.page.getByTestId('quick').click();await A.page.getByTestId('ffa-list').waitFor({timeout:10000});await waitList(A,1);
    for(let i=0;i<4;i++){const before=await list(A);await A.page.getByTestId('add-computer').click();if(before+1<5)await waitList(A,before+1);}}
-  else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();}
+  else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('level-FACILE').click();await A.page.getByTestId('quick').click();}
   await A.wait(x=>x&&x.hits.some(h=>h.kind==='hand'||h.id.startsWith('person-')),30000,'table');
   await A.cdp.send('Profiler.enable');await A.cdp.send('Profiler.setSamplingInterval',{interval:SAMPLE});
   for(let t=0;t<TURNS;t++){

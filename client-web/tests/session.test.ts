@@ -58,7 +58,7 @@ async function inHub() {
 async function inGame(view = duel()) {
   const ctx = await inHub();
   ctx.session.join('quick/1vCom'); await flush();
-  assert.deepEqual(ctx.server.sent.at(-1), {destination: '/app/game/quick/1vCom/join', body: 'Tu', headers: {category: 'base'}});
+  assert.deepEqual(ctx.server.sent.at(-1), {destination: '/app/game/quick/1vCom/join', body: 'Tu', headers: {category: 'base', level: 'NORMALE'}});
   ctx.server.deliver('/user/queue/game/quick/1vCom/ready', 'g1'); await flush();
   assert.deepEqual(ctx.server.sent.at(-1), {destination: '/app/game/g1/Tu/view', body: ''});
   ctx.server.deliver('/user/queue/game/g1/view', view);
@@ -173,7 +173,7 @@ test('outcome, leave acknowledgement and a new quick game', async () => {
   assert.deepEqual(server.sent.at(-1), {destination: '/app/game/g1/Tu/leave', body: ''});
   server.deliver('/user/queue/game/g1/leave', 'true'); await flush();
   assert.equal(session.model, null); assert.equal(session.phase, 'queue');
-  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1vCom/join', body: 'Tu', headers: {category: 'base'}});
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1vCom/join', body: 'Tu', headers: {category: 'base', level: 'NORMALE'}});
 });
 
 test('queue error returns to the hub with the server message', async () => {
@@ -493,7 +493,7 @@ test('open 1vCom subscribes ready and its error channel, then joins with user an
   session.join('open/1vCom', 'Strano'); await flush();
   assert.ok(server.handlers.has('/user/queue/game/open/1vCom/ready'));
   assert.ok(server.handlers.has('/user/queue/game/open/1vCom/error'));
-  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/open/1vCom/join/Tu/Strano', body: 'Tu'});
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/open/1vCom/join/Tu/Strano', body: 'Tu', headers: {level: 'NORMALE'}});
   server.deliver('/user/queue/game/open/1vCom/error', 'Deck unavailable. Choose a saved deck from your account and retry.');
   assert.equal(session.phase, 'hub');
   assert.equal(session.error, 'Mazzo non disponibile sul server: scegli un mazzo salvato e riprova.');
@@ -528,10 +528,10 @@ for (const mode of ['quick/1vCom', 'quick/1v1', 'quick/ffa'] as const) {
     assert.equal(session.category, 'base', 'default Base');
     session.setCategory('avanzato');
     session.join(mode); await flush();
-    assert.deepEqual(server.sent.at(-1), {destination: `/app/game/${mode}/join`, body: 'Tu', headers: {category: 'avanzato'}});
+    assert.deepEqual(server.sent.at(-1), {destination: `/app/game/${mode}/join`, body: 'Tu', headers: {category: 'avanzato', ...(mode === 'quick/1vCom' ? {level: 'NORMALE'} : {})}});
     const other = await inHub();
     other.session.join(mode); await flush();
-    assert.deepEqual(other.server.sent.at(-1), {destination: `/app/game/${mode}/join`, body: 'Tu', headers: {category: 'base'}});
+    assert.deepEqual(other.server.sent.at(-1), {destination: `/app/game/${mode}/join`, body: 'Tu', headers: {category: 'base', ...(mode === 'quick/1vCom' ? {level: 'NORMALE'} : {})}});
   });
 }
 
@@ -544,16 +544,70 @@ test('SB-29: the category is remembered for the session and repeated by «new ga
   session.leave('again'); await flush();
   server.deliver('/user/queue/game/g1/leave', 'true'); await flush();
   assert.equal(server.count('/app/game/quick/1vCom/join'), 2);
-  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1vCom/join', body: 'Tu', headers: {category: 'avanzato'}});
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1vCom/join', body: 'Tu', headers: {category: 'avanzato', level: 'NORMALE'}});
 });
 
-test('SB-29: a category that is not in the table is ignored; the open join has no header', async () => {
+test('SB-29: a category that is not in the table is ignored; the open join has no category header', async () => {
   const {session, server} = await inHub();
   session.setCategory('esperto');
   assert.equal(session.category, 'base');
   session.join('open/1vCom', 'Strano', 'avanzato'); await flush();
   const sent = server.sent.at(-1)!;
   assert.equal(sent.destination, '/app/game/open/1vCom/join/Tu/Strano');
-  assert.equal('headers' in sent, false, 'the open plays a saved deck: no category');
+  assert.deepEqual(sent.headers, {level: 'NORMALE'}, 'the open plays a saved deck: no category');
   assert.equal(session.category, 'base', 'the open does not change the quick category');
+});
+
+// SB-30a (D203, D207): explicit level only in duels, repeated by new game; shared errors also reject open joins.
+for (const mode of ['quick/1vCom', 'open/1vCom'] as const) {
+  for (const level of ['FACILE', 'NORMALE'] as const) {
+    test(`SB-30a: ${mode} remembers ${level} through new game`, async () => {
+      const {session, server} = await inHub();
+      assert.equal(session.level, 'NORMALE', 'default Normale');
+      session.setLevel(level);
+      session.join(mode, 'Strano'); await flush();
+      const destination = mode === 'open/1vCom' ? '/app/game/open/1vCom/join/Tu/Strano' : '/app/game/quick/1vCom/join';
+      const headers = mode === 'open/1vCom' ? {level} : {category: 'base', level};
+      assert.deepEqual(server.sent.at(-1), {destination, body: 'Tu', headers});
+      server.deliver(`/user/queue/game/${mode}/ready`, 'g1'); await flush();
+      server.deliver('/user/queue/game/g1/view', {...duel(), over: true, winner: 'Tu'});
+      session.leave('again'); await flush();
+      server.deliver('/user/queue/game/g1/leave', 'true'); await flush();
+      assert.equal(session.level, level);
+      assert.equal(server.count(destination), 2);
+      assert.deepEqual(server.sent.at(-1), {destination, body: 'Tu', headers});
+    });
+  }
+  test(`SB-30a: ${mode} shows a shared unknown-level refusal and clears its queue`, async () => {
+    const {session, server} = await inHub();
+    session.join(mode, 'Strano'); await flush();
+    const message = 'Livello sconosciuto: ignoto (noti: FACILE, NORMALE)';
+    server.deliver('/user/queue/game/error', message);
+    assert.equal(session.phase, 'hub'); assert.equal(session.queued, null);
+    assert.equal(session.error, message);
+    assert.ok(!server.handlers.has(`/user/queue/game/${mode}/ready`));
+    assert.ok(!server.handlers.has('/user/queue/game/open/1vCom/error'));
+    assert.equal(session.model, null);
+    session.join(mode, 'Strano'); await flush();
+    assert.equal(session.error, ''); assert.equal(session.phase, 'queue');
+  });
+}
+for (const mode of ['quick/1v1', 'quick/ffa'] as const) {
+  test(`SB-30a: ${mode} never sends a level, even after choosing Facile`, async () => {
+    const {session, server} = await inHub();
+    session.setLevel('FACILE'); session.join(mode); await flush();
+    assert.deepEqual(server.sent.at(-1), {destination: `/app/game/${mode}/join`, body: 'Tu', headers: {category: 'base'}});
+    if (mode === 'quick/ffa') {
+      session.addComputer();
+      assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/ffa/join/com', body: 'Tu'});
+    }
+  });
+}
+test('SB-30a: unsupported levels are ignored and valid changes notify the hub once', async () => {
+  const {session} = await inHub(); let updates = 0;
+  session.subscribe(() => updates++);
+  for (const level of ['', 'facile', 'DIFFICILE', 'MAESTRO']) session.setLevel(level);
+  assert.equal(session.level, 'NORMALE'); assert.equal(updates, 0);
+  session.setLevel('FACILE'); session.setLevel('FACILE');
+  assert.equal(session.level, 'FACILE'); assert.equal(updates, 1);
 });

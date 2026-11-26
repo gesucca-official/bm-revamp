@@ -9,6 +9,10 @@ export type Mode = 'quick/1vCom' | 'quick/1v1' | 'quick/ffa' | 'open/1vCom';
 export const CATEGORIES: {id: string; label: string}[] = [{id: 'base', label: 'Base'}, {id: 'avanzato', label: 'Avanzato'}];
 export const DEFAULT_CATEGORY = 'base';
 export const isQuick = (mode: Mode) => mode.startsWith('quick/');
+/** SB-30a (D203): the level is a session choice, sent only by the two duels against the computer. */
+export type ComLevel = 'FACILE' | 'NORMALE';
+export const LEVELS: {id: ComLevel; label: string}[] = [{id: 'FACILE', label: 'Facile'}, {id: 'NORMALE', label: 'Normale'}];
+export const isVsComputer = (mode: Mode) => mode === 'quick/1vCom' || mode === 'open/1vCom';
 const FFA_SEATS = 5;
 export type Trace = {at: number; channel: string; body: string};
 export type Timers = {set(fn: () => void, ms: number): number; clear(id: number): void};
@@ -161,10 +165,13 @@ export class Session {
   category = DEFAULT_CATEGORY;
   setCategory(category: string) { if (CATEGORIES.some(c => c.id === category) && category !== this.category) { this.category = category; this.emit(); } }
 
+  level: ComLevel = 'NORMALE';
+  setLevel(level: string) { if (LEVELS.some(l => l.id === level) && level !== this.level) { this.level = level as ComLevel; this.emit(); } }
+
   join(mode: Mode, deckId: string | null = this.openDeck, category: string = this.category) {
     if (this.phase !== 'hub' || !this.link || (mode === 'open/1vCom' && !deckId)) return;
     if (isQuick(mode)) this.category = category;
-    const link = this.link, generation = this.generation, token = ++this.queueToken;
+    const link = this.link, generation = this.generation, token = ++this.queueToken, level = this.level;
     const stale = () => generation !== this.generation || token !== this.queueToken;
     if (mode === 'open/1vCom') this.openDeck = deckId;
     this.error = ''; this.notice = ''; this.receipt = null; this.phase = 'queue'; this.queued = mode; this.mode = mode; this.joined = false; this.leavingQueue = false; this.ffaQueue = []; this.starting = false; this.emit();
@@ -173,7 +180,7 @@ export class Session {
       this.log(`${mode}/ready`, body); this.clearQueue(); this.queued = null; this.leavingQueue = false; void this.attach(body, true);
     })];
     // The FFA list is public: every join, computer, leave or start republishes it to everyone listening.
-    // Open: a missing deck (or a game still to resume) is answered on its own error channel, not on game/error.
+    // Open: missing decks (or a game still to resume) use this channel; level refusals use the shared game/error (D207).
     if (mode === 'open/1vCom') subscriptions.push(link.subscribe('/user/queue/game/open/1vCom/error', body => {
       if (stale() || this.phase !== 'queue') return;
       this.log('open/1vCom/error', body); this.queueFailed(serverMessage(body));
@@ -185,9 +192,9 @@ export class Session {
     Promise.all(subscriptions).then(unsubs => {
       if (stale()) { unsubs.forEach(unsub => unsub()); return; }
       this.queueSubs.push(...unsubs); this.joined = true;
-      // SB-29: the quick joins carry the category as a header, the open does not (it plays a saved deck).
-      if (mode === 'open/1vCom') link.send(`/app/game/open/1vCom/join/${this.user}/${deckId}`, this.user);
-      else link.send(`/app/game/${mode}/join`, this.user, {category});
+      // SB-29 / SB-30a: category only in quick; level only in duels against the computer (FFA is server-selected).
+      if (mode === 'open/1vCom') link.send(`/app/game/open/1vCom/join/${this.user}/${deckId}`, this.user, {level});
+      else link.send(`/app/game/${mode}/join`, this.user, {category, ...(isVsComputer(mode) ? {level} : {})});
     }, () => { if (!stale()) this.close('Il server non ha confermato la coda.'); });
   }
 

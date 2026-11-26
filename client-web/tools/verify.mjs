@@ -2,6 +2,7 @@
 // login → quick 1vCom → full games until the outcome → new game, for both characters.
 // Prerequisites: ./scripts/dev.ps1 -Task Server -SeedAccounts and ./client-web/run.ps1 -Task Serve.
 // Moves are chosen by trying cards and targets through the UI; the server decides legality.
+// SB-30a: FACILE through the radio preserves the former random opponent and short complete games; «new game» repeats it.
 import {chromium} from '@playwright/test';
 import {mkdir,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
@@ -179,7 +180,7 @@ async function playTurn(game){
  evidence.noValidMove.push({turn,hand:cards.map(c=>c.name)});return 'stuck';
 }
 
-if(!resumed)await page.getByTestId('quick').click();
+if(!resumed){await page.getByTestId('level-FACILE').click();await page.getByTestId('quick').click();}
 else if((await state())?.over){await page.getByTestId('again').click();}
 for(let g=0;g<8&&(want.characters.size<2||!want.bound||!want.item||!want.periodic||!want.drag||!want.tap);g++){
  await wait(x=>x&&!x.over&&x.hits.some(h=>h.id===`person-${x.me}`),20000,'new game view');
@@ -207,7 +208,7 @@ for(let g=0;g<8&&(want.characters.size<2||!want.bound||!want.item||!want.periodi
  game.ended=new Date().toISOString();evidence.games.push(game);
  console.log(JSON.stringify({game:game.index,character:game.character,opponent:game.opponent,moves:game.moves.length,outcome:game.outcome,stuck:!!game.stuck}));
  if(end?.over)await page.getByTestId('again').click();
- else await page.getByTestId('quick').click();
+ else{await page.getByTestId('level-FACILE').click();await page.getByTestId('quick').click();}
  await page.waitForTimeout(300);
 }
 // Back to the hub without JSON: leave after the outcome.

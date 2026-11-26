@@ -1,3 +1,4 @@
+// SB-30a: explicitly choose FACILE through the hub radio: preserve the former random opponent, short games and existing checks. FFA stays server-selected NORMALE.
 // C3-1 end-to-end check against the REAL server: the pure resolution model (src/resolution.ts) on real games.
 // C3-4: each sequence animates what the timeline of the facts says (cards, voids, cost tokens, objects, draws, end of
 // turn, per-card bars only when the report lines verify) and ends on the view; scenario `humans` measures the 30 s clock.
@@ -521,7 +522,7 @@ try{
 
  // 1. Quick 1vCom to the outcome; at the second own turn a drop and a rejoin: the same resolution, no re-animation.
  if(run('quick')){
-  await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();await table(A);
+  await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('level-FACILE').click();await A.page.getByTestId('quick').click();await table(A);
   const game=readyId(A,/quick\/1vCom\/ready$/);let rejoin=null;
   const r=await playToEnd(A,{shots:'quick',onTurn:async(p,s)=>{
    if(rejoin||s.turn<2)return false;
@@ -548,7 +549,7 @@ try{
  if(run('report')){
   const rows=[];
   for(const mode of ['duel','ffa']){
-   if(mode==='duel'){await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();}
+   if(mode==='duel'){await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('level-FACILE').click();await A.page.getByTestId('quick').click();}
    else{await joinFfa(A);await waitList(A,1);await addComputers(A,4);}
    await table(A);const game=readyId(A,mode==='duel'?/quick\/1vCom\/ready$/:/quick\/ffa\/ready$/);let checked=0;
    for(let t=0;t<6&&checked<4;t++){
@@ -573,7 +574,7 @@ try{
  // K3: reduced motion emulated, three rounds of quick 1vCom, then abandon. No sequence; the static summary is there.
  if(run('reduced')){
   await A.page.emulateMedia({reducedMotion:'reduce'});
-  await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();await table(A);
+  await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('level-FACILE').click();await A.page.getByTestId('quick').click();await table(A);
   const game=readyId(A,/quick\/1vCom\/ready$/),rounds=[];
   for(let i=0;i<3;i++){const s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'))),60000,'turn');if(s.over||s.eliminated)break;
    await playOne(A);const t=await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,60000,'resolved');await A.page.waitForTimeout(300);
@@ -595,7 +596,7 @@ try{
  // sequence bring it to the final state and leave the summary (rules 4, 5); a round resolved while the tab is
  // hidden starts no sequence on return, keeps the summary and a short summary that did not expire (K3, K5).
  if(run('interrupt')){
-  await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();await table(A);
+  await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('level-FACILE').click();await A.page.getByTestId('quick').click();await table(A);
   const game=readyId(A,/quick\/1vCom\/ready$/),out={};
   const ready=()=>A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'))),60000,'turn');
   const resolved=s=>A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,60000,'resolved');
@@ -722,7 +723,7 @@ try{
   const lost=rows.filter(failed);
   return {rounds:rows.length,lost:lost.length,firstLoss,newGameAfterLoss,byAction:Object.fromEntries([...ACTIONS,'new game'].map(a=>[a,{rounds:rows.filter(r=>r.action===a).length,lost:rows.filter(r=>r.action===a&&failed(r)).length}])),hovered:rows.reduce((n,r)=>n+(r.hovered??r.tapped??0),0),pressed:rows.reduce((n,r)=>n+(r.pressed??0),0),gaveWay:rows.reduce((n,r)=>n+(r.gave?.length??0),0),rows};
  }
- const startDuel=p=>async()=>{await p.page.getByRole('radio',{name:'Contro il computer'}).click();await p.page.getByTestId('quick').click();};
+ const startDuel=p=>async()=>{await p.page.getByRole('radio',{name:'Contro il computer'}).click();await p.page.getByTestId('level-FACILE').click();await p.page.getByTestId('quick').click();};
  if(run('info')){
   const r=await infoGames(A,'duel',{start:startDuel(A)});evidence.scene.info=r;step('infoDuel',{rounds:r.rounds,lost:r.lost,firstLoss:r.firstLoss,newGameAfterLoss:r.newGameAfterLoss,byAction:r.byAction,hovered:r.hovered,pressed:r.pressed});
  }
@@ -866,7 +867,7 @@ try{
     if(/Grab/.test(b)&&!own)return -1;if(/Steal/.test(b)&&!far)return -1;return list.length-i;};};
   evidence.blow=[];evidence.blowProblems=[];
   for(const [id,list] of [['C3 contrasti',counters],['C3 furti',theft]]){
-   await page.getByTestId('tab-play').click();await page.getByRole('radio',{name:'Con un tuo mazzo'}).click();
+   await page.getByTestId('tab-play').click();await page.getByRole('radio',{name:'Con un tuo mazzo'}).click();await page.getByTestId('level-FACILE').click();
    await page.getByTestId('quick').click();await page.getByTestId('deck-dialog').waitFor();
    await page.getByRole('radio',{name:new RegExp(`^${id} `)}).click();await page.getByTestId('start-open').click();
    await table(A);const game=readyId(A,/open\/1vCom\/ready$/);

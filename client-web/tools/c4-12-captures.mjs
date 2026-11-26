@@ -1,3 +1,4 @@
+// SB-30a: explicitly choose FACILE through the hub radio: preserve the former random opponent, short games and existing checks. FFA stays server-selected NORMALE.
 // C4-12: captures of an elimination in FFA (four computers) and of an outcome in a duel (quick 1vCom) at the same moments of the sequence,
 // to compare a build before and after C4-12 (BM_TAG=prima|dopo). Not a verification: no check fails on the product; it records, per moment,
 // a screenshot, a crop of the seat stamped at the tail, whether the outcome panel and the hint are in the page and the time in the sequence.
@@ -45,7 +46,7 @@ async function run(mode){
  await page.getByRole('button',{name:'Siediti al tavolo'}).click();await page.getByTestId('quick').waitFor({timeout:15000});
  if(mode==='ffa'){await page.getByRole('radio',{name:'Tutti contro tutti'}).click();await page.getByTestId('quick').click();await page.getByTestId('ffa-list').waitFor({timeout:10000});
   for(let i=0;i<4;i++){await page.getByTestId('add-computer').click();await page.waitForTimeout(400);}}
- else{await page.getByRole('radio',{name:'Contro il computer'}).click();await page.getByTestId('quick').click();}
+ else{await page.getByRole('radio',{name:'Contro il computer'}).click();await page.getByTestId('level-FACILE').click();await page.getByTestId('quick').click();}
  await wait(s=>s.hits.some(h=>h.kind==='hand'),30000,'table');await page.mouse.move(2,2);
  for(let t=0;t<maxTurns&&!rec.found;t++){
   const s0=await wait(s=>s.over||s.eliminated||(s.phase==='choose'&&!s.sequence.running&&s.hits.some(h=>h.kind==='hand')),90000,'turn');

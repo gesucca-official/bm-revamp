@@ -1,3 +1,4 @@
+// SB-30a: explicitly choose FACILE through the hub radio: preserve the former random opponent, short games and existing checks. FFA stays server-selected NORMALE.
 // SB-31 F3: captures of the inspection (flavour, full text, keyword reminders, rarity) and of the status list on the REAL table, a quick game against the computer
 // on a temporary database, at 1366x768 and 844x390; and which of the fields the client calls «playground only» a live game really carries (item 7 of the prompt).
 // Not a verification of the table: what it checks is what the phase promises for the inspection (button >= 44 px, one swap and back, a line per keyword the card uses,
@@ -104,7 +105,7 @@ async function run(size,category){
  await page.goto(`${url}#/accedi`);
  await page.getByLabel('Nome').fill('devAlice');await page.getByLabel('Password').fill('local-alice');
  await page.getByRole('button',{name:'Siediti al tavolo'}).click();await page.getByTestId('quick').waitFor({timeout:15000});
- await page.getByRole('radio',{name:'Contro il computer'}).click();
+ await page.getByRole('radio',{name:'Contro il computer'}).click();await page.getByTestId('level-FACILE').click();
  await page.getByTestId(`category-${category}`).click();await page.getByTestId('quick').click();
  await wait(s=>s.hits.some(h=>h.kind==='hand'),30000,'table');await page.mouse.move(2,2);
  const seen=new Set();let statusDone=false,shotsLeft=3;

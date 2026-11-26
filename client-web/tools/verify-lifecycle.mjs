@@ -1,3 +1,4 @@
+// SB-30a: explicitly choose FACILE through the hub radio: preserve the former random opponent, short games and existing checks. FFA stays server-selected NORMALE.
 // C2b-2 end-to-end check against the REAL server: lifecycle of 1v1 games with two accounts.
 // The script starts the server itself on a temporary database (D12: the local data is never touched),
 // stops and restarts it for the restart receipt, and stops it at the end. Waits of 30 s are real.
@@ -253,7 +254,7 @@ try{
  step('restart',{gameId:g8,resumeA:res8[0],resumeB:res8[1],hubA:receipts[0],hubB:receipts[1],framesA:frames8[0],framesB:frames8[1],rejoinA:'Rientra',reloginB:'Esci + login'});
 
  // 9. vsCom regression: a drop longer than 30 s is a forfeit against the computer too.
- await pickMode(A,'Contro il computer');await A.page.getByTestId('quick').click();await table(A);
+ await pickMode(A,'Contro il computer');await A.page.getByTestId('level-FACILE').click();await A.page.getByTestId('quick').click();await table(A);
  const g9=readyId(A);const dropped9=await drop(A);
  await A.page.waitForTimeout(Math.max(0,dropped9+33000-Date.now()));
  await rejoin(A);const s9=await A.wait(x=>x&&x.over,10000,'vsCom forfeit');

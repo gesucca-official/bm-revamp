@@ -112,3 +112,24 @@ tests.push({name: 'open rejection releases loading and subscriptions, retry send
   callbacks['/user/queue/game/open/1vCom/ready']({body:'game'});
   assert.equal(ready,1); assert.equal(state.queued,false); assert.equal(unsubscribed,4);
 }});
+
+// SB-30a (D203): None preserves the headerless Facile fallback, in both computer modes.
+const levelHeaders: [string, object[]][] = [
+  ['quick/1vCom', [{category: 'avanzato'}, {category: 'avanzato', level: 'FACILE'}, {category: 'avanzato', level: 'NORMALE'}]],
+  ['open/1vCom', [{}, {level: 'FACILE'}, {level: 'NORMALE'}]],
+  ['quick/1v1', [{category: 'avanzato'}, {category: 'avanzato'}, {category: 'avanzato'}]],
+  ['quick/ffa', [{category: 'avanzato'}, {category: 'avanzato'}, {category: 'avanzato'}]]
+];
+for (const [mode, expected] of levelHeaders) {
+for (const [index, level] of ([null, 'FACILE', 'NORMALE'] as const).entries()) {
+tests.push({name: mode + ' sends computer level ' + (level || '(none)'), run: async () => {
+  const state = new SessionService();
+  assert.equal(state.computerLevel, null);
+  state.computerLevel = level; state.starterCategory = 'avanzato';
+  const service = new WebsocketService(state), sent: any[] = [];
+  (service as any).stompClient = {subscribe: () => ({unsubscribe: () => {}}), send: (destination, headers, body) => sent.push({destination, headers, body})};
+  service.joinGame('alice', mode, () => {}, {deckId: 'selected'} as any);
+  assert.deepEqual(sent, [{destination: '/app/game/' + mode + '/join' + (mode === 'open/1vCom' ? '/alice/selected' : ''), headers: expected[index], body: 'alice'}]);
+}});
+}
+}

@@ -38,6 +38,15 @@
       <mat-menu #openPlayModes="matMenu">
         <button mat-menu-item (click)="joinOpenGame('open/1vCom')">Join 1vCom Game</button>
       </mat-menu>
+      <label class="starter-category">Computer level (quick/open 1vCom)
+        <select data-testid="computer-level" [disabled]="sessionService.queued"
+                [value]="sessionService.computerLevel || ''"
+                (change)="sessionService.computerLevel = $any($event.target).value || null">
+          <option value="">None (Facile)</option>
+          <option value="FACILE">FACILE</option>
+          <option value="NORMALE">NORMALE</option>
+        </select>
+      </label>
     </mat-card-content>
   </mat-card>
   <mat-card class="chooser-card" *ngIf="sessionService.queuedFor=='ffa'">

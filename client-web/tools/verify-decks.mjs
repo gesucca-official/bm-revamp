@@ -1,3 +1,4 @@
+// SB-30a: explicitly choose FACILE through the hub radio: preserve the former random opponent, short games and existing checks. FFA stays server-selected NORMALE.
 // SB-28, D184 (6): adapted to the live game (regulation 2.0, Set Base 1.0: 117 cards, 7 characters, three bound cards for some characters); the images
 // are SB-32's, so a card without art shows the placeholder (no-img.png) and the checks accept it.
 // C2b-4 end-to-end check against the REAL server: catalog, deck editor, save/overwrite/delete and open 1vCom
@@ -159,7 +160,7 @@ function fromDeck(game,deck){
 }
 const startOpen=async(id,{cancelFirst=false}={})=>{
  await page.getByTestId('tab-play').click();
- await page.getByRole('radio',{name:'Con un tuo mazzo'}).click();
+ await page.getByRole('radio',{name:'Con un tuo mazzo'}).click();await page.getByTestId('level-FACILE').click();
  const mark=A.sent.length;
  if(cancelFirst){await page.getByTestId('quick').click();await page.getByTestId('deck-dialog').waitFor();await page.getByTestId('cancel-open').click();
   assert.equal(await dialogOpen(),false);assert.ok(!A.sends(mark).some(f=>f.headers.destination.includes('/open/')),'cancel sends nothing');}

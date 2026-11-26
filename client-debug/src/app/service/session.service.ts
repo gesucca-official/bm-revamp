@@ -14,6 +14,8 @@ export class SessionService {
   gameJoinError = '';
   /** SB-29 (R01 2.1, D190): starter category sent with the quick joins (`base`, `avanzato`); null sends none, any starter. */
   starterCategory: string | null = null;
+  /** SB-30a (D203): null omits the header (Facile); only quick/open 1vCom send it. */
+  computerLevel: 'FACILE' | 'NORMALE' | null = null;
 
 
   // tslint:disable:variable-name

@@ -1,3 +1,4 @@
+// SB-30a: explicitly choose FACILE through the hub radio: preserve the former random opponent, short games and existing checks. FFA stays server-selected NORMALE.
 // C3-3 (O6) end-to-end check against the REAL server: arrows from the chosen or dragged card to the admitted targets.
 // Like VerifyResolution it starts the server itself on a temporary database (the local data is never touched) and stops it
 // at the end. Scenarios (BM_SCENARIOS): duel (quick 1vCom, mouse), touch (quick 1vCom, emulated touch), reduced (quick 1vCom, reduced
@@ -366,7 +367,7 @@ async function scenario(name,{ffa=false,touch=false,reduced=false,turns=3,drags=
  const rec={ffa,touch,reduced,turns:[],cards:[],locked:[],d12:[]};evidence.scenarios[name]=rec;
  try{
   if(ffa){await joinFfa(A);await waitList(A,1);await addComputers(A,4);}
-  else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();}
+  else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('level-FACILE').click();await A.page.getByTestId('quick').click();}
   await table(A);
   const game=readyId(A,ffa?/quick\/ffa\/ready$/:/quick\/1vCom\/ready$/);rec.game=game;
   let learn=null;
@@ -569,7 +570,7 @@ async function scenarioKeyboard(name,{ffa=false,reduced=true,turns=60}){
  const rec={ffa,reduced,turns:[]};evidence.scenarios[name]=rec;
  try{
   if(ffa){await joinFfa(A);await waitList(A,1);await addComputers(A,4);}
-  else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();}
+  else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('level-FACILE').click();await A.page.getByTestId('quick').click();}
   await table(A);
   await kbdGame(A,scope,rec,{maxTurns:turns,reduced});
   step(scope,{turns:rec.turns.length,end:rec.end,focus:rec.focus,confirmFocus:rec.confirmFocus,tabOrder:rec.turns[0]?.tabOrder,noValidMove:rec.noValidMove,sequenceEnds:rec.sequenceEnds});

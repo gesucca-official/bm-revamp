@@ -196,10 +196,13 @@ export class WebsocketService {
     queueSubs.push(subscription);
     if (errorSubscription) { queueSubs.push(errorSubscription); }
     this.subscriptions.set('queue', queueSubs);
+    const headers = {
+      ...(gameType.startsWith('quick/') && this.sessionService.starterCategory ? {category: this.sessionService.starterCategory} : {}),
+      ...((gameType === 'quick/1vCom' || gameType === 'open/1vCom') && this.sessionService.computerLevel ? {level: this.sessionService.computerLevel} : {})
+    };
     this.stompClient.send('/app/game/' + gameType + '/join' +
       (gameType.includes('open') ? '/' + playerId + '/' + deck.deckId : '')
-      // SB-29: the quick joins carry the chosen starter category in the STOMP header `category`; without a choice, none (any starter).
-      , gameType.startsWith('quick/') && this.sessionService.starterCategory ? {category: this.sessionService.starterCategory} : {}, playerId);
+      , headers, playerId);
   }
 
   public addComToGame(): void {

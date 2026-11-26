@@ -1,5 +1,5 @@
 import React,{useEffect,useRef,useState} from 'react';
-import {CATEGORIES,isQuick,type Session,type Mode} from './session.ts';
+import {CATEGORIES,LEVELS,isQuick,isVsComputer,type Session,type Mode} from './session.ts';
 import {PressButton} from './ui.tsx';
 import {groupKeyDown,tabStop} from './a11y.ts';
 import {Collection} from './collection.tsx';
@@ -79,6 +79,9 @@ export function Hub({session}:{session:Session}){
     {!waiting&&isQuick(choice)&&<div className="category">
      <div role="radiogroup" aria-label="Starter" aria-describedby="category-hint" className="modes" onKeyDown={e=>groupKeyDown(e,'radio')}><span className="small" aria-hidden="true">Starter:</span>{CATEGORIES.map((c,i)=><PressButton key={c.id} role="radio" aria-checked={c.id===session.category} tabIndex={i===tabStop(CATEGORIES.map(x=>x.id===session.category),CATEGORIES.map(()=>true))?0:-1} data-testid={`category-${c.id}`} className={`mode${c.id===session.category?' on':''}`} onClick={()=>session.setCategory(c.id)}>{c.label}</PressButton>)}</div>
      <p id="category-hint" className="small">Base: per imparare. Avanzato: personaggi più complessi.</p></div>}
+    {!waiting&&isVsComputer(choice)&&<div className="category">
+     <div role="radiogroup" aria-label="Livello del computer" aria-describedby="level-hint" className="modes" onKeyDown={e=>groupKeyDown(e,'radio')}><span className="small" aria-hidden="true">Computer:</span>{LEVELS.map((l,i)=><PressButton key={l.id} role="radio" aria-checked={l.id===session.level} tabIndex={i===tabStop(LEVELS.map(x=>x.id===session.level),LEVELS.map(()=>true))?0:-1} data-testid={`level-${l.id}`} className={`mode${l.id===session.level?' on':''}`} onClick={()=>session.setLevel(l.id)}>{l.label}</PressButton>)}</div>
+     <p id="level-hint" className="small">Facile: casuale. Normale: segue il personaggio.</p></div>}
     {waiting&&<p className="notice" role="status" data-testid="waiting">{entering?'Entro nella partita…':session.queued==='quick/1v1'?'In attesa di un altro giocatore…':session.queued==='quick/ffa'?(session.starting?'Si parte…':`Al tavolo ${session.ffaQueue.length} su 5: si parte da soli a cinque.`):session.queued==='open/1vCom'?`Preparo il tavolo con «${session.openDeck}»…`:'Cerco un posto al tavolo…'}</p>}
     {session.queued==='quick/ffa'&&<FfaQueue session={session}/>}
     <div className="actions">

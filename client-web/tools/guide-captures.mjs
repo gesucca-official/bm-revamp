@@ -1,3 +1,4 @@
+// SB-30a: explicitly choose FACILE through the hub radio: preserve the former random opponent, short games and existing checks. FFA stays server-selected NORMALE.
 // C4-10 Phase A: captures of the moments of a turn on the REAL table (duel = quick 1vCom, FFA = four computers), for the visual guidance proposal.
 // Not a verification: no check fails. It records, per moment, a screenshot and where the elements that should draw the eye are
 // (chosen card, admitted targets, preview with ✓/×, discard card, hint, short summary, round cards), with the distances the eye travels.
@@ -75,7 +76,7 @@ async function run(mode,size){
  await page.getByRole('button',{name:'Siediti al tavolo'}).click();await page.getByTestId('quick').waitFor({timeout:15000});
  if(mode==='ffa'){await page.getByRole('radio',{name:'Tutti contro tutti'}).click();await page.getByTestId('quick').click();await page.getByTestId('ffa-list').waitFor({timeout:10000});
   for(let i=0;i<4;i++){await page.getByTestId('add-computer').click();await page.waitForTimeout(400);}}
- else{await page.getByRole('radio',{name:'Contro il computer'}).click();await page.getByTestId('quick').click();}
+ else{await page.getByRole('radio',{name:'Contro il computer'}).click();await page.getByTestId('level-FACILE').click();await page.getByTestId('quick').click();}
  await wait(s=>s.hits.some(h=>h.kind==='hand'),30000,'table');
  await page.mouse.move(2,2);
  const maxTurns=toEnd?40:turns;

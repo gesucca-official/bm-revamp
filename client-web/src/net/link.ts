@@ -2,7 +2,7 @@
 export interface Link {
   /** Resolves when the server's RECEIPT confirms the subscription; then a SEND cannot outrun it. */
   subscribe(destination: string, handler: (body: string) => void): Promise<() => void>;
-  /** SB-29: `headers` are STOMP native headers (the quick joins carry `category`); none when omitted. */
+  /** `headers` are STOMP native headers: quick joins carry `category`, quick/open 1vCom also carry `level` (SB-29, SB-30a). */
   send(destination: string, body?: string, headers?: Record<string, string>): void;
   /** Deliberate close: no drop notification. */
   close(): void;

@@ -1,3 +1,4 @@
+// SB-30a: explicitly choose FACILE through the hub radio: preserve the former random opponent, short games and existing checks. FFA stays server-selected NORMALE.
 // SB-31 F4: captures of the catalog with its filters, of the deck editor with the fixed deck bar and its summary (O15), and of the HEALTH cost of Duccio (D198 (15)),
 // on the REAL client against a local server on a temporary database, at 1366x768 and 844x390. Not a verification of the client (VerifyDecks is): it gives the owner something to
 // judge (the minimal option, before any full one) and it writes what it measured: touch targets of the new controls, the position of the bar, the faces shown by each filter.
@@ -101,7 +102,7 @@ async function run(size){
  const healthCards=new Set(annex.cards.filter(c=>c.character===DUC).map(c=>c.class));
  const costOf=new Map();
  let found=null,attempts=0;
- const startGame=async()=>{await page.getByTestId('tab-play').click();await page.getByRole('radio',{name:'Con un tuo mazzo'}).click();await page.getByTestId('quick').click();await page.getByTestId('deck-dialog').waitFor();
+ const startGame=async()=>{await page.getByTestId('tab-play').click();await page.getByRole('radio',{name:'Con un tuo mazzo'}).click();await page.getByTestId('level-FACILE').click();await page.getByTestId('quick').click();await page.getByTestId('deck-dialog').waitFor();
   await page.getByRole('radio',{name:/^Duccio /}).click();await page.getByTestId('start-open').click();await wait(s=>s.phase==='choose'&&s.hits.some(h=>h.kind==='hand'),40000,'Duccio table');};
  const abandon=async()=>{const e=await state();if(e&&(e.over||e.eliminated)){await page.getByRole('button',{name:'Torna all’hub'}).click();}else{await page.getByLabel('Apri menu').click();await page.getByRole('button',{name:'Abbandona la partita'}).click();await page.getByRole('button',{name:'Sì, abbandona'}).click();}
   await page.getByTestId('quick').waitFor({timeout:15000});};

@@ -112,6 +112,13 @@ in verticale, mai la pagina in orizzontale.
 - Modalità: contro il computer, uno contro uno, tutti contro tutti e «Con un tuo
   mazzo» (open 1vCom, C2b-4). «Gioca» entra nella coda scelta; per open apre prima la
   scelta fra i mazzi salvati (nessun mazzo: rimando alla collezione).
+- Nei due duelli contro computer si sceglie «Facile» o «Normale», con Normale
+  selezionato inizialmente (SB-30a, D203). Come «Starter», il gruppo si usa con
+  frecce e un solo ingresso con Tab. La scelta resta nella sessione e «Nuova
+  partita» la ripete: header STOMP `level` (`FACILE` / `NORMALE`). Il livello non
+  compare al tavolo. Uno contro uno e FFA non mandano `level`; i computer della
+  FFA sono sempre Normale sul server. Nel client di debug «None (Facile)» omette
+  l'header, oppure si invia esplicitamente uno dei due livelli.
 - In coda: «Esci dalla coda» chiede `/app/session/queue/leave` e torna all'hub solo
   all'ACK del server; senza ACK (5 s) resta in coda con un errore e si può riprovare.
   Un ingresso rifiutato (`game/error`) riporta all'hub con il messaggio del server.
@@ -132,6 +139,8 @@ in verticale, mai la pagina in orizzontale.
   `open/1vCom/ready` e `open/1vCom/error`; un mazzo assente (o una partita ancora da
   riprendere, che il server segnala con lo stesso messaggio) riporta all'hub con
   «Mazzo non disponibile sul server».
+  Il rifiuto di un livello sconosciuto arriva invece su `game/error` anche
+  nell'open e mostra il messaggio del server nell'hub (D207).
 - «Al bar»: utenti collegati e attività (`/topic/connections/users`), conteggio,
   ordinamento per colonna, pagine da 5, 10 o 20 righe.
 - Il `resume` del login si applica una sola volta; un `account/data` successivo

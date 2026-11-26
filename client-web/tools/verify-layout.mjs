@@ -1,3 +1,4 @@
+// SB-30a: explicitly choose FACILE through the hub radio: preserve the former random opponent, short games and existing checks. FFA stays server-selected NORMALE.
 // C3-L end-to-end measure against the REAL server: scale and use of the table space, in the duel (quick 1vCom) and the five-seat FFA
 // (four computers). Like VerifyAim it starts the server itself on a temporary database (the local data is never touched) and stops it
 // at the end. At several turns the scene is read back (layout, hits) with the HTML shell (clock, turn, menu, hint, short summary), and
@@ -265,7 +266,7 @@ async function scenarioResize(name,ffa){const scope=`${name}${tag}`,A=await open
   const row={what,size,commands:s.commands,target:s.target,resizes:s.stats.resizes,scale:L.scale,person:mine?R(mine.person):null,problems:layoutProblems(tableLayout(size.width,size.height,Object.keys(s.backs).concat(s.me),s.me,{}),size.width,size.height).length};rec.steps.push(row);
   if(s.target&&dom.card){const hit=s.hits.find(h=>(h.kind==='person'||h.kind==='item')&&h.target.owner===s.target.owner&&h.target.itemIndex===s.target.itemIndex);if(hit&&overlap(dom.card,hit)>0)bad(scope,`${what}: the card covers its target`);for(const b of dom.b){if(!b.reach)bad(scope,`${what}: control not reachable`);if(b.x<0||b.y<0||b.x>size.width||b.y>size.height)bad(scope,`${what}: control off the screen`);}}
   return s;};
- try{if(ffa){await joinFfa(A);await waitList(A,1);await addComputers(A,4);}else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();}await table(A);
+ try{if(ffa){await joinFfa(A);await waitList(A,1);await addComputers(A,4);}else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('level-FACILE').click();await A.page.getByTestId('quick').click();}await table(A);
   await playOne(A);let s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&!x.sequence.running&&x.hits.some(h=>h.kind==='hand'))),60000,'turn');
   if(!await aimAny(A))bad(scope,'no card admits a character');
   const before=await look('start',home);if(!before.target)bad(scope,'no target chosen at the start');
@@ -282,7 +283,7 @@ async function scenario(name,{ffa=false,turns=2}){
  const A=await open('A',{hasTouch:true});await login(A);const rec={ffa,turns:[],closeUps:[]};evidence.scenarios[name]=rec;let closeUpsSeen=0;
  try{
   if(ffa){await joinFfa(A);await waitList(A,1);await addComputers(A,4);}
-  else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();}
+  else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('level-FACILE').click();await A.page.getByTestId('quick').click();}
   await table(A);
   for(let t=0;t<=turns;t++){
    const s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand')&&!x.sequence.running)),60000,'turn');
