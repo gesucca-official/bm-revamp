@@ -424,3 +424,32 @@ Nessun altro atteso esistente modificato; nessuna asserzione, soglia, timeout, `
 La schermata dell'hub con il gruppo «Computer» ([quick 1366×768](sb-30a/b3-hub-quick-1366x768.jpg),
 [quick 844×390](sb-30a/b3-hub-quick-844x390.jpg), [open 1366×768](sb-30a/b3-hub-open-1366x768.jpg),
 [open 844×390](sb-30a/b3-hub-open-844x390.jpg)) e la riga di aiuto «Facile: casuale. Normale: segue il personaggio.».
+
+## B4 — Partita del proprietario
+
+**Lista per la partita** (proposta, sezione 7; [D209](../../set-base-decisioni.md#decisioni-del-proprietario) (2)). Nessun
+esecutore: gioca il proprietario, la regia registra il giudizio.
+
+Prima di cominciare: `git pull`, jar rifatto (`./scripts/build.ps1 -Task Server -Offline`), server su database temporaneo
+(`$env:BM_DATABASE_PATH="$env:TEMP\bm-b4.sqlite"; ./scripts/dev.ps1 -Task Server -SeedAccounts`), client servito
+(`./client-web/run.ps1 -Task Serve`).
+
+1. **Tre partite contro Facile** e **tre contro Normale**, «Contro il computer» con starter Base.
+2. **Una contro Normale con starter Avanzato.**
+3. **Una FFA:** i computer della FFA sono sempre Normale; con un solo umano servono quattro computer per partire.
+
+Per ogni partita una parola fra «stupido / giusto / duro / ingiusto / noioso», e se hai vinto. Il Normale passa se non è mai
+«stupido» e non è «ingiusto»; il Facile passa se resta battibile da chi impara. Da notare in particolare: se il Normale sembra
+«leggere la mano» (para sempre davanti a un colpo mostrato e letale: la carta mostrata è pubblica) e se Normale è troppo duro come
+default (in quel caso si cambia il default, non il bot).
+
+| Partita | Livello | Starter | Parola | Vinto |
+|---|---|---|---|---|
+| 1 | Facile | Base | | |
+| 2 | Facile | Base | | |
+| 3 | Facile | Base | | |
+| 4 | Normale | Base | | |
+| 5 | Normale | Base | | |
+| 6 | Normale | Base | | |
+| 7 | Normale | Avanzato | | |
+| 8 | FFA (Normale) | — | | |
