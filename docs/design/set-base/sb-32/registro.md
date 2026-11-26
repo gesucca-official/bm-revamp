@@ -1246,3 +1246,177 @@ Eccezione alla guida di stile: in SVEGLIAMOCI-8 l'avventore ha un volto generico
 ### Primo giudizio del proprietario — lotto 2
 
 26 novembre 2026. Slalom d’Avvicinamento: «bella», approvata. Correzioni richieste: mano in più in Lazo e Sventare; Requisire deve mettere il pacco nello zaino; Sgommata e Tagliare in bici fuori dal bar; rendere leggibili Agilità e Traiettoria; unto dei kebab e lieve sorriso in Unta; pollice e sguardo soddisfatto verso l’avventore in Semaforo. «Smettiamo di fare tutti gli avventori incappucciati»: avventori anonimi, senza cappucci. Prompt del giro aggiunti prima delle generazioni.
+
+### Generazioni dopo il primo giudizio — lotto 2
+
+Prompt preventivi: `4606e64`; rimozione localizzata di Lazo: `ea7dad2`. Dieci chiamate, una per prompt, nessun rifiuto o rilancio. Lazo versione 2 ha rimosso il casco ma lasciato l’arto: conservata e superata dalla versione 3 su indicazione con maschera del proprietario. Modello e riscrittura non esposti. Originali copiati senza modifica, fuori da git.
+
+#### Lazo del Rider — 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.CinghiataDiTraverso` |
+| promptSha256 | `d06fff61d0c19afee1ed3963654d9b6c81349a5e7d8cebcc1a8b950d20c4ca21` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | ; `originali/base.mara.CinghiataDiTraverso.png`: `5c1ad6e2c0def41eb5756549cbd8f4125e2e032739e62d84c71c3b260ac20d07` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.CinghiataDiTraverso-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2940334 / `e74e5bc6ed3df5386bdc7b100d9feef7aa2f5fe38d2ebf4201a693ff526fdbf0` |
+| Anteprima | [WebP](anteprime/base.mara.CinghiataDiTraverso-2.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessun rilancio; Lazo 2 superata dalla 3. |
+| Controllo a 60 px | Cinghia e avventore leggibili; nella versione 2 resta il braccio pendente, corretto nella 3. |
+| Giudizio del proprietario | In attesa. |
+
+#### Requisire al Volo — 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.PresoAlVolo` |
+| promptSha256 | `c2c394c5cf1af952a391b2667e40aaba34e07318104553228c9a6ba1a056b9fa` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | ; `originali/base.mara.PresoAlVolo.png`: `355214c1b7dde700e3dbcfbab27b35fba49a9af9b6436c8e706529d55d0d965f` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.PresoAlVolo-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2943439 / `d64d56cdfdb0c7a1daf9b34b287b57d91de29f5b89aa0dff85e09d622eb69ef8` |
+| Anteprima | [WebP](anteprime/base.mara.PresoAlVolo-2.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessun rilancio; Lazo 2 superata dalla 3. |
+| Controllo a 60 px | Il pacco entra nello zaino; la direzione è segnalata anche da una freccia grafica. |
+| Giudizio del proprietario | In attesa. |
+
+#### Sgommata — 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.Sgommata` |
+| promptSha256 | `c70cdcd16d0baf2d849d7f1e8674732cd0222d578ec6f146cb31da2a89f584a3` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | ; `originali/base.mara.Sgommata.png`: `84727d5ec84b6b2414ba3cb39b217af97f5f629203409727fee5a6b5f46a8d04`; `../../carriere/asset/tutorial/sfondi/s1-esterno.webp`: `19f020fe6689b2de7261dfe7c1bcff9608a6509539c7fb5ab18363a85687a1d6` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.Sgommata-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3504046 / `f591c9c5226b0070db44f678c5cdb5bfb7bb11850d47ae005a037858ba0c7d75` |
+| Anteprima | [WebP](anteprime/base.mara.Sgommata-2.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessun rilancio; Lazo 2 superata dalla 3. |
+| Controllo a 60 px | Sbandata in bici davanti alla facciata del bar. |
+| Giudizio del proprietario | In attesa. |
+
+#### Agilità Innaturale — 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.SorpassoInCurva` |
+| promptSha256 | `e0796e6b2cd2b30d492f9c2e92558f01dbdcc13081ecc4a3e3cc4e0d183e9228` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | ; `../identikit/riferimenti/mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `../../carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.SorpassoInCurva-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2761222 / `5584a6a159680461c5dceb874ed05d2eedeef2be3ec88c8b26c6822b29b0a5df` |
+| Anteprima | [WebP](anteprime/base.mara.SorpassoInCurva-2.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessun rilancio; Lazo 2 superata dalla 3. |
+| Controllo a 60 px | Il salto sullo sgabello e la schivata si distinguono. |
+| Giudizio del proprietario | In attesa. |
+
+#### Traiettoria Imprevedibile — 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.TiStringoLaCurva` |
+| promptSha256 | `5ac2261fb156f12ae3a3556b53bb4b8abb5baf01bd7a3e9a4f02ef15b17f773d` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | ; `../identikit/riferimenti/mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `../../carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.TiStringoLaCurva-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2975642 / `bbb98562d6a28b92220c4e8ebdd1599e53d17a2669ef961b42f2235683970fb7` |
+| Anteprima | [WebP](anteprime/base.mara.TiStringoLaCurva-2.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessun rilancio; Lazo 2 superata dalla 3. |
+| Controllo a 60 px | Piede piantato e torsione suggeriscono il cambio di direzione. |
+| Giudizio del proprietario | In attesa. |
+
+#### Unta e Bisunta — 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.TraDueParaurti` |
+| promptSha256 | `611dd6ddf3f0e49e5ea494fa6d7414f309806f586071a20710b30f22f50fe040` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | ; `originali/base.mara.TraDueParaurti.png`: `64fb6c231be0c3a72fd832f579e7b329a2a9c686cf40dcc6b7d0826057087d09` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.TraDueParaurti-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2788215 / `b7183fd293604bb4af5aa1b9092bf42f89bb8ca8d6a737b6847ee11a16f43817` |
+| Anteprima | [WebP](anteprime/base.mara.TraDueParaurti-2.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessun rilancio; Lazo 2 superata dalla 3. |
+| Controllo a 60 px | Sorriso e grandi macchie unte visibili; kebab spunta dallo zaino. |
+| Giudizio del proprietario | In attesa. |
+
+#### Semaforo Rosso — 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.bound.CambioMarcia` |
+| promptSha256 | `58c472b60f6afd246649a98f2a3d682b8890b6b0bfbb5ee119a4b546356e34c1` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | ; `originali/base.mara.bound.CambioMarcia.png`: `f83be5de0e50470de63e68f0fee98b74cca61f706abb0acd699a1a8d5cb3a988` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.bound.CambioMarcia-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2739946 / `061430435258c60ff2602c4da62479d2e30ea5ed179e9515125d7b564dbbe2d6` |
+| Anteprima | [WebP](anteprime/base.mara.bound.CambioMarcia-2.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessun rilancio; Lazo 2 superata dalla 3. |
+| Controllo a 60 px | Mara guarda soddisfatta l’avventore; il pollice resta piccolo a 60 px. |
+| Giudizio del proprietario | In attesa. |
+
+#### Tagliare la Strada — 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.bound.ColpoDiStriscio` |
+| promptSha256 | `b4e74a7e30a9b7fcce0c5aaadeecc0ba16eb04159189654fcfc7c86dc4b98343` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | ; `../identikit/riferimenti/mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `../../carriere/asset/tutorial/sfondi/s1-esterno.webp`: `19f020fe6689b2de7261dfe7c1bcff9608a6509539c7fb5ab18363a85687a1d6` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.bound.ColpoDiStriscio-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3066389 / `b67918357a262fe7bb3e12172bb062e84ab48308b41b3622c9afe9aa3d47d2ab` |
+| Anteprima | [WebP](anteprime/base.mara.bound.ColpoDiStriscio-2.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessun rilancio; Lazo 2 superata dalla 3. |
+| Controllo a 60 px | La bici attraversa la strada davanti all’avventore. |
+| Giudizio del proprietario | In attesa. |
+
+#### Sventare l'Assassinio — 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.bound.PassoStretto` |
+| promptSha256 | `acfa1fb7f0d11a9893d8205e47ef9eedea5d766d290284886f010bb134839aad` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | ; `originali/base.mara.bound.PassoStretto.png`: `3058eac329e6c20150e218dc083179a32a6a6be49ad416ae5e6964d7b3e035fa` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.bound.PassoStretto-2.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2564188 / `2425e489e490597074138f416bb189eb7965fbb51966a7e51a02f8cffc04963d` |
+| Anteprima | [WebP](anteprime/base.mara.bound.PassoStretto-2.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessun rilancio; Lazo 2 superata dalla 3. |
+| Controllo a 60 px | La mano del casco a sinistra è rimossa; resta il gesto contro il bicchiere. |
+| Giudizio del proprietario | In attesa. |
+
+#### Lazo del Rider — 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.CinghiataDiTraverso` |
+| promptSha256 | `754323b41a3b06d4b98158048bcd6dfe19bb9820057e4a050f0f990cffbb59d3` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `originali/base.mara.CinghiataDiTraverso-2.png`: `e74e5bc6ed3df5386bdc7b100d9feef7aa2f5fe38d2ebf4201a693ff526fdbf0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.CinghiataDiTraverso-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2916655 / `05e8271ed5f893dcbadcdaecb4f6a1da25539c29e3318e6c1ed1d3ec8ad21707` |
+| Anteprima | [WebP](anteprime/base.mara.CinghiataDiTraverso-3.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessun rilancio; Lazo 2 superata dalla 3. |
+| Controllo a 60 px | Braccio pendente rimosso; rimangono la cinghia e il gesto principale. |
+| Giudizio del proprietario | In attesa. |
