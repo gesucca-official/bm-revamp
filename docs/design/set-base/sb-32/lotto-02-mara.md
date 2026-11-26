@@ -358,3 +358,15 @@ Allegati in ordine:
 ~~~text
 Edit Attachment 1, the previous illustration of this original fictional character. Remove the extra arm and helmet-holding hand at the left edge. Keep Mara’s drink-knocking gesture, flying glass, expression, identity and bar. Her other arm is occluded on the far side of her torso; do not add a replacement hand at the left edge. Exactly two anatomically connected arms. No hood on any visible opponent. Preserve the hand-inked European comic style, restrained muted palette and square opaque artwork. Keep one clear action readable at 60 pixels. No text, lettering, logos, blood or extra limbs. Keep unaffected details unchanged.
 ~~~
+
+## Lazo del Rider — rimozione localizzata, versione 3
+
+Il proprietario indica con maschera bianca l’avambraccio pendente rimasto nella versione 2: «Remove the area marked in the second image from the first image». La maschera è ricevuta in chat; il prompt descrive la stessa zona.
+
+`base.mara.CinghiataDiTraverso-3`
+
+Allegato: `originali/base.mara.CinghiataDiTraverso-2.png`, SHA-256 `e74e5bc6ed3df5386bdc7b100d9feef7aa2f5fe38d2ebf4201a693ff526fdbf0`.
+
+~~~text
+Edit Attachment 1 only. Remove the entire extra hanging forearm and clenched hand in the lower-left portion, from the sleeve below the backpack down to the fist. Reconstruct the bar background and the edge of Mara’s body naturally in that area. Do not replace it with another arm, hand, helmet or object. Preserve the strap-pulling arm, strap, opponent, face, backpack, clothing, composition, colours and all other details exactly. Square opaque hand-inked comic illustration. No text or extra limbs.
+~~~
