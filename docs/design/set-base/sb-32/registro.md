@@ -1058,3 +1058,187 @@ Chiuso il 26 novembre 2026 ([D204](../../../set-base-decisioni.md#decisioni-del-
 | ADOPERIAMOTI | `com.basic.BruiserGrab` | 2 | [WebP](anteprime/com.basic.BruiserGrab-2.webp) |
 
 Eccezione alla guida di stile: in SVEGLIAMOCI-8 l'avventore ha un volto generico e stordito, su richiesta del proprietario; non vale per le altre carte.
+
+## Lotto 2 — Mara
+
+[Prompt letterali](lotto-02-mara.md), commit `2799716`. Una generazione per prompt, in ordine; nessun rifiuto, tentativo ripetuto o scartato. Modello e riscrittura non esposti; nessun campo negativo separato. Gli originali sono copie non modificate, fuori da git. [Pagina di giudizio](giudizio-lotto-02.html).
+
+### Lazo del Rider
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.CinghiataDiTraverso` |
+| promptSha256 | `fe5732ad7703de420cf590f99c8ddeaaeaadef858cc78e6c5e4f9a2715da2b9c` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.CinghiataDiTraverso.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2910124 / `5c1ad6e2c0def41eb5756549cbd8f4125e2e032739e62d84c71c3b260ac20d07` |
+| Anteprima | [WebP](anteprime/base.mara.CinghiataDiTraverso.webp), 512 px, qualità 80 |
+| Associazione | certa |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Mara e la cinghia si distinguono; il contatto con l’avversario è poco evidente. |
+| Giudizio del proprietario | In attesa. |
+
+### Requisire al Volo
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.PresoAlVolo` |
+| promptSha256 | `490ab2b9dafdf97f87018b5f9d3b628e9b79559d8e756094a5663996632abdf9` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.PresoAlVolo.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2938631 / `355214c1b7dde700e3dbcfbab27b35fba49a9af9b6436c8e706529d55d0d965f` |
+| Anteprima | [WebP](anteprime/base.mara.PresoAlVolo.webp), 512 px, qualità 80 |
+| Associazione | certa |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Mara e il pacco si distinguono; il gesto di prenderlo dallo zaino è meno chiaro. |
+| Giudizio del proprietario | In attesa. |
+
+### Sgommata
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.Sgommata` |
+| promptSha256 | `e97c47e635e6ec3cb839c84c7d210f6f5f38dcce82cda5eb1825c06b66542092` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.Sgommata.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3029351 / `84727d5ec84b6b2414ba3cb39b217af97f5f629203409727fee5a6b5f46a8d04` |
+| Anteprima | [WebP](anteprime/base.mara.Sgommata.webp), 512 px, qualità 80 |
+| Associazione | certa |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Bicicletta e sbandata leggibili; il contatto con l’avversario non è evidente. |
+| Giudizio del proprietario | In attesa. |
+
+### Slalom d'Avvicinamento
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.Slalom` |
+| promptSha256 | `0c3f528f9e003dc728bfaffbe5bb08f1fa83a786588aab5f9975ccc71a360661` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.Slalom.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2881171 / `27f60b7faceed0dded2a7fc60f27a54cec37ba91e4035e04542140225614188c` |
+| Anteprima | [WebP](anteprime/base.mara.Slalom.webp), 512 px, qualità 80 |
+| Associazione | certa |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | La corsa fra gli sgabelli si legge; il percorso a slalom è meno evidente. |
+| Giudizio del proprietario | In attesa. |
+
+### Agilità Innaturale
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.SorpassoInCurva` |
+| promptSha256 | `3a95b8b7ef7d2a41c4447a36d6ffd784cd0fee576857ff29c2cf6b4e60d14fc9` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.SorpassoInCurva.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2836092 / `2810f3b76a68d146313b8e7bb3ee4dc6d6d9695fb3b5b1ab2361a3cbaf6328b7` |
+| Anteprima | [WebP](anteprime/base.mara.SorpassoInCurva.webp), 512 px, qualità 80 |
+| Associazione | certa |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Il braccio teso e l’avversario si distinguono; il movimento di sorpasso è meno chiaro. |
+| Giudizio del proprietario | In attesa. |
+
+### Traiettoria Imprevedibile
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.TiStringoLaCurva` |
+| promptSha256 | `3e23a11444c1f52b9a598c26c00d2759d64e8305adcb41606f0f4e5a563cbfc4` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.TiStringoLaCurva.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2876941 / `36732464ab1cd8f4b41bf92384cc55d7f2af06a21935fcebd2a6da7a8990c2ad` |
+| Anteprima | [WebP](anteprime/base.mara.TiStringoLaCurva.webp), 512 px, qualità 80 |
+| Associazione | certa |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | La corsa e il cambio di direzione si suggeriscono; l’avversario è piccolo. |
+| Giudizio del proprietario | In attesa. |
+
+### Unta e Bisunta
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.TraDueParaurti` |
+| promptSha256 | `21882994652d0be51293adc6297f35b96096acd77e7e6f0489de28f41c748bee` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.TraDueParaurti.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2795106 / `64fb6c231be0c3a72fd832f579e7b329a2a9c686cf40dcc6b7d0826057087d09` |
+| Anteprima | [WebP](anteprime/base.mara.TraDueParaurti.webp), 512 px, qualità 80 |
+| Associazione | certa |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | La presa sul braccio e la torsione si distinguono; l’effetto unto è poco visibile. |
+| Giudizio del proprietario | In attesa. |
+
+### Semaforo Rosso
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.bound.CambioMarcia` |
+| promptSha256 | `d6360f6cf246ffe6237d08b0457efd251c822ceb4a39979a0d9a66535cb3058a` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.bound.CambioMarcia.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2767119 / `f83be5de0e50470de63e68f0fee98b74cca61f706abb0acd699a1a8d5cb3a988` |
+| Anteprima | [WebP](anteprime/base.mara.bound.CambioMarcia.webp), 512 px, qualità 80 |
+| Associazione | certa |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | La mano contro l’avversario e l’arresto si distinguono. |
+| Giudizio del proprietario | In attesa. |
+
+### Tagliare la Strada
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.bound.ColpoDiStriscio` |
+| promptSha256 | `5afd8d8ae74b7f7677456c8f055a2d61c01fa69fe1cbbe63a35531e1d2a12f82` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.bound.ColpoDiStriscio.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2824070 / `b133eceac313c30c0a4f2261cc9f6e788cdc0b1061850a5f68a041266181e099` |
+| Anteprima | [WebP](anteprime/base.mara.bound.ColpoDiStriscio.webp), 512 px, qualità 80 |
+| Associazione | certa |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | La corsa davanti all’avversario si distingue; le figure si sovrappongono. |
+| Giudizio del proprietario | In attesa. |
+
+### Sventare l'Assassinio
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.bound.PassoStretto` |
+| promptSha256 | `f77c10e9182bfd0a6c6e5cf2d6bc2a40794d2be475d117d93d5e6b4662b3df05` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `mara.png`: `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; `s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.bound.PassoStretto.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2770033 / `3058eac329e6c20150e218dc083179a32a6a6be49ad416ae5e6964d7b3e035fa` |
+| Anteprima | [WebP](anteprime/base.mara.bound.PassoStretto.webp), 512 px, qualità 80 |
+| Associazione | certa |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Il bicchiere che vola e il gesto della mano si distinguono. |
+| Giudizio del proprietario | In attesa. |
