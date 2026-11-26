@@ -942,3 +942,79 @@ Il proprietario approva ADOPERIAMOTI con «ok» e chiede immagini che comunichin
 | Anteprima | [WebP](anteprime/bruiser.character.LittleSmack-5.webp), 512 px, qualità 80 |
 | Nota | Due mani ai lati della testa; orecchie coperte e anatomia delle dita da giudicare. |
 | Esito | Conservata per il giudizio. |
+
+
+## Quarto giudizio: correzioni del lotto 1
+
+Tre [prompt letterali](lotto-01-spazienzio.md#quarto-giudizio-correzioni-del-lotto-1) committati in `b8c42c7`; una generazione per carta, nessun tentativo ripetuto, scarto o rifiuto. Modello e riscrittura dello strumento non esposti. Originali fuori da git; giudizio del proprietario in attesa.
+
+### GARGANTUESCO IMPATTO SUL TU
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.SuperImpact` |
+| source | `originali/bruiser.SuperImpact-5.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2958669 / `546245494baf2031ef4e3db998cf31e21610c72884c052bf6b90af1ef19d3f69` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| promptSha256 | `90e568af925fce3a19ff7b443f6ecf855c6d4c1da2df47ecbdb347853e6fd735` |
+| Allegati effettivi | `originali/bruiser.SuperImpact-4.png`: `525d313f805ea598af1d78a2c10c8265695db65f8308eb13d3b2b72c68f17aaa`; `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Riscrittura | Non esposta. |
+| Tentativi scartati / rifiuti | Nessuno. |
+| Anteprima | [WebP](anteprime/bruiser.SuperImpact-5.webp), 512 px, qualità 80 |
+| Nota | A 60 px il pugno e il bersaglio si distinguono; la mano in alto è vicina al bordo e la pelle resta molto arancione. |
+| Giudizio del proprietario | In attesa. |
+
+### LIEVE FASTIDIO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.LittleRage` |
+| source | `originali/bruiser.character.LittleRage-5.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3369726 / `bc162dcb63c843c8e3ace4e2f38467c8afdebe4ae516f5defb16a094b1c987a9` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| promptSha256 | `60d71c07d4786901c3691144472a90da25d7f61f5b410f9d9a7f5d7d8ca59421` |
+| Allegati effettivi | `originali/bruiser.character.LittleRage-4.png`: `6040aa38b656669552614c8720c98b7c8599a31e77a4295d9a1541857a71abe4`; `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Riscrittura | Non esposta. |
+| Tentativi scartati / rifiuti | Nessuno. |
+| Anteprima | [WebP](anteprime/bruiser.character.LittleRage-5.webp), 512 px, qualità 80 |
+| Nota | A 60 px sorriso e contatto sono leggibili; la deformazione della guancia resta marcata. |
+| Giudizio del proprietario | In attesa. |
+
+### SVEGLIAMOCI - MA TU NO
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.LittleSmack` |
+| source | `originali/bruiser.character.LittleSmack-6.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3060506 / `050ee2fb2f8cdb712604d237cba9c3a4c173686fa5007a995e9360f414e0dc81` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| promptSha256 | `341cb3d14291e9fe430fcce94f08541f9c589386117faf2cf5632dd60d3c0673` |
+| Allegati effettivi | `docs/design/set-base/identikit/riferimenti/spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Riscrittura | Non esposta. |
+| Tentativi scartati / rifiuti | Nessuno. |
+| Anteprima | [WebP](anteprime/bruiser.character.LittleSmack-6.webp), 512 px, qualità 80 |
+| Nota | A 60 px lo schiaffo e le stelle si leggono; il palmo copre il viso e le dita sono difficili da distinguere. |
+| Giudizio del proprietario | Rifiutata: «la mano è orientata male»; richiesto un pugno a martello. |
+
+
+## Quinto giudizio: SVEGLIAMOCI - MA TU NO
+
+Il proprietario rifiuta la versione 6: «la mano è orientata male» e chiede «spazienzio che tira un cazzotto a martello col pugno chiuso sopra la testa dell'avventore». [Prompt](lotto-01-spazienzio.md#quinto-giudizio-correzione-di-svegliamoci---ma-tu-no) committato in `0ef26e2`; una generazione, nessun tentativo ripetuto o rifiuto dello strumento.
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.LittleSmack` |
+| source | `originali/bruiser.character.LittleSmack-7.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3214958 / `fd12338c8c22746b2a8657b7f48e73a85a33cc6b4e9c5dd3a8cc1e32eea52f0e` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| promptSha256 | `d57fb12b0e06c2727e75f4cbb8a0ca037eea0ec4b47d6f5bb2d11905e2a71a96` |
+| Allegati effettivi | `docs/design/set-base/identikit/riferimenti/spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Riscrittura | Non esposta. |
+| Tentativi scartati / rifiuti | Nessuno. |
+| Anteprima | [WebP](anteprime/bruiser.character.LittleSmack-7.webp), 512 px, qualità 80 |
+| Nota | Il pugno chiuso tocca la testa; a 60 px contatto e avventore si distinguono, ma l’avventore è vicino ai bordi. |
+| Giudizio del proprietario | In attesa. |
