@@ -1525,3 +1525,7 @@ Prompt preventivo `e94120a`. Una chiamata; nessun rifiuto, rilancio o tentativo 
 | Tentativi scartati | Nessuno. |
 | Controllo a 60 px | Bici più compatta e manubrio libero; braccio teso e avventore respinto si distinguono. |
 | Giudizio del proprietario | In attesa. |
+
+### Quinto giudizio del proprietario — lotto 2
+
+26 novembre 2026: Tagliare 5 non accettata. Si torna alla versione 3 spostando solo la mano verso l’avventore, senza toccarlo e senza modificarlo. Bici e resto della scena da preservare. Prompt preventivo della versione 6.

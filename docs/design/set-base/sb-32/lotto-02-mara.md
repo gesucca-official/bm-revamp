@@ -428,3 +428,15 @@ Allegato: `originali/base.mara.bound.ColpoDiStriscio-4.png`, SHA-256 `ea55dcc487
 ~~~text
 Edit Attachment 1. Change the riding pose: Mara is pedalling her bicycle with NO hands touching the handlebars. Keep her helmet-holding hand. Her other arm now reaches upward and outward, with an open palm physically pushing the pedestrian’s chest away from her as she cuts across his path. Make the contact, his recoil and her forward cycling motion clear. Both handlebar grips must be empty. Redraw the handlebars as a simple ordinary mechanically plausible bicycle handlebar, correctly attached to the stem, without odd duplicate grips or bends. Shorten the bicycle to normal compact adult city-bike proportions: a believable wheelbase, ordinary rigid diamond frame with straight connected tubes, saddle above the crank area, fork and front axle correctly placed. No elongated frame or stretched bicycle. Adjust Mara’s legs and pedals coherently to the shorter bicycle, with feet plausibly pedalling. Keep the same character identity, headphones, cubic backpack, reflective vest, dark hoodie, foil helmet in hand, shadowy bare-headed pedestrian, perpendicular crossing paths and exterior bar. Preserve the restrained palette, hand-inked European comic style, square opaque composition and sense of motion. One clear action readable at 60 pixels. Exactly two arms and anatomically coherent hands. No lettering, arrows, logos, blood or extra limbs.
 ~~~
+
+## Quinto giudizio — gesto senza contatto dalla versione 3
+
+Il proprietario: «ripartiamo dalla prima versione, e spostiamo soltanto la mano che regge il manubrio»; chiarito il riferimento alla versione 3: «verso l’avventore, ma senza toccarlo e senza cambiarlo». La versione 6 riparte dalla 3, senza modificare bici o avventore.
+
+`base.mara.bound.ColpoDiStriscio-6`
+
+Allegato: `originali/base.mara.bound.ColpoDiStriscio-3.png`, SHA-256 `594d73132c74b3f67b507b97d4e5e7822cb9f2a8f5bdcebd8c7e09eb5cc17a23`.
+
+~~~text
+Edit Attachment 1 with a strictly local change to Mara’s handlebar-holding hand and its connected forearm only. Lift that hand off the handlebar and extend it toward the pedestrian, with a relaxed open palm, stopping clearly short of him: leave a visible gap between her fingertips and his clothing. No contact, no pushing and no impact. Adjust only the wrist and forearm necessary for a natural gesture. Preserve the pedestrian EXACTLY: same position, pose, expressionless shadowed head, clothes, silhouette and hands. Preserve the entire bicycle EXACTLY, including its original frame length, geometry, wheels, handlebar shape and position. Reveal the previously held grip naturally where the hand was removed. Preserve Mara’s face, torso, legs, helmet-holding arm, backpack, hair, clothing and all other details exactly. Preserve the background, crossing paths, framing, colours, lighting and ink style. Do not recompose, resize or redesign anything. Square opaque artwork. No extra limbs, lettering, arrows or new objects.
+~~~
