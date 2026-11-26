@@ -106,3 +106,87 @@ cambiati.
    la istanziano.
 3. **Ordine delle chiavi in `BozzeStoriche`** (già domanda 2 di SB-30a B1): resta aperto; il passo 0 si confronta per contenuto.
 4. **Prossimo:** B2 (costanti dei nomi nei test), come in D213 (3)?
+
+---
+
+# SB-34 B2 — Costanti degli id nei test
+
+**Esito: consegnata, in attesa del proprietario (STOP).** `SetBaseIds` ha **130 costanti** (117 carte, 7 personaggi, 1 token,
+5 starter), generata da `tools/set-catalog` e controllata da `--vivo --check` e da `check-rules.py`; nei test **1432 stringhe in 90
+file** sono diventate la costante dello stesso valore, **42 restano di proposito**. Nessun id, atteso, risorsa di test o file di
+`server/src/main` cambia. Base `8c61c12`; passo diretto ([D213](../../set-base-decisioni.md#decisioni-del-proprietario) (3),
+[D215](../../set-base-decisioni.md#decisioni-del-proprietario)).
+
+## Cosa cambia
+
+**Classe generata:** `server/src/test/java/com/gsc/bm/model/cards/base/SetBaseIds.java`. Nome in UPPER_SNAKE_CASE dal nome inglese
+approvato ([tabella](../../design/set-base/sb-34/tabella.json)); commento col nome italiano della carta; gli starter sono
+`STARTER_<nome inglese>` (`STARTER_PIERA = "starter-pino"`). Gli id vengono dal set vivo, non dalla tabella. Nessuna collisione.
+
+**Generatore:** `set_catalog.py --vivo` scrive anche la classe; si ferma su un id senza riga nella tabella, una riga senza id, due
+nomi uguali, un nome o un id non scrivibile in Java. `docs/sets/manifest.json` ha la classe fra le uscite e la tabella fra gli
+ingressi (nessun'altra uscita cambia). `prova-errori.py`: copia anche i due file e ha un caso in più (costante cambiata a mano).
+`formato-file-set.md` elenca la classe fra i file generati.
+
+**Test:** un test nuovo, `SetBaseIdsTest`: costanti e id del set vivo coincidono uno a uno (liste ordinate, quindi anche i
+doppioni sono una differenza). Negli altri 90 file cambiano solo le stringhe sostituite e le righe di import.
+
+## Stringhe lasciate
+
+| Cosa | Quante | Perché |
+|---|---:|---|
+| `sim/CardClassesLoadTest` | 27 | provano che gli id sono quelli congelati: con una costante derivata dal set l'atteso seguirebbe un cambio di id |
+| `model/cards/CardClassesTest` | 12 | come sopra |
+| `conf/db/SetBaseDecksMigrationTest` | 3 | sostituiscono testo dentro il JSON dei mazzi salvati, scritto per esteso |
+| id dentro stringhe più lunghe (messaggi, chiavi, JSON, SQL) | 67 in 9 file | come da prompt (14 sono il JSON di `SetBaseDecksMigrationTest`) |
+| id fuori dal set vivo (bozze 0.1 e 1.5) | tutti | come da prompt; le 32 classi storiche non contengono id vivi scritti per esteso |
+
+## Verifiche
+
+Uscite in `%TEMP%\bm-sb34-b2`. Processi controllati prima di ogni corsa esclusiva (nessun altro `java`).
+
+| Verifica | Esito |
+|---|---|
+| `build.ps1 -Task Test -Offline`, base `8c61c12` | **1527 test, 0 falliti, 0 errori, 23 saltati**; client di debug 54/54 |
+| `build.ps1 -Task Test -Offline`, nuovo | **1528 test, 0 falliti, 0 errori, 23 saltati**; client di debug 54/54; per classe cambia solo la nuova `SetBaseIdsTest` (1) |
+| bytecode delle classi di test, base contro nuovo (`javap -c -p -constants`) | 336 classi della base **uguali** (a meno di numerazione del constant pool, `ldc`/`ldc_w` e offset); 2 nuove (`SetBaseIds`, `SetBaseIdsTest`) |
+| token dei sorgenti, `HEAD` contro nuovo | 90 file: 1432 stringhe diventate la costante dello stesso valore, **nessun'altra differenza** oltre agli import |
+| `set_catalog.py --vivo --check` | 8 file identici alla generazione |
+| `prova-errori.py` | 7/7 OK |
+| `check-rules.py` | verde |
+| `check-links.py` | 22 rotti, quelli noti |
+| `git diff --check` | pulito (avvisi di fine riga dei test CRLF già esistenti) |
+| prove del generatore su copie temporanee (5) | tutte rosse: id senza riga, riga senza id, nomi doppi, costante tolta a mano, classe mancante |
+| mutazioni di `SetBaseIdsTest` su copie compilate fuori dal repository (4) | tutte rosse: costante tolta, doppia, con id cambiato, fuori dal set |
+| `build.ps1 -Task TestServerContext -Offline` | **1737 test, 1 fallito**, 23 saltati: `QuickDuelCliTest.aBaseAndAnAdvancedHumanPlayTheirOwnStarters`, «Event timeout», **noto, voce R3**, senza rilancio; 1737 sono i 1736 di B1 più il test nuovo |
+| `verify-match-manifests.py` | uscita 0, `allChecks` PASS (lanciato a parte: lo script si era fermato sul rosso) |
+
+**Rossi:** il solo R3. Il file del test rosso è fra quelli toccati, ma le sue classi compilate sono uguali a quelle della base (riga del bytecode).
+
+**Non rifatti:** identità viva e passo 0. Nessun file di `server/src/main` cambia e il bytecode dei banchi di `sim` è quello della
+base, quindi «stesso codice, stessi numeri» vale per costruzione. Nessuna verifica del client web (nessun file cambia).
+
+## Scelte prese
+
+1. Gli alias locali dei test restano (`IMPACT = GARGANTUAN_IMPACT_ON_YOU`): cambia solo il valore a destra.
+2. Import statico di `SetBaseIds.*`; gli otto nomi che i test usano già per altro (`SPAZIENZIO`, `MARA`, `CELESTINA`, `PIERA`,
+   `BEPPE`, `SERGIO`, `DUCCIO`, `GRAB`) si scrivono sempre `SetBaseIds.X` (per esempio `LiveFixtures.MARA` è lo starter).
+3. Le tre eccezioni della tabella «Stringhe lasciate».
+4. `TestServerContext` aggiunto alle verifiche del prompt: cambiano test di contesto e della CLI
+   ([aree protette](../../aree-protette.md#partita-viva)).
+
+## Cosa sapere
+
+- Prima di B2 le stringhe sparse nei test avrebbero fatto fallire un cambio accidentale di id; ora le costanti seguono il set.
+  Restano a fermarlo: la tabella dei nomi (un id cambiato senza la sua riga ferma `--vivo` e `check-rules.py`), le stringhe lasciate
+  in `CardClassesLoadTest` e `CardClassesTest` (solo le classi Java) e i dati salvati o archiviati dei test.
+- **Una carta nuova** deve avere la sua riga in `design/set-base/sb-34/tabella.json`, altrimenti `--vivo` e `check-rules.py` si
+  fermano. La tabella è passata da evidenza di progetto a ingresso del generatore.
+- Dopo il pull la regola chiede di rifare il jar (cambiano file sotto `server/` e `docs/sets/`), anche se il server non cambia.
+
+## Domande
+
+1. Basta quella protezione degli id congelati, o vuoi un test che li fissi tutti e 130 per esteso (o con un'impronta della lista
+   ordinata)? Raccomandato: un'impronta nel test, in B3.
+2. La tabella dei nomi resta in `docs/design/set-base/sb-34/` o passa sotto `tools/set-catalog/`? Raccomandato: spostarla con la
+   prima carta nuova, non ora.
