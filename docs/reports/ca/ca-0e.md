@@ -1,7 +1,8 @@
 # CA-0e — Modificatori di incontro: proposta
 
-Proposta del 26 novembre 2026, passo con proposta ([piano](../../ca-plan.md#ca-0e--modificatori-di-incontro)). **Esito:** in attesa
-della decisione del proprietario. Nulla è applicato.
+Proposta del 26 novembre 2026, passo con proposta ([piano](../../ca-plan.md#ca-0e--modificatori-di-incontro)). **Esito:** proposta
+decisa dal proprietario il 26 novembre 2026 ([sotto](#decisione-del-proprietario), DC5 del piano). Nulla è applicato: l'attuazione parte
+dopo la chiusura di SB-30a.
 
 ## In breve
 
@@ -118,3 +119,21 @@ turno), `tools/carriere/run.ps1 -Task Test` e `-Task Check`, `check-links.py`.
    nel pacchetto, che obbliga a ripetere i modificatori riusati.
 5. **Mazzi accorciati del tutorial.** Primitiva Mazzo subito, o solo se la misura col runner lo chiede? **Raccomando** subito nel
    regolamento (costa una riga, evita una revisione dopo), ma nessun modificatore concreto nel catalogo finché il tutorial non lo usa.
+
+## Decisione del proprietario
+
+26 novembre 2026. La regia ha rivisto la proposta (commit `6baa711`): perimetro rispettato, inventario completo rispetto ai tre
+`[Modificatori: …]` delle storie, classi del server citate esistenti, R02 e R02a letti correttamente. Il proprietario ha risposto «Come
+raccomandi tu» alle raccomandazioni della regia:
+
+1. **Ordine con SB-30a:** l'attuazione parte dopo la **chiusura** di SB-30a, non solo dopo il commit di B1, perché SB-30a può ancora
+   ritoccare la regola del computer; il regolamento passa alla **2.3**.
+2. **S1:** lettura (a), cioè Protezione degli oggetti di Piera e Vista in meno per il giocatore.
+3. **«Ogni tanto» di Sergio:** Recupero ogni 3 turni, l'ultima carta regolare scartata, deterministico e mostrato.
+4. **Catalogo:** `docs/carriere/modificatori.md`, condiviso fra le carriere.
+5. **Mazzi accorciati:** **niente primitiva Mazzo** per ora, contro la raccomandazione dell'esecutore. Come per le estensioni del formato
+   (CA-0b), entra solo ciò che una storia vera usa; Mazzo arriverà con una revisione quando il tutorial lo chiederà. Le primitive sono
+   cinque: Vista, Pesca, Recupero, Bersagli, Protezione.
+
+Nota della regia, non una domanda: Vista in più («ha letto i tuoi messaggi») non cambia la partita finché nessun livello del computer
+usa la mano vista; conterà con un livello più forte, da misurare in CA-3.
