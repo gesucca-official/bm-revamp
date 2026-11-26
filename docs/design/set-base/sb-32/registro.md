@@ -2131,3 +2131,73 @@ Celestina is about twenty-three and clearly adult, with a young face and tired s
 
 Avoid: syringes, powders, pills, lines, drug paraphernalia or any recognizable drug; mirroring the character; changing her face; a burgundy or green tracksuit; making her look middle-aged; hoods on any figure; text, letters, numbers, pseudo-lettering, signatures, watermarks, logos or brands, including on clothing, wrappers and bottles; recognizable faces on opponents; other cast members; crowds; blood; card frames, borders or interface; likeness of any real person; photographic or 3D-rendered style; oversaturated colours, dominant yellow-and-black, neon, gold ornament; Internet imagery or the look of any existing game.
 ~~~
+
+
+#### Risultati del secondo giro di correzioni
+
+Due ritocchi del volto sulle versioni 2 e una nuova generazione del tunnel. Una richiesta per carta, nessun rifiuto o rilancio. Tre versioni 3 in attesa del proprietario; tutte le versioni precedenti restano conservate.
+
+##### Fare l'Inventario — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.MethDrivenRage` |
+| Versione | 3 |
+| promptSha256 | `52b166639ea88637975a34a339eb588c779cc2852f64b1aeb7b2fe606515153e` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/junkie.MethDrivenRage-2.png`: `9ea2d734d22f95db08a774358331c4f65ec5d79d48ce3ebb0c864a990746f994`. |
+| Prompt riscritto | non esposto; testo inviato riportato sopra |
+| source | `originali/junkie.MethDrivenRage-3.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-a8eb57d3-376c-418b-abeb-de4d9cdfbd7a.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2772986 / `e265ed5e0f33c877af641121bba0cfc63a33c8739796f815ecda14538e34bbdf` |
+| Anteprima | [WebP](anteprime/junkie.MethDrivenRage-3.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla rispettiva richiesta |
+| Tentativi scartati | Nessuno nel giro; versione 2 da correggere secondo il proprietario e conservata. |
+| Controllo a 60 px | Sguardo abbassato e postura raccolta leggibili; allineamento degli occhi non valutabile nel dettaglio. |
+| Anomalie / riscontro della richiesta | Espressione pensierosa e labbra chiuse; non si osserva lo strabismo della versione precedente. Il tool ha rielaborato anche i tratti del volto, rendendoli più regolari. |
+| Giudizio del proprietario | In attesa. |
+
+##### Metabolismo Corrotto — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.PervertedMetabolism` |
+| Versione | 3 |
+| promptSha256 | `398394582be798619d03a08a18a3a31de9515001891b7410c8191691b29fe149` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/junkie.PervertedMetabolism-2.png`: `9a9363063481fced77ba74ba51e07a3b93f4958085a19f7d5da53146030d2742`. |
+| Prompt riscritto | non esposto; testo inviato riportato sopra |
+| source | `originali/junkie.PervertedMetabolism-3.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-8f7efd44-0a64-4ee8-a00b-927fa2501cb5.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2639960 / `5592a5ef0c1ee1d4e8a4f33c6b7b19dddf2a2e00cd5a9415c7857e2c9279a3b4` |
+| Anteprima | [WebP](anteprime/junkie.PervertedMetabolism-3.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla rispettiva richiesta |
+| Tentativi scartati | Nessuno nel giro; versione 2 da correggere secondo il proprietario e conservata. |
+| Controllo a 60 px | Ghigno e sopracciglia marcate distinguibili; vene verdi poco leggibili. |
+| Anomalie / riscontro della richiesta | Volto più angoloso, ghigno storto e sopracciglia accentuate; vene verdi conservate. |
+| Giudizio del proprietario | In attesa. |
+
+##### Trascinare nel Tunnel — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.ToxicBloodDrain` |
+| Versione | 3 |
+| promptSha256 | `9b82ab2d656a25f9e7905c0bd7a2c040d1815d68f1b49b571a661ba349be2cbc` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto; testo inviato riportato sopra |
+| source | `originali/junkie.ToxicBloodDrain-3.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-20bc3eeb-2515-401d-879a-9a0674a4ca81.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3030203 / `0b429f2175ff1b20c9a2ab804b5694386b16999b9dac4f284d4d2b06de381692` |
+| Anteprima | [WebP](anteprime/junkie.ToxicBloodDrain-3.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla rispettiva richiesta |
+| Tentativi scartati | Nessuno nel giro; versione 2 da correggere secondo il proprietario e conservata. |
+| Controllo a 60 px | Mano verso la bocca e reazione dell’avventore leggibili; muffa non identificabile nel dettaglio. |
+| Anomalie / riscontro della richiesta | Boccone ammuffito introdotto nella bocca dell’avventore; compare altro pane sul piatto. Il colorito verdastro di Celestina resta poco evidente sotto la luce calda. |
+| Giudizio del proprietario | In attesa. |
+
+**Verifiche del secondo giro:** `git diff --check` e `python scripts/check-rules.py` verdi; `python scripts/check-links.py` conserva i 22 collegamenti mancanti preesistenti, nessuno nuovo. Tre originali confrontati byte per byte con le risposte del tool, tre anteprime 512 × 512 px WebP qualità 80 e controllo visivo a 60 px. Pagina verificata con otto giudizi approvati, tre in attesa, undici viste a 60 px e riferimenti locali presenti. Nessun rifiuto, nessun rilancio, nessun comportamento o atteso modificato; file altrui intatti, nessun push. Il proprietario giudica le tre versioni 3 di Inventario, Metabolismo e Tunnel.
