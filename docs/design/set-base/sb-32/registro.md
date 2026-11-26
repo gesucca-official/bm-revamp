@@ -2748,3 +2748,19 @@ Prompt preventivi nel commit `78d3fa6`. Dieci richieste nell’ordine delle cart
 | Giudizio del proprietario | In attesa. |
 
 **Verifiche del giro:** git diff --check verde (anche sul solo perimetro); python scripts/check-rules.py verde sul checkout corrente; controllo mirato del registro: zero link rotti. Controllo globale: 505 documenti e 35 link rotti, identico elenco sostituendo in memoria il registro con quello della base 1fa9008: nessuno introdotto dal lotto. Ventidue destinazioni erano assenti nella base; tredici erano presenti e sono state rinominate dal lavoro concorrente sulle classi, fuori perimetro. Durante il giro sono comparse modifiche altrui anche in staging: lasciate intatte, commit limitato esplicitamente ai dodici percorsi del lotto. Verificati dieci allegati iniziali invariati, dieci copie byte per byte, dieci WebP a 512 x 512 px; pagina con dieci versioni 2, dieci viste a 60 px e tutte le versioni 1 e i giudizi precedenti. Prompt iniziali invariati; prompt di correzione preventivi nel commit 78d3fa6. Nessuna verifica server del lavoro concorrente attribuita a questo lotto. **Non verificato:** giudizio del proprietario sulle versioni 2; nessuna decisione o chiusura del lotto. **Scelte prese:** quelle dichiarate nei prompt preventivi; nessun ulteriore ritocco autonomo. Giro terminato, in attesa del giudizio.
+
+### Secondo giro di correzioni — Alla Goccia, rimozione con maschera — 26 novembre 2026
+
+Richiesta letterale del proprietario:
+
+> Remove the area marked in the second image from the first image
+
+Il primo allegato segnalato dalla chat non era leggibile per il prefisso Windows `/C:/`; la stessa immagine è disponibile nell’originale locale verificato `originali/base.pino.GoingBerserk-2.png`, SHA-256 `1194d6d8fa573c8c3b3cb4a42c02a4f4d30f9434616c15eee8cdb0afcddad480`. La seconda immagine è la maschera nera con area bianca sul lato sinistro: indica la mano e l’avambraccio protesi dietro Piera. Si rimuove quella parte visibile ricostruendo sfondo e bordo della manica; il braccio rimane fuori vista dietro il corpo. Un’unica richiesta di ritocco, versione 3, nessun rilancio. Tutte le versioni precedenti restano conservate; le altre nove carte non ricevono nuove richieste.
+
+**Diagnosi:** originale versione 2 presente, impronta coincidente; perimetro SB-32 pulito. La maschera è disponibile come allegato della chat, senza percorso locale o SHA-256 esposti. **Modifica prevista:** solo la zona bianca, mantenendo colpo, bicchiere cilindrico e mento asciutto. Si inviano solo maschera e immagine da correggere tramite le due immagini recenti: immagine 1 maschera, immagine 2 originale caricato localmente. Nessun identikit o altro riferimento. Nessuna decisione o chiusura del lotto.
+
+#### Prompt preventivo — Alla Goccia, versione 3
+
+~~~text
+Image 1 is the black-and-white removal mask supplied by the owner: white marks the only area to edit and black marks protected artwork. Image 2 is the illustration to edit. Remove the exposed hand and forearm at the far left of Piera, entirely within the white mask area. Remove every finger and the skin-coloured forearm of that rear-reaching limb. Fill the cleared area naturally with the existing dark bar background and, where it meets her body, a continuous edge of her black sleeve and sweatshirt. The arm should be out of sight behind her body, with no visible hand, detached stump or replacement limb there. Preserve everything outside the white region as closely as possible: the striking arm and its hand, ordinary cylindrical glass, impact on the opponent's head, both figures' faces and bodies, dry chin, pencil, furniture, floor, lighting, colours, ink contours, print texture and square framing. Do not alter the blow, invent another arm, add objects, lettering, borders or transparency. Return one opaque square illustration.
+~~~
