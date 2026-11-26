@@ -1502,3 +1502,7 @@ Prompt preventivo `b7c1bfc`. Una chiamata; nessun rifiuto, rilancio o tentativo 
 | Tentativi scartati | Nessuno. |
 | Controllo a 60 px | Presa spostata sulla manopola lontana; quella vicina è libera. Il dettaglio richiede la vista grande. |
 | Giudizio del proprietario | In attesa. |
+
+### Quarto giudizio del proprietario — lotto 2
+
+26 novembre 2026. Tagliare 4 respinta: manubrio strano e bici troppo lunga. Richiesta: pedalare senza mani sul manubrio, una mano tiene il casco e l’altra allontana l’avventore; bici più proporzionata. Prompt preventivo della versione 5 nel documento del lotto. Nove carte restano approvate.

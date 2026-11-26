@@ -416,3 +416,15 @@ Allegato: `originali/base.mara.bound.ColpoDiStriscio-3.png`, SHA-256 `594d73132c
 ~~~text
 Edit Attachment 1 with one precise local correction only. Mara’s steering hand currently grips the handlebar grip nearest the viewer. Move that same hand to the OTHER handlebar grip, the far-side grip farther from the viewer, beyond the handlebar stem. Adjust only the connected wrist and forearm as needed for natural anatomy and correct depth; the near-side grip must be visibly empty. Keep exactly two arms. Preserve absolutely everything else: her helmet-holding hand, face, body pose, bicycle frame and wheels, pedestrian, crossing trajectories, exterior bar, lighting, muted colours, ink lines, composition and square opaque format. Do not mirror the image or alter the action. No text, arrows, logos, extra limbs or new objects.
 ~~~
+
+## Quarto giudizio — senza mani sul manubrio
+
+Il proprietario respinge la versione 4: «il manubrio della bici ora è strano. facciamo che sta pedalando senza reggere il manubrio con le mani, e la mano che non tiene il casco allontana l’avventore. occhi anche alla bici, mi sembra un po’ lunga». Versione 5.
+
+`base.mara.bound.ColpoDiStriscio-5`
+
+Allegato: `originali/base.mara.bound.ColpoDiStriscio-4.png`, SHA-256 `ea55dcc4876bdead5ad3acad353601c06aaa579cacc05eee792fc134997d37fb`.
+
+~~~text
+Edit Attachment 1. Change the riding pose: Mara is pedalling her bicycle with NO hands touching the handlebars. Keep her helmet-holding hand. Her other arm now reaches upward and outward, with an open palm physically pushing the pedestrian’s chest away from her as she cuts across his path. Make the contact, his recoil and her forward cycling motion clear. Both handlebar grips must be empty. Redraw the handlebars as a simple ordinary mechanically plausible bicycle handlebar, correctly attached to the stem, without odd duplicate grips or bends. Shorten the bicycle to normal compact adult city-bike proportions: a believable wheelbase, ordinary rigid diamond frame with straight connected tubes, saddle above the crank area, fork and front axle correctly placed. No elongated frame or stretched bicycle. Adjust Mara’s legs and pedals coherently to the shorter bicycle, with feet plausibly pedalling. Keep the same character identity, headphones, cubic backpack, reflective vest, dark hoodie, foil helmet in hand, shadowy bare-headed pedestrian, perpendicular crossing paths and exterior bar. Preserve the restrained palette, hand-inked European comic style, square opaque composition and sense of motion. One clear action readable at 60 pixels. Exactly two arms and anatomically coherent hands. No lettering, arrows, logos, blood or extra limbs.
+~~~
