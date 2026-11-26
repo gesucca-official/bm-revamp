@@ -3156,3 +3156,24 @@ Il primo allegato segnalato dalla chat non era leggibile per il prefisso Windows
 ~~~text
 Image 1 is the owner's black-and-white mask: white marks the only area to edit and black protects the rest. Image 2 is the illustration to edit. Remove the upper punching fist and its exposed forearm in the white region, including the connected sleeve portion where marked. Reconstruct the dark bar background and the natural edge of the opponent's clothing where needed, with no detached limb or replacement hand. Preserve everything outside the white area as closely as possible, especially Beppe, his headphones and both arms, the opponent's lower punching arm, the figures, bar furniture, lighting, colours, hand-inked comic style, print texture and square framing. Add no objects, text, border or transparency. Return one opaque square illustration.
 ~~~
+
+#### Risultato — Cuffie e Testa Bassa, versione 2
+
+Prompt preventivo nel commit `1401ee5`; una richiesta con maschera e originale, nessun rilancio o rifiuto. La maschera è stata usata come immagine guida, non come parametro separato. Originale copiato byte per byte; versione 1 conservata.
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.bound.UnaStrettaEPassa` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati | maschera della chat, impronta non esposta; originale versione 1 SHA-256 `5991df13b70782e94dbd4bc282b3ca92ac5da28fdf840fa51d83a0af93ab2395` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.bound.UnaStrettaEPassa-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-80ef340f-d6f9-4aff-8595-2db354c706be.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2825673 / `9e9a45cde407af5204d99705cf9e772aa51e76012bdb5157cf1ba0d40f3a8c1c` |
+| Anteprima | [WebP](anteprime/base.gigi.bound.UnaStrettaEPassa-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Beppe e pugno inferiore leggibili; braccia separate, dita minute, tasche poco distinguibili; nessun attrezzo visibile. |
+| Anomalie visive | Il pugno e avambraccio superiori sono rimossi; restano i segni bianchi d’impatto sulla spalla. Braccio inferiore conservato; l’altro braccio dell’avversario non è visibile. |
+| Giudizio del proprietario | In attesa. |
