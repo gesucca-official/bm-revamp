@@ -1922,3 +1922,168 @@ Celestina is about twenty-three and clearly adult, with a young face and tired s
 
 Avoid: syringes, powders, pills, lines, drug paraphernalia or any recognizable drug; mirroring the character; changing her face; a burgundy or green tracksuit; making her look middle-aged; hoods on any figure; text, letters, numbers, pseudo-lettering, signatures, watermarks, logos or brands, including on clothing, wrappers and bottles; recognizable faces on opponents; other cast members; crowds; blood; card frames, borders or interface; likeness of any real person; photographic or 3D-rendered style; oversaturated colours, dominant yellow-and-black, neon, gold ornament; Internet imagery or the look of any existing game.
 ~~~
+
+
+#### Ritocco localizzato richiesto dal proprietario
+
+Durante il giro il proprietario ha chiesto: «Remove the area marked in the second image from the first image», indicando con una maschera l’avambraccio e la mano aggiuntivi nella versione 2 di L’Ultimo Tiro. Questa richiesta autorizza un ritocco tramite imagegen su quella versione, distinto dalle sei nuove generazioni con i due riferimenti. Il risultato è conservato come versione 3; versione 2 non riuscita conservata. Il percorso locale dell’immagine è stato letto correggendo il prefisso non valido `/C:/` in `C:/`.
+
+Testo inviato per il ritocco:
+
+~~~text
+Edit the supplied colour illustration of Celestina on the bar floor. The other supplied image is a black mask with a white marked region: use the white region ONLY to identify the unwanted extra forearm and hand lying horizontally on the floor in the lower-left portion of the illustration. Remove that entire horizontal extra forearm and its hand, replacing them with a seamless continuation of the existing wooden floor, its perspective, ink lines, texture, warm lighting and shadows. Preserve the bent arm with its elbow resting on the floor and its hand raised holding the cigarette: this arm must remain a single continuous anatomically coherent arm, without a branch from its elbow. Preserve Celestina's face, body, pose, clothing, feet, belt bag, smoke cloud, opponent and bar interior. Change only what is necessary inside the marked region to remove the extra limb. Keep the square opaque full-bleed comic illustration and its original style, palette and composition. Do not include the mask, white paint or black overlay in the output. No text, watermark or border.
+~~~
+
+
+#### Risultati delle correzioni
+
+Sei nuove generazioni in ordine, una per ciascun prompt di versione 2, più un ritocco con maschera richiesto esplicitamente dal proprietario durante il giro. Nessun rifiuto. Le immagini iniziali e la versione 2 non riuscita di L’Ultimo Tiro sono conservate. Le sei proposte correnti attendono il giudizio del proprietario; le altre cinque carte restano approvate nella versione 1.
+
+##### Rintanarsi nel Cappotto — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.tossico.bound.RaschiareIlFondo` |
+| Versione | 2 |
+| promptSha256 | `14270bb6bc51223914952ac1eb1f2b29b59ca88313040f9146bd48d57147afc8` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto; testo inviato riportato sopra |
+| source | `originali/base.tossico.bound.RaschiareIlFondo-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-6249d4c8-ff26-412e-afe3-37b771151753.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2831776 / `868793dab1ebed48226ea5856f9a796c594e56a4133c71e23c91230f860a230b` |
+| Anteprima | [WebP](anteprime/base.tossico.bound.RaschiareIlFondo-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla rispettiva richiesta |
+| Tentativi scartati | Versione 1 respinta dal proprietario e conservata; nessun rilancio di questa richiesta. |
+| Controllo a 60 px | Cappotto chiuso, testa bassa e postura raccolta leggibili; espressione triste poco dettagliata. |
+| Anomalie / riscontro della richiesta | Nessun nuovo arto aggiuntivo osservato; il cappotto avvolge il corpo e lo sguardo è abbassato. |
+| Giudizio del proprietario | In attesa. |
+
+##### Tagliare la Dose — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.character.RottenSmile` |
+| Versione | 2 |
+| promptSha256 | `ae92b5eabd332fa4a5a6b5d024938563a77387e96984f4e60e27b4878187cc71` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto; testo inviato riportato sopra |
+| source | `originali/junkie.character.RottenSmile-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-1586b3a0-954f-40df-96fc-6d39a7fba032.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3084712 / `008a85056a741a78b6467af1642e2e3b26f0d9a32f832cad28bffeef35e40ac0` |
+| Anteprima | [WebP](anteprime/junkie.character.RottenSmile-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla rispettiva richiesta |
+| Tentativi scartati | Versione 1 respinta dal proprietario e conservata; nessun rilancio di questa richiesta. |
+| Controllo a 60 px | Quattro pezzi rossi separati visibili; lama minuta. |
+| Anomalie / riscontro della richiesta | Caramella in quattro spicchi separati; non compare più un disco intero. |
+| Giudizio del proprietario | In attesa. |
+
+##### L'Ultimo Tiro — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.LethalHeroinDose` |
+| Versione | 2 |
+| promptSha256 | `a5b45d9f5101d34bf5ce1bd8c76ed4119eb4d41c4902eae77ff4b13cd0d7b47d` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto; testo inviato riportato sopra |
+| source | `originali/junkie.LethalHeroinDose-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-97f9692c-c3e4-4d52-a8ba-70e40fe4b3cf.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3003999 / `14ec53f35b7655e93861640d0ee0775bcd53e9fdcddb2d3504dca8166d05a161` |
+| Anteprima | [WebP](anteprime/junkie.LethalHeroinDose-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla rispettiva richiesta |
+| Tentativi scartati | Versione 2 non riuscita, conservata; ritocco versione 3 autorizzato dal proprietario. |
+| Controllo a 60 px | Nube e avversario leggibili; la biforcazione del braccio non è evidente a questa scala. |
+| Anomalie / riscontro della richiesta | Correzione non riuscita: due avambracci partono ancora dal medesimo gomito. Superata dal ritocco versione 3 richiesto dal proprietario. |
+| Giudizio del proprietario | Non accettata: richiesta di rimozione localizzata; vedere versione 3. |
+
+##### Fare l'Inventario — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.MethDrivenRage` |
+| Versione | 2 |
+| promptSha256 | `525e65fdeefdce8e42833c72786619260ba0ef9d831bcec57987c4c4ac3de5b1` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto; testo inviato riportato sopra |
+| source | `originali/junkie.MethDrivenRage-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-e08b227b-1ac0-4c9a-a6aa-fb7de6f69f62.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3101602 / `9ea2d734d22f95db08a774358331c4f65ec5d79d48ce3ebb0c864a990746f994` |
+| Anteprima | [WebP](anteprime/junkie.MethDrivenRage-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla rispettiva richiesta |
+| Tentativi scartati | Versione 1 respinta dal proprietario e conservata; nessun rilancio di questa richiesta. |
+| Controllo a 60 px | Oggetti fermi sul tavolo e sguardo rivolto in basso leggibili; singoli oggetti minuti. |
+| Anomalie / riscontro della richiesta | Sei oggetti appoggiati sul tavolino; nessun oggetto in volo. |
+| Giudizio del proprietario | In attesa. |
+
+##### Metabolismo Corrotto — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.PervertedMetabolism` |
+| Versione | 2 |
+| promptSha256 | `8cff1f1cc73e661b1efb15ba7ab332014d994cb21602b2ba9c292efaf5c029a5` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto; testo inviato riportato sopra |
+| source | `originali/junkie.PervertedMetabolism-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-3018249d-b11b-489e-8332-e5fb685bd5ef.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3115067 / `9a9363063481fced77ba74ba51e07a3b93f4958085a19f7d5da53146030d2742` |
+| Anteprima | [WebP](anteprime/junkie.PervertedMetabolism-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla rispettiva richiesta |
+| Tentativi scartati | Versione 1 respinta dal proprietario e conservata; nessun rilancio di questa richiesta. |
+| Controllo a 60 px | Avambracci scoperti leggibili; il reticolo delle vene verdi si perde a 60 px. |
+| Anomalie / riscontro della richiesta | Vene verdi presenti a piena risoluzione su mani, avambracci, collo e tempia; leggibilità limitata a 60 px. |
+| Giudizio del proprietario | In attesa. |
+
+##### Trascinare nel Tunnel — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.ToxicBloodDrain` |
+| Versione | 2 |
+| promptSha256 | `2aaf80ccd620b33400f80f525f17ce221b3e5e8792b238df06ee04578cd1e50b` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto; testo inviato riportato sopra |
+| source | `originali/junkie.ToxicBloodDrain-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-f81df467-b9ab-428b-8943-d109867635dc.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2746113 / `f916e089a7258c75bdda7bf6cb6155d7fc899423298859e9263ce7bd145373b0` |
+| Anteprima | [WebP](anteprime/junkie.ToxicBloodDrain-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla rispettiva richiesta |
+| Tentativi scartati | Versione 1 respinta dal proprietario e conservata; nessun rilancio di questa richiesta. |
+| Controllo a 60 px | Stretta di mano e volto verdastro distinguibili; ombra sul pavimento poco dettagliata. |
+| Anomalie / riscontro della richiesta | Pelle verdastra presente; ombre ordinarie a terra, senza figura soprannaturale. |
+| Giudizio del proprietario | In attesa. |
+
+##### L'Ultimo Tiro — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.LethalHeroinDose` |
+| Versione | 3 |
+| promptSha256 | `1e76d8dbeea263754c41a34d15562ea48d4e64229f62f719580686a6cd75d1e9` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Contesto recente (2 immagini): maschera bianca/nera allegata dal proprietario in chat, SHA-256 non esposto perché senza percorso locale; PNG di versione 2 `originali/junkie.LethalHeroinDose-2.png`: `14ec53f35b7655e93861640d0ee0775bcd53e9fdcddb2d3504dca8166d05a161`. Nessun riferimento aggiuntivo. |
+| Prompt riscritto | non esposto; testo inviato riportato sopra |
+| source | `originali/junkie.LethalHeroinDose-3.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-15b058f8-d3f3-4a07-9a6f-416486a7a92e.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2940118 / `cd834191ae6b1c59f1d80ebfe653d68b303b09880aaff023b3541bc4af842e26` |
+| Anteprima | [WebP](anteprime/junkie.LethalHeroinDose-3.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla rispettiva richiesta |
+| Tentativi scartati | Versione 2 non riuscita, conservata; ritocco versione 3 autorizzato dal proprietario. |
+| Controllo a 60 px | Nube e avversario leggibili; l’avambraccio a terra non compare più. |
+| Anomalie / riscontro della richiesta | Rimosso l’avambraccio orizzontale con la mano; il pavimento occupa l’area indicata. L’altro braccio non è esposto nella posa. |
+| Giudizio del proprietario | In attesa. |
+
+**Verifiche del giro di correzione:** `git diff --check` e `python scripts/check-rules.py` verdi; `python scripts/check-links.py` conserva gli stessi 22 collegamenti mancanti della base, nessuno nuovo. Controllate le copie byte per byte dei sette file restituiti, le sette anteprime WebP qualità 80 a 512 × 512 px e le viste a 60 px; pagina verificata con 11 campi di giudizio, 11 viste a 60 px e tutti i riferimenti locali presenti. Modello, prompt riscritto e hash della maschera allegata in chat non esposti dal tool. Nessuna modifica ai prompt iniziali, al gioco o ai file altrui; nessun push. Cinque versioni 1 approvate; sei proposte correnti in attesa del proprietario, inclusa L’Ultimo Tiro versione 3. La versione 2 non riuscita resta documentata e conservata.
