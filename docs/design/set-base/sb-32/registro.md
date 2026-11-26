@@ -2936,3 +2936,208 @@ Prompt preventivo nel commit `9c73e29`. Una richiesta di sostituzione del bicchi
 | Un Altro... Grappino... | `base.pino.PrimaIlBrindisi` | 3 | [WebP](anteprime/base.pino.PrimaIlBrindisi-3.webp) |
 
 Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 512×512 WebP qualità 80. Nota della regia per la passata di omogeneità (D206): sotto la luce calda i vestiti neri di Piera tendono al marrone scuro. Nessuna integrazione nell’atlante in questo lotto. Nessun comportamento di gioco o atteso modificato.
+
+
+## Lotto 5 — Beppe
+
+[Prompt letterali](lotto-05-beppe.md), commit `3dbedaa`, verificati invariati. Dieci generazioni in ordine, una per prompt, con i due allegati indicati e impronte verificate; nessun rifiuto, rilancio o tentativo scartato. Modello e riscrittura non esposti. Prompt letterali senza delimitatori né ritorno finale, SHA-256 su UTF-8 con ritorni LF. Originali copiati byte per byte fuori da git; anteprime WebP 512 × 512, qualità 80. [Pagina di giudizio](giudizio-lotto-05.html). Sandbox non inizializzabile: letture, copie e verifiche eseguite tramite escalation. I file SB-34 preesistenti restano esclusi.
+
+### Questo Torna Utile
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.QuestoTornaUtile` |
+| promptSha256 | `0afbd776f8c1c44c0927af47382164a653b0f6fa2287b5dbfe09a68d39616e54` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/beppe.png`: `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.QuestoTornaUtile.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-274dc69b-4f00-4585-a9c1-dc89cd67bc5a.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2919372 / `68ce3e95ee1f3339bd0d59a728248edcd0e7e48f1aeebe9090e1c1c166038116` |
+| Anteprima | [WebP](anteprime/base.gigi.QuestoTornaUtile.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 1, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Beppe e sedia rotta leggibili; pezzo di legno distinto. Braccia separate, dita e tasche troppo minute; nessun attrezzo in tasca distinguibile. |
+| Anomalie visive | Nessuna evidente alla vista grande. |
+| Giudizio del proprietario | In attesa. |
+
+### Cuffie e Testa Bassa
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.bound.UnaStrettaEPassa` |
+| promptSha256 | `7454e1e6b1808e945ef168b8dc7f05ef99d346e7e7f05e1f93e8cb9f93707181` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/beppe.png`: `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.bound.UnaStrettaEPassa.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-0390102d-8301-48fd-ab2f-f32792de1813.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2876286 / `5991df13b70782e94dbd4bc282b3ca92ac5da28fdf840fa51d83a0af93ab2395` |
+| Anteprima | [WebP](anteprime/base.gigi.bound.UnaStrettaEPassa.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 2, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Sagoma e pugni avversari leggibili; mani e arti separati, dita minute; tasche poco distinguibili, nessun attrezzo visibile. |
+| Anomalie visive | Avversario parzialmente fuori campo. |
+| Giudizio del proprietario | In attesa. |
+
+### Colpo col Cacciavite
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.bound.ColpoDiCacciavite` |
+| promptSha256 | `1463ab4bdfe7947486674947bc721b1fcb5829831908a657125079d1aa4b3ae8` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/beppe.png`: `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.bound.ColpoDiCacciavite.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-59afb342-466f-473d-998c-42b77758e7a3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2769225 / `5369567ed45a2b028b27f5b74c87e76eeee47d4e9b35667d4226074a78e89fe0` |
+| Anteprima | [WebP](anteprime/base.gigi.bound.ColpoDiCacciavite.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 3, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Beppe e avversario distinguibili; cacciavite sottile, punta e dita minute; arti parzialmente coperti, tasche senza attrezzi distinguibili. |
+| Anomalie visive | L’avversario è parzialmente fuori campo; la punta del cacciavite è coperta. |
+| Giudizio del proprietario | In attesa. |
+
+### Affilare gli Utensili
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.bound.Lima` |
+| promptSha256 | `ad370796f7bdb25309d77fa521e69b2e0db1af1ec95f5b14bdf5f06b42ac08b5` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/beppe.png`: `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.bound.Lima.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-298a46f5-aacf-4fad-b725-6685e4062307.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3136621 / `66ef3e515df48fca29820307034a6f209421e8bdd66c4a7191ee36541517bb77` |
+| Anteprima | [WebP](anteprime/base.gigi.bound.Lima.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 4, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Lima e chiave distinguibili come aste; estremità e impugnature minute, braccia separate; tasche non leggibili. |
+| Anomalie visive | La chiave ha una estremità ad anello e una aperta; scintille visibili. |
+| Giudizio del proprietario | In attesa. |
+
+### Disassemblare
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.BreakYourToy` |
+| promptSha256 | `6ab4bb1d08abc29cd5c7d190c68165591321bb0fcc3efe5c4de3db3de6e3e5ff` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/beppe.png`: `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/bruiser.BreakYourToy.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-7a528594-c9ae-4a3c-a361-a22a3f6ca588.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2878144 / `c854f269cf7a323b6f0d1c1d2a455d5506f42830603b08cee82dafc6fd8c5b0a` |
+| Anteprima | [WebP](anteprime/bruiser.BreakYourToy.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 5, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Shaker e pezzi sul tavolo distinguibili; mano avversaria e braccia visibili, dita minute; tasche senza attrezzi distinguibili. |
+| Anomalie visive | Il pezzo tenuto è separato dal corpo dello shaker. |
+| Giudizio del proprietario | In attesa. |
+
+### Chiave da Tredici
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.ChiaveDaTredici` |
+| promptSha256 | `d017f3c6bae4f7055b2225ea1a763091a274eb3d3744ceab21c63ad4c4f26843` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/beppe.png`: `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.ChiaveDaTredici.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-ec93f7ce-8875-49bf-86c3-600c1330fce7.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2907129 / `70e09051edcd1216c73c4450b53bf0f90b9534f806a7c5c0ca1daa7b55a1b777` |
+| Anteprima | [WebP](anteprime/base.gigi.ChiaveDaTredici.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 6, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Colpo e chiave leggibili; punta e mani minute, braccia sollevate separate; avversario parzialmente coperto, tasche senza attrezzi distinguibili. |
+| Anomalie visive | La punta della chiave tocca la giacca; seconda mano dell’avversario coperta. |
+| Giudizio del proprietario | In attesa. |
+
+### Preparare il Lavoro
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.ColpoDiChiaveInglese` |
+| promptSha256 | `6e1d8bfa8b48bfc3a95c7d14733e258039e94a8606d9b0c059c404f15f01704b` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/beppe.png`: `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.ColpoDiChiaveInglese.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-961b21b1-c772-4249-a29f-581fdef33cc0.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3054045 / `a0ce1142cbbe62bbb9515a3d2142ffec410ab748fda6959150f3a69bf5ea9c18` |
+| Anteprima | [WebP](anteprime/base.gigi.ColpoDiChiaveInglese.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 7, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Calibro e due figure leggibili; ganasce e dita minute, braccia distinguibili; tasche senza attrezzi visibili. |
+| Anomalie visive | L’avversario ha il volto parzialmente visibile; forma delle ganasce da giudicare alla vista grande. |
+| Giudizio del proprietario | In attesa. |
+
+### Secondo Bagagliaio
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.SottoIlCofano` |
+| promptSha256 | `606e6ba3a3113c244cb26b06b0709faa1a30fdfb7d70d4b73728f65068247fc1` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/beppe.png`: `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.SottoIlCofano.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-90c9055e-7c93-497e-9b90-73efea5967bc.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3077467 / `8a5ac9b9b078925a977001a479cb3287803f9b29485d29f844f1593925777389` |
+| Anteprima | [WebP](anteprime/base.gigi.SottoIlCofano.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 8, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Cofano e Beppe leggibili; asta nella mano visibile, forma e funzione minute; arti in parte coperti, tasche non verificabili. |
+| Anomalie visive | Beppe impugna un’asta non richiesta; cofano e vano motore occupano gran parte della scena. |
+| Giudizio del proprietario | In attesa. |
+
+### Lavoro Fatto Bene
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.LavoroFattoBene` |
+| promptSha256 | `7c2890945dadf65fafe0908febab27a2ad9d6f837adb9111bbd0cbf53106f9a2` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/beppe.png`: `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.LavoroFattoBene.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-ae00e95c-2957-4c6d-a183-c608996457a3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3025136 / `8730031b3cbe85447b07131dfa6a6ec00f92a8d448bb2b7097b4dd9e03eb053a` |
+| Anteprima | [WebP](anteprime/base.gigi.LavoroFattoBene.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 9, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Pugno e avversario leggibili; attrezzi sul tavolo minuti e forme non tutte distinguibili; arti separati, dita e tasche minute. |
+| Anomalie visive | I cinque attrezzi sono sul tavolo; l’avversario è parzialmente fuori campo. |
+| Giudizio del proprietario | In attesa. |
+
+### Metodo Empirico
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.UnaStrettaDiProva` |
+| promptSha256 | `04e26413ad320b9998fd1c3ed87dd2cadd243691aabdeaa80636f59f83fae479` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/beppe.png`: `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.UnaStrettaDiProva.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-22ae7c07-f2a7-4610-b5fa-3fe15f7cd40c.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2982108 / `5465399271f579454f4140f61418d630846ce79c4b9b5cfa44954d1d6c77cb11` |
+| Anteprima | [WebP](anteprime/base.gigi.UnaStrettaDiProva.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 10, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Tavolo inclinato e chiave visibili; estremità e dita minute, braccia distinguibili; tasche non verificabili. |
+| Anomalie visive | La mano di Beppe dietro la gamba del tavolo è parzialmente coperta. |
+| Giudizio del proprietario | In attesa. |
