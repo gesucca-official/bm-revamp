@@ -1567,3 +1567,232 @@ Prompt preventivo `86b0062`. Una chiamata; nessun rifiuto, rilancio o tentativo 
 | Sventare l’Assassinio | `base.mara.bound.PassoStretto` | 2 | [WebP](anteprime/base.mara.bound.PassoStretto-2.webp) |
 
 Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 512×512 WebP qualità 80. Nessuna integrazione nell’atlante in questo lotto. Nessun comportamento di gioco o atteso modificato.
+
+
+## Lotto 3 — Celestina
+
+[Prompt letterali](lotto-03-celestina.md), commit `2e220ec`, verificati invariati. Undici generazioni, una per prompt nell’ordine 1–11, con esclusivamente i due allegati nell’ordine dichiarato e impronte verificate: nessun rifiuto, rilancio, modifica o tentativo scartato. Modello e riscrittura non esposti; nessun campo negativo separato. I testi inviati sono i contenuti letterali dei blocchi, senza delimitatori né ritorno a capo finale; promptSha256 calcolato in UTF-8 con ritorni LF. Gli originali sono copie byte per byte dei PNG restituiti, fuori da git; anteprime a 512 × 512 px, WebP qualità 80. [Pagina di giudizio](giudizio-lotto-03.html).
+
+**Diagnosi:** SHA-256 di entrambi gli allegati coincidenti; file dei prompt identico al commit indicato. Modifiche altrui già presenti nel checkout lasciate intatte. **Modifica:** solo originali esclusi da git, undici anteprime, questa sezione e pagina di giudizio; nessun comportamento o atteso cambiato. La generazione ha prodotto anomalie visive, conservate senza ritocchi e descritte nelle tabelle; il giudizio resta al proprietario.
+
+### Desiderio Incontrollabile
+
+| Campo | Valore |
+|---|---|
+| bindingName | `com.basic.ToxicGrab` |
+| promptSha256 | `399da792fce55d31c170a17de87a9ebb0241f6fdb6be6c1e020d37e990e8c697` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/com.basic.ToxicGrab.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-256c17f0-cba3-4bcd-9c92-e564dd3b2035.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2977379 / `131213ec5e2bc0ce37c27dbfd569e5f0a5a76b7e555992c531ee39b31c53ab94` |
+| Anteprima | [WebP](anteprime/com.basic.ToxicGrab.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 1, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Mano alla bocca e volto leggibili; il piccolo avanzo di cibo non si distingue. |
+| Anomalie visive | La tuta appare prugna brunito, con il violetto poco netto sotto la luce calda. |
+| Giudizio del proprietario | In attesa. |
+
+### Fondo del Posacenere
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.character.PatheticBlade` |
+| promptSha256 | `092644058f68f821a46a723f3e395b4f5e6ce8b2db4b0c2af789d734a19455ff` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/junkie.character.PatheticBlade.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-d806909b-9b23-4876-ab24-1c37d8f1ab2f.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3013310 / `0b2a968b72661b3d99524af16d7431f23b5b1e9541090a36369819ef1bd158d7` |
+| Anteprima | [WebP](anteprime/junkie.character.PatheticBlade.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 2, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Posacenere rovesciato e mano alzata visibili; la scheggia è troppo piccola per identificarla. |
+| Anomalie visive | La tuta appare prugna brunito; la scheggia viene mostrata sopra il mucchio. |
+| Giudizio del proprietario | In attesa. |
+
+### Rintanarsi nel Cappotto
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.tossico.bound.RaschiareIlFondo` |
+| promptSha256 | `e3cfa5d1532d06e0293dbf843bd8fe0377122abef1c757e2bf49499ddeb1f8d4` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.tossico.bound.RaschiareIlFondo.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-55d976a9-36c7-4981-a454-b23b5d683660.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3065035 / `5f8528e63653ae9caad98141b8cbf6a1b0ea3dc9dd308744bd60541d6a61593a` |
+| Anteprima | [WebP](anteprime/base.tossico.bound.RaschiareIlFondo.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 3, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Cappotto e postura raccolta leggibili; le pieghe si fondono nelle ombre. |
+| Anomalie visive | La tuta appare prugna brunito; la posa raccolta riprende in parte quella del riferimento. |
+| Giudizio del proprietario | In attesa. |
+
+### Tagliare la Dose
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.character.RottenSmile` |
+| promptSha256 | `d4c9f7f8dd5889b02873ef6171e834d3125dbf6cd22d9db0df20d46b1f3581d6` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/junkie.character.RottenSmile.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-860ad055-ba61-40fe-b00b-5d8d6144ab43.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3083496 / `8760af44427bf7dacbcc4d7c03d3be2c7c061a7a3ef1ef076234bd3fa6abe5d2` |
+| Anteprima | [WebP](anteprime/junkie.character.RottenSmile.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 4, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Gesto di taglio e caramella rossa visibili; lama e singole porzioni poco distinte. |
+| Anomalie visive | La tuta appare prugna brunito; tre spicchi separati e una porzione maggiore non formano quattro spicchi uguali. |
+| Giudizio del proprietario | In attesa. |
+
+### L'Ultimo Tiro
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.LethalHeroinDose` |
+| promptSha256 | `16a9bab3a5f14745a722806fde6a011a8c16595aa960bb5f57ce55ee3f340ee4` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/junkie.LethalHeroinDose.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-45cc9c57-231a-4ab9-af0c-c6c57aca7f34.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2939886 / `bb2dcb36f21801abf523e8580fe31ad392d755dd68ff79186f05cf170ca13fef` |
+| Anteprima | [WebP](anteprime/junkie.LethalHeroinDose.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 5, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Nube e avversario arretrato leggibili; il filtro della sigaretta non si distingue. |
+| Anomalie visive | Tre braccia visibili di Celestina: mano con sigaretta, appoggio sul gomito e ulteriore mano a terra. Tuta prugna brunito. |
+| Giudizio del proprietario | In attesa. |
+
+### Fare l'Inventario
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.MethDrivenRage` |
+| promptSha256 | `72cac89e8d0338a5af916f0c6abab90f71f27da10f3b55265776bbb89fba25e3` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/junkie.MethDrivenRage.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-34c64093-cb5c-43b8-9bfc-dea30e55696c.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2981814 / `51288ff50ee955f3f648cef7728639f0b35ca9345daa19d30fb9cb4ea1e7b216` |
+| Anteprima | [WebP](anteprime/junkie.MethDrivenRage.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 6, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Mano lanciata e arco di oggetti visibili; i singoli oggetti non sono identificabili. |
+| Anomalie visive | Il gesto è molto posato; tuta prugna brunito. |
+| Giudizio del proprietario | In attesa. |
+
+### Tossicone Scatarrante
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.Cough` |
+| promptSha256 | `fa34f735018af3ab41b35312f3a868b619058c1343d301766c3e17e4cff56d20` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/junkie.Cough.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-463a76b5-ee78-4031-adf4-3af9bf891004.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2870626 / `805f10b2ea11879bf952b38517913cf29e5938bf2091f5dae48bd1e6cead0582` |
+| Anteprima | [WebP](anteprime/junkie.Cough.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 7, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Getto dalla bocca e avversario che si ritrae leggibili; mani minute e poco distinte. |
+| Anomalie visive | Mano aggiuntiva alla gola, oltre alla mano sul tavolo e a quella sul ventre. Tuta prugna brunito. |
+| Giudizio del proprietario | In attesa. |
+
+### Metabolismo Corrotto
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.PervertedMetabolism` |
+| promptSha256 | `c5af64a11dd13ee026883ef4586b43e2610180177bebd4d141163eb2e65736ad` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/junkie.PervertedMetabolism.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-6d352617-e928-402f-a041-44a054baf259.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2710894 / `c5aba5753adfcb6edb4e8af20eeecb3713ca329f6095045efa4ca96415fec8e1` |
+| Anteprima | [WebP](anteprime/junkie.PervertedMetabolism.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 8, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Braccia alzate e sagoma leggibili; le bottiglie ai piedi si confondono. |
+| Anomalie visive | Alcune bottiglie hanno etichette; pugni entro il margine esterno del 5%. Tuta prugna brunito. |
+| Giudizio del proprietario | In attesa. |
+
+### Riflessi Aumentati dalla Speed
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.AmphetamineReflexes` |
+| promptSha256 | `9ef373451ed995ae2682c0bbf1e68e3bd86228b80fcf82726ed5a2161689fe52` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/junkie.AmphetamineReflexes.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-6fd12dd2-cdcb-47fc-9c98-836345ade014.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3074610 / `18c274f8b9b3da5ab8762af6f9edfbf2648d02a1b70a8a2d8406e39e2f6b5ab2` |
+| Anteprima | [WebP](anteprime/junkie.AmphetamineReflexes.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 9, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Pugno alto e abbassamento di Celestina leggibili; dettagli del volto poco distinti. |
+| Anomalie visive | La schivata è un abbassamento accovacciato; tuta prugna brunito. |
+| Giudizio del proprietario | In attesa. |
+
+### Trascinare nel Tunnel
+
+| Campo | Valore |
+|---|---|
+| bindingName | `junkie.ToxicBloodDrain` |
+| promptSha256 | `386e79acf8511555d8d16d5d2dd3d12efca25bcb63419a9667f687fe938d0664` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/junkie.ToxicBloodDrain.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-86bef904-0c37-4712-9331-62bcb3ede7ab.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2743989 / `b1df9cb07cf940239c703c66394f61de24f6acf2cd3c6662b524f15ff2c61c52` |
+| Anteprima | [WebP](anteprime/junkie.ToxicBloodDrain.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 10, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Trazione tra le figure leggibile; stretta di mano minuta e ombra poco distinta. |
+| Anomalie visive | L’ombra resta sul pavimento e non sale sull’avversario. Tuta prugna brunito. |
+| Giudizio del proprietario | In attesa. |
+
+### Un Assaggino
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.tossico.UnAssaggino` |
+| promptSha256 | `3019d624e522f1a710168b4b936a2e5cb819e9b3461ccb32feac2e668db4f7fc` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/celestina.png`: `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.tossico.UnAssaggino.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a217df-b635-7070-9a74-02f502e68a8e/exec-8446db75-c897-4397-973c-d9d539107404.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2755646 / `e02a013fb8e47cb8853386755e63710b4b590ba85883d13340c69c7bf3d3e1a4` |
+| Anteprima | [WebP](anteprime/base.tossico.UnAssaggino.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 11, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Bicchiere alla bocca e mano del cliente protesa leggibili; annusare non è distinguibile. |
+| Anomalie visive | Celestina è già seduta e beve; l’atto di annusare non è esplicito. Tuta prugna brunito. |
+| Giudizio del proprietario | In attesa. |
+
+**Verifica e consegna:** copie degli undici originali confrontate byte per byte con i file restituiti; dimensioni 1254 × 1254 px per tutti, undici anteprime 512 × 512 px WebP qualità 80 e controllo visivo sul foglio a 60 px. `git diff --check` senza errori; `python scripts/check-rules.py` verde; `python scripts/check-links.py` restituisce gli stessi 22 link mancanti rilevati prima della modifica, nessuno nuovo. Solo aggiunte al registro; nessun atteso cambiato. Modello e prompt riscritto non esposti dal tool, quindi non verificabili. Nessun atlas, client, catalogo, piano, README, decisione o guida modificati dal lotto; nessun push. Scelte prese: riduzione Lanczos per le anteprime; campi del giudizio compilabili senza salvataggio automatico. Tutte le undici carte attendono il giudizio del proprietario.
