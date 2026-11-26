@@ -2431,3 +2431,104 @@ Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 51
 | Giudizio del proprietario | In attesa. |
 
 **Verifiche:** git diff --check verde; python scripts/check-rules.py verde; python scripts/check-links.py: 504 documenti, 22 link rotti preesistenti, elenco identico al commit di base 9a6c4da (confronto in memoria del registro originale), zero nuovi; controllo mirato del registro: zero link rotti. Dieci originali verificati identici ai file restituiti tramite SHA-256, dieci anteprime WebP verificate a 512 x 512 px, controllo visivo su riduzioni effettive a 60 px. Prompt sorgente invariata. Nessuna verifica server richiesta per questo perimetro. **Non verificato:** approvazione visiva del proprietario; nessuna chiusura del lotto o decisione registrata. **Scelte prese:** nessuna modifica dei prompt, nessuna selezione fra varianti; conservati tutti i risultati della singola richiesta per carta.
+
+### Giudizio del proprietario e primo giro di correzioni — 26 novembre 2026
+
+> ultima goccia: la matita ha la punta dalla parte della gomma
+> posto fisso: la punta della matita è strana
+> schiarirsi le idee: la punta della matita è strana
+> ultimo giro: i bicchieri che cadono sono tutti diversi e il vassoio è al contrario, e la punta della matita è strana
+> scompenso: va bene ma la matita sembra conficcata nella testa, mettiamola più inclinata
+> alla goccia: il bicchiere è strano e sembra che piera abbia della bava sul mento
+> avamposto fortificato: lei dovrebbe essere dietro il bancone, e con una faccia agguerrita
+> un altro e arrivo: la mano alzata ha il pollice al contrario. non mi piace la posa
+> rutto: va quasi bene a parte la matita e la sedia rovesciata che è strana
+> un altro grappino: ok a parte la matita
+
+Recepito il giudizio sulle dieci versioni 1. Si prepara una versione 2 per ciascuna carta, una sola richiesta per carta, senza rilanci. Per ogni richiesta l’unico allegato è l’originale della carta da correggere, senza identikit, riferimento del bar o maschere. Tutte le versioni precedenti restano conservate. Scompenso e Un Altro... Grappino... sono da conservare nella scena, con la sola correzione della matita richiesta; nessuna approvazione definitiva o chiusura del lotto viene registrata.
+
+**Diagnosi:** checkout con i soli quattro file non tracciati già autorizzati in `output/pdf/`, lasciati intatti. Base del giro: `1fa9008`; modifiche di SB-34 già committate, estranee al perimetro. **Modifica prevista:** ritocchi localizzati su sette matite; in Ultimo Giro anche vassoio e bicchieri, in Alla Goccia bicchiere e mento, in Rutto a Bruciapelo anche sedia. Per Avamposto Fortificato si ricompone Piera dietro al bancone con espressione agguerrita; per Un Altro e Arrivo si cambia posa mantenendo la richiesta di un altro drink e correggendo l’anatomia della mano. Scelte esecutive: un bicchiere cilindrico robusto per Alla Goccia; mano vicina alla spalla e busto eretto per Un Altro e Arrivo. Nessuna modifica di regole o attesi.
+
+#### Prompt preventivi delle versioni 2
+
+Testi da inviare letteralmente, UTF-8 e LF, senza delimitatori o ritorno finale; da committare prima delle richieste.
+
+##### Fino all'Ultima Goccia — versione 2
+
+Unico allegato: `originali/base.pino.QuestoLoFiniscoIo.png`, SHA-256 `6e8d50caee0f5130e92e0342d8fd0792832a89401da2574e9fb5c410a7ada0fb`.
+
+~~~text
+Edit only the pencil in this attached illustration. Replace the pencil in her bun with one ordinary straight wooden pencil. Its exposed end on the left is a clean sharpened cone of pale wood ending in one small dark graphite point. There is no eraser or metal ferrule on that pointed end. The opposite blunt end is hidden among the curls. Lay the pencil shallowly and tangentially through the outer hair above the scalp, clearly held by the bun, never entering skin. Keep it short and physically plausible. Keep the drinking action, glass, patron, counter, backless stool, Piera's pose and all other details unchanged. Preserve the same recognizable Piera, face except where expressly changed, body proportions, all-black clothes, hair, exactly two arms and two anatomically coherent hands, the other figures, bar/restroom setting, warm lighting, palette, irregular ink contours and painted print texture. Preserve the original square composition except for the specified changes. Opaque square artwork, no text, border or watermark.
+~~~
+
+##### Posto Fisso — versione 2
+
+Unico allegato: `originali/base.pino.bound.CinqueMinutiEVado.png`, SHA-256 `97a880312db0dbcb253c741bc95e55767e8745ae58d4bc867364d05fd0678c2a`.
+
+~~~text
+Edit only the pencil in this attached illustration. Replace the pencil in her bun with one ordinary straight wooden pencil. Its exposed end on the left is a clean sharpened cone of pale wood ending in one small dark graphite point. There is no eraser or metal ferrule on that pointed end. The opposite blunt end is hidden among the curls. Lay the pencil shallowly and tangentially through the outer hair above the scalp, clearly held by the bun, never entering skin. Keep it short and physically plausible. Keep Piera's pose and glass, the dog snarling on the round backless stool, all four natural dog legs and grounded paws, and the recoiling patron unchanged. Preserve the same recognizable Piera, face except where expressly changed, body proportions, all-black clothes, hair, exactly two arms and two anatomically coherent hands, the other figures, bar/restroom setting, warm lighting, palette, irregular ink contours and painted print texture. Preserve the original square composition except for the specified changes. Opaque square artwork, no text, border or watermark.
+~~~
+
+##### Schiarirsi le Idee — versione 2
+
+Unico allegato: `originali/base.pino.bound.Coccio.png`, SHA-256 `ce1d04f3a897c265582a571ee374e459f85d3ac3f2b0a2ab3ddc2bb4e52fdaf1`.
+
+~~~text
+Edit only the pencil in this attached illustration. Replace the pencil in her bun with one ordinary straight wooden pencil. Its exposed end on the left is a clean sharpened cone of pale wood ending in one small dark graphite point. There is no eraser or metal ferrule on that pointed end. The opposite blunt end is hidden among the curls. Lay the pencil shallowly and tangentially through the outer hair above the scalp, clearly held by the bun, never entering skin. Keep it short and physically plausible. Keep Piera washing her face, both hands, all water splashes, sink, faucet and blurred mirror reflection unchanged. Preserve the same recognizable Piera, face except where expressly changed, body proportions, all-black clothes, hair, exactly two arms and two anatomically coherent hands, the other figures, bar/restroom setting, warm lighting, palette, irregular ink contours and painted print texture. Preserve the original square composition except for the specified changes. Opaque square artwork, no text, border or watermark.
+~~~
+
+##### Ultimo Giro — versione 2
+
+Unico allegato: `originali/base.pino.UltimoGiro.png`, SHA-256 `e22e126de7420a1f520e72b858fab492d89384ba515fe8c59cd974269e77e0f0`.
+
+~~~text
+Edit this attached illustration only in the pencil, tray and falling shot glasses. Replace the pencil in her bun with one ordinary straight wooden pencil. Its exposed end on the left is a clean sharpened cone of pale wood ending in one small dark graphite point. There is no eraser or metal ferrule on that pointed end. The opposite blunt end is hidden among the curls. Lay the pencil shallowly and tangentially through the outer hair above the scalp, clearly held by the bun, never entering skin. Keep it short and physically plausible. Correct the tray's orientation: show the shallow concave serving surface with its raised rim facing the viewer and tipped downward toward the opponent, so glasses visibly slide and tumble off its lowered edge. Do not show the convex underside as the surface that held the drinks. Make every falling glass an identical small cylindrical shot glass, with the same simple straight sides, thick flat base, diameter and height; only its perspective and rotation vary. Keep the glasses intact, their liquor spilling onto the opponent, and preserve her two hands holding the tray and the opponent's defensive reaction. Preserve the same recognizable Piera, face except where expressly changed, body proportions, all-black clothes, hair, exactly two arms and two anatomically coherent hands, the other figures, bar/restroom setting, warm lighting, palette, irregular ink contours and painted print texture. Preserve the original square composition except for the specified changes. Opaque square artwork, no text, border or watermark.
+~~~
+
+##### Scompenso da Ultimo Giro — versione 2
+
+Unico allegato: `originali/base.pino.TestataDaUltimoGiro.png`, SHA-256 `def7a830a6341e52ffe77f6379c84c5629b2e50cbe05814eaf58c35dd87d7e7d`.
+
+~~~text
+Edit only the pencil and the tiny surrounding area of hair in this attached illustration. Keep Piera's fall, closed eyes, impact, opponent, flying glass and tipped backless stool unchanged. Replace the pencil in her bun with one ordinary straight wooden pencil. Its exposed end on the left is a clean sharpened cone of pale wood ending in one small dark graphite point. There is no eraser or metal ferrule on that pointed end. The opposite blunt end is hidden among the curls. Lay the pencil shallowly and tangentially through the outer hair above the scalp, clearly held by the bun, never entering skin. Keep it short and physically plausible. Rotate the pencil farther toward horizontal, only about 15 degrees above the horizontal toward the exposed left point. Make its shaft visibly rest along the outer curls with hair supporting it; no shaft directed into the head, skin, face or scalp. Preserve the same recognizable Piera, face except where expressly changed, body proportions, all-black clothes, hair, exactly two arms and two anatomically coherent hands, the other figures, bar/restroom setting, warm lighting, palette, irregular ink contours and painted print texture. Preserve the original square composition except for the specified changes. Opaque square artwork, no text, border or watermark.
+~~~
+
+##### Alla Goccia — versione 2
+
+Unico allegato: `originali/base.pino.GoingBerserk.png`, SHA-256 `8731e49eea3dc2f2bc94d82f05f49b9eaf7156a827d16ad65d2497de0add0ab0`.
+
+~~~text
+Edit this attached illustration only in the drinking glass used for the blow and the drop on Piera's chin. Replace the strange stemmed vessel with one ordinary sturdy empty cylindrical tumbler, straight glass walls, open circular rim and thick flat base, no stem and no pedestal foot. Her existing striking hand grips its side naturally and brings its base down onto the opponent's head; keep the glass intact and preserve the direction and force of the blow. Remove the drool-like drop and its streak completely: her chin is dry, with normal skin shading. Keep her face, smile, pose, pencil, other hand, opponent, impact marks and background unchanged. Preserve the same recognizable Piera, face except where expressly changed, body proportions, all-black clothes, hair, exactly two arms and two anatomically coherent hands, the other figures, bar/restroom setting, warm lighting, palette, irregular ink contours and painted print texture. Preserve the original square composition except for the specified changes. Opaque square artwork, no text, border or watermark.
+~~~
+
+##### Avamposto Fortificato al Bancone — versione 2
+
+Unico allegato: `originali/base.pino.IlBanconeRegge.png`, SHA-256 `6517c2af879fe073c698f120fa5a403cf46c5116d3fc564858ba149a6191386a`.
+
+~~~text
+Edit this attached illustration to place Piera behind the bar counter, on the bartender's working side, with a fierce combative expression. Put the large solid wooden counter front in the foreground between the viewer and her lower body; her upper body rises prominently behind its top. She braces one arm firmly around the counter's edge and keeps the little grappa glass level in her other hand while the whole counter lurches diagonally and bottles and glasses slide. Give her a determined aggressive face with lowered knitted brows, narrowed aligned eyes and a tight defiant mouth; retain her recognizable age, round face and red nose. Recompose only as needed for this clear behind-the-counter position; do not show her sitting on a stool on the customer's side. Keep her recognizable clothes, bun and pencil, the bar shelves and lamp, and coherent anatomy. Preserve the same recognizable Piera, face except where expressly changed, body proportions, all-black clothes, hair, exactly two arms and two anatomically coherent hands, the other figures, bar/restroom setting, warm lighting, palette, irregular ink contours and painted print texture. Preserve the original square composition except for the specified changes. Opaque square artwork, no text, border or watermark.
+~~~
+
+##### Un Altro e Arrivo — versione 2
+
+Unico allegato: `originali/base.pino.OffroIo.png`, SHA-256 `7a13e72051a4a6d894969d92114b7daba0564276b49dde9a917648da47a1190c`.
+
+~~~text
+Edit this attached illustration to replace Piera's disliked raised-arm pose with a natural readable order for one more drink. Keep her seated upright on the same modest round backless bar stool, in a relaxed side-on posture toward the counter, shoulders level, weight balanced. Rest one forearm naturally on the counter. Bend the other elbow close to her torso and raise that hand beside her shoulder with only the index finger pointing up to order another drink; no arm reaching backward over her head. Draw a coherent hand with five digits: the thumb emerges from the correct inner side of the palm and folds naturally across the curled middle, ring and little fingers. The hand and forearm must join naturally, no reversed thumb or twisted wrist. Let her head turn slightly toward the counter with her familiar serene drowsy expression. Keep the two anonymous impatient patrons by the door, glass, bun and pencil, furniture scale, and bar background. Preserve the same recognizable Piera, face except where expressly changed, body proportions, all-black clothes, hair, exactly two arms and two anatomically coherent hands, the other figures, bar/restroom setting, warm lighting, palette, irregular ink contours and painted print texture. Preserve the original square composition except for the specified changes. Opaque square artwork, no text, border or watermark.
+~~~
+
+##### Rutto a Bruciapelo — versione 2
+
+Unico allegato: `originali/base.pino.RuttoADistanzaSociale.png`, SHA-256 `0b38609386de982c852b15caefe4048c12b58183673a507d23f85ddd462a7cd4`.
+
+~~~text
+Edit this attached illustration only in the pencil and the overturned chair at the lower right. Replace the pencil in her bun with one ordinary straight wooden pencil. Its exposed end on the left is a clean sharpened cone of pale wood ending in one small dark graphite point. There is no eraser or metal ferrule on that pointed end. The opposite blunt end is hidden among the curls. Lay the pencil shallowly and tangentially through the outer hair above the scalp, clearly held by the bun, never entering skin. Keep it short and physically plausible. Redraw that overturned chair as a simple physically coherent wooden bar chair resting on its side: one rectangular seat, one backrest connected to the rear seat corners by two continuous uprights, and exactly four legs attached at the four seat corners, with consistent perspective, no fused, disconnected or extra wooden parts. Keep the flying patron, belch shockwave, table, glasses, Piera's pose and her round backless stool unchanged. Preserve Grappino cowering underneath, separate from her legs, with no added or altered limbs. Preserve the same recognizable Piera, face except where expressly changed, body proportions, all-black clothes, hair, exactly two arms and two anatomically coherent hands, the other figures, bar/restroom setting, warm lighting, palette, irregular ink contours and painted print texture. Preserve the original square composition except for the specified changes. Opaque square artwork, no text, border or watermark.
+~~~
+
+##### Un Altro... Grappino... — versione 2
+
+Unico allegato: `originali/base.pino.PrimaIlBrindisi.png`, SHA-256 `d6f568f76db3311f0a9968f012a524c91264062830b31f6c4d7c30f8e9b62333`.
+
+~~~text
+Edit only the pencil in this attached illustration. Replace the pencil in her bun with one ordinary straight wooden pencil. Its exposed end on the left is a clean sharpened cone of pale wood ending in one small dark graphite point. There is no eraser or metal ferrule on that pointed end. The opposite blunt end is hidden among the curls. Lay the pencil shallowly and tangentially through the outer hair above the scalp, clearly held by the bun, never entering skin. Keep it short and physically plausible. Keep Piera's toast, raised glass and hand, other hand on the backless stool, open mouth, dog barking in the foreground, its four natural legs and paws on the floor, and the two startled patrons unchanged. Preserve the same recognizable Piera, face except where expressly changed, body proportions, all-black clothes, hair, exactly two arms and two anatomically coherent hands, the other figures, bar/restroom setting, warm lighting, palette, irregular ink contours and painted print texture. Preserve the original square composition except for the specified changes. Opaque square artwork, no text, border or watermark.
+~~~
