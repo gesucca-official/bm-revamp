@@ -2,7 +2,7 @@
 
 Proposta del 26 novembre 2026, passo con proposta ([piano](../../ca-plan.md#ca-0e--modificatori-di-incontro)). **Esito:** proposta
 decisa dal proprietario il 26 novembre 2026 ([sotto](#decisione-del-proprietario), DC5 del piano), **attuata** lo stesso giorno
-([Attuazione](#attuazione)), in attesa di revisione.
+([Attuazione](#attuazione)) e **chiusa** dopo la revisione della regia ([Chiusura](#chiusura)).
 
 ## In breve
 
@@ -235,3 +235,16 @@ I testi dei sei modificatori; R08a com'è scritta; i limiti dei parametri.
 2. **Limiti:** Pesca da 2 a 3 e Recupero da 2 a 5 bastano, o li vuole nel regolamento invece che nel catalogo?
 3. **Stampa:** i PDF vivi e il test di stampa restano indietro a ogni cambio di versione del set (R19, R20 e oggi di nuovo): li si
    rigenera in un blocco a parte, o si aggiunge una voce al registro dei rossi noti?
+
+## Chiusura
+
+26 novembre 2026, revisione della regia sul commit `398dda1`. Perimetro rispettato: nessun file di `server/src/main/java`, nessun
+`cards.sqlite`, nessuna scheda; nel server cambiano solo le due righe di versione di `MatchArchiveTest` (DC7). R08a e catalogo
+corrispondono a DC5. Rifatte dalla regia: `git diff --check`, `check-links.py` (22 link rotti, nessuno nuovo), `check-rules.py` verde
+(regolamento 2.3, Set Base 1.0.4), `tools/carriere/run.ps1 -Task Test` (36 verdi) e `-Task Check` (0 errori, catalogo 0.1 con 6
+modificatori e 0 errori, numeri della principale invariati), `prototipi/carriere/run.ps1 -Task Test` (117 verdi). Non rifatte: le
+verifiche Maven, esclusive; vale il rapporto, col solo rosso noto R3. Resta non verificato a schermo il tavolo del prototipo con i
+modificatori.
+
+Il proprietario ha risposto «Sì, chiudi» alle raccomandazioni della regia sulle domande 1–3 (DC8 del piano): testi dei modificatori
+come sono, limiti dei parametri nel catalogo, PDF di stampa segnalati alla regia del Set Base. **CA-0e è chiuso.**

@@ -14,7 +14,7 @@ Una riga corta per filone: chi apre una regia parte da qui e dalla «Ripartenza�
 |---|---|---|---|
 | Set Base | [piano](set-base-plan.md) | portatile | SB-30a chiuso (D211): computer Facile o Normale nella partita viva; SB-34 chiuso (D217): classi delle carte coi nomi attuali, id congelati, regolamento 2.2 e Set Base 1.0.3; prossimo l'ingresso dei lotti di SB-32 nell'atlante |
 | Client web | [roadmap](client-roadmap.md); [piano C5](client-c5-plan.md), ridotta (D1) | l'altra | C5-1, consolidamento, al via del proprietario |
-| Carriere | [piano CA-0](ca-plan.md); contenuti nella [tabella dei lavori anticipati](product-roadmap.md#lavori-anticipati) | portatile | CA-0b–CA-0d chiusi (21 novembre 2026); CA-0e attuato il 26 novembre 2026 (regolamento 2.3, [catalogo dei modificatori](carriere/modificatori.md), formato 0.2), in attesa di revisione; CA-0f dopo SB-30 ed EC-0, CA-0g dopo C5 |
+| Carriere | [piano CA-0](ca-plan.md); contenuti nella [tabella dei lavori anticipati](product-roadmap.md#lavori-anticipati) | portatile | CA-0b–CA-0d chiusi (21 novembre 2026); CA-0e chiuso il 26 novembre 2026 (regolamento 2.3, [catalogo dei modificatori](carriere/modificatori.md), formato 0.2); CA-0f dopo SB-30 ed EC-0, CA-0g dopo C5 |
 
 ## Stato corrente
 
