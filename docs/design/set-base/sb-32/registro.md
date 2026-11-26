@@ -2221,3 +2221,213 @@ Due ritocchi del volto sulle versioni 2 e una nuova generazione del tunnel. Una 
 | Un Assaggino | `base.tossico.UnAssaggino` | 1 | [WebP](anteprime/base.tossico.UnAssaggino.webp) |
 
 Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 512×512 WebP qualità 80. Nota della regia per la passata di omogeneità (D206): in più immagini la tuta tende al prugna o al bordeaux invece che al viola della guida. Nessuna integrazione nell’atlante in questo lotto. Nessun comportamento di gioco o atteso modificato.
+
+## Lotto 4 — Piera
+
+[Prompt letterali](lotto-04-piera.md), commit `9a6c4da`, verificati invariati. Dieci generazioni, una per prompt nell’ordine 1–10, con esclusivamente i due allegati nell’ordine dichiarato e impronte verificate: nessun rifiuto, rilancio, modifica o tentativo scartato. Modello e riscrittura non esposti; nessun campo negativo separato. I testi inviati sono i contenuti letterali dei blocchi, senza delimitatori né ritorno a capo finale; promptSha256 calcolato in UTF-8 con ritorni LF. Gli originali sono copie byte per byte dei PNG restituiti, fuori da git; anteprime a 512 × 512 px, WebP qualità 80. [Pagina di giudizio](giudizio-lotto-04.html).
+
+**Deroga al preliminare, proprietario:** «Sì, prosegui con il lotto 4 lasciando intatti i quattro file non tracciati in output/pdf/. Non includerli nel commit.» I quattro file preesistenti sono le bozze set base e starter, PDF e manifest; lasciati intatti ed esclusi dal commit.
+
+**Diagnosi:** SHA-256 di entrambi gli allegati coincidenti; sorgente dei prompt identica al commit indicato. Fetch eseguito: HEAD avanti di un commit rispetto a origin/main, nessun commit remoto da integrare. La sandbox non avviava i processi; letture, copie e verifiche eseguite fuori sandbox tramite escalation autorizzata. **Modifica:** dieci originali esclusi da git, dieci anteprime, questa sezione e pagina di giudizio; nessun comportamento o atteso cambiato. Le anomalie visive sono conservate senza ritocchi e descritte nelle tabelle; il giudizio resta al proprietario.
+
+### Fino all'Ultima Goccia
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.QuestoLoFiniscoIo` |
+| promptSha256 | `a7557e12ea888427cc5c89e7c63e3dfdbdefa7b2e9b48831a747e319fde42935` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/piera.png`: `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.pino.QuestoLoFiniscoIo.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-abfcf520-211f-41eb-bbe4-fb680618d130.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2813167 / `6e8d50caee0f5130e92e0342d8fd0792832a89401da2574e9fb5c410a7ada0fb` |
+| Anteprima | [WebP](anteprime/base.pino.QuestoLoFiniscoIo.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 1, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Bicchiere alla bocca e sagoma leggibili; punta della matita non distinguibile; seduta tonda senza schienale visibile. |
+| Anomalie visive | La matita espone il terminale rosso con ghiera; la punta temperata richiesta non è visibile. |
+| Giudizio del proprietario | In attesa. |
+
+### Posto Fisso
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.bound.CinqueMinutiEVado` |
+| promptSha256 | `357c8559a861aefd773ae58c433d17d4551e01734211541e36067e7ddb5a1307` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/piera.png`: `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.pino.bound.CinqueMinutiEVado.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-3c931e91-0463-4939-aeb5-d4f5ba804d09.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2707204 / `97a880312db0dbcb253c741bc95e55767e8745ae58d4bc867364d05fd0678c2a` |
+| Anteprima | [WebP](anteprime/base.pino.bound.CinqueMinutiEVado.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 2, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Cane sullo sgabello e cliente che si ritrae leggibili; punta della matita minuta; seduta tonda visibile, quattro zampe non separabili a 60 px. |
+| Anomalie visive | Piera tiene un braccio davanti al busto e l’altro al bancone: non entrambi gli avambracci poggiano sul banco. Quattro zampe del cane presenti a piena risoluzione, una parzialmente nascosta. |
+| Giudizio del proprietario | In attesa. |
+
+### Schiarirsi le Idee
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.bound.Coccio` |
+| promptSha256 | `6876a5023f26cc056989cc042803553c1bc883c78a8d8079fbc58dc70dbd807c` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/piera.png`: `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.pino.bound.Coccio.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-69fe7a0b-3d67-4c02-9331-254ae28404b0.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3300520 / `ce1d04f3a897c265582a571ee374e459f85d3ac3f2b0a2ab3ddc2bb4e52fdaf1` |
+| Anteprima | [WebP](anteprime/base.pino.bound.Coccio.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 3, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Mani al viso e lavandino leggibili; punta della matita minuta; nessuna seduta presente. |
+| Anomalie visive | Riflesso sfocato presente; lo sdoppiamento è lieve e non leggibile a 60 px. |
+| Giudizio del proprietario | In attesa. |
+
+### Ultimo Giro
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.UltimoGiro` |
+| promptSha256 | `e5c210de9309a253fa8c33279a8a19911d8866e0a62cfc002d8d2caee4be0aab` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/piera.png`: `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.pino.UltimoGiro.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-87dce7a1-e96c-44be-9255-c56a5b97d11c.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2920015 / `e22e126de7420a1f520e72b858fab492d89384ba515fe8c59cd974269e77e0f0` |
+| Anteprima | [WebP](anteprime/base.pino.UltimoGiro.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 4, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Vassoio inclinato e cliente chino leggibili; singoli bicchieri minuti; punta della matita minuta, seduta sul fondo poco distinta. |
+| Anomalie visive | La seduta sul fondo è tagliata dal soggetto; nessuna seduta principale necessaria all’azione. |
+| Giudizio del proprietario | In attesa. |
+
+### Scompenso da Ultimo Giro
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.TestataDaUltimoGiro` |
+| promptSha256 | `989f0f800ff66a0db66459bceb7d9b347ab065d4ea58771d16379d9d809ff47b` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/piera.png`: `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.pino.TestataDaUltimoGiro.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-f3101419-a3a6-4cdf-9651-188616f463f9.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2917703 / `def7a830a6341e52ffe77f6379c84c5629b2e50cbe05814eaf58c35dd87d7e7d` |
+| Anteprima | [WebP](anteprime/base.pino.TestataDaUltimoGiro.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 5, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Caduta e urto leggibili; bicchiere in volo minuto; punta della matita non distinguibile, seduta rovesciata senza schienale visibile. |
+| Anomalie visive | Contatto sul viso/naso contro il torso anziché nettamente sulla fronte; avversario inclinato all’indietro anziché piegato in avanti. Matita con terminale rosso e punta nascosta. |
+| Giudizio del proprietario | In attesa. |
+
+### Alla Goccia
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.GoingBerserk` |
+| promptSha256 | `cb3f1c054d4d6de6b6f2b40ffb15f707fc05837a245e24a8cf8e73e0ee2c5fd5` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/piera.png`: `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.pino.GoingBerserk.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-8d8d66e8-54f8-435c-8ff7-f4672360697e.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2787653 / `8731e49eea3dc2f2bc94d82f05f49b9eaf7156a827d16ad65d2497de0add0ab0` |
+| Anteprima | [WebP](anteprime/base.pino.GoingBerserk.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 6, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Colpo dall’alto e avversario piegato leggibili; bicchiere minuto; punta della matita minuta, seduta senza schienale sul fondo. |
+| Anomalie visive | Nessuna ulteriore anomalia macroscopica osservata a piena risoluzione; dettagli minuti non verificabili a 60 px. |
+| Giudizio del proprietario | In attesa. |
+
+### Avamposto Fortificato al Bancone
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.IlBanconeRegge` |
+| promptSha256 | `0a3e41ecf2dff3cce737d939ab4381c47e9b745478d308adca9cc89d4485cdaa` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/piera.png`: `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.pino.IlBanconeRegge.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-ff917e02-7608-4aec-ba1c-a28b02b4dc71.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2856956 / `6517c2af879fe073c698f120fa5a403cf46c5116d3fc564858ba149a6191386a` |
+| Anteprima | [WebP](anteprime/base.pino.IlBanconeRegge.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 7, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Piera e bancone inclinato leggibili; presa e bicchierino minuti; punta della matita minuta, seduta tonda inclinata visibile. |
+| Anomalie visive | Mano appoggiata al bordo anziché braccio chiaramente avvolto intorno al bancone; bicchierino sostanzialmente verticale. |
+| Giudizio del proprietario | In attesa. |
+
+### Un Altro e Arrivo
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.OffroIo` |
+| promptSha256 | `fc54a838841f248ef4a4c42cd3f8c4ed11c9ba66af4f2d5b22676c69756d61d5` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/piera.png`: `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.pino.OffroIo.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-f459e3e1-5f5a-42cd-81c4-164f38cc8e12.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2761729 / `7a13e72051a4a6d894969d92114b7daba0564276b49dde9a917648da47a1190c` |
+| Anteprima | [WebP](anteprime/base.pino.OffroIo.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 8, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Indice alzato e due clienti in attesa leggibili; punta della matita minuta; seduta tonda senza schienale visibile. |
+| Anomalie visive | Barman assente; Piera mostra il volto alla sala, la direzione del gesto verso il barman non è verificabile. |
+| Giudizio del proprietario | In attesa. |
+
+### Rutto a Bruciapelo
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.RuttoADistanzaSociale` |
+| promptSha256 | `617aaf50faa026bfa83fdd5faf15f9c4930e2d52bc12eb7d99fe0a871d15e8d1` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/piera.png`: `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.pino.RuttoADistanzaSociale.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-afd5c100-9586-4315-a23a-5f30d7c3d138.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3091514 / `0b38609386de982c852b15caefe4048c12b58183673a507d23f85ddd462a7cd4` |
+| Anteprima | [WebP](anteprime/base.pino.RuttoADistanzaSociale.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 9, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Onda e avversario in volo leggibili; punta della matita minuta; seduta senza schienale visibile, cane sotto di essa, quattro zampe non verificabili. |
+| Anomalie visive | Grappino si copre le orecchie; le zampe posteriori sono nascoste dalla posa, quindi non è verificabile l’appoggio di tutte e quattro. Cane separato dalle gambe di Piera. |
+| Giudizio del proprietario | In attesa. |
+
+### Un Altro... Grappino...
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.PrimaIlBrindisi` |
+| promptSha256 | `34097bd7aea6ceb9d8183c05ecdc477adc8ba7216d2a404d356ee58ec08c1ba9` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/piera.png`: `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.pino.PrimaIlBrindisi.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-7a09d8d9-e7eb-4acb-9d41-3c316d062d65.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2784671 / `d6f568f76db3311f0a9968f012a524c91264062830b31f6c4d7c30f8e9b62333` |
+| Anteprima | [WebP](anteprime/base.pino.PrimaIlBrindisi.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 10, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Brindisi e cane rivolto ai clienti leggibili; punta della matita minuta; seduta laterale senza schienale visibile, quattro zampe non separabili a 60 px. |
+| Anomalie visive | Quattro zampe del cane presenti a piena risoluzione, una posteriore parzialmente coperta; il cane rimane separato dalle gambe di Piera. Schizzo del brindisi vicino al margine superiore. |
+| Giudizio del proprietario | In attesa. |
+
+**Verifiche:** git diff --check verde; python scripts/check-rules.py verde; python scripts/check-links.py: 504 documenti, 22 link rotti preesistenti, elenco identico al commit di base 9a6c4da (confronto in memoria del registro originale), zero nuovi; controllo mirato del registro: zero link rotti. Dieci originali verificati identici ai file restituiti tramite SHA-256, dieci anteprime WebP verificate a 512 x 512 px, controllo visivo su riduzioni effettive a 60 px. Prompt sorgente invariata. Nessuna verifica server richiesta per questo perimetro. **Non verificato:** approvazione visiva del proprietario; nessuna chiusura del lotto o decisione registrata. **Scelte prese:** nessuna modifica dei prompt, nessuna selezione fra varianti; conservati tutti i risultati della singola richiesta per carta.
