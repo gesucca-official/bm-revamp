@@ -963,7 +963,7 @@ Tre [prompt letterali](lotto-01-spazienzio.md#quarto-giudizio-correzioni-del-lot
 | Tentativi scartati / rifiuti | Nessuno. |
 | Anteprima | [WebP](anteprime/bruiser.SuperImpact-5.webp), 512 px, qualità 80 |
 | Nota | A 60 px il pugno e il bersaglio si distinguono; la mano in alto è vicina al bordo e la pelle resta molto arancione. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | Approvata: «il resto va bene» (sesto giudizio, [D204](../../../set-base-decisioni.md#decisioni-del-proprietario)). |
 
 ### LIEVE FASTIDIO
 
@@ -980,7 +980,7 @@ Tre [prompt letterali](lotto-01-spazienzio.md#quarto-giudizio-correzioni-del-lot
 | Tentativi scartati / rifiuti | Nessuno. |
 | Anteprima | [WebP](anteprime/bruiser.character.LittleRage-5.webp), 512 px, qualità 80 |
 | Nota | A 60 px sorriso e contatto sono leggibili; la deformazione della guancia resta marcata. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | Approvata: «il resto va bene» (sesto giudizio, [D204](../../../set-base-decisioni.md#decisioni-del-proprietario)). |
 
 ### SVEGLIAMOCI - MA TU NO
 
@@ -1017,7 +1017,7 @@ Il proprietario rifiuta la versione 6: «la mano è orientata male» e chiede «
 | Tentativi scartati / rifiuti | Nessuno. |
 | Anteprima | [WebP](anteprime/bruiser.character.LittleSmack-7.webp), 512 px, qualità 80 |
 | Nota | Il pugno chiuso tocca la testa; a 60 px contatto e avventore si distinguono, ma l’avventore è vicino ai bordi. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | Da correggere: «non si vede l'avventore, è tutto capelli» (sesto giudizio); superata dalla versione 8. |
 
 
 ## Sesto giudizio: SVEGLIAMOCI - MA TU NO
@@ -1037,4 +1037,24 @@ Il proprietario chiede una faccia stordita per l’avventore e dice «il resto v
 | Tentativi scartati / rifiuti | Nessuno. |
 | Anteprima | [WebP](anteprime/bruiser.character.LittleSmack-8.webp), 512 px, qualità 80 |
 | Nota | Il volto stordito e il contatto sono visibili; a 60 px il viso è piccolo. Lo sfondo è più scuro e meno dettagliato della versione 7. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | Approvata: «sì, approvo SVEGLIAMOCI-8» ([D204](../../../set-base-decisioni.md#decisioni-del-proprietario)). |
+
+
+## Chiusura del lotto 1
+
+Chiuso il 26 novembre 2026 ([D204](../../../set-base-decisioni.md#decisioni-del-proprietario)). Versioni scelte, tutte con l'originale presente in `originali/`:
+
+| Carta | bindingName | Versione | Anteprima |
+|---|---|---|---|
+| SGOMBERIAMOVI | `base.bruiser.TiFaccioSpazio` | 1 | [WebP](anteprime/base.bruiser.TiFaccioSpazio.webp) |
+| VIOLENZAZIONE | `base.spazienzio.bound.TestaAlMuro` | 2 | [WebP](anteprime/base.spazienzio.bound.TestaAlMuro-2.webp) |
+| SPEDIAMOTI DUNQUE IN O-AHIO | `bruiser.ExtremelyViolentBlow` | 4 | [WebP](anteprime/bruiser.ExtremelyViolentBlow-4.webp) |
+| PAZIENZA: FINITA | `bruiser.Glare` | 1 | [WebP](anteprime/bruiser.Glare.webp) |
+| NON GIOCARE COL COLTELLO NO | `bruiser.MadeOfStone` | 2 | [WebP](anteprime/bruiser.MadeOfStone-2.webp) |
+| GARGANTUESCO IMPATTO SUL TU | `bruiser.SuperImpact` | 5 | [WebP](anteprime/bruiser.SuperImpact-5.webp) |
+| FAI BASTA | `bruiser.YouStop` | 1 | [WebP](anteprime/bruiser.YouStop.webp) |
+| LIEVE FASTIDIO | `bruiser.character.LittleRage` | 5 | [WebP](anteprime/bruiser.character.LittleRage-5.webp) |
+| SVEGLIAMOCI - MA TU NO | `bruiser.character.LittleSmack` | 8 | [WebP](anteprime/bruiser.character.LittleSmack-8.webp) |
+| ADOPERIAMOTI | `com.basic.BruiserGrab` | 2 | [WebP](anteprime/com.basic.BruiserGrab-2.webp) |
+
+Eccezione alla guida di stile: in SVEGLIAMOCI-8 l'avventore ha un volto generico e stordito, su richiesta del proprietario; non vale per le altre carte.
