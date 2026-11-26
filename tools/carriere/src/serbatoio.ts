@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import {converti} from './converti.ts';
 import {valida} from './valida.ts';
 import {controllaGrafo, type Esito3} from './grafo.ts';
+import {controllaModificatori, leggiCatalogo, type Catalogo} from './modificatori.ts';
 import type {Carriera, Cast, Problema} from './formato.ts';
 
 export const radice = new URL('../../../', import.meta.url);
@@ -19,12 +20,18 @@ export const CARRIERE: Voce[] = Object.entries(leggiManifest()).map(([id, m]) =>
 export const FILE_CAST = 'prototipi/carriere/dati/cast.json';
 
 export const leggiCast = (): Cast => JSON.parse(fs.readFileSync(new URL(FILE_CAST, radice), 'utf8')) as Cast;
+// CA-0e: il catalogo dei modificatori di incontro (formato 0.2, F11), normativo e condiviso fra le carriere.
+export const FILE_CATALOGO = 'docs/carriere/modificatori.md';
+export const testoCatalogo = (): string => fs.readFileSync(new URL(FILE_CATALOGO, radice), 'utf8');
+export const leggiCatalogoDisco = (cast: Cast): {catalogo: Catalogo; errori: string[]} => leggiCatalogo(testoCatalogo(), cast);
 
-export function convertiCarriera(v: Voce, cast: Cast): {carriera: Carriera; problemi: Problema[]; validita: string[]} {
+/** Con il catalogo (CA-0e) la validità comprende i controlli dei modificatori che non dipendono dal percorso (F12). */
+export function convertiCarriera(v: Voce, cast: Cast, catalogo?: Catalogo): {carriera: Carriera; problemi: Problema[]; validita: string[]} {
   const md = fs.readFileSync(v.file, 'utf8');
   const {carriera, problemi} = converti(md, cast, v.fonte);
   // Il controllo di validità guarda il JSON come lo leggerà il lettore: dopo un giro di serializzazione.
   const validita = problemi.some(p => p.livello === 'errore') ? [] : valida(JSON.parse(JSON.stringify(carriera)), cast);
+  if (catalogo && !validita.length && !problemi.some(p => p.livello === 'errore')) validita.push(...controllaModificatori(carriera, catalogo));
   return {carriera, problemi, validita};
 }
 

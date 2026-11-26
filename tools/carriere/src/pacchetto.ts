@@ -3,17 +3,20 @@
 // (DC4: normativo è solo il formato); la versione di una carriera sta nel manifest carriere.json, perché il markdown non la dichiara.
 import {createHash} from 'node:crypto';
 import {FORMATO, type Carriera, type Cast} from './formato.ts';
+import {modificatoriUsati, type Catalogo, type Modificatore} from './modificatori.ts';
 
-/** Versione della forma del pacchetto (i campi qui sotto), non del formato né della carriera. */
-export const FORMA_PACCHETTO = 1;
+/** Versione della forma del pacchetto (i campi qui sotto), non del formato né della carriera. 2 da CA-0e: i modificatori risolti. */
+export const FORMA_PACCHETTO = 2;
 
-export type Impronte = {storia: string; cast: string};
+// modificatori (CA-0e): l'impronta della parte del catalogo che la carriera usa, come per il cast.
+export type Impronte = {storia: string; cast: string; modificatori: string};
 export type Pacchetto = {
   pacchetto: typeof FORMA_PACCHETTO;
   formato: typeof FORMATO;
   id: string;
   versione: number;
   impronte: Impronte;
+  modificatori: Record<string, Modificatore>;  // i modificatori del catalogo che la carriera usa, risolti (F11)
   carriera: Carriera;
 };
 
@@ -59,13 +62,17 @@ export function castUsato(carriera: Carriera, cast: Cast): unknown {
   };
 }
 
-export const impronte = (md: string, carriera: Carriera, cast: Cast): Impronte =>
-  ({storia: sha256(normalizzaStoria(md)), cast: sha256(canonico(castUsato(carriera, cast)))});
+/** L'impronta dei modificatori usati: una carriera senza modificatori ha quella dell'oggetto vuoto. */
+export const improntaModificatori = (usati: Record<string, Modificatore>): string => sha256(canonico(usati));
 
-export function costruisciPacchetto(md: string, carriera: Carriera, cast: Cast, versione: number): Pacchetto {
+export const impronte = (md: string, carriera: Carriera, cast: Cast, catalogo: Catalogo): Impronte =>
+  ({storia: sha256(normalizzaStoria(md)), cast: sha256(canonico(castUsato(carriera, cast))), modificatori: improntaModificatori(modificatoriUsati(carriera, catalogo))});
+
+export function costruisciPacchetto(md: string, carriera: Carriera, cast: Cast, versione: number, catalogo: Catalogo): Pacchetto {
   // Un giro di serializzazione toglie i campi `undefined`: il pacchetto è quello che si rilegge dal file.
   const c = JSON.parse(JSON.stringify(carriera)) as Carriera;
-  return {pacchetto: FORMA_PACCHETTO, formato: FORMATO, id: c.id, versione, impronte: impronte(md, c, cast), carriera: c};
+  const modificatori = JSON.parse(JSON.stringify(modificatoriUsati(c, catalogo))) as Record<string, Modificatore>;
+  return {pacchetto: FORMA_PACCHETTO, formato: FORMATO, id: c.id, versione, impronte: impronte(md, c, cast, catalogo), modificatori, carriera: c};
 }
 
 /** Il testo del file: JSON deterministico (ordine dei campi fisso, indentato di uno spazio), LF e a capo finale. */
@@ -76,6 +83,9 @@ export function controllaVersione(nuovo: Pacchetto, precedente: Pacchetto | unde
   if (!precedente) return undefined;
   if (nuovo.versione < precedente.versione) return `${nuovo.id}: la versione del manifest (${nuovo.versione}) è sotto quella del pacchetto (${precedente.versione})`;
   if (nuovo.versione > precedente.versione) return undefined;
-  const cosa = [precedente.impronte.storia !== nuovo.impronte.storia && 'la storia', precedente.impronte.cast !== nuovo.impronte.cast && 'il cast che usa'].filter(Boolean);
-  return cosa.length ? `${nuovo.id}: cambiato ${cosa.join(' e ')} senza alzare la versione (${nuovo.versione}): alzarla in carriere.json (F13)` : undefined;
+  // Un pacchetto della forma 1 (formato 0.1) non ha l'impronta dei modificatori: non ne risolveva nessuno, quindi vale quella vuota.
+  const prima = precedente.impronte.modificatori ?? improntaModificatori({});
+  const cosa = [precedente.impronte.storia !== nuovo.impronte.storia && 'la storia', precedente.impronte.cast !== nuovo.impronte.cast && 'il cast che usa',
+    prima !== nuovo.impronte.modificatori && 'i modificatori che usa'].filter(Boolean);
+  return cosa.length ? `${nuovo.id}: cambiato ${cosa.join(', ')} senza alzare la versione (${nuovo.versione}): alzarla in carriere.json (F13)` : undefined;
 }

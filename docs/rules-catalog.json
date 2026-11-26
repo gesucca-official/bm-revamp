@@ -1,6 +1,6 @@
 {
   "set": "base",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "cards": [
     {
       "class": "base.bruiser.TiFaccioSpazio",

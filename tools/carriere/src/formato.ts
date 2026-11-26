@@ -3,7 +3,7 @@
 // Tutti i nomi sono in italiano come i documenti delle carriere; gli identificativi sono minuscoli con trattini.
 
 /** La versione del formato (docs/carriere/formato.md): la scrive ogni carriera convertita e ogni pacchetto. */
-export const FORMATO = '0.1';
+export const FORMATO = '0.2';
 
 /** Una carriera convertita: un grafo di nodi (le tappe della mappa) con achievement e sblocchi obbligatori. */
 export type Carriera = {
@@ -87,7 +87,7 @@ export type Partita = {
   modo: 'duello' | 'ffa';
   giocatore: Rif;              // chi prende le parti del giocatore (D14)
   avversari: Rif[] | {altriFra: string[]};  // {altriFra}: tutti al tavolo tranne il giocatore (il giocatore non è mai «a scelta» qui)
-  modificatori?: string[];     // modificatori di incontro dichiarati (nel prototipo solo mostrati)
+  modificatori?: string[];     // modificatori di incontro dichiarati: id del catalogo (docs/carriere/modificatori.md, F5 e F11)
   ritento?: Battuta[];         // battute prima di ritentare, sempre saltabili
   sconfitta?: Destinazione;    // assente: si ritenta; presente: la sconfitta apre un ramo
   riga: number;

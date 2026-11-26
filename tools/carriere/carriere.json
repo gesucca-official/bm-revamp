@@ -1,5 +1,5 @@
 {
  "tutorial": {"storia": "docs/design/carriere/tutorial-dialoghi.md", "versione": 1},
  "prova": {"storia": "prototipi/carriere/storie/prova.md", "versione": 1},
- "principale": {"storia": "docs/design/carriere/principale-dialoghi.md", "versione": 1}
+ "principale": {"storia": "docs/design/carriere/principale-dialoghi.md", "versione": 2}
 }

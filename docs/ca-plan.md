@@ -11,11 +11,11 @@ verifiche si scelgono dalla [tabella delle aree](aree-protette.md).
 >   chiuso (regolamento 2.0, oggi 2.1 col Set Base 1.0.1): regolamento e documenti di set si toccano solo in CA-0e, dopo la proposta
 >   approvata dal proprietario. Le storie restano nel [serbatoio](design/carriere/README.md), senza valore normativo ([DC4](#decisioni)).
 >   Il [prototipo](design/carriere/prototipo.md) (CA-0a) resta il posto dove provare le storie; il formato è il
->   [formato delle carriere 0.1](carriere/formato.md) (CA-0b).
-> - **In attesa:** la chiusura di SB-34 ([DC6](#decisioni)); SB-30a è chiuso dal 26 novembre 2026. Poi l'attuazione di CA-0e ([DC5](#decisioni)).
+>   [formato delle carriere 0.2](carriere/formato.md) (CA-0b, CA-0e).
+> - **In attesa:** revisione dell'attuazione di CA-0e ([rapporto](reports/ca/ca-0e.md#attuazione), domande 1–3).
 > - **Prossimo:** la parte di strumento di CA-0 è finita (CA-0c: `tools/carriere/`; CA-0d: pacchetti versionati con impronte in
->   `tools/carriere/pacchetti/`, [rapporto](reports/ca/ca-0d.md)). **CA-0e:** proposta decisa il 26 novembre 2026 ([DC5](#decisioni));
->   l'attuazione, come regolamento 2.3, parte dopo la chiusura di SB-34 ([DC6](#decisioni)). CA-0f aspetta SB-30, che nel Set Base viene dopo i lotti di SB-32 e C5, ed EC-0, non ancora partito; CA-0g aspetta C5.
+>   `tools/carriere/pacchetti/`, [rapporto](reports/ca/ca-0d.md)). **CA-0e:** attuata il 26 novembre 2026 (regolamento 2.3 con R08a,
+>   Set Base 1.0.4, [catalogo dei modificatori](carriere/modificatori.md) 0.1, formato 0.2, principale 2), da rivedere. CA-0f aspetta SB-30, che nel Set Base viene dopo i lotti di SB-32 e C5, ed EC-0, non ancora partito; CA-0g aspetta C5.
 > - **Fuori dal piano, nel serbatoio:** dialoghi della campagna principale completi e mockup alla 0.3.7 sui dialoghi veri
 >   ([riga](product-roadmap.md#lavori-anticipati)); illustrazioni approvate e adottate dal prototipo il 21 novembre 2026, con i
 >   ripieghi dell'[elenco](design/carriere/illustrazioni.md#campagna-principale) per le espressioni che non si generano; secondo giro delle
@@ -52,7 +52,7 @@ contro computer, progressi e achievement salvati lato server. Il tutorial vero �
 | [CA-0b](#ca-0b--formato-delle-carriere-01) | Formato delle carriere 0.1, documento normativo | subito | con proposta | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0b.md), [formato 0.1](carriere/formato.md)) |
 | [CA-0c](#ca-0c--strumento-delle-carriere) | Strumento: convertitore, validazione, controllo del grafo | dopo CA-0b | diretto | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0c.md)) |
 | [CA-0d](#ca-0d--pacchetto-delle-carriere) | Pacchetto JSON con versione e impronte, controllato come `check-rules.py` controlla le carte | dopo CA-0c | diretto | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0d.md)) |
-| [CA-0e](#ca-0e--modificatori-di-incontro) | Modificatori di incontro nel regolamento, con la precedenza di R00 | dopo SB-28 | con proposta | Proposta del 26 novembre 2026 ([rapporto](reports/ca/ca-0e.md)) decisa ([DC5](#decisioni)); attuazione dopo la chiusura di SB-34 ([DC6](#decisioni)) |
+| [CA-0e](#ca-0e--modificatori-di-incontro) | Modificatori di incontro nel regolamento, con la precedenza di R00 | dopo SB-28 | con proposta | Proposta decisa ([DC5](#decisioni)); attuazione del 26 novembre 2026 ([rapporto](reports/ca/ca-0e.md#attuazione)) in attesa di revisione |
 | CA-0f | Motore lato server: progressi, segni, achievement, ricompense protette dal farming | dopo SB-30 ed EC-0 | con proposta | — |
 | CA-0g | Scena di dialogo e bacheca nella shell React, banco della fluidità nel client | dopo C5 | a fasi | — |
 
@@ -120,7 +120,9 @@ formato e lo strumento li risolvono e li controllano. Passo con proposta.
 
 **Stato:** proposta del 26 novembre 2026 ([rapporto](reports/ca/ca-0e.md)): sei primitive in una sezione nuova R08a, catalogo
 `docs/carriere/modificatori.md`, formato 0.2, principale 2. Decisa il 26 novembre 2026 ([DC5](#decisioni)): cinque primitive, senza
-Mazzo. L'attuazione parte dopo la chiusura di SB-34 ([DC6](#decisioni)).
+Mazzo. Attuata il 26 novembre 2026 dopo la chiusura di SB-34 ([DC6](#decisioni), [DC7](#decisioni)): regolamento 2.3 con R08a, Set Base
+1.0.4 (solo il regolamento richiesto), [catalogo dei modificatori](carriere/modificatori.md) 0.1 coi sei della principale, formato 0.2, strumento che
+risolve e controlla i modificatori, pacchetti di forma 2 con principale alla versione 2 ([attuazione](reports/ca/ca-0e.md#attuazione)). In attesa di revisione.
 
 ## Decisioni
 

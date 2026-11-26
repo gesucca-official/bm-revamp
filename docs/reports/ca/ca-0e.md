@@ -1,8 +1,8 @@
 # CA-0e — Modificatori di incontro: proposta
 
 Proposta del 26 novembre 2026, passo con proposta ([piano](../../ca-plan.md#ca-0e--modificatori-di-incontro)). **Esito:** proposta
-decisa dal proprietario il 26 novembre 2026 ([sotto](#decisione-del-proprietario), DC5 del piano). Nulla è applicato: l'attuazione parte
-dopo la chiusura di SB-30a.
+decisa dal proprietario il 26 novembre 2026 ([sotto](#decisione-del-proprietario), DC5 del piano), **attuata** lo stesso giorno
+([Attuazione](#attuazione)), in attesa di revisione.
 
 ## In breve
 
@@ -137,3 +137,101 @@ raccomandi tu» alle raccomandazioni della regia:
 
 Nota della regia, non una domanda: Vista in più («ha letto i tuoi messaggi») non cambia la partita finché nessun livello del computer
 usa la mano vista; conterà con un livello più forte, da misurare in CA-3.
+
+## Attuazione
+
+26 novembre 2026, passo diretto (DC5, DC6, DC7). **Esito:** regolamento 2.3 con R08a e Set Base 1.0.4 in vigore, `check-rules.py` verde;
+[catalogo dei modificatori](../../carriere/modificatori.md) 0.1 coi sei della principale; [formato](../../carriere/formato.md) 0.2; lo
+strumento risolve ogni `[Modificatori: …]` nel catalogo e fallisce sugli errori nuovi; pacchetti di forma 2 rigenerati, principale alla 2,
+`-Task Check` verde coi numeri delle tre storie invariati. Partita viva identica: nessun file sotto `server/src/main/java`, nessun
+`cards.sqlite`, nessuna scheda; `server/src/main/resources/sets/base.json` non cambia nemmeno (la versione del set sta nel documento).
+
+### Cosa cambia
+
+- **Regolamento 2.3** (`docs/game-rules.md`, copia identica in `client-debug`): R00, paragrafo «Modificatori di incontro (2.3)» con la
+  precedenza e il catalogo subordinato come un documento di set; R01, le partite di carriera possono avere modificatori, quick, open e PvP
+  mai; **R08a** nuova con le cinque primitive (Vista, Pesca, Recupero, Bersagli, Protezione; niente Mazzo, DC5 (5)) e Recupero «ogni K
+  turni (al turno K, 2K, …) … l'ultima carta regolare che un posto ha scartato, se non è già tornata», mostrata a tutti (DC5 (3)); incisi
+  in R02 (una sola pesca), R03 (il computer: informazioni e vantaggi) e R08 (viste). La revisione dice che nessuna partita cambia finché
+  non esistono le partite di carriera (CA-0f). Nessun nome di carta (`check-rules.py`).
+- **Set Base 1.0.4** da `set_catalog.py --vivo`: cambiano solo la riga «Richiede il regolamento 2.3» e una riga di revisione («Nessuna
+  scheda cambia»); la revisione 1.0.3 ora dice «Richiedeva il regolamento 2.2», e la 1.0.2 scrive 2.2 fisso invece della costante.
+  Rigenerati documento e copia, allegato (solo `version`), manifest. Attesi di versione aggiornati (DC7): tre script CLI,
+  `MatchArchiveTest.java` (solo le due righe), `tools/print-cards/test_generator.py`.
+- **Catalogo** `docs/carriere/modificatori.md` 0.1: M1 come si legge, M2 parametri e limiti per primitiva, il punto di R08a (6), M3 la
+  tabella dei sei (S1 con la lettura (a)). È la fonte unica che lo strumento legge.
+- **Formato 0.2:** F5 (i nomi sono modificatori del catalogo, anche sulle catene), F11 «Il cast e il catalogo», F12 errori nuovi, F13
+  (cade «Posti riservati»; la versione di una carriera cambia anche coi modificatori che usa), revisione.
+- **Strumento** (`tools/carriere/`): `src/modificatori.ts` nuovo (lettura della tabella, controlli delle righe contro M2 e il cast,
+  controlli statici, presenza al tavolo, modificatori usati); il grafo, con il catalogo, controlla la presenza degli avversari nominati
+  su ogni stato; `convertiCarriera` e i pacchetti aggiungono i controlli statici; `-Task Check` stampa il catalogo. Pacchetto di
+  **forma 2**: campo `modificatori` (i modificatori usati, risolti) e `impronte.modificatori` (l'impronta della parte del catalogo
+  usata, come per il cast). Un catalogo cambiato su un modificatore usato senza alzare la versione è un errore di `-Task Check`; un
+  pacchetto della forma 1 vale come «nessun modificatore risolto», quindi tutorial e prova si rigenerano alla versione 1 e principale
+  passa alla **2** (`carriere.json`). Impronte di storia e cast dei tre pacchetti invariate.
+- **Prototipo:** `Convert` scrive anche `dati/generati/modificatori.json`; al tavolo di partita e catena, al posto degli id, un elenco
+  «Modificatori di incontro» con nome in grassetto e testo.
+- **Stato:** piano (riga, sezione, Ripartenza), `aree-protette.md` (riga delle carriere: il catalogo in «Se cambia»), `README.md`
+  (Regolamento, documenti, Carriere), `setup.md` (set vivo).
+
+### Verifiche
+
+| Verifica | Esito |
+|---|---|
+| `git diff --check` | pulito |
+| `check-links.py` | 22 link rotti, gli stessi noti; nessuno nuovo |
+| `check-rules.py` | verde: «Regolamento 2.3 e Set Base 1.0.4 allineati…; regolamento senza carte citate» |
+| `set_catalog.py --vivo`, `prova-errori.py` | rigenerato; tutti i casi OK |
+| `tools/print-cards/test_generator.py` | 14 test verdi dopo gli attesi di versione (vedi Rossi) |
+| `build.ps1 -Task Test -Offline` | **1529 test, 0 falliti, 0 errori, 23 saltati**, come SB-34 B3; client di debug 54/54 |
+| `build.ps1 -Task Server -Offline` (jar) | BUILD SUCCESS, prima del contesto completo |
+| `build.ps1 -Task TestServerContext -Offline` (con i test CLI) | **1738 test, 1 fallito**, 23 saltati: `QuickDuelCliTest.aBaseAndAnAdvancedHumanPlayTheirOwnStarters`, «Event timeout», **noto, voce R3**, senza rilancio. Verdi i test che girano gli script CLI con gli attesi nuovi: `MatchArchiveCliTest` (2), `OpenCompleteCliTest` (1), `QuickCompleteCliTest` (2); `MatchArchiveTest` 10/10 |
+| `verify-match-manifests.py` | uscita 0, `allChecks` PASS |
+| `tools/carriere/run.ps1 -Task Test` | **36 prove verdi** (27 di CA-0d più 9 nuove in `tests/modificatori.test.ts`) |
+| `tools/carriere/run.ps1 -Task Package` e `-Task Check` | 3 pacchetti scritti; Check 0 errori, «catalogo dei modificatori 0.1: 6 modificatori, 0 errori» |
+| `prototipi/carriere/run.ps1 -Task Test`, `-Task Check`, `-Task Build` | 117 verdi; Check 0 errori; Build verde (`tsc` e `vite`) |
+
+**Numeri delle storie**, identici a [CA-0d](ca-0d.md): tutorial 6 nodi / 12 stati / 2 fini, 0 avvisi; prova 8 / 15 / 4, 0 avvisi;
+principale 27 / 665 / 104 (disco-pub 52, il-serraglio-resta 36, il-serraglio-e-di-tutti 16), 49 avvisi di conversione e 0 del grafo.
+Il controllo nuovo non aggiunge stati: i segni delle partite erano già nella chiave dello stato.
+
+**Mutazioni** (8, sulla logica nuova; script in `%TEMP%`, `scratchpad/mutazioni.py` della sessione): ognuna fa fallire almeno una prova.
+M1 limite inferiore dei numeri; M2 Bersagli in un duello; M3 «computer» comprende gli avversari; M4 «un posto solo»; M5 impronta vuota
+per i pacchetti della forma 1; M6 nome sconosciuto; M7 Vista sulla coppia chi e di; M8 presenza al tavolo nel grafo. Al primo giro
+M4 (chi gioca nominato come avversario) e M7 sopravvivevano: la clausola di M4 era ridondante (chi gioca non è mai fra gli avversari
+risolti) ed è stata tolta, sostituita dalla mutazione su «un posto solo»; per M7 mancava il caso «stesso `chi`, `di` diversi», aggiunto.
+
+### Rossi
+
+- `test_generator.py`, due test (fra cui `test_live_mode_prints_the_live_set_file`): attesi «Set Base 1.0.2» e regolamento 2.2. **Preesistente** per il set: alla base il documento è alla 1.0.3 (SB-34) e l'atteso era 1.0.2,
+  come nella voce R19 per SB-29; attesi portati alle versioni vigenti (DC7). Da valutare se aggiungere una voce al registro (domanda 3).
+- `TestServerContext`: `QuickDuelCliTest`, «Event timeout»: **noto, voce R3** (stesso test e messaggio di SB-34), non riprovato.
+
+### Non verificato
+
+- Il prototipo con i modificatori non è stato guardato a schermo: Build e prove sono verdi, ma nessuna cattura del tavolo di S2.
+- I PDF di stampa in `output/pdf` restano al Set Base 1.0.2 e al regolamento 2.2 (non rigenerati, come chiede il protetto);
+  `verify.py` su di essi non è stato lanciato e direbbe «set o regolamento diversi dal manifest», come R20.
+
+### Scelte prese
+
+- Limiti dei parametri nel catalogo (M2), non nel regolamento: Pesca da 2 a 3, Recupero da 2 a 5. Si cambiano con una revisione del
+  catalogo.
+- Sintassi dei parametri `nome: valore; …` e posti `giocatore`, `computer` o id del cast; per «ce l'hanno tutti con te» Sergio e Duccio per
+  nome, non `computer`, così il controllo di presenza vale.
+- Il punto di R08a (6) è la primitiva per il posto `chi`, per Vista la coppia `chi`–`di`; `computer` si sovrappone a ogni avversario.
+- L'impronta è della parte del catalogo che la carriera usa (come per il cast), non del file intero: un modificatore nuovo non usato non
+  alza le versioni. Il pacchetto non porta la versione del catalogo.
+- Testi per chi gioca scritti dall'esecutore (M3), in seconda persona.
+- In R08a la Vista in meno lascia pubbliche le carte mostrate; il Recupero dice cosa succede se la carta è già tornata o la mano è piena.
+
+### Cosa giudica il proprietario
+
+I testi dei sei modificatori; R08a com'è scritta; i limiti dei parametri.
+
+### Domande
+
+1. **Testi e nomi in M3:** vanno bene, o li riscrive la regia con il tono delle storie?
+2. **Limiti:** Pesca da 2 a 3 e Recupero da 2 a 5 bastano, o li vuole nel regolamento invece che nel catalogo?
+3. **Stampa:** i PDF vivi e il test di stampa restano indietro a ogni cambio di versione del set (R19, R20 e oggi di nuovo): li si
+   rigenera in un blocco a parte, o si aggiunge una voce al registro dei rossi noti?

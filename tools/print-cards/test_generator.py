@@ -63,8 +63,8 @@ class BozzaModeTest(unittest.TestCase):
         self.assertEqual((m['mode'], m['catalog_count'], m['printed_count']), ('bozza', faces, faces))
         self.assertEqual(len(m['placements']), faces)
         # SB-28: the playground rules became regulation 2.0 (D183); the print says the regulation, read from docs/game-rules.md
-        # (2.2 since SB-30a, D203).
-        self.assertEqual((m['rules_version'], m['set'], m['file_version']), ('2.2', 'Set Base 1.7', '1.7'))
+        # (2.2 since SB-30a, D203; 2.3 since CA-0e, DC7).
+        self.assertEqual((m['rules_version'], m['set'], m['file_version']), ('2.3', 'Set Base 1.7', '1.7'))
         self.assertEqual(m['set_file']['sha256'], hashlib.sha256(BOZZA.read_bytes()).hexdigest())
         text = pdf_text(output)
         self.assertNotIn('[[', text)
@@ -244,13 +244,13 @@ class BozzaModeTest(unittest.TestCase):
                 bozza_mode.draw_face(scratch, face, 0, 0, 62*mm, 87*mm, total, total, stamp)
 
     def test_live_mode_prints_the_live_set_file(self):
-        """SB-28: without --bozza the print is the live Set Base, from the set file the server reads (SB-30a: 1.0.2, regulation 2.2)."""
+        """SB-28: without --bozza the print is the live Set Base, from the set file the server reads (CA-0e: 1.0.4, regulation 2.3)."""
         live = json.loads(LIVE_SET.read_text(encoding='utf-8'))
         output = self.d/'live.pdf'
         result = run_generate('--output', str(output))
         self.assertEqual(result.returncode, 0, result.stderr)
         m = self.manifest(output)
-        self.assertEqual((m['mode'], m['set'], m['file_version'], m['rules_version']), ('set', 'Set Base 1.0.2', '1.7', '2.2'))
+        self.assertEqual((m['mode'], m['set'], m['file_version'], m['rules_version']), ('set', 'Set Base 1.0.4', '1.7', '2.3'))
         self.assertEqual(m['set_file'], dict(path='server/src/main/resources/sets/base.json', sha256=hashlib.sha256(LIVE_SET.read_bytes()).hexdigest(),
                                              sha256_short=hashlib.sha256(LIVE_SET.read_bytes()).hexdigest()[:12]))
         self.assertEqual((m['catalog_count'], m['printed_count']), (124, 124))
@@ -261,9 +261,9 @@ class BozzaModeTest(unittest.TestCase):
         self.assertNotIn('BOZZA', text)
         self.assertNotIn('playground', text)
         self.assertIsNone(re.search(r'RP-[0-9]', text))
-        self.assertGreaterEqual(text.count('SET BASE 1.0.2'), 124)
+        self.assertGreaterEqual(text.count('SET BASE 1.0.4'), 124)
         self.assertIn('SETBASE/GUIDAALTAVOLO', flat)
-        self.assertIn('regolamento2.2(docs/game-rules.md)', flat)
+        self.assertIn('regolamento2.3(docs/game-rules.md)', flat)
         for card in live['cards']:
             self.assertIn(re.sub(r'\s+', '', card['gui']['name']), flat, card['binding'])
         verify = subprocess.run([sys.executable, str(GENERATE.with_name('verify.py')), str(output)], capture_output=True, text=True, encoding='utf-8',

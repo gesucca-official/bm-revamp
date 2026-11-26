@@ -1,14 +1,16 @@
 {
- "pacchetto": 1,
- "formato": "0.1",
+ "pacchetto": 2,
+ "formato": "0.2",
  "id": "tutorial",
  "versione": 1,
  "impronte": {
   "storia": "d55154c7e390f9b7d35da6bbdbe86fdd253c93b9be072578903264bd9fb7e7cd",
-  "cast": "d910ce2c033e02102fef694fa8b25391f23045720e464401beef0ed6108cb594"
+  "cast": "d910ce2c033e02102fef694fa8b25391f23045720e464401beef0ed6108cb594",
+  "modificatori": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
  },
+ "modificatori": {},
  "carriera": {
-  "formato": "0.1",
+  "formato": "0.2",
   "id": "tutorial",
   "titolo": "Tutorial",
   "fonte": "docs/design/carriere/tutorial-dialoghi.md",

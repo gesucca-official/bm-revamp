@@ -3,7 +3,10 @@ import castJson from '../../dati/cast.json';
 import tutorialJson from '../../dati/generati/tutorial.json';
 import provaJson from '../../dati/generati/prova.json';
 import principaleJson from '../../dati/generati/principale.json';
+// CA-0e: i modificatori di incontro del catalogo, scritti da `Convert` (docs/carriere/modificatori.md).
+import modificatoriJson from '../../dati/generati/modificatori.json';
 import type {Carriera, Cast} from '../../../../tools/carriere/src/formato.ts';
+import type {Modificatore} from '../../../../tools/carriere/src/modificatori.ts';
 import {comeCarriera} from '../../../../tools/carriere/src/valida.ts';
 import {PREMIO_LETTERE} from '../movimentiBacheca.ts';
 
@@ -30,6 +33,9 @@ export const asset = (rel: string): string => {
 };
 
 export const nomeDi = (id: string) => cast.personaggi[id]?.nome ?? id;
+const modificatori = modificatoriJson as unknown as Record<string, Modificatore>;
+/** Nome e testo di un modificatore di incontro, come si mostrano a chi gioca (R08a (2)); l'id se il catalogo non lo ha. */
+export const modificatoreDi = (id: string): {nome: string; testo: string} => modificatori[id] ?? {nome: id, testo: ''};
 /** Il file del ritratto, relativo alla radice degli asset (null per le figure in ombra). */
 function relRitratto(chi: string, espressione?: string): string | null {
   const p = cast.personaggi[chi];

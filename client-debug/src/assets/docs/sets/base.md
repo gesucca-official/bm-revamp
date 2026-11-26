@@ -1,6 +1,6 @@
 # Botte Micidiali — Set Base
 
-Versione **1.0.3 — 26 novembre 2026**. Documento del set `base`, con le schede normative delle sue carte (regolamento, R00 e R07). Richiede il regolamento 2.2.
+Versione **1.0.4 — 26 novembre 2026**. Documento del set `base`, con le schede normative delle sue carte (regolamento, R00 e R07). Richiede il regolamento 2.3.
 
 Questo documento è generato da `tools/set-catalog/set_catalog.py --vivo` dal file del set `server/src/main/resources/sets/base.json`, che lo stesso comando ricava dalla bozza `server/src/test/resources/set-base/bozza.json` (versione 1.7 del file) togliendo i mazzi di prova: non si modifica a mano, si cambia la bozza e si rigenera (decisioni D175 e D183 del piano Set Base; il formato del file è descritto in `docs/formato-file-set.md`). Il regolamento governa il sistema, le schede governano le carte: una scheda deroga a una regola solo se lo dice esplicitamente. La scheda normativa di ogni carta è il suo **testo completo**; il testo breve stampato sulla carta è nell'allegato ed è descrittivo: in caso di dubbio prevale la scheda. Ruoli, guadagni e danno nominale sono descrittivi (R07a).
 
@@ -1627,7 +1627,9 @@ Campi descrittivi definiti in R07a, generati dagli stessi dati delle schede; in 
 
 ## Revisioni
 
-- **1.0.3 — 26 novembre 2026, SB-34 (D210, D213):** i nomi delle classi Java delle carte si allineano ai nomi attuali delle carte e i loro identificatori si congelano: l'id di ogni carta, personaggio, token e starter resta quello di prima ed è l'identificatore stabile della carta, mentre la classe dichiara il proprio id. Le schede delle carte con una classe scrivono id, classe e slot; la frase in testa parla dell'identificatore della carta e non più della classe. Nessuna carta cambia. **Richiede il regolamento 2.2.**
+- **1.0.4 — 26 novembre 2026, CA-0e (DC7):** il set richiede il regolamento 2.3, che aggiunge i modificatori di incontro delle partite di carriera (R08a). Nessuna scheda cambia. **Richiede il regolamento 2.3.**
+
+- **1.0.3 — 26 novembre 2026, SB-34 (D210, D213):** i nomi delle classi Java delle carte si allineano ai nomi attuali delle carte e i loro identificatori si congelano: l'id di ogni carta, personaggio, token e starter resta quello di prima ed è l'identificatore stabile della carta, mentre la classe dichiara il proprio id. Le schede delle carte con una classe scrivono id, classe e slot; la frase in testa parla dell'identificatore della carta e non più della classe. Nessuna carta cambia. **Richiedeva il regolamento 2.2.**
 
 - **1.0.2 — 26 novembre 2026, SB-30a (D203):** la scheda di ogni personaggio con uno starter dice lo stile del computer a livello Normale (regolamento 2.2, R03): aggressivo per Spazienzio e Piera, prudente per Mara, risorse per Celestina e Beppe; Sergio e Duccio, senza starter, non ne hanno. Nessuna carta cambia. **Richiedeva il regolamento 2.2.**
 

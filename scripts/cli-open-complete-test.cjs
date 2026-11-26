@@ -114,7 +114,7 @@ async function main() {
       assert.strictEqual(initial.versions.rulesVersion,process.env.BM_RULES_VERSION);
       // Regulation 1.13 (SB-2): the set documents loaded by the server, with version and hash.
       assert.deepStrictEqual(initial.versions.sets,JSON.parse(process.env.BM_SETS));
-      assert.strictEqual(initial.versions.sets.base.version,'1.0.3'); // SB-34 (D213): Set Base 1.0.3 (1.0.2 in SB-30a, D203)
+      assert.strictEqual(initial.versions.sets.base.version,'1.0.4'); // CA-0e (DC7): Set Base 1.0.4 (1.0.3 in SB-34, D213)
       assert.strictEqual(initial.configuration.botPolicy,'random');
       // SB-30a: one entry per computer; the runner stubs a ComPlayer without policy, so no level and «random».
       assert.deepStrictEqual(initial.configuration.computers,[{playerId:bot,level:null,policy:'random'}]);

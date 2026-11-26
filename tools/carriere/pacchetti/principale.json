@@ -1,14 +1,105 @@
 {
- "pacchetto": 1,
- "formato": "0.1",
+ "pacchetto": 2,
+ "formato": "0.2",
  "id": "principale",
- "versione": 1,
+ "versione": 2,
  "impronte": {
   "storia": "dce4b53c92df6a79ce3fadddd12162f474c225aa410cbb83fbc23d91a0e73d86",
-  "cast": "6402beb9541a788f88b73404e5313ba3a8416b706d23dff42feb842239011ffd"
+  "cast": "6402beb9541a788f88b73404e5313ba3a8416b706d23dff42feb842239011ffd",
+  "modificatori": "170b65f14a1c809c3d815f18f7395ef404c01bbabb3c70b377d65f6a54210044"
+ },
+ "modificatori": {
+  "ce-l-hanno-tutti-con-te": {
+   "id": "ce-l-hanno-tutti-con-te",
+   "nome": "Ce l'hanno tutti con te",
+   "testo": "Sergio e Duccio se la prendono solo con te, quando la carta lo permette.",
+   "primitiva": "Bersagli",
+   "parametri": {
+    "chi": [
+     "sergio",
+     "duccio"
+    ],
+    "verso": [
+     "giocatore"
+    ]
+   }
+  },
+  "ha-comprato-il-mazzo": {
+   "id": "ha-comprato-il-mazzo",
+   "nome": "Ha comprato il mazzo",
+   "testo": "Dopo ogni mossa Sergio pesca fino a due carte invece di una.",
+   "primitiva": "Pesca",
+   "parametri": {
+    "chi": [
+     "sergio"
+    ],
+    "volte": [
+     "2"
+    ]
+   }
+  },
+  "ha-letto-i-tuoi-messaggi": {
+   "id": "ha-letto-i-tuoi-messaggi",
+   "nome": "Ha letto i tuoi messaggi",
+   "testo": "Sergio vede le carte che hai in mano.",
+   "primitiva": "Vista",
+   "parametri": {
+    "chi": [
+     "sergio"
+    ],
+    "di": [
+     "giocatore"
+    ],
+    "cosa": [
+     "mano"
+    ]
+   }
+  },
+  "il-cane-difende-le-sue-cose": {
+   "id": "il-cane-difende-le-sue-cose",
+   "nome": "Il cane difende le sue cose",
+   "testo": "Gli oggetti di Piera non si toccano: le tue carte non possono bersagliarli, rubarli, scambiarli o distruggerli.",
+   "primitiva": "Protezione",
+   "parametri": {
+    "chi": [
+     "piera"
+    ]
+   }
+  },
+  "la-cantina-e-buia": {
+   "id": "la-cantina-e-buia",
+   "nome": "La cantina è buia",
+   "testo": "Al buio non vedi le risorse e gli oggetti di Piera: solo i tuoi e le carte mostrate.",
+   "primitiva": "Vista",
+   "parametri": {
+    "chi": [
+     "giocatore"
+    ],
+    "di": [
+     "piera"
+    ],
+    "cosa": [
+     "tavolo"
+    ]
+   }
+  },
+  "societa-apri-e-chiudi": {
+   "id": "societa-apri-e-chiudi",
+   "nome": "Società apri e chiudi",
+   "testo": "Ogni 3 turni l'ultima carta che Sergio ha scartato gli torna in mano, e la vedi.",
+   "primitiva": "Recupero",
+   "parametri": {
+    "chi": [
+     "sergio"
+    ],
+    "ogni": [
+     "3"
+    ]
+   }
+  }
  },
  "carriera": {
-  "formato": "0.1",
+  "formato": "0.2",
   "id": "principale",
   "titolo": "Il Serraglio chiude",
   "fonte": "docs/design/carriere/principale-dialoghi.md",

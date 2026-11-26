@@ -1,11 +1,12 @@
 // Convertitore da riga di comando (CA-0a). Dalla cartella del prototipo, con il Node di client-web:
 //   node --experimental-strip-types strumenti/converti.ts --tutti
-//       converte le carriere del prototipo (sotto, CARRIERE) in dati/generati/<id>.json, con il controllo di validità
+//       converte le carriere del prototipo (sotto, CARRIERE) in dati/generati/<id>.json, con il controllo di validità, e scrive i
+//       modificatori di incontro del catalogo (CA-0e, docs/carriere/modificatori.md) in dati/generati/modificatori.json
 //   node --experimental-strip-types strumenti/converti.ts <storia.md> [--json <uscita.json>]
 //       converte un solo file
 // Esce con 1 se ci sono errori di conversione o di validità.
 import fs from 'node:fs';
-import {CARRIERE, leggiCast, convertiCarriera, riepilogoConversione, qui} from './carriere.ts';
+import {CARRIERE, leggiCast, leggiCatalogoDisco, convertiCarriera, riepilogoConversione, qui} from './carriere.ts';
 import {converti} from '../../../tools/carriere/src/converti.ts';
 import {valida} from '../../../tools/carriere/src/valida.ts';
 import type {Carriera, Problema} from '../../../tools/carriere/src/formato.ts';
@@ -23,8 +24,12 @@ const riepilogo = (c: Carriera, problemi: Problema[], validita: string[]) => {
 if (args.includes('--tutti')) {
   const dir = new URL('dati/generati/', qui);
   fs.mkdirSync(dir, {recursive: true});
+  const {catalogo, errori} = leggiCatalogoDisco(cast);
+  for (const e of errori) console.log(`  ERRORE ${e}`);
+  if (errori.length) rosso = true;
+  fs.writeFileSync(new URL('modificatori.json', dir), JSON.stringify(catalogo.voci, null, 2) + '\n');
   for (const voce of CARRIERE) {
-    const {carriera, problemi, validita} = convertiCarriera(voce, cast);
+    const {carriera, problemi, validita} = convertiCarriera(voce, cast, catalogo);
     riepilogo(carriera, problemi, validita);
     fs.writeFileSync(new URL(`${carriera.id}.json`, dir), JSON.stringify(carriera, null, 2) + '\n');
   }

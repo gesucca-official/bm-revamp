@@ -43,10 +43,10 @@ DEFAULT_SET = "server/src/test/resources/set-base/bozza.json"
 DEFAULT_TEXTS = "docs/design/set-base/testi/testi-completi.json"
 DEFAULT_SLOT = "docs/design/set-base/testi/slot.json"
 DEFAULT_OUT = None  # SB-28: the SB-26 candidate folder became the live catalog (--vivo)
-DEFAULT_VERSIONS = {"base": "1.0.3"}
+DEFAULT_VERSIONS = {"base": "1.0.4"}
 # SB-28: the live catalog. The set document says the date and the regulation it requires; every output has its live place.
-LIVE_DATE = "26 novembre 2026"  # SB-34 B1: date of the live version 1.0.3; the earlier revisions keep their own dates
-LIVE_RULES = "2.2"  # SB-30a (D203): the live set requires regulation 2.2
+LIVE_DATE = "26 novembre 2026"  # CA-0e: date of the live version 1.0.4; the earlier revisions keep their own dates
+LIVE_RULES = "2.3"  # CA-0e (DC7): the live set requires regulation 2.3 (2.2 since SB-30a, D203)
 LIVE_SET_FILE = "server/src/main/resources/sets/base.json"
 LIVE_TEST_DECKS = "server/src/test/resources/set-base/mazzi-prova.json"
 LIVE_MANIFEST = "docs/sets/manifest.json"
@@ -559,15 +559,19 @@ def set_document(cat, s):
         note = (" Il generatore dei testi di SB-25 non conosce " + ", ".join(f"`{b}`" for b in from_file)
                 + ": per queste carte testo breve, guadagni, danno nominale e scheda sono il testo del file.")
     if cat.live:
-        out.append(f"- **1.0.3 — {LIVE_DATE}, SB-34 (D210, D213):** i nomi delle classi Java delle carte si allineano ai nomi "
+        out.append(f"- **1.0.4 — {LIVE_DATE}, CA-0e (DC7):** il set richiede il regolamento {LIVE_RULES}, che aggiunge i modificatori "
+                   "di incontro delle partite di carriera (R08a). Nessuna scheda cambia. "
+                   f"**Richiede il regolamento {LIVE_RULES}.**")
+        out.append("")
+        out.append("- **1.0.3 — 26 novembre 2026, SB-34 (D210, D213):** i nomi delle classi Java delle carte si allineano ai nomi "
                    "attuali delle carte e i loro identificatori si congelano: l'id di ogni carta, personaggio, token e starter resta "
                    "quello di prima ed è l'identificatore stabile della carta, mentre la classe dichiara il proprio id. Le schede "
                    "delle carte con una classe scrivono id, classe e slot; la frase in testa parla dell'identificatore della carta e "
                    "non più della classe. Nessuna carta cambia. "
-                   f"**Richiede il regolamento {LIVE_RULES}.**")
+                   "**Richiedeva il regolamento 2.2.**")
         out.append("")
         out.append(f"- **1.0.2 — 26 novembre 2026, SB-30a (D203):** la scheda di ogni personaggio con uno starter dice lo stile del computer a "
-                   f"livello Normale (regolamento {LIVE_RULES}, R03): aggressivo per Spazienzio e Piera, prudente per Mara, risorse per "
+                   "livello Normale (regolamento 2.2, R03): aggressivo per Spazienzio e Piera, prudente per Mara, risorse per "
                    "Celestina e Beppe; Sergio e Duccio, senza starter, non ne hanno. Nessuna carta cambia. "
                    "**Richiedeva il regolamento 2.2.**")
         out.append("")

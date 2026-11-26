@@ -2,7 +2,7 @@
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import type {Carriera} from '../../../../tools/carriere/src/formato.ts';
 import {scegliCatena, scegliGiocatore, avanti, conNome, finali, nodo, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../motore.ts';
-import {cast, espressioneStacco, nomeDi, nomeSblocco, ritratto, ritrattoAlfa, ritrattoBocca, sfondo, sprite} from './dati.ts';
+import {cast, espressioneStacco, modificatoreDi, nomeDi, nomeSblocco, ritratto, ritrattoAlfa, ritrattoBocca, sfondo, sprite} from './dati.ts';
 import {pagine, useTesto} from './testo.ts';
 import {CARATTERE} from './font.ts';
 import {preparaRitratto, Ritratto, Uscente, useMovimentoRidotto} from './Ritratto.tsx';
@@ -17,6 +17,16 @@ const LARGHEZZA_SFONDO = 1536, ALTEZZA_SFONDO = 1024;
 const BANCO = new URLSearchParams(window.location.search).has('banco');
 
 /** Il testo a parole, ciascuna in uno span con il carattere da cui comincia: per sapere in che riga la mette il disegno. */
+/** CA-0e: i modificatori di incontro della partita, con nome e testo del catalogo (R08a (2): dichiarati e mostrati prima di giocare). */
+function Modificatori({ids}: {ids: string[]}) {
+  return (
+    <div className="nota modificatori" data-testid="modificatori">
+      <p>Modificatori di incontro:</p>
+      <ul>{ids.map(id => { const m = modificatoreDi(id); return <li key={id} data-testid={`modificatore-${id}`}><b>{m.nome}</b>{m.testo ? <> — {m.testo}</> : null}</li>; })}</ul>
+    </div>
+  );
+}
+
 function parti(testo: string) {
   const out: (string | ReturnType<typeof Parola>)[] = [];
   for (const m of testo.matchAll(/\S+|\s+/g)) out.push(/\s/.test(m[0]) ? m[0] : Parola({da: m.index, testo: m[0]}));
@@ -270,7 +280,7 @@ export function Gioco({c, s, nome, eventi, azione, livello, onLivello, onMappa, 
               {v.avversari.map(a => <figure key={a}>{ritratto(a) && <img src={ritratto(a)!} alt="" />}<figcaption>{nomeDi(a)}</figcaption></figure>)}
             </div>
           </div>
-          {v.partita.modificatori?.length ? <p className="nota">Modificatori: {v.partita.modificatori.join(', ')}</p> : null}
+          {v.partita.modificatori?.length ? <Modificatori ids={v.partita.modificatori} /> : null}
           {v.sblocchi.length > 0 && <p className="nota">Se vinci: {v.sblocchi.map(nomeSblocco).join(', ')}</p>}
           <p className="nota">Partita simulata: nel prototipo si sceglie l'esito.</p>
           <div className="pulsanti">
@@ -299,7 +309,7 @@ export function Gioco({c, s, nome, eventi, azione, livello, onLivello, onMappa, 
             <span className="contro">contro</span>
             <figure className="avversario-catena">{ritratto(v.avversario) && <img src={ritratto(v.avversario)!} alt="" />}<figcaption>{nomeDi(v.avversario)}</figcaption></figure>
           </div>
-          {v.catena.modificatori?.length ? <p className="nota">Modificatori: {v.catena.modificatori.join(', ')}</p> : null}
+          {v.catena.modificatori?.length ? <Modificatori ids={v.catena.modificatori} /> : null}
           <p className="nota">Vinti {v.giocatori.filter(x => x.vinto).length} di {v.giocatori.length}. Senza ritento: si vince se vincono tutti, la prima sconfitta chiude la catena.</p>
           {v.sblocchi.length > 0 && <p className="nota">Se vincono tutti: {v.sblocchi.map(nomeSblocco).join(', ')}</p>}
           {v.fase === 'scelta' ? <p className="nota" data-testid="catena-scegli">Scegli chi gioca ora.</p> : (

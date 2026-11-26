@@ -115,7 +115,7 @@ il [formato delle carriere](carriere/formato.md) e i numeri del controllo sulle 
 
 | Se cambia | Esegui | Prosegui se |
 |---|---|---|
-| una storia, il cast (`prototipi/carriere/dati/cast.json`), il formato o lo strumento | il controllo delle carriere: `./tools/carriere/run.ps1 -Task Check` (confronta anche i pacchetti committati; dopo una storia o il cast usato alzare la versione in `carriere.json` e `-Task Package`); per lo strumento anche `-Task Test`, e per il prototipo `./prototipi/carriere/run.ps1 -Task Test` e `-Task Check` | 0 errori; numeri uguali a prima, o ogni differenza spiegata nel rapporto |
+| una storia, il cast (`prototipi/carriere/dati/cast.json`), il catalogo dei modificatori (`docs/carriere/modificatori.md`), il formato o lo strumento | il controllo delle carriere: `./tools/carriere/run.ps1 -Task Check` (confronta anche i pacchetti committati; dopo una storia, il cast usato o un modificatore usato alzare la versione in `carriere.json` e `-Task Package`); per lo strumento anche `-Task Test`, e per il prototipo `./prototipi/carriere/run.ps1 -Task Test` e `-Task Check` | 0 errori; numeri uguali a prima, o ogni differenza spiegata nel rapporto |
 
 ## Client di debug
 

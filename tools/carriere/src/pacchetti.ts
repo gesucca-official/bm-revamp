@@ -4,11 +4,13 @@ import {converti} from './converti.ts';
 import {valida} from './valida.ts';
 import {costruisciPacchetto, controllaVersione, serializza, type Pacchetto} from './pacchetto.ts';
 import type {Cast} from './formato.ts';
+import {controllaModificatori, leggiCatalogo} from './modificatori.ts';
 import type {Manifest} from './serbatoio.ts';
 
 export type Fonti = {
   manifest: Manifest;
   cast: Cast;
+  catalogo: string;                                      // il markdown del catalogo dei modificatori (CA-0e)
   storia: (percorso: string) => string;                  // il markdown di una storia
   pacchetto: (id: string) => string | undefined;         // il testo del pacchetto committato, se c'è
   pacchetti: () => string[];                             // gli id dei pacchetti committati
@@ -19,15 +21,18 @@ export type Esito = {errori: string[]; scritture: Record<string, string>};
 export function esaminaPacchetti(f: Fonti, controllaScritti = true): Esito {
   const errori: string[] = [];
   const scritture: Record<string, string> = {};
+  const {catalogo, errori: erroriCatalogo} = leggiCatalogo(f.catalogo, f.cast);
+  if (erroriCatalogo.length) return {errori: erroriCatalogo.map(e => `catalogo dei modificatori non valido, nessun pacchetto: ${e}`), scritture};
   for (const [id, m] of Object.entries(f.manifest)) {
     if (!Number.isInteger(m.versione) || m.versione < 1) { errori.push(`${id}: versione del manifest non valida (${m.versione}), serve un intero da 1`); continue; }
     const md = f.storia(m.storia);
     const {carriera, problemi} = converti(md, f.cast, m.storia);
     const rotti = problemi.filter(p => p.livello === 'errore').map(p => `riga ${p.riga}: ${p.messaggio}`)
       .concat(problemi.some(p => p.livello === 'errore') ? [] : valida(JSON.parse(JSON.stringify(carriera)), f.cast));
+    if (!rotti.length) rotti.push(...controllaModificatori(carriera, catalogo));
     if (rotti.length) { errori.push(`${id}: conversione con errori (${rotti.length}), nessun pacchetto: ${rotti[0]}`); continue; }
     if (carriera.id !== id) { errori.push(`${id}: la storia ${m.storia} dà la carriera «${carriera.id}», il manifest la chiama «${id}»`); continue; }
-    const nuovo = costruisciPacchetto(md, carriera, f.cast, m.versione);
+    const nuovo = costruisciPacchetto(md, carriera, f.cast, m.versione, catalogo);
     const testo = f.pacchetto(id);
     let vecchio: Pacchetto | undefined;
     if (testo !== undefined) {

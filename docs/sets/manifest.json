@@ -37,7 +37,7 @@
   "uscite": [
     {
       "file": "client-debug/src/assets/docs/sets/base.md",
-      "sha256": "ee0ac570a93c75a656657f5f4391bf3e17e1ff778b037b19b57b371380126b0e"
+      "sha256": "3010c81c90dc38be39b9e556d792e88f15bcebdcd7072d35b9dde6abcb8cd615"
     },
     {
       "file": "server/src/main/resources/sets/base.json",
@@ -45,11 +45,11 @@
     },
     {
       "file": "docs/rules-catalog.json",
-      "sha256": "96be50891129df6113d8bb5d4ea6e1e947763fc0f549548a5fd6d3ee4ad5adec"
+      "sha256": "2d8b034cd5db723cdd2d254d3eddcb1cd04f6a9206dd6c6b288ee25e33d42ba7"
     },
     {
       "file": "docs/sets/base.md",
-      "sha256": "ee0ac570a93c75a656657f5f4391bf3e17e1ff778b037b19b57b371380126b0e"
+      "sha256": "3010c81c90dc38be39b9e556d792e88f15bcebdcd7072d35b9dde6abcb8cd615"
     },
     {
       "file": "server/src/test/resources/set-base/mazzi-prova.json",

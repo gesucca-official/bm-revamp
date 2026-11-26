@@ -1,6 +1,6 @@
 # Botte Micidiali — Formato delle carriere
 
-Versione **0.1 — 21 novembre 2026**. Documento normativo del formato in cui si scrive una carriera single-player: la storia in markdown
+Versione **0.2 — 26 novembre 2026**. Documento normativo del formato in cui si scrive una carriera single-player: la storia in markdown
 di regia, il cast che condivide con le altre carriere e ciò che il controllo garantisce su entrambi.
 
 Il documento è subordinato al [regolamento](../game-rules.md) e ai documenti di set (R00). Il regolamento governa partite, mosse e
@@ -116,8 +116,9 @@ Dopo la vittoria i passi del nodo continuano. Dopo una sconfitta si ritenta, sal
   > `**Ritento.** **Mara** (agitata): Di nuovo. Più veloce, o il suo kebab si fredda. · **Spazienzio** (fumante): ANCORA VOI? ANNICHILIAMOVI.`
 - **Sconfitta che apre un ramo:** `[Sconfitta: → Nodo]` dopo la partita. Perdendo si va lì da soli, senza ritento.
   > `[Sconfitta: → I1s]`
-- **Modificatori di incontro:** `[Modificatori: …]` dopo la partita. È un posto riservato (F13): la storia li nomina, il significato lo
-  darà il regolamento con CA-0e.
+- **Modificatori di incontro:** `[Modificatori: …]` dopo la partita, i nomi separati da virgole. Ogni nome è un modificatore del
+  catalogo dei modificatori (F11); che cosa fa in partita lo dice il regolamento (R08a), e vale solo per quella partita. Una partita a
+  catena li scrive allo stesso modo e valgono per ogni duello della catena.
   > `[Modificatori: ce l'hanno tutti con te]`
 
 **Partita a catena.** Ogni personaggio in catena fa un duello contro lo stesso avversario, uno alla volta, nell'ordine che sceglie il
@@ -227,7 +228,7 @@ Nella sezione `## Achievement`, uno per sottosezione `### Titolo`, con:
 
 Un achievement citato da un passo dev'essere definito; ogni achievement dev'essere dato da un passo o da `[Quando: …]`.
 
-## F11 — Il cast
+## F11 — Il cast e il catalogo
 
 Il cast è unico e condiviso fra le carriere; lo scrive la regia. Per il formato contano:
 
@@ -242,6 +243,12 @@ Il cast è unico e condiviso fra le carriere; lo scrive la regia. Per il formato
 Velocità del testo, animazione, bocca, misure e posizione degli sprite sono nel cast ma non sono del formato: le decide la scena di
 dialogo (CA-0g). Un cambio del cast non cambia la versione del formato (F12).
 
+Il **catalogo dei modificatori** ([modificatori.md](modificatori.md)) è unico e condiviso fra le carriere, come il cast, e normativo:
+per ogni modificatore id, nome, testo per chi gioca, primitiva di R08a e parametri, con i posti scritti come `giocatore`, `computer` o
+l'identificativo di un personaggio del cast. Un nome di `[Modificatori: …]` (F5) si riduce come ogni identificativo (F1) e deve essere
+l'id di una riga del catalogo. Un cambio del catalogo non cambia la versione del formato; cambia quella del catalogo e, se tocca un
+modificatore che una carriera usa, quella della carriera (F13).
+
 ## F12 — Il controllo
 
 Una carriera è valida se il controllo non trova errori; gli avvisi si leggono ma non la fermano. Il controllo esplora tutti gli stati
@@ -253,7 +260,11 @@ superarlo è un errore, e la storia va semplificata o il tetto rivisto con una n
 espressioni, sfondi e sprite sconosciuti; vicoli ciechi (uno stato da cui non si arriva a nessuna fine, anche entrando in un nodo la cui
 condizione non vale); nessuna fine raggiungibile; scelte senza opzioni visibili e nodi senza uscita valida su qualche percorso; un
 obbligatorio non preso su qualche percorso fino a una fine completata; una partita che legge un segno non assegnato su qualche percorso;
-un personaggio di una catena assente su qualche percorso; un achievement senza percorso o mai definito.
+un personaggio di una catena assente su qualche percorso; un achievement senza percorso o mai definito. Per i modificatori di incontro
+(F5, F11): un nome che non è nel catalogo; un avversario nominato da un modificatore che non siede al tavolo come avversario su qualche
+percorso; Bersagli in un duello (anche a catena); due modificatori della stessa partita sullo stesso punto per lo stesso posto
+(modificatori.md, M2); una riga del catalogo con una primitiva che non è di R08a, parametri mancanti, in più o fuori dai limiti, o un
+personaggio che non è nel cast.
 
 **Avvisi:** ripieghi del cast; note dell'autore non riconosciute; espressioni scritte per figure in ombra; segnaposto sconosciuti; opzioni
 senza «con <personaggio>» o senza messaggio; una battuta con condizione che non si vede mai; un indizio che non può mai comparire; un nodo
@@ -265,12 +276,20 @@ raggiunto solo perdendo che non è segreto (salvo una scena finale); una tasca c
   (un avviso che diventa errore, il tetto) o alla parte del cast che il formato usa. Si aggiorna prima il documento, con la motivazione,
   poi lo strumento e le storie nella stessa modifica, come per il regolamento. Il formato passa alla 1.0 quando il gioco legge le carriere
   (CA-0f e CA-0g).
-- **Versione di una carriera:** cambia quando cambia la storia (battute, nodi, segni, sblocchi, achievement) o il cast che usa. La porta il
-  pacchetto della carriera (CA-0d), con il formato a cui si attiene; il markdown non la dichiara.
-- **Posti riservati:** i **modificatori di incontro** (`[Modificatori: …]`, F5) si scrivono e si controllano solo come nomi; il loro
-  significato e la loro precedenza arrivano con CA-0e, nel regolamento, e allora il formato cambia versione.
+- **Versione di una carriera:** cambia quando cambia la storia (battute, nodi, segni, sblocchi, achievement), il cast che usa o i
+  modificatori del catalogo che usa. La porta il pacchetto della carriera (CA-0d), con il formato a cui si attiene e i modificatori
+  risolti; il markdown non la dichiara.
 
 ## Revisioni
+
+- **0.2 — 26 novembre 2026, CA-0e:** i modificatori di incontro non sono più un posto riservato. F5: ogni nome di `[Modificatori: …]`
+  è un modificatore del catalogo, il significato lo dà il regolamento 2.3 (R08a). F11 diventa «Il cast e il catalogo»: il catalogo
+  dei modificatori, `docs/carriere/modificatori.md`, normativo e condiviso. F12: errori nuovi per nome sconosciuto, avversario nominato
+  assente dal tavolo su qualche percorso, Bersagli in un duello, due modificatori sullo stesso punto e posto, righe del catalogo non
+  valide o con parametri fuori dai limiti. F13: cadono i posti riservati, la versione di una carriera cambia anche coi modificatori che
+  usa. Decisioni del proprietario DC5 e DC6 del [piano CA-0](../ca-plan.md#decisioni). Motivazione: il formato 0.1 lasciava il
+  significato dei modificatori al regolamento, che ora lo dà; una storia che nomina un modificatore inesistente o impossibile non
+  passa più il controllo. Nessuna storia cambia.
 
 - **0.1 — 21 novembre 2026, CA-0b:** prima versione. Descrive i costrutti che il convertitore del prototipo CA-0a accetta sul
   tutorial e sulla campagna principale con i dialoghi veri, e le garanzie del suo controllo del grafo. Ciò che il prototipo accetta ma

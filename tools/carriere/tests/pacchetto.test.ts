@@ -1,26 +1,26 @@
 // CA-0d: pacchetti, impronte e controllo delle versioni (src/pacchetto.ts, src/pacchetti.ts), tutto in memoria.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {cast, mdProva} from './aiuto.ts';
+import {cast, catalogo, mdCatalogo, mdProva} from './aiuto.ts';
 import {converti} from '../src/converti.ts';
 import {costruisciPacchetto, impronte, serializza} from '../src/pacchetto.ts';
 import {esaminaPacchetti, type Fonti} from '../src/pacchetti.ts';
 import type {Cast} from '../src/formato.ts';
 
 const clona = <T>(x: T): T => JSON.parse(JSON.stringify(x)) as T;
-const pacchettoDi = (md: string, c: Cast = cast, versione = 1) => costruisciPacchetto(md, converti(md, c, 'prova.md').carriera, c, versione);
+const pacchettoDi = (md: string, c: Cast = cast, versione = 1) => costruisciPacchetto(md, converti(md, c, 'prova.md').carriera, c, versione, catalogo);
 
 /** Fonti in memoria: una carriera «prova» e i pacchetti committati (all'inizio quelli che si generano oggi). */
 function fonti(md = mdProva, c: Cast = cast, versione = 1, committati: Record<string, string> = {}): Fonti {
-  return {manifest: {prova: {storia: 'prova.md', versione}}, cast: c, storia: () => md,
+  return {manifest: {prova: {storia: 'prova.md', versione}}, cast: c, catalogo: mdCatalogo, storia: () => md,
     pacchetto: id => committati[id], pacchetti: () => Object.keys(committati)};
 }
 const committato = (md = mdProva, c: Cast = cast, versione = 1) => ({prova: serializza(pacchettoDi(md, c, versione))});
 
 test('il pacchetto ha la sua intestazione e il testo è deterministico (LF, a capo finale)', () => {
   const p = pacchettoDi(mdProva);
-  assert.deepEqual(Object.keys(p), ['pacchetto', 'formato', 'id', 'versione', 'impronte', 'carriera']);
-  assert.equal(p.formato, '0.1'); assert.equal(p.carriera.formato, '0.1'); assert.equal(p.id, 'prova'); assert.equal(p.versione, 1);
+  assert.deepEqual(Object.keys(p), ['pacchetto', 'formato', 'id', 'versione', 'impronte', 'modificatori', 'carriera']);
+  assert.equal(p.formato, '0.2'); assert.equal(p.carriera.formato, '0.2'); assert.equal(p.pacchetto, 2); assert.equal(p.id, 'prova'); assert.equal(p.versione, 1);
   assert.match(p.impronte.storia, /^[0-9a-f]{64}$/);
   const t = serializza(p);
   assert.equal(t, serializza(pacchettoDi(mdProva)));
@@ -48,11 +48,11 @@ test('una modifica alla storia senza alzare la versione è un errore, con la ver
 });
 
 test('un cambio di bocca, animazione o velocità non cambia l\'impronta del cast; un\'espressione usata sì', () => {
-  const base = impronte(mdProva, converti(mdProva, cast, 'prova.md').carriera, cast);
+  const base = impronte(mdProva, converti(mdProva, cast, 'prova.md').carriera, cast, catalogo);
   const c = clona(cast);
   for (const p of Object.values(c.personaggi)) { p.velocita = 9; p.bocca = {u: 0.1, v: 0.1, ru: 0.1, rv: 0.1}; p.animazione = {modo: 'movimento'}; p.tempoAnimazioni = 3; }
   for (const s of Object.values(c.sprite)) { s.x = 0.99; s.altezza = 0.1; }
-  assert.deepEqual(impronte(mdProva, converti(mdProva, c, 'prova.md').carriera, c), base);
+  assert.deepEqual(impronte(mdProva, converti(mdProva, c, 'prova.md').carriera, c, catalogo), base);
   assert.deepEqual(esaminaPacchetti(fonti(mdProva, c, 1, committato())).errori, [], 'il pacchetto committato resta valido');
 
   // un'espressione in più per un personaggio che la storia usa: l'impronta cambia
@@ -60,11 +60,11 @@ test('un cambio di bocca, animazione o velocità non cambia l\'impronta del cast
   const usato = carr.nodi.flatMap(n => n.passi).find(p => p.tipo === 'battuta' && p.espressione)!;
   if (usato.tipo !== 'battuta') throw new Error('attesa una battuta');
   const e = clona(cast); e.personaggi[usato.chi].espressioni = [...e.personaggi[usato.chi].espressioni!, 'nuovissima'];
-  assert.notEqual(impronte(mdProva, carr, e).cast, base.cast);
+  assert.notEqual(impronte(mdProva, carr, e, catalogo).cast, base.cast);
   assert.match(esaminaPacchetti(fonti(mdProva, e, 1, committato())).errori.join(' '), /cambiato il cast che usa senza alzare la versione/);
   // un personaggio che la carriera non usa non cambia niente
   const inutile = Object.keys(cast.personaggi).find(n => !JSON.stringify(carr).includes(`"${n}"`));
-  if (inutile) { const u = clona(cast); u.personaggi[inutile].espressioni = ['x']; assert.equal(impronte(mdProva, carr, u).cast, base.cast); }
+  if (inutile) { const u = clona(cast); u.personaggi[inutile].espressioni = ['x']; assert.equal(impronte(mdProva, carr, u, catalogo).cast, base.cast); }
 });
 
 test('pacchetti mancanti, in più o con id diverso dal manifest sono errori', () => {

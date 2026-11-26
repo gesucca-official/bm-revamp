@@ -1,14 +1,16 @@
 {
- "pacchetto": 1,
- "formato": "0.1",
+ "pacchetto": 2,
+ "formato": "0.2",
  "id": "prova",
  "versione": 1,
  "impronte": {
   "storia": "ca4b15c8e58eaa38131b9707016434129e28f16b0a31682c2da17d3c32b78c10",
-  "cast": "e08e5b421d4379714bb01db65b1a0d82db5078b4cd91a9a288fc39cd625a41d4"
+  "cast": "e08e5b421d4379714bb01db65b1a0d82db5078b4cd91a9a288fc39cd625a41d4",
+  "modificatori": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
  },
+ "modificatori": {},
  "carriera": {
-  "formato": "0.1",
+  "formato": "0.2",
   "id": "prova",
   "titolo": "Dov'è Grappino?",
   "fonte": "prototipi/carriere/storie/prova.md",

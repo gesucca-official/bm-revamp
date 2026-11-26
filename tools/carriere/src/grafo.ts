@@ -4,6 +4,7 @@
 // possibilità (decisione T6 della regia), con un tetto di 200 000 stati.
 import {usciteDi, type Carriera, type Condizione, type Destinazione, type Esito, type Passo} from './formato.ts';
 import {idFinale} from './converti.ts';
+import {assentiDalTavolo, type Catalogo} from './modificatori.ts';
 
 export const TETTO_STATI = 200_000;
 
@@ -22,7 +23,8 @@ export type Esito3 = {
   catene: Record<string, {dichiarati: number; minimo: number}>;  // nodo con una partita a catena -> personaggi dichiarati e minimo in catena
 };
 
-export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
+/** `catalogo` (CA-0e): con il catalogo dei modificatori controlla anche che ogni avversario che un modificatore nomina sieda al tavolo. */
+export function controllaGrafo(c: Carriera, tetto = TETTO_STATI, catalogo?: Catalogo): Esito3 {
   const errori = new Set<string>();
   const avvisi = new Set<string>();
   const nodi = new Map(c.nodi.map(n => [n.id, n]));
@@ -123,6 +125,12 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
       const rifs = [p.giocatore, ...(Array.isArray(p.avversari) ? p.avversari : [])];
       for (const r of rifs) if ('segno' in r && r.segno && !('sceltaFra' in r) && !(r.segno in l.segni)) errori.add(`partita al nodo ${n.id}: il segno ${r.segno} non è assegnato su qualche percorso`);
     };
+    // CA-0e (F12): un avversario nominato da un modificatore che non siede al tavolo come avversario su qualche percorso.
+    const alTavolo = (p: Passo, l: Locale) => {
+      if (!catalogo || (p.tipo !== 'partita' && p.tipo !== 'catena')) return;
+      for (const a of assentiDalTavolo(p, l.segni, catalogo))
+        errori.add(`partita al nodo ${n.id}: il modificatore ${a.modificatore} nomina ${a.posto}, che non siede al tavolo come avversario su qualche percorso`);
+    };
 
     // Cammina i passi del nodo; le partite e le scelte senza destinazione biforcano.
     const cammina = (i: number, l: Locale, daScelta: boolean): void => {
@@ -144,6 +152,7 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
           case 'partita': {
             if (daScelta) break;  // ritorno alla scelta: la partita è già stata giocata
             segnoAssegnato(p, l);
+            alTavolo(p, l);
             if (p.sconfitta) {
               // Una sconfitta che apre un ramo porta lì da sola, senza ritento (P3).
               const lp = copia(l); metti(lp.persi, n.id); successore(p.sconfitta, lp);
@@ -161,6 +170,7 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
             // due: vincono tutti (il nodo prosegue) o la prima sconfitta (si va dove dice [Sconfitta: …], e F3 deve poter essere raggiunto).
             if (daScelta) break;  // ritorno alla scelta: la catena è già stata giocata
             if ('segno' in p.avversario && p.avversario.segno && !(p.avversario.segno in l.segni)) errori.add(`catena al nodo ${n.id}: il segno ${p.avversario.segno} non è assegnato su qualche percorso`);
+            alTavolo(p, l);
             const mancano = p.giocatori.filter(x => x.sblocco && !l.sblocchi.includes(x.sblocco)).map(x => x.personaggio);
             for (const m of mancano) errori.add(`catena al nodo ${n.id}: ${m} non è in catena su qualche percorso (manca ${p.giocatori.find(x => x.personaggio === m)!.sblocco})`);
             const dimensione = p.giocatori.length - mancano.length;
