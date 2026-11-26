@@ -2853,3 +2853,28 @@ Recepiti i nove «ok»: Posto Fisso, Schiarirsi le Idee, Ultimo Giro, Scompenso 
 ~~~text
 Edit this attached illustration only in the glass Piera is drinking from and the tiny contact area between her fingers and that glass. Replace its distorted shape with one ordinary sturdy clear cylindrical tumbler, straight parallel side walls, one circular open rim shown as a clean ellipse in perspective, and one flat circular thick base shown in consistent perspective. The rim and base belong to the same regular cylinder, no bulges, warped lip, doubled rim, stem, handle, pedestal or extra glass. Keep the current tilt and position: her raised hand grips the side naturally and she pours the amber drink into her open mouth in one gulp. Preserve the existing liquid stream and drinking gesture, changing them only at the glass rim if required for a physically coherent pour. Keep her face, expression, head angle, pose, all-black clothes, bun, corrected short horizontal pencil, other hand, patron, counter, round backless stool, slippers, bar background, light, palette, ink contours, worn print texture and square framing unchanged. No extra fingers or limbs, no text, border or transparency. Return one opaque square illustration.
 ~~~
+
+#### Risultato — Fino all’Ultima Goccia, versione 3
+
+Prompt preventivo nel commit `92867d7`. Una richiesta, nessun rifiuto, rilancio o tentativo scartato. Versioni 1 e 2 conservate; versione 3 proposta in attesa. Nove altre carte approvate come riportato nel giudizio precedente, senza nuove generazioni.
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.QuestoLoFiniscoIo` |
+| Versione | 3 |
+| promptSha256 | `202e4bef4239dcfbcadcc717b1c4ad5e436e48672e01710226585d3e09e19f37` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/base.pino.QuestoLoFiniscoIo-2.png`: `4b734bd2bbe786c8e54ba4436175ed8e0570d845bb5dcfb51119390a1809db1e`. Nessuna maschera o altro riferimento. |
+| Prompt riscritto | non esposto; testo inviato riportato nel prompt preventivo |
+| source | `originali/base.pino.QuestoLoFiniscoIo-3.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-9a493bb1-7ed4-4e0f-b555-f7d6f97f4f99.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2453395 / `90539e06526916e98b6ac4866266e45c17d511bb613de5c3c8be3ac3ac1cdbcc` |
+| Anteprima | [WebP](anteprime/base.pino.QuestoLoFiniscoIo-3.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla richiesta di correzione del bicchiere |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Bevuta e bicchiere inclinato leggibili; dettagli di bordo e fondo poco distinti; punta della matita minuta, seduta tonda senza schienale visibile. |
+| Controllo oggettivo | Bicchiere ridisegnato con pareti dritte, bordo e base ellittici; getto alla bocca mantenuto. Nessuno stelo o rigonfiamento evidente a piena risoluzione; posa e matita mantenute. |
+| Giudizio del proprietario | In attesa. |
+
+**Verifiche del bicchiere:** git diff --check verde; python scripts/check-rules.py verde sul checkout corrente; controllo dei link del registro verde. Originale versione 2 verificato invariato; versione 3 identica byte per byte al file restituito; anteprima WebP 512 x 512 px, qualità 80; controllo visivo a 60 px eseguito. Pagina verificata: dieci carte, nove giudizi ok, un giudizio in attesa, 33 riferimenti immagine validi e tutte le versioni precedenti conservate. Prompt iniziali invariati. Nessun intervento sul lavoro concorrente. **Non verificato:** giudizio del proprietario su questa versione 3; nessuna decisione o chiusura del lotto. **Scelte prese:** bicchiere cilindrico semplice, mantenendo inclinazione e azione. Giro terminato in attesa del proprietario.
