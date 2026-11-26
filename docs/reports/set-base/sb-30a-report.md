@@ -443,13 +443,18 @@ Per ogni partita una parola fra «stupido / giusto / duro / ingiusto / noioso»,
 «leggere la mano» (para sempre davanti a un colpo mostrato e letale: la carta mostrata è pubblica) e se Normale è troppo duro come
 default (in quel caso si cambia il default, non il bot).
 
-| Partita | Livello | Starter | Parola | Vinto |
-|---|---|---|---|---|
-| 1 | Facile | Base | | |
-| 2 | Facile | Base | | |
-| 3 | Facile | Base | | |
-| 4 | Normale | Base | | |
-| 5 | Normale | Base | | |
-| 6 | Normale | Base | | |
-| 7 | Normale | Avanzato | | |
-| 8 | FFA (Normale) | — | | |
+### Esito: SB-30a chiuso il 26 novembre 2026 ([D211](../../set-base-decisioni.md#decisioni-del-proprietario))
+
+Il proprietario ha giocato sul database temporaneo; la regia ha letto le partite nell'archivio (`LOG003_MATCH_EVENTS`): il livello registrato in `INITIAL.configuration.computers` è sempre quello scelto. Giudizio del proprietario: «non mi sembrano male i bot».
+
+| Partita | Livello (stile) | Proprietario contro computer | Esito |
+|---|---|---|---|
+| 1 | Facile | Mara contro Spazienzio | vinta al 4° turno, salute 57 |
+| 2 | Normale (prudente) | Mara contro Mara | vinta al 3° turno, salute 13 |
+| 3 | Normale (aggressivo) | Spazienzio contro Spazienzio | abbandonata al turno 0 |
+| 4 | Normale (prudente) | Spazienzio contro Mara | vinta al 5° turno, salute 14 |
+| 5 | Normale (risorse) | Piera contro Celestina | **persa** al 6° turno |
+| 6 | Normale (aggressivo) | Piera contro Piera | vinta all'11° turno, salute 18 |
+| 7 | FFA, quattro Normale | Beppe contro Mara, Piera ×2, Celestina | **persa**: eliminato al 10° turno, vince Celestina |
+
+**Lettura della regia.** Il Normale non fa mosse senza senso; Celestina alterna danno e recupero e vince due volte; in FFA i computer eliminano per prima Mara, la più fragile. Contro il Facile il proprietario chiude quasi intatto, contro il Normale le partite sono strette o perse. **Osservazione per SB-30b:** il Normale di Piera (stile aggressivo), quando non ha un colpo, gioca «Posto Fisso» (protezione e 5 L) scartando carte utili e non prepara Scompenso da Ultimo Giro: in FFA 6 mosse su 9, nel duello speculare tre di fila e Fasciatura d'Emergenza scartata a salute 29. È la regola dello stile, non un errore; non si ritocca il Normale misurato.
