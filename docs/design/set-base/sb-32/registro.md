@@ -2780,3 +2780,53 @@ L’immagine indicata è `exec-5f90b55f-618e-41cc-b2d1-165fd1f8ef6d.png`, dispon
 ~~~text
 Image 1 is the owner's black-and-white removal mask: white identifies the edit region and black protects the rest. Image 2 is the illustration to edit. In the white region only, remove the raised hand and exposed forearm of the foreground patron at the right side, just above and to the right of the barking dog's head. Remove all the fingers, palm and skin-coloured forearm in that marked region, reconstructing the ordinary bar background and the natural continuous edge of that patron's dark coat where needed. Leave this arm out of sight, not replaced by a stump, new hand or extra limb. Do not remove or change the other patron's higher raised hand, the foreground patron's lower hand near the bottom-right edge, Grappino's muzzle, ears, body, four natural legs and grounded paws, Piera's toast and both hands, her pencil, stool, glass, liquid splash or any unmarked detail. Preserve the existing warm lighting, colours, hand-inked comic style, print texture and square composition. No text, border or transparency. Return one opaque square illustration.
 ~~~
+
+#### Risultati dei due ritocchi con maschera — versioni 3
+
+Prompt preventivi nei commit `9b9aa3a` (Alla Goccia) e `6373038` (Un Altro... Grappino...). Una richiesta per carta, nessun rifiuto o rilancio. Originali e anteprime delle versioni 1 e 2 conservati; due proposte in versione 3 in attesa. Le maschere sono state passate come immagini guida bianche/nere, non come parametro di maschera separato (non esposto dallo strumento).
+
+##### Alla Goccia — risultato versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.GoingBerserk` |
+| Versione | 3 |
+| promptSha256 | `98504f0f40704a5ec8060779e0d8c5d4c8596f6718be345115bc10e0923d9f97` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. Maschera del proprietario allegata in chat per questa carta (SHA-256 non esposto); 2. `originali/base.pino.GoingBerserk-2.png`: `1194d6d8fa573c8c3b3cb4a42c02a4f4d30f9434616c15eee8cdb0afcddad480`. Solo queste due immagini recenti, nessun altro riferimento. |
+| Prompt riscritto | non esposto; testo inviato riportato nel prompt preventivo |
+| source | `originali/base.pino.GoingBerserk-3.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-2a0626c8-1a33-4285-95fa-6a35b5dcc294.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2346630 / `e2b06061f3aebb95c3d5a07855d7b24bc4611a9d63197baba2c6b27d638fd894` |
+| Anteprima | [WebP](anteprime/base.pino.GoingBerserk-3.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla richiesta di ritocco di questa carta |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Colpo e bicchiere cilindrico leggibili; mano posteriore a sinistra assente, mento asciutto; punta della matita minuta, sgabello senza schienale sul fondo. |
+| Controllo oggettivo | Rimossi dita, mano e avambraccio sinistri segnati; fondo del bar e profilo della felpa ricostruiti. Braccio che colpisce, bicchiere e impatto mantenuti. Il braccio posteriore non è esposto. |
+| Limiti | Nessuna misura pixel per pixel fuori maschera: la maschera non è disponibile come file locale; possibili variazioni fini di tratto e texture della generazione. |
+| Giudizio del proprietario | In attesa. |
+
+##### Un Altro... Grappino... — risultato versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.PrimaIlBrindisi` |
+| Versione | 3 |
+| promptSha256 | `92ef014b6537f417579d438aa8898a0774a59e39f45ef49d8c147b272912f534` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | 1. Maschera del proprietario allegata in chat per questa carta (SHA-256 non esposto); 2. `originali/base.pino.PrimaIlBrindisi-2.png`: `ec9d65629e1903e90bf75d2f232b8b1031d1d6ba91f961095092dad77484e9d8`. Solo queste due immagini recenti, nessun altro riferimento. |
+| Prompt riscritto | non esposto; testo inviato riportato nel prompt preventivo |
+| source | `originali/base.pino.PrimaIlBrindisi-3.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-475755e6-5015-406d-84e8-c3c2f9ab037f.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2606297 / `11f018267cb98b96e0a0b5b1909b20a4b3b83c19041b608dfabb5ebbe3c1a11d` |
+| Anteprima | [WebP](anteprime/base.pino.PrimaIlBrindisi-3.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla richiesta di ritocco di questa carta |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Brindisi e cane leggibili; mano accanto al muso assente; punta della matita minuta, seduta laterale senza schienale visibile, quattro zampe non separabili a 60 px. |
+| Controllo oggettivo | Rimossi mano alzata e avambraccio del cliente in primo piano nella zona segnata. Restano la sua mano inferiore e quella alta dell’altro cliente. Grappino è separato dalle gambe di Piera; quattro zampe presenti a piena risoluzione, una posteriore parzialmente coperta. |
+| Limiti | Nessuna misura pixel per pixel fuori maschera: la maschera non è disponibile come file locale; possibili variazioni fini di tratto e texture della generazione. |
+| Giudizio del proprietario | In attesa. |
+
+**Verifiche dei ritocchi:** git diff --check verde; python scripts/check-rules.py verde sul checkout corrente; controllo dei link del registro verde. Due originali identici byte per byte ai risultati restituiti, due anteprime WebP verificate a 512 x 512 px; controllo visivo delle riduzioni a 60 px. Pagina verificata: dieci carte, due versioni 3 correnti, dodici sezioni delle versioni precedenti, dieci campi di giudizio e 32 riferimenti immagine validi. Le anomalie globali dei link del lavoro concorrente restano quelle attribuite nel giro precedente; nessun file di quel lavoro viene modificato o incluso. Prompt iniziali invariati. **Non verificato:** giudizio del proprietario sulle versioni 3; nessuna decisione o chiusura del lotto. **Scelte prese:** rimozione limitata alle due parti indicate, senza sostituirle con nuovi arti. Giro terminato in attesa del proprietario.
