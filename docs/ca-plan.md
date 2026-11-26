@@ -12,16 +12,16 @@ verifiche si scelgono dalla [tabella delle aree](aree-protette.md).
 >   approvata dal proprietario. Le storie restano nel [serbatoio](design/carriere/README.md), senza valore normativo ([DC4](#decisioni)).
 >   Il [prototipo](design/carriere/prototipo.md) (CA-0a) resta il posto dove provare le storie; il formato è il
 >   [formato delle carriere 0.1](carriere/formato.md) (CA-0b).
-> - **In attesa:** la chiusura di SB-30a, che scrive la 2.2 del regolamento sullo stesso checkout; poi l'attuazione di CA-0e ([DC5](#decisioni)).
+> - **In attesa:** la chiusura di SB-34 ([DC6](#decisioni)); SB-30a è chiuso dal 26 novembre 2026. Poi l'attuazione di CA-0e ([DC5](#decisioni)).
 > - **Prossimo:** la parte di strumento di CA-0 è finita (CA-0c: `tools/carriere/`; CA-0d: pacchetti versionati con impronte in
 >   `tools/carriere/pacchetti/`, [rapporto](reports/ca/ca-0d.md)). **CA-0e:** proposta decisa il 26 novembre 2026 ([DC5](#decisioni));
->   l'attuazione, come regolamento 2.3, parte dopo la chiusura di SB-30a. CA-0f aspetta SB-30, che nel Set Base viene dopo i lotti di SB-32 e C5, ed EC-0, non ancora partito; CA-0g aspetta C5.
+>   l'attuazione, come regolamento 2.3, parte dopo la chiusura di SB-34 ([DC6](#decisioni)). CA-0f aspetta SB-30, che nel Set Base viene dopo i lotti di SB-32 e C5, ed EC-0, non ancora partito; CA-0g aspetta C5.
 > - **Fuori dal piano, nel serbatoio:** dialoghi della campagna principale completi e mockup alla 0.3.7 sui dialoghi veri
 >   ([riga](product-roadmap.md#lavori-anticipati)); illustrazioni approvate e adottate dal prototipo il 21 novembre 2026, con i
 >   ripieghi dell'[elenco](design/carriere/illustrazioni.md#campagna-principale) per le espressioni che non si generano; secondo giro delle
 >   bocche adottato. Restano aperti la prova del prototipo su un telefono vero e l'idea, non decisa, di rinominare il nodo F1
 >   ([prossimi passi](design/carriere/principale.md#prossimi-passi)).
-> - **Decisioni da leggere:** DC1–DC5.
+> - **Decisioni da leggere:** DC1–DC6.
 
 ## Obiettivo e chiusura
 
@@ -52,7 +52,7 @@ contro computer, progressi e achievement salvati lato server. Il tutorial vero �
 | [CA-0b](#ca-0b--formato-delle-carriere-01) | Formato delle carriere 0.1, documento normativo | subito | con proposta | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0b.md), [formato 0.1](carriere/formato.md)) |
 | [CA-0c](#ca-0c--strumento-delle-carriere) | Strumento: convertitore, validazione, controllo del grafo | dopo CA-0b | diretto | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0c.md)) |
 | [CA-0d](#ca-0d--pacchetto-delle-carriere) | Pacchetto JSON con versione e impronte, controllato come `check-rules.py` controlla le carte | dopo CA-0c | diretto | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0d.md)) |
-| [CA-0e](#ca-0e--modificatori-di-incontro) | Modificatori di incontro nel regolamento, con la precedenza di R00 | dopo SB-28 | con proposta | Proposta del 26 novembre 2026 ([rapporto](reports/ca/ca-0e.md)) decisa ([DC5](#decisioni)); attuazione dopo la chiusura di SB-30a |
+| [CA-0e](#ca-0e--modificatori-di-incontro) | Modificatori di incontro nel regolamento, con la precedenza di R00 | dopo SB-28 | con proposta | Proposta del 26 novembre 2026 ([rapporto](reports/ca/ca-0e.md)) decisa ([DC5](#decisioni)); attuazione dopo la chiusura di SB-34 ([DC6](#decisioni)) |
 | CA-0f | Motore lato server: progressi, segni, achievement, ricompense protette dal farming | dopo SB-30 ed EC-0 | con proposta | — |
 | CA-0g | Scena di dialogo e bacheca nella shell React, banco della fluidità nel client | dopo C5 | a fasi | — |
 
@@ -120,7 +120,7 @@ formato e lo strumento li risolvono e li controllano. Passo con proposta.
 
 **Stato:** proposta del 26 novembre 2026 ([rapporto](reports/ca/ca-0e.md)): sei primitive in una sezione nuova R08a, catalogo
 `docs/carriere/modificatori.md`, formato 0.2, principale 2. Decisa il 26 novembre 2026 ([DC5](#decisioni)): cinque primitive, senza
-Mazzo. L'attuazione parte dopo la chiusura di SB-30a.
+Mazzo. L'attuazione parte dopo la chiusura di SB-34 ([DC6](#decisioni)).
 
 ## Decisioni
 
@@ -131,3 +131,4 @@ Mazzo. L'attuazione parte dopo la chiusura di SB-30a.
 | DC3 | 20 novembre 2026 | Il prototipo diventa un utilizzatore dello strumento: un solo convertitore | Stesso |
 | DC4 | 20 novembre 2026 | Adesso diventa normativo solo il formato; storie e dialoghi restano nel serbatoio, senza valore normativo, fino all'avvio di CA-1 e CA-2 | Stesso |
 | DC5 | 26 novembre 2026 | Proposta di CA-0e approvata con le raccomandazioni della regia: (1) attuazione dopo la **chiusura** di SB-30a, come regolamento 2.3; (2) S1, lettura (a): Protezione degli oggetti di Piera e Vista in meno per il giocatore; (3) Recupero ogni 3 turni, l'ultima carta regolare scartata, deterministico e mostrato; (4) catalogo condiviso `docs/carriere/modificatori.md`; (5) **niente primitiva Mazzo** finché una storia vera non la usa, come per le estensioni del formato (CA-0b): le primitive sono cinque | Proprietario: «Come raccomandi tu», sulla [revisione della regia](reports/ca/ca-0e.md#decisione-del-proprietario) |
+| DC6 | 26 novembre 2026 | L'attuazione di CA-0e aspetta anche la chiusura di SB-34: SB-34 scrive `docs/sets/base.md` e `scripts/check-rules.py`, e il set deve richiedere il regolamento pubblicato, quindi il passaggio alla 2.3 tocca lo stesso documento | Proprietario: «aspettiamo di chiudere anche sb 34 a questo punto» |
