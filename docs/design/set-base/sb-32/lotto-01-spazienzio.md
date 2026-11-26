@@ -436,3 +436,17 @@ Use a hand-inked European comic style with irregular dark contours, restrained p
 
 Avoid text, letters, numbers, pseudo-lettering, signatures, watermarks, logos, brands, blood, crowds, card frames, borders, recognizable opponent faces, real person likeness, mirroring Spazienzio, steam, anything coming out of the nose, photographic or 3D style, neon and dominant yellow-and-black.
 ~~~
+
+## Sesto giudizio: correzione di SVEGLIAMOCI - MA TU NO
+
+Il proprietario dice: «SVEGLIAMOCI non si vede l'avventore, è tutto capelli. facciamogli una faccia stordita. il resto va bene». Prompt letterale da committare prima della generazione; l'originale è fuori da git.
+
+### SVEGLIAMOCI - MA TU NO
+
+`bruiser.character.LittleSmack`. Allegato: `originali/bruiser.character.LittleSmack-7.png`: `fd12338c8c22746b2a8657b7f48e73a85a33cc6b4e9c5dd3a8cc1e32eea52f0e`.
+
+~~~text
+Edit the attached square playing-card illustration. Keep Spazienzio, his identity, fixed tattoos, clothing, pose, closed hammer fist striking the top of the patron’s head, impact marks, dive bar, palette, lighting, composition and hand-inked European comic style. Change the patron’s head so his face is clearly visible beneath the fist instead of being hidden by hair: turn his head toward the viewer, with a generic, non-identifiable face showing a dazed expression, unfocused eyes and a slack mouth. Keep the fist visibly contacting the crown of his head and the patron recoiling downward. Make the face and contact readable at 60 pixels.
+
+Keep the background darker and simpler than the subjects. No blood, text, letters, numbers, pseudo-lettering, signatures, watermarks, logos, brands, card frame, steam, anything coming out of the nose, recognizable real person likeness, photographic or 3D style. Do not mirror Spazienzio.
+~~~
