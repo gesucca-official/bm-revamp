@@ -2532,3 +2532,219 @@ Unico allegato: `originali/base.pino.PrimaIlBrindisi.png`, SHA-256 `d6f568f76db3
 ~~~text
 Edit only the pencil in this attached illustration. Replace the pencil in her bun with one ordinary straight wooden pencil. Its exposed end on the left is a clean sharpened cone of pale wood ending in one small dark graphite point. There is no eraser or metal ferrule on that pointed end. The opposite blunt end is hidden among the curls. Lay the pencil shallowly and tangentially through the outer hair above the scalp, clearly held by the bun, never entering skin. Keep it short and physically plausible. Keep Piera's toast, raised glass and hand, other hand on the backless stool, open mouth, dog barking in the foreground, its four natural legs and paws on the floor, and the two startled patrons unchanged. Preserve the same recognizable Piera, face except where expressly changed, body proportions, all-black clothes, hair, exactly two arms and two anatomically coherent hands, the other figures, bar/restroom setting, warm lighting, palette, irregular ink contours and painted print texture. Preserve the original square composition except for the specified changes. Opaque square artwork, no text, border or watermark.
 ~~~
+
+#### Risultati del primo giro di correzioni
+
+Prompt preventivi nel commit `78d3fa6`. Dieci richieste nell’ordine delle carte, ciascuna con il solo originale della versione 1 da ritoccare. Nessun rifiuto, rilancio, maschera o tentativo scartato. Dieci versioni 2 proposte, tutte in attesa del proprietario; versioni 1 conservate. Modello e prompt riscritto non esposti. Originali copiati senza trasformazioni; anteprime WebP 512 px, qualità 80. [Pagina aggiornata](giudizio-lotto-04.html).
+
+##### Fino all'Ultima Goccia — risultato versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.QuestoLoFiniscoIo` |
+| Versione | 2 |
+| promptSha256 | `db368adade7f614386038ec3a0c96bc7f983ff10429ea4d71aa73fe8fd9f7831` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/base.pino.QuestoLoFiniscoIo.png`: `6e8d50caee0f5130e92e0342d8fd0792832a89401da2574e9fb5c410a7ada0fb`. Nessuna maschera. |
+| Prompt riscritto | non esposto; testo inviato riportato nei prompt preventivi sopra |
+| source | `originali/base.pino.QuestoLoFiniscoIo-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-b5917492-ee3b-4e99-af01-27685b136e6e.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2506081 / `4b734bd2bbe786c8e54ba4436175ed8e0570d845bb5dcfb51119390a1809db1e` |
+| Anteprima | [WebP](anteprime/base.pino.QuestoLoFiniscoIo-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt di correzione 1, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Bevuta e seduta tonda senza schienale leggibili; matita corta orizzontale, punta troppo minuta per verificarne la grafite. |
+| Controllo oggettivo e anomalie | Matita corta con legno temperato e punta scura a sinistra; eliminati gomma e ghiera da quel lato. La scena resta quella della versione 1. |
+| Giudizio del proprietario | In attesa. |
+
+##### Posto Fisso — risultato versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.bound.CinqueMinutiEVado` |
+| Versione | 2 |
+| promptSha256 | `5dd9fd9df23c85fa63e0af8018c9598fbc34549e88e8a4ac163ee55279d51807` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/base.pino.bound.CinqueMinutiEVado.png`: `97a880312db0dbcb253c741bc95e55767e8745ae58d4bc867364d05fd0678c2a`. Nessuna maschera. |
+| Prompt riscritto | non esposto; testo inviato riportato nei prompt preventivi sopra |
+| source | `originali/base.pino.bound.CinqueMinutiEVado-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-9887ded8-7a91-4f63-af76-2856be4c1a22.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2402163 / `00b20b89fa839eeed86908c6299c2e4beda4b076eab9baec3f330eb9606ce19b` |
+| Anteprima | [WebP](anteprime/base.pino.bound.CinqueMinutiEVado-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt di correzione 2, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Cane sullo sgabello e cliente che arretra leggibili; punta della matita minuta; seduta tonda visibile, quattro zampe non separabili. |
+| Controllo oggettivo e anomalie | Matita corta appoggiata ai ricci, legno temperato e punta scura visibili a piena risoluzione. Quattro zampe del cane presenti, una posteriore parzialmente coperta; cane separato dalle gambe di Piera. |
+| Giudizio del proprietario | In attesa. |
+
+##### Schiarirsi le Idee — risultato versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.bound.Coccio` |
+| Versione | 2 |
+| promptSha256 | `f1e1071119cb74ddd42e81c07e079ebf6d1ba818ae568579ce9b3e54bd701065` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/base.pino.bound.Coccio.png`: `ce1d04f3a897c265582a571ee374e459f85d3ac3f2b0a2ab3ddc2bb4e52fdaf1`. Nessuna maschera. |
+| Prompt riscritto | non esposto; testo inviato riportato nei prompt preventivi sopra |
+| source | `originali/base.pino.bound.Coccio-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-1d56eefa-2f34-4305-a520-ecece2b1bcf5.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2900505 / `67f11860c756e5243c47bca5f261ac020790613eee47c96b0273aa25d5e20e1f` |
+| Anteprima | [WebP](anteprime/base.pino.bound.Coccio-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt di correzione 3, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Mani al viso e lavandino leggibili; matita orizzontale visibile ma grafite non verificabile; nessuna seduta. |
+| Controllo oggettivo e anomalie | Matita appoggiata quasi orizzontalmente ai ricci, con legno chiaro temperato e punta scura; il fusto è stato ridisegnato tra le ciocche. Scena del lavaggio mantenuta. |
+| Giudizio del proprietario | In attesa. |
+
+##### Ultimo Giro — risultato versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.UltimoGiro` |
+| Versione | 2 |
+| promptSha256 | `1185ca7e2018aab1831766a95c2804683700407ab7da772e0a4204f70c89a484` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/base.pino.UltimoGiro.png`: `e22e126de7420a1f520e72b858fab492d89384ba515fe8c59cd974269e77e0f0`. Nessuna maschera. |
+| Prompt riscritto | non esposto; testo inviato riportato nei prompt preventivi sopra |
+| source | `originali/base.pino.UltimoGiro-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-f8d3f047-979e-4416-b436-1bab0d348b05.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2696377 / `b22a7721d716fb81c49a3fd586f0b9a5fa79bdfc64a8efbd9af5286d97a6d3df` |
+| Anteprima | [WebP](anteprime/base.pino.UltimoGiro-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt di correzione 4, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Interno del vassoio e caduta dei bicchieri leggibili; uniformità dei singoli bicchieri e punta della matita troppo minute; seduta sul fondo poco distinta. |
+| Controllo oggettivo e anomalie | Superficie concava del vassoio e bordo rialzato rivolti allo spettatore; sei bicchieri cilindrici simili, con differenze prospettiche. Alcuni bicchieri in volo trattengono ancora liquido. Matita ridisegnata senza gomma sul lato appuntito. |
+| Giudizio del proprietario | In attesa. |
+
+##### Scompenso da Ultimo Giro — risultato versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.TestataDaUltimoGiro` |
+| Versione | 2 |
+| promptSha256 | `24f5c6b2a9a50f5af0382c7278ffb0fecad20c4a90ec49cf1acd94e1c38aba3d` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/base.pino.TestataDaUltimoGiro.png`: `def7a830a6341e52ffe77f6379c84c5629b2e50cbe05814eaf58c35dd87d7e7d`. Nessuna maschera. |
+| Prompt riscritto | non esposto; testo inviato riportato nei prompt preventivi sopra |
+| source | `originali/base.pino.TestataDaUltimoGiro-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-0ac66dc0-7f06-41f2-af93-27b0ff16db19.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2569347 / `453d6bb70aabd52c4dec325347aa73ca8f93acbc6329071ccb2ce71ca73adee3` |
+| Anteprima | [WebP](anteprime/base.pino.TestataDaUltimoGiro-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt di correzione 5, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Caduta e urto leggibili; matita quasi orizzontale, punta minuta; seduta rovesciata senza schienale visibile. |
+| Controllo oggettivo e anomalie | Matita quasi orizzontale lungo i ricci, con punto scuro esposto a sinistra; il tratto visibile non entra nella pelle. Caduta, contatto e sgabello mantenuti. |
+| Giudizio del proprietario | In attesa. |
+
+##### Alla Goccia — risultato versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.GoingBerserk` |
+| Versione | 2 |
+| promptSha256 | `9ff5b77050741659a31d3a3d64451e859e7c2c5ad03d90b6c46bc22dc11c82ae` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/base.pino.GoingBerserk.png`: `8731e49eea3dc2f2bc94d82f05f49b9eaf7156a827d16ad65d2497de0add0ab0`. Nessuna maschera. |
+| Prompt riscritto | non esposto; testo inviato riportato nei prompt preventivi sopra |
+| source | `originali/base.pino.GoingBerserk-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-2233ba19-ded0-4158-aa23-5d1c606cfa51.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2438514 / `1194d6d8fa573c8c3b3cb4a42c02a4f4d30f9434616c15eee8cdb0afcddad480` |
+| Anteprima | [WebP](anteprime/base.pino.GoingBerserk-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt di correzione 6, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Colpo e bicchiere senza stelo leggibili; mento senza goccia; punta della matita minuta, seduta senza schienale sul fondo. |
+| Controllo oggettivo e anomalie | Bicchiere cilindrico robusto, senza stelo né piede; goccia e striscia sul mento rimosse. Bicchiere integro contro la testa dell’avversario. |
+| Giudizio del proprietario | In attesa. |
+
+##### Avamposto Fortificato al Bancone — risultato versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.IlBanconeRegge` |
+| Versione | 2 |
+| promptSha256 | `d382aca3d323dee47f762ec1a7bc1d5fce666bdebd710b3e0a9fbd8ae0f608ed` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/base.pino.IlBanconeRegge.png`: `6517c2af879fe073c698f120fa5a403cf46c5116d3fc564858ba149a6191386a`. Nessuna maschera. |
+| Prompt riscritto | non esposto; testo inviato riportato nei prompt preventivi sopra |
+| source | `originali/base.pino.IlBanconeRegge-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-6b878ff7-1260-41d1-beac-70fdf46fdbcd.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2802951 / `d7bd4a3f7891794fcf8dc0786b350357838163b874bcff9280b75c8ad1afdf79` |
+| Anteprima | [WebP](anteprime/base.pino.IlBanconeRegge-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt di correzione 7, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Piera dietro il bancone e sopracciglia aggrottate leggibili; punta della matita minuta; nessuna seduta visibile. |
+| Controllo oggettivo e anomalie | Bancone in primo piano davanti al corpo di Piera, espressione agguerrita e bicchierino verticale. Una mano afferra il bordo: il braccio non avvolge completamente il bancone. Ricomposizione più stretta, gambe e sgabello non visibili. |
+| Giudizio del proprietario | In attesa. |
+
+##### Un Altro e Arrivo — risultato versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.OffroIo` |
+| Versione | 2 |
+| promptSha256 | `04c41d31bc50d95ea2efff0f9b2044e465cb08a5007f17523c5117ea624a268e` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/base.pino.OffroIo.png`: `7a13e72051a4a6d894969d92114b7daba0564276b49dde9a917648da47a1190c`. Nessuna maschera. |
+| Prompt riscritto | non esposto; testo inviato riportato nei prompt preventivi sopra |
+| source | `originali/base.pino.OffroIo-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-b9fc98e6-abc7-442a-a6a9-53a6ca45d793.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2576866 / `77ce27760393a5f83c75adb0e83c72358d915cc1b414d640baae886726ac4c68` |
+| Anteprima | [WebP](anteprime/base.pino.OffroIo-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt di correzione 8, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Busto eretto e indice vicino alla spalla leggibili; pollice non verificabile a questa scala; punta della matita minuta, seduta tonda visibile. |
+| Controllo oggettivo e anomalie | Posa più eretta e mano ridisegnata accanto alla spalla; pollice ripiegato presso le dita, dettaglio non verificabile a 60 px. Clienti alla porta e bicchiere sul banco mantenuti. |
+| Giudizio del proprietario | In attesa. |
+
+##### Rutto a Bruciapelo — risultato versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.RuttoADistanzaSociale` |
+| Versione | 2 |
+| promptSha256 | `42dfbcb3959765f02b8837d44f28e2f608f064fcbe01c898e4fe2820ddc0351a` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/base.pino.RuttoADistanzaSociale.png`: `0b38609386de982c852b15caefe4048c12b58183673a507d23f85ddd462a7cd4`. Nessuna maschera. |
+| Prompt riscritto | non esposto; testo inviato riportato nei prompt preventivi sopra |
+| source | `originali/base.pino.RuttoADistanzaSociale-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-0f63f07a-8366-440a-bf9d-06ab9c5ed5b7.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2811774 / `0512c5993f903adcbc1c8b6f4d65ba16f5b12e1143333776bdbba7fb166f78cd` |
+| Anteprima | [WebP](anteprime/base.pino.RuttoADistanzaSociale-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt di correzione 9, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Onda, avversario in volo e sedia laterale leggibili; punta della matita minuta; sgabello senza schienale visibile, quattro zampe di Grappino non verificabili. |
+| Controllo oggettivo e anomalie | Sedia ridisegnata con seduta rettangolare, schienale e quattro gambe orientate verso destra; prospettiva rigida e attacchi da giudicare a piena risoluzione. Matita senza terminale rosso sul lato appuntito. Grappino mantiene le zampe anteriori sulle orecchie e le posteriori nascoste; appoggio di quattro zampe non verificabile. |
+| Giudizio del proprietario | In attesa. |
+
+##### Un Altro... Grappino... — risultato versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.PrimaIlBrindisi` |
+| Versione | 2 |
+| promptSha256 | `8a02bec618d00dbd02e35708c18145d49e9d9bbcb7dbfb471952440143947b45` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato, immagine da ritoccare: `originali/base.pino.PrimaIlBrindisi.png`: `d6f568f76db3311f0a9968f012a524c91264062830b31f6c4d7c30f8e9b62333`. Nessuna maschera. |
+| Prompt riscritto | non esposto; testo inviato riportato nei prompt preventivi sopra |
+| source | `originali/base.pino.PrimaIlBrindisi-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-5f90b55f-618e-41cc-b2d1-165fd1f8ef6d.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2465212 / `ec9d65629e1903e90bf75d2f232b8b1031d1d6ba91f961095092dad77484e9d8` |
+| Anteprima | [WebP](anteprime/base.pino.PrimaIlBrindisi-2.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt di correzione 10, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Brindisi e cane che abbaia leggibili; matita quasi orizzontale, punta minuta; seduta laterale senza schienale visibile, quattro zampe non separabili. |
+| Controllo oggettivo e anomalie | Matita corta e quasi orizzontale sopra i ricci, con punta scura a sinistra. Brindisi, seduta e cane mantenuti; quattro zampe del cane presenti a piena risoluzione, una posteriore parzialmente coperta. |
+| Giudizio del proprietario | In attesa. |
+
+**Verifiche del giro:** git diff --check verde (anche sul solo perimetro); python scripts/check-rules.py verde sul checkout corrente; controllo mirato del registro: zero link rotti. Controllo globale: 505 documenti e 35 link rotti, identico elenco sostituendo in memoria il registro con quello della base 1fa9008: nessuno introdotto dal lotto. Ventidue destinazioni erano assenti nella base; tredici erano presenti e sono state rinominate dal lavoro concorrente sulle classi, fuori perimetro. Durante il giro sono comparse modifiche altrui anche in staging: lasciate intatte, commit limitato esplicitamente ai dodici percorsi del lotto. Verificati dieci allegati iniziali invariati, dieci copie byte per byte, dieci WebP a 512 x 512 px; pagina con dieci versioni 2, dieci viste a 60 px e tutte le versioni 1 e i giudizi precedenti. Prompt iniziali invariati; prompt di correzione preventivi nel commit 78d3fa6. Nessuna verifica server del lavoro concorrente attribuita a questo lotto. **Non verificato:** giudizio del proprietario sulle versioni 2; nessuna decisione o chiusura del lotto. **Scelte prese:** quelle dichiarate nei prompt preventivi; nessun ulteriore ritocco autonomo. Giro terminato, in attesa del giudizio.
