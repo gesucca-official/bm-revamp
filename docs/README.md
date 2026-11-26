@@ -12,7 +12,7 @@ Una riga corta per filone: chi apre una regia parte da qui e dalla «Ripartenza�
 
 | Filone | Piano e stato | Macchina | Prossimo passo |
 |---|---|---|---|
-| Set Base | [piano](set-base-plan.md) | portatile | SB-30a chiuso (D211): computer Facile o Normale nella partita viva; SB-34 B1 accettata (D215): classi delle carte coi nomi attuali, id congelati, regolamento 2.2 e Set Base 1.0.3; prossima B2 |
+| Set Base | [piano](set-base-plan.md) | portatile | SB-30a chiuso (D211): computer Facile o Normale nella partita viva; SB-34 B2 accettata (D216): classi delle carte coi nomi attuali, id congelati, costanti nei test, regolamento 2.2 e Set Base 1.0.3; prossima B3, chiusura |
 | Client web | [roadmap](client-roadmap.md); [piano C5](client-c5-plan.md), ridotta (D1) | l'altra | C5-1, consolidamento, al via del proprietario |
 | Carriere | [piano CA-0](ca-plan.md); contenuti nella [tabella dei lavori anticipati](product-roadmap.md#lavori-anticipati) | portatile | CA-0b–CA-0d chiusi (21 novembre 2026); CA-0e sbloccato da SB-28, da aprire; CA-0f dopo SB-30 ed EC-0, CA-0g dopo C5 |
 

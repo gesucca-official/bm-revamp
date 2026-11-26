@@ -111,7 +111,7 @@ cambiati.
 
 # SB-34 B2 — Costanti degli id nei test
 
-**Esito: consegnata, in attesa del proprietario (STOP).** `SetBaseIds` ha **130 costanti** (117 carte, 7 personaggi, 1 token,
+**Esito: accettata il 26 novembre 2026 ([D216](../../set-base-decisioni.md#decisioni-del-proprietario)): domanda 1 come raccomandato (impronta in B3), domanda 2 anticipata a B3.** `SetBaseIds` ha **130 costanti** (117 carte, 7 personaggi, 1 token,
 5 starter), generata da `tools/set-catalog` e controllata da `--vivo --check` e da `check-rules.py`; nei test **1432 stringhe in 90
 file** sono diventate la costante dello stesso valore, **42 restano di proposito**. Nessun id, atteso, risorsa di test o file di
 `server/src/main` cambia. Base `8c61c12`; passo diretto ([D213](../../set-base-decisioni.md#decisioni-del-proprietario) (3),
