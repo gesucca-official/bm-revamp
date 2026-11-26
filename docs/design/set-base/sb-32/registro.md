@@ -2201,3 +2201,23 @@ Due ritocchi del volto sulle versioni 2 e una nuova generazione del tunnel. Una 
 | Giudizio del proprietario | In attesa. |
 
 **Verifiche del secondo giro:** `git diff --check` e `python scripts/check-rules.py` verdi; `python scripts/check-links.py` conserva i 22 collegamenti mancanti preesistenti, nessuno nuovo. Tre originali confrontati byte per byte con le risposte del tool, tre anteprime 512 × 512 px WebP qualità 80 e controllo visivo a 60 px. Pagina verificata con otto giudizi approvati, tre in attesa, undici viste a 60 px e riferimenti locali presenti. Nessun rifiuto, nessun rilancio, nessun comportamento o atteso modificato; file altrui intatti, nessun push. Il proprietario giudica le tre versioni 3 di Inventario, Metabolismo e Tunnel.
+
+## Chiusura del lotto 3
+
+26 novembre 2026. Il proprietario approva le versioni 3 di Fare l’Inventario, Metabolismo Corrotto e Trascinare nel Tunnel: «Approvo, chiudi». Con le approvazioni dei giri precedenti, tutte le undici carte di Celestina sono approvate ([D212](../../../set-base-decisioni.md#decisioni-del-proprietario)). Versioni scelte:
+
+| Carta | bindingName | Versione | Anteprima |
+|---|---|---:|---|
+| Desiderio Incontrollabile | `com.basic.ToxicGrab` | 1 | [WebP](anteprime/com.basic.ToxicGrab.webp) |
+| Fondo del Posacenere | `junkie.character.PatheticBlade` | 1 | [WebP](anteprime/junkie.character.PatheticBlade.webp) |
+| Rintanarsi nel Cappotto | `base.tossico.bound.RaschiareIlFondo` | 2 | [WebP](anteprime/base.tossico.bound.RaschiareIlFondo-2.webp) |
+| Tagliare la Dose | `junkie.character.RottenSmile` | 2 | [WebP](anteprime/junkie.character.RottenSmile-2.webp) |
+| L’Ultimo Tiro | `junkie.LethalHeroinDose` | 3 | [WebP](anteprime/junkie.LethalHeroinDose-3.webp) |
+| Fare l’Inventario | `junkie.MethDrivenRage` | 3 | [WebP](anteprime/junkie.MethDrivenRage-3.webp) |
+| Tossicone Scatarrante | `junkie.Cough` | 1 | [WebP](anteprime/junkie.Cough.webp) |
+| Metabolismo Corrotto | `junkie.PervertedMetabolism` | 3 | [WebP](anteprime/junkie.PervertedMetabolism-3.webp) |
+| Riflessi Aumentati dalla Speed | `junkie.AmphetamineReflexes` | 1 | [WebP](anteprime/junkie.AmphetamineReflexes.webp) |
+| Trascinare nel Tunnel | `junkie.ToxicBloodDrain` | 3 | [WebP](anteprime/junkie.ToxicBloodDrain-3.webp) |
+| Un Assaggino | `base.tossico.UnAssaggino` | 1 | [WebP](anteprime/base.tossico.UnAssaggino.webp) |
+
+Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 512×512 WebP qualità 80. Nota della regia per la passata di omogeneità (D206): in più immagini la tuta tende al prugna o al bordeaux invece che al viola della guida. Nessuna integrazione nell’atlante in questo lotto. Nessun comportamento di gioco o atteso modificato.
