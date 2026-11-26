@@ -3356,3 +3356,94 @@ Edit only the supplied illustration. Restore both of Beppe's hands with clear, c
 ~~~text
 Edit only the supplied illustration. Replace the caliper completely with one straight, flat metal metric ruler of realistic hand-held proportions. Beppe holds the ruler naturally against the side of the shadowy opponent's nose as if measuring it, while the opponent recoils; show a single ruler with small simple metric tick marks, no numerals or letters, and no caliper jaws or sliding parts. Both of Beppe's hands and arms are coherent and naturally positioned. Preserve the figures, faces, clothing, bar, warm restrained lighting, hand-inked texture and square framing as closely as possible. No tools in Beppe's pockets, blood, text, border or transparency. Return one opaque square illustration.
 ~~~
+
+#### Risultati del nuovo giro
+
+Prompt preventivi nel commit `05d0e19`. Una richiesta per carta, nessun rifiuto o rilancio; originali copiati byte per byte, versioni precedenti conservate. Modello e prompt riscritto non esposti.
+
+##### Cuffie e Testa Bassa — versione 4
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.bound.UnaStrettaEPassa` |
+| promptSha256 | `76ff830ef72976fe0dd15d4d69b8dcb60ae15a4f5e6b1fca4470aba46422ca3f` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.bound.UnaStrettaEPassa-3.png`, SHA-256 `89d2c5b6e3222ce3c0c33dceaa16b7890fbda6222bb22b60cf1ff1f134e45d90` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.bound.UnaStrettaEPassa-4.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-fc5e2cfa-e8c0-4054-9a18-97874e8f8c5a.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2689139 / `b6b38a774f4d77cea3b6b620538236c5b094df9fa1bcceee1ce948a07386121c` |
+| Anteprima | [WebP](anteprime/base.gigi.bound.UnaStrettaEPassa-4.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Sedia e impatto leggibili; le due prese e i frammenti sono minuti; arti distinguibili, tasche non verificabili. |
+| Anomalie visive | Due mani afferrano due elementi paralleli della sedia, spezzata sulla schiena; le gambe si sovrappongono alla seduta. |
+| Giudizio del proprietario | In attesa. |
+
+##### Chiave da Tredici — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.ChiaveDaTredici` |
+| promptSha256 | `be6ee7eacf57c8177f58832aeb13736685fcd9d2cdf855d14825615f28113798` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.ChiaveDaTredici-2.png`, SHA-256 `26d329fcf916f422b12720244e1b80b8d08ab8ca3e10b3ad53ae87608a914fd3` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.ChiaveDaTredici-3.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-931ad25a-45b4-40fc-8594-0a665809339b.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2536639 / `6e5e821f13f09df108e97822513c3fb36c4871288858a2b2ca78202f4cf303ef` |
+| Anteprima | [WebP](anteprime/base.gigi.ChiaveDaTredici-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Colpo e due braccia leggibili; mani e chiave minute, tasche non distinguibili. |
+| Anomalie visive | Due mani visibili; chiave ancora lunga e asta parzialmente nascosta dietro il braccio: continuità non verificabile. |
+| Giudizio del proprietario | In attesa. |
+
+##### Preparare il Lavoro — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.ColpoDiChiaveInglese` |
+| promptSha256 | `9b94d1575c402a2438c2bfd0bfbea076f381a23ffa06d4aac59b035a0b551633` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.ColpoDiChiaveInglese-2.png`, SHA-256 `fd19d8ae477dd7d962040fafd46c222f822f4209d12909336d45eaa323307257` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.ColpoDiChiaveInglese-3.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-2b6ec589-c30a-4dfa-b37c-6eb0985655f0.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2606358 / `c838b179b455041d126da8f00fa1eb52fbad7383e9ca3aa9e4c83ae28d02ac6b` |
+| Anteprima | [WebP](anteprime/base.gigi.ColpoDiChiaveInglese-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Riga e figure leggibili; tacche e dita minute, braccia distinguibili; tasche non verificabili. |
+| Anomalie visive | Calibro sostituito da riga rettilinea con tacche, poggiata sul naso; mani visibili. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Ulteriore giudizio del proprietario e correzioni — 26 novembre 2026
+
+> cuffie: le mani vanno bene, ma la sedia no, è strana. facciamogliela afferrare per lo schieale
+> chiave da tredici proprio non ci siamo, cambiamo completamente scena: un primo piano di beppe che stringa la chiave fra i denti mentre tira una testata
+> preparare il lavoro bene la riga, ma beppe la deve stringere in modo più naturale e con l'altra mano deve tenere fermo per la testa l'avventore
+
+Il proprietario autorizza a generare mentre SB-34 lavora: «genera lo stesso le immagini, lasciamo sb34 a fare la sua cosa». La verifica delle regole è sospesa: `docs/design/set-base/sb-34/tabella.json` risulta eliminata nell'indice del lavoro concorrente. Tre richieste con il solo originale della versione precedente; nessuna chiusura o decisione del lotto.
+
+#### Prompt preventivo — Cuffie e Testa Bassa, versione 5
+
+~~~text
+Edit only the supplied illustration. The hooded patron smashes one coherent wooden bar chair against Beppe's back, gripping the chair by its backrest with both hands. Show clearly how both hands grasp the backrest, with two coherent arms connected to the patron; make the chair's backrest, seat and short proportionate legs physically plausible and clearly connected except for fragments breaking at the impact. Keep the hood, Beppe's oblivious expression, headphones, face, body, clothing and pose. Preserve the bar, warm restrained lighting, colours, inked comic style, texture and square framing as closely as possible. No tools in Beppe's pockets, extra limbs, blood, text, borders or transparency. Return one opaque square illustration.
+~~~
+
+#### Prompt preventivo — Chiave da Tredici, versione 4
+
+~~~text
+Create a new composition by editing the supplied illustration, keeping the same Beppe, his face, beard, hair bun, black shirt and tobacco overalls, the same dive bar and the hand-inked comic style and restrained warm palette. Show a close-up of Beppe delivering a forceful headbutt to a generic shadowy opponent. Beppe clenches one short, realistically proportioned 13 mm metal combination spanner firmly between his teeth; the whole wrench is visible, with one open end and one ring end connected by a single shaft. The headbutt and contact must be clear, with no blood or visible wounds. Show coherent anatomy, no extra limbs or tools in pockets, no recognizable opponent's face, text, border or transparency. Return one opaque square illustration.
+~~~
+
+#### Prompt preventivo — Preparare il Lavoro, versione 4
+
+~~~text
+Edit only the supplied illustration. Beppe holds the single straight metric ruler in one hand with a natural, anatomically coherent grip, placing it against the side of the opponent's nose to measure it. With his other hand Beppe firmly holds the opponent's head still; both hands are distinct and connected to their own arms. The ruler is one flat straight object with fine unnumbered tick marks and no caliper jaws or sliding parts. Preserve the faces, figures, clothing, bar, warm restrained lighting, hand-inked texture and square framing as closely as possible. No extra limbs, tools in Beppe's pockets, blood, text, border or transparency. Return one opaque square illustration.
+~~~
