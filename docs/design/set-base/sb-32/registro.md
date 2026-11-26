@@ -1018,3 +1018,23 @@ Il proprietario rifiuta la versione 6: «la mano è orientata male» e chiede «
 | Anteprima | [WebP](anteprime/bruiser.character.LittleSmack-7.webp), 512 px, qualità 80 |
 | Nota | Il pugno chiuso tocca la testa; a 60 px contatto e avventore si distinguono, ma l’avventore è vicino ai bordi. |
 | Giudizio del proprietario | In attesa. |
+
+
+## Sesto giudizio: SVEGLIAMOCI - MA TU NO
+
+Il proprietario chiede una faccia stordita per l’avventore e dice «il resto va bene»: approvate le altre immagini presentate, comprese SuperImpact-5, LittleRage-5 e ExtremelyViolentBlow-4. La versione LittleSmack-7 resta da correggere perché l’avventore non si vede. Prompt committato in `4e00cb9`; una generazione, nessuna ripetizione o rifiuto.
+
+| Campo | Valore |
+|---|---|
+| bindingName | `bruiser.character.LittleSmack` |
+| source | `originali/bruiser.character.LittleSmack-8.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2982301 / `0769e6d697a71dbcf0aa0068dda42231147c2cd238366076e3614fa818c75dce` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| promptSha256 | `d9d0f0eb07e305b1b524e52e39149c343abd54b29973bc4644e6212852ad465c` |
+| Allegato effettivo | `originali/bruiser.character.LittleSmack-7.png`: `fd12338c8c22746b2a8657b7f48e73a85a33cc6b4e9c5dd3a8cc1e32eea52f0e` |
+| Riscrittura | Non esposta. |
+| Tentativi scartati / rifiuti | Nessuno. |
+| Anteprima | [WebP](anteprime/bruiser.character.LittleSmack-8.webp), 512 px, qualità 80 |
+| Nota | Il volto stordito e il contatto sono visibili; a 60 px il viso è piccolo. Lo sfondo è più scuro e meno dettagliato della versione 7. |
+| Giudizio del proprietario | In attesa. |
