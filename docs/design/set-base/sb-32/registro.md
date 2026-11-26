@@ -2917,3 +2917,22 @@ Prompt preventivo nel commit `9c73e29`. Una richiesta di sostituzione del bicchi
 | Giudizio del proprietario | In attesa. |
 
 **Verifiche del calice:** git diff --check verde; python scripts/check-rules.py verde sul checkout corrente; controllo dei link del registro verde. Originale versione 3 invariato, versione 4 identica byte per byte al file restituito, anteprima WebP verificata a 512 x 512 px, qualità 80; controllo visivo a 60 px eseguito. Pagina verificata: dieci carte, nove ok, un giudizio in attesa e 34 riferimenti immagine validi; tutte le versioni conservate. Prompt iniziali invariati; lavoro concorrente lasciato intatto. **Non verificato:** giudizio del proprietario sulla versione 4. **Scelte prese:** calice da grappa a tulipano, stelo corto e piede, con adeguamento della sola presa. Giro terminato; nessuna decisione o chiusura del lotto.
+
+## Chiusura del lotto 4
+
+26 novembre 2026. Il proprietario approva Fino all’Ultima Goccia 4: «Approvo, chiudi». Con le approvazioni dei giri precedenti, tutte le dieci carte del lotto sono approvate ([D214](../../../set-base-decisioni.md#decisioni-del-proprietario)); Violenta Spruzzata di Seltz resta quella del campione (Seltz 7, D192). Versioni scelte:
+
+| Carta | bindingName | Versione | Anteprima |
+|---|---|---:|---|
+| Fino all’Ultima Goccia | `base.pino.QuestoLoFiniscoIo` | 4 | [WebP](anteprime/base.pino.QuestoLoFiniscoIo-4.webp) |
+| Posto Fisso | `base.pino.bound.CinqueMinutiEVado` | 2 | [WebP](anteprime/base.pino.bound.CinqueMinutiEVado-2.webp) |
+| Schiarirsi le Idee | `base.pino.bound.Coccio` | 2 | [WebP](anteprime/base.pino.bound.Coccio-2.webp) |
+| Ultimo Giro | `base.pino.UltimoGiro` | 2 | [WebP](anteprime/base.pino.UltimoGiro-2.webp) |
+| Scompenso da Ultimo Giro | `base.pino.TestataDaUltimoGiro` | 2 | [WebP](anteprime/base.pino.TestataDaUltimoGiro-2.webp) |
+| Alla Goccia | `base.pino.GoingBerserk` | 3 | [WebP](anteprime/base.pino.GoingBerserk-3.webp) |
+| Avamposto Fortificato al Bancone | `base.pino.IlBanconeRegge` | 2 | [WebP](anteprime/base.pino.IlBanconeRegge-2.webp) |
+| Un Altro e Arrivo | `base.pino.OffroIo` | 2 | [WebP](anteprime/base.pino.OffroIo-2.webp) |
+| Rutto a Bruciapelo | `base.pino.RuttoADistanzaSociale` | 2 | [WebP](anteprime/base.pino.RuttoADistanzaSociale-2.webp) |
+| Un Altro... Grappino... | `base.pino.PrimaIlBrindisi` | 3 | [WebP](anteprime/base.pino.PrimaIlBrindisi-3.webp) |
+
+Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 512×512 WebP qualità 80. Nota della regia per la passata di omogeneità (D206): sotto la luce calda i vestiti neri di Piera tendono al marrone scuro. Nessuna integrazione nell’atlante in questo lotto. Nessun comportamento di gioco o atteso modificato.
