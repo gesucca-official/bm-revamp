@@ -1242,3 +1242,7 @@ Eccezione alla guida di stile: in SVEGLIAMOCI-8 l'avventore ha un volto generico
 | Tentativi scartati | Nessuno. |
 | Controllo a 60 px | Il bicchiere che vola e il gesto della mano si distinguono. |
 | Giudizio del proprietario | In attesa. |
+
+### Primo giudizio del proprietario — lotto 2
+
+26 novembre 2026. Slalom d’Avvicinamento: «bella», approvata. Correzioni richieste: mano in più in Lazo e Sventare; Requisire deve mettere il pacco nello zaino; Sgommata e Tagliare in bici fuori dal bar; rendere leggibili Agilità e Traiettoria; unto dei kebab e lieve sorriso in Unta; pollice e sguardo soddisfatto verso l’avventore in Semaforo. «Smettiamo di fare tutti gli avventori incappucciati»: avventori anonimi, senza cappucci. Prompt del giro aggiunti prima delle generazioni.
