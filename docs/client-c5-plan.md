@@ -1,6 +1,6 @@
 # Piano C5 — Consegnare il client web per i playtest (ridotta)
 
-26 novembre 2026. Regolamento **2.1** col [Set Base 1.0.1](sets/base.md), [roadmap del client](client-roadmap.md#c5-consegnare-il-client-web-per-i-playtest)
+26 novembre 2026. Regolamento **2.3** col [Set Base 1.0.4](sets/base.md) (aggiornato la sera dello stesso giorno, dopo SB-30a, SB-34 e CA-0e), [roadmap del client](client-roadmap.md#c5-consegnare-il-client-web-per-i-playtest)
 versione 64. C0–C4 sono chiuse ([piano C4](client-c4-plan.md)). Stato corrente nell'[indice](README.md#filoni-attivi).
 
 > **Ripartenza** (aggiornata il 26 novembre 2026, dopo D1). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
@@ -8,7 +8,7 @@ versione 64. C0–C4 sono chiuse ([piano C4](client-c4-plan.md)). Stato corrente
 > - **In vigore:** C5 ridotta ([D1](#decisioni-del-proprietario)): regressione completa, un passaggio di correzione, guida di avvio, rapporto. Senza la prova umana C.
 > - **In corso:** nessun blocco.
 > - **Prossimo:** C5-1, consolidamento.
-> - **In attesa:** il via del proprietario a C5-1.
+> - **In attesa:** il via del proprietario a C5-1 (prompt pronto); l'ingresso dei lotti 1–5 di SB-32 nell'atlante aspetta la fine di C5-1.
 > - **Decisioni da leggere:** D1; [D16 del piano C4](client-c4-plan.md#decisioni-del-proprietario) (metodo delle verifiche); [D1 della roadmap del prodotto](product-roadmap.md#decisioni-del-proprietario).
 
 ## Obiettivo
@@ -28,8 +28,10 @@ rapporto.
 che restano da assegnare; deploy e pacchetti nativi. `client-debug` resta come riferimento diagnostico fino alla chiusura di C5.
 
 **Dipendenze e coordinamento.** Il codice client è cambiato molto dopo la fine di C4 (Set Base 1.0, SB-22, SB-31: testi del set,
-atlanti per set, filtri dell'editor). La matrice gira quindi sul codice di oggi, non su quello di C4. C5-1 non gira insieme
-all'innesto di un lotto di SB-32 nell'atlante: le verifiche sono esclusive e i due lavori toccano entrambi `client-web`.
+atlanti per set, filtri dell'editor; SB-30a: livello Facile o Normale contro il computer). La matrice gira quindi sul codice di
+oggi, non su quello di C4, e la guida di avvio cita la scelta del livello. C5-1 non gira insieme all'ingresso dei lotti di SB-32
+nell'atlante: le verifiche sono esclusive e i due lavori toccano entrambi `client-web`. L'ingresso dei lotti viene dopo C5-1 e
+rifà le proprie verifiche (`Size` e quelle grafiche); non riapre C5.
 
 ## Blocchi
 
