@@ -1420,3 +1420,7 @@ Prompt preventivi: `4606e64`; rimozione localizzata di Lazo: `ea7dad2`. Dieci ch
 | Tentativi scartati | Nessun rilancio; Lazo 2 superata dalla 3. |
 | Controllo a 60 px | Braccio pendente rimosso; rimangono la cinghia e il gesto principale. |
 | Giudizio del proprietario | In attesa. |
+
+### Secondo giudizio del proprietario — lotto 2
+
+26 novembre 2026. Approvate: Agilità Innaturale 2 («perfetta»), Traiettoria Imprevedibile 2 («ok»), Unta e Bisunta 2 («perfetta»), Semaforo Rosso 2, Sventare l’Assassinio 2, Lazo del Rider 3 («ok»). Slalom 1 resta approvata dal primo giudizio. Requisire torna alla prima versione con il braccio del casco corretto; Sgommata corregge il telaio; Tagliare corregge l’incrocio delle traiettorie.

@@ -370,3 +370,37 @@ Allegato: `originali/base.mara.CinghiataDiTraverso-2.png`, SHA-256 `e74e5bc6ed3d
 ~~~text
 Edit Attachment 1 only. Remove the entire extra hanging forearm and clenched hand in the lower-left portion, from the sleeve below the backpack down to the fist. Reconstruct the bar background and the edge of Mara’s body naturally in that area. Do not replace it with another arm, hand, helmet or object. Preserve the strap-pulling arm, strap, opponent, face, backpack, clothing, composition, colours and all other details exactly. Square opaque hand-inked comic illustration. No text or extra limbs.
 ~~~
+
+## Secondo giudizio — tre correzioni
+
+26 novembre 2026. Approvate: Agilità Innaturale 2 («perfetta»), Traiettoria Imprevedibile 2 («ok»), Unta e Bisunta 2 («perfetta»), Semaforo Rosso 2, Sventare l’Assassinio 2, Lazo del Rider 3 («ok»). Slalom 1 resta approvata dal primo giudizio. Requisire torna alla prima versione con il braccio del casco corretto; Sgommata corregge il telaio; Tagliare corregge l’incrocio delle traiettorie.
+
+### Requisire al Volo — versione 3
+
+`base.mara.PresoAlVolo-3`
+
+Allegato: `originali/base.mara.PresoAlVolo.png`, SHA-256 `355214c1b7dde700e3dbcfbab27b35fba49a9af9b6436c8e706529d55d0d965f`.
+
+~~~text
+Edit Attachment 1, the first version preferred by the owner. Correct only Mara’s helmet-holding arm at the left of the image: the shoulder, upper arm, elbow, forearm and wrist must form a natural connected anatomy, with a relaxed elbow bend and the helmet hanging naturally from her hand. Preserve the parcel, backpack, other arm, face, pose, clothing, bar, framing and all other details. Do not introduce arrows. Square opaque hand-inked European comic artwork, muted colours, one clear action readable at 60 pixels. No lettering, logos or watermarks. Keep the background darker and simpler than the subject.
+~~~
+
+### Sgommata — versione 3
+
+`base.mara.Sgommata-3`
+
+Allegato: `originali/base.mara.Sgommata-2.png`, SHA-256 `f591c9c5226b0070db44f678c5cdb5bfb7bb11850d47ae005a037858ba0c7d75`.
+
+~~~text
+Edit Attachment 1. Repair only the bicycle geometry so it is a plausible intact rigid bicycle: straight continuous frame tubes joined at coherent vertices, two rigid frame triangles, aligned crank, rear axle, head tube and fork, no bent, broken or disconnected tubing. Respect perspective and the existing skid pose. Preserve Mara, wheels, skid, passer-by, exterior bar, composition, style and all unaffected details. Square opaque hand-inked European comic artwork, muted colours, one clear action readable at 60 pixels. No lettering, logos or watermarks. Keep the background darker and simpler than the subject.
+~~~
+
+### Tagliare la Strada — versione 3
+
+`base.mara.bound.ColpoDiStriscio-3`
+
+Allegato: `originali/base.mara.bound.ColpoDiStriscio-2.png`, SHA-256 `b67918357a262fe7bb3e12172bb062e84ab48308b41b3622c9afe9aa3d47d2ab`.
+
+~~~text
+Recompose Attachment 1 so Mara on her bicycle unmistakably cuts directly across the pedestrian’s intended path outside the bar. Show the bicycle moving left to right in broad side view across the foreground. Behind its middle, the pedestrian has been walking from the background toward the foreground, perpendicular to the bicycle; their forward foot brakes immediately behind the bicycle frame and both hands rise in startled reaction. The bicycle physically blocks the exact path ahead of their feet, close enough to force an abrupt stop. No parallel or diverging trajectories. No collision or injury. Keep Mara’s face, clothes, cubic backpack, headphones and foil helmet held in one hand. An intact plausible bicycle, no extra limbs. The pedestrian is bare-headed in an ordinary jacket, head turned aside in shadow without recognizable facial features. Keep the same exterior bar and restrained comic style. Square opaque hand-inked European comic artwork, muted colours, one clear action readable at 60 pixels. No lettering, logos or watermarks. Keep the background darker and simpler than the subject.
+~~~
