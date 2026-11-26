@@ -1,6 +1,6 @@
 # Roadmap del client web animato
 
-**21 novembre 2026 — versione 63. C0, C1, C2, C3 e C4 sono chiuse; la prossima tappa è C5.** C4 è stata chiusa dal proprietario l'11 novembre 2026 («Approvo, chiudi C4»; [piano C4](client-c4-plan.md), [Fase B di C4-9](reports/client-c4/c4-9.md#fase-b-11-novembre-2026)). C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**26 novembre 2026 — versione 64. C0, C1, C2, C3 e C4 sono chiuse; la prossima tappa è C5, ridotta ([piano C5](client-c5-plan.md), D1).** C4 è stata chiusa dal proprietario l'11 novembre 2026 («Approvo, chiudi C4»; [piano C4](client-c4-plan.md), [Fase B di C4-9](reports/client-c4/c4-9.md#fase-b-11-novembre-2026)). C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -620,10 +620,14 @@ segnala quando la disposizione entra.
 
 ### C5 Consegnare il client web per i playtest
 
+**Ridotta dal proprietario il 26 novembre 2026 ([D1 del piano C5](client-c5-plan.md#decisioni-del-proprietario)):**
+resta tutto tranne la prova umana C, che passa alle prime partite con gli amici dopo DE-1; O19 si decide dopo quelle
+partite. Blocchi e stato nel [piano C5](client-c5-plan.md).
+
 **Dipende da C4. Risultato:** versione locale ripetibile, a parità funzionale,
 che i giocatori possono usare per provare il gioco con istruzioni brevi.
 
-**Attività:** una regressione consolidata dei percorsi, una prova umana finale,
+**Attività:** una regressione consolidata dei percorsi (la prova umana finale è tolta da D1 del piano C5),
 correzione dei blocchi emersi, guida di avvio del nuovo client e rapporto con
 limiti residui. Conservare il debug come riferimento diagnostico finché la
 parità non è verificata. Non includere deploy o pacchetti nativi.
@@ -634,7 +638,7 @@ prima funzionanti. Nessuna discrepanza con il regolamento, nessun dato privato
 in più, nessuna funzione rimossa per privilegiare la grafica. Avvio documentato
 da checkout con cache predisposte, esiti e rientro ripetibili.
 
-**Prova umana C:** quattro persone, includendone almeno una nuova al client,
+**Prova umana C (non più in C5, D1 del piano C5; resta come riferimento per le partite dopo DE-1):** quattro persone, includendone almeno una nuova al client,
 circa un'ora; un duello, una FFA e passaggi mirati su editor/touch. Ciascuno
 deve riconoscere costo, bersaglio, scarto, accettazione ed esito senza aprire
 diagnostica; almeno tre su quattro devono spiegare correttamente l'ultimo
@@ -689,7 +693,7 @@ modifica a regole, server o catalogo è già decisa.
 
 | ID | Osservazione | Tappa | Note e vincoli |
 |---|---|---|---|
-| O19 | Prova C3-4: oltre alla sequenza una carta per volta (D12, D13) serve una **versione velocizzata, attivabile dall'utente**. | C5 | Impostazione dell'utente, non un default. Deve conservare le regole 1–9 del piano C3: stato finale uguale alla vista del server, nessun blocco di invio né del clock di 30 s, movimento ridotto che mantiene le informazioni. Decidere dopo la prova umana del ritmo in C5, con le durate misurate in C3 (due mosse 7,1–10,4 s; FFA a cinque mosse 15,9–19,7 s; tetto 20 s di D10/D13). |
+| O19 | Prova C3-4: oltre alla sequenza una carta per volta (D12, D13) serve una **versione velocizzata, attivabile dall'utente**. | Dopo le prime partite con gli amici in DE-1 ([D1 del piano C5](client-c5-plan.md#decisioni-del-proprietario)); prima era C5 | Impostazione dell'utente, non un default. Deve conservare le regole 1–9 del piano C3: stato finale uguale alla vista del server, nessun blocco di invio né del clock di 30 s, movimento ridotto che mantiene le informazioni. Decidere dopo la prova umana del ritmo in C5, con le durate misurate in C3 (due mosse 7,1–10,4 s; FFA a cinque mosse 15,9–19,7 s; tetto 20 s di D10/D13). |
 | O20 | Prova FFA: dopo il forfait per tempo dei due umani, i computer hanno combattuto altri **25 round**; l'esito riporta `outcomeReason: timeout` con un **computer vincitore**. | **Chiusa il 10 novembre 2026** (correzione del server, commit `1eb2579`, [rapporto](reports/o20-report.md)); non riguarda il client | Letta contro R06: proseguire fra i computer è conforme, l'anomalia era solo il motivo dell'esito. Ora `outcomeReason` è `combat` quando la partita finisce nella risoluzione dopo un forfait, `timeout` o `leave` solo se la chiudono i forfait stessi ([domande aperte](open-questions.md#o20--motivo-dellesito-dopo-un-forfait), [api.md](api.md)); regolamento invariato. Non rieseguito lo scenario `ffaForfeit` del client: rientra nella matrice di fine C4. |
 | O21 | Residui dichiarati da C3-5 e C3-6. | C3-7 e C4 | **POISON:** simbolo e impatto provati solo in unità, nessuna carta lo usa. **ExtremelyViolentBlow (`HIT 20+x`)**: **chiuso da C4-8a** (10 novembre 2026): la V reale sul volto è stata vista (V 45 → «32», Fase A) e `VerifyResolution open` controlla a ogni turno la pillola e l'etichetta (20 + trunc((V − costo)/2)). **Carte piccole del round (36–40 px):** solo il simbolo del danno, l'importo è nell'ispezione. **Movimento ridotto:** il segno del tipo di danno resta sul volto ma non c'è impatto sul bersaglio; **chiuso da D5 (b)** in C4-8a: «Ultimo turno» dice il tipo (riga «Danno nominale»). **Controllo delle scritte a 844×390 in FFA:** il guasto di C3-6 non si è riprodotto; il controllo ora misura fino all'inizio della sfumatura (soglia `LABEL.read` − 50 ms invariata, approvato il 2 novembre 2026), e le scritte registrano `end` e `gap` per spiegarlo se ricapita. |
 | O22 | C3-L: a 750×292 (minimo iPhone) il tavolo non entra; già prima di C3-L, in FFA un posto esce dallo schermo. | C4 per la non regressione, app futura per l'adattamento | Decisione del proprietario del 3 novembre 2026 (D6 del piano C4): 750×292 non peggiora e un miglioramento economico si fa, ma non è un obiettivo di C4. Un test in unità segnala quando la disposizione entra. |
@@ -778,11 +782,12 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo:** C4, rifinitura di art, audio, layout e prestazioni ([piano](client-c4-plan.md)), poi C5 (playtest finali, con la prova umana del ritmo e la decisione sulla sequenza velocizzata O19). C3 è chiusa ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)); le attività A1 e A3 (tipo e importo del danno nel catalogo, dal regolamento) l'hanno preceduta. O15 e O16 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in un'attività successiva dedicata; O17 e O18 cambiano regole e protocollo: attività separate, da aprire dal regolamento; O20 resta da valutare a parte dal proprietario.
+**Prossimo passo (26 novembre 2026):** C5 ridotta ([piano](client-c5-plan.md)): regressione completa, guida di avvio e rapporto; la prova umana del ritmo e la decisione su O19 passano alle partite con gli amici dopo DE-1. C4 è chiusa ([piano](client-c4-plan.md)). C3 è chiusa ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)); le attività A1 e A3 (tipo e importo del danno nel catalogo, dal regolamento) l'hanno preceduta. O15 e O16 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in un'attività successiva dedicata; O17 e O18 cambiano regole e protocollo: attività separate, da aprire dal regolamento; O20 resta da valutare a parte dal proprietario.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 64 — 26 novembre 2026:** C5 ridotta dal proprietario ([D1 del piano C5](client-c5-plan.md#decisioni-del-proprietario), «C5 ridotta»): tolta la prova umana C, che passa alle prime partite con gli amici dopo DE-1, e con lei la decisione su O19; restano regressione completa, correzione, guida di avvio e rapporto. Nuovo [piano C5](client-c5-plan.md).
 - **Versione 63 — 21 novembre 2026:** nuove osservazioni [O33 e O34](#osservazioni-registrate-durante-sb-22) dalla prova SB-22 del Set Base (segno P+/P− sulla carta; nessuna mossa annullata animata per un personaggio morto), da assegnare.
 - **Versione 62 — 12 novembre 2026:** nuova osservazione [O32](#osservazioni-registrate-durante-c4) (quantità di danno e barriera sull'impatto), dopo C5 con eventi strutturati dal server.
 - **Versione 61 — 11 novembre 2026:** **C4 chiusa dal proprietario** («Approvo, chiudi C4», dopo il controllo dal vivo di [C4-12](client-c4-plan.md#c4-12--eliminazione-ed-esito-dopo-la-sequenza)); matrice completa di fine C4 24/25 con il solo rosso R5 dello script di `VerifyAim`; residui e rimandi in [C4-9 Fase B](reports/client-c4/c4-9.md#fase-b-11-novembre-2026). Prossima tappa: C5.

@@ -100,6 +100,8 @@ Prima di esporre il servizio, un ricontrollo di sicurezza mirato: l'autorizzazio
 ([debito tecnico](technical-debt.md)), restano da guardare codici di verifica, limiti ai tentativi di accesso, credenziali di
 amministrazione e log.
 
+**Prova umana del client** ([D1 del piano C5](client-c5-plan.md#decisioni-del-proprietario), 26 novembre 2026): le prime partite con gli amici sostituiscono la prova umana C tolta da C5; dopo di esse si decide O19 (sequenza velocizzata) e si correggono i ritorni (D1).
+
 **Rimandati da C4 al primo client servito in rete,** quindi da fare in DE-1 (decisioni del proprietario dell'11 novembre 2026):
 
 - **Peso e caricamento degli asset:** compressione e caricamento mirato, il punto 2 di [C4-8b](client-c4-plan.md#c4-8b--prestazioni-e-budget)
