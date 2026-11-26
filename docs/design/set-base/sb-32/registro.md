@@ -2892,3 +2892,28 @@ Fino all’Ultima Goccia versione 3 non accettata. Si sostituisce del tutto il c
 ~~~text
 Edit this attached illustration by completely replacing the current cylindrical tumbler with a recognizable traditional Italian grappa tasting glass. Draw one small clear stemmed tulip glass: a compact rounded bulb-shaped bowl at the bottom that narrows toward a small circular drinking rim, a short slender stem below the bowl, and one simple flat circular foot. Keep the anatomy and perspective coherent: one continuous glass, one rim, one bowl, one stem and one foot, no doubled edges or fused parts. Piera holds the short stem naturally between thumb and fingers of her raised hand and tilts the entire grappa glass toward her open mouth to drink, with the small rim at her lips and a little amber grappa flowing from the rim into her mouth. Repose only that hand and adjust the wrist minimally as needed for the new stem grip; all five fingers belong naturally to the same hand. The bowl, short stem and circular foot must all remain visibly connected and recognizable, even while tilted. Remove the old tumbler completely. Preserve Piera's recognizable face, drowsy expression, head angle, body and seated pose, all-black clothes, bun and corrected short horizontal pencil, her other hand, the anonymous patron, counter, round backless stool, slippers, bar shelves and lamp, warm lighting, restrained palette, irregular ink contours, worn print texture and square framing. No extra hand or limb, second glass, text, border or transparency. Return one opaque square illustration.
 ~~~
+
+#### Risultato — Fino all’Ultima Goccia, versione 4
+
+Prompt preventivo nel commit `9c73e29`. Una richiesta di sostituzione del bicchiere, nessun rifiuto, rilancio o tentativo scartato. Versioni 1, 2 e 3 conservate; versione 4 in attesa. Le altre nove carte restano approvate nelle rispettive versioni già indicate.
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.pino.QuestoLoFiniscoIo` |
+| Versione | 4 |
+| promptSha256 | `461ba011fd8e64210145eb5266898fd4ec37ac6250966a887df4b59b47b40cea` (UTF-8, LF, senza ritorno finale) |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | Unico allegato: `originali/base.pino.QuestoLoFiniscoIo-3.png`: `90539e06526916e98b6ac4866266e45c17d511bb613de5c3c8be3ac3ac1cdbcc`. Nessuna maschera o altro riferimento. |
+| Prompt riscritto | non esposto; testo inviato riportato nel prompt preventivo |
+| source | `originali/base.pino.QuestoLoFiniscoIo-4.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a218c6-cd70-7e12-87fc-82a14ea0ace8/exec-ad0d648c-827b-4756-9fb2-ca3bac27c8bb.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2359514 / `bd7807efa0d14844f779f35e51f27f622c11bcd5afde65e7f83a7eaa81a977d5` |
+| Anteprima | [WebP](anteprime/base.pino.QuestoLoFiniscoIo-4.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta alla richiesta di sostituzione del bicchiere |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Bevuta leggibile; calice minuto con stelo e piede poco distinti; punta della matita minuta, seduta tonda senza schienale visibile. |
+| Controllo oggettivo | Calice da grappa con coppa arrotondata, imboccatura stretta, stelo e piede circolare visibilmente collegati. Mano ridisegnata sullo stelo e polso adattato; bicchiere inclinato alla bocca, resto della scena mantenuto. |
+| Giudizio del proprietario | In attesa. |
+
+**Verifiche del calice:** git diff --check verde; python scripts/check-rules.py verde sul checkout corrente; controllo dei link del registro verde. Originale versione 3 invariato, versione 4 identica byte per byte al file restituito, anteprima WebP verificata a 512 x 512 px, qualità 80; controllo visivo a 60 px eseguito. Pagina verificata: dieci carte, nove ok, un giudizio in attesa e 34 riferimenti immagine validi; tutte le versioni conservate. Prompt iniziali invariati; lavoro concorrente lasciato intatto. **Non verificato:** giudizio del proprietario sulla versione 4. **Scelte prese:** calice da grappa a tulipano, stelo corto e piede, con adeguamento della sola presa. Giro terminato; nessuna decisione o chiusura del lotto.
