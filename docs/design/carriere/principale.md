@@ -265,10 +265,12 @@ Il proprietario ha chiesto come si raggiungono (14 novembre 2026). Tutti e due h
 
 ## Numeri
 
-Un giro attraversa 11–13 nodi con partita, più i ritenti e le scene delle sconfitte; in tutto la mappa ha 24 nodi, 21 con partita, 3
-finali e 2 segreti. È meno dell'ordine di grandezza di partenza (15–20 incontri per giro, 30–40 nodi), e **va bene così:** il
+Un giro attraversa 11–13 nodi con partita, più i ritenti e le scene delle sconfitte; contando uno per uno i duelli della catena di III5
+(da 1 a 5), le partite di un giro vanno da 11 a 17, 18 con S2. Sui dialoghi veri la mappa ha 27 nodi (F1, F2 e F3 sono scene), 3 finali e
+2 segreti ([mockup con i dialoghi](mockup-principale.md#numeri-per-giro)). È meno dell'ordine di grandezza di partenza (15–20 incontri per giro, 30–40 nodi), e **va bene così:** il
 proprietario, dopo il mockup, non vuole allungare («a me sembra ok come lunghezza e complessità»). Resta valida l'osservazione del mockup:
-la bacheca di oggi regge circa quattordici colonne, e una carriera più lunga chiederebbe una bacheca per atto.
+la bacheca di oggi regge circa quattordici colonne (nel mockup della 0.3.7 sono sedici di nodi), e una carriera più lunga chiederebbe una
+bacheca per atto.
 
 **Cosa insegna** quello che il tutorial lasciava fuori ([tutorial](tutorial.md#cosa-insegna-in-sintesi)): il veleno in I1 e II2c, oggetti
 ed equipaggiamento in I2a e II2b, la L di Piera in II2a, il mazzo costruito con il PvP in I4, la FFA a cinque in III2a, le contromosse in
@@ -325,14 +327,17 @@ DETTO», l'assegno che si autodistrugge) vale la 0.3.7. Restano come storia.
 
 ## Prossimi passi
 
-1. Il [mockup del grafo](mockup-principale.md) nel prototipo, fatto sulla 0.2 e provato dal proprietario, si aggiorna alla 0.3: le
-   tre sconfitte che aprono un ramo, le varianti di battuta nuove, i due achievement cambiati e quello nuovo.
-2. Il proprietario riscrive la scaletta dove serve: nomi dei nodi, scene, chi gioca.
-3. Poi i dialoghi, scena per scena, come per il [tutorial](tutorial-dialoghi.md): gli atti I e II sono riscritti dal proprietario (19
-   novembre 2026), l'atto III il 20 novembre, dai suoi appunti messi in forma dalla regia. **I dialoghi sono completi;** il mockup va
-   portato alla 0.3.7, compresa la partita a catena di III5.
-4. Gli sfondi nuovi (il Dimmi Di Sì dentro, il retro del bar, la cantina) e i ritratti dei quattro, dagli
-   [identikit](../set-base/identikit.md#celestina-bucatina) approvati il 12 novembre 2026.
+1. Il [mockup del grafo](mockup-principale.md) nel prototipo, fatto sulla 0.2 e provato dal proprietario, è sulla 0.3.7 e legge i
+   dialoghi veri (20 novembre 2026), catena di III5 compresa: [aggiornamento](mockup-principale.md#aggiornamento-alla-037-con-i-dialoghi-veri).
+2. Il proprietario riscrive la scaletta dove serve: nomi dei nodi, scene, chi gioca. Resta un'idea della regia, non decisa: F2 prosegue nel
+   nodo F1 «Il Serraglio resta» e chiude con il finale «è di tutti»; se sulla bacheca confonde, il nodo F1 si può rinominare (per esempio
+   «La sera dopo»).
+3. I dialoghi, scena per scena, come per il [tutorial](tutorial-dialoghi.md): gli atti I e II sono riscritti dal proprietario (19
+   novembre 2026), l'atto III il 20 novembre, dai suoi appunti messi in forma dalla regia. **I dialoghi sono completi.**
+4. I ritratti dei quattro, dagli [identikit](../set-base/identikit.md#celestina-bucatina) approvati il 12 novembre 2026, e gli sfondi:
+   **completi e approvati** il 21 novembre 2026 ed entrati nel prototipo ([elenco](illustrazioni.md#campagna-principale),
+   [prompt](prompt-principale.md)). Il Dimmi Di Sì dentro è S3 del tutorial, la cantina è S4; il retro del bar non serve (III3b è «S2 al
+   buio»). Le espressioni che non si generano ripiegano su quelle del cast.
 
 ## Cronologia
 
