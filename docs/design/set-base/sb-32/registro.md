@@ -1547,4 +1547,23 @@ Prompt preventivo `86b0062`. Una chiamata; nessun rifiuto, rilancio o tentativo 
 | Anteprima | [WebP](anteprime/base.mara.bound.ColpoDiStriscio-6.webp), 512 px, qualità 80 |
 | Tentativi scartati | Nessuno. |
 | Controllo a 60 px | Mano aperta rivolta verso l’avventore; gesto piccolo. Bici e avventore conservano la composizione della 3. La distanza dalle dita va giudicata in grande. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | Approvata: «va bene», 26 novembre 2026. |
+
+## Chiusura del lotto 2
+
+26 novembre 2026. Il proprietario approva Tagliare la Strada 6: «va bene». Con le approvazioni dei giri precedenti, tutte le dieci carte di Mara sono approvate. Versioni scelte:
+
+| Carta | bindingName | Versione | Anteprima |
+|---|---|---:|---|
+| Lazo del Rider | `base.mara.CinghiataDiTraverso` | 3 | [WebP](anteprime/base.mara.CinghiataDiTraverso-3.webp) |
+| Requisire al Volo | `base.mara.PresoAlVolo` | 3 | [WebP](anteprime/base.mara.PresoAlVolo-3.webp) |
+| Sgommata | `base.mara.Sgommata` | 3 | [WebP](anteprime/base.mara.Sgommata-3.webp) |
+| Slalom d’Avvicinamento | `base.mara.Slalom` | 1 | [WebP](anteprime/base.mara.Slalom.webp) |
+| Agilità Innaturale | `base.mara.SorpassoInCurva` | 2 | [WebP](anteprime/base.mara.SorpassoInCurva-2.webp) |
+| Traiettoria Imprevedibile | `base.mara.TiStringoLaCurva` | 2 | [WebP](anteprime/base.mara.TiStringoLaCurva-2.webp) |
+| Unta e Bisunta | `base.mara.TraDueParaurti` | 2 | [WebP](anteprime/base.mara.TraDueParaurti-2.webp) |
+| Semaforo Rosso | `base.mara.bound.CambioMarcia` | 2 | [WebP](anteprime/base.mara.bound.CambioMarcia-2.webp) |
+| Tagliare la Strada | `base.mara.bound.ColpoDiStriscio` | 6 | [WebP](anteprime/base.mara.bound.ColpoDiStriscio-6.webp) |
+| Sventare l’Assassinio | `base.mara.bound.PassoStretto` | 2 | [WebP](anteprime/base.mara.bound.PassoStretto-2.webp) |
+
+Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 512×512 WebP qualità 80. Nessuna integrazione nell’atlante in questo lotto. Nessun comportamento di gioco o atteso modificato.
