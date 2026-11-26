@@ -3327,3 +3327,32 @@ Prompt preventivi nel commit `552ad6b`. Una richiesta per carta, nessun rifiuto 
 | Controllo a 60 px | Figure e asta del calibro leggibili; ganasce e dita minute, nessun attrezzo in tasca distinguibile. |
 | Anomalie visive | Calibro ridisegnato; una ganascia sembra sotto il naso e il contatto con entrambe le ganasce non è chiaro. |
 | Giudizio del proprietario | In attesa. |
+
+
+### Nuovo giudizio del proprietario e correzioni — 26 novembre 2026
+
+> cuffie e testa bassa: va bene il cappuccio, però l'azione di dargli la sedia nella schiena non è chiara per via della presa che ha l'avventore sulla sedia stessa. inoltre la gamba è troppo lunga
+> cacciavite: va bene
+> affilare gli utensili: va bene
+> chiave da tredici non va bene per niente, è sparita una mano di beppe e la chiave è troppo lunga
+> preparare il lavoro non va bene, cambiamo il calibro con una riga metrica
+
+Tre richieste, una per carta, con il solo originale della versione precedente; tutte le versioni restano conservate. Il cappuccio è accettato dal proprietario. Nessuna decisione o chiusura del lotto.
+
+#### Prompt preventivo — Cuffie e Testa Bassa, versione 4
+
+~~~text
+Edit only the supplied illustration. Make the chair strike on Beppe's back immediately clear: the hooded patron grips the wooden chair firmly and naturally by its two shorter legs with both hands and swings it into Beppe's back, where the chair breaks on contact. Draw one coherent chair with proportionate legs, clear hand placement and distinct fragments; no excessively long leg. Keep the patron hooded and anonymous. Beppe remains completely oblivious, wearing headphones, with his posture, face, beard, bun, clothes and both hands retained. Preserve the bar, warm restrained colours, lighting, hand-inked texture and square framing as closely as possible. Two coherent arms and hands per figure; no tools in Beppe's pockets, no blood, lettering, border or transparency. Return one opaque square illustration.
+~~~
+
+#### Prompt preventivo — Chiave da Tredici, versione 3
+
+~~~text
+Edit only the supplied illustration. Restore both of Beppe's hands with clear, continuous arms: both hands naturally grip one short 13 mm combination spanner together above his head as he strikes the opponent's padded shoulder. Make the spanner realistically small, about one hand long, not a long wrench; show a single coherent shaft, one closed ring end and one open end ground to a point. The two hands must be distinct and connected to their own arms, without missing, fused or extra limbs. Preserve the two figures, action, faces, clothing, bar, warm restrained lighting, hand-inked texture and square framing as closely as possible. No tools in pockets, visible wounds, blood, text, border or transparency. Return one opaque square illustration.
+~~~
+
+#### Prompt preventivo — Preparare il Lavoro, versione 3
+
+~~~text
+Edit only the supplied illustration. Replace the caliper completely with one straight, flat metal metric ruler of realistic hand-held proportions. Beppe holds the ruler naturally against the side of the shadowy opponent's nose as if measuring it, while the opponent recoils; show a single ruler with small simple metric tick marks, no numerals or letters, and no caliper jaws or sliding parts. Both of Beppe's hands and arms are coherent and naturally positioned. Preserve the figures, faces, clothing, bar, warm restrained lighting, hand-inked texture and square framing as closely as possible. No tools in Beppe's pockets, blood, text, border or transparency. Return one opaque square illustration.
+~~~
