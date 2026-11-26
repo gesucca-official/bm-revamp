@@ -30,7 +30,7 @@
       "sha256": "66463643f351583171c2729111e3d2cef453731fe4b142700a8ee469b6db33e2"
     },
     {
-      "file": "docs/design/set-base/sb-34/tabella.json",
+      "file": "tools/set-catalog/nomi-classi.json",
       "sha256": "5c1c290921721b9af76f635100940ee5476548a25a636db6e08a2f9f28b4cbeb"
     }
   ],
@@ -57,7 +57,7 @@
     },
     {
       "file": "server/src/test/java/com/gsc/bm/model/cards/base/SetBaseIds.java",
-      "sha256": "a7b2920d295f5a52e352124671573b89f46f53ddc25943a05c009a416a05f4ee"
+      "sha256": "27feb889b0221dffc347db30dd309ebf4dc1ef6db15714760e5c5dfc25644d8f"
     },
     {
       "file": "server/src/main/resources/cards.sqlite",

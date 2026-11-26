@@ -2,7 +2,7 @@
 
 Scritta il 26 novembre 2026 su [D210](../../set-base-decisioni.md#decisioni-del-proprietario); base `9a6c4da`. Nessun codice né
 dato cambia in questa fase. Evidenze: [inventario](sb-34/inventario.json) (conteggi per area, per file e per id) e
-[tabella](sb-34/tabella.json) (vecchio → nuovo, in forma di dati).
+[tabella](../../../tools/set-catalog/nomi-classi.json) (vecchio → nuovo, in forma di dati).
 
 **Esito.** 130 identificativi (117 carte, 7 personaggi, 1 token, 5 starter), presenti in 900 file tracciati (187 vivi, 713 storici),
 nei nomi di 69 file delle illustrazioni, in 3 cataloghi SQLite e, sulla macchina, nelle due basi applicative e in 2.400 file di

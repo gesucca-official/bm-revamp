@@ -55,7 +55,7 @@ LIVE_CLASSES = "server/src/main/java/com/gsc/bm/model/cards/base/SetBaseClasses.
 JAVA_ROOT = "server/src/main/java"
 CARDS_PKG = "com.gsc.bm.model.cards."
 # SB-34 B2 (D213 (3)): the approved names (id -> English name) and the constants class generated for the test code.
-LIVE_NAMES = "docs/design/set-base/sb-34/tabella.json"
+LIVE_NAMES = "tools/set-catalog/nomi-classi.json"
 LIVE_IDS = "server/src/test/java/com/gsc/bm/model/cards/base/SetBaseIds.java"
 LIVE_PATHS = {"sets/base.md": "docs/sets/base.md", "client-debug/sets/base.md": "client-debug/src/assets/docs/sets/base.md",
               "sets/base.json": "docs/rules-catalog.json", "cards.sqlite": "server/src/main/resources/cards.sqlite",

@@ -2,7 +2,7 @@
 
 **Esito: accettata il 26 novembre 2026 ([D215](../../set-base-decisioni.md#decisioni-del-proprietario)): domande 1, 2 e 4 come raccomandato, 3 resta aperta.** Le 20 classi vive delle carte e le 2 superclassi portano i
 nomi approvati ([D213](../../set-base-decisioni.md#decisioni-del-proprietario), tabella di
-[sb-34/tabella.json](../../design/set-base/sb-34/tabella.json)) sotto `com.gsc.bm.model.cards.base.<personaggio>` / `common` /
+[sb-34/tabella.json](../../../tools/set-catalog/nomi-classi.json)) sotto `com.gsc.bm.model.cards.base.<personaggio>` / `common` /
 `items` / `tokens` e dichiarano il loro id invariato con `@CardId`; il caricatore cerca prima il registro esplicito `SetBaseClasses`,
 poi la regola storica. Documento del set **1.0.3**, nessuna carta cambia. Identità viva identica alla base, passo 0 identico (con la
 differenza nota dell'ordine di due chiavi in `draft.json`). Tutte le verifiche verdi salvo R3, noto. Tre allargamenti del perimetro
@@ -120,7 +120,7 @@ file** sono diventate la costante dello stesso valore, **42 restano di proposito
 ## Cosa cambia
 
 **Classe generata:** `server/src/test/java/com/gsc/bm/model/cards/base/SetBaseIds.java`. Nome in UPPER_SNAKE_CASE dal nome inglese
-approvato ([tabella](../../design/set-base/sb-34/tabella.json)); commento col nome italiano della carta; gli starter sono
+approvato ([tabella](../../../tools/set-catalog/nomi-classi.json)); commento col nome italiano della carta; gli starter sono
 `STARTER_<nome inglese>` (`STARTER_PIERA = "starter-pino"`). Gli id vengono dal set vivo, non dalla tabella. Nessuna collisione.
 
 **Generatore:** `set_catalog.py --vivo` scrive anche la classe; si ferma su un id senza riga nella tabella, una riga senza id, due
@@ -190,3 +190,78 @@ base, quindi «stesso codice, stessi numeri» vale per costruzione. Nessuna veri
    ordinata)? Raccomandato: un'impronta nel test, in B3.
 2. La tabella dei nomi resta in `docs/design/set-base/sb-34/` o passa sotto `tools/set-catalog/`? Raccomandato: spostarla con la
    prima carta nuova, non ora.
+
+---
+
+# SB-34 B3 — Impronta degli id congelati, tabella dei nomi
+
+**Esito: consegnata il 26 novembre 2026; SB-34 è consegnato, in attesa del giudizio del proprietario.** Un test fissa i 130 id del set vivo con un'impronta SHA-256 della lista ordinata: un id cambiato o aggiunto lo fa fallire (provato con due mutazioni, sotto). La tabella dei nomi passa da `design/set-base/sb-34/` a `tools/set-catalog/nomi-classi.json`, perché è un ingresso del generatore ([D216](../../set-base-decisioni.md#decisioni-del-proprietario) (2)). Nessun id, atteso, carta, versione del set (1.0.3) o file della partita viva cambia.
+
+## Cosa cambia
+
+**Test nuovo:** `server/src/test/java/com/gsc/bm/model/cards/base/FrozenIdsFingerprintTest.java`. Legge gli id dal file del set vivo (`/sets/base.json`: carte, personaggi e starter) più l'id del token che il codice crea, li ordina, li unisce con `\n` e calcola SHA-256. Il risultato si confronta con un letterale scritto nel test: `f5d65b8feede47bf39bf80f050af9218552778db252bee49cf829bc8bc91baf8`. Il test asserisce anche il conteggio, 130. Non deriva il valore da `SetBaseIds` né dalla tabella. Il messaggio di errore dice che gli id sono identificativi congelati (D213) e che una carta nuova aggiunge un id solo insieme al documento del set. Il valore è stato ricalcolato in Python dal file del set e coincide.
+
+**Tabella spostata** con `git mv`: `docs/design/set-base/sb-34/tabella.json` → `tools/set-catalog/nomi-classi.json`. Contenuto invariato (sha256 `5c1c2909…`). `inventario.json` resta in `docs/design/set-base/sb-34/`.
+
+**Lettori ripuntati** (il testo visibile dei link non cambia):
+
+| File | Cosa cambia |
+|---|---|
+| `tools/set-catalog/set_catalog.py` | costante `LIVE_NAMES` |
+| `tools/set-catalog/prova-errori.py` | percorso nell'elenco delle copie |
+| `server/src/test/java/com/gsc/bm/model/cards/base/SetBaseIds.java` | intestazione, rigenerata da `--vivo` (sha256 `27feb889…`) |
+| `server/src/test/java/com/gsc/bm/sim/CardClassesLoadTest.java` | solo il commento Javadoc |
+| `docs/sets/manifest.json` | voce della tabella, rigenerata da `--vivo` (sha256 della tabella invariato) |
+| `docs/formato-file-set.md` | destinazione del link |
+| `docs/design/set-base/sb-34-proposta.md` | destinazione del link |
+| `docs/reports/set-base/sb-34-report.md` | destinazione dei due link del B1 (righe 5 e 123) |
+
+`--vivo` ha riscritto anche gli altri file del catalogo vivo, che risultano identici: `sets/base.json`, `cards.sqlite`, documento e allegato del set, copie del client. Il rapporto B2 (riga 183, «Cosa sapere») resta com'è: è testo storico.
+
+**Piano** (`docs/set-base-plan.md`): riga SB-34, sezione SB-34 (paragrafo B3) e una voce della Ripartenza («Prossimo»), che ora dice che SB-34 è consegnato e attende il giudizio.
+
+## Mutazioni
+
+Due mutazioni sul file del set vivo (`server/src/main/resources/sets/base.json`), ognuna con `mvn test -Dtest=FrozenIdsFingerprintTest` (offline), poi ripristino: l'hash del file è tornato quello di prima e `git status` non lo segnala.
+
+| Mutazione | Esito |
+|---|---|
+| M1: un id cambiato (`bruiser.YouStop` → `bruiser.YouStopX`), conteggio invariato a 130 | **rosso** sull'impronta: `expected: <f5d65b8f…>` `but was: <779a720d…>` |
+| M2: un id aggiunto (una starter nuova, `base.test.Aggiunta`) | **rosso** sul conteggio: `expected: <130>` `but was: <131>` |
+
+## Verifiche
+
+Uscite in `%TEMP%\bm-sb34-b3` (`test2.log`, `bm-sb34-b3-links.txt`, `bm-sb34-b3-prova.txt`).
+
+| Verifica | Esito |
+|---|---|
+| `git diff --check` | pulito (avvisi di fine riga già noti, nessuno nei file toccati) |
+| `python scripts/check-links.py` | 506 file, **22 link rotti**, quelli noti; nessuno dei rotti è di SB-34 |
+| `python scripts/check-rules.py` | verde |
+| `./scripts/build.ps1 -Task Test -Offline` | server: **1529 test, 0 falliti, 0 in errore, 23 saltati** (1528 di B2 più il test nuovo); client di debug **54/54** |
+| `set_catalog.py --vivo`, poi `--vivo --check` | 8 file generati, **8 identici** alla generazione |
+| `prova-errori.py` | **7/7 OK** |
+| `git grep` del vecchio percorso | nessun riferimento vivo; resta solo la riga 183 del rapporto B2, storica |
+| `TestServerContext` | non eseguito: nessuna modifica a `server/src/main` e nessun test di contesto cambia |
+
+**Insidia incontrata.** Il primo giro di `Test` dopo le mutazioni ha dato 1521 test, 4 fallimenti e 73 errori, tutti su `/sets/base.json` non valido: la copia compilata `server/target/classes/sets/base.json` conteneva ancora la mutazione M2, perché Maven non l'ha ricopiata dopo il ripristino della sorgente (la sorgente era identica all'originale). Rimossa la cartella `server/target` (output di build, non tracciato) e rifatto il giro: verde. Da qui in poi, dopo una mutazione su una risorsa, si controlla o si rimuove la copia in `target`.
+
+**Rossi:** nessuno nel giro di `Test`. R3 è nel contesto completo, che qui non gira.
+
+## Scelte prese
+
+1. Nome della tabella: `nomi-classi.json`, come suggerito dal prompt.
+2. Il token è letto dal codice (`BrokenBottle.getBindingName()`), come in `SetBaseIdsTest`, non dalla tabella.
+3. Il messaggio del test è in italiano, perché lo legge il proprietario; la Javadoc in inglese, come nei file vicini.
+4. Nella Ripartenza del piano è cambiata solo la voce «Prossimo»: non c'è una riga in più che la contraddica.
+5. Il testo visibile dei link resta «sb-34/tabella.json», come da perimetro: ora il nome non corrisponde più al percorso vivo, la destinazione sì.
+
+## Chiusura di SB-34
+
+Oggi è vero questo. Le 20 classi vive delle carte e le 2 superclassi portano i nomi delle carte attuali sotto `com.gsc.bm.model.cards.base.<personaggio>` (più `common`, `items` e `tokens`), dichiarano il loro id con `@CardId` e stanno nel registro `SetBaseClasses`. Gli id dei 130 elementi del set sono congelati (D213) e un test ne fissa l'impronta. Le costanti dei test (`SetBaseIds`) seguono il set, e la tabella dei nomi sta in `tools/set-catalog/`. Il documento del set è alla versione 1.0.3, senza carte cambiate.
+
+Restano aperti due punti. L'ordine delle chiavi in `BozzeStoriche` (domanda 3 del B1; il passo 0 si confronta per contenuto). R3: `QuickDuelCliTest` nel contesto completo, voce del registro dei rossi noti.
+
+## Cosa giudica il proprietario
+
+1. Giudizio su SB-34 come consegnato. La regia registra la chiusura nel registro delle decisioni dopo il suo giudizio.

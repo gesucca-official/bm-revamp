@@ -26,7 +26,7 @@ class CardClassesLoadTest {
     private static final ObjectMapper JSON = new ObjectMapper();
     private static final String PKG = CardFactoryService.BASE_CARDS_PKG;
 
-    /** The approved table (docs/design/set-base/sb-34/tabella.json): id → class, for the live classes. */
+    /** The approved table (tools/set-catalog/nomi-classi.json): id → class, for the live classes. */
     static final Map<String, String> APPROVED = new LinkedHashMap<>();
 
     static {

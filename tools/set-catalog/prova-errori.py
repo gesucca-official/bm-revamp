@@ -23,7 +23,7 @@ COPY = [
     "client-debug/src/assets/docs", "server/src/main/java", "server/src/main/resources/cards.sqlite",
     "server/src/main/resources/sets", "server/src/test/resources/set-base/bozza.json",
     "server/src/test/resources/set-base/mazzi-prova.json", "scripts/check-rules.py", "tools/set-catalog/set_catalog.py",
-    "docs/design/set-base/sb-34/tabella.json", "server/src/test/java/com/gsc/bm/model/cards/base/SetBaseIds.java",
+    "tools/set-catalog/nomi-classi.json", "server/src/test/java/com/gsc/bm/model/cards/base/SetBaseIds.java",
 ]
 
 
