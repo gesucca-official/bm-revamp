@@ -416,3 +416,23 @@ Spazienzio is bald, enormous and bare-chested, with a short bristly beard and th
 
 Avoid: mirroring the character; changing his face or tattoos; text, letters, numbers, pseudo-lettering, signatures, watermarks, logos or brands, including on clothing and bottles; recognizable faces on opponents; other cast members; crowds; blood; steam; anything coming out of the nose; card frames, borders or interface; likeness of any real person; photographic or 3D-rendered style; dominant yellow-and-black, neon, gold ornament; Internet imagery or the look of any existing game.
 ~~~
+
+## Quinto giudizio: correzione di SVEGLIAMOCI - MA TU NO
+
+Prompt letterale da committare prima della generazione; il proprietario chiede: «spazienzio che tira un cazzotto a martello col pugno chiuso sopra la testa dell'avventore». Gli allegati in `originali/` sono fuori da git.
+
+### SVEGLIAMOCI - MA TU NO
+
+`bruiser.character.LittleSmack`. Allegati: `docs/design/set-base/identikit/riferimenti/spazienzio.png`: `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0`.
+
+~~~text
+Create one new square playing-card illustration, at least 1024 x 1024 pixels, opaque, full-bleed, without a frame or lettering. Attachment 1 is the approved reference for Spazienzio’s face, enormous body and fixed tattoo map; Attachment 2 is the dive bar reference for setting, palette and light. Do not copy the character reference pose or plain background.
+
+Spazienzio delivers a single powerful downward hammer fist with his closed fist onto the top of a faceless shadowy patron’s head. Show the instant of contact clearly: his raised arm descends from above, with a coherent shoulder, elbow and wrist, and the bottom of his clenched fist striking the crown of the patron’s head. The patron recoils downward, dazed, with comic impact marks and small stars. Spazienzio looks angry and solidly planted; his other arm stays out of the way. No blood.
+
+Spazienzio is bald, enormous and bare-chested, with a short bristly beard, the same fixed tattoo map as Attachment 1 and burgundy tracksuit trousers with side stripes. Any opponent is a generic shadowy figure without a recognizable face. Nothing comes out of Spazienzio’s nose; no steam.
+
+Use a hand-inked European comic style with irregular dark contours, restrained painted shading and light worn print texture. Show the dark dive bar of Attachment 2 behind the figures, with wooden shelves, unlabelled bottles and warm wall-lamp light, darker, simpler and less sharp than the subjects. Use walnut and tobacco browns, dusty bottle green, oxblood burgundy, muted petrol and worn ivory, with warm dirty light and deep shadows. Keep Spazienzio large and the action clearly readable at 60 pixels, with essential details away from the outer 5%.
+
+Avoid text, letters, numbers, pseudo-lettering, signatures, watermarks, logos, brands, blood, crowds, card frames, borders, recognizable opponent faces, real person likeness, mirroring Spazienzio, steam, anything coming out of the nose, photographic or 3D style, neon and dominant yellow-and-black.
+~~~
