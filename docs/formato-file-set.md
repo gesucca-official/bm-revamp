@@ -24,7 +24,10 @@ Il formato è `sb-6b/1`. Le bozze storiche `sb-6a/1` e le espansioni di prova re
 - `set`: `id`, `name`, `version` (la versione del file, non quella del documento del set). Un set che ne richiede altri ha `requires`
   e non dichiara le regole; i suoi id hanno il prefisso del set.
 - `rules`: `deckSize`, `maxCopies`, `basicFixedPerCharacter`, `boundChoices`, `lastResortRequired` e `searchShuffle` (sotto).
-- `characters`: `id`, `rarity`, `name`, `flavour`, `resources`, `items`, `immunities`, `basic`.
+- `characters`: `id`, `rarity`, `name`, `flavour`, `resources`, `items`, `immunities`, `basic` e, per i personaggi con uno starter,
+  `botStyle` (`aggressivo`, `prudente` o `risorse`; SB-30a, [D203](set-base-decisioni.md#decisioni-del-proprietario)): lo stile del
+  computer a livello Normale (regolamento, R03), che il generatore scrive nella scheda del personaggio. Il caricatore del server lo
+  accetta e non lo legge ancora.
 - `cards`: una carta **a dati** (`kind` ACTION, BOUND o ITEM, `priority`, `targets`, `cost`, passi `self` e `target`, `boundTo`,
   `basic`, `lastResort`, `exclusiveTo`, `inPlay`) oppure una **classe Java** (`java: true`, `cost`, `priority`, `params`): i numeri sono
   sempre nel file, la classe tiene solo la logica (D177). Ogni carta ha `rarity` e `gui` (nome, flavour, testo breve, ruolo, guadagni,

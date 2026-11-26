@@ -57,7 +57,8 @@ class Bozza16Test {
     static JsonNode withoutSb24(JsonNode draft) {
         ObjectNode copy = draft.deepCopy();
         ((ObjectNode) copy.path("set")).remove("version");
-        for (JsonNode c : copy.path("characters")) ((ObjectNode) c).remove(List.of("name", "flavour", "rarity"));
+        // SB-30a B1 (D203): botStyle is a descriptive field added after the freeze, left out like name, flavour and rarity.
+        for (JsonNode c : copy.path("characters")) ((ObjectNode) c).remove(List.of("name", "flavour", "rarity", "botStyle"));
         for (JsonNode c : copy.path("cards")) ((ObjectNode) c.path("gui")).remove(List.of("name", "flavour"));
         return copy;
     }

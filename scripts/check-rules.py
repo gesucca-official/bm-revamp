@@ -144,11 +144,17 @@ def check_catalog(rel, place, live):
         r07a = {row[1].strip('`'): row for row in table_rows(
             doc, '| Carta | Identificatore | Ruolo | Guadagni a sé | Danno nominale | Importo nominale |')}
         assert sorted(r07a) == sorted(sheets), where + ': the R07a table must list every entry'
+        chars = {p['id']: p for p in data.get('characters', [])}
         for e in entries:
             b, made = e['class'], cat.entries[e['class']]
             name, fields, paragraphs = sheets[b]
             assert name == e['name'] == made['name'], b + ': name differs between sheet, annex and set file'
             # The sheet: the full text of the annex as the set document shows it (placeholders as letters).
+            # SB-30a (D203 (4)): the sheet of a character with botStyle ends with one more line, outside the full text.
+            style = chars.get(b, {}).get('botStyle')
+            if style:
+                assert paragraphs and paragraphs[-1] == 'Stile del computer: ' + style + '.', b + ': computer style of the sheet differs from the set file'
+                paragraphs = paragraphs[:-1]
             assert paragraphs == [gen.render(p) for p in e['fullText']], b + ': sheet differs from the full text of the annex'
             assert e['fullText'] == made['fullText'], b + ': full text differs from the SB-25 texts (testi-completi.json)'
             assert e.get('flavour') == made['flavour'], b + ': flavour differs from the set file'
@@ -177,7 +183,6 @@ def check_catalog(rel, place, live):
             assert e['role'] in role_names, b + ': unknown role ' + e['role']
         for c in annex_doc['characters']:
             assert r07a[c['class']][2:] == [NONE] * 4, c['class'] + ': characters have no role or damage'
-        chars = {p['id']: p for p in data.get('characters', [])}
         s2 = table_rows(doc, '| Personaggio | H | A | V | T | L | Capacità oggetti | Immunità iniziale | Base |')
         assert len(s2) == len(chars), where + ': S2 must list every character'
         for row, p in zip(s2, chars.values()):

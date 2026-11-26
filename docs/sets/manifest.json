@@ -15,7 +15,7 @@
   "ingressi": [
     {
       "file": "server/src/test/resources/set-base/bozza.json",
-      "sha256": "a969dff08aaa80895f9345c6f1d5787699469c90adc806e3880c48e58e964f9b"
+      "sha256": "eea290a0ab98a9ec5e34d491035918790f4d9979c866d8d8dd9781dd33555cf5"
     },
     {
       "file": "docs/design/set-base/testi/testi-completi.json",
@@ -29,19 +29,19 @@
   "uscite": [
     {
       "file": "client-debug/src/assets/docs/sets/base.md",
-      "sha256": "a88872aa0ea28ed52f78e8ec1c9f7d638acd0b006638207b4b6cec9018218f34"
+      "sha256": "a8101128c926d99042bd4d6fc746b1cb74f98bec6f96f96da1cf549cd35957b6"
     },
     {
       "file": "server/src/main/resources/sets/base.json",
-      "sha256": "de7088d20b90095d4d489aa55a373ff2b1256a8bfdfe8badd459f71fd24b89ba"
+      "sha256": "8e4c6d06554181097039fee77c5f31e8ebe31d16b31319d2878712d6063cc2e6"
     },
     {
       "file": "docs/rules-catalog.json",
-      "sha256": "b03a987b8c2d8d4a240937dc499dcc369b6886aee50a7be7fcbb3f0ed64b7c39"
+      "sha256": "c88bd998d06c9edf717d3d20a3177c40a38adfdc61708c65d2895ddb8b0b4238"
     },
     {
       "file": "docs/sets/base.md",
-      "sha256": "a88872aa0ea28ed52f78e8ec1c9f7d638acd0b006638207b4b6cec9018218f34"
+      "sha256": "a8101128c926d99042bd4d6fc746b1cb74f98bec6f96f96da1cf549cd35957b6"
     },
     {
       "file": "server/src/test/resources/set-base/mazzi-prova.json",

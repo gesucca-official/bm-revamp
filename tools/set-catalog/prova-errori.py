@@ -48,6 +48,10 @@ def changed_short_text(copy):
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
+def changed_bot_style(copy):
+    edit_doc(copy, lambda t: t.replace("Stile del computer: prudente.", "Stile del computer: aggressivo.", 1))
+
+
 def changed_set_file(copy):
     path = copy / "server/src/test/resources/set-base/bozza.json"
     text = path.read_text(encoding="utf-8")
@@ -59,6 +63,7 @@ CASES = [
     ("numero cambiato nella scheda (costo)", changed_cost, "cost of the sheet differs from the set file"),
     ("testo completo cambiato nella scheda", changed_full_text, "sheet differs from the full text of the annex"),
     ("testo breve cambiato nell'allegato", changed_short_text, "short text differs from the SB-25 generator"),
+    ("stile del computer cambiato nella scheda", changed_bot_style, "computer style of the sheet differs from the set file"),
     ("numero cambiato nel file del set dopo la generazione", changed_set_file, "changed after the generation"),
 ]
 

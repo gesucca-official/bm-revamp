@@ -39,10 +39,10 @@ DEFAULT_SET = "server/src/test/resources/set-base/bozza.json"
 DEFAULT_TEXTS = "docs/design/set-base/testi/testi-completi.json"
 DEFAULT_SLOT = "docs/design/set-base/testi/slot.json"
 DEFAULT_OUT = None  # SB-28: the SB-26 candidate folder became the live catalog (--vivo)
-DEFAULT_VERSIONS = {"base": "1.0.1"}
+DEFAULT_VERSIONS = {"base": "1.0.2"}
 # SB-28: the live catalog. The set document says the date and the regulation it requires; every output has its live place.
-LIVE_DATE = "24 novembre 2026"  # SB-29: date of the live version 1.0.1; the 1.0 revision keeps its own date
-LIVE_RULES = "2.1"  # SB-29 (D190): the live set requires regulation 2.1
+LIVE_DATE = "26 novembre 2026"  # SB-30a: date of the live version 1.0.2; the earlier revisions keep their own dates
+LIVE_RULES = "2.2"  # SB-30a (D203): the live set requires regulation 2.2
 LIVE_SET_FILE = "server/src/main/resources/sets/base.json"
 LIVE_TEST_DECKS = "server/src/test/resources/set-base/mazzi-prova.json"
 LIVE_MANIFEST = "docs/sets/manifest.json"
@@ -50,6 +50,9 @@ LIVE_PATHS = {"sets/base.md": "docs/sets/base.md", "client-debug/sets/base.md": 
               "sets/base.json": "docs/rules-catalog.json", "cards.sqlite": "server/src/main/resources/cards.sqlite",
               "set-file": LIVE_SET_FILE, "test-decks": LIVE_TEST_DECKS, "manifest.json": LIVE_MANIFEST}
 STARTER_CATEGORY = {"base": "base", "avanzato": "avanzato"}
+# SB-30a (D203 (4)): the style of the computer at level Normale (regulation R03), `botStyle` of a character in the set file; the
+# sheet writes it in its own line, outside the full text of the card.
+BOT_STYLES = ("aggressivo", "prudente", "risorse")
 GENERATOR = "tools/set-catalog/set_catalog.py"
 MANIFEST = "manifest.json"
 SQLITE = "cards.sqlite"
@@ -197,7 +200,9 @@ class Catalog:
         generated = ts.completo_personaggio(p, self.ctx)
         if full is not None and full.get(p["id"], {}).get("breve") != ts.breve_personaggio(p):
             raise ValueError(f"{p['id']}: il testo breve del file non è quello del generatore di SB-25")
-        return {"class": p["id"], "name": p["name"], "type": "Personaggio", "subtype": None, "rarity": p.get("rarity"),
+        if "botStyle" in p and p["botStyle"] not in BOT_STYLES:
+            raise ValueError(f"{p['id']}: botStyle sconosciuto {p['botStyle']!r}, ammessi " + ", ".join(BOT_STYLES))
+        return {"class": p["id"], "name": p["name"], "botStyle": p.get("botStyle"), "type": "Personaggio", "subtype": None, "rarity": p.get("rarity"),
                 "fullText": self.full_text(full, p["id"], generated), "flavour": p.get("flavour"),
                 "resources": p["resources"], "items": p["items"], "immunities": p.get("immunities", []), "basic": p["basic"],
                 "description": ts.breve_personaggio(p)}
@@ -341,6 +346,8 @@ def sheet(cat, entry):
         if re.match(r"\s*(\d+[.)]\s|[-*+>#|]|`)", paragraph):
             raise ValueError(f"{entry['class']}: un paragrafo del testo completo sarebbe letto come markdown")
         lines += [render(paragraph), ""]
+    if entry.get("botStyle"):
+        lines += [f"Stile del computer: {entry['botStyle']}.", ""]
     return lines
 
 
@@ -417,6 +424,11 @@ def set_document(cat, s):
         out.append("")
     starters = [d for d in data.get("decks", []) if d["id"].startswith("starter-")]
     others = [d for d in data.get("decks", []) if not d["id"].startswith("starter-")]
+    if cat.live:
+        # SB-30a (D203 (4)): the characters with a starter, and only they, have a style (the computer plays starters only).
+        wrong = sorted({d["character"] for d in starters} ^ {e["class"] for e in chars if e.get("botStyle")})
+        if wrong:
+            raise ValueError("botStyle va a tutti e soli i personaggi con uno starter: " + ", ".join(wrong))
     if starters:
         out.append(f"Ogni starter è conforme a R02: {data.get('rules', {}).get('deckSize', 20)} carte regolari, oltre alla base, "
                    "alle due legate scelte e all'ultima risorsa. Le composizioni sono qui e nell'allegato.")
@@ -507,8 +519,13 @@ def set_document(cat, s):
         note = (" Il generatore dei testi di SB-25 non conosce " + ", ".join(f"`{b}`" for b in from_file)
                 + ": per queste carte testo breve, guadagni, danno nominale e scheda sono il testo del file.")
     if cat.live:
-        out.append(f"- **1.0.1 — {LIVE_DATE}, SB-29 (D190):** cambia solo la frase di S1 sulla quick: si sceglie la categoria, base o avanzato, e lo "
-                   f"starter esce a caso al suo interno (R01, regolamento {LIVE_RULES}). Nessuna carta cambia. **Richiede il regolamento {LIVE_RULES}.**")
+        out.append(f"- **1.0.2 — {LIVE_DATE}, SB-30a (D203):** la scheda di ogni personaggio con uno starter dice lo stile del computer a "
+                   f"livello Normale (regolamento {LIVE_RULES}, R03): aggressivo per Spazienzio e Piera, prudente per Mara, risorse per "
+                   "Celestina e Beppe; Sergio e Duccio, senza starter, non ne hanno. Nessuna carta cambia. "
+                   f"**Richiede il regolamento {LIVE_RULES}.**")
+        out.append("")
+        out.append("- **1.0.1 — 24 novembre 2026, SB-29 (D190):** cambia solo la frase di S1 sulla quick: si sceglie la categoria, base o avanzato, e lo "
+                   "starter esce a caso al suo interno (R01, regolamento 2.1). Nessuna carta cambia. **Richiedeva il regolamento 2.1.**")
         out.append("")
         out.append(f"- **1.0 — 23 novembre 2026, SB-28:** il Set Base entra nella partita viva e sostituisce la 0.1, archiviata in "
                    f"`docs/history/set-base-0.1.md`. **Richiedeva il regolamento 2.0**, che porta nel sistema le regole "

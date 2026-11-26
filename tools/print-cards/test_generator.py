@@ -62,8 +62,9 @@ class BozzaModeTest(unittest.TestCase):
         self.assertEqual(faces, 124)  # bozza 1.7: 7 characters (rarity P, SB-24) and 117 cards
         self.assertEqual((m['mode'], m['catalog_count'], m['printed_count']), ('bozza', faces, faces))
         self.assertEqual(len(m['placements']), faces)
-        # SB-28: the playground rules became regulation 2.0 (D183); the print says the regulation, read from docs/game-rules.md.
-        self.assertEqual((m['rules_version'], m['set'], m['file_version']), ('2.0', 'Set Base 1.7', '1.7'))
+        # SB-28: the playground rules became regulation 2.0 (D183); the print says the regulation, read from docs/game-rules.md
+        # (2.2 since SB-30a, D203).
+        self.assertEqual((m['rules_version'], m['set'], m['file_version']), ('2.2', 'Set Base 1.7', '1.7'))
         self.assertEqual(m['set_file']['sha256'], hashlib.sha256(BOZZA.read_bytes()).hexdigest())
         text = pdf_text(output)
         self.assertNotIn('[[', text)
@@ -223,14 +224,33 @@ class BozzaModeTest(unittest.TestCase):
                 for line in bozza_mode.wrap(face['text'], 'Body', 9, 54*mm, face['id']):
                     self.assertLessEqual(bozza_mode._width(line, 'Body', 9), 54*mm + .01, face['id'])
 
+    def test_the_footer_fits_with_the_widest_fingerprint(self):
+        """SB-30a B1: the width of the footer depends on the digits of the hash. With the twelve widest ones and the longest card
+        number it fits on every front, in a draft and in the live print, with the stamp the print writes."""
+        from io import BytesIO
+        from reportlab.lib.pagesizes import A4
+        from reportlab.lib.units import mm
+        from reportlab.pdfbase import pdfmetrics
+        from reportlab.pdfgen import canvas
+        from generate import fonts
+        fonts(None)
+        bozza_mode.italic_font()
+        widest = max('0123456789abcdef', key=lambda digit: pdfmetrics.stringWidth(digit, 'Body', 6))
+        scratch = canvas.Canvas(BytesIO(), pagesize=A4)
+        for path, live in ((BOZZA, False), (LIVE_SET, True)):
+            bz = bozza_mode.load_bozza(path, live=live)
+            stamp, total = bozza_mode.footer_stamp(bz, widest * 12), len(bz['faces'])
+            for face in bz['faces']:
+                bozza_mode.draw_face(scratch, face, 0, 0, 62*mm, 87*mm, total, total, stamp)
+
     def test_live_mode_prints_the_live_set_file(self):
-        """SB-28: without --bozza the print is the live Set Base 1.0, from the set file the server reads, with regulation 2.0."""
+        """SB-28: without --bozza the print is the live Set Base, from the set file the server reads (SB-30a: 1.0.2, regulation 2.2)."""
         live = json.loads(LIVE_SET.read_text(encoding='utf-8'))
         output = self.d/'live.pdf'
         result = run_generate('--output', str(output))
         self.assertEqual(result.returncode, 0, result.stderr)
         m = self.manifest(output)
-        self.assertEqual((m['mode'], m['set'], m['file_version'], m['rules_version']), ('set', 'Set Base 1.0', '1.7', '2.0'))
+        self.assertEqual((m['mode'], m['set'], m['file_version'], m['rules_version']), ('set', 'Set Base 1.0.2', '1.7', '2.2'))
         self.assertEqual(m['set_file'], dict(path='server/src/main/resources/sets/base.json', sha256=hashlib.sha256(LIVE_SET.read_bytes()).hexdigest(),
                                              sha256_short=hashlib.sha256(LIVE_SET.read_bytes()).hexdigest()[:12]))
         self.assertEqual((m['catalog_count'], m['printed_count']), (124, 124))
@@ -241,9 +261,9 @@ class BozzaModeTest(unittest.TestCase):
         self.assertNotIn('BOZZA', text)
         self.assertNotIn('playground', text)
         self.assertIsNone(re.search(r'RP-[0-9]', text))
-        self.assertGreaterEqual(text.count('SET BASE 1.0'), 124)
+        self.assertGreaterEqual(text.count('SET BASE 1.0.2'), 124)
         self.assertIn('SETBASE/GUIDAALTAVOLO', flat)
-        self.assertIn('regolamento2.0(docs/game-rules.md)', flat)
+        self.assertIn('regolamento2.2(docs/game-rules.md)', flat)
         for card in live['cards']:
             self.assertIn(re.sub(r'\s+', '', card['gui']['name']), flat, card['binding'])
         verify = subprocess.run([sys.executable, str(GENERATE.with_name('verify.py')), str(output)], capture_output=True, text=True, encoding='utf-8',

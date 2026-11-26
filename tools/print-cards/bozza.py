@@ -313,6 +313,12 @@ def crop_marks(pdf, x, y, width, height):
             pdf.line(cx, cy + dy * .5 * mm, cx, cy + dy * 1.5 * mm)
 
 
+def footer_stamp(bz, sha12):
+    """The stamp at the foot of every front: set and version, regulation, short hash of the file. A draft says it is one in the band of
+    the front («BOZZA PROVVISORIA»), not here (SB-30a B1): with that prefix the footer fitted or not according to the digits of the hash."""
+    return f'{bz["set_label"]} · reg. {bz["rules"]} · {sha12}'
+
+
 def draw_face(pdf, face, x, y, width, height, number, total, stamp, mark='BOZZA PROVVISORIA'):
     """One front; `mark` is the word in the band (the provisional mark of a draft, the set of the live print). Raises Overflow naming the card when a text does not fit (flavour included, D166 (2)).
 
@@ -609,7 +615,7 @@ def run(args, parser):
     if not instances:
         parser.error('Nessuna copia da stampare')
     sha12 = bz['raw_sha256'][:12]
-    stamp = ('' if bz['live'] else 'BOZZA · ') + f'{bz["set_label"]} · reg. {bz["rules"]} · {sha12}'
+    stamp = footer_stamp(bz, sha12)
     mark = bz['set_label'].upper() if bz['live'] else 'BOZZA PROVVISORIA'
     total = len(faces)
     # Every card is laid out once on a scratch page before anything is published: all the overflows are reported together.

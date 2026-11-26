@@ -669,7 +669,8 @@ final class Draft implements PlayerSource {
         ObjectNode node = object(raw, "personaggio");
         String id = text(node, "id", "personaggio");
         String where = label("personaggio", id, textOrNull(node, "set"));
-        fields(node, where, Set.of("id", "name", "resources", "items", "immunities"), Set.of("basic", "rarity", "set", "flavour"));
+        // SB-30a B1 (D203 (4)): botStyle is accepted and not read; the live bot reads it from B2 on.
+        fields(node, where, Set.of("id", "name", "resources", "items", "immunities"), Set.of("basic", "rarity", "set", "flavour", "botStyle"));
         String set = setOf(node, where, id), rarity = rarity(node, where);
         String name = text(node, "name", where);
         String flavour = optional(node, "flavour", where);

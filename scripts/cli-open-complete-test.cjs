@@ -113,7 +113,7 @@ async function main() {
       assert.strictEqual(initial.versions.rulesVersion,process.env.BM_RULES_VERSION);
       // Regulation 1.13 (SB-2): the set documents loaded by the server, with version and hash.
       assert.deepStrictEqual(initial.versions.sets,JSON.parse(process.env.BM_SETS));
-      assert.strictEqual(initial.versions.sets.base.version,'1.0.1'); // SB-29 (D190): Set Base 1.0.1 (1.0 in SB-28, D182)
+      assert.strictEqual(initial.versions.sets.base.version,'1.0.2'); // SB-30a (D203): Set Base 1.0.2 (1.0.1 in SB-29, D190)
       assert.strictEqual(initial.configuration.botPolicy,'random');
       const human=initial.state.players.find(p=>p.playerId===user);
       assert.strictEqual(initial.state.mode,'open1vCom');

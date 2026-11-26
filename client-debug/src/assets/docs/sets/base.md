@@ -1,6 +1,6 @@
 # Botte Micidiali — Set Base
 
-Versione **1.0.1 — 24 novembre 2026**. Documento del set `base`, con le schede normative delle sue carte (regolamento, R00 e R07). Richiede il regolamento 2.1.
+Versione **1.0.2 — 26 novembre 2026**. Documento del set `base`, con le schede normative delle sue carte (regolamento, R00 e R07). Richiede il regolamento 2.2.
 
 Questo documento è generato da `tools/set-catalog/set_catalog.py --vivo` dal file del set `server/src/main/resources/sets/base.json`, che lo stesso comando ricava dalla bozza `server/src/test/resources/set-base/bozza.json` (versione 1.7 del file) togliendo i mazzi di prova: non si modifica a mano, si cambia la bozza e si rigenera (decisioni D175 e D183 del piano Set Base; il formato del file è descritto in `docs/formato-file-set.md`). Il regolamento governa il sistema, le schede governano le carte: una scheda deroga a una regola solo se lo dice esplicitamente. La scheda normativa di ogni carta è il suo **testo completo**; il testo breve stampato sulla carta è nell'allegato ed è descrittivo: in caso di dubbio prevale la scheda. Ruoli, guadagni e danno nominale sono descrittivi (R07a).
 
@@ -133,11 +133,15 @@ Ogni starter ha un nome e una categoria (D182): **base** Spazienzio e Mara; **av
 
 Personaggio (regolamento, R01a). Parti con 70 H, 20 A e 25 V; T e L partono da 0 (regolamento, R01). Puoi tenere 1 oggetto vicino a te: quando ne arriva uno in più, anche rubato, scambiato, copiato o creato, sparisce il più vecchio (regolamento, R02). La tua azione base è «ADOPERIAMOTI».
 
+Stile del computer: aggressivo.
+
 #### Mara Contromano — Personaggio · PROTAGONIST
 
 `base.character.Mara` · slot PG-MAR
 
 Personaggio (regolamento, R01a). Parti con 65 H e 45 A; V, T e L partono da 0 (regolamento, R01). Puoi tenere 2 oggetti vicino a te: quando ne arriva uno in più, anche rubato, scambiato, copiato o creato, sparisce il più vecchio (regolamento, R02). La tua azione base è «Requisire al Volo».
+
+Stile del computer: prudente.
 
 #### Celestina Bucatina — Personaggio · PROTAGONIST
 
@@ -145,17 +149,23 @@ Personaggio (regolamento, R01a). Parti con 65 H e 45 A; V, T e L partono da 0 (r
 
 Personaggio (regolamento, R01a). Parti con 65 H, 35 A e 20 T; V e L partono da 0 (regolamento, R01). Puoi tenere 2 oggetti vicino a te: quando ne arriva uno in più, anche rubato, scambiato, copiato o creato, sparisce il più vecchio (regolamento, R02). Sei immune a T: la tua T non fa effetto a fine turno; costi, guadagni, perdite e danni POISON restano, e un'altra carta può toglierti l'immunità (regolamento, R07b). La tua azione base è «Desiderio Incontrollabile».
 
+Stile del computer: risorse.
+
 #### Piera Pinot — Personaggio · PROTAGONIST
 
 `base.character.Pino` · slot PG-PIN
 
 Personaggio (regolamento, R01a). Parti con 80 H, 15 A e 15 L; V e T partono da 0 (regolamento, R01). Puoi tenere 2 oggetti vicino a te: quando ne arriva uno in più, anche rubato, scambiato, copiato o creato, sparisce il più vecchio (regolamento, R02). La tua azione base è «Fino all'Ultima Goccia».
 
+Stile del computer: aggressivo.
+
 #### Beppe Bulletta — Personaggio · PROTAGONIST
 
 `base.character.Gigi` · slot PG-GIG
 
 Personaggio (regolamento, R01a). Parti con 75 H, 25 A e 25 V; T e L partono da 0 (regolamento, R01). Puoi tenere 3 oggetti vicino a te: quando ne arriva uno in più, anche rubato, scambiato, copiato o creato, sparisce il più vecchio (regolamento, R02). La tua azione base è «Questo Torna Utile».
+
+Stile del computer: risorse.
 
 #### Sergio Sommerso — Personaggio · PROTAGONIST
 
@@ -1617,6 +1627,8 @@ Campi descrittivi definiti in R07a, generati dagli stessi dati delle schede; in 
 
 ## Revisioni
 
-- **1.0.1 — 24 novembre 2026, SB-29 (D190):** cambia solo la frase di S1 sulla quick: si sceglie la categoria, base o avanzato, e lo starter esce a caso al suo interno (R01, regolamento 2.1). Nessuna carta cambia. **Richiede il regolamento 2.1.**
+- **1.0.2 — 26 novembre 2026, SB-30a (D203):** la scheda di ogni personaggio con uno starter dice lo stile del computer a livello Normale (regolamento 2.2, R03): aggressivo per Spazienzio e Piera, prudente per Mara, risorse per Celestina e Beppe; Sergio e Duccio, senza starter, non ne hanno. Nessuna carta cambia. **Richiede il regolamento 2.2.**
 
-- **1.0 — 23 novembre 2026, SB-28:** il Set Base entra nella partita viva e sostituisce la 0.1, archiviata in `docs/history/set-base-0.1.md`. **Richiedeva il regolamento 2.0**, che porta nel sistema le regole del playground con cui il set è stato bilanciato (D50, D78, D183). Generata dal file del set `server/src/main/resources/sets/base.json` (SHA-256 `de7088d20b90095d4d489aa55a373ff2b1256a8bfdfe8badd459f71fd24b89ba`), ricavato dalla bozza `server/src/test/resources/set-base/bozza.json` (SHA-256 `a969dff08aaa80895f9345c6f1d5787699469c90adc806e3880c48e58e964f9b`), con i testi completi di SB-25 `docs/design/set-base/testi/testi-completi.json` (SHA-256 `ef7cd3ea9e0c3bf0f52dd7c6c6296cdc05b4ac92afc1e5592ca7a9c5158b6ae7`) e gli slot `docs/design/set-base/testi/slot.json` (SHA-256 `48bc14dd58706e7d8ca9bb3583e5d4eaa714bff591233ffb549635a8a35176f7`). Schede = testi completi approvati in D174, coi rimandi al regolamento (D183); testo breve, guadagni e danno nominale dal generatore di SB-25; starter con nome e categoria (D182). Al passaggio i mazzi personalizzati salvati che contengono carte dello 0.1 uscite dal set si cancellano (D182 (3)).
+- **1.0.1 — 24 novembre 2026, SB-29 (D190):** cambia solo la frase di S1 sulla quick: si sceglie la categoria, base o avanzato, e lo starter esce a caso al suo interno (R01, regolamento 2.1). Nessuna carta cambia. **Richiedeva il regolamento 2.1.**
+
+- **1.0 — 23 novembre 2026, SB-28:** il Set Base entra nella partita viva e sostituisce la 0.1, archiviata in `docs/history/set-base-0.1.md`. **Richiedeva il regolamento 2.0**, che porta nel sistema le regole del playground con cui il set è stato bilanciato (D50, D78, D183). Generata dal file del set `server/src/main/resources/sets/base.json` (SHA-256 `8e4c6d06554181097039fee77c5f31e8ebe31d16b31319d2878712d6063cc2e6`), ricavato dalla bozza `server/src/test/resources/set-base/bozza.json` (SHA-256 `eea290a0ab98a9ec5e34d491035918790f4d9979c866d8d8dd9781dd33555cf5`), con i testi completi di SB-25 `docs/design/set-base/testi/testi-completi.json` (SHA-256 `ef7cd3ea9e0c3bf0f52dd7c6c6296cdc05b4ac92afc1e5592ca7a9c5158b6ae7`) e gli slot `docs/design/set-base/testi/slot.json` (SHA-256 `48bc14dd58706e7d8ca9bb3583e5d4eaa714bff591233ffb549635a8a35176f7`). Schede = testi completi approvati in D174, coi rimandi al regolamento (D183); testo breve, guadagni e danno nominale dal generatore di SB-25; starter con nome e categoria (D182). Al passaggio i mazzi personalizzati salvati che contengono carte dello 0.1 uscite dal set si cancellano (D182 (3)).

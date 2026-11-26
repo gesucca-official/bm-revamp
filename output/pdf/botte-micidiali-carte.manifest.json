@@ -1,12 +1,12 @@
 {
   "mode": "set",
-  "set": "Set Base 1.0",
+  "set": "Set Base 1.0.2",
   "file_version": "1.7",
-  "rules_version": "2.0",
+  "rules_version": "2.2",
   "set_file": {
     "path": "server/src/main/resources/sets/base.json",
-    "sha256": "de7088d20b90095d4d489aa55a373ff2b1256a8bfdfe8badd459f71fd24b89ba",
-    "sha256_short": "de7088d20b90"
+    "sha256": "8e4c6d06554181097039fee77c5f31e8ebe31d16b31319d2878712d6063cc2e6",
+    "sha256_short": "8e4c6d065541"
   },
   "catalog_count": 124,
   "printed_count": 124,
