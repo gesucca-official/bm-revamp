@@ -1,6 +1,6 @@
 # SB-34 B1 — Classi delle carte, caricatore, documento del set 1.0.3
 
-**Esito: consegnata il 26 novembre 2026, in attesa del proprietario.** Le 20 classi vive delle carte e le 2 superclassi portano i
+**Esito: accettata il 26 novembre 2026 ([D215](../../set-base-decisioni.md#decisioni-del-proprietario)): domande 1, 2 e 4 come raccomandato, 3 resta aperta.** Le 20 classi vive delle carte e le 2 superclassi portano i
 nomi approvati ([D213](../../set-base-decisioni.md#decisioni-del-proprietario), tabella di
 [sb-34/tabella.json](../../design/set-base/sb-34/tabella.json)) sotto `com.gsc.bm.model.cards.base.<personaggio>` / `common` /
 `items` / `tokens` e dichiarano il loro id invariato con `@CardId`; il caricatore cerca prima il registro esplicito `SetBaseClasses`,
