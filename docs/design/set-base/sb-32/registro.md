@@ -2764,3 +2764,19 @@ Il primo allegato segnalato dalla chat non era leggibile per il prefisso Windows
 ~~~text
 Image 1 is the black-and-white removal mask supplied by the owner: white marks the only area to edit and black marks protected artwork. Image 2 is the illustration to edit. Remove the exposed hand and forearm at the far left of Piera, entirely within the white mask area. Remove every finger and the skin-coloured forearm of that rear-reaching limb. Fill the cleared area naturally with the existing dark bar background and, where it meets her body, a continuous edge of her black sleeve and sweatshirt. The arm should be out of sight behind her body, with no visible hand, detached stump or replacement limb there. Preserve everything outside the white region as closely as possible: the striking arm and its hand, ordinary cylindrical glass, impact on the opponent's head, both figures' faces and bodies, dry chin, pencil, furniture, floor, lighting, colours, ink contours, print texture and square framing. Do not alter the blow, invent another arm, add objects, lettering, borders or transparency. Return one opaque square illustration.
 ~~~
+
+### Secondo giro di correzioni — Un Altro... Grappino..., rimozione con maschera — 26 novembre 2026
+
+Ulteriore richiesta letterale del proprietario, ricevuta mentre era in corso il ritocco di Alla Goccia:
+
+> Remove the area marked in the second image from the first image
+
+L’immagine indicata è `exec-5f90b55f-618e-41cc-b2d1-165fd1f8ef6d.png`, disponibile nella copia locale verificata `originali/base.pino.PrimaIlBrindisi-2.png`, SHA-256 `ec9d65629e1903e90bf75d2f232b8b1031d1d6ba91f961095092dad77484e9d8`. La maschera allegata in chat indica la mano alzata e l’avambraccio del cliente in primo piano a destra, accanto alla testa di Grappino; non indica la mano più alta dell’altro cliente o quella inferiore presso il bordo destro. Maschera senza percorso locale o SHA-256 esposti.
+
+**Diagnosi:** versione 2 già verificata; errore del collegamento `/C:/` aggirato caricando l’originale locale corretto. **Modifica prevista:** un solo ritocco locale, versione 3, con esclusivamente maschera e immagine da correggere (immagine 1 maschera, immagine 2 originale caricato localmente). Nessun rilancio; tutte le versioni conservate. Questa richiesta si aggiunge ad Alla Goccia nello stesso giro; le altre otto carte rimangono in versione 2, in attesa. Nessuna decisione o chiusura del lotto.
+
+#### Prompt preventivo — Un Altro... Grappino..., versione 3
+
+~~~text
+Image 1 is the owner's black-and-white removal mask: white identifies the edit region and black protects the rest. Image 2 is the illustration to edit. In the white region only, remove the raised hand and exposed forearm of the foreground patron at the right side, just above and to the right of the barking dog's head. Remove all the fingers, palm and skin-coloured forearm in that marked region, reconstructing the ordinary bar background and the natural continuous edge of that patron's dark coat where needed. Leave this arm out of sight, not replaced by a stump, new hand or extra limb. Do not remove or change the other patron's higher raised hand, the foreground patron's lower hand near the bottom-right edge, Grappino's muzzle, ears, body, four natural legs and grounded paws, Piera's toast and both hands, her pencil, stool, glass, liquid splash or any unmarked detail. Preserve the existing warm lighting, colours, hand-inked comic style, print texture and square composition. No text, border or transparency. Return one opaque square illustration.
+~~~
