@@ -404,3 +404,15 @@ Allegato: `originali/base.mara.bound.ColpoDiStriscio-2.png`, SHA-256 `b67918357a
 ~~~text
 Recompose Attachment 1 so Mara on her bicycle unmistakably cuts directly across the pedestrian’s intended path outside the bar. Show the bicycle moving left to right in broad side view across the foreground. Behind its middle, the pedestrian has been walking from the background toward the foreground, perpendicular to the bicycle; their forward foot brakes immediately behind the bicycle frame and both hands rise in startled reaction. The bicycle physically blocks the exact path ahead of their feet, close enough to force an abrupt stop. No parallel or diverging trajectories. No collision or injury. Keep Mara’s face, clothes, cubic backpack, headphones and foil helmet held in one hand. An intact plausible bicycle, no extra limbs. The pedestrian is bare-headed in an ordinary jacket, head turned aside in shadow without recognizable facial features. Keep the same exterior bar and restrained comic style. Square opaque hand-inked European comic artwork, muted colours, one clear action readable at 60 pixels. No lettering, logos or watermarks. Keep the background darker and simpler than the subject.
 ~~~
+
+## Terzo giudizio — presa del manubrio
+
+Requisire 3 e Sgommata 3 approvate («ok»). Per Tagliare 3: «la mano che regge il manubrio della bici lo regge dalla parte sbagliata, dovrebbe reggere l’altra manopola, quella più lontana da noi osservatori. il resto è perfetto». Correzione locale, versione 4.
+
+`base.mara.bound.ColpoDiStriscio-4`
+
+Allegato: `originali/base.mara.bound.ColpoDiStriscio-3.png`, SHA-256 `594d73132c74b3f67b507b97d4e5e7822cb9f2a8f5bdcebd8c7e09eb5cc17a23`.
+
+~~~text
+Edit Attachment 1 with one precise local correction only. Mara’s steering hand currently grips the handlebar grip nearest the viewer. Move that same hand to the OTHER handlebar grip, the far-side grip farther from the viewer, beyond the handlebar stem. Adjust only the connected wrist and forearm as needed for natural anatomy and correct depth; the near-side grip must be visibly empty. Keep exactly two arms. Preserve absolutely everything else: her helmet-holding hand, face, body pose, bicycle frame and wheels, pedestrian, crossing trajectories, exterior bar, lighting, muted colours, ink lines, composition and square opaque format. Do not mirror the image or alter the action. No text, arrows, logos, extra limbs or new objects.
+~~~

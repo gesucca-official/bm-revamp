@@ -1479,3 +1479,7 @@ Prompt preventivi: `0219059`. Tre chiamate, una per prompt; nessun rifiuto, rila
 | Tentativi scartati | Nessuno. |
 | Controllo a 60 px | Bici di profilo davanti alle gambe dell’avventore; arresto e traiettorie perpendicolari più chiari. |
 | Giudizio del proprietario | In attesa. |
+
+### Terzo giudizio del proprietario — lotto 2
+
+26 novembre 2026: Requisire al Volo 3 e Sgommata 3 approvate («ok»). Tagliare la Strada 3: tutto perfetto salvo la presa; la mano deve reggere la manopola più lontana dall’osservatore. Nuovo prompt preventivo per la sola correzione locale, versione 4. Nove carte approvate, una in attesa.
