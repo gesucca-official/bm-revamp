@@ -195,7 +195,7 @@ base, quindi «stesso codice, stessi numeri» vale per costruzione. Nessuna veri
 
 # SB-34 B3 — Impronta degli id congelati, tabella dei nomi
 
-**Esito: consegnata il 26 novembre 2026; SB-34 è consegnato, in attesa del giudizio del proprietario.** Un test fissa i 130 id del set vivo con un'impronta SHA-256 della lista ordinata: un id cambiato o aggiunto lo fa fallire (provato con due mutazioni, sotto). La tabella dei nomi passa da `design/set-base/sb-34/` a `tools/set-catalog/nomi-classi.json`, perché è un ingresso del generatore ([D216](../../set-base-decisioni.md#decisioni-del-proprietario) (2)). Nessun id, atteso, carta, versione del set (1.0.3) o file della partita viva cambia.
+**Esito: consegnata il 26 novembre 2026; SB-34 chiuso lo stesso giorno ([D217](../../set-base-decisioni.md#decisioni-del-proprietario)).** Un test fissa i 130 id del set vivo con un'impronta SHA-256 della lista ordinata: un id cambiato o aggiunto lo fa fallire (provato con due mutazioni, sotto). La tabella dei nomi passa da `design/set-base/sb-34/` a `tools/set-catalog/nomi-classi.json`, perché è un ingresso del generatore ([D216](../../set-base-decisioni.md#decisioni-del-proprietario) (2)). Nessun id, atteso, carta, versione del set (1.0.3) o file della partita viva cambia.
 
 ## Cosa cambia
 
