@@ -21,7 +21,7 @@ verifiche si scelgono dalla [tabella delle aree](aree-protette.md).
 >   ripieghi dell'[elenco](design/carriere/illustrazioni.md#campagna-principale) per le espressioni che non si generano; secondo giro delle
 >   bocche adottato. Restano aperti la prova del prototipo su un telefono vero e l'idea, non decisa, di rinominare il nodo F1
 >   ([prossimi passi](design/carriere/principale.md#prossimi-passi)).
-> - **Decisioni da leggere:** DC1–DC6.
+> - **Decisioni da leggere:** DC1–DC7.
 
 ## Obiettivo e chiusura
 
@@ -132,3 +132,4 @@ Mazzo. L'attuazione parte dopo la chiusura di SB-34 ([DC6](#decisioni)).
 | DC4 | 20 novembre 2026 | Adesso diventa normativo solo il formato; storie e dialoghi restano nel serbatoio, senza valore normativo, fino all'avvio di CA-1 e CA-2 | Stesso |
 | DC5 | 26 novembre 2026 | Proposta di CA-0e approvata con le raccomandazioni della regia: (1) attuazione dopo la **chiusura** di SB-30a, come regolamento 2.3; (2) S1, lettura (a): Protezione degli oggetti di Piera e Vista in meno per il giocatore; (3) Recupero ogni 3 turni, l'ultima carta regolare scartata, deterministico e mostrato; (4) catalogo condiviso `docs/carriere/modificatori.md`; (5) **niente primitiva Mazzo** finché una storia vera non la usa, come per le estensioni del formato (CA-0b): le primitive sono cinque | Proprietario: «Come raccomandi tu», sulla [revisione della regia](reports/ca/ca-0e.md#decisione-del-proprietario) |
 | DC6 | 26 novembre 2026 | L'attuazione di CA-0e aspetta anche la chiusura di SB-34: SB-34 scrive `docs/sets/base.md` e `scripts/check-rules.py`, e il set deve richiedere il regolamento pubblicato, quindi il passaggio alla 2.3 tocca lo stesso documento | Proprietario: «aspettiamo di chiudere anche sb 34 a questo punto» |
+| DC7 | 26 novembre 2026 | Eccezione a DC1 per l'attuazione di CA-0e, solo per il passaggio di versione: il regolamento 2.3 porta il Set Base alla 1.0.4 (il set richiede il regolamento pubblicato), quindi possono cambiare `server/src/main/resources/sets/base.json` (generato) e la riga della versione in `MatchArchiveTest.java`; nessun codice di `server/src/main` | Proprietario: «Sì, approvo» |
