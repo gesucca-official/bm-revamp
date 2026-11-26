@@ -2830,3 +2830,26 @@ Prompt preventivi nei commit `9b9aa3a` (Alla Goccia) e `6373038` (Un Altro... Gr
 | Giudizio del proprietario | In attesa. |
 
 **Verifiche dei ritocchi:** git diff --check verde; python scripts/check-rules.py verde sul checkout corrente; controllo dei link del registro verde. Due originali identici byte per byte ai risultati restituiti, due anteprime WebP verificate a 512 x 512 px; controllo visivo delle riduzioni a 60 px. Pagina verificata: dieci carte, due versioni 3 correnti, dodici sezioni delle versioni precedenti, dieci campi di giudizio e 32 riferimenti immagine validi. Le anomalie globali dei link del lavoro concorrente restano quelle attribuite nel giro precedente; nessun file di quel lavoro viene modificato o incluso. Prompt iniziali invariati. **Non verificato:** giudizio del proprietario sulle versioni 3; nessuna decisione o chiusura del lotto. **Scelte prese:** rimozione limitata alle due parti indicate, senza sostituirle con nuovi arti. Giro terminato in attesa del proprietario.
+
+### Terzo giudizio del proprietario e correzione del bicchiere — 26 novembre 2026
+
+> ultima goccia: il bicchiere ha una forma strana
+> posto fisso: ok
+> schiarirsi le idee: ok
+> ultimo giro: ok
+> scompenso: ok
+> alla goccia: ok
+> avamposto: ok
+> un altro e arrivo: ok
+> rutto: ok
+> grappino: ok
+
+Recepiti i nove «ok»: Posto Fisso, Schiarirsi le Idee, Ultimo Giro, Scompenso da Ultimo Giro, Avamposto Fortificato al Bancone, Un Altro e Arrivo e Rutto a Bruciapelo approvate nella versione 2; Alla Goccia e Un Altro... Grappino... approvate nella versione 3. Fino all’Ultima Goccia versione 2 richiede il solo ritocco del bicchiere; si propone una versione 3 con un unico bicchiere cilindrico regolare, senza modificare il resto della scena. Nessuna chiusura del lotto o decisione della regia.
+
+**Diagnosi:** perimetro SB-32 pulito; originale verificato `originali/base.pino.QuestoLoFiniscoIo-2.png`, SHA-256 `4b734bd2bbe786c8e54ba4436175ed8e0570d845bb5dcfb51119390a1809db1e`. **Modifica prevista:** una richiesta di ritocco con esclusivamente questo originale, senza maschera o riferimenti aggiuntivi; nessun rilancio e tutte le versioni conservate. Le altre nove carte non ricevono generazioni. Nessuna modifica di regole o attesi.
+
+#### Prompt preventivo — Fino all’Ultima Goccia, versione 3
+
+~~~text
+Edit this attached illustration only in the glass Piera is drinking from and the tiny contact area between her fingers and that glass. Replace its distorted shape with one ordinary sturdy clear cylindrical tumbler, straight parallel side walls, one circular open rim shown as a clean ellipse in perspective, and one flat circular thick base shown in consistent perspective. The rim and base belong to the same regular cylinder, no bulges, warped lip, doubled rim, stem, handle, pedestal or extra glass. Keep the current tilt and position: her raised hand grips the side naturally and she pours the amber drink into her open mouth in one gulp. Preserve the existing liquid stream and drinking gesture, changing them only at the glass rim if required for a physically coherent pour. Keep her face, expression, head angle, pose, all-black clothes, bun, corrected short horizontal pencil, other hand, patron, counter, round backless stool, slippers, bar background, light, palette, ink contours, worn print texture and square framing unchanged. No extra fingers or limbs, no text, border or transparency. Return one opaque square illustration.
+~~~
