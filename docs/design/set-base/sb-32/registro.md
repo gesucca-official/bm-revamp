@@ -1506,3 +1506,22 @@ Prompt preventivo `b7c1bfc`. Una chiamata; nessun rifiuto, rilancio o tentativo 
 ### Quarto giudizio del proprietario — lotto 2
 
 26 novembre 2026. Tagliare 4 respinta: manubrio strano e bici troppo lunga. Richiesta: pedalare senza mani sul manubrio, una mano tiene il casco e l’altra allontana l’avventore; bici più proporzionata. Prompt preventivo della versione 5 nel documento del lotto. Nove carte restano approvate.
+
+### Tagliare la Strada — versione 5
+
+Prompt preventivo `e94120a`. Una chiamata; nessun rifiuto, rilancio o tentativo scartato.
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.bound.ColpoDiStriscio` |
+| promptSha256 | `076af5c6f716ae95a27baed31aa4a66e5c7768bc6cd783cfe3f8e758aceb0f11` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `originali/base.mara.bound.ColpoDiStriscio-4.png`: `ea55dcc4876bdead5ad3acad353601c06aaa579cacc05eee792fc134997d37fb` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.bound.ColpoDiStriscio-5.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2805203 / `c245ad7b698f247d7e5ed27f9cea59fc0bcb3c1b1b900960fd994c9499622e92` |
+| Anteprima | [WebP](anteprime/base.mara.bound.ColpoDiStriscio-5.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Bici più compatta e manubrio libero; braccio teso e avventore respinto si distinguono. |
+| Giudizio del proprietario | In attesa. |
