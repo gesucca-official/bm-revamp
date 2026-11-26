@@ -1424,3 +1424,58 @@ Prompt preventivi: `4606e64`; rimozione localizzata di Lazo: `ea7dad2`. Dieci ch
 ### Secondo giudizio del proprietario — lotto 2
 
 26 novembre 2026. Approvate: Agilità Innaturale 2 («perfetta»), Traiettoria Imprevedibile 2 («ok»), Unta e Bisunta 2 («perfetta»), Semaforo Rosso 2, Sventare l’Assassinio 2, Lazo del Rider 3 («ok»). Slalom 1 resta approvata dal primo giudizio. Requisire torna alla prima versione con il braccio del casco corretto; Sgommata corregge il telaio; Tagliare corregge l’incrocio delle traiettorie.
+
+### Generazioni dopo il secondo giudizio — lotto 2
+
+Prompt preventivi: `0219059`. Tre chiamate, una per prompt; nessun rifiuto, rilancio o tentativo scartato. Modello e riscrittura non esposti. Originali copiati senza modifica, fuori da git.
+
+#### Requisire al Volo — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.PresoAlVolo` |
+| promptSha256 | `28e1b862121a478e1801e2e7d2cf942d8d4afe549008d12eb8ba662233531ab3` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `originali/base.mara.PresoAlVolo.png`: `355214c1b7dde700e3dbcfbab27b35fba49a9af9b6436c8e706529d55d0d965f` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.PresoAlVolo-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2809860 / `43b29c5aec0231d5d20bd131573cfbc5414b9b7dfd9b4b29ad5a497e4ce764b3` |
+| Anteprima | [WebP](anteprime/base.mara.PresoAlVolo-3.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Braccio del casco più disteso; il pacco e lo zaino restano quelli della prima versione. |
+| Giudizio del proprietario | In attesa. |
+
+#### Sgommata — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.Sgommata` |
+| promptSha256 | `20dfbe696b25677f7792cf4a01cf3d8cfb362ead34fe95858daadf8eaceb2a3f` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `originali/base.mara.Sgommata-2.png`: `f591c9c5226b0070db44f678c5cdb5bfb7bb11850d47ae005a037858ba0c7d75` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.Sgommata-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2965937 / `9986e66c6f4422d840b83f477fbb9b3b4881c72fe9d50c6bb31a347d2db3e3ea` |
+| Anteprima | [WebP](anteprime/base.mara.Sgommata-3.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Telaio con tubi continui e triangoli più regolari; sbandata conservata. |
+| Giudizio del proprietario | In attesa. |
+
+#### Tagliare la Strada — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.bound.ColpoDiStriscio` |
+| promptSha256 | `d840e963a3974dddb39c6ba45f3f1a0f640f95c244e18618ce9cb763afcd6588` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `originali/base.mara.bound.ColpoDiStriscio-2.png`: `b67918357a262fe7bb3e12172bb062e84ab48308b41b3622c9afe9aa3d47d2ab` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.bound.ColpoDiStriscio-3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3035713 / `594d73132c74b3f67b507b97d4e5e7822cb9f2a8f5bdcebd8c7e09eb5cc17a23` |
+| Anteprima | [WebP](anteprime/base.mara.bound.ColpoDiStriscio-3.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Bici di profilo davanti alle gambe dell’avventore; arresto e traiettorie perpendicolari più chiari. |
+| Giudizio del proprietario | In attesa. |
