@@ -3141,3 +3141,18 @@ Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 51
 | Controllo a 60 px | Tavolo inclinato e chiave visibili; estremità e dita minute, braccia distinguibili; tasche non verificabili. |
 | Anomalie visive | La mano di Beppe dietro la gamba del tavolo è parzialmente coperta. |
 | Giudizio del proprietario | In attesa. |
+
+
+### Correzione con maschera — Cuffie e Testa Bassa — 26 novembre 2026
+
+Richiesta letterale del proprietario:
+
+> Remove the area marked in the second image from the first image
+
+Il primo allegato segnalato dalla chat non era leggibile per il prefisso Windows `/C:/`. La stessa immagine è conservata in `originali/base.gigi.bound.UnaStrettaEPassa.png`, SHA-256 `5991df13b70782e94dbd4bc282b3ca92ac5da28fdf840fa51d83a0af93ab2395`. La maschera allegata, senza percorso o impronta esposti, segna in bianco il pugno e il braccio superiore dell’avversario. Un solo ritocco locale, versione 2, mantenendo la versione precedente; nessuna decisione o chiusura del lotto. Si inviano soltanto la maschera e l’originale da correggere, caricati come immagini recenti, nell’ordine maschera e originale.
+
+#### Prompt preventivo — Cuffie e Testa Bassa, versione 2
+
+~~~text
+Image 1 is the owner's black-and-white mask: white marks the only area to edit and black protects the rest. Image 2 is the illustration to edit. Remove the upper punching fist and its exposed forearm in the white region, including the connected sleeve portion where marked. Reconstruct the dark bar background and the natural edge of the opponent's clothing where needed, with no detached limb or replacement hand. Preserve everything outside the white area as closely as possible, especially Beppe, his headphones and both arms, the opponent's lower punching arm, the figures, bar furniture, lighting, colours, hand-inked comic style, print texture and square framing. Add no objects, text, border or transparency. Return one opaque square illustration.
+~~~
