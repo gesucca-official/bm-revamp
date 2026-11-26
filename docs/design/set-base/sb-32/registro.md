@@ -1529,3 +1529,22 @@ Prompt preventivo `e94120a`. Una chiamata; nessun rifiuto, rilancio o tentativo 
 ### Quinto giudizio del proprietario — lotto 2
 
 26 novembre 2026: Tagliare 5 non accettata. Si torna alla versione 3 spostando solo la mano verso l’avventore, senza toccarlo e senza modificarlo. Bici e resto della scena da preservare. Prompt preventivo della versione 6.
+
+### Tagliare la Strada — versione 6
+
+Prompt preventivo `86b0062`. Una chiamata; nessun rifiuto, rilancio o tentativo scartato.
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.mara.bound.ColpoDiStriscio` |
+| promptSha256 | `98ac0fe2c761664a7c0317210de4e66384a9a0e970b951edf4e1f4039da69c5c` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegati effettivi | `originali/base.mara.bound.ColpoDiStriscio-3.png`: `594d73132c74b3f67b507b97d4e5e7822cb9f2a8f5bdcebd8c7e09eb5cc17a23` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.mara.bound.ColpoDiStriscio-6.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2638841 / `fc23766951638484890183c40415c5604fc5d4ce1b6ce561afc854760494fbfe` |
+| Anteprima | [WebP](anteprime/base.mara.bound.ColpoDiStriscio-6.webp), 512 px, qualità 80 |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Mano aperta rivolta verso l’avventore; gesto piccolo. Bici e avventore conservano la composizione della 3. La distanza dalle dita va giudicata in grande. |
+| Giudizio del proprietario | In attesa. |
