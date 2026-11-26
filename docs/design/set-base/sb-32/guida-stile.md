@@ -68,6 +68,9 @@ non mescoli troppe fonti.
 - **Chi non è un personaggio del gioco** (l'avversario, gli avventori) è una **figura in ombra** generica, senza volto riconoscibile, la
   stessa regola delle carriere ([illustrazioni](../../carriere/illustrazioni.md#ritratti-e-sprite)). Così l'avversario non diventa per
   sbaglio uno del cast, e il soggetto si stacca.
+  **Senza cappuccio** ([D208](../../../set-base-decisioni.md#decisioni-del-proprietario) (2)): l'anonimato viene dall'ombra e
+  dall'inquadratura, non da un cappuccio; nel prompt, per esempio, «No hood on any visible opponent». Il proprietario, al lotto 2:
+  «Smettiamo di fare tutti gli avventori incappucciati».
 
 ## Niente scritte
 
