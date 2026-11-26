@@ -1,8 +1,8 @@
 {
   "mode": "set",
-  "set": "Set Base 1.0.2",
+  "set": "Set Base 1.0.4",
   "file_version": "1.7",
-  "rules_version": "2.2",
+  "rules_version": "2.3",
   "set_file": {
     "path": "server/src/main/resources/sets/base.json",
     "sha256": "8e4c6d06554181097039fee77c5f31e8ebe31d16b31319d2878712d6063cc2e6",
