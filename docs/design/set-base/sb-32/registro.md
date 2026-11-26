@@ -3223,3 +3223,107 @@ Edit only the supplied illustration. Replace the oversized spanner with one real
 ~~~text
 Edit only the supplied illustration. Correct the sliding caliper and Beppe's hands locally: draw one physically plausible metal caliper with one straight continuous beam, one fixed jaw and one sliding jaw, plain unmarked scales, and the two jaws closing on the opponent's nose. Both hands grip or adjust the tool naturally, without merged fingers or extra parts. Preserve the figures, action, faces, clothes, bar background, lighting, restrained palette, hand-inked texture and square framing as closely as possible. Keep two arms and two hands per figure, no tools in Beppe's pockets, and no text, border, blood or transparency. Return one opaque square illustration.
 ~~~
+
+#### Risultati del giro di correzioni
+
+Prompt preventivi nel commit `552ad6b`. Una richiesta per carta, nessun rifiuto o rilancio; originali copiati byte per byte, versioni precedenti conservate. Modello e prompt riscritto non esposti.
+
+##### Cuffie e Testa Bassa — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.bound.UnaStrettaEPassa` |
+| promptSha256 | `18ffd000ec93e6c0bc5b3cafedfc3449a00cd4b85f006b8f04f9646f8a8de712` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.bound.UnaStrettaEPassa-2.png`, SHA-256 `9e9a45cde407af5204d99705cf9e772aa51e76012bdb5157cf1ba0d40f3a8c1c` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.bound.UnaStrettaEPassa-3.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-71e9e98e-941c-4785-bc6d-832fa77a0a26.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2781609 / `89d2c5b6e3222ce3c0c33dceaa16b7890fbda6222bb22b60cf1ff1f134e45d90` |
+| Anteprima | [WebP](anteprime/base.gigi.bound.UnaStrettaEPassa-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Sedia rotta e impatto distinguibili; mani e frammenti minuti; nessun attrezzo in tasca distinguibile. |
+| Anomalie visive | Avversario con cappuccio; Beppe appare impassibile. La sedia spezzata ha elementi sovrapposti. |
+| Giudizio del proprietario | In attesa. |
+
+##### Colpo col Cacciavite — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.bound.ColpoDiCacciavite` |
+| promptSha256 | `f6f980e1550de9d8540e31dff8e1c1dcee329e97b5890b5c22c7d8b22ef2e281` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.bound.ColpoDiCacciavite.png`, SHA-256 `5369567ed45a2b028b27f5b74c87e76eeee47d4e9b35667d4226074a78e89fe0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.bound.ColpoDiCacciavite-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-6a792411-73fb-43cd-b01c-98a56c3aaecf.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2552446 / `7ec4970756192745e9a06f090a795e9536558ce4fde895db400d6dd635a3a1fb` |
+| Anteprima | [WebP](anteprime/base.gigi.bound.ColpoDiCacciavite-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Asta sottile visibile, punta e dita minute; braccia distinguibili, tasche non leggibili. |
+| Anomalie visive | Cacciavite con manico, asta e punta visibili; la punta si sovrappone al vestito dell’avversario. |
+| Giudizio del proprietario | In attesa. |
+
+##### Affilare gli Utensili — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.bound.Lima` |
+| promptSha256 | `8557d8a8ea1919b0dc72fd62c7628b9341f04c98eadf71655136bb355d782a14` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.bound.Lima.png`, SHA-256 `66ef3e515df48fca29820307034a6f209421e8bdd66c4a7191ee36541517bb77` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.bound.Lima-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-45852c7c-0cc5-426a-95e4-a0c336ddcb92.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2893668 / `d90da9a17bfd4d55cfe3a4a9512628121839e807a13b4e96fdbb9ba9275b10db` |
+| Anteprima | [WebP](anteprime/base.gigi.bound.Lima-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Lima e chiave leggibili; estremità e dita minute, braccia separate; tasche non verificabili. |
+| Anomalie visive | Chiave con anello chiuso e bocca aperta; lima impugnata e scintille conservate. |
+| Giudizio del proprietario | In attesa. |
+
+##### Chiave da Tredici — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.ChiaveDaTredici` |
+| promptSha256 | `3a476f68c38e25b7bc9bd1284198543b76bead7a1031cdf871437ebbe1089899` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.ChiaveDaTredici.png`, SHA-256 `70e09051edcd1216c73c4450b53bf0f90b9534f806a7c5c0ca1daa7b55a1b777` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.ChiaveDaTredici-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-1f4d3bb4-eeed-4b97-abeb-e31afdc8f323.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2672234 / `26d329fcf916f422b12720244e1b80b8d08ab8ca3e10b3ad53ae87608a914fd3` |
+| Anteprima | [WebP](anteprime/base.gigi.ChiaveDaTredici-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Colpo e chiave più sottile visibili; estremità e mani minute, tasche poco distinguibili. |
+| Anomalie visive | Chiave ridotta ma ancora lunga rispetto alla mano; il braccio superiore termina presso la mano sovrapposta e il raccordo è ambiguo. |
+| Giudizio del proprietario | In attesa. |
+
+##### Preparare il Lavoro — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.ColpoDiChiaveInglese` |
+| promptSha256 | `34f81c41a6b197572d95917509b5a85794e01b4115c7e6837e5c4c03ea0d5591` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.ColpoDiChiaveInglese.png`, SHA-256 `a0ce1142cbbe62bbb9515a3d2142ffec410ab748fda6959150f3a69bf5ea9c18` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.ColpoDiChiaveInglese-2.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-ef076d9f-40cb-4ece-ad65-3823ffe628a3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2712762 / `fd19d8ae477dd7d962040fafd46c222f822f4209d12909336d45eaa323307257` |
+| Anteprima | [WebP](anteprime/base.gigi.ColpoDiChiaveInglese-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Figure e asta del calibro leggibili; ganasce e dita minute, nessun attrezzo in tasca distinguibile. |
+| Anomalie visive | Calibro ridisegnato; una ganascia sembra sotto il naso e il contatto con entrambe le ganasce non è chiaro. |
+| Giudizio del proprietario | In attesa. |
