@@ -145,7 +145,7 @@ class MatchArchiveTest {
         var sets = initialTree.path("versions").path("sets");
         var ids = new java.util.ArrayList<String>(); sets.fieldNames().forEachRemaining(ids::add);
         assertEquals(List.of("base"), ids);
-        assertEquals("1.0.2", sets.path("base").path("version").asText()); // SB-30a (D203): Set Base 1.0.2 (1.0.1 in SB-29, D190)
+        assertEquals("1.0.3", sets.path("base").path("version").asText()); // SB-34 (D213): Set Base 1.0.3 (1.0.2 in SB-30a, D203)
         assertTrue(sets.path("base").path("sha256").asText().matches("[0-9a-f]{64}"));
         for (String hash : List.of("codeSha256","rulesSha256","catalogSha256","rulesCatalogSha256")) {
             assertTrue(initialTree.path("versions").path(hash).asText().matches("[0-9a-f]{64}"));
@@ -203,7 +203,7 @@ class MatchArchiveTest {
         var repo = new MatchEventRepository(jdbc(directory.resolve("states.sqlite"))); var archive = archive(repo);
         var a = player("a"); var b = player("b");
         ((AbstractCard) LiveFixtures.card("bruiser.MadeOfStone")).applyEffectOnSelf(a.getCharacter());
-        new com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle().applyEffectOnSelf(a.getCharacter());
+        new com.gsc.bm.model.cards.base.tokens.BrokenBottle().applyEffectOnSelf(a.getCharacter());
         a.getCharacter().getTimers().add(new com.gsc.bm.model.game.Timer("synthetic timer", c -> {}, 3));
         a.getCharacter().getImmunities().add(com.gsc.bm.model.Resource.TOXICITY);
         a.getCharacter().getItems().add(LiveFixtures.card("com.items.RottenBeer","beer"));

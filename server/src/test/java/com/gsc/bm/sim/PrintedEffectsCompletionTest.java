@@ -3,8 +3,8 @@ package com.gsc.bm.sim;
 import com.gsc.bm.model.Damage.DamageType;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.PrintedEffects;
-import com.gsc.bm.model.cards.com.items.AnotherRottenBeer;
-import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
+import com.gsc.bm.model.cards.base.items.DiscountDoubleMalt;
+import com.gsc.bm.model.cards.base.tokens.BrokenBottle;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
 import com.gsc.bm.model.game.status.Vulnerability;
@@ -38,12 +38,12 @@ class PrintedEffectsCompletionTest {
     }
 
     @Test void supplementalJavaItemTextLeavesOldSourcesUntouched() {
-        AnotherRottenBeer beer = new AnotherRottenBeer(); beer.setGuiRole("RESOURCES", "+17 L");
+        DiscountDoubleMalt beer = new DiscountDoubleMalt(); beer.setGuiRole("RESOURCES", "+17 L");
         assertFalse(beer instanceof PrintedEffects.Source);
         PrintedEffects.Step gain = PrintedEffects.consumedText(beer).getSteps().get(0);
         assertEquals(17, gain.getBase()); assertEquals(Resource.ALCOHOL, gain.getResource());
-        assertEquals(new BrokenBeerBottle().getBindingName(), gain.getSpawnedItem());
-        PrintedEffects.Step bottle = PrintedEffects.consumedText(new BrokenBeerBottle()).getSteps().get(0);
+        assertEquals(new BrokenBottle().getBindingName(), gain.getSpawnedItem());
+        PrintedEffects.Step bottle = PrintedEffects.consumedText(new BrokenBottle()).getSteps().get(0);
         assertEquals(DamageType.CUT, bottle.getConvertTo()); assertEquals(1.5f, bottle.getFactor());
         assertTrue(bottle.isSingleUse()); assertTrue(bottle.isEquip()); assertNull(bottle.getTurns());
     }

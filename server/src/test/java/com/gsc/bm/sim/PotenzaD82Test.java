@@ -7,7 +7,7 @@ import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.PrintedEffects;
-import com.gsc.bm.model.cards.junkie.ToxicBloodDrain;
+import com.gsc.bm.model.cards.base.celestina.DragIntoTheTunnel;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.game.bot.BotView;
@@ -205,13 +205,13 @@ class PotenzaD82Test {
         assertEquals(0, me.getResources().get(Resource.TOXICITY));
         // SB-28 (D181 (3), lista di SB-27): the class starts from the set file's 10 POISON, no longer from the 0 of the Set Base 0.1:
         // two report lines and four printed steps; 0, read only in the historical drafts, still deals none.
-        ToxicBloodDrain live = new ToxicBloodDrain();
+        DragIntoTheTunnel live = new DragIntoTheTunnel();
         com.gsc.bm.model.Character x = a.character("junkie.character.ToxicJunkie"), y = a.character("base.character.Mara");
         int health = y.getResources().get(Resource.HEALTH);
         assertEquals(2, live.applyEffectOnTarget(x, y).size());
         assertEquals(health - 10, y.getResources().get(Resource.HEALTH));
         assertEquals(4, live.printedEffects().getSteps().size());
-        ToxicBloodDrain none = (ToxicBloodDrain) noPoison();
+        DragIntoTheTunnel none = (DragIntoTheTunnel) noPoison();
         com.gsc.bm.model.Character z = a.character("base.character.Mara");
         assertEquals(1, none.applyEffectOnTarget(x, z).size());
         assertEquals(health, z.getResources().get(Resource.HEALTH));
@@ -311,7 +311,7 @@ class PotenzaD82Test {
         IllegalArgumentException missing = assertThrows(IllegalArgumentException.class, () -> Draft.parse("senza poison", silent));
         assertTrue(missing.getMessage().contains("parametro mancante params.poison"), missing.getMessage());
         Draft adapted = Draft.parse("senza poison, adattata", BozzeStoriche.adatta(silent));
-        assertEquals(3, ((ToxicBloodDrain) adapted.card(TRAVASO)).printedEffects().getSteps().size());
+        assertEquals(3, ((DragIntoTheTunnel) adapted.card(TRAVASO)).printedEffects().getSteps().size());
         ObjectNode root = a.json().deepCopy();
         for (JsonNode c : root.get("cards"))
             if (c.get("binding").asText().equals(TRAVASO)) ((ObjectNode) c.get("params")).put("poisn", 12);

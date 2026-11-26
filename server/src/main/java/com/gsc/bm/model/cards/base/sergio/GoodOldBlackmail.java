@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.base.cesira;
+package com.gsc.bm.model.cards.base.sergio;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.PrintedEffects;
@@ -15,7 +16,8 @@ import java.util.Map;
  * fissi, dello stesso tipo, arrotondando per difetto. I danni fissi sono quelli stampati contro l'avversario
  * ({@link PrintedEffects#baseDamage}): mai le parti lette dalle risorse o dagli oggetti, mai Rincara. Il numero è nel file del set.
  */
-public class Ricatto extends Contromossa {
+@CardId("base.cesira.Ricatto")
+public class GoodOldBlackmail extends Countermove {
 
     /** La parte dei danni fissi rimandata, in percento. */
     @Tunable

@@ -157,7 +157,7 @@ Eseguite nel checkout, una alla volta, dopo aver controllato che non girassero M
 
 ### La classe di «Lavoro fatto bene»
 
-[`base/gigi/LavoroFattoBene.java`](../../../server/src/main/java/com/gsc/bm/model/cards/base/gigi/LavoroFattoBene.java), nei sorgenti
+[`base/gigi/LavoroFattoBene.java`](../../../server/src/main/java/com/gsc/bm/model/cards/base/beppe/JobWellDone.java), nei sorgenti
 di test, ha due parametri `@Tunable`: `base` (6) e `perItem` (4).
 - Nella logica speciale, dopo i costi e prima degli effetti (R04), conta gli oggetti dell'autore ancora sul campo, token compresi.
 - Poi infligge al bersaglio HIT pari a `base` più `perItem` per oggetto.

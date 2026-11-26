@@ -13,7 +13,7 @@ import com.gsc.bm.model.cards.com.last.Struggle;
 import com.gsc.bm.model.cards.junkie.BadTrip;
 import com.gsc.bm.model.cards.junkie.LethalHeroinDose;
 import com.gsc.bm.model.cards.junkie.PervertedMetabolism;
-import com.gsc.bm.model.cards.junkie.ToxicBloodDrain;
+import com.gsc.bm.model.cards.base.celestina.DragIntoTheTunnel;
 import com.gsc.bm.model.cards.junkie.character.ToxicJunkie;
 import com.gsc.bm.service.session.ConnectionsService;
 import com.gsc.bm.service.session.GameLoggingService;
@@ -124,9 +124,9 @@ class MissingResourceTest {
 
     /** The readers protected by their own cost stay unplayable at 0: the zero does not open a payment. */
     @Test void costGuardedReadersStayUnplayableAtZero() {
-        Player a = spazienzioWith("a", new ToxicBloodDrain());
+        Player a = spazienzioWith("a", new DragIntoTheTunnel());
         Game g = duel(a, player("b"));
-        assertEquals("cant be cast with current resources", move(g, "a", "ToxicBloodDrain", "b").isValidFor(g).getComment());
+        assertEquals("cant be cast with current resources", move(g, "a", "DragIntoTheTunnel", "b").isValidFor(g).getComment());
         Player j = new Player("j", new ToxicJunkie(), named(new ToxicGrab(), "basic"), List.of(), named(new Struggle(), "last-resort"), List.of());
         j.getCardsInHand().add(named(new ExtremelyViolentBlow(), "ExtremelyViolentBlow"));
         Game g2 = duel(j, player("x"));

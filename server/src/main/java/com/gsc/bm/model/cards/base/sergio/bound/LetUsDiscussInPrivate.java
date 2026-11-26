@@ -1,10 +1,11 @@
-package com.gsc.bm.model.cards.base.cesira.bound;
+package com.gsc.bm.model.cards.base.sergio.bound;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.cards.PrintedEffects;
-import com.gsc.bm.model.cards.base.cesira.Contromossa;
+import com.gsc.bm.model.cards.base.sergio.Countermove;
 
 import java.util.List;
 import java.util.Map;
@@ -15,9 +16,10 @@ import java.util.Map;
  * passo di ricerca); altrimenti non fa nulla. Lo scarto di R02 avviene all'inizio dell'effetto, come in
  * {@code AbstractCharacterBoundCard}. Costo, priorità e rarità sono nel file del set.
  */
-public class NeRiparliamoFuori extends Contromossa {
+@CardId("base.cesira.bound.NeRiparliamoFuori")
+public class LetUsDiscussInPrivate extends Countermove {
 
-    public NeRiparliamoFuori() {
+    public LetUsDiscussInPrivate() {
         super();
         setBoundToCharacter("base.character.Cesira");
     }

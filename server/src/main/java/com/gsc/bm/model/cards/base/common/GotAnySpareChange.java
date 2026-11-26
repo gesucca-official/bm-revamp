@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.base.com;
+package com.gsc.bm.model.cards.base.common;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
@@ -19,9 +20,10 @@ import java.util.Set;
  * dell'autore, come nella carta viva {@code junkie.BeggingMoney}, di cui questa è la copia senza la perdita di A. Nessun testo
  * stampato: i bot la leggono dal file del set (ruolo ITEMS, nessun danno). Costo e priorità sono nel file del set.
  */
-public class BeggingMoney extends AbstractCard {
+@CardId("base.com.BeggingMoney")
+public class GotAnySpareChange extends AbstractCard {
 
-    public BeggingMoney() {
+    public GotAnySpareChange() {
         super();
         setCanTarget(Set.of(CardTarget.OPPONENT));
         setCost(Map.of());

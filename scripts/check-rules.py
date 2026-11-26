@@ -79,7 +79,7 @@ spec.loader.exec_module(gen)
 
 
 HEADING = re.compile(r'^#### (.+?) — (.+)$')
-BINDING_LINE = re.compile(r'^`([^`]+)`(?: · slot (\S+))?$')
+BINDING_LINE = re.compile(r'^`([^`]+)`(?: · classe `[^`]+`)?(?: · slot (\S+))?$')  # SB-34: «id · classe · slot»
 
 
 def parse_sheets(text, where):

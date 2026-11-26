@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.bruiser;
+package com.gsc.bm.model.cards.base.spazienzio;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
@@ -11,11 +12,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class YouStop extends AbstractCard implements PrintedEffects.Source {
+@CardId("bruiser.YouStop")
+public class ThatsEnough extends AbstractCard implements PrintedEffects.Source {
 
     private boolean countered = false;
 
-    public YouStop() {
+    public ThatsEnough() {
         super();
         setCanTarget(Set.of(CardTarget.OPPONENT));
         setCost(Map.of(Resource.VIOLENCE, 5));

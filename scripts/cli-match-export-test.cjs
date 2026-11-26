@@ -43,7 +43,7 @@ async function main() {
     assert.strictEqual(initial.state.mode, 'quick1vCom'); assert.strictEqual(initial.state.players.length, 2);
     assert.strictEqual(initial.versions.rulesVersion, '2.2'); // SB-30a (D203): regulation 2.2 (2.1 in SB-29, D190)
     assert.deepStrictEqual(Object.keys(initial.versions.sets), ['base']);
-    assert.strictEqual(initial.versions.sets.base.version, '1.0.2'); // SB-30a (D203): Set Base 1.0.2 (1.0.1 in SB-29, D190)
+    assert.strictEqual(initial.versions.sets.base.version,'1.0.3'); // SB-34 (D213): Set Base 1.0.3 (1.0.2 in SB-30a, D203)
     assert(/^[a-f0-9]{64}$/.test(initial.versions.sets.base.sha256));
     assert.strictEqual(initial.state.players[0].initialDeckDrawOrder.length, 20);
     assert.strictEqual(JSON.parse(all[2].json).data.pendingMoves.length, 2);

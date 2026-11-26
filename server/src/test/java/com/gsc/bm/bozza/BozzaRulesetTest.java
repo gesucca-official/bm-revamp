@@ -24,7 +24,7 @@ class BozzaRulesetTest {
 
     private static Player player(String id) {
         var basic = new com.gsc.bm.model.cards.bruiser.SuperImpact();
-        var last = new com.gsc.bm.model.cards.bruiser.YouStop();
+        var last = new com.gsc.bm.model.cards.base.spazienzio.ThatsEnough();
         basic.setGuiName("basic");
         last.setGuiName("last");
         return new Player(id, new com.gsc.bm.model.Character(50, 10, 3) { }, basic, List.of(), last, List.of());

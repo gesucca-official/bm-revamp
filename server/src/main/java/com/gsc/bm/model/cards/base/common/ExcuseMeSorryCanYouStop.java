@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.bruiser;
+package com.gsc.bm.model.cards.base.common;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
@@ -15,12 +16,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class BadEducation extends AbstractCard {
+@CardId("bruiser.BadEducation")
+public class ExcuseMeSorryCanYouStop extends AbstractCard {
 
     @Tunable
     private int hitDamage = 8;
 
-    public BadEducation() {
+    public ExcuseMeSorryCanYouStop() {
         super();
         setCanTarget(Set.of(CardTarget.OPPONENT));
         setCost(Map.of(Resource.VIOLENCE, 5));

@@ -2,7 +2,7 @@ package com.gsc.bm.sim;
 
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.cards.Card;
-import com.gsc.bm.model.cards.bruiser.BreakYourToy;
+import com.gsc.bm.model.cards.base.beppe.Disassemble;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Player;
 import org.junit.jupiter.api.BeforeAll;
@@ -37,7 +37,7 @@ class Sb27MaraCardsTest {
         draft = Draft.fromClasspath("/set-base/bozza.json");
     }
 
-    private static final class EarlyRemoval extends BreakYourToy {
+    private static final class EarlyRemoval extends Disassemble {
         EarlyRemoval() {
             setPriority(3);
             setGuiName("Rimozione di prova");

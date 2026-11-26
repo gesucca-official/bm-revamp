@@ -5,7 +5,7 @@ import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.LiveFixtures;
-import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
+import com.gsc.bm.model.cards.base.tokens.BrokenBottle;
 import com.gsc.bm.service.session.*;
 import com.gsc.bm.service.view.ViewExtractorService;
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ class RoundIsolationTest {
         public List<String> applyEffectOnSelf(Character c) {
             c.gainResource(Resource.ALERTNESS,7);
             c.getTimers().add(new Timer("local", x -> x.gainResource(Resource.VIOLENCE,1),2));
-            new BrokenBeerBottle().applyEffectOnSelf(c);
+            new BrokenBottle().applyEffectOnSelf(c);
             if (entered != null) {
                 entered.countDown();
                 try { if (!release.await(3,TimeUnit.SECONDS)) { throw new IllegalStateException("test timeout"); } }
@@ -106,7 +106,7 @@ class RoundIsolationTest {
         assertEquals(2,a.getStatuses().get(0).getLastsForTurns()); assertEquals(3,b.getStatuses().get(0).getLastsForTurns());
         card.applyEffectOnSelf(a); assertNotSame(a.getStatuses().get(0),a.getStatuses().get(1));
         assertEquals(3,a.getStatuses().get(1).getLastsForTurns());
-        a.getStatuses().clear(); b.getStatuses().clear(); var bottle=new BrokenBeerBottle();
+        a.getStatuses().clear(); b.getStatuses().clear(); var bottle=new BrokenBottle();
         bottle.applyEffectOnSelf(a); bottle.applyEffectOnSelf(b); a.getStatuses().get(0).expended();
         assertNull(b.getStatuses().get(0).getLastsForTurns());
     }

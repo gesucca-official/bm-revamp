@@ -3,7 +3,7 @@ package com.gsc.bm.sim;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.gsc.bm.model.cards.Card;
-import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
+import com.gsc.bm.model.cards.base.tokens.BrokenBottle;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.bot.AggressivePolicy;
 import com.gsc.bm.model.game.bot.BotPolicy;
@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * SB-11a: le carte scritte con i passi consume ed equip coincidono con le classi Java che sostituiscono (Grab, BruiserGrab, ToxicGrab e
- * il token BrokenBeerBottle): stessi campi, stesse righe di rapporto, stesso stato finale, partite intere identiche, copie a metà partita.
+ * il token BrokenBottle): stessi campi, stesse righe di rapporto, stesso stato finale, partite intere identiche, copie a metà partita.
  * I casi che il set di oggi non copre (equip in entrata, uso singolo senza conversione, BadEducation, scadenza) stanno in
  * {@link ConsumeEquipStatesTest}; il rifiuto delle definizioni errate in {@link ConsumeEquipValidationTest}.
  */
@@ -106,7 +106,7 @@ class ConsumeEquipTest {
 
     /** Il token non è nel catalogo: la carta Java è la classe, senza testi; il confronto non guarda i nomi. */
     private static String tokenDifference(CardScenarios scenarios, DataCards source) throws Exception {
-        return scenarios.difference(BrokenBeerBottle::new, () -> source.create(ConsumeEquipFixtures.TOKEN));
+        return scenarios.difference(BrokenBottle::new, () -> source.create(ConsumeEquipFixtures.TOKEN));
     }
 
     // ---- il confronto sa fallire ----

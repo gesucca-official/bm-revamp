@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.base.pino;
+package com.gsc.bm.model.cards.base.piera;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
@@ -22,7 +23,8 @@ import java.util.Set;
  * i HIT all'avversario crescono di {@code perPlay} e quelli a sé di {@code perPlaySelf}. Il contatore lo tiene la partita, solo con le
  * regole del playground. Numeri, costo e priorità sono nel file del set; ognuno è obbligatorio.
  */
-public class UltimoGiro extends AbstractCard implements PrintedEffects.Source {
+@CardId("base.pino.UltimoGiro")
+public class LastRound extends AbstractCard implements PrintedEffects.Source {
 
     /** Il danno fisso all'avversario. */
     @Tunable
@@ -42,7 +44,7 @@ public class UltimoGiro extends AbstractCard implements PrintedEffects.Source {
     /** Le giocate precedenti della carta da parte del suo autore, lette all'inizio della risoluzione. */
     private int plays;
 
-    public UltimoGiro() {
+    public LastRound() {
         super();
         setCanTarget(Set.of(CardTarget.OPPONENT));
         setCost(Map.of());

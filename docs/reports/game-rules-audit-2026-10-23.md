@@ -60,12 +60,12 @@ Le righe seguenti riportano gli effetti del codice, non dedotti dai nomi; le qua
 | [PatheticBlade](../../server/src/main/java/com/gsc/bm/model/cards/junkie/character/PatheticBlade.java) | +5 TOXICITY a sé; 5 CUT e +5 TOXICITY al target |
 | [SuperImpact](../../server/src/main/java/com/gsc/bm/model/cards/bruiser/SuperImpact.java) | Costo 25 VIOLENCE, priorità 0, 40 HIT |
 | [Struggle](../../server/src/main/java/com/gsc/bm/model/cards/com/last/Struggle.java) | Costo vuoto, 5 HIT a sé e 10 HIT al bersaglio |
-| [YouStop](../../server/src/main/java/com/gsc/bm/model/cards/bruiser/YouStop.java) | Costo 5 VIOLENCE, priorità 2; rende void una mossa successiva del target e gli dà 10 ALERTNESS se trovata |
-| [AmphetamineReflexes](../../server/src/main/java/com/gsc/bm/model/cards/junkie/AmphetamineReflexes.java) | Costo 10 TOXICITY, priorità 2; annulla mosse successive che bersagliano il lanciatore |
+| [YouStop](../../server/src/main/java/com/gsc/bm/model/cards/base/spazienzio/ThatsEnough.java) | Costo 5 VIOLENCE, priorità 2; rende void una mossa successiva del target e gli dà 10 ALERTNESS se trovata |
+| [AmphetamineReflexes](../../server/src/main/java/com/gsc/bm/model/cards/base/celestina/SpeedBoostedReflexes.java) | Costo 10 TOXICITY, priorità 2; annulla mosse successive che bersagliano il lanciatore |
 | [Grab](../../server/src/main/java/com/gsc/bm/model/cards/com/Grab.java) | Rimuove l'item vicino e chiama gli hook self/target dell'item; non ne chiama l'hook di logica aggiuntiva |
-| [Steal](../../server/src/main/java/com/gsc/bm/model/cards/com/Steal.java) | Costo 10 ALERTNESS, priorità 0; sposta l'item dal target al lanciatore se ancora presente |
-| [AnotherRottenBeer](../../server/src/main/java/com/gsc/bm/model/cards/com/items/AnotherRottenBeer.java) | +10 ALCOHOL e aggiunta del token BrokenBeerBottle |
-| [MarvelousCocktail](../../server/src/main/java/com/gsc/bm/model/cards/com/items/MarvelousCocktail.java) | +20 ALCOHOL/TOXICITY, immunità a entrambi; timer 5 che svuota immunità e stati e infligge 20 POISON |
+| [Steal](../../server/src/main/java/com/gsc/bm/model/cards/base/common/SleightOfHandTheft.java) | Costo 10 ALERTNESS, priorità 0; sposta l'item dal target al lanciatore se ancora presente |
+| [AnotherRottenBeer](../../server/src/main/java/com/gsc/bm/model/cards/base/items/DiscountDoubleMalt.java) | +10 ALCOHOL e aggiunta del token BrokenBeerBottle |
+| [MarvelousCocktail](../../server/src/main/java/com/gsc/bm/model/cards/base/items/LethalMix.java) | +20 ALCOHOL/TOXICITY, immunità a entrambi; timer 5 che svuota immunità e stati e infligge 20 POISON |
 | [BadTrip](../../server/src/test/java/com/gsc/bm/model/cards/junkie/BadTrip.java) | Toglie immunità TOXICITY, raddoppia la risorsa aggiungendone il valore, la ripristina con timer 3 |
 
 **V:** una mossa annullata durante la risoluzione ha già pagato il costo; `applyEffectTo` produce “Didn't do anything!”, ma il ciclo esegue comunque scarto/pesca. La carta bound annullata non arriva al proprio scarto aggiuntivo. [Game.resolveMoves](../../server/src/main/java/com/gsc/bm/model/game/Game.java), [Move.applyEffectTo](../../server/src/main/java/com/gsc/bm/model/game/Move.java).
@@ -83,9 +83,9 @@ Le righe seguenti riportano gli effetti del codice, non dedotti dai nomi; le qua
 | Stesso regolamento, Regular Action Cards | Dice che hanno sempre un costo; `Glare`, `MadeOfStone` e altre hanno costo vuoto. |
 | SQLite `CRD001_GUI`, chiave `bruiser.CantFeelAnything`; [classe](../../server/src/main/java/com/gsc/bm/model/cards/bruiser/CantFeelAnything.java) | Testo dice danno dimezzato; codice moltiplica per 0,35 e aggiunge 10 ALERTNESS. |
 | SQLite `junkie.AmphetamineReflexes`; classe sopra | Testo promette +5 ALERTNESS, assente dal codice. |
-| SQLite `com.items.RottenBeer`; [RottenBeer](../../server/src/main/java/com/gsc/bm/model/cards/com/items/RottenBeer.java) e Grab | L'equip è aggiunto nell'hook che Grab non chiama: il percorso di consumo non lo applica. |
+| SQLite `com.items.RottenBeer`; [RottenBeer](../../server/src/main/java/com/gsc/bm/model/cards/base/items/WarmBlonde66.java) e Grab | L'equip è aggiunto nell'hook che Grab non chiama: il percorso di consumo non lo applica. |
 | [GoingBerserk](../../server/src/test/java/com/gsc/bm/model/cards/junkie/GoingBerserk.java) | Due `setCost` successivi: il costo effettivo è solo ALCOHOL 10; non si sommano i costi. |
-| [ToxicBloodDrain](../../server/src/main/java/com/gsc/bm/model/cards/junkie/ToxicBloodDrain.java) | Rimuove immunità al target, ma aggiunge al lanciatore il timer che la ripristina. |
+| [ToxicBloodDrain](../../server/src/main/java/com/gsc/bm/model/cards/base/celestina/DragIntoTheTunnel.java) | Rimuove immunità al target, ma aggiunge al lanciatore il timer che la ripristina. |
 | [LethalHeroinDose](../../server/src/main/java/com/gsc/bm/model/cards/junkie/LethalHeroinDose.java) e `gainResource` | Con TOXICITY t, aggiunge abs(t−30); per t>=30 non si limita a portarla a 30. |
 | [Status.invertViewPoint](../../server/src/main/java/com/gsc/bm/model/game/status/Status.java) | `ALL.containsAll(s)` restituisce ALL anche per sottoinsiemi validi: il filtraggio degli stati sul target non segue un'inversione selettiva. |
 

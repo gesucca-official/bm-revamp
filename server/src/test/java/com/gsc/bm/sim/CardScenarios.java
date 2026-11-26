@@ -5,7 +5,7 @@ import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
-import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
+import com.gsc.bm.model.cards.base.tokens.BrokenBottle;
 import com.gsc.bm.model.game.ComPlayer;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
@@ -47,7 +47,7 @@ final class CardScenarios {
 
     /**
      * Gli stessi 200 scenari, ma le carte che bersagliano un oggetto vicino trovano oggetti sul campo (RottenBeer, CocktailOnTheGround,
-     * MarvelousCocktail, AnotherRottenBeer e il token BrokenBeerBottle, tutte classi Java). Per seme: oggetto presente da solo, scelto
+     * MarvelousCocktail, AnotherRottenBeer e il token BrokenBottle, tutte classi Java). Per seme: oggetto presente da solo, scelto
      * ma assente dal campo, sparito fra la scelta e la risoluzione, presente accanto a un altro. Le altre carte restano come prima.
      */
     CardScenarios withItems() { return new CardScenarios(java, true); }
@@ -109,7 +109,7 @@ final class CardScenarios {
     /** La carta sceglie un oggetto vicino. Il modo dipende dal seme: 0 presente, 1 assente, 2 sparito alla risoluzione, 3 presente con un altro. */
     private String grab(Card card, Game game, ComPlayer player, long seed) throws Exception {
         List<Card> pool = List.of(java.card("com.items.RottenBeer"), java.card("com.items.CocktailOnTheGround"),
-                java.card("com.items.MarvelousCocktail"), java.card("com.items.AnotherRottenBeer"), new BrokenBeerBottle());
+                java.card("com.items.MarvelousCocktail"), java.card("com.items.AnotherRottenBeer"), new BrokenBottle());
         Random random = new Random(seed * 31 + 7);
         Card item = pool.get(random.nextInt(pool.size()));
         Card other = pool.get((pool.indexOf(item) + 1 + random.nextInt(pool.size() - 1)) % pool.size());

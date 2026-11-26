@@ -4,7 +4,6 @@ import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
-import com.gsc.bm.service.factories.CardFactoryService;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,7 +35,7 @@ public abstract class AbstractCard implements Card, LoadableCard, Serializable {
 
     @Override
     public String getBindingName() {
-        return this.getClass().getName().replace(CardFactoryService.BASE_CARDS_PKG, "");
+        return CardClasses.idOf(this.getClass());
     }
 
     @Override

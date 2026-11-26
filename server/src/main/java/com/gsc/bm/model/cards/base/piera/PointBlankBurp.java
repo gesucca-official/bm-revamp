@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.base.pino;
+package com.gsc.bm.model.cards.base.piera;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
@@ -21,7 +22,8 @@ import java.util.Set;
  * Gli effetti su sé vengono prima di quelli sul bersaglio (regolamento, R04): per questo la L si legge nella logica speciale, dopo i
  * costi e prima dell'azzeramento. Numeri, costo e priorità sono nel file del set; ognuno è obbligatorio.
  */
-public class RuttoADistanzaSociale extends AbstractCard implements PrintedEffects.Source {
+@CardId("base.pino.RuttoADistanzaSociale")
+public class PointBlankBurp extends AbstractCard implements PrintedEffects.Source {
 
     /** Il danno fisso. */
     @Tunable
@@ -33,7 +35,7 @@ public class RuttoADistanzaSociale extends AbstractCard implements PrintedEffect
     /** La L spesa: quella dell'autore all'inizio della risoluzione, dopo il costo. */
     private int alcohol;
 
-    public RuttoADistanzaSociale() {
+    public PointBlankBurp() {
         super();
         setCanTarget(Set.of(CardTarget.OPPONENT));
         setCost(Map.of());

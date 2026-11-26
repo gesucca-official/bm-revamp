@@ -107,7 +107,7 @@ Fonti: [UserCredentialsRecord](../server/src/main/java/com/gsc/bm/repo/external/
 
 `UserStoredDeck` contiene `characterClazz`, `basicActionCardClazz`, `lastResortCardClazz`, `characterBoundCardsClazz[]`, `regularCardsClazz[]`. Non contiene le statistiche del personaggio o gli effetti delle carte: vengono ricostruiti dalle classi e dal catalogo. [UserAccountServiceImpl.fromGuiToStoredDeck/fromStoredToGuiDeck](../server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java).
 
-**D:** rinominare una classe o cambiare il catalogo può rendere illeggibile un mazzo esistente o cambiarne il significato, perché i binding sono riferimenti al codice e non identificatori di contenuto versionati.
+**D:** cambiare il catalogo può rendere illeggibile un mazzo esistente o cambiarne il significato, perché i binding non sono identificatori di contenuto versionati. Da SB-34 ([D213](set-base-decisioni.md#decisioni-del-proprietario)) un binding è l'identificatore stabile della carta e non il nome della sua classe: la classe Java viva dichiara il proprio id (`@CardId`) e sta nel registro `SetBaseClasses`, che il caricatore consulta prima della regola storica package + id; rinominare o spostare una classe non tocca più i mazzi salvati.
 
 ## Scritture e stato non persistito
 

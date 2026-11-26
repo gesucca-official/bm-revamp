@@ -1,5 +1,6 @@
 package com.gsc.bm.model.cards.base.items;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractItemCard;
@@ -16,7 +17,8 @@ import java.util.List;
  * un timer di {@code turns} turni, contando questo, toglie l'immunità a L alla fine dell'ultimo, dopo l'effetto di fine turno della L,
  * anche se nel frattempo ne avevi un'altra. Il numero è nel file del set.
  */
-public class SantinoDellaPortinaia extends AbstractItemCard implements PrintedEffects.Source {
+@CardId("base.items.SantinoDellaPortinaia")
+public class SaintBriacoHolyCard extends AbstractItemCard implements PrintedEffects.Source {
 
     /** I turni dell'immunità, contando quello in cui lo consumi. */
     @Tunable

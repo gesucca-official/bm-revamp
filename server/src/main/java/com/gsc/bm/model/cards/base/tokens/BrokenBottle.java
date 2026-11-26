@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.com.tokens;
+package com.gsc.bm.model.cards.base.tokens;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.cards.AbstractItemCard;
@@ -12,7 +13,8 @@ import com.gsc.bm.model.game.status.StatusType;
 import java.util.List;
 
 /** «Bottiglia Spaccata», token del Set Base (slot TOKEN): nome e testo breve sono quelli della scheda, D168 (4) applicata in SB-28. */
-public class BrokenBeerBottle extends AbstractItemCard {
+@CardId("com.tokens.BrokenBeerBottle")
+public class BrokenBottle extends AbstractItemCard {
 
     public static Status newStatus() { return Status.builder()
             .name("BROKEN BEER")
@@ -27,7 +29,7 @@ public class BrokenBeerBottle extends AbstractItemCard {
             .build();
     }
 
-    public BrokenBeerBottle() {
+    public BrokenBottle() {
         super();
         setGuiName("Bottiglia Spaccata");
         setGuiEffectDescription("Quando lo consumi: i tuoi [[HIT]] diventano [[CUT]] e ne infliggi una volta e mezza (equipaggiamento). Dopo il primo uso dura solo fino a fine turno.");

@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.base.cesira;
+package com.gsc.bm.model.cards.base.sergio;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.cards.PrintedEffects;
 import com.gsc.bm.model.game.Move;
 
@@ -11,7 +12,8 @@ import java.util.List;
  * dell'avversario, quella giocata non lo fa finire. È un effetto di questa sola carta (R00): la carta annunciata annullata da altro
  * toglie il Vulnerabile come sempre. La partita lo applica con le regole del playground ({@link Move#isKeepsToken()}).
  */
-public class LoSapevo extends Contromossa {
+@CardId("base.cesira.LoSapevo")
+public class SeenThatScript extends Countermove {
 
     @Override
     protected void onVoided(Move voided) { voided.setKeepsToken(true); }

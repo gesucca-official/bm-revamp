@@ -5,14 +5,22 @@ import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.*;
 import com.gsc.bm.model.cards.bruiser.*;
+import com.gsc.bm.model.cards.base.common.ExcuseMeSorryCanYouStop;
+import com.gsc.bm.model.cards.base.beppe.Disassemble;
+import com.gsc.bm.model.cards.base.spazienzio.ThatsEnough;
 import com.gsc.bm.model.cards.bruiser.character.*;
 import com.gsc.bm.model.cards.junkie.*;
+import com.gsc.bm.model.cards.base.celestina.SpeedBoostedReflexes;
 import com.gsc.bm.model.cards.junkie.character.*;
 import com.gsc.bm.model.cards.com.*;
+import com.gsc.bm.model.cards.base.common.SleightOfHandTheft;
 import com.gsc.bm.model.cards.com.basic.*;
 import com.gsc.bm.model.cards.com.items.*;
+import com.gsc.bm.model.cards.base.items.WarmBlonde66;
+import com.gsc.bm.model.cards.base.items.LethalMix;
+import com.gsc.bm.model.cards.base.items.DiscountDoubleMalt;
 import com.gsc.bm.model.cards.com.last.Struggle;
-import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
+import com.gsc.bm.model.cards.base.tokens.BrokenBottle;
 import com.gsc.bm.model.game.status.*;
 import org.junit.jupiter.api.*;
 import java.util.*;
@@ -121,7 +129,7 @@ class CatalogEffectsTest {
     @Test void lot2_seagullFiltersOnlyActorAndBottleConvertsBeforeInput() {
         Character a=new BigBadBruiser(),b=new BigBadBruiser();
         a.getStatuses().add(modifier(StatusType.BAD,StatusFlow.OUTPUT,Damage.DamageType.HIT,4));
-        new BrokenBeerBottle().applyEffectOnSelf(a); new MadeOfStone().applyEffectOnSelf(b);
+        new BrokenBottle().applyEffectOnSelf(a); new MadeOfStone().applyEffectOnSelf(b);
         b.getStatuses().add(modifier(StatusType.BAD,StatusFlow.INPUT,Damage.DamageType.CUT,2));
         new SeagullFly().applyEffectOnTarget(a,b);
         // GOOD OUTPUT: 15 -> 22 CUT; target GOOD INPUT ->11, BAD INPUT ->22.
@@ -133,8 +141,8 @@ class CatalogEffectsTest {
     }
     @Test void lot2_badEducationRemovesOnlyEquipsBeforeDamage() {
         Character a=new BigBadBruiser(),b=new BigBadBruiser();
-        new BrokenBeerBottle().applyEffectOnSelf(b); new Glare().applyEffectOnSelf(b);
-        effect(new BadEducation(),a,b);
+        new BrokenBottle().applyEffectOnSelf(b); new Glare().applyEffectOnSelf(b);
+        effect(new ExcuseMeSorryCanYouStop(),a,b);
         // SB-28 (D181 (3), lista di SB-27): 8 HIT invece di 10 (Set Base 1.0), con lo stesso stato: 12 invece di 15.
         assertEquals(88,value(b,Resource.HEALTH)); assertEquals(1,b.getStatuses().size()); assertFalse(b.getStatuses().get(0).isEquip());
     }
@@ -151,7 +159,7 @@ class CatalogEffectsTest {
         assertEquals(0,value(c,Resource.TOXICITY));
     }
     @TestFactory Stream<DynamicTest> lot2_grabConsumesEveryObjectAndBasicPersists() {
-        return Stream.of(new CocktailOnTheGround(),new RottenBeer(),new AnotherRottenBeer(),new MarvelousCocktail(),new BrokenBeerBottle())
+        return Stream.of(new CocktailOnTheGround(),new WarmBlonde66(),new DiscountDoubleMalt(),new LethalMix(),new BrokenBottle())
             .flatMap(item->Stream.of(new Grab(),new BruiserGrab(),new ToxicGrab()).map(grab->
             DynamicTest.dynamicTest(grab.getClass().getSimpleName()+" / "+item.getClass().getSimpleName(),()->{
                 Player a=player("a"),b=player("b"); Character c=a.getCharacter();
@@ -160,26 +168,26 @@ class CatalogEffectsTest {
                 assertEquals(grab instanceof ToxicGrab?10:20,value(c,Resource.ALERTNESS));
                 assertFalse(c.getItems().contains(item));
                 assertEquals(item instanceof CocktailOnTheGround?45:25,value(c,Resource.VIOLENCE));
-                int alcohol=item instanceof AnotherRottenBeer?10:item instanceof RottenBeer?5:item instanceof CocktailOnTheGround?15:item instanceof MarvelousCocktail?20:0;
+                int alcohol=item instanceof DiscountDoubleMalt?10:item instanceof WarmBlonde66?5:item instanceof CocktailOnTheGround?15:item instanceof LethalMix?20:0;
                 assertEquals(alcohol,value(c,Resource.ALCOHOL));
-                assertEquals(item instanceof CocktailOnTheGround?5:item instanceof MarvelousCocktail?20:0,value(c,Resource.TOXICITY));
-                assertEquals(item instanceof BrokenBeerBottle?1:0,c.getStatuses().size());
-                assertEquals(item instanceof MarvelousCocktail?Set.of(Resource.TOXICITY,Resource.ALCOHOL):Set.of(),c.getImmunities());
-                assertEquals(item instanceof MarvelousCocktail?1:0,c.getTimers().size());
-                if(item instanceof AnotherRottenBeer) assertTrue(c.getItems().peek() instanceof BrokenBeerBottle);
+                assertEquals(item instanceof CocktailOnTheGround?5:item instanceof LethalMix?20:0,value(c,Resource.TOXICITY));
+                assertEquals(item instanceof BrokenBottle?1:0,c.getStatuses().size());
+                assertEquals(item instanceof LethalMix?Set.of(Resource.TOXICITY,Resource.ALCOHOL):Set.of(),c.getImmunities());
+                assertEquals(item instanceof LethalMix?1:0,c.getTimers().size());
+                if(item instanceof DiscountDoubleMalt) assertTrue(c.getItems().peek() instanceof BrokenBottle);
                 else assertTrue(c.getItems().isEmpty());
                 a.discardCard(grab); assertEquals(grab.isBasicAction(),a.getCardsInHand().contains(grab));
             })));
     }
     @Test void lot2_tokenCreationEvictsOldestAndCanBeConsumed() {
-        Player a=player("a"),b=player("b"); Character c=a.getCharacter(); c.getItems().add(named(new RottenBeer(),"old"));
-        new AnotherRottenBeer().applyEffectOnSelf(c); assertEquals(1,c.getItems().size());
-        Card token=c.getItems().peek(); assertTrue(token instanceof BrokenBeerBottle);
+        Player a=player("a"),b=player("b"); Character c=a.getCharacter(); c.getItems().add(named(new WarmBlonde66(),"old"));
+        new DiscountDoubleMalt().applyEffectOnSelf(c); assertEquals(1,c.getItems().size());
+        Card token=c.getItems().peek(); assertTrue(token instanceof BrokenBottle);
         play(duel(a,b),a,new BruiserGrab(),"SELF",Map.of(Move.AdditionalAction.TARGET_ITEM,token.getName()));
         assertTrue(c.getItems().isEmpty()); assertTrue(c.getStatuses().get(0).isEquip());
     }
     @TestFactory Stream<DynamicTest> lot2_drawingObjectsDoesNotActivateThem() {
-        return Stream.of(new CocktailOnTheGround(),new RottenBeer(),new AnotherRottenBeer(),new MarvelousCocktail())
+        return Stream.of(new CocktailOnTheGround(),new WarmBlonde66(),new DiscountDoubleMalt(),new LethalMix())
             .map(item->DynamicTest.dynamicTest("draw: "+item.getClass().getSimpleName(),()->{
                 Player a=player("a"); var before=new EnumMap<Resource,Integer>(a.getResources());
                 Card action=named(new Glare(),"drawn action"); named(item,"drawn item");
@@ -193,9 +201,9 @@ class CatalogEffectsTest {
     @Test void lot2_stealSwapAndBeggingRespectCapacityWithoutConsumption() {
         Player a=player("a"); Character junkie=new ToxicJunkie();
         Player b=new Player("b",junkie,named(new ToxicGrab(),"basic"),List.of(),named(new Struggle(),"last"),List.of());
-        Card old=named(new RottenBeer(),"old"), one=named(new RottenBeer(),"one"),two=named(new RottenBeer(),"two");
+        Card old=named(new WarmBlonde66(),"old"), one=named(new WarmBlonde66(),"one"),two=named(new WarmBlonde66(),"two");
         a.getCharacter().getItems().add(old); junkie.getItems().add(one); junkie.getItems().add(two);
-        Game g=duel(a,b); play(g,a,new Steal(),"b",Map.of(Move.AdditionalAction.TARGET_ITEM,"one"));
+        Game g=duel(a,b); play(g,a,new SleightOfHandTheft(),"b",Map.of(Move.AdditionalAction.TARGET_ITEM,"one"));
         assertEquals(List.of(one),new ArrayList<>(a.getCharacter().getItems())); assertEquals(List.of(two),new ArrayList<>(junkie.getItems()));
         assertEquals(10,value(a.getCharacter(),Resource.ALERTNESS)); assertEquals(0,value(a.getCharacter(),Resource.ALCOHOL));
         junkie.getItems().add(old); new ShuffleFeet().applyEffectOnTarget(a.getCharacter(),junkie);
@@ -208,7 +216,7 @@ class CatalogEffectsTest {
     }
 
     @TestFactory Stream<DynamicTest> lot3_missingItemAtResolutionKeepsCostsAndExtraEffects() {
-        return Stream.of(new Grab(),new BruiserGrab(),new ToxicGrab(),new EverythingIsDrug(),new Steal(),new BreakYourToy())
+        return Stream.of(new Grab(),new BruiserGrab(),new ToxicGrab(),new EverythingIsDrug(),new SleightOfHandTheft(),new Disassemble())
             .map(card->DynamicTest.dynamicTest(card.getClass().getSimpleName(),()->{
                 Player a=player("a"),b=player("b"); Game g=duel(a,b);
                 boolean far=card.getCanTarget().contains(Card.CardTarget.FAR_ITEM);
@@ -217,9 +225,9 @@ class CatalogEffectsTest {
                 Move m=move(g,a,"played",far?"b":"SELF",Map.of(Move.AdditionalAction.TARGET_ITEM,"item"));
                 assertTrue(m.isValidFor(g).isValid()); g.submitMove(m); g.submitMove(Move.voidMove("b"));
                 owner.getItems().clear(); round(g);
-                assertEquals(card instanceof Steal || card instanceof ToxicGrab?10:20,value(a.getCharacter(),Resource.ALERTNESS));
+                assertEquals(card instanceof SleightOfHandTheft || card instanceof ToxicGrab?10:20,value(a.getCharacter(),Resource.ALERTNESS));
                 // SB-28 (D181 (3), lista di SB-27): «Disassemblare» costa 5 V invece di 10.
-                assertEquals(card instanceof BreakYourToy?20:25,value(a.getCharacter(),Resource.VIOLENCE));
+                assertEquals(card instanceof Disassemble?20:25,value(a.getCharacter(),Resource.VIOLENCE));
                 assertEquals(card instanceof EverythingIsDrug?20:0,value(a.getCharacter(),Resource.TOXICITY));
                 assertEquals(card instanceof EverythingIsDrug?90:100,value(a.getCharacter(),Resource.HEALTH)); // R06 poison
                 assertEquals(0,value(a.getCharacter(),Resource.ALCOHOL)); assertTrue(owner.getItems().isEmpty());
@@ -228,10 +236,10 @@ class CatalogEffectsTest {
     }
     @Test void lot3_destroyAndDrugConsumeWithoutItemEffects() {
         Player a=player("a"),b=player("b"); Game g=duel(a,b);
-        b.getCharacter().getItems().add(named(new MarvelousCocktail(),"item"));
-        play(g,a,new BreakYourToy(),"b",Map.of(Move.AdditionalAction.TARGET_ITEM,"item"));
+        b.getCharacter().getItems().add(named(new LethalMix(),"item"));
+        play(g,a,new Disassemble(),"b",Map.of(Move.AdditionalAction.TARGET_ITEM,"item"));
         assertTrue(b.getCharacter().getItems().isEmpty()); assertTrue(b.getCharacter().getTimers().isEmpty());
-        a.getCharacter().getItems().add(named(new MarvelousCocktail(),"item"));
+        a.getCharacter().getItems().add(named(new LethalMix(),"item"));
         play(g,a,new EverythingIsDrug(),"SELF",Map.of(Move.AdditionalAction.TARGET_ITEM,"item"));
         assertTrue(a.getCharacter().getItems().isEmpty()); assertTrue(a.getCharacter().getTimers().isEmpty());
         assertTrue(a.getCharacter().getImmunities().isEmpty()); assertEquals(20,value(a.getCharacter(),Resource.TOXICITY));
@@ -246,7 +254,7 @@ class CatalogEffectsTest {
         assertEquals(5,value(b.getCharacter(),Resource.TOXICITY)); assertTrue(g.getResolvedMoves().get(1).isVoid());
     }
     @Test void lot3_countersDoNotCancelEarlierMoves() {
-        for(AbstractCard card:List.of(new YouStop(),new WhatchaDoin())) {
+        for(AbstractCard card:List.of(new ThatsEnough(),new WhatchaDoin())) {
             Player a=new Player("a",new ToxicJunkie(),named(new ToxicGrab(),"basic"),List.of(),named(new Struggle(),"last"),List.of()),b=player("b");
             a.getResources().put(Resource.ALERTNESS,50); a.getCardsInHand().add(named(new RottenSmile(),"early"));
             a.getCardsInHand().add(named(new Glare(),"spare")); b.getCardsInHand().add(named(card,"late"));
@@ -258,7 +266,7 @@ class CatalogEffectsTest {
     }
     @Test void lot3_reflexesMultipleOpponentsAndOtherTargets() {
         Player a=player("a"),b=player("b"),c=player("c"),d=player("d"); a.getResources().put(Resource.TOXICITY,10);
-        a.getCardsInHand().add(named(new AmphetamineReflexes(),"reflex"));
+        a.getCardsInHand().add(named(new SpeedBoostedReflexes(),"reflex"));
         Game g=legacy(new Game(List.of(a,b,c,d),"synthetic ffa",false));
         g.submitMove(move(g,a,"reflex","SELF",null)); g.submitMove(move(g,b,"last-resort","a",null));
         g.submitMove(move(g,c,"last-resort","a",null)); g.submitMove(move(g,d,"last-resort","b",null)); round(g);
@@ -269,7 +277,7 @@ class CatalogEffectsTest {
     @Test void lot3_reflexesIgnoresEarlierMoveAndOpponentSelfTarget() {
         Player a=player("a"),c=player("c"),d=player("d");
         Player b=new Player("b",new ToxicJunkie(),named(new ToxicGrab(),"basic"),List.of(),named(new Struggle(),"last"),List.of());
-        a.getResources().put(Resource.TOXICITY,10); a.getCardsInHand().add(named(new AmphetamineReflexes(),"reflex"));
+        a.getResources().put(Resource.TOXICITY,10); a.getCardsInHand().add(named(new SpeedBoostedReflexes(),"reflex"));
         b.getCardsInHand().add(named(new RottenSmile(),"early")); b.getCardsInHand().add(named(new Glare(),"spare"));
         c.getCardsInHand().add(named(new Glare(),"spare"));
         Game g=legacy(new Game(List.of(a,b,c,d),"counter boundaries",false));
@@ -301,14 +309,14 @@ class CatalogEffectsTest {
         List<String> lines; try(reader) { lines=reader.lines().collect(java.util.stream.Collectors.toList()); }
         assertEquals(33,lines.size());
         return lines.stream().map(line->DynamicTest.dynamicTest("payment: "+line.split("\t")[0],()->{
-            String[] f=line.split("\t",-1); AbstractCard card=(AbstractCard)Class.forName("com.gsc.bm.model.cards."+f[0]).getDeclaredConstructor().newInstance();
+            String[] f=line.split("\t",-1); AbstractCard card=(AbstractCard)com.gsc.bm.model.cards.CardClasses.forId(f[0]).getDeclaredConstructor().newInstance();
             Map<Resource,Integer> costs=new EnumMap<>(Resource.class);
             if(!f[3].isEmpty()) for(String pair:f[3].split(",")) { String[] bits=pair.split("="); costs.put(Resource.valueOf(bits[0]),Integer.valueOf(bits[1])); }
             Character character=card.getBoundToCharacter()!=null && card.getBoundToCharacter().contains("ToxicJunkie")?new ToxicJunkie():new BigBadBruiser();
             Player a=new Player("a",character,named(new BruiserGrab(),"basic"),List.of(),named(new Struggle(),"last"),List.of()),b=player("b");
             for(Resource r:Resource.values()) a.getResources().put(r,50);
             named(card,"paid"); a.getCardsInHand().add(card); a.getCardsInHand().add(named(new Glare(),"spare"));
-            a.getCharacter().getItems().add(named(new RottenBeer(),"item")); b.getCharacter().getItems().add(named(new RottenBeer(),"item"));
+            a.getCharacter().getItems().add(named(new WarmBlonde66(),"item")); b.getCharacter().getItems().add(named(new WarmBlonde66(),"item"));
             String target=f[2].equals("SELF") || f[2].equals("NEAR_ITEM")?"SELF":"b";
             Game g=duel(a,b); Move m=move(g,a,"paid",target,Map.of(Move.AdditionalAction.DISCARD_ONE,"spare",Move.AdditionalAction.TARGET_ITEM,"item"));
             for(var cost:costs.entrySet()) { a.getResources().put(cost.getKey(),cost.getValue()-1); assertFalse(m.isValidFor(g).isValid()); a.getResources().put(cost.getKey(),50); }

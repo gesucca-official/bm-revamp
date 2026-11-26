@@ -6,8 +6,8 @@ import com.gsc.bm.model.Damage.DamageType;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
-import com.gsc.bm.model.cards.base.cesira.Contromossa;
-import com.gsc.bm.model.cards.base.cesira.Ricatto;
+import com.gsc.bm.model.cards.base.sergio.Countermove;
+import com.gsc.bm.model.cards.base.sergio.GoodOldBlackmail;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.bot.BotPlayer;
 import com.gsc.bm.model.game.bot.BotView;
@@ -54,8 +54,8 @@ class BozzaCardFactoryTest {
 
         assertEquals(description, draft.draft().card(DATA).getEffect());
         assertEquals(description, draft.draft().card(JAVA).getEffect());
-        assertFalse(factory.craftCard(DATA) instanceof Ricatto);
-        assertTrue(factory.craftCard(JAVA) instanceof Ricatto);
+        assertFalse(factory.craftCard(DATA) instanceof GoodOldBlackmail);
+        assertTrue(factory.craftCard(JAVA) instanceof GoodOldBlackmail);
         assertEquals("<p><b>lastStrike</b></p>" + escaped, factory.craftCard(DATA).getEffect());
         assertEquals("<p><b>firstStrike</b></p>" + escaped, factory.craftCard(JAVA).getEffect());
     }
@@ -82,8 +82,8 @@ class BozzaCardFactoryTest {
         String fallback = "bruiser.BadEducation";
         assertEquals(8, BotView.publicText(factory.craftCard(fallback)).nominalDamage());
         Map<DamageType, Integer> hit = Map.of(DamageType.HIT, 8);
-        assertEquals(hit, ReflectionTestUtils.invokeMethod(Contromossa.class, "baseDamage", draft.draft().card(fallback)));
-        assertEquals(hit, ReflectionTestUtils.invokeMethod(Contromossa.class, "baseDamage", factory.craftCard(fallback)));
+        assertEquals(hit, ReflectionTestUtils.invokeMethod(Countermove.class, "baseDamage", draft.draft().card(fallback)));
+        assertEquals(hit, ReflectionTestUtils.invokeMethod(Countermove.class, "baseDamage", factory.craftCard(fallback)));
     }
 
     @Test

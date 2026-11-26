@@ -19,6 +19,16 @@ BOZZA = ROOT / "server/src/test/resources/set-base/bozza.json"
 SLOT_JSON = QUI / "slot.json"
 COMPLETI_JSON = QUI / "testi-completi.json"
 JAVA_SRC = ROOT / "server/src/main/java/com/gsc/bm/model/cards"
+# SB-34 (D213): una classe viva sta sotto base/ col nome attuale della carta e dichiara il proprio id con @CardId.
+_CARD_ID = re.compile(r'^@CardId\("([^"]+)"\)$', re.M)
+SORGENTI_VIVI = {m.group(1): f for f in sorted((JAVA_SRC / "base").rglob("*.java"))
+                 for m in [_CARD_ID.search(f.read_text(encoding="utf-8"))] if m}
+
+
+def sorgente_java(binding):
+    """Il sorgente della classe di una carta: la classe viva che dichiara l'id, altrimenti il percorso dell'id (classi storiche)."""
+    return SORGENTI_VIVI.get(binding, JAVA_SRC / (binding.replace(".", "/") + ".java"))
+
 LETTERE = dict(zip(("HEALTH", "ALERTNESS", "VIOLENCE", "TOXICITY", "ALCOHOL"), "HAVTL"))
 ORDINE_RISORSE = tuple(LETTERE)
 DANNI = ("HIT", "CUT", "POISON")
@@ -73,7 +83,7 @@ TOKEN_BINDING = "com.tokens.BrokenBeerBottle"
 TOKEN_NOME = "Bottiglia Spaccata"
 TOKEN_STATO = {"op": "status", "statusType": "GOOD", "flow": "OUTPUT", "property": "HIT", "factor": 1.5,
                "equip": True, "singleUse": True, "convertTo": "CUT"}
-TOKEN_SORGENTE = JAVA_SRC / "com/tokens/BrokenBeerBottle.java"
+TOKEN_SORGENTE = sorgente_java(TOKEN_BINDING)
 TOKEN_CREATO_DA = "com.items.AnotherRottenBeer"
 
 # Dove il giocatore trova la regola intera (D170 (2)). SB-28: le regole del playground sono entrate nel regolamento 2.0
@@ -787,7 +797,7 @@ FRAZIONE_ARROTONDA = "metà e quarti si arrotondano per difetto"
 
 def bersaglio_java(binding):
     """Il bersaglio di una carta Java, letto dal sorgente della classe (setCanTarget), risalendo alle superclassi."""
-    percorso = JAVA_SRC / (binding.replace(".", "/") + ".java")
+    percorso = sorgente_java(binding)
     visti = 0
     while percorso.exists() and visti < 5:
         sorgente = percorso.read_text(encoding="utf-8")
@@ -809,7 +819,7 @@ def bersaglio_java(binding):
 
 def legato_java(binding):
     """Il personaggio a cui è legata una carta Java (setBoundToCharacter), o None."""
-    percorso = JAVA_SRC / (binding.replace(".", "/") + ".java")
+    percorso = sorgente_java(binding)
     m = re.search(r'setBoundToCharacter\("([^"]+)"\)', percorso.read_text(encoding="utf-8")) if percorso.exists() else None
     return m.group(1) if m else None
 

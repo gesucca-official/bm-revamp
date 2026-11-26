@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.com;
+package com.gsc.bm.model.cards.base.common;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
@@ -12,12 +13,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class Steal extends AbstractCard {
+@CardId("com.Steal")
+public class SleightOfHandTheft extends AbstractCard {
 
     private String message;
     private Card targetItem;
 
-    public Steal() {
+    public SleightOfHandTheft() {
         super();
         setCanTarget(Set.of(CardTarget.FAR_ITEM));
         setCost(Map.of(Resource.ALERTNESS, 10));

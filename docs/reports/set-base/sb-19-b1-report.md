@@ -19,7 +19,7 @@ in campo (è la Fase B2).**
 ## 1. Passo 0
 
 - **Identità.** Bozza di 2896896 contro bozza nuova, `ChargeMeasureTest#measure`, braccio B, 4 semi, 8.640 partite ([step0.ps1](sb-19/step0.ps1)): le due uscite coincidono byte per byte. Le nove carte sono nuove: nessun mazzo di riferimento le contiene, quindi nessuna partita cambia.
-- **Codice.** GEN-04 è la sola classe nuova, `base.com.BeggingMoney`, sottoclasse della carta viva che toglie il −10 A al bersaglio ([BeggingMoney.java](../../../server/src/main/java/com/gsc/bm/model/cards/base/com/BeggingMoney.java)). GEN-10 usa la classe viva
+- **Codice.** GEN-04 è la sola classe nuova, `base.com.BeggingMoney`, sottoclasse della carta viva che toglie il −10 A al bersaglio ([BeggingMoney.java](../../../server/src/main/java/com/gsc/bm/model/cards/base/common/GotAnySpareChange.java)). GEN-10 usa la classe viva
   `bruiser.BadEducation` con costo, priorità e `hitDamage` dalla bozza: nessun codice nuovo. Il diff sta nel pacchetto `model/cards/base` (e nei test): vale la deroga del playground di `docs/aree-protette.md`.
 - **Criterio 1.** «Rif» (i sette mazzi di riferimento fra loro, 28 coppie, 144 incontri per coppia, 100 semi) sulla bozza di oggi e sulla nuova: stessi incontri (4.032), stesse partite (403.200), stessi invarianti (0 violazioni), nessuna differenza ([identity-rif.json](sb-19/evidence/identity-rif.json)).
   Il giro di «Rif» è anche la base dei numeri di riferimento per la B2 ([rif-summary.md](sb-19/evidence/rif-summary.md)): 2 incontri su 28 fuori dalla soglia D95, entrambi già presenti oggi (Celestina–Celestina, patte 12,58%; Celestina–Sergio, 68,83%).

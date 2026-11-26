@@ -9,6 +9,7 @@ import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
+import com.gsc.bm.model.cards.CardClasses;
 import com.gsc.bm.model.cards.LoadableCard;
 import com.gsc.bm.model.cards.Tunable;
 import com.gsc.bm.model.game.ComPlayer;
@@ -747,11 +748,16 @@ final class Draft implements PlayerSource {
     private CardSpec javaCard(ObjectNode node, String binding, String where, Gui gui, String exclusiveTo, String set, String rarity) {
         Class<? extends AbstractCard> type;
         try {
-            Class<?> found = Class.forName(CardFactoryService.BASE_CARDS_PKG + binding);
+            // SB-34 (D213): the registry of the live classes first, then the rule of the historical ones (package + id).
+            Class<?> found = CardClasses.forId(binding);
             if (!AbstractCard.class.isAssignableFrom(found) || Modifier.isAbstract(found.getModifiers()))
                 throw invalid(where, "la classe non è una carta concreta");
             type = found.asSubclass(AbstractCard.class);
+            if (!CardClasses.idOf(type).equals(binding))
+                throw invalid(where, "la classe " + type.getName() + " dichiara l'id " + CardClasses.idOf(type));
             type.getConstructor();
+        } catch (IllegalStateException error) {
+            throw invalid(where, error.getMessage());
         } catch (ClassNotFoundException error) {
             throw invalid(where, "nessuna classe Java " + CardFactoryService.BASE_CARDS_PKG + binding);
         } catch (NoSuchMethodException error) {

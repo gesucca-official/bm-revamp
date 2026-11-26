@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.base.com;
+package com.gsc.bm.model.cards.base.common;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
@@ -18,9 +19,10 @@ import java.util.Set;
  * Costo e priorità sono nel file del set. SB-28: la logica è copiata qui, identica, dalla carta {@code com.ShuffleFeet} dello 0.1, uscita
  * dal set (che resta nei sorgenti di test per le bozze storiche).
  */
-public class ShuffleFeet extends AbstractCard implements PrintedEffects.Source {
+@CardId("base.com.ShuffleFeet")
+public class SuddenDash extends AbstractCard implements PrintedEffects.Source {
 
-    public ShuffleFeet() {
+    public SuddenDash() {
         setCanTarget(Set.of(CardTarget.OPPONENT));
         setPriority(-1);
     }

@@ -24,12 +24,16 @@
     {
       "file": "docs/design/set-base/testi/slot.json",
       "sha256": "48bc14dd58706e7d8ca9bb3583e5d4eaa714bff591233ffb549635a8a35176f7"
+    },
+    {
+      "file": "server/src/main/java/com/gsc/bm/model/cards/base/SetBaseClasses.java",
+      "sha256": "66463643f351583171c2729111e3d2cef453731fe4b142700a8ee469b6db33e2"
     }
   ],
   "uscite": [
     {
       "file": "client-debug/src/assets/docs/sets/base.md",
-      "sha256": "a8101128c926d99042bd4d6fc746b1cb74f98bec6f96f96da1cf549cd35957b6"
+      "sha256": "ee0ac570a93c75a656657f5f4391bf3e17e1ff778b037b19b57b371380126b0e"
     },
     {
       "file": "server/src/main/resources/sets/base.json",
@@ -37,11 +41,11 @@
     },
     {
       "file": "docs/rules-catalog.json",
-      "sha256": "c88bd998d06c9edf717d3d20a3177c40a38adfdc61708c65d2895ddb8b0b4238"
+      "sha256": "96be50891129df6113d8bb5d4ea6e1e947763fc0f549548a5fd6d3ee4ad5adec"
     },
     {
       "file": "docs/sets/base.md",
-      "sha256": "a8101128c926d99042bd4d6fc746b1cb74f98bec6f96f96da1cf549cd35957b6"
+      "sha256": "ee0ac570a93c75a656657f5f4391bf3e17e1ff778b037b19b57b371380126b0e"
     },
     {
       "file": "server/src/test/resources/set-base/mazzi-prova.json",

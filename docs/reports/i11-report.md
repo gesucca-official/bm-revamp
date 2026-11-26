@@ -10,7 +10,7 @@ Aggiornati insieme copia client, versione e descrizioni di rules-catalog.json e 
 
 R04 gia richiedeva parita per ordine dei partecipanti nella partita. Game usava HashMap e stabilita dell'ordine di invio delle mosse; un test storico approvava quest'ultimo comportamento, in contrasto con il testo normativo. Corretti mappa e terzo criterio del comparatore, e aggiornato esplicitamente quel test alla regola. La modifica all'atteso e motivata da questo conflitto, non da un fallimento accidentale. Priorita e ALERTNESS dopo i costi restano i primi due criteri.
 
-Fonti: [MadeOfStone](../../server/src/main/java/com/gsc/bm/model/cards/bruiser/MadeOfStone.java), [BrokenBeerBottle](../../server/src/main/java/com/gsc/bm/model/cards/com/tokens/BrokenBeerBottle.java), [Game](../../server/src/main/java/com/gsc/bm/model/game/Game.java), [RulesConformanceTest](../../server/src/test/java/com/gsc/bm/model/game/RulesConformanceTest.java).
+Fonti: [MadeOfStone](../../server/src/main/java/com/gsc/bm/model/cards/bruiser/MadeOfStone.java), [BrokenBeerBottle](../../server/src/main/java/com/gsc/bm/model/cards/base/tokens/BrokenBottle.java), [Game](../../server/src/main/java/com/gsc/bm/model/game/Game.java), [RulesConformanceTest](../../server/src/test/java/com/gsc/bm/model/game/RulesConformanceTest.java).
 
 ## Transazione locale del servizio
 

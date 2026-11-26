@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.com.items;
+package com.gsc.bm.model.cards.base.items;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
@@ -12,7 +13,8 @@ import com.gsc.bm.model.cards.Tunable;
 
 import java.util.List;
 
-public class MarvelousCocktail extends AbstractItemCard implements PrintedEffects.Source {
+@CardId("com.items.MarvelousCocktail")
+public class LethalMix extends AbstractItemCard implements PrintedEffects.Source {
 
     @Tunable
     private int alcohol = 20;

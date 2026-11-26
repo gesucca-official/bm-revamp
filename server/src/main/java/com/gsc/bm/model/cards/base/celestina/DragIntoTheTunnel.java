@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.junkie;
+package com.gsc.bm.model.cards.base.celestina;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
@@ -15,7 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ToxicBloodDrain extends AbstractCard implements PrintedEffects.Source {
+@CardId("junkie.ToxicBloodDrain")
+public class DragIntoTheTunnel extends AbstractCard implements PrintedEffects.Source {
 
     int toxicity;
     @Tunable
@@ -27,7 +29,7 @@ public class ToxicBloodDrain extends AbstractCard implements PrintedEffects.Sour
     @Tunable
     private int poison = 10;
 
-    public ToxicBloodDrain() {
+    public DragIntoTheTunnel() {
         super();
         setCanTarget(Set.of(CardTarget.OPPONENT));
         setCost(Map.of(Resource.TOXICITY, 10));

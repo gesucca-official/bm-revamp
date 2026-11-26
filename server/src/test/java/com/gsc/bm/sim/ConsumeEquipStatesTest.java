@@ -7,8 +7,8 @@ import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.AbstractItemCard;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.LoadableCard;
-import com.gsc.bm.model.cards.bruiser.BadEducation;
-import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
+import com.gsc.bm.model.cards.base.common.ExcuseMeSorryCanYouStop;
+import com.gsc.bm.model.cards.base.tokens.BrokenBottle;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * SB-11a, stati costruiti a mano: ciò che il set di oggi non copre (equip in entrata, uso singolo senza conversione, durata che scade
- * secondo R05, BadEducation) e l'ordine dei passi attorno a consume. Le carte «prova.*» sono attrezzi di test, non carte del set.
+ * secondo R05, ExcuseMeSorryCanYouStop) e l'ordine dei passi attorno a consume. Le carte «prova.*» sono attrezzi di test, non carte del set.
  */
 class ConsumeEquipStatesTest {
     private static DataCards fixtures;
@@ -146,9 +146,9 @@ class ConsumeEquipStatesTest {
         assertEquals(2, dealt(wearer, victim, Damage.DamageType.HIT, 10), "Il turno dopo non c'è più");
     }
 
-    // ---- BadEducation ----
+    // ---- ExcuseMeSorryCanYouStop ----
 
-    /** BadEducation toglie tutti gli equip del bersaglio, di ogni forma, e solo quelli; poi infligge i suoi 10 HIT. */
+    /** ExcuseMeSorryCanYouStop toglie tutti gli equip del bersaglio, di ogni forma, e solo quelli; poi infligge i suoi 10 HIT. */
     @Test void badEducationRemovesEveryDataEquipAndOnlyEquips() {
         Character victim = fighter(), attacker = fighter();
         wear(victim, "prova.giubbotto");
@@ -156,10 +156,10 @@ class ConsumeEquipStatesTest {
         wear(victim, "prova.guanti");
         ((AbstractCard) fixtures.create("prova.coccio")).applyEffectOnSelf(victim);
         ((AbstractCard) fixtures.create("prova.pelle")).applyEffectOnSelf(victim); // stato non equip
-        new BrokenBeerBottle().applyEffectOnSelf(victim);                          // equip del motore
+        new BrokenBottle().applyEffectOnSelf(victim);                          // equip del motore
         assertEquals(6, victim.getStatuses().size());
 
-        List<String> report = new BadEducation().applyEffectOnTarget(attacker, victim);
+        List<String> report = new ExcuseMeSorryCanYouStop().applyEffectOnTarget(attacker, victim);
         assertEquals(List.of("Removed FINTA PELLE status!", "Removed POSACENERE status!", "Removed GUANTI DA OFFICINA status!",
                 "Removed COCCIO status!", "Removed BROKEN BEER status!"), report.subList(0, 5));
         assertEquals(6, report.size(), "Cinque equip tolti, poi il danno");
@@ -171,7 +171,7 @@ class ConsumeEquipStatesTest {
 
     /**
      * Ogni equip a dati si comporta come lo stesso stato costruito con il builder del motore: stessi campi e stessa sequenza di colpi e
-     * di fine turno, con i numeri di R05. Il token a dati contro lo stato di BrokenBeerBottle.newStatus().
+     * di fine turno, con i numeri di R05. Il token a dati contro lo stato di BrokenBottle.newStatus().
      */
     @Test void dataEquipsBehaveLikeEngineStatuses() throws Exception {
         Map<String, Status> engine = new java.util.LinkedHashMap<>();
@@ -179,7 +179,7 @@ class ConsumeEquipStatesTest {
         engine.put("prova.guanti", status("GUANTI DA OFFICINA", "Hit Damage dealt: x1.25", StatusFlow.OUTPUT, Damage.DamageType.HIT, 1.25f, 2, false, null));
         engine.put("prova.posacenere", status("POSACENERE", "Next Hit Damage dealt: x1.5", StatusFlow.OUTPUT, Damage.DamageType.HIT, 1.5f, null, true, null));
         engine.put("prova.coccio", status("COCCIO", "Hit Damage dealt x1.5 and turned to Cut Damage", StatusFlow.OUTPUT, Damage.DamageType.HIT, 1.5f, null, true, Damage.DamageType.CUT));
-        engine.put(ConsumeEquipFixtures.TOKEN, BrokenBeerBottle.newStatus());
+        engine.put(ConsumeEquipFixtures.TOKEN, BrokenBottle.newStatus());
         DataCards all = DataCards.parse(ConsumeEquipFixtures.read(ConsumeEquipFixtures.CARDS));
         for (Map.Entry<String, Status> entry : engine.entrySet()) {
             Character viaData = fighter(), viaEngine = fighter();

@@ -9,7 +9,7 @@ import com.gsc.bm.model.game.status.Status;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
 import com.gsc.bm.model.game.status.Vulnerability;
-import com.gsc.bm.service.factories.CardFactoryService;
+import com.gsc.bm.model.cards.CardClasses;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.apache.commons.collections4.queue.CircularFifoQueue;
@@ -136,7 +136,7 @@ public abstract class Character implements Serializable {
     /** With an explicit binding name, for characters described as data (set-base plan SB-6a, test sources only). */
     protected Character(String bindingName, int hp, int speed, int itemsSize) {
         this.bindingName = bindingName != null ? bindingName
-                : this.getClass().getName().replace(CardFactoryService.BASE_CARDS_PKG, "");
+                : CardClasses.idOf(this.getClass());
         this.itemsSize = itemsSize;
         this.items = new CircularFifoQueue<>(itemsSize);
         // Regulation 1.11 R01: every character has all five resources; those its sheet does not state start at 0.

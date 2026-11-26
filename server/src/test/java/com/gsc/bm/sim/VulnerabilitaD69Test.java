@@ -6,7 +6,7 @@ import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.LoadableCard;
-import com.gsc.bm.model.cards.bruiser.YouStop;
+import com.gsc.bm.model.cards.base.spazienzio.ThatsEnough;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
@@ -91,7 +91,7 @@ class VulnerabilitaD69Test {
     private static Card charge() { return charge(""); }
 
     private static Card youStop() {
-        YouStop stop = new YouStop();
+        ThatsEnough stop = new ThatsEnough();
         stop.setGuiName("Fermo");
         return stop;
     }

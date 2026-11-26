@@ -1,4 +1,4 @@
-package com.gsc.bm.model.cards.base.cesira;
+package com.gsc.bm.model.cards.base.sergio;
 
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Damage;
@@ -20,12 +20,12 @@ import java.util.Set;
  * <p>
  * Una mossa già annullata (per esempio da un'altra contromossa) non si annulla di nuovo e non dà l'effetto in più.
  */
-public abstract class Contromossa extends AbstractCard implements PrintedEffects.Source {
+public abstract class Countermove extends AbstractCard implements PrintedEffects.Source {
 
     /** La carta annullata in questa risoluzione, o null. */
     private Card countered;
 
-    protected Contromossa() {
+    protected Countermove() {
         super();
         setCanTarget(Set.of(CardTarget.OPPONENT));
         setPriority(2);

@@ -2,7 +2,7 @@ package com.gsc.bm.sim;
 
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.PrintedEffects;
-import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
+import com.gsc.bm.model.cards.base.tokens.BrokenBottle;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.game.bot.BotView;
 
@@ -24,7 +24,7 @@ final class PublicCatalog {
             Player p = draft.player(deck, "text", new Random(0), null);
             List<Card> cards = new ArrayList<>(p.getCardsInHand());
             cards.addAll(p.getDeck()); cards.addAll(p.getCharacter().getItems()); cards.add(p.getLastResortCard());
-            cards.add(new BrokenBeerBottle());
+            cards.add(new BrokenBottle());
             for (Card c : cards) {
                 BotView.CardSeen seen = BotView.publicText(c);
                 PrintedEffects effects = c.isItem() ? PrintedEffects.consumedText(c) : seen.getEffects();

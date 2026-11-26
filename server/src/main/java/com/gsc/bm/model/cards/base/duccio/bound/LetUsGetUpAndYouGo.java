@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.base.rocco.bound;
+package com.gsc.bm.model.cards.base.duccio.bound;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCharacterBoundCard;
@@ -17,7 +18,8 @@ import java.util.Set;
  * di sé, quindi si risolve anche a terra. Numeri, costo, priorità e rarità sono nel file del set; ognuno è obbligatorio. Lo scarto di
  * R02 lo fa {@link AbstractCharacterBoundCard}.
  */
-public class MiRialzo extends AbstractCharacterBoundCard implements PrintedEffects.Source {
+@CardId("base.rocco.bound.MiRialzo")
+public class LetUsGetUpAndYouGo extends AbstractCharacterBoundCard implements PrintedEffects.Source {
 
     /** La H guadagnata. */
     @Tunable
@@ -29,7 +31,7 @@ public class MiRialzo extends AbstractCharacterBoundCard implements PrintedEffec
     @Tunable
     private int healthAtMost;
 
-    public MiRialzo() {
+    public LetUsGetUpAndYouGo() {
         super(Character.class);
         setCanTarget(Set.of(CardTarget.SELF));
         setPriority(0);

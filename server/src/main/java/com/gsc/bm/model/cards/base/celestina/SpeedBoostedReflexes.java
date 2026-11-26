@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.junkie;
+package com.gsc.bm.model.cards.base.celestina;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
@@ -13,11 +14,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class AmphetamineReflexes extends AbstractCard implements PrintedEffects.Source {
+@CardId("junkie.AmphetamineReflexes")
+public class SpeedBoostedReflexes extends AbstractCard implements PrintedEffects.Source {
 
     private final List<String> countered = new ArrayList<>();
 
-    public AmphetamineReflexes() {
+    public SpeedBoostedReflexes() {
         super();
         setCanTarget(Set.of(CardTarget.SELF));
         setCost(Map.of(Resource.TOXICITY, 10));

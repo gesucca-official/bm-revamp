@@ -4,8 +4,8 @@ import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
-import com.gsc.bm.model.cards.com.items.AnotherRottenBeer;
-import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
+import com.gsc.bm.model.cards.base.items.DiscountDoubleMalt;
+import com.gsc.bm.model.cards.base.tokens.BrokenBottle;
 import com.gsc.bm.model.game.status.Status;
 import lombok.Builder;
 import lombok.Value;
@@ -290,18 +290,18 @@ public class PrintedEffects implements Serializable {
      */
     public static PrintedEffects consumedText(Card card) {
         if (card instanceof Source) return ((Source) card).printedEffects();
-        if (card instanceof BrokenBeerBottle) {
-            Status s = BrokenBeerBottle.newStatus();
+        if (card instanceof BrokenBottle) {
+            Status s = BrokenBottle.newStatus();
             return new PrintedEffects(List.of(Step.builder().kind(Kind.STATUS).name(s.getName()).description(s.getDescription())
                     .statusType(s.getType()).flow(s.getFlow()).damageType((Damage.DamageType) s.getImpactedProperty())
                     .factor(s.getAmountFunction().apply(1f)).convertTo((Damage.DamageType) s.getTypeFunction().apply(Damage.DamageType.HIT))
                     .singleUse(s.isSingleUse()).equip(s.isEquip()).turns(s.getLastsForTurns()).build()));
         }
-        if (card instanceof AnotherRottenBeer) {
+        if (card instanceof DiscountDoubleMalt) {
             String gains = ((AbstractCard) card).getGains();
             java.util.regex.Matcher amount = java.util.regex.Pattern.compile("\\+(\\d+) L").matcher(gains == null ? "" : gains);
             if (amount.matches()) return new PrintedEffects(List.of(Step.builder().kind(Kind.GAIN).resource(Resource.ALCOHOL)
-                    .base(Integer.parseInt(amount.group(1))).spawnedItem(new BrokenBeerBottle().getBindingName()).build()));
+                    .base(Integer.parseInt(amount.group(1))).spawnedItem(new BrokenBottle().getBindingName()).build()));
         }
         return null;
     }

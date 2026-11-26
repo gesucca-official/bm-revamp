@@ -42,7 +42,7 @@ class UserAccountServiceImplTest {
         CardFactoryService factory = mock(CardFactoryService.class);
         when(factory.craftCard(anyString())).thenAnswer(call -> {
             String binding = call.getArgument(0);
-            LoadableCard card = (LoadableCard) Class.forName(CardFactoryService.BASE_CARDS_PKG + binding).getConstructor().newInstance();
+            LoadableCard card = (LoadableCard) com.gsc.bm.model.cards.CardClasses.forId(binding).getConstructor().newInstance();
             card.setGuiName(binding);
             card.setGuiExclusiveTo(reserved.get(binding));
             return card;

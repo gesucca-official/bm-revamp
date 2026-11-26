@@ -2,7 +2,7 @@ package com.gsc.bm.model.game;
 
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.bruiser.SuperImpact;
-import com.gsc.bm.model.cards.com.items.RottenBeer;
+import com.gsc.bm.model.cards.base.items.WarmBlonde66;
 import org.junit.jupiter.api.Test;
 
 import static com.gsc.bm.model.game.GameFixtures.*;
@@ -13,7 +13,7 @@ class PlayerTest {
         Player player = player("alice");
         player.getCardsInHand().clear();
         Card action = named(new SuperImpact(), "action");
-        Card item = named(new RottenBeer(), "item");
+        Card item = named(new WarmBlonde66(), "item");
         player.getDeck().push(action);
         for (int i = 0; i < 20000; i++) player.getDeck().push(item);
         player.drawCard();
@@ -27,7 +27,7 @@ class PlayerTest {
         Player player = player("alice");
         player.getCardsInHand().clear();
         Card action = named(new SuperImpact(), "action");
-        Card item = named(new RottenBeer(), "item");
+        Card item = named(new WarmBlonde66(), "item");
         player.getDeck().push(action);
         player.getDeck().push(item); // deterministic top of stack, no random draw
 
@@ -42,8 +42,8 @@ class PlayerTest {
     @Test
     void excessItemsAreForgottenInFifoOrder() {
         Player player = player("alice"); // Bruiser has capacity one
-        Card older = named(new RottenBeer(), "older");
-        Card newer = named(new RottenBeer(), "newer");
+        Card older = named(new WarmBlonde66(), "older");
+        Card newer = named(new WarmBlonde66(), "newer");
         player.getDeck().push(named(new SuperImpact(), "action"));
         player.getDeck().push(newer);
         player.getDeck().push(older);

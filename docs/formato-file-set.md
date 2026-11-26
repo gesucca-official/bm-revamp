@@ -34,6 +34,13 @@ Il formato è `sb-6b/1`. Le bozze storiche `sb-6a/1` e le espansioni di prova re
   danno nominale). Un costo a zero non si scrive. Un costo in HEALTH è ammesso (D27). Il campo `lastBlow` («Ultimo colpo») resta
   leggibile per le bozze storiche, ma il regolamento 2.0 non lo ha (D183 (3)): il file vivo non lo usa e la partita viva rifiuta
   una carta che lo porti.
+- **Identificatore e classe** (SB-34, [D213](set-base-decisioni.md#decisioni-del-proprietario)): il `binding` di una carta (e l'`id`
+  di personaggi e starter) è l'identificatore stabile della carta e non cambia mai, nemmeno se cambiano il nome della carta o della sua
+  classe. Il file non nomina la classe: per una carta `java: true` il caricatore cerca prima il registro delle classi vive
+  (`com.gsc.bm.model.cards.base.SetBaseClasses`, dove ogni classe dichiara il proprio id con `@CardId`), e solo se l'id non c'è usa
+  la regola delle classi storiche delle bozze 0.1 e 1.5, `com.gsc.bm.model.cards.` + id. Un id che entrambe le strade risolvono, o il
+  nome di una classe viva usato come id, è un errore di caricamento. Il documento del set scrive, per le carte con classe, id, classe e
+  slot. Una carta nuova riceve alla nascita un id `base.<personaggio>.<NomeInglese>`, poi congelato.
 
 ## Mazzi
 

@@ -3,7 +3,7 @@ package com.gsc.bm.sim;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.Card;
-import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
+import com.gsc.bm.model.cards.base.tokens.BrokenBottle;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
@@ -428,7 +428,7 @@ class Sb27SpecialCardsTest {
         turn(game, onItem(game, "s", "Consuma", "s", name(MALTO)), rest(game, "b"));
         assertEquals(10, res(game, "s", Resource.ALCOHOL));
         assertEquals(1, ch(game, "s").getItems().size());
-        assertTrue(ch(game, "s").getItems().peek() instanceof BrokenBeerBottle, "a Bottiglia Spaccata next to you");
+        assertTrue(ch(game, "s").getItems().peek() instanceof BrokenBottle, "a Bottiglia Spaccata next to you");
     }
 
     @Test
@@ -480,7 +480,7 @@ class Sb27SpecialCardsTest {
     @Test
     void lavoroAddsFourPerItemTokensIncluded() {
         Game game = game(sWith(LAVORO, Resource.VIOLENCE, 20), b());
-        ch(game, "s").getItems().addAll(List.of(new BrokenBeerBottle(), card(ESPRESSO)));
+        ch(game, "s").getItems().addAll(List.of(new BrokenBottle(), card(ESPRESSO)));
         assertEquals(15 + 4 * 2, turn(game, move(game, "s", name(LAVORO), "b"), rest(game, "b"))[1]);
     }
 

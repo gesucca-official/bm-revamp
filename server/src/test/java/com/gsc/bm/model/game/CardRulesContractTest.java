@@ -22,7 +22,7 @@ class CardRulesContractTest {
         assertEquals(40, lines.size());
         return lines.stream().map(line -> DynamicTest.dynamicTest("type: " + line.split("\t")[0], () -> {
             String[] fields = line.split("\t", -1);
-            Object instance = Class.forName("com.gsc.bm.model.cards." + fields[0]).getDeclaredConstructor().newInstance();
+            Object instance = com.gsc.bm.model.cards.CardClasses.forId(fields[0]).getDeclaredConstructor().newInstance();
             if (fields[1].equals("Personaggio")) {
                 assertTrue(instance instanceof com.gsc.bm.model.Character);
                 assertEquals("—", fields[2]);
@@ -50,7 +50,7 @@ class CardRulesContractTest {
             reader.lines().forEach(line -> roles.put(line.split("	")[0], line.split("	", -1)));
         }
         assertEquals(38, roles.size());
-        var token = new com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle();
+        var token = new com.gsc.bm.model.cards.base.tokens.BrokenBottle();
         assertEquals(roles.get("com.tokens.BrokenBeerBottle")[1], token.getRole());
         assertEquals(roles.get("com.tokens.BrokenBeerBottle")[2], token.getGains());
         assertEquals(roles.get("com.tokens.BrokenBeerBottle")[3], token.getDamage());
@@ -104,7 +104,7 @@ class CardRulesContractTest {
             assertEquals(1, row[4].split(", ").length, "no card has several damage types yet");
             boolean variable = amount[1].endsWith("+x");
             for (int violence : variable ? new int[]{0, 10, 41, 60} : new int[]{0}) {
-                var card = (com.gsc.bm.model.cards.AbstractCard) Class.forName("com.gsc.bm.model.cards." + row[0]).getDeclaredConstructor().newInstance();
+                var card = (com.gsc.bm.model.cards.AbstractCard) com.gsc.bm.model.cards.CardClasses.forId(row[0]).getDeclaredConstructor().newInstance();
                 var self = new com.gsc.bm.model.cards.bruiser.character.BigBadBruiser();
                 var target = new com.gsc.bm.model.cards.junkie.character.ToxicJunkie();
                 self.getResources().put(Resource.VIOLENCE, violence);
@@ -126,7 +126,7 @@ class CardRulesContractTest {
         assertEquals(33, lines.size());
         return lines.stream().map(line -> DynamicTest.dynamicTest(line.split("\t")[0], () -> {
             String[] fields = line.split("\t", -1);
-            Card card = (Card) Class.forName("com.gsc.bm.model.cards." + fields[0]).getDeclaredConstructor().newInstance();
+            Card card = (Card) com.gsc.bm.model.cards.CardClasses.forId(fields[0]).getDeclaredConstructor().newInstance();
             Map<Resource,Integer> cost = new EnumMap<>(Resource.class);
             if (!fields[3].isEmpty()) for (String entry : fields[3].split(",")) {
                 String[] pair = entry.split("="); cost.put(Resource.valueOf(pair[0]), Integer.valueOf(pair[1]));

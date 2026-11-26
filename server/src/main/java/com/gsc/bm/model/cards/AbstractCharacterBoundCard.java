@@ -3,7 +3,6 @@ package com.gsc.bm.model.cards;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
-import com.gsc.bm.service.factories.CardFactoryService;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,7 @@ public abstract class AbstractCharacterBoundCard extends AbstractCard {
 
     public AbstractCharacterBoundCard(Class<? extends Character> boundTo) {
         super();
-        setBoundToCharacter(boundTo.getName().replace(CardFactoryService.BASE_CARDS_PKG, ""));
+        setBoundToCharacter(CardClasses.idOf(boundTo));
     }
 
     @Override

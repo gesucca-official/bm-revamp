@@ -1,5 +1,6 @@
-package com.gsc.bm.model.cards.base.gigi;
+package com.gsc.bm.model.cards.base.beppe;
 
+import com.gsc.bm.model.cards.CardId;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.cards.AbstractCard;
@@ -19,7 +20,8 @@ import java.util.Set;
  * Gli oggetti si contano nella logica speciale, all'inizio della risoluzione e dopo i costi (regolamento, R04): contano anche i token;
  * gli equipaggiamenti no, perché sono stati e non oggetti. Numeri, costo e priorità sono nel file del set; ognuno è obbligatorio.
  */
-public class LavoroFattoBene extends AbstractCard implements PrintedEffects.Source {
+@CardId("base.gigi.LavoroFattoBene")
+public class JobWellDone extends AbstractCard implements PrintedEffects.Source {
 
     /** Il danno fisso, senza oggetti. */
     @Tunable
@@ -31,7 +33,7 @@ public class LavoroFattoBene extends AbstractCard implements PrintedEffects.Sour
     /** Gli oggetti dell'autore contati alla risoluzione. */
     private int items;
 
-    public LavoroFattoBene() {
+    public JobWellDone() {
         super();
         setCanTarget(Set.of(CardTarget.OPPONENT));
         setCost(Map.of());

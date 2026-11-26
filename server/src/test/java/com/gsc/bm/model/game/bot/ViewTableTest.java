@@ -281,16 +281,16 @@ class ViewTableTest {
     @Test void theTimerTextsOfTheCardsNameAndMeasureTheEngineTimers() {
         com.gsc.bm.model.Character a = new com.gsc.bm.model.cards.junkie.character.ToxicJunkie(),
                 b = new com.gsc.bm.model.cards.bruiser.character.BigBadBruiser();
-        new com.gsc.bm.model.cards.junkie.ToxicBloodDrain().applyEffectOnTarget(a, b);
-        new com.gsc.bm.model.cards.com.items.MarvelousCocktail().applyEffectOnSelf(b);
-        new com.gsc.bm.model.cards.base.items.SantinoDellaPortinaia().applyEffectOnSelf(b);
+        new com.gsc.bm.model.cards.base.celestina.DragIntoTheTunnel().applyEffectOnTarget(a, b);
+        new com.gsc.bm.model.cards.base.items.LethalMix().applyEffectOnSelf(b);
+        new com.gsc.bm.model.cards.base.items.SaintBriacoHolyCard().applyEffectOnSelf(b);
         Map<String, Integer> engine = new TreeMap<>();
         for (com.gsc.bm.model.game.Timer timer : a.getTimers()) engine.put(timer.getName(), timer.getTimer());
         for (com.gsc.bm.model.game.Timer timer : b.getTimers()) engine.put(timer.getName(), timer.getTimer());
         Map<String, Integer> text = new TreeMap<>();
-        for (PrintedEffects effects : List.of(new com.gsc.bm.model.cards.junkie.ToxicBloodDrain().printedEffects(),
-                new com.gsc.bm.model.cards.com.items.MarvelousCocktail().printedEffects(),
-                new com.gsc.bm.model.cards.base.items.SantinoDellaPortinaia().printedEffects()))
+        for (PrintedEffects effects : List.of(new com.gsc.bm.model.cards.base.celestina.DragIntoTheTunnel().printedEffects(),
+                new com.gsc.bm.model.cards.base.items.LethalMix().printedEffects(),
+                new com.gsc.bm.model.cards.base.items.SaintBriacoHolyCard().printedEffects()))
             for (PrintedEffects.TimerText timer : effects.getTimers()) text.put(timer.getName(), timer.getTurns());
         assertEquals(3, engine.size());
         assertEquals(engine, text);

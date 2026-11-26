@@ -1,10 +1,10 @@
 # Botte Micidiali — Set Base
 
-Versione **1.0.2 — 26 novembre 2026**. Documento del set `base`, con le schede normative delle sue carte (regolamento, R00 e R07). Richiede il regolamento 2.2.
+Versione **1.0.3 — 26 novembre 2026**. Documento del set `base`, con le schede normative delle sue carte (regolamento, R00 e R07). Richiede il regolamento 2.2.
 
 Questo documento è generato da `tools/set-catalog/set_catalog.py --vivo` dal file del set `server/src/main/resources/sets/base.json`, che lo stesso comando ricava dalla bozza `server/src/test/resources/set-base/bozza.json` (versione 1.7 del file) togliendo i mazzi di prova: non si modifica a mano, si cambia la bozza e si rigenera (decisioni D175 e D183 del piano Set Base; il formato del file è descritto in `docs/formato-file-set.md`). Il regolamento governa il sistema, le schede governano le carte: una scheda deroga a una regola solo se lo dice esplicitamente. La scheda normativa di ogni carta è il suo **testo completo**; il testo breve stampato sulla carta è nell'allegato ed è descrittivo: in caso di dubbio prevale la scheda. Ruoli, guadagni e danno nominale sono descrittivi (R07a).
 
-Nelle schede H, A, V, T e L sono le risorse (HEALTH, ALERTNESS, VIOLENCE, TOXICITY, ALCOHOL) e HIT, CUT e POISON i tipi di danno; sulle carte stampate e nel client sono simboli. Ogni scheda indica in testa nome, tipologia e sottotipo, rarità, costo e priorità, poi l'identificatore stabile della classe e, se c'è, lo slot della carta stampata.
+Nelle schede H, A, V, T e L sono le risorse (HEALTH, ALERTNESS, VIOLENCE, TOXICITY, ALCOHOL) e HIT, CUT e POISON i tipi di danno; sulle carte stampate e nel client sono simboli. Ogni scheda indica in testa nome, tipologia e sottotipo, rarità, costo e priorità, poi l'identificatore stabile della carta, che non cambia anche se cambiano il nome della carta o della sua classe (D213); per le carte con una classe Java il nome della classe; e, se c'è, lo slot della carta stampata.
 
 ## S1 — Contenuto e starter
 
@@ -275,7 +275,7 @@ Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applican
 
 #### FAI BASTA — Azione, Regolare · UNCOMMON · Costo 5 V · Priorità 2
 
-`bruiser.YouStop` · slot SPA-AR5
+`bruiser.YouStop` · classe `base.spazienzio.ThatsEnough` · slot SPA-AR5
 
 Azione regolare (regolamento, R01a). Costo: 5 V, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca contro un avversario, che scegli.
 
@@ -497,7 +497,7 @@ Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Riflessi Aumentati dalla Speed — Azione, Regolare · UNCOMMON · Costo 10 T · Priorità 2
 
-`junkie.AmphetamineReflexes` · slot TOS-AR4
+`junkie.AmphetamineReflexes` · classe `base.celestina.SpeedBoostedReflexes` · slot TOS-AR4
 
 Azione regolare (regolamento, R01a). Costo: 10 T, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca su di te.
 
@@ -505,7 +505,7 @@ Quando la carta si risolve annulli la mossa di ogni avversario che si gioca cont
 
 #### Trascinare nel Tunnel — Azione, Regolare · RARE · Costo 10 T · Priorità 1
 
-`junkie.ToxicBloodDrain` · slot TOS-AR5
+`junkie.ToxicBloodDrain` · classe `base.celestina.DragIntoTheTunnel` · slot TOS-AR5
 
 Azione regolare (regolamento, R01a). Costo: 10 T, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.
 
@@ -573,7 +573,7 @@ Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Ultimo Giro — Azione, Ultima risorsa · UNCOMMON · Costo — · Priorità 1
 
-`base.pino.UltimoGiro` · slot LR-PIN
+`base.pino.UltimoGiro` · classe `base.piera.LastRound` · slot LR-PIN
 
 Ultima risorsa, riservata a Piera Pinot (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.
 
@@ -601,7 +601,7 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 35 HIT.
 
 #### Alla Goccia — Azione, Regolare · UNCOMMON · Costo — · Priorità 1
 
-`base.pino.GoingBerserk` · slot PIN-AR2
+`base.pino.GoingBerserk` · classe `base.piera.DownInOne` · slot PIN-AR2
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 1. Si gioca contro un avversario, che scegli.
 
@@ -633,7 +633,7 @@ Annuncia «Alla Goccia» o «Rutto a Bruciapelo» (regolamento, R02a e R07b): al
 
 #### Rutto a Bruciapelo — Azione, Regolare · RARE · Costo 5 L · Priorità 1
 
-`base.pino.RuttoADistanzaSociale` · slot PIN-AR5
+`base.pino.RuttoADistanzaSociale` · classe `base.piera.PointBlankBurp` · slot PIN-AR5
 
 Azione regolare (regolamento, R01a). Costo: 5 L, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.
 
@@ -697,7 +697,7 @@ Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applican
 
 #### Disassemblare — Azione, Regolare · UNCOMMON · Costo 5 V · Priorità 1
 
-`bruiser.BreakYourToy` · slot GIG-AR1
+`bruiser.BreakYourToy` · classe `base.beppe.Disassemble` · slot GIG-AR1
 
 Azione regolare (regolamento, R01a). Costo: 5 V, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca su un oggetto di un avversario, che scegli.
 
@@ -741,7 +741,7 @@ Ogni stato si aggiunge a quelli che ci sono già: sullo stesso danno si applican
 
 #### Lavoro Fatto Bene — Azione, Regolare · RARE · Costo 10 V · Priorità 1
 
-`base.gigi.LavoroFattoBene` · slot GIG-AR5
+`base.gigi.LavoroFattoBene` · classe `base.beppe.JobWellDone` · slot GIG-AR5
 
 Azione regolare (regolamento, R01a). Costo: 10 V, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.
 
@@ -777,7 +777,7 @@ Quando la carta si risolve, nell'ordine: 1. Guadagni 8 A. 2. Consumi il tuo ogge
 
 #### Discutiamone in Privato — Azione, Legata al personaggio · UNCOMMON · Costo — · Priorità 2
 
-`base.cesira.bound.NeRiparliamoFuori` · slot CES-BO1
+`base.cesira.bound.NeRiparliamoFuori` · classe `base.sergio.bound.LetUsDiscussInPrivate` · slot CES-BO1
 
 Azione legata a Sergio Sommerso (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 2. Si gioca contro un avversario, che scegli.
 
@@ -829,7 +829,7 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 4 HIT.
 
 #### Buon Vecchio Ricatto — Azione, Regolare · UNCOMMON · Costo 15 A · Priorità 2
 
-`base.cesira.Ricatto` · slot CES-AR2
+`base.cesira.Ricatto` · classe `base.sergio.GoodOldBlackmail` · slot CES-AR2
 
 Azione regolare (regolamento, R01a). Costo: 15 A, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca contro un avversario, che scegli.
 
@@ -843,7 +843,7 @@ Ogni danno passa prima per gli stati sui danni inflitti di chi lo infligge, poi 
 
 #### Copione Già Visto — Azione, Regolare · UNCOMMON · Costo 10 A · Priorità 2
 
-`base.cesira.LoSapevo` · slot CES-AR3
+`base.cesira.LoSapevo` · classe `base.sergio.SeenThatScript` · slot CES-AR3
 
 Azione regolare (regolamento, R01a). Costo: 10 A, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 2. Si gioca contro un avversario, che scegli.
 
@@ -929,7 +929,7 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 2 HIT.
 
 #### Rialziamoci e Partite! — Azione, Legata al personaggio · UNCOMMON · Costo — · Priorità 0
 
-`base.rocco.bound.MiRialzo` · slot ROC-BO2
+`base.rocco.bound.MiRialzo` · classe `base.duccio.bound.LetUsGetUpAndYouGo` · slot ROC-BO2
 
 Azione legata a Duccio Braccio Teso (regolamento, R01a). Nessun costo in risorse. Per giocarla scarti un'altra carta della mano, che non sia base, legata o ultima risorsa; lo scarto avviene all'inizio del suo effetto, e questa carta resta in mano (regolamento, R02). Priorità 0. Si gioca su di te.
 
@@ -1045,7 +1045,7 @@ Quando la carta si risolve: consumi il tuo oggetto che hai scelto: esce dal camp
 
 #### Furto con Destrezza — Azione, Regolare · COMMON · Costo 10 A · Priorità 0
 
-`com.Steal` · slot GEN-02
+`com.Steal` · classe `base.common.SleightOfHandTheft` · slot GEN-02
 
 Azione regolare (regolamento, R01a). Costo: 10 A, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 0. Si gioca su un oggetto di un avversario, che scegli.
 
@@ -1053,7 +1053,7 @@ Quando la carta si risolve prendi l'oggetto dell'avversario che hai scelto e lo 
 
 #### Scatto Repentino — Azione, Regolare · UNCOMMON · Costo — · Priorità −1
 
-`base.com.ShuffleFeet` · slot GEN-03
+`base.com.ShuffleFeet` · classe `base.common.SuddenDash` · slot GEN-03
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità -1. Si gioca contro un avversario, che scegli.
 
@@ -1061,7 +1061,7 @@ Quando la carta si risolve scambi tutti i tuoi oggetti con tutti quelli dell'avv
 
 #### Ce l'Hai Due Spicci? — Azione, Regolare · RARE · Costo — · Priorità 0
 
-`base.com.BeggingMoney` · slot GEN-04
+`base.com.BeggingMoney` · classe `base.common.GotAnySpareChange` · slot GEN-04
 
 Azione regolare (regolamento, R01a). Nessun costo in risorse. Priorità 0. Si gioca contro un avversario, che scegli.
 
@@ -1133,7 +1133,7 @@ Danni fissi, quelli che «Buon Vecchio Ricatto» rimanda: infliggi 10 HIT.
 
 #### PERMESSO SCUSA PUOI SMETTERLA — Azione, Regolare · UNCOMMON · Costo 5 V · Priorità 1
 
-`bruiser.BadEducation` · slot GEN-10
+`bruiser.BadEducation` · classe `base.common.ExcuseMeSorryCanYouStop` · slot GEN-10
 
 Azione regolare (regolamento, R01a). Costo: 5 V, che paghi prima di ogni effetto del turno (regolamento, R04). Priorità 1. Si gioca contro un avversario, che scegli.
 
@@ -1335,7 +1335,7 @@ Quando lo consumi: guadagni 10 L.
 
 #### Doppio Malto da Discount — Oggetto · UNCOMMON · Costo — · Priorità —
 
-`com.items.AnotherRottenBeer` · slot OGG-03
+`com.items.AnotherRottenBeer` · classe `base.items.DiscountDoubleMalt` · slot OGG-03
 
 Oggetto: quando lo peschi va in campo vicino a te; fa effetto quando lo consumi con una carta che si gioca su un tuo oggetto (regolamento, R01a).
 
@@ -1343,7 +1343,7 @@ Quando lo consumi, nell'ordine: 1. Accanto a te compare una Bottiglia Spaccata, 
 
 #### Mescolone Micidiale — Oggetto · RARE · Costo — · Priorità —
 
-`com.items.MarvelousCocktail` · slot OGG-04
+`com.items.MarvelousCocktail` · classe `base.items.LethalMix` · slot OGG-04
 
 Oggetto: quando lo peschi va in campo vicino a te; fa effetto quando lo consumi con una carta che si gioca su un tuo oggetto (regolamento, R01a).
 
@@ -1445,7 +1445,7 @@ Nessuna risorsa scende sotto 0 (regolamento, R01).
 
 #### Santino di San Briaco — Oggetto · RARE · Costo — · Priorità —
 
-`base.items.SantinoDellaPortinaia` · slot OGG-15
+`base.items.SantinoDellaPortinaia` · classe `base.items.SaintBriacoHolyCard` · slot OGG-15
 
 Oggetto: quando lo peschi va in campo vicino a te; fa effetto quando lo consumi con una carta che si gioca su un tuo oggetto (regolamento, R01a).
 
@@ -1485,7 +1485,7 @@ Quando lo consumi: guadagni 10 A.
 
 #### Bottiglia Spaccata — Oggetto, Token · — · Costo — · Priorità —
 
-`com.tokens.BrokenBeerBottle` · slot TOKEN
+`com.tokens.BrokenBeerBottle` · classe `base.tokens.BrokenBottle` · slot TOKEN
 
 Token oggetto, creato da «Doppio Malto da Discount» (regolamento, R01a): in campo segue le regole degli oggetti, compreso il numero di oggetti che puoi tenere (regolamento, R02). Fa effetto quando lo consumi con una carta che si gioca su un tuo oggetto.
 
@@ -1627,7 +1627,9 @@ Campi descrittivi definiti in R07a, generati dagli stessi dati delle schede; in 
 
 ## Revisioni
 
-- **1.0.2 — 26 novembre 2026, SB-30a (D203):** la scheda di ogni personaggio con uno starter dice lo stile del computer a livello Normale (regolamento 2.2, R03): aggressivo per Spazienzio e Piera, prudente per Mara, risorse per Celestina e Beppe; Sergio e Duccio, senza starter, non ne hanno. Nessuna carta cambia. **Richiede il regolamento 2.2.**
+- **1.0.3 — 26 novembre 2026, SB-34 (D210, D213):** i nomi delle classi Java delle carte si allineano ai nomi attuali delle carte e i loro identificatori si congelano: l'id di ogni carta, personaggio, token e starter resta quello di prima ed è l'identificatore stabile della carta, mentre la classe dichiara il proprio id. Le schede delle carte con una classe scrivono id, classe e slot; la frase in testa parla dell'identificatore della carta e non più della classe. Nessuna carta cambia. **Richiede il regolamento 2.2.**
+
+- **1.0.2 — 26 novembre 2026, SB-30a (D203):** la scheda di ogni personaggio con uno starter dice lo stile del computer a livello Normale (regolamento 2.2, R03): aggressivo per Spazienzio e Piera, prudente per Mara, risorse per Celestina e Beppe; Sergio e Duccio, senza starter, non ne hanno. Nessuna carta cambia. **Richiedeva il regolamento 2.2.**
 
 - **1.0.1 — 24 novembre 2026, SB-29 (D190):** cambia solo la frase di S1 sulla quick: si sceglie la categoria, base o avanzato, e lo starter esce a caso al suo interno (R01, regolamento 2.1). Nessuna carta cambia. **Richiedeva il regolamento 2.1.**
 

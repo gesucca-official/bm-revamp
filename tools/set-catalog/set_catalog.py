@@ -39,13 +39,17 @@ DEFAULT_SET = "server/src/test/resources/set-base/bozza.json"
 DEFAULT_TEXTS = "docs/design/set-base/testi/testi-completi.json"
 DEFAULT_SLOT = "docs/design/set-base/testi/slot.json"
 DEFAULT_OUT = None  # SB-28: the SB-26 candidate folder became the live catalog (--vivo)
-DEFAULT_VERSIONS = {"base": "1.0.2"}
+DEFAULT_VERSIONS = {"base": "1.0.3"}
 # SB-28: the live catalog. The set document says the date and the regulation it requires; every output has its live place.
-LIVE_DATE = "26 novembre 2026"  # SB-30a: date of the live version 1.0.2; the earlier revisions keep their own dates
+LIVE_DATE = "26 novembre 2026"  # SB-34 B1: date of the live version 1.0.3; the earlier revisions keep their own dates
 LIVE_RULES = "2.2"  # SB-30a (D203): the live set requires regulation 2.2
 LIVE_SET_FILE = "server/src/main/resources/sets/base.json"
 LIVE_TEST_DECKS = "server/src/test/resources/set-base/mazzi-prova.json"
 LIVE_MANIFEST = "docs/sets/manifest.json"
+# SB-34 (D213): the registry of the live Java classes; each class declares the id of its card with @CardId.
+LIVE_CLASSES = "server/src/main/java/com/gsc/bm/model/cards/base/SetBaseClasses.java"
+JAVA_ROOT = "server/src/main/java"
+CARDS_PKG = "com.gsc.bm.model.cards."
 LIVE_PATHS = {"sets/base.md": "docs/sets/base.md", "client-debug/sets/base.md": "client-debug/src/assets/docs/sets/base.md",
               "sets/base.json": "docs/rules-catalog.json", "cards.sqlite": "server/src/main/resources/cards.sqlite",
               "set-file": LIVE_SET_FILE, "test-decks": LIVE_TEST_DECKS, "manifest.json": LIVE_MANIFEST}
@@ -142,6 +146,7 @@ class Catalog:
 
     def __init__(self, root, sets, versions, live=False):
         self.root, self.sets, self.versions, self.live = root, sets, versions, live
+        self.classes_raw, self.java = java_classes(root) if live else (None, {})
         ts = self.ts = load_texts_module(root)
         merged = {"cards": [c for s in sets for c in s.data["cards"]],
                   "characters": [p for s in sets for p in s.data.get("characters", [])],
@@ -264,6 +269,10 @@ class Catalog:
                  "cost": card.get("cost", {}), "priority": card.get("priority"), "textSource": source}
         if card.get("exclusiveTo"):
             entry["exclusiveTo"] = card["exclusiveTo"]
+        if self.live and card.get("java"):
+            if b not in self.java:
+                raise ValueError(f"{b}: carta Java senza classe nel registro {LIVE_CLASSES}")
+            entry["javaClass"] = self.java[b]
         if subtype == "Base":
             entry["owner"] = card.get("exclusiveTo") or self.ctx.basic.get(b)
         elif subtype == "Legata al personaggio":
@@ -278,9 +287,14 @@ class Catalog:
         stale = [f for f in TOKEN_STATUS_SOURCE if f not in whole]
         if stale:
             raise ValueError("token: il testo dello stato (TOKEN_STATUS_TEXT) non deriva più dal testo completo: manca «" + stale[0] + "»")
-        return {"class": ts.TOKEN_BINDING, "name": ts.TOKEN_NOME, "description": voce["breve"], "type": "Oggetto",
-                "subtype": "Token", **TOKEN_ROLE, "rarity": None, "fullText": voce["completo"], "flavour": None,
-                "statusText": TOKEN_STATUS_TEXT, "cost": {}, "priority": None, "textSource": "generatore"}
+        entry = {"class": ts.TOKEN_BINDING, "name": ts.TOKEN_NOME, "description": voce["breve"], "type": "Oggetto",
+                 "subtype": "Token", **TOKEN_ROLE, "rarity": None, "fullText": voce["completo"], "flavour": None,
+                 "statusText": TOKEN_STATUS_TEXT, "cost": {}, "priority": None, "textSource": "generatore"}
+        if self.live:
+            if ts.TOKEN_BINDING not in self.java:
+                raise ValueError(f"{ts.TOKEN_BINDING}: token senza classe nel registro {LIVE_CLASSES}")
+            entry["javaClass"] = self.java[ts.TOKEN_BINDING]
+        return entry
 
     # ------------------------------------------------------------------------------------------------------- grouping
     def group_of(self, entry):
@@ -341,7 +355,8 @@ def sheet(cat, entry):
     code = cat.slot.get(entry["class"])
     if " — " in entry["name"] or " · " in entry["name"]:
         raise ValueError(f"{entry['class']}: il nome contiene un separatore dell'intestazione della scheda")
-    lines = [heading(entry), "", f"`{entry['class']}`" + (f" · slot {code}" if code else ""), ""]
+    java = f" · classe `{entry['javaClass']}`" if entry.get("javaClass") else ""
+    lines = [heading(entry), "", f"`{entry['class']}`" + java + (f" · slot {code}" if code else ""), ""]
     for paragraph in entry["fullText"]:
         if re.match(r"\s*(\d+[.)]\s|[-*+>#|]|`)", paragraph):
             raise ValueError(f"{entry['class']}: un paragrafo del testo completo sarebbe letto come markdown")
@@ -355,6 +370,22 @@ def group_title(cat, key):
     if key in cat.characters:
         return cat.characters[key]["name"]
     return {"generiche": "Azioni generiche", "oggetti": "Oggetti", "token": "Token"}[key]
+
+
+def java_classes(root):
+    """SB-34 (D213): (registry bytes, {card id: class name without com.gsc.bm.model.cards.}) of the live classes, read from the
+    registry's imports and each class's @CardId."""
+    raw = (root / LIVE_CLASSES).read_bytes()
+    classes = {}
+    for name in re.findall(r"^import (com\.gsc\.bm\.model\.cards\.base\.[\w.]+);$", raw.decode("utf-8"), re.M):
+        source = (root / JAVA_ROOT / (name.replace(".", "/") + ".java")).read_text(encoding="utf-8")
+        declared = re.findall(r'^@CardId\("([^"]+)"\)$', source, re.M)
+        if len(declared) != 1:
+            raise ValueError(f"{name}: nel registro senza un solo @CardId")
+        if declared[0] in classes:
+            raise ValueError(f"{declared[0]}: due classi nel registro")
+        classes[declared[0]] = name[len(CARDS_PKG):]
+    return raw, classes
 
 
 def count_phrase(n, one, many):
@@ -397,8 +428,10 @@ def set_document(cat, s):
     out.append("")
     out.append("Nelle schede H, A, V, T e L sono le risorse (HEALTH, ALERTNESS, VIOLENCE, TOXICITY, ALCOHOL) e HIT, CUT e "
                "POISON i tipi di danno; sulle carte stampate e nel client sono simboli. Ogni scheda indica in testa nome, "
-               "tipologia e sottotipo, rarità, costo e priorità, poi l'identificatore stabile della classe e, se c'è, lo slot "
-               "della carta stampata.")
+               "tipologia e sottotipo, rarità, costo e priorità, poi "
+               + ("l'identificatore stabile della carta, che non cambia anche se cambiano il nome della carta o della sua "
+                  "classe (D213); per le carte con una classe Java il nome della classe; e, se c'è, lo slot della carta stampata."
+                  if cat.live else "l'identificatore stabile della classe e, se c'è, lo slot della carta stampata."))
     out.append("")
     # S1
     out += ["## S1 — Contenuto e starter", ""]
@@ -519,10 +552,17 @@ def set_document(cat, s):
         note = (" Il generatore dei testi di SB-25 non conosce " + ", ".join(f"`{b}`" for b in from_file)
                 + ": per queste carte testo breve, guadagni, danno nominale e scheda sono il testo del file.")
     if cat.live:
-        out.append(f"- **1.0.2 — {LIVE_DATE}, SB-30a (D203):** la scheda di ogni personaggio con uno starter dice lo stile del computer a "
+        out.append(f"- **1.0.3 — {LIVE_DATE}, SB-34 (D210, D213):** i nomi delle classi Java delle carte si allineano ai nomi "
+                   "attuali delle carte e i loro identificatori si congelano: l'id di ogni carta, personaggio, token e starter resta "
+                   "quello di prima ed è l'identificatore stabile della carta, mentre la classe dichiara il proprio id. Le schede "
+                   "delle carte con una classe scrivono id, classe e slot; la frase in testa parla dell'identificatore della carta e "
+                   "non più della classe. Nessuna carta cambia. "
+                   f"**Richiede il regolamento {LIVE_RULES}.**")
+        out.append("")
+        out.append(f"- **1.0.2 — 26 novembre 2026, SB-30a (D203):** la scheda di ogni personaggio con uno starter dice lo stile del computer a "
                    f"livello Normale (regolamento {LIVE_RULES}, R03): aggressivo per Spazienzio e Piera, prudente per Mara, risorse per "
                    "Celestina e Beppe; Sergio e Duccio, senza starter, non ne hanno. Nessuna carta cambia. "
-                   f"**Richiede il regolamento {LIVE_RULES}.**")
+                   "**Richiedeva il regolamento 2.2.**")
         out.append("")
         out.append("- **1.0.1 — 24 novembre 2026, SB-29 (D190):** cambia solo la frase di S1 sulla quick: si sceglie la categoria, base o avanzato, e lo "
                    "starter esce a caso al suo interno (R01, regolamento 2.1). Nessuna carta cambia. **Richiedeva il regolamento 2.1.**")
@@ -701,6 +741,8 @@ def generate(root, specs, versions, args_list, live=False):
             inputs.append({"file": s.texts_path, "sha256": sha256(s.texts_raw)})
         if s.slot_raw:
             inputs.append({"file": s.slot_path, "sha256": sha256(s.slot_raw)})
+    if cat.classes_raw is not None:
+        inputs.append({"file": LIVE_CLASSES, "sha256": sha256(cat.classes_raw)})
     manifest = {
         "nota": ("SB-28: catalogo vivo del Set Base, generato da " + GENERATOR + " --vivo; " if live else "SB-26 (D175): file generati da "
                  + GENERATOR + "; ") + "non si modificano a mano. L'impronta di cards.sqlite è "

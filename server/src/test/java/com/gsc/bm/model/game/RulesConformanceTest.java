@@ -6,12 +6,17 @@ import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.bruiser.*;
+import com.gsc.bm.model.cards.base.spazienzio.ThatsEnough;
 import com.gsc.bm.model.cards.bruiser.character.BigBadBruiser;
 import com.gsc.bm.model.cards.junkie.*;
+import com.gsc.bm.model.cards.base.celestina.DragIntoTheTunnel;
+import com.gsc.bm.model.cards.base.celestina.SpeedBoostedReflexes;
 import com.gsc.bm.model.cards.junkie.character.ToxicJunkie;
 import com.gsc.bm.model.cards.com.*;
 import com.gsc.bm.model.cards.com.items.*;
-import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
+import com.gsc.bm.model.cards.base.items.WarmBlonde66;
+import com.gsc.bm.model.cards.base.items.LethalMix;
+import com.gsc.bm.model.cards.base.tokens.BrokenBottle;
 import com.gsc.bm.model.game.status.*;
 import org.junit.jupiter.api.Test;
 import java.util.*;
@@ -73,7 +78,7 @@ class RulesConformanceTest {
     }
     @Test void r04_counterStillPaysAndDiscards() {
         Player a=player("a"), b=player("b");
-        a.getCardsInHand().add(named(new YouStop(),"stop")); Card impact=named(new SuperImpact(),"impact"); b.getCardsInHand().add(impact);
+        a.getCardsInHand().add(named(new ThatsEnough(),"stop")); Card impact=named(new SuperImpact(),"impact"); b.getCardsInHand().add(impact);
         Game g=duel(a,b); g.submitMove(move(g,a,"stop","b",null)); g.submitMove(move(g,b,"impact","a",null)); round(g);
         assertEquals(100,a.getResources().get(Resource.HEALTH)); assertEquals(0,b.getResources().get(Resource.VIOLENCE));
         // SB-28 (D181 (3), lista di SB-27): «FAI BASTA» non dà più 10 A all'avversario annullato; prima 30.
@@ -82,7 +87,7 @@ class RulesConformanceTest {
     }
     @Test void r04_counteredBoundKeepsAdditionalDiscard() {
         Player a=player("a"), b=player("b");
-        a.getCardsInHand().add(named(new YouStop(),"stop")); Card spare=named(new SuperImpact(),"spare"); b.getCardsInHand().add(spare);
+        a.getCardsInHand().add(named(new ThatsEnough(),"stop")); Card spare=named(new SuperImpact(),"spare"); b.getCardsInHand().add(spare);
         Game g=duel(a,b); g.submitMove(move(g,a,"stop","b",null));
         g.submitMove(move(g,b,"bound-one","a",Map.of(Move.AdditionalAction.DISCARD_ONE,"spare"))); round(g);
         assertTrue(b.getCardsInHand().contains(spare)); assertEquals(100,a.getResources().get(Resource.HEALTH));
@@ -151,13 +156,13 @@ class RulesConformanceTest {
         }
     }
     @Test void r07_rottenBeerViaGrabDoesNotEquip() {
-        Player a=player("a"); a.getCharacter().getItems().add(named(new RottenBeer(),"beer")); Game g=duel(a,player("b"));
+        Player a=player("a"); a.getCharacter().getItems().add(named(new WarmBlonde66(),"beer")); Game g=duel(a,player("b"));
         Move m=move(g,a,"basic","SELF",Map.of(Move.AdditionalAction.TARGET_ITEM,"beer")); m.applyEffectTo(g);
         assertTrue(a.getCharacter().getItems().isEmpty()); assertTrue(a.getCharacter().getStatuses().isEmpty());
         assertEquals(5,a.getResources().get(Resource.ALCOHOL));
     }
     @Test void r07_beggingCopiesWithoutTakingOrSobering() {
-        Player a=player("a"), b=player("b"); Card beer=named(new RottenBeer(),"beer"); b.getCharacter().getItems().add(beer);
+        Player a=player("a"), b=player("b"); Card beer=named(new WarmBlonde66(),"beer"); b.getCharacter().getItems().add(beer);
         a.getResources().put(Resource.ALCOHOL,8); Game g=duel(a,b); BeggingMoney card=new BeggingMoney();
         Move m=move(g,a,"unused","b",null); card.resolve(g,m);
         assertSame(beer,a.getCharacter().getItems().peek()); assertSame(beer,b.getCharacter().getItems().peek());
@@ -165,19 +170,19 @@ class RulesConformanceTest {
     }
     @Test void r07_toxicDrainRestoresImmunityToActorOnly() {
         Player a=player("a"), b=player("b"); a.getResources().put(Resource.TOXICITY,30); b.getCharacter().getImmunities().add(Resource.TOXICITY);
-        a.getCardsInHand().add(named(new ToxicBloodDrain(),"drain")); Game g=duel(a,b); Move m=move(g,a,"drain","b",null);
+        a.getCardsInHand().add(named(new DragIntoTheTunnel(),"drain")); Game g=duel(a,b); Move m=move(g,a,"drain","b",null);
         m.applyCostTo(g); m.applyEffectTo(g);
         assertEquals(0,a.getResources().get(Resource.TOXICITY)); assertEquals(20,b.getResources().get(Resource.TOXICITY));
         assertFalse(b.getCharacter().getImmunities().contains(Resource.TOXICITY)); a.getCharacter().resolveTimeBasedEffects();
         assertTrue(a.getCharacter().getImmunities().contains(Resource.TOXICITY)); assertFalse(b.getCharacter().getImmunities().contains(Resource.TOXICITY));
     }
     @Test void r07_amphetamineCountersWithoutAlertnessGain() {
-        Player a=player("a"), b=player("b"); a.getResources().put(Resource.TOXICITY,10); a.getCardsInHand().add(named(new AmphetamineReflexes(),"reflex"));
+        Player a=player("a"), b=player("b"); a.getResources().put(Resource.TOXICITY,10); a.getCardsInHand().add(named(new SpeedBoostedReflexes(),"reflex"));
         Game g=duel(a,b); g.submitMove(move(g,b,"last-resort","a",null)); g.submitMove(move(g,a,"reflex","SELF",null)); round(g);
         assertEquals(100,a.getResources().get(Resource.HEALTH)); assertEquals(20,a.getResources().get(Resource.ALERTNESS));
     }
     @Test void r07_marvelousCocktailExpiresOnFifthTick() {
-        Character c=new BigBadBruiser(); new MarvelousCocktail().applyEffectOnSelf(c);
+        Character c=new BigBadBruiser(); new LethalMix().applyEffectOnSelf(c);
         c.getStatuses().add(status(Damage.DamageType.HIT,.5f,null,false));
         for(int i=0;i<4;i++) c.resolveTimeBasedEffects(); assertEquals(100,c.getResources().get(Resource.HEALTH));
         c.resolveTimeBasedEffects(); assertEquals(80,c.getResources().get(Resource.HEALTH));
@@ -188,7 +193,7 @@ class RulesConformanceTest {
         new MadeOfStone().applyEffectOnSelf(a); new MadeOfStone().applyEffectOnSelf(b);
         assertNotSame(a.getStatuses().get(0),b.getStatuses().get(0));
         a.getStatuses().clear(); b.getStatuses().clear();
-        new BrokenBeerBottle().applyEffectOnSelf(a); new BrokenBeerBottle().applyEffectOnSelf(b);
+        new BrokenBottle().applyEffectOnSelf(a); new BrokenBottle().applyEffectOnSelf(b);
         assertNotSame(a.getStatuses().get(0),b.getStatuses().get(0));
     }
 }

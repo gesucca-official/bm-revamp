@@ -6,7 +6,6 @@ import com.gsc.bm.model.cards.LoadableCard;
 import com.gsc.bm.model.game.ComPlayer;
 import com.gsc.bm.model.game.bot.BotPlayer;
 import com.gsc.bm.model.game.bot.BotPolicy;
-import com.gsc.bm.service.factories.CardFactoryService;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -89,7 +88,7 @@ final class SimulationCatalog implements PlayerSource {
     }
 
     Object instantiate(String binding) throws Exception {
-        return Class.forName(CardFactoryService.BASE_CARDS_PKG + binding).getConstructor().newInstance();
+        return com.gsc.bm.model.cards.CardClasses.forId(binding).getConstructor().newInstance();
     }
 
     Card card(String binding) throws Exception {

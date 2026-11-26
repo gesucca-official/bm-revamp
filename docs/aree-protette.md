@@ -44,15 +44,15 @@ stessa modifica (AGENTS); dopo il pull le altre macchine rifanno il jar.
 
 ## Partita viva
 
-**Percorsi:** `server/src/main` e `server/pom.xml`, salvo la [deroga del playground](#playground-e-misure). **Protetto:** la partita del
+**Percorsi:** `server/src/main` e `server/pom.xml` (nessun file ne è più escluso: [playground](#playground-e-misure)). **Protetto:** la partita del
 regolamento vigente e l'avvio dell'applicazione. **Isolamento:** le regole del playground entrano nel motore e nei bot dietro
 l'interruttore `Ruleset.playground()`, non in cartelle separate: qui il diff dei percorsi **non** prova nulla.
 
 | Se cambia | Esegui | Prosegui se |
 |---|---|---|
-| `com/gsc/bm/model/**` fuori da `model/cards/base` (motore, personaggi, carte vive, `PrintedEffects`, bot), senza l'intenzione di cambiare la partita viva | **identità viva**: il banco vivo di 480.000 partite confrontato con la base; procedura e impronte nell'ultimo rapporto che l'ha eseguita (oggi [SB-16i](reports/set-base/sb-16i-report.md#cancelli-b-prima-di-cambiare-la-bozza), `sb-16i/live-identity.json`) | JSON e Markdown identici byte per byte alla base |
+| `com/gsc/bm/model/**` (motore, personaggi, carte vive e il loro registro in `model/cards/base`, `PrintedEffects`, bot) o il caricatore del set in `com/gsc/bm/sim`, senza l'intenzione di cambiare la partita viva | **identità viva**: il banco vivo di 480.000 partite confrontato con la base; procedura e impronte nell'ultimo rapporto che l'ha eseguita (oggi [SB-16i](reports/set-base/sb-16i-report.md#cancelli-b-prima-di-cambiare-la-bozza), `sb-16i/live-identity.json`) | JSON e Markdown identici byte per byte alla base |
 | gli stessi file, **per** cambiare la partita viva | prima l'area [regolamento e set](#regolamento-e-set); poi l'identità viva come nuova base | la differenza è quella decisa e il rapporto la dichiara con la decisione |
-| qualsiasi file di `server/src/main` fuori dalla deroga, `server/pom.xml`, i test di contesto o della CLI (servizi, `api`, `conf`, `repo`, `com/gsc/bm/bozza`, risorse, e anche motore e modello: gli scenari applicativi giocano partite vere) | `./scripts/build.ps1 -Task TestServerContext -Offline`, poi `python scripts/verify-match-manifests.py` | 0 test falliti o in errore; tutti i controlli dei manifest PASS |
+| qualsiasi file di `server/src/main`, `server/pom.xml`, i test di contesto o della CLI (servizi, `api`, `conf`, `repo`, `com/gsc/bm/bozza`, risorse, e anche motore e modello: gli scenari applicativi giocano partite vere) | `./scripts/build.ps1 -Task TestServerContext -Offline`, poi `python scripts/verify-match-manifests.py` | 0 test falliti o in errore; tutti i controlli dei manifest PASS |
 | ciò che il server espone al client (`api`, estrazione delle viste, `docs/api.md`) | anche l'area [client web](#client-web), con il jar rifatto | come in quell'area |
 
 Il contesto Spring completo è una verifica separata: i test unitari verdi non provano l'avvio. `com/gsc/bm/bozza` contiene le
@@ -65,21 +65,18 @@ fabbriche del profilo `bozza`: il loro isolamento dipende dal profilo e lo prova
 (banco, bracci, test della bozza), `server/src/test/resources/set-base/` (dati della bozza). **Protetto:** (a) nulla della bozza
 raggiunge la partita viva; (b) una misura di bilanciamento non è confusa da cambiamenti del codice: stesso codice, stessi numeri.
 
-**Deroga alla partita viva.** I due package di `server/src/main` sono esentati dall'**identità viva** e da **`TestServerContext` con
-i manifest**, non dalle verifiche «Sempre», a tre condizioni, tutte da mostrare nel rapporto:
+**Niente più deroga in `server/src/main`** (riscritta in SB-34 B1, [D213](set-base-decisioni.md#decisioni-del-proprietario) (2)).
+Fino a SB-34 i due package di `server/src/main` erano esentati dall'identità viva e da `TestServerContext` a tre condizioni (diff
+solo nei due package, nessun codice vivo che ne dipende, catalogo vivo senza classi di `model/cards/base`). Oggi la seconda e la terza
+sono false: da SB-28 la partita viva carica il set con `sim/Draft` e `sim/DraftSource` (`LiveSet` e le fabbriche dei
+servizi) e il catalogo vivo usa classi di `model/cards/base`; da SB-34 lì stanno tutte le classi vive delle carte, col loro registro
+`SetBaseClasses`, e `PrintedEffects` e `CardClasses` le importano. Quindi `com/gsc/bm/sim` e `model/cards/base` di `server/src/main`
+seguono le righe della [partita viva](#partita-viva) come il resto del modello, e in più il passo 0 qui sotto perché la misura li
+esegue.
 
-1. il diff non contiene file di `server/src/main` fuori dai due package, né `cards.sqlite`, regolamento, documenti di set,
-   allegato o client;
-2. nessun codice vivo dipende dai due package: questo comando non stampa nulla;
-
-   ```text
-   git grep -nE "com\.gsc\.bm\.(sim|model\.cards\.base)\b" -- server/src/main/java ":!server/src/main/java/com/gsc/bm/sim" ":!server/src/main/java/com/gsc/bm/model/cards/base" ":!server/src/main/java/com/gsc/bm/bozza"
-   ```
-
-3. il catalogo vivo non nomina classi di `model/cards/base` (vero al 15 novembre 2026; resta vero finché `cards.sqlite` non
-   cambia, cioè per la condizione 1).
-
-Se una condizione manca, valgono le righe della partita viva. I dati di `server/src/test/resources` non entrano nel jar.
+**Cosa resta playground:** i banchi, i bracci e i test della bozza in `server/src/test/java/com/gsc/bm/sim`, i dati della bozza in
+`server/src/test/resources/set-base/` (che non entrano nel jar) e le regole che il motore applica solo dietro `Ruleset.playground()`.
+Per questi vale la protezione (b): stesso codice, stessi numeri.
 
 | Se cambia | Esegui | Prosegui se |
 |---|---|---|
