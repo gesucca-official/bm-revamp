@@ -3627,3 +3627,66 @@ Create a completely new action composition by editing the supplied illustration,
 ~~~text
 Edit only the supplied illustration. Preserve the existing scene and composition: Beppe's one hand continues holding the opponent still by the head. Completely remove the ruler and its spirit level. Beppe touches and strokes his own beard thoughtfully with his now-free other hand, looking pensive as he considers the opponent. Make both hands natural, distinct and connected to their respective arms, without extra limbs. Preserve both figures, faces, clothing, bar, warm restrained lighting, hand-inked comic texture and square framing as closely as possible. No measuring tool, tools in Beppe's pockets, blood, text, border or transparency. Return one opaque square illustration.
 ~~~
+
+#### Risultati del giro
+
+Prompt preventivi nel commit `7612c6d`. Una richiesta per carta, nessun rifiuto o rilancio; originali copiati byte per byte, versioni precedenti conservate. Modello e prompt riscritto non esposti.
+
+##### Chiave da Tredici — versione 6
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.ChiaveDaTredici` |
+| promptSha256 | `eeeefee375b104c93589f97d5937cbe67547ac6153dfa6da13f06fc877ca8b12` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.ChiaveDaTredici-5.png`, SHA-256 `f3f190fea5825ee447eb43140904bb1109078fab26891d0a7086ac09b3b0e488` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.ChiaveDaTredici-6.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-49692825-1ffd-4041-ab37-411e2a57714a.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2859363 / `d32df4e39ebfe6a8314210ebcc4aecf87040051d3a7b91e97f5d400323248151` |
+| Anteprima | [WebP](anteprime/base.gigi.ChiaveDaTredici-6.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Pugno e impatto leggibili; chiave e dita minute, tasche non verificabili. |
+| Anomalie visive | Chiave con due estremità sporgenti dal pugno; volto dell’avventore visibile e parzialmente tagliato dal bordo. |
+| Giudizio del proprietario | In attesa. |
+
+##### Preparare il Lavoro — versione 6
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.ColpoDiChiaveInglese` |
+| promptSha256 | `e60220b3d8b27a0a196457637de82fac96028534a685813e027e4e46beb5730d` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.ColpoDiChiaveInglese-5.png`, SHA-256 `c8a2cc7f81479ef6fff38afe25daf6f593a9d64e2117c34f264ebac0e7178776` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.ColpoDiChiaveInglese-6.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-055fa9e0-a4aa-4e21-8dec-4f5ea7a31b4e.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2473859 / `eab44835cc1a4236f550626fbe8866e943094ce54b8b6105b85711c8a0ae64dd` |
+| Anteprima | [WebP](anteprime/base.gigi.ColpoDiChiaveInglese-6.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Beppe tocca la barba e tiene la testa dell’avventore; dita minute, arti distinguibili, tasche non verificabili. |
+| Anomalie visive | Riga e livella assenti; una mano sulla barba e una sulla testa dell’avventore. |
+| Giudizio del proprietario | In attesa. |
+
+## Chiusura del lotto 5
+
+26 novembre 2026. Il proprietario approva Chiave da Tredici 6 e Preparare il Lavoro 6: «Approvo, chiudi». Con le approvazioni dei giri precedenti, tutte le dieci carte di Beppe sono approvate ([D218](../../../set-base-decisioni.md#decisioni-del-proprietario)). Versioni scelte:
+
+| Carta | bindingName | Versione | Anteprima |
+|---|---|---:|---|
+| Questo Torna Utile | `base.gigi.QuestoTornaUtile` | 1 | [WebP](anteprime/base.gigi.QuestoTornaUtile.webp) |
+| Cuffie e Testa Bassa | `base.gigi.bound.UnaStrettaEPassa` | 6 | [WebP](anteprime/base.gigi.bound.UnaStrettaEPassa-6.webp) |
+| Colpo col Cacciavite | `base.gigi.bound.ColpoDiCacciavite` | 2 | [WebP](anteprime/base.gigi.bound.ColpoDiCacciavite-2.webp) |
+| Affilare gli Utensili | `base.gigi.bound.Lima` | 2 | [WebP](anteprime/base.gigi.bound.Lima-2.webp) |
+| Disassemblare | `bruiser.BreakYourToy` | 1 | [WebP](anteprime/bruiser.BreakYourToy.webp) |
+| Chiave da Tredici | `base.gigi.ChiaveDaTredici` | 6 | [WebP](anteprime/base.gigi.ChiaveDaTredici-6.webp) |
+| Preparare il Lavoro | `base.gigi.ColpoDiChiaveInglese` | 6 | [WebP](anteprime/base.gigi.ColpoDiChiaveInglese-6.webp) |
+| Secondo Bagagliaio | `base.gigi.SottoIlCofano` | 1 | [WebP](anteprime/base.gigi.SottoIlCofano.webp) |
+| Lavoro Fatto Bene | `base.gigi.LavoroFattoBene` | 1 | [WebP](anteprime/base.gigi.LavoroFattoBene.webp) |
+| Metodo Empirico | `base.gigi.UnaStrettaDiProva` | 1 | [WebP](anteprime/base.gigi.UnaStrettaDiProva.webp) |
+
+Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 512×512 WebP qualità 80. `python scripts/check-rules.py`, sospeso nei giri durante SB-34, è verde alla chiusura. Eccezioni accettate in D218 (3): volto visibile dell’avventore in Chiave da Tredici 6 e Preparare il Lavoro 6. Nessuna integrazione nell’atlante in questo lotto. Nessun comportamento di gioco o atteso modificato.
