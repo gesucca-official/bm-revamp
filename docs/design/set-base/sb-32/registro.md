@@ -2087,3 +2087,47 @@ Sei nuove generazioni in ordine, una per ciascun prompt di versione 2, più un r
 | Giudizio del proprietario | In attesa. |
 
 **Verifiche del giro di correzione:** `git diff --check` e `python scripts/check-rules.py` verdi; `python scripts/check-links.py` conserva gli stessi 22 collegamenti mancanti della base, nessuno nuovo. Controllate le copie byte per byte dei sette file restituiti, le sette anteprime WebP qualità 80 a 512 × 512 px e le viste a 60 px; pagina verificata con 11 campi di giudizio, 11 viste a 60 px e tutti i riferimenti locali presenti. Modello, prompt riscritto e hash della maschera allegata in chat non esposti dal tool. Nessuna modifica ai prompt iniziali, al gioco o ai file altrui; nessun push. Cinque versioni 1 approvate; sei proposte correnti in attesa del proprietario, inclusa L’Ultimo Tiro versione 3. La versione 2 non riuscita resta documentata e conservata.
+
+
+### Secondo giudizio del proprietario e nuove correzioni — 26 novembre 2026
+
+> rintanarsi del cappotto: ok
+> tagliare la dose: ok
+> ultimo tiro: ok
+> inventario: celestina sembra strabica, facciamole uno sguardo più pensieroso
+> metabolismo corrotto: quasi ok, facciamole il volto un po' deformato dalla malvagità
+> trascinare nel tunnel: non mi piace, cambiamo concetto: facciamo celestina che ficca un qualcosa di marcio in bocca alll'avventore
+
+Approvate Rintanarsi nel Cappotto versione 2, Tagliare la Dose versione 2 e L’Ultimo Tiro versione 3. Il totale approvato sale a otto carte. Per Fare l’Inventario e Metabolismo Corrotto si ritocca soltanto il volto nelle rispettive versioni 2, conservando il resto; per Trascinare nel Tunnel si genera un nuovo soggetto con un boccone di pane ammuffito, secondo la richiesta. Una richiesta per ciascuna carta, senza rilanci automatici. Nessuna modifica ai prompt iniziali o alle regole del gioco. Le nuove proposte saranno versioni 3, in attesa di giudizio.
+
+#### Prompt del secondo giro di correzioni
+
+##### Fare l'Inventario — versione 3
+
+~~~text
+Edit this illustration only in Celestina's face and expression. Make her look thoughtful and absorbed in considering the six small objects on the table: a calm contemplative expression, slightly lowered eyelids, gently furrowed brow, and relaxed closed lips rather than a smirk. Correct the direction of her eyes: both eyes must be naturally aligned and look together at the same point on the tabletop; anatomically coherent pupils, no crossed eyes, no wandering or divergent eye. Keep her head angle, recognizable face, red shaved-side hair, violet tracksuit, body, two arms and two hands, belt bag, all six stationary objects, table, bar interior, lighting, palette, framing and ink-and-painted comic style unchanged. Do not add objects, movement, text or borders. Opaque square artwork.
+~~~
+
+##### Metabolismo Corrotto — versione 3
+
+~~~text
+Edit this illustration only in Celestina's face. Make her face subtly distorted by malice: more angular pinched cheekbones, a slightly twisted cruel grin lifting one corner of the mouth, an arched brow and a menacing narrowed gaze, an unsettling exaggerated comic expression. The deformation is slight but visible: she remains the same recognizable young adult woman with her original female face and red shaved-side hair. Preserve the prominent green veins on her temple, neck, forearms and hands and the sickly skin colour. Keep her pose, body, exactly two arms and two hands, violet tracksuit, belt bag, table, dive bar background, composition, lighting, colours and hand-inked comic style unchanged. No wounds, blood, extra facial parts, monstrous mouth, text or borders. Opaque square artwork.
+~~~
+
+##### Trascinare nel Tunnel — versione 3
+
+~~~text
+Create one new square illustration, 1024 x 1024 pixels or larger, aspect ratio 1:1, opaque, preferably an original PNG: the action artwork for a playing card of the original project Botte Micidiali. Full-bleed artwork only, not a card mockup: no frame, no border, no lettering.
+
+Attachment 1 is the approved character reference: draw the same woman with the same face and body. Do not copy its pose, framing or plain background. Attachment 2 is the approved interior of the same dive bar: show its shelves, bottles and lamp visibly behind the figures, simplified, darker and less sharp than the subject.
+
+Style: hand-inked European comic, irregular dark contours, restrained painted shading, light worn print texture, slightly exaggerated features. Restrained palette: walnut and tobacco browns, dusty bottle green, oxblood burgundy, muted petrol, worn ivory; no oversaturated colours. Warm, dirty light from one clear direction, deep shadows that never become flat black.
+
+Composition for a tiny card tile: one centred subject filling at least two thirds of the image height, with a large clear silhouette readable at 60 pixels. Keep the background darker, simpler and less sharp than the subject, with strong value contrast. Keep essential details out of the outer 5% of the image. Give characters and bar furniture a believable relative scale, and make any seat physically plausible for the character's weight. Cast shadows consistently with the direction of the light. Show a single clear, coherent scene with the posture and action specified below. Make the main gesture or physical condition readable at tiny size. Make the anatomy of arms and hands coherent and their ownership unambiguous: every figure has exactly two arms and two hands, and no extra or detached limb appears anywhere.
+
+Subject: Celestina forcibly pushes a small rotten piece of food into the open mouth of a seated shadowy adult bar patron. The spoiled food is clearly an ordinary lump of bread with fuzzy muted green mould and a dark soggy patch, held between the fingers of her right hand; half of this single morsel is entering his mouth, showing one unmistakable feeding action. Her left hand braces on the table, separate and clearly owned by her. She leans toward him with a malicious crooked grin; her face, neck and hands retain a sickly pale green cast, while her red hair and violet tracksuit remain distinct. The patron recoils in disgust and raises one hand defensively; his head is turned away in deep shadow, showing only an anonymous mouth and jaw, no recognizable face. Keep the two figures and hand-to-mouth contact large and readable; exactly two arms and two hands for each figure, no extra or detached limbs. One lamp casts ordinary consistent shadows. No handshake, no supernatural shadow, no gore, no vomiting, no drugs or paraphernalia.
+
+Celestina is about twenty-three and clearly adult, with a young face and tired skin, dark circles and a crooked little smirk; thin, crooked, all angles. She has red hair shaved at the sides with a longer faded tuft; she wears a baggy faded tracksuit clearly violet, not burgundy and not green, a belt bag stuffed with things picked up from the floor and mismatched shoes. Any opponent or patron is a generic shadowy figure without a recognizable face, anonymous through shadow and the turn of the head; no hood on any visible figure.
+
+Avoid: syringes, powders, pills, lines, drug paraphernalia or any recognizable drug; mirroring the character; changing her face; a burgundy or green tracksuit; making her look middle-aged; hoods on any figure; text, letters, numbers, pseudo-lettering, signatures, watermarks, logos or brands, including on clothing, wrappers and bottles; recognizable faces on opponents; other cast members; crowds; blood; card frames, borders or interface; likeness of any real person; photographic or 3D-rendered style; oversaturated colours, dominant yellow-and-black, neon, gold ornament; Internet imagery or the look of any existing game.
+~~~
