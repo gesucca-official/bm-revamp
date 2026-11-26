@@ -12,7 +12,7 @@ verifiche si scelgono dalla [tabella delle aree](aree-protette.md).
 >   approvata dal proprietario. Le storie restano nel [serbatoio](design/carriere/README.md), senza valore normativo ([DC4](#decisioni)).
 >   Il [prototipo](design/carriere/prototipo.md) (CA-0a) resta il posto dove provare le storie; il formato è il
 >   [formato delle carriere 0.1](carriere/formato.md) (CA-0b).
-> - **In attesa:** nulla.
+> - **In attesa:** decisione del proprietario sulla [proposta di CA-0e](reports/ca/ca-0e.md), domande 1–5.
 > - **Prossimo:** la parte di strumento di CA-0 è finita (CA-0c: `tools/carriere/`; CA-0d: pacchetti versionati con impronte in
 >   `tools/carriere/pacchetti/`, [rapporto](reports/ca/ca-0d.md)). **CA-0e è sbloccato** (SB-28 chiuso) e si può aprire quando lo decide
 >   il proprietario. CA-0f aspetta SB-30, che nel Set Base viene dopo i lotti di SB-32 e C5, ed EC-0, non ancora partito; CA-0g aspetta C5.
@@ -52,7 +52,7 @@ contro computer, progressi e achievement salvati lato server. Il tutorial vero �
 | [CA-0b](#ca-0b--formato-delle-carriere-01) | Formato delle carriere 0.1, documento normativo | subito | con proposta | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0b.md), [formato 0.1](carriere/formato.md)) |
 | [CA-0c](#ca-0c--strumento-delle-carriere) | Strumento: convertitore, validazione, controllo del grafo | dopo CA-0b | diretto | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0c.md)) |
 | [CA-0d](#ca-0d--pacchetto-delle-carriere) | Pacchetto JSON con versione e impronte, controllato come `check-rules.py` controlla le carte | dopo CA-0c | diretto | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0d.md)) |
-| CA-0e | Modificatori di incontro nel regolamento, con la precedenza di R00 | dopo SB-28 | con proposta | Sbloccato (SB-28 chiuso il 24 novembre 2026), da aprire |
+| [CA-0e](#ca-0e--modificatori-di-incontro) | Modificatori di incontro nel regolamento, con la precedenza di R00 | dopo SB-28 | con proposta | Proposta del 26 novembre 2026 ([rapporto](reports/ca/ca-0e.md)), in attesa della decisione del proprietario |
 | CA-0f | Motore lato server: progressi, segni, achievement, ricompense protette dal farming | dopo SB-30 ed EC-0 | con proposta | — |
 | CA-0g | Scena di dialogo e bacheca nella shell React, banco della fluidità nel client | dopo C5 | a fasi | — |
 
@@ -111,6 +111,15 @@ sono in più, sono fuori data, o se storia o cast usato sono cambiati senza alza
 
 **Stato:** chiuso il 21 novembre 2026. [Rapporto](reports/ca/ca-0d.md): 3 pacchetti riproducibili, 27 prove dello strumento (5 nuove) e 117 del
 prototipo verdi, numeri delle tre storie invariati. Il convertitore ora ignora BOM e CRLF della storia.
+
+### CA-0e — Modificatori di incontro
+
+**Risultato:** il regolamento definisce i modificatori di incontro come sistema (primitive, dichiarazione al tavolo, precedenza nello
+stile di R00, solo partite di carriera, nessun bot che bara da solo) e un catalogo dice quelli concreti che le storie nominano; il
+formato e lo strumento li risolvono e li controllano. Passo con proposta.
+
+**Stato:** proposta del 26 novembre 2026 ([rapporto](reports/ca/ca-0e.md)): sei primitive in una sezione nuova R08a, catalogo
+`docs/carriere/modificatori.md`, formato 0.2, principale 2. In attesa della decisione del proprietario, domande 1–5.
 
 ## Decisioni
 
