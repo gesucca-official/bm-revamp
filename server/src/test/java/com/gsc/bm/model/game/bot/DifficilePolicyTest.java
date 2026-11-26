@@ -237,4 +237,25 @@ class DifficilePolicyTest {
             assertFalse(banned.matcher(source).find(), name);
         }
     }
+
+    /**
+     * SB-30a B2 (proposal §5, part 4): the same boundary for the level factory of the live computer and for the policies of Facile
+     * and Normale, with what they call (styles, previsions). Only {@link BotPlayer} and {@link BotView} read the engine. The factory
+     * returns a {@link BotPolicy}, whose only input is the view.
+     */
+    @Test void liveLevelFactoryAndPoliciesImportNoEngineTypeNorReflection() throws Exception {
+        Path root = Path.of(System.getProperty("b5b.botSources", "src/main/java/com/gsc/bm/model/game/bot"));
+        java.util.regex.Pattern banned = java.util.regex.Pattern.compile(
+                "(?m)^import .*\\b(Game|Player|ComPlayer|Character|Move);|java\\.lang\\.reflect|\\bClass\\.forName\\b|getDeclared"
+                        + "|\\bcom\\.gsc\\.bm\\.model\\.game\\.(Game|Player|ComPlayer|Move)\\b|\\bcom\\.gsc\\.bm\\.model\\.Character\\b");
+        for (String name : List.of("ComLevel", "ComPolicies", "RandomPolicy", "LethalAwarePolicy", "SoughtHitPolicy",
+                "AggressivePolicy", "PrudentPolicy", "ResourceAwarePolicy", "StyleSupport", "TurnForecast")) {
+            String source = Files.readString(root.resolve(name + ".java"));
+            assertFalse(banned.matcher(source).find(), name);
+        }
+        for (java.lang.reflect.Method m : ComPolicies.class.getDeclaredMethods())
+            if (m.getName().equals("policyFor")) assertEquals(BotPolicy.class, m.getReturnType());
+        for (java.lang.reflect.Method m : BotPolicy.class.getDeclaredMethods())
+            assertEquals(List.of(BotView.class, List.class, java.util.Random.class), List.of(m.getParameterTypes()), m.getName());
+    }
 }

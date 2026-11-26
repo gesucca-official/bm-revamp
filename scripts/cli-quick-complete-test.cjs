@@ -10,7 +10,8 @@ async function main() {
     const ids = JSON.parse(process.env.BM_IDS);
     for (let match = 0; match < 2; match++) {
       let mark = c.events.length;
-      await c.command({command:'join',mode:'quick/1vCom'});
+      // SB-30a (R03 2.2): the first match without a level (Facile), the second at Normale through the header `level`.
+      await c.command(match===0?{command:'join',mode:'quick/1vCom'}:{command:'join',mode:'quick/1vCom',level:'NORMALE'});
       const id = (await c.wait('/user/queue/game/quick/1vCom/ready',mark)).data;
       assert.strictEqual(id,ids[match]);
       await c.command({command:'watch',gameId:id});
@@ -59,6 +60,8 @@ async function main() {
       assert.strictEqual(exported.integrity.headHash,previous);
       const initial=events[0].data;
       assert.strictEqual(initial.configuration.botPolicy,'random');
+      // SB-30a: one entry per computer; the runner stubs a ComPlayer without policy, so no level and «random».
+      assert.deepStrictEqual(initial.configuration.computers,[{playerId:bot,level:null,policy:'random'}]);
       assert.strictEqual(initial.versions.rulesVersion,process.env.BM_RULES_VERSION);
       assert.deepStrictEqual(initial.versions.sets,JSON.parse(process.env.BM_SETS));
       assert.strictEqual(initial.versions.sets.base.version,'1.0.2'); // SB-30a (D203): Set Base 1.0.2 (1.0.1 in SB-29, D190)

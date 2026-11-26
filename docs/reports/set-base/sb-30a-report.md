@@ -128,3 +128,154 @@ Il testo di R01, R03 e R08 della 2.2 (sotto, R03), la riga dello stile nelle sch
 1. **R3.** Va bene il rosso come noto, senza rilancio? Raccomandato: sì; B2 rieseguirà comunque il contesto completo.
 2. **Ordine delle chiavi in `BozzeStoriche`.** Lo correggiamo con una mappa ordinata? Raccomandato: sì, in un blocco che tocca gli
    strumenti di misura; fino ad allora `draft.json` del passo 0 si confronta per contenuto.
+
+## B2 — Server
+
+**Esito: consegnata il 26 novembre 2026.** Il computer della partita viva è un `BotPlayer` a uno dei due livelli di R03 2.2,
+Facile (`RandomPolicy`) o Normale (`LethalAwarePolicy(SoughtHitPolicy(<stile della scheda>, ALWAYS))`), scelto con l'header STOMP
+`level` in quick e open contro computer; Normale fisso in FFA; Facile se l'header manca
+([D203](../../set-base-decisioni.md#decisioni-del-proprietario), [D205](../../set-base-decisioni.md#decisioni-del-proprietario) (3)).
+Prova «nessuna informazione nascosta» nuova sul percorso vivo, sempre attiva: 80/80 posizioni. Otto mutazioni rilevate. Tempi
+molto sotto i limiti. Tutte le verifiche verdi; nel contesto completo un rosso noto (R3), verde al rilancio da solo.
+
+Base: `2151caf`. Durante il blocco non sono arrivati commit di altri sulla stessa copia.
+
+### Che cosa è cambiato
+
+- **Livello** (`model/game/bot/ComLevel.java`, nuovo): `FACILE`, `NORMALE`, riservati `DIFFICILE` e `MAESTRO`. `parse` dell'header:
+  assente o vuoto → Facile; `FACILE` o `NORMALE`, maiuscolo e confronto esatto, come la categoria; ogni altro valore, riservati
+  compresi → `UnknownLevelException` («Livello sconosciuto: X (noti: FACILE, NORMALE)»).
+- **Fabbrica per giocatore** (`model/game/bot/ComPolicies.java`, nuovo): `policyFor(level, character)` restituisce un'istanza nuova
+  per ogni computer; lo stile del Normale viene dal `botStyle` del personaggio nel file vivo del set; un livello riservato si
+  rifiuta. Non importa tipi del motore.
+- `PlayerFactoryService.craftComPlayer(category, level)` al posto di `craftRandomComPlayer(category)`. La fabbrica viva crea un
+  `BotPlayer` con id `ComPlayer_nnnn` (stesso formato di prima, ora dal generatore della fabbrica, quindi ripetibile nei test), col
+  generatore del giocatore preso dalla fabbrica e col livello. All'avvio controlla che ogni personaggio con uno starter abbia uno
+  stile noto.
+- `BotPlayer`: campo `level` (null fuori dalla partita viva) e un costruttore in più; quello di prima resta per playground e
+  profilo `bozza`. `level()` non è una proprietà bean, quindi le viste non lo portano.
+- **Caricatore** (`sim/Draft.java`, `DraftSource`): `botStyle` ora letto (`characterBotStyle`) e rifiutato se fuori vocabolario
+  (aggressivo, prudente, risorse). Il motore non lo legge.
+- **Ingressi:** `GameFactoryService.craftQuick1vComGame(player, category, level)` e `craftOpen1vComGame(user, deck, level)`;
+  `craftQuickMultiPlayerGame` dà Normale ai computer della FFA. `QuickGameQueuesController` legge l'header `level` dopo la
+  categoria e prima di accodare o creare. `OpenGameQueuesController` lo legge prima di tutto; il rifiuto va su
+  `/user/queue/game/error` con un gestore dedicato, più specifico di quello del mazzo (che risponde su
+  `/user/queue/game/open/1vCom/error` con un testo generico). `ffa/join/com` non legge header di livello.
+- **Archivio** (`MatchArchiveService`): `INITIAL.configuration.computers`, una voce `{playerId, level, policy}` per computer
+  nell'ordine dei giocatori (`level` null col profilo `bozza`, `policy` «random» per un computer senza politica). `botPolicy` resta,
+  col nome della politica del primo: per la partita viva ora `RandomPolicy` o `LethalAwarePolicy(SoughtHitPolicy(ALWAYS,…))`
+  invece di «random».
+- **Profilo `bozza`:** `BozzaPlayerFactory.craftComPlayer` ignora il livello e gioca lo stile di `app.bozza.bot`, come prima.
+- **CLI** (`scripts/bm-cli.cjs`): il campo `level` del comando `join` è inoltrato come header `level` in quick/1vCom e open/1vCom.
+- **Documenti:** `docs/api.md` (paragrafo «Livello del computer», righe dei tre join), `docs/cli.md`, `docs/match-archive.md`
+  (`botPolicy` e `computers`; non era nell'elenco del prompt, ma descrive il campo nuovo).
+- **Identici byte per byte** (`git diff` vuoto): `ComPlayer`, `BotView`, `TurnForecast`, `LethalAwarePolicy`, `SoughtHitPolicy`,
+  `RandomPolicy`, `StyleSupport`, `AggressivePolicy`, `PrudentPolicy`, `ResourceAwarePolicy`. Nessun file di `client-web` o
+  `client-debug`.
+
+### Test nuovi
+
+| Test | Cosa prova |
+|---|---|
+| `LiveNoHiddenInformationTest` (sempre attivo, circa 2 s) | 60 posizioni a due posti da partite vere col set vivo e `Ruleset.LIVE`, fra computer creati da `PlayerFactoryServiceImpl.craftComPlayer` (livelli misti; fra chi decide, tutti e cinque gli starter), più 20 a tre posti create da `GameFactoryServiceImpl.craftQuickMultiPlayerGame` (FFA, Normale). Copia col nascosto cambiato: mano coperta di **ogni** avversario scambiata con carte del mazzo di nome diverso, ordine di **tutti** i mazzi, una mossa già inviata da un avversario, generatori degli avversari avanzati. Attese: `BotView` uguali; `Move` di `BotPlayer.chooseMove(game)` uguale (carta, autore, bersaglio, partita, scarto, oggetto, vuota, nome cercato) per il computer creato dalla fabbrica e, allo stesso posto, per Facile e per Normale con ciascuno dei tre stili della fabbrica viva. Esito: 60/60 e 20/20; mano cambiata 60/60 e 20/20 (entrambi gli avversari in 19/20); mosse confrontate 300 e 100; posizioni con almeno due mosse legali 60 e 20; con una carta mostrata 8 |
+| `ComLevelFactoryTest` | `parse` (assente, vuoto, i due nomi, sette valori rifiutati); stile di ogni starter uguale al file del set e alla tabella di D203 (4); Facile = `RandomPolicy`, Normale = la catena misurata, istanza nuova a ogni chiamata, riservati rifiutati; stile mancante o sconosciuto ferma l'avvio; il caricatore rifiuta un `botStyle` fuori vocabolario; `craftComPlayer` dà un `BotPlayer` con id `ComPlayer_\d{1,4}`, livello e politica; stesso seme, stessi computer; quick e open al livello chiesto, FFA a Normale |
+| `DifficilePolicyTest.liveLevelFactoryAndPoliciesImportNoEngineTypeNorReflection` | confine dei tipi esteso a `ComLevel`, `ComPolicies`, `RandomPolicy`, `LethalAwarePolicy`, `SoughtHitPolicy`, i tre stili, `StyleSupport`, `TurnForecast`: nessun `Game`, `Player`, `ComPlayer`, `Character`, `Move` (anche per nome completo) né riflessione; `policyFor` restituisce una `BotPolicy`, il cui solo ingresso è la vista |
+| `MatchArchiveTest.initialRecordsEveryComputerWithItsLevelAndPolicy` | `computers` con Facile, Normale, `BotPlayer` senza livello e `ComPlayer` senza politica; `botPolicy` del primo; lista vuota senza computer |
+| `ComLevelContextTest` (contesto, STOMP vero, fabbriche vere) | quick 1vCom senza header, vuoto, `FACILE`, `NORMALE`; open 1vCom con un mazzo salvato, senza header, `FACILE`, `NORMALE`; sei valori non validi su entrambi i join: rifiuto su `/user/queue/game/error` col valore nel testo, nessuna partita, nessuna chiamata alla fabbrica, mazzo non letto, code vuote, niente sull'errore dell'open; FFA con due computer (uno aggiunto con header `FACILE`, ignorato): entrambi Normale; `INITIAL.computers` letto dal database coincide coi giocatori |
+| CLI (`cli-quick-complete-test.cjs`, `cli-open-complete-test.cjs`) | la seconda partita di ciascuno manda `level: 'NORMALE'`; il lato Java verifica che la fabbrica riceva Facile per la prima e Normale per la seconda; `computers` nell'esportazione |
+
+La misura dei tempi (`ComLevelTimingProbe`) gira solo con `-Dsb30a.timing=<cartella>`; non è un test a soglia e il nome non segue
+lo schema dei test di Maven.
+
+### Attesi cambiati (tutti deliberati, D203 (3) e D205 (3))
+
+| File | Prima → dopo | Perché |
+|---|---|---|
+| `BozzaProfileOffContextTest.quickPlayersComeFromSqlite` | `ComPlayer.class` → `BotPlayer.class` con politica `RandomPolicy` | senza livello il computer vivo è il Facile sulla `BotView`, non più il `ComPlayer` casuale |
+| `QuickStartersTest` (tre punti) | `instanceof ComPlayer` → `instanceof BotPlayer`, più l'id `ComPlayer_` | idem; le prove di distribuzione degli starter non cambiano e chiamano `craftComPlayer` |
+| `QuickFfaCliTest` | `craftRandomComPlayer(null)` → `craftComPlayer(null, NORMALE)`, più «mai un livello diverso da Normale» | computer della FFA a Normale (D203 (1)) |
+| `QuickCategoryContextTest`, `OpenCompleteCliTest`, `QuickCompleteCliTest`, `ArchiveLifecycleCliTest`, `MatchArchiveCliTest`, `WebSocketIdentityTest`, `BozzaRulesetTest` | firma nuova con `ComLevel.FACILE` (la CLI di quei test non manda il livello) | solo la firma; in `OpenCompleteCliTest` e `QuickCompleteCliTest` la seconda partita va a Normale (sopra) |
+
+Nessun atteso numerico è cambiato, nessuna asserzione tolta. I test con la CLI che giocano partite intere sostituiscono il
+computer con un `ComPlayer` fisso, com'era: le loro partite non cambiano e `botPolicy` resta «random». Nessun test con seme ha
+dovuto ricalcolare un esito per il passaggio al Facile.
+
+### Mutazioni (8/8 rilevate, poi ripristinate; [esiti](sb-30a/b2-mutations.json))
+
+| | Mutazione | Test rosso |
+|---|---|---|
+| M1 | la fabbrica crea un computer la cui decisione legge la `Game` (generatore dalle mani coperte degli avversari) | `LiveNoHiddenInformationTest`, entrambi i casi |
+| M2 | `BotView` porta la mano coperta degli avversari fra le carte mostrate | idem |
+| M3 | Facile = il vecchio `ComPlayer` casuale | `LiveNoHiddenInformationTest`, `ComLevelFactoryTest`, `QuickStartersTest` |
+| M4 | computer della FFA a Facile | `LiveNoHiddenInformationTest` (FFA), `ComLevelFactoryTest` |
+| M5 | livello mancante → Normale | `ComLevelFactoryTest` |
+| M6 | livello sconosciuto accettato come Facile | `ComLevelFactoryTest` |
+| M7 | Normale senza `LethalAwarePolicy` | `ComLevelFactoryTest` |
+| M8 | l'archivio salta il computer senza politica | `MatchArchiveTest` |
+
+### Tempo per decisione ([JSON](sb-30a/b2-timing.json))
+
+`BotPlayer.chooseMove(game)` su una copia di ogni posizione di partite vere (set vivo, `Ruleset.LIVE`), a JVM calda (seconda di due
+passate), Ryzen 9 5950X, JDK Zulu 11.0.29, nessun altro carico.
+
+| Caso | Decisioni | Mediana | P99 | Massimo |
+|---|---|---|---|---|
+| un computer, Facile (300 partite) | 3.752 | 0,018 ms | 0,046 ms | 0,113 ms |
+| un computer, Normale (300 partite) | 2.604 | 0,078 ms | 0,179 ms | 2,467 ms |
+| quattro computer, Normale, per decisione (80 FFA a cinque) | 3.444 | 0,123 ms | 0,348 ms | 2,799 ms |
+| quattro computer, Normale, **turno intero** | 301 turni | 0,609 ms | 1,302 ms | 1,649 ms |
+| quattro computer, Facile (non è un caso vivo), turno intero | 741 turni | 0,078 ms | 0,186 ms | 0,304 ms |
+
+Limiti della proposta: P99 sotto 5 ms, massimo sotto 50 ms, turno FFA con quattro computer sotto 50 ms. Rispettati con margine
+largo; nessuna decisione sopra 5 ms.
+
+### Verifiche
+
+| Verifica | Esito |
+|---|---|
+| `build.ps1 -Task Test -Offline` | verde: **1518 test, 0 falliti, 23 saltati** (12 in più di B1); client di debug 42/42 |
+| `build.ps1 -Task TestServerContext -Offline` | **1727 test, 1 fallito (R3)**, 23 saltati |
+| rilancio da solo di `QuickDuelCliTest` | verde, 11/11 |
+| `verify-match-manifests.py` | uscita 0, `allChecks` PASS |
+| `check-rules.py` | verde: regolamento 2.2, Set Base 1.0.2 |
+| Identità viva (`ChargeMeasureTest#liveBenchOnTheSameHistoricalDraft`, 480.000 partite, 100 s), nella cartella delle basi | `final-live.json` `ca131721…` (266.869 B), `final-live.md` `16d3bde4…` (26.112 B): **identici byte per byte** al riferimento di B1, riscritti dopo il codice |
+| `TurnForecastFidelityTest` | verde nel giro dei test, file non toccato |
+| Mutazioni | 8/8 rosse, sorgenti ripristinati (nessun `MUTANT` rimasto, `git status` uguale a prima) |
+| `build.ps1 -Task Server -Offline` | jar rifatto |
+| `check-links.py` | 22 rotti, quelli noti |
+| `git diff --check` | pulito (solo l'avviso di fine riga di `MatchArchiveTest.java`, normalizzato da git) |
+
+**Rosso del contesto completo.** `QuickDuelCliTest.aBaseAndAnAdvancedHumanPlayTheirOwnStarters`, «Error: Event timeout»: stessa
+verifica, stesso test e stessa firma di B1, quindi **noto, voce R3** del [registro](../rossi-noti.md). È una partita 1v1 fra due
+umani, senza computer. Come chiede il prompt l'ho rilanciato una volta da solo: verde (11/11).
+
+**Processi.** Prima di ogni corsa di Maven e del banco nessun altro `java` o `mvn`; le corse una alla volta.
+
+### Non verificato
+
+- Nessuna verifica col browser: `client-web` non manda ancora il livello (B3), quindi oggi gioca contro il Facile. Le Playwright
+  giocano contro un computer diverso dal `ComPlayer` di prima, di forza pari (51,6% nella misura della Fase A): da guardare in B3.
+- Nessuna partita manuale (B4).
+- Due computer con lo stesso id (quattro cifre a caso, come prima) restano possibili in FFA: non è cambiato, non indagato.
+
+### Scelte prese
+
+- Nomi del livello maiuscoli e confronto esatto (i nomi dell'enum); il minuscolo si rifiuta, come la categoria rifiuta «Base».
+- Il rifiuto del livello nell'open va su `/user/queue/game/error`, come chiede il prompt, non sull'errore dell'open: oggi
+  `client-web` per l'open ascolta solo quest'ultimo, ma non manda ancora il livello (domanda 1).
+- Il caricatore rifiuta un `botStyle` fuori vocabolario: lo fa già il generatore, qui protegge l'avvio del server.
+- La prova sul percorso vivo è un test nuovo nel pacchetto delle fabbriche (serve il costruttore con seme), non un'estensione di
+  `Sb30bProbeTest`; ne riprende la trasformazione del nascosto.
+
+### Per le altre macchine
+
+- Server cambiato: dopo il pull il jar va ricostruito prima di qualsiasi verifica del client.
+
+### Da giudicare
+
+I tempi, il campo `computers` dell'archivio, il rifiuto del livello nell'open su `/user/queue/game/error`.
+
+### Domande
+
+1. **Rifiuto del livello nell'open.** Resta su `/user/queue/game/error`, e in B3 il client ascolta quella coda anche nell'open?
+   Raccomandato: sì, così quick e open rifiutano il livello allo stesso modo.

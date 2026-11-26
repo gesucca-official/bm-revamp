@@ -61,7 +61,9 @@ class QuickCompleteCliTest extends SqliteContextSupport {
         String user = junkie ? "i13Junkie" : "i13Bruiser";
         users.createIfAbsent(new UserCredentialsRecord(user,null,encoder.encode("synthetic"),"USER"));
         Game win=fixture(user,junkie,false), draw=fixture(user,junkie,true);
-        doReturn(win,draw).when(factory).craftQuick1vComGame(user,null);
+        // SB-30a (R03 2.2): the CLI joins the first match without a level (Facile) and the second with the header level NORMALE.
+        doReturn(win).when(factory).craftQuick1vComGame(user,null,com.gsc.bm.model.game.bot.ComLevel.FACILE);
+        doReturn(draw).when(factory).craftQuick1vComGame(user,null,com.gsc.bm.model.game.bot.ComLevel.NORMALE);
         Path root=Path.of("..").toAbsolutePath().normalize();
         Path output=Files.createTempFile(Path.of("target"),"i13-cli-",".json");
         ProcessBuilder pb=new ProcessBuilder(root.resolve(".tools/node-v12.22.12-win-x64/node.exe").toString(),root.resolve("scripts/cli-quick-complete-test.cjs").toString());
@@ -88,7 +90,8 @@ class QuickCompleteCliTest extends SqliteContextSupport {
                 assertEquals(result.path("exports").get(i),mapper.valueToTree(reread.export(game.getGameId(),user)));
                 assertThrows(IllegalArgumentException.class,()->games.getGame(game.getGameId()));
             }
-            verify(factory,times(2)).craftQuick1vComGame(user,null);
+            verify(factory).craftQuick1vComGame(user,null,com.gsc.bm.model.game.bot.ComLevel.FACILE);
+            verify(factory).craftQuick1vComGame(user,null,com.gsc.bm.model.game.bot.ComLevel.NORMALE);
             assertFalse(Files.readString(output).contains("synthetic"));
             Files.copy(output,root.resolve(".build-logs/i13-"+user+"-exports.json"),StandardCopyOption.REPLACE_EXISTING);
         } finally {

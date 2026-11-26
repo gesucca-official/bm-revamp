@@ -2,8 +2,10 @@ package com.gsc.bm.service.factories;
 
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.cards.Card;
-import com.gsc.bm.model.game.ComPlayer;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.game.bot.BotPlayer;
+import com.gsc.bm.model.game.bot.ComLevel;
+import com.gsc.bm.model.game.bot.ComPolicies;
 import com.gsc.bm.repo.external.UserDeckRecordKey;
 import com.gsc.bm.repo.external.UserDecksRepository;
 import com.gsc.bm.service.account.DeckRules;
@@ -12,14 +14,17 @@ import com.gsc.bm.sim.DraftSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
  * Players of the live game. SB-28 (D182 (1)): quick deals one of the five starters of the live set at random, base and advanced,
  * to every human and to the computer; open plays a deck the account saved. SB-29 (R01 2.1, D190): the human may choose a
- * category of the set document and the starter is drawn inside it; without a category, among all of them.
+ * category of the set document and the starter is drawn inside it; without a category, among all of them. SB-30a (R03 2.2,
+ * D203): the computer is a {@link BotPlayer} at the level of the join, with the style of its character's sheet at Normale.
  */
 @Service
 public class PlayerFactoryServiceImpl implements PlayerFactoryService {
@@ -30,6 +35,7 @@ public class PlayerFactoryServiceImpl implements PlayerFactoryService {
     private final UserDecksRepository userDecksRepo;
     private final CardFactoryService cards;
     private final Random random;
+    private final ComPolicies policies;
 
     @Autowired
     public PlayerFactoryServiceImpl(LiveSet live, CharacterFactoryService characterFactoryService, UserDecksRepository userDecksRepo,
@@ -46,13 +52,22 @@ public class PlayerFactoryServiceImpl implements PlayerFactoryService {
         this.userDecksRepo = userDecksRepo;
         this.cards = cards;
         this.random = random;
+        // SB-30a (D203 (4)): every character with a starter has a style in the set file, checked at the start.
+        Map<String, String> styles = new LinkedHashMap<>();
+        for (String deck : starters) styles.put(set.characterOf(deck), set.characterBotStyle(set.characterOf(deck)));
+        this.policies = new ComPolicies(styles);
     }
 
     @Override
-    public Player craftRandomComPlayer(String category) {
+    public Player craftComPlayer(String category, ComLevel level) {
+        if (!level.offered()) throw new ComLevel.UnknownLevelException(level.name());
         Starter s = new Starter(randomStarter(category));
-        return new ComPlayer(s.character, s.basic, s.bound, s.lastResort, s.regular);
+        return new BotPlayer("ComPlayer_" + random.nextInt(10000), s.character, s.basic, s.bound, s.lastResort, s.regular,
+                new Random(random.nextLong()), policies.policyFor(level, s.character.getBindingName()), level);
     }
+
+    /** SB-30a: the policies of the live computers (for the tests). */
+    ComPolicies policies() { return policies; }
 
     @Override
     public Player craftRandomPlayer(String playerId, String category) {

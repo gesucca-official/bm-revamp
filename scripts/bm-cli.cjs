@@ -152,8 +152,11 @@ class Client {
         await this.subscribe(d);
         if (c.mode === 'quick/ffa') await this.subscribe('/topic/game/quick/ffa/joined');
         // SB-29 (R01 2.1, D190): the quick joins take the starter category as the STOMP header `category`; without it, any starter.
-        const category = c.mode.startsWith('quick/') && typeof c.category === 'string' ? {category: c.category} : {};
-        this.send('/app/game/' + c.mode + '/join' + (c.mode === 'open/1vCom' ? '/' + u + '/' + c.deckId : ''), u, category);
+        const headers = c.mode.startsWith('quick/') && typeof c.category === 'string' ? {category: c.category} : {};
+        // SB-30a (R03 2.2, D203): the two joins against the computer take its level as the STOMP header `level` (FACILE or
+        // NORMALE); without it, Facile. The FFA computers play at Normale.
+        if (c.mode.endsWith('/1vCom') && typeof c.level === 'string') headers.level = c.level;
+        this.send('/app/game/' + c.mode + '/join' + (c.mode === 'open/1vCom' ? '/' + u + '/' + c.deckId : ''), u, headers);
         return {joined: c.mode};
       }
       case 'watch':

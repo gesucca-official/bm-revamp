@@ -68,7 +68,7 @@ class QuickFfaCliTest extends SqliteContextSupport {
         doAnswer(i -> new com.gsc.bm.model.game.ComPlayer(new BigBadBruiser(),
             cards.craftCard("base.com.ShuffleFeet"), List.of(), cards.craftCard("com.last.Struggle"),
             java.util.stream.IntStream.range(0,50).mapToObj(n -> cards.craftCard("base.com.ShuffleFeet")).collect(java.util.stream.Collectors.toList())))
-            .when(players).craftRandomComPlayer(null);
+            .when(players).craftComPlayer(null,com.gsc.bm.model.game.bot.ComLevel.NORMALE);
         Path root=Path.of("..").toAbsolutePath().normalize();
         Path controls=Files.createTempDirectory(Path.of("target"),"i17b-clock-").toAbsolutePath();
         Path output=Path.of("target","i17b-"+scenario+".json");
@@ -110,8 +110,9 @@ class QuickFfaCliTest extends SqliteContextSupport {
             if(scenario.equals("categories")) { // SB-29 (D190): the humans asked for their category, the computer of the FFA for none (any starter)
                 verify(players).craftRandomPlayer(prefix+"A","base");
                 verify(players).craftRandomPlayer(prefix+"B","avanzato");
-                verify(players).craftRandomComPlayer(null);
-                verify(players,never()).craftRandomComPlayer(argThat(category -> category != null));
+                verify(players).craftComPlayer(null,com.gsc.bm.model.game.bot.ComLevel.NORMALE);
+                verify(players,never()).craftComPlayer(argThat(category -> category != null),any());
+                verify(players,never()).craftComPlayer(any(),argThat(level -> level != com.gsc.bm.model.game.bot.ComLevel.NORMALE));
             }
             Files.copy(output,root.resolve(".build-logs/i17b-"+scenario+"-exports.json"),StandardCopyOption.REPLACE_EXISTING);
         } finally {

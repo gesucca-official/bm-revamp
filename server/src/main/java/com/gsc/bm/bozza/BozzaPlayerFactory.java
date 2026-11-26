@@ -6,6 +6,7 @@ import com.gsc.bm.model.game.ComPlayer;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.game.bot.BotPlayer;
 import com.gsc.bm.model.game.bot.BotPolicy;
+import com.gsc.bm.model.game.bot.ComLevel;
 import com.gsc.bm.service.account.DeckRules;
 import com.gsc.bm.service.factories.CardFactoryService;
 import com.gsc.bm.service.factories.CharacterFactoryService;
@@ -46,8 +47,12 @@ public class BozzaPlayerFactory implements PlayerFactoryService {
         this.saved = saved;
     }
 
+    /**
+     * SB-29: the draft profile draws from its pool and ignores the category. SB-30a: it ignores the level too; the computer plays
+     * the style of {@code app.bozza.bot}, as before.
+     */
     @Override
-    public Player craftRandomComPlayer(String category) { // SB-29: the draft profile draws from its pool and ignores the category
+    public Player craftComPlayer(String category, ComLevel level) {
         String deck = BozzaDraft.FROM_POOL.equals(bozza.com()) ? fromPool() : bozza.com();
         Deck d = deck(deck);
         BotPolicy policy = bozza.newPolicy();

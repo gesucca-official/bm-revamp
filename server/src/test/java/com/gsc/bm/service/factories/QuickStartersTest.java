@@ -1,6 +1,7 @@
 package com.gsc.bm.service.factories;
 
-import com.gsc.bm.model.game.ComPlayer;
+import com.gsc.bm.model.game.bot.BotPlayer;
+import com.gsc.bm.model.game.bot.ComLevel;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.repo.external.UserDecksRepository;
 import com.gsc.bm.repo.internal.CardKeywordsRecord;
@@ -64,8 +65,9 @@ class QuickStartersTest {
         Set<String> characters = new HashSet<>();
         for (int i = 0; i < 200; i++) {
             Player human = players.craftRandomPlayer("umano", null);
-            Player com = players.craftRandomComPlayer(null);
-            assertTrue(com instanceof ComPlayer);
+            Player com = players.craftComPlayer(null, ComLevel.FACILE);
+            assertTrue(com instanceof BotPlayer); // SB-30a (D203 (3)): the live computer is a BotPlayer, no more the random ComPlayer
+            assertTrue(com.getPlayerId().startsWith("ComPlayer_"), com.getPlayerId());
             for (Player p : List.of(human, com)) {
                 String character = p.getCharacter().getBindingName();
                 characters.add(character);
@@ -98,7 +100,7 @@ class QuickStartersTest {
             Set<String> humans = new HashSet<>(), coms = new HashSet<>();
             for (int i = 0; i < 400; i++) {
                 humans.add(deckOf(players.craftRandomPlayer("umano", category)));
-                coms.add(deckOf(players.craftRandomComPlayer(category)));
+                coms.add(deckOf(players.craftComPlayer(category, ComLevel.NORMALE)));
             }
             assertEquals(expected, humans, category + " (human)");
             assertEquals(expected, coms, category + " (computer)");
@@ -124,7 +126,7 @@ class QuickStartersTest {
         for (String bad : List.of("esperto", "Base", "AVANZATO", " base", "base ")) {
             assertThrows(IllegalArgumentException.class, () -> players.randomStarter(bad), bad);
             assertThrows(IllegalArgumentException.class, () -> players.craftRandomPlayer("umano", bad), bad);
-            assertThrows(IllegalArgumentException.class, () -> players.craftRandomComPlayer(bad), bad);
+            assertThrows(IllegalArgumentException.class, () -> players.craftComPlayer(bad, ComLevel.FACILE), bad);
             assertThrows(IllegalArgumentException.class, () -> players.checkCategory(bad), bad);
         }
         assertNull(players.checkCategory(null), "no category");

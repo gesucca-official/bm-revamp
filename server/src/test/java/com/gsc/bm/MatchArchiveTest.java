@@ -152,6 +152,39 @@ class MatchArchiveTest {
         }
         assertEquals(70, initialTree.path("state").path("players").get(1).path("resources").path("HEALTH").asInt());
     }
+    /** SB-30a B2 (R03 2.2, D203): INITIAL lists every computer with its level and policy; botPolicy stays, the first one's. */
+    @Test void initialRecordsEveryComputerWithItsLevelAndPolicy() throws Exception {
+        var repo = new MatchEventRepository(jdbc(directory.resolve("computers.sqlite"))); var archive = archive(repo);
+        String starter = LiveFixtures.set().starters().get(0);
+        var facile = bot("ComPlayer_11", starter, new com.gsc.bm.model.game.bot.RandomPolicy(), com.gsc.bm.model.game.bot.ComLevel.FACILE);
+        var normale = bot("ComPlayer_22", starter, new com.gsc.bm.model.game.bot.LethalAwarePolicy(new com.gsc.bm.model.game.bot.SoughtHitPolicy(
+                new com.gsc.bm.model.game.bot.PrudentPolicy(), com.gsc.bm.model.game.bot.SoughtHitPolicy.Timing.ALWAYS)),
+                com.gsc.bm.model.game.bot.ComLevel.NORMALE);
+        var draft = bot("ComPlayer_33", starter, new com.gsc.bm.model.game.bot.AggressivePolicy(), null); // profile bozza: no level
+        var random = LiveFixtures.computer("ComPlayer_44", starter, 4); // a ComPlayer without policy
+        var game = LiveFixtures.live(new Game(List.of(player("a"), facile, normale, draft, random), "quickFFA", false));
+        archive.start(game);
+        var configuration = mapper.readTree(repo.read(game.getGameId()).get(0).getJson()).path("data").path("configuration");
+        assertEquals("RandomPolicy", configuration.path("botPolicy").asText(), "compatibility: the policy of the first computer");
+        assertEquals(mapper.readTree("[{\"playerId\":\"ComPlayer_11\",\"level\":\"FACILE\",\"policy\":\"RandomPolicy\"},"
+                + "{\"playerId\":\"ComPlayer_22\",\"level\":\"NORMALE\",\"policy\":\"LethalAwarePolicy(SoughtHitPolicy(ALWAYS,PrudentPolicy))\"},"
+                + "{\"playerId\":\"ComPlayer_33\",\"level\":null,\"policy\":\"AggressivePolicy\"},"
+                + "{\"playerId\":\"ComPlayer_44\",\"level\":null,\"policy\":\"random\"}]"), configuration.path("computers"));
+        // A game of humans has no computer.
+        var humans = LiveFixtures.live(new Game(List.of(player("h1"), player("h2")), "quick1v1", false));
+        archive.start(humans);
+        var none = mapper.readTree(repo.read(humans.getGameId()).get(0).getJson()).path("data").path("configuration");
+        assertEquals("random", none.path("botPolicy").asText());
+        assertEquals(0, none.path("computers").size());
+        assertTrue(none.path("computers").isArray());
+    }
+    static com.gsc.bm.model.game.bot.BotPlayer bot(String id, String starter, com.gsc.bm.model.game.bot.BotPolicy policy,
+                                                  com.gsc.bm.model.game.bot.ComLevel level) {
+        var set = LiveFixtures.set();
+        return new com.gsc.bm.model.game.bot.BotPlayer(id, LiveFixtures.character(set.characterOf(starter)),
+                LiveFixtures.card(set.basicOf(starter), "basic"), LiveFixtures.bound(starter), LiveFixtures.card(set.lastResortOf(starter), "last-resort"),
+                List.of(), new Random(1), policy, level);
+    }
     @Test void failedInitialAndLaterWritesRetainImmutableEvidenceAndRemainPendingForRetry() {
         var repo = mock(MatchEventRepository.class); doThrow(new IllegalStateException("synthetic")).when(repo).commit(anyString(),anyList());
         when(repo.read(anyString())).thenReturn(List.of()); var archive = archive(repo);

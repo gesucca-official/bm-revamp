@@ -85,10 +85,29 @@ public class MatchArchiveService {
                     "outcome", fields("over", true, "result", "draw", "winner", null, "reason", "riavvio server"));
         } catch (java.io.IOException e) { throw new IllegalStateException("Invalid restart outcome", e); }
     }
-    /** «random» for the live ComPlayer; SB-8: the heuristic policy of a BotPlayer, only with the development profile. */
+    /**
+     * The policy of the first BotPlayer, «random» for a ComPlayer without policy (profile bozza, casuale). SB-30a: kept for
+     * compatibility; {@link #computers} describes every computer.
+     */
     static String botPolicy(Game game) {
         return game.getPlayers().values().stream().filter(p -> p instanceof com.gsc.bm.model.game.bot.BotPlayer)
                 .map(p -> ((com.gsc.bm.model.game.bot.BotPlayer) p).policyName()).findFirst().orElse("random");
+    }
+    /**
+     * SB-30a (R03 2.2, D203): one entry per computer, in the order of the players: id, level (null outside the live game) and
+     * policy («random» for a ComPlayer without policy).
+     */
+    static List<Map<String, Object>> computers(Game game) {
+        List<Map<String, Object>> computers = new ArrayList<>();
+        for (Player player : game.getPlayers().values()) {
+            if (!(player instanceof ComPlayer)) { continue; }
+            if (player instanceof com.gsc.bm.model.game.bot.BotPlayer) {
+                var bot = (com.gsc.bm.model.game.bot.BotPlayer) player;
+                computers.add(fields("playerId", bot.getPlayerId(), "level", bot.level() == null ? null : bot.level().name(),
+                        "policy", bot.policyName()));
+            } else { computers.add(fields("playerId", player.getPlayerId(), "level", null, "policy", "random")); }
+        }
+        return computers;
     }
     public synchronized void record(Game game, List<ActionLog> events) {
         Stream stream = streams.get(game.getGameId());
@@ -103,7 +122,7 @@ public class MatchArchiveService {
                 else if (data instanceof Move) { data = MatchSnapshot.move((Move) data); }
                 if (event.getWhat().equals("INITIAL")) {
                     data = fields("versions", versions.get(), "configuration", fields("handSize", Player.CARDS_IN_HAND,
-                            "deckOrder", "next draw first", "playerOrder", "insertion", "botPolicy", botPolicy(game),
+                            "deckOrder", "next draw first", "playerOrder", "insertion", "botPolicy", botPolicy(game), "computers", computers(game),
                             "scope", "quick1vCom/quick1v1/quickFFA/open1vCom engine events; no UI telemetry"), "state", data);
                 }
                 int sequence = stream.entries.size();

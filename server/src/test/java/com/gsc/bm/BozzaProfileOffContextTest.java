@@ -1,7 +1,6 @@
 package com.gsc.bm;
 
 import com.gsc.bm.model.cards.Card;
-import com.gsc.bm.model.game.ComPlayer;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.repo.external.UserCredentialsRecord;
 import com.gsc.bm.repo.external.UserCredentialsRepository;
@@ -142,7 +141,7 @@ class BozzaProfileOffContextTest extends SqliteContextSupport {
     void quickPlayersComeFromSqlite() {
         Set<String> catalogCards = liveCards();
         for (int i = 0; i < 50; i++) {
-            for (Player player : List.of(players.craftRandomPlayer("sb8Quick",null), players.craftRandomComPlayer(null))) {
+            for (Player player : List.of(players.craftRandomPlayer("sb8Quick",null), players.craftComPlayer(null, com.gsc.bm.model.game.bot.ComLevel.FACILE))) {
                 // SB-28 (D182 (1)): one of the five starters of the live set.
                 assertTrue(live.starters().stream().map(live.set()::characterOf).anyMatch(player.getCharacter().getBindingName()::equals),
                         player.getCharacter().getBindingName());
@@ -151,7 +150,10 @@ class BozzaProfileOffContextTest extends SqliteContextSupport {
                 all.add(player.getLastResortCard());
                 for (Card card : all) assertTrue(catalogCards.contains(card.getBindingName()), card.getBindingName());
             }
-            assertEquals(ComPlayer.class, players.craftRandomComPlayer(null).getClass(), "live computer: the random ComPlayer");
+            // SB-30a (D203 (3)): the live computer is a BotPlayer on the BotView; at Facile its policy is RandomPolicy.
+            Player computer = players.craftComPlayer(null, com.gsc.bm.model.game.bot.ComLevel.FACILE);
+            assertEquals(com.gsc.bm.model.game.bot.BotPlayer.class, computer.getClass(), "live computer: a BotPlayer");
+            assertEquals("RandomPolicy", ((com.gsc.bm.model.game.bot.BotPlayer) computer).policyName(), "live computer at Facile");
         }
     }
 

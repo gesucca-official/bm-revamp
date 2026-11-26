@@ -52,7 +52,7 @@ class WebSocketIdentityTest extends SqliteContextSupport {
         bot.getCardsInHand().clear(); bot.getCardsInHand().add(cards.craftCard("com.last.Struggle"));
         bot.getDeck().push(cards.craftCard("bruiser.SuperImpact"));
         var game = new com.gsc.bm.model.game.Game(java.util.List.of(human,bot),"quick1vCom",false);
-        org.mockito.Mockito.doReturn(game).when(gameFactory).craftQuick1vComGame("roundHuman",null);
+        org.mockito.Mockito.doReturn(game).when(gameFactory).craftQuick1vComGame("roundHuman",null,com.gsc.bm.model.game.bot.ComLevel.FACILE);
         var client = newClient(); StompSession session = null, observer = null;
         boolean joined = false;
         try {
@@ -66,7 +66,7 @@ class WebSocketIdentityTest extends SqliteContextSupport {
             String id = new String(reply,java.nio.charset.StandardCharsets.UTF_8);
             assertEquals(game.getGameId(),id); assertEquals(2,games.getGame(id).getPlayers().size());
             assertNull(others.poll(200,TimeUnit.MILLISECONDS));
-            org.mockito.Mockito.verify(gameFactory,org.mockito.Mockito.times(1)).craftQuick1vComGame("roundHuman",null);
+            org.mockito.Mockito.verify(gameFactory,org.mockito.Mockito.times(1)).craftQuick1vComGame("roundHuman",null,com.gsc.bm.model.game.bot.ComLevel.FACILE);
             var updates = new LinkedBlockingQueue<byte[]>(); var privateViews = new LinkedBlockingQueue<byte[]>(); var errors = new LinkedBlockingQueue<byte[]>();
             subscribeConfirmed(session,"/topic/game/"+id+"/update",collect(updates));
             subscribeConfirmed(session,"/user/queue/game/"+id+"/view",collect(privateViews));
@@ -263,7 +263,7 @@ class WebSocketIdentityTest extends SqliteContextSupport {
                 decks.craftCharacterBoundStarterCards(botCharacter), decks.craftLastResortStarterCard(botCharacter), java.util.List.of());
         bot.getCardsInHand().clear(); bot.getCardsInHand().add(cards.craftCard("com.last.Struggle"));
         var game = new com.gsc.bm.model.game.Game(java.util.List.of(human, bot), "quick1vCom", false);
-        org.mockito.Mockito.doReturn(game).when(gameFactory).craftQuick1vComGame("cliHuman",null);
+        org.mockito.Mockito.doReturn(game).when(gameFactory).craftQuick1vComGame("cliHuman",null,com.gsc.bm.model.game.bot.ComLevel.FACILE);
         Path root = Path.of("..").toAbsolutePath().normalize();
         Path input = Files.createTempFile(Path.of("target"), "cli-", ".jsonl");
         Path output = Files.createTempFile(Path.of("target"), "cli-", ".out");

@@ -15,6 +15,7 @@ import com.gsc.bm.model.game.ComPlayer;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.game.bot.BotPlayer;
 import com.gsc.bm.model.game.bot.BotPolicy;
+import com.gsc.bm.model.game.bot.ComPolicies;
 import com.gsc.bm.service.factories.CardFactoryService;
 
 import java.io.InputStream;
@@ -150,14 +151,17 @@ final class Draft implements PlayerSource {
         final String id, name, basic, set, rarity;
         /** SB-24: the flavour line of the character (D166), descriptive only; null when the draft does not write it. */
         final String flavour;
+        /** SB-30a B2 (R03 2.2, D203 (4)): the style of the computer at Normale, or null; no effect on the engine. */
+        final String botStyle;
         final Map<Resource, Integer> resources;
         final int items;
         final Set<Resource> immunities;
 
         CharacterSpec(String id, String name, Map<Resource, Integer> resources, int items, Set<Resource> immunities, String basic,
-                      String set, String rarity, String flavour) {
+                      String set, String rarity, String flavour, String botStyle) {
             this.id = id;
             this.flavour = flavour;
+            this.botStyle = botStyle;
             this.set = set;
             this.rarity = rarity;
             this.name = name;
@@ -553,6 +557,8 @@ final class Draft implements PlayerSource {
 
     String characterFlavour(String id) { return characters.get(id).flavour; }
 
+    String characterBotStyle(String id) { return characters.get(id).botStyle; }
+
     String characterName(String id) { return characters.get(id).name; }
 
     /** Le bound legate al personaggio fra le carte caricate, in ordine di binding: quelle fra cui un mazzo sceglie. */
@@ -669,11 +675,14 @@ final class Draft implements PlayerSource {
         ObjectNode node = object(raw, "personaggio");
         String id = text(node, "id", "personaggio");
         String where = label("personaggio", id, textOrNull(node, "set"));
-        // SB-30a B1 (D203 (4)): botStyle is accepted and not read; the live bot reads it from B2 on.
+        // SB-30a (D203 (4)): botStyle is the style of the live computer at Normale (ComPolicies); the engine does not read it.
         fields(node, where, Set.of("id", "name", "resources", "items", "immunities"), Set.of("basic", "rarity", "set", "flavour", "botStyle"));
         String set = setOf(node, where, id), rarity = rarity(node, where);
         String name = text(node, "name", where);
         String flavour = optional(node, "flavour", where);
+        String botStyle = optional(node, "botStyle", where);
+        if (botStyle != null && !ComPolicies.STYLES.containsKey(botStyle))
+            throw invalid(where, "botStyle sconosciuto: " + botStyle + " (noti: " + ComPolicies.STYLES.keySet() + ")");
         ObjectNode resourcesNode = object(node.get("resources"), where + ": resources");
         Map<Resource, Integer> resources = new EnumMap<>(Resource.class);
         resourcesNode.fields().forEachRemaining(entry -> {
@@ -695,7 +704,7 @@ final class Draft implements PlayerSource {
         String basic = node.has("basic") ? text(node, "basic", where) : null;
         if (rules.basicFixedPerCharacter && basic == null) throw invalid(where, "campo basic mancante: la basic è fissa per personaggio");
         return new CharacterSpec(id, name, Collections.unmodifiableMap(resources), items, Collections.unmodifiableSet(immunities), basic,
-                set, rarity, flavour);
+                set, rarity, flavour, botStyle);
     }
 
     private CardSpec card(JsonNode raw) {

@@ -58,7 +58,8 @@ async function main() {
       const selected=deck(cfg);
       assert.deepStrictEqual((await c.command({command:'save',deck:selected})).data.decks.find(d=>d.deckId===cfg.id),selected);
       let mark=c.events.length;
-      await c.command({command:'join',mode:'open/1vCom',deckId:cfg.id});
+      // SB-30a (R03 2.2): the first deck without a level (Facile), the second at Normale through the header `level`.
+      await c.command(cfg===configs[0]?{command:'join',mode:'open/1vCom',deckId:cfg.id}:{command:'join',mode:'open/1vCom',deckId:cfg.id,level:'NORMALE'});
       const id=(await c.wait('/user/queue/game/open/1vCom/ready',mark)).data;
       await c.command({command:'watch',gameId:id});
       let view=(await c.command({command:'view',gameId:id})).data;
@@ -115,6 +116,8 @@ async function main() {
       assert.deepStrictEqual(initial.versions.sets,JSON.parse(process.env.BM_SETS));
       assert.strictEqual(initial.versions.sets.base.version,'1.0.2'); // SB-30a (D203): Set Base 1.0.2 (1.0.1 in SB-29, D190)
       assert.strictEqual(initial.configuration.botPolicy,'random');
+      // SB-30a: one entry per computer; the runner stubs a ComPlayer without policy, so no level and «random».
+      assert.deepStrictEqual(initial.configuration.computers,[{playerId:bot,level:null,policy:'random'}]);
       const human=initial.state.players.find(p=>p.playerId===user);
       assert.strictEqual(initial.state.mode,'open1vCom');
       assert.strictEqual(human.character,cfg.character);

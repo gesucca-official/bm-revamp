@@ -1,5 +1,6 @@
 package com.gsc.bm.api.ws;
 
+import com.gsc.bm.model.game.bot.ComLevel;
 import com.gsc.bm.service.factories.GameFactoryService;
 import com.gsc.bm.service.factories.PlayerFactoryService;
 import com.gsc.bm.service.session.GameSessionService;
@@ -49,12 +50,15 @@ public class QuickGameQueuesController {
 
     @MessageMapping("/game/quick/1vCom/join")
     @SendToUser("/queue/game/quick/1vCom/ready")
-    public synchronized String queueForQuick1vCom(String playerId, @Header(name = CATEGORY, required = false) String category) {
+    public synchronized String queueForQuick1vCom(String playerId, @Header(name = CATEGORY, required = false) String category,
+                                                  @Header(name = ComLevel.HEADER, required = false) String level) {
         String chosen = playerFactoryService.checkCategory(category); // SB-29: before anything is queued or created
+        // SB-30a (R03 2.2, D203 (2)): missing level = Facile; an unknown one is refused on /user/queue/game/error, like the category
+        ComLevel computer = ComLevel.parse(level);
         gameSessionService.checkAvailable(playerId);
         queueService.leaveAllQueues(new QueuedPlayer(playerId, true));
         return gameSessionService.newGame(
-                gameFactoryService.craftQuick1vComGame(playerId, chosen));
+                gameFactoryService.craftQuick1vComGame(playerId, chosen, computer));
     }
 
     @MessageMapping("/game/quick/1v1/join")

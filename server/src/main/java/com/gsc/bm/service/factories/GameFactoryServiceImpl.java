@@ -4,6 +4,7 @@ import com.gsc.bm.bozza.BozzaDraft;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.game.Ruleset;
+import com.gsc.bm.model.game.bot.ComLevel;
 import com.gsc.bm.service.session.model.QueuedPlayer;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,18 +39,18 @@ public class GameFactoryServiceImpl implements GameFactoryService {
     }
 
     @Override
-    public Game craftQuick1vComGame(String playerId, String category) {
+    public Game craftQuick1vComGame(String playerId, String category, ComLevel level) {
         return withRules(new Game(List.of(
                 playerFactoryService.craftRandomPlayer(playerId, category),
-                playerFactoryService.craftRandomComPlayer(category)
+                playerFactoryService.craftComPlayer(category, level)
         ), "quick1vCom", Objects.equals(env.getProperty("log.db"), "N")));
     }
 
     @Override
-    public Game craftOpen1vComGame(String username, String deckId) {
+    public Game craftOpen1vComGame(String username, String deckId, ComLevel level) {
         return withRules(new Game(List.of(
                 playerFactoryService.craftOpenPlayer(username, deckId),
-                playerFactoryService.craftRandomComPlayer(null)
+                playerFactoryService.craftComPlayer(null, level)
         ), "open1vCom", Objects.equals(env.getProperty("log.db"), "N")));
     }
 
@@ -60,7 +61,8 @@ public class GameFactoryServiceImpl implements GameFactoryService {
             players.add(
                     qp.isHuman()
                             ? playerFactoryService.craftRandomPlayer(qp.getPlayerId(), qp.getCategory())
-                            : playerFactoryService.craftRandomComPlayer(null) // FFA computers: any starter (Q1, D190)
+                            // FFA computers: any starter (Q1, D190), at Normale (R01 2.2, D203 (1))
+                            : playerFactoryService.craftComPlayer(null, ComLevel.NORMALE)
             );
         return withRules(new Game(players, type, Objects.equals(env.getProperty("log.db"), "N")));
     }

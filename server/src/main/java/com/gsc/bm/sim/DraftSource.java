@@ -59,6 +59,9 @@ public final class DraftSource {
     /** The fixed basic of a character, or null when the format does not fix it. */
     public String characterBasic(String id) { return draft.characterBasic(id); }
 
+    /** SB-30a (R03 2.2): the style of the computer at Normale written in the character's sheet, or null. */
+    public String characterBotStyle(String id) { return draft.characterBotStyle(id); }
+
     /** The character a last resort is reserved to, or null. */
     public String exclusiveTo(String binding) { return draft.exclusiveTo(binding); }
 

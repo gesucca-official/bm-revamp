@@ -56,7 +56,7 @@ class OpenCompleteCliTest extends SqliteContextSupport {
                     decks.craftCharacterBoundStarterCards(bc),decks.craftLastResortStarterCard(bc),List.of());
             bot.getCardsInHand().removeIf(Card::isLastResort);
             return bot;
-        }).when(factory).craftRandomComPlayer(null);
+        }).when(factory).craftComPlayer(org.mockito.ArgumentMatchers.isNull(),org.mockito.ArgumentMatchers.any());
         Path root=Path.of("..").toAbsolutePath().normalize();
         Path output=Files.createTempFile(Path.of("target"),"i16-cli-",".json");
         ProcessBuilder pb=new ProcessBuilder(root.resolve(".tools/node-v12.22.12-win-x64/node.exe").toString(),root.resolve("scripts/cli-open-complete-test.cjs").toString());
@@ -78,7 +78,10 @@ class OpenCompleteCliTest extends SqliteContextSupport {
             }
             verify(savedDecks,times(1)).findById(new UserDeckRecordKey(user,"i16-bruiser"));
             verify(savedDecks,times(1)).findById(new UserDeckRecordKey(user,"i16-junkie"));
-            verify(factory,times(2)).craftRandomComPlayer(null);
+            // SB-30a (R03 2.2): the first open without a level (Facile), the second with the header level NORMALE.
+            verify(factory).craftComPlayer(null,com.gsc.bm.model.game.bot.ComLevel.FACILE);
+            verify(factory).craftComPlayer(null,com.gsc.bm.model.game.bot.ComLevel.NORMALE);
+            verify(factory,times(2)).craftComPlayer(org.mockito.ArgumentMatchers.any(),org.mockito.ArgumentMatchers.any());
             verify(factory).craftOpenPlayer(user,"i16-bruiser");
             verify(factory).craftOpenPlayer(user,"i16-junkie");
             verify(factory).craftOpenPlayer(user,"i16-old-rules");

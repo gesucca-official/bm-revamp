@@ -76,7 +76,7 @@ class QuickCategoryContextTest extends SqliteContextSupport {
                 }
             }
             verify(players, atLeastOnce()).craftRandomPlayer("catSolo", "avanzato");
-            verify(players, atLeastOnce()).craftRandomComPlayer("avanzato");
+            verify(players, atLeastOnce()).craftComPlayer("avanzato", com.gsc.bm.model.game.bot.ComLevel.FACILE);
         } finally { close(session); client.stop(); }
     }
 
@@ -93,7 +93,7 @@ class QuickCategoryContextTest extends SqliteContextSupport {
             assertNotNull(id);
             // D190 (2): no category = any of the five starters, as before SB-29 (not «base»).
             verify(players).craftRandomPlayer("catNone", null);
-            verify(players).craftRandomComPlayer(null);
+            verify(players).craftComPlayer(null, com.gsc.bm.model.game.bot.ComLevel.FACILE);
             sessions.leaveGame(new String(id, StandardCharsets.UTF_8), "catNone");
             // An empty header is the same as none.
             join(session, "/app/game/quick/1vCom/join", "catNone", "");
@@ -122,7 +122,7 @@ class QuickCategoryContextTest extends SqliteContextSupport {
                 }
             }
             assertNull(ready.poll(200, TimeUnit.MILLISECONDS));
-            verify(games, never()).craftQuick1vComGame(anyString(), any());
+            verify(games, never()).craftQuick1vComGame(anyString(), any(), any());
             verify(games, never()).craftQuickMultiPlayerGame(any(), anyString());
             for (var queue : QueueService.GameQueue.values())
                 assertTrue(queues.getUsersInQueue(queue).isEmpty(), queue.toString());
