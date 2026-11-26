@@ -1796,3 +1796,129 @@ Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 51
 | Giudizio del proprietario | In attesa. |
 
 **Verifica e consegna:** copie degli undici originali confrontate byte per byte con i file restituiti; dimensioni 1254 × 1254 px per tutti, undici anteprime 512 × 512 px WebP qualità 80 e controllo visivo sul foglio a 60 px. `git diff --check` senza errori; `python scripts/check-rules.py` verde; `python scripts/check-links.py` restituisce gli stessi 22 link mancanti rilevati prima della modifica, nessuno nuovo. Solo aggiunte al registro; nessun atteso cambiato. Modello e prompt riscritto non esposti dal tool, quindi non verificabili. Nessun atlas, client, catalogo, piano, README, decisione o guida modificati dal lotto; nessun push. Scelte prese: riduzione Lanczos per le anteprime; campi del giudizio compilabili senza salvataggio automatico. Tutte le undici carte attendono il giudizio del proprietario.
+
+
+### Giudizio del proprietario e correzioni — 26 novembre 2026
+
+Il proprietario, dopo il primo giro:
+
+> **Rintanarsi nel Cappotto**: il cappotto è strano, non avvolge celestina. inoltre, lei dovrebbe essere triste
+> **Tagliare la Dose** : la caramella è intera nonostante venga tagliata
+> **L’Ultimo Tiro**  : il braccio di celestina si sdoppia, non va bene
+> **Fare l’Inventario**  : perché gli oggetti stanno volando? disponiamoli sul tavolino con gelestina che li guarda
+> **Metabolismo Corrotto**  : non ha senso. facciamo celestina con le vene tutte in risalto e verdi, come geralt in the witcher 3 quando prende le pozioni
+> Trascinare nel Tunne: l'ombra è strana, e celestina dovrebbe apparire verdastra, per esaltare la sua tossicità
+>
+> le altre vanno bene
+
+Recepita la richiesta: approvate le versioni 1 di Desiderio Incontrollabile, Fondo del Posacenere, Tossicone Scatarrante, Riflessi Aumentati dalla Speed e Un Assaggino. Le altre sei versioni 1 sono respinte e restano conservate. Si genera una versione 2 per ciascuna delle sei carte, con i medesimi due riferimenti verificati e senza modificare il file dei prompt iniziali. Per Metabolismo Corrotto si traduce il riferimento in vene verdi sottocutanee molto in risalto; per Trascinare nel Tunnel, pelle verdastra e normali ombre coerenti con la lampada. Nessuna modifica alle regole del gioco. Nuove versioni in attesa del giudizio.
+
+#### Testi inviati per le versioni 2
+
+##### Rintanarsi nel Cappotto — versione 2
+
+~~~text
+Create one new square illustration, 1024 x 1024 pixels or larger, aspect ratio 1:1, opaque, preferably an original PNG: the action artwork for a playing card of the original project Botte Micidiali. Full-bleed artwork only, not a card mockup: no frame, no border, no lettering.
+
+Attachment 1 is the approved character reference: draw the same woman with the same face and body. Do not copy its pose, framing or plain background. Attachment 2 is the approved interior of the same dive bar: show its shelves, bottles and lamp visibly behind the figures, simplified, darker and less sharp than the subject.
+
+Style: hand-inked European comic, irregular dark contours, restrained painted shading, light worn print texture, slightly exaggerated features. Restrained palette: walnut and tobacco browns, dusty bottle green, oxblood burgundy, muted petrol, worn ivory; no oversaturated colours. Warm, dirty light from one clear direction, deep shadows that never become flat black.
+
+Composition for a tiny card tile: one centred subject filling at least two thirds of the image height, with a large clear silhouette readable at 60 pixels. Keep the background darker, simpler and less sharp than the subject, with strong value contrast. Keep essential details out of the outer 5% of the image. Give characters and bar furniture a believable relative scale, and make any seat physically plausible for the character's weight. Cast shadows consistently with the direction of the light. Show a single clear, coherent scene with the posture and action specified below. Make the main gesture or physical condition readable at tiny size. Make the anatomy of arms and hands coherent and their ownership unambiguous: every figure has exactly two arms and two hands, and no extra or detached limb appears anywhere.
+
+Subject: Celestina sits hunched on a low bar chair, completely wrapped inside one enormous shabby overcoat like a closed cocoon. The coat is worn normally over both shoulders, both sleeves hang naturally, and its two front panels overlap firmly across her chest, belly and knees, enclosing her body rather than spreading outward. Both of her hands, close together at chest height, clutch the overlapping lapels shut. Her violet tracksuit trousers and mismatched shoes emerge only beneath the hem. The collar is raised without a hood. She looks down at the floor with sad, weary eyes, lowered brows and a drooping mouth: vulnerable, withdrawn and unhappy, with no smile or smirk.
+
+Celestina is about twenty-three and clearly adult, with a young face and tired skin, dark circles and a sad, withdrawn expression; thin, crooked, all angles. She has red hair shaved at the sides with a longer faded tuft; she wears a baggy faded tracksuit clearly violet, not burgundy and not green, a belt bag stuffed with things picked up from the floor and mismatched shoes. Any opponent or patron is a generic shadowy figure without a recognizable face, anonymous through shadow and the turn of the head; no hood on any visible figure.
+
+Avoid: syringes, powders, pills, lines, drug paraphernalia or any recognizable drug; mirroring the character; changing her face; a burgundy or green tracksuit; making her look middle-aged; hoods on any figure; text, letters, numbers, pseudo-lettering, signatures, watermarks, logos or brands, including on clothing, wrappers and bottles; recognizable faces on opponents; other cast members; crowds; blood; card frames, borders or interface; likeness of any real person; photographic or 3D-rendered style; oversaturated colours, dominant yellow-and-black, neon, gold ornament; Internet imagery or the look of any existing game.
+~~~
+
+##### Tagliare la Dose — versione 2
+
+~~~text
+Create one new square illustration, 1024 x 1024 pixels or larger, aspect ratio 1:1, opaque, preferably an original PNG: the action artwork for a playing card of the original project Botte Micidiali. Full-bleed artwork only, not a card mockup: no frame, no border, no lettering.
+
+Attachment 1 is the approved character reference: draw the same woman with the same face and body. Do not copy its pose, framing or plain background. Attachment 2 is the approved interior of the same dive bar: show its shelves, bottles and lamp visibly behind the figures, simplified, darker and less sharp than the subject.
+
+Style: hand-inked European comic, irregular dark contours, restrained painted shading, light worn print texture, slightly exaggerated features. Restrained palette: walnut and tobacco browns, dusty bottle green, oxblood burgundy, muted petrol, worn ivory; no oversaturated colours. Warm, dirty light from one clear direction, deep shadows that never become flat black.
+
+Composition for a tiny card tile: one centred subject filling at least two thirds of the image height, with a large clear silhouette readable at 60 pixels. Keep the background darker, simpler and less sharp than the subject, with strong value contrast. Keep essential details out of the outer 5% of the image. Give characters and bar furniture a believable relative scale, and make any seat physically plausible for the character's weight. Cast shadows consistently with the direction of the light. Show a single clear, coherent scene with the posture and action specified below. Make the main gesture or physical condition readable at tiny size. Make the anatomy of arms and hands coherent and their ownership unambiguous: every figure has exactly two arms and two hands, and no extra or detached limb appears anywhere.
+
+Subject: Celestina leans over a bare bar table with total concentration and finishes cutting one large round translucent red boiled sweet into four equal quarter-circle wedges using a small folding pocket knife. Show exactly four completely separate wedges of the same size on the table, with visible empty gaps between all four pieces. There is no whole sweet, no intact disc and no remaining central piece. The knife blade is lowered into the empty gap between two of the already separated wedges, completing the cut; one hand holds the knife and the other rests flat beside the pieces, safely away from the blade. The four pieces clearly belong to a single candy. No powder, lines or other objects on the table.
+
+Celestina is about twenty-three and clearly adult, with a young face and tired skin, dark circles and a crooked little smirk; thin, crooked, all angles. She has red hair shaved at the sides with a longer faded tuft; she wears a baggy faded tracksuit clearly violet, not burgundy and not green, a belt bag stuffed with things picked up from the floor and mismatched shoes. Any opponent or patron is a generic shadowy figure without a recognizable face, anonymous through shadow and the turn of the head; no hood on any visible figure.
+
+Avoid: syringes, powders, pills, lines, drug paraphernalia or any recognizable drug; mirroring the character; changing her face; a burgundy or green tracksuit; making her look middle-aged; hoods on any figure; text, letters, numbers, pseudo-lettering, signatures, watermarks, logos or brands, including on clothing, wrappers and bottles; recognizable faces on opponents; other cast members; crowds; blood; card frames, borders or interface; likeness of any real person; photographic or 3D-rendered style; oversaturated colours, dominant yellow-and-black, neon, gold ornament; Internet imagery or the look of any existing game.
+~~~
+
+##### L'Ultimo Tiro — versione 2
+
+~~~text
+Create one new square illustration, 1024 x 1024 pixels or larger, aspect ratio 1:1, opaque, preferably an original PNG: the action artwork for a playing card of the original project Botte Micidiali. Full-bleed artwork only, not a card mockup: no frame, no border, no lettering.
+
+Attachment 1 is the approved character reference: draw the same woman with the same face and body. Do not copy its pose, framing or plain background. Attachment 2 is the approved interior of the same dive bar: show its shelves, bottles and lamp visibly behind the figures, simplified, darker and less sharp than the subject.
+
+Style: hand-inked European comic, irregular dark contours, restrained painted shading, light worn print texture, slightly exaggerated features. Restrained palette: walnut and tobacco browns, dusty bottle green, oxblood burgundy, muted petrol, worn ivory; no oversaturated colours. Warm, dirty light from one clear direction, deep shadows that never become flat black.
+
+Composition for a tiny card tile: one centred subject filling at least two thirds of the image height, with a large clear silhouette readable at 60 pixels. Keep the background darker, simpler and less sharp than the subject, with strong value contrast. Keep essential details out of the outer 5% of the image. Give characters and bar furniture a believable relative scale, and make any seat physically plausible for the character's weight. Cast shadows consistently with the direction of the light. Show a single clear, coherent scene with the posture and action specified below. Make the main gesture or physical condition readable at tiny size. Make the anatomy of arms and hands coherent and their ownership unambiguous: every figure has exactly two arms and two hands, and no extra or detached limb appears anywhere.
+
+Subject: Celestina sprawls on the bar floor, propped on exactly one elbow, and blows a thick grey-green cloud from her mouth straight into the face of one standing shadowy opponent, who recoils. Her anatomy must show exactly two continuous arms and two hands in total: one supporting upper arm runs from her shoulder down to the elbow planted on the floor, with its forearm continuing along the floor to its single relaxed hand; her other arm is bent upward, its single hand holding one burnt-down cigarette filter beside her face. Keep the two arms clearly separated in silhouette. There is no extra arm, no additional supporting hand and no branching elbow. The opponent has exactly two arms, both lifted defensively, and his face is turned away into shadow.
+
+Celestina is about twenty-three and clearly adult, with a young face and tired skin, dark circles and a crooked little smirk; thin, crooked, all angles. She has red hair shaved at the sides with a longer faded tuft; she wears a baggy faded tracksuit clearly violet, not burgundy and not green, a belt bag stuffed with things picked up from the floor and mismatched shoes. Any opponent or patron is a generic shadowy figure without a recognizable face, anonymous through shadow and the turn of the head; no hood on any visible figure.
+
+Avoid: syringes, powders, pills, lines, drug paraphernalia or any recognizable drug; mirroring the character; changing her face; a burgundy or green tracksuit; making her look middle-aged; hoods on any figure; text, letters, numbers, pseudo-lettering, signatures, watermarks, logos or brands, including on clothing, wrappers and bottles; recognizable faces on opponents; other cast members; crowds; blood; card frames, borders or interface; likeness of any real person; photographic or 3D-rendered style; oversaturated colours, dominant yellow-and-black, neon, gold ornament; Internet imagery or the look of any existing game.
+~~~
+
+##### Fare l'Inventario — versione 2
+
+~~~text
+Create one new square illustration, 1024 x 1024 pixels or larger, aspect ratio 1:1, opaque, preferably an original PNG: the action artwork for a playing card of the original project Botte Micidiali. Full-bleed artwork only, not a card mockup: no frame, no border, no lettering.
+
+Attachment 1 is the approved character reference: draw the same woman with the same face and body. Do not copy its pose, framing or plain background. Attachment 2 is the approved interior of the same dive bar: show its shelves, bottles and lamp visibly behind the figures, simplified, darker and less sharp than the subject.
+
+Style: hand-inked European comic, irregular dark contours, restrained painted shading, light worn print texture, slightly exaggerated features. Restrained palette: walnut and tobacco browns, dusty bottle green, oxblood burgundy, muted petrol, worn ivory; no oversaturated colours. Warm, dirty light from one clear direction, deep shadows that never become flat black.
+
+Composition for a tiny card tile: one centred subject filling at least two thirds of the image height, with a large clear silhouette readable at 60 pixels. Keep the background darker, simpler and less sharp than the subject, with strong value contrast. Keep essential details out of the outer 5% of the image. Give characters and bar furniture a believable relative scale, and make any seat physically plausible for the character's weight. Cast shadows consistently with the direction of the light. Show a single clear, coherent scene with the posture and action specified below. Make the main gesture or physical condition readable at tiny size. Make the anatomy of arms and hands coherent and their ownership unambiguous: every figure has exactly two arms and two hands, and no extra or detached limb appears anywhere.
+
+Subject: Celestina sits at a small bar table, leaning forward and looking down intently at her small inventory arranged on the tabletop: exactly one bottle cap, one button, one key, one coin, one crumpled napkin and one lighter. All six objects rest flat and stationary on the table in a compact, clearly spaced group directly in front of her, with small contact shadows. Her eyes are directed at these objects, studying and counting them. Both of her hands rest on the tabletop beside the group; her belt bag is open at her waist. Nothing is being thrown, nothing floats, and there is no airborne object, trajectory or motion arc.
+
+Celestina is about twenty-three and clearly adult, with a young face and tired skin, dark circles and a crooked little smirk; thin, crooked, all angles. She has red hair shaved at the sides with a longer faded tuft; she wears a baggy faded tracksuit clearly violet, not burgundy and not green, a belt bag stuffed with things picked up from the floor and mismatched shoes. Any opponent or patron is a generic shadowy figure without a recognizable face, anonymous through shadow and the turn of the head; no hood on any visible figure.
+
+Avoid: syringes, powders, pills, lines, drug paraphernalia or any recognizable drug; mirroring the character; changing her face; a burgundy or green tracksuit; making her look middle-aged; hoods on any figure; text, letters, numbers, pseudo-lettering, signatures, watermarks, logos or brands, including on clothing, wrappers and bottles; recognizable faces on opponents; other cast members; crowds; blood; card frames, borders or interface; likeness of any real person; photographic or 3D-rendered style; oversaturated colours, dominant yellow-and-black, neon, gold ornament; Internet imagery or the look of any existing game.
+~~~
+
+##### Metabolismo Corrotto — versione 2
+
+~~~text
+Create one new square illustration, 1024 x 1024 pixels or larger, aspect ratio 1:1, opaque, preferably an original PNG: the action artwork for a playing card of the original project Botte Micidiali. Full-bleed artwork only, not a card mockup: no frame, no border, no lettering.
+
+Attachment 1 is the approved character reference: draw the same woman with the same face and body. Do not copy its pose, framing or plain background. Attachment 2 is the approved interior of the same dive bar: show its shelves, bottles and lamp visibly behind the figures, simplified, darker and less sharp than the subject.
+
+Style: hand-inked European comic, irregular dark contours, restrained painted shading, light worn print texture, slightly exaggerated features. Restrained palette: walnut and tobacco browns, dusty bottle green, oxblood burgundy, muted petrol, worn ivory; no oversaturated colours. Warm, dirty light from one clear direction, deep shadows that never become flat black.
+
+Composition for a tiny card tile: one centred subject filling at least two thirds of the image height, with a large clear silhouette readable at 60 pixels. Keep the background darker, simpler and less sharp than the subject, with strong value contrast. Keep essential details out of the outer 5% of the image. Give characters and bar furniture a believable relative scale, and make any seat physically plausible for the character's weight. Cast shadows consistently with the direction of the light. Show a single clear, coherent scene with the posture and action specified below. Make the main gesture or physical condition readable at tiny size. Make the anatomy of arms and hands coherent and their ownership unambiguous: every figure has exactly two arms and two hands, and no extra or detached limb appears anywhere.
+
+Subject: Celestina sits at the bar table, leaning forward with an exhausted but alert expression, her body visibly showing a fictional toxic metabolic reaction. Prominent raised veins form clear branching dark moss-green networks along both bare forearms and hands, up her neck and across her temples; the veins are visibly beneath her skin and follow plausible anatomy, with a muted green tint around them. Her skin is pallid with a sickly green cast, while her red hair and violet tracksuit remain distinct. Both sleeves are rolled to the elbows; both forearms lie openly on the table with exactly two arms and two hands, so the green veins are a main readable feature. Keep her original thin adult female body and face. No bottles scattered on the floor, no stretching or triumphant pose, no glowing veins, no neon, no drugs or paraphernalia.
+
+Celestina is about twenty-three and clearly adult, with a young face and tired skin, dark circles and a crooked little smirk; thin, crooked, all angles. She has red hair shaved at the sides with a longer faded tuft; she wears a baggy faded tracksuit clearly violet, not burgundy and not green, a belt bag stuffed with things picked up from the floor and mismatched shoes. Any opponent or patron is a generic shadowy figure without a recognizable face, anonymous through shadow and the turn of the head; no hood on any visible figure.
+
+Avoid: syringes, powders, pills, lines, drug paraphernalia or any recognizable drug; mirroring the character; changing her face; a burgundy or green tracksuit; making her look middle-aged; hoods on any figure; text, letters, numbers, pseudo-lettering, signatures, watermarks, logos or brands, including on clothing, wrappers and bottles; recognizable faces on opponents; other cast members; crowds; blood; card frames, borders or interface; likeness of any real person; photographic or 3D-rendered style; oversaturated colours, dominant yellow-and-black, neon, gold ornament; Internet imagery or the look of any existing game.
+~~~
+
+##### Trascinare nel Tunnel — versione 2
+
+~~~text
+Create one new square illustration, 1024 x 1024 pixels or larger, aspect ratio 1:1, opaque, preferably an original PNG: the action artwork for a playing card of the original project Botte Micidiali. Full-bleed artwork only, not a card mockup: no frame, no border, no lettering.
+
+Attachment 1 is the approved character reference: draw the same woman with the same face and body. Do not copy its pose, framing or plain background. Attachment 2 is the approved interior of the same dive bar: show its shelves, bottles and lamp visibly behind the figures, simplified, darker and less sharp than the subject.
+
+Style: hand-inked European comic, irregular dark contours, restrained painted shading, light worn print texture, slightly exaggerated features. Restrained palette: walnut and tobacco browns, dusty bottle green, oxblood burgundy, muted petrol, worn ivory; no oversaturated colours. Warm, dirty light from one clear direction, deep shadows that never become flat black.
+
+Composition for a tiny card tile: one centred subject filling at least two thirds of the image height, with a large clear silhouette readable at 60 pixels. Keep the background darker, simpler and less sharp than the subject, with strong value contrast. Keep essential details out of the outer 5% of the image. Give characters and bar furniture a believable relative scale, and make any seat physically plausible for the character's weight. Cast shadows consistently with the direction of the light. Show a single clear, coherent scene with the posture and action specified below. Make the main gesture or physical condition readable at tiny size. Make the anatomy of arms and hands coherent and their ownership unambiguous: every figure has exactly two arms and two hands, and no extra or detached limb appears anywhere.
+
+Subject: Celestina, with distinctly sickly pale green skin on her face, neck and hands, grips a shadowy opponent's right hand in one single clear right-handed handshake and pulls him toward her. Her expression is a crooked, excessively broad smile and he leans forward, dragged off balance. Keep her red hair and violet tracksuit, making the green skin clearly visible as a sign of fictional toxicity. Both figures have exactly two arms and two hands, with an anatomically coherent handshake. A single lamp high behind them casts ordinary grounded shadows in one consistent direction across the floor, away from the lamp; shadows remain simple, physically plausible and flat on the floor, with no supernatural silhouette, climbing shadow, extra figure or shadow limbs.
+
+Celestina is about twenty-three and clearly adult, with a young face and tired skin, dark circles and a crooked little smirk; thin, crooked, all angles. She has red hair shaved at the sides with a longer faded tuft; she wears a baggy faded tracksuit clearly violet, not burgundy and not green, a belt bag stuffed with things picked up from the floor and mismatched shoes. Any opponent or patron is a generic shadowy figure without a recognizable face, anonymous through shadow and the turn of the head; no hood on any visible figure.
+
+Avoid: syringes, powders, pills, lines, drug paraphernalia or any recognizable drug; mirroring the character; changing her face; a burgundy or green tracksuit; making her look middle-aged; hoods on any figure; text, letters, numbers, pseudo-lettering, signatures, watermarks, logos or brands, including on clothing, wrappers and bottles; recognizable faces on opponents; other cast members; crowds; blood; card frames, borders or interface; likeness of any real person; photographic or 3D-rendered style; oversaturated colours, dominant yellow-and-black, neon, gold ornament; Internet imagery or the look of any existing game.
+~~~
