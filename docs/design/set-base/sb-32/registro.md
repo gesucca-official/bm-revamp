@@ -3177,3 +3177,49 @@ Prompt preventivo nel commit `1401ee5`; una richiesta con maschera e originale, 
 | Controllo a 60 px | Beppe e pugno inferiore leggibili; braccia separate, dita minute, tasche poco distinguibili; nessun attrezzo visibile. |
 | Anomalie visive | Il pugno e avambraccio superiori sono rimossi; restano i segni bianchi d’impatto sulla spalla. Braccio inferiore conservato; l’altro braccio dell’avversario non è visibile. |
 | Giudizio del proprietario | In attesa. |
+
+
+### Giudizio del proprietario e correzioni — 26 novembre 2026
+
+> questo torna utile: ok
+> cuffie e testa bassa: l'uomo che colpisce beppe è ancora strano: facciamo gli gli spacca una sedia sulla schiena e beppe non se ne accorge minimamente
+> colpo col cacciavite: non si vede il cacciavite, ma solo il manico. facciamolo vedere nella sua interezza stretto nel pugno di beppe. benissimo il resto dell'immagine
+> affilare gli utensili: le estremità della chiave sono strane
+> disassemblare: perfetto
+> chiave da tredici: più che una chiave da tredici questa è una chiave da centotrenta! è troppo grande
+> preparare il lavoro: il calibro è strano vicino alle mani di beppe
+> secondo bagagliaio: va bene
+> lavoro fatto bene: ok
+> metodo empirico: va bene
+
+Cinque richieste, una per carta, con il solo originale della versione da correggere. Versioni precedenti conservate; nessuna decisione o chiusura del lotto. I cinque prompt seguenti sono preventivi.
+
+#### Prompt preventivo — Cuffie e Testa Bassa, versione 3
+
+~~~text
+Edit only the supplied illustration. Replace the awkward attacking man and his action with an anonymous shadowy opponent smashing a wooden bar chair against Beppe's back: show the chair breaking on impact, with a coherent chair, visible fragments and a physically clear grip. Beppe does not notice at all: keep him impassive with headphones on, head lowered, sturdy stance and both hands naturally placed. Preserve Beppe's face, beard, bun, overalls, tattoo and the existing bar, warm subdued lighting, hand-inked comic style, palette, texture and square framing as closely as possible. Keep anatomy clear, with two arms and hands per person, and no tools in Beppe's pockets. No text, border, blood or transparency. Return one opaque square illustration.
+~~~
+
+#### Prompt preventivo — Colpo col Cacciavite, versione 2
+
+~~~text
+Edit only the supplied illustration. Keep the rest of the image as close to the original as possible. Change Beppe's tool and gripping hand locally so that the entire single screwdriver is clearly visible, naturally clenched in his fist: a recognizable handle and one continuous straight metal shaft with a visible tip, unobscured by the opponent or hand. Preserve the rest of the action, both figures, their faces and bodies, clothing, background, lighting, colour, ink texture and square framing. Keep arms and hands anatomically coherent and Beppe's pockets free of tools. No text, border, blood or transparency. Return one opaque square illustration.
+~~~
+
+#### Prompt preventivo — Affilare gli Utensili, versione 2
+
+~~~text
+Edit only the supplied illustration. Correct the two ends of the single spanner Beppe holds: make it one coherent, realistically proportioned metal combination spanner with a recognizable open jaw at one end and a single closed ring at the other, cleanly joined to one shaft. Keep the file and both natural grips clear. Preserve the rest of the scene, Beppe's face and body, his posture and clothes, background, lighting, colour, hand-inked texture and square framing as closely as possible. Keep hands and arms coherent and no tools in his pockets. No text, border or transparency. Return one opaque square illustration.
+~~~
+
+#### Prompt preventivo — Chiave da Tredici, versione 2
+
+~~~text
+Edit only the supplied illustration. Replace the oversized spanner with one realistically sized 13 mm combination spanner, roughly hand-length rather than a huge wrench. It has one closed ring end and one open end ground to a point, a single straight shaft, and is gripped naturally as Beppe strikes the opponent's padded shoulder. Preserve the action, the two figures, their faces and clothing, bar background, lighting, restrained palette, hand-inked texture and square framing as closely as possible. Keep hands and arms coherent, no tools in Beppe's pockets, no visible wound, blood, text, border or transparency. Return one opaque square illustration.
+~~~
+
+#### Prompt preventivo — Preparare il Lavoro, versione 2
+
+~~~text
+Edit only the supplied illustration. Correct the sliding caliper and Beppe's hands locally: draw one physically plausible metal caliper with one straight continuous beam, one fixed jaw and one sliding jaw, plain unmarked scales, and the two jaws closing on the opponent's nose. Both hands grip or adjust the tool naturally, without merged fingers or extra parts. Preserve the figures, action, faces, clothes, bar background, lighting, restrained palette, hand-inked texture and square framing as closely as possible. Keep two arms and two hands per figure, no tools in Beppe's pockets, and no text, border, blood or transparency. Return one opaque square illustration.
+~~~
