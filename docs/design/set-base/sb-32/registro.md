@@ -3540,3 +3540,90 @@ Edit only the supplied illustration. Keep the close-up headbutt and the small co
 ~~~text
 Edit only the supplied illustration. Enlarge the single flat straight metric ruler Beppe holds against the side of the opponent's nose, and integrate a small clearly visible spirit-level bubble vial at the centre of that same ruler. The ruler and level form one physically plausible measuring tool, with fine unnumbered tick marks. Keep Beppe's natural one-handed grip and his other hand holding the opponent's head still, with two distinct hands attached to coherent arms. Preserve both figures, faces, clothes, bar, warm restrained lighting, hand-inked texture and square framing as closely as possible. No additional tools in pockets, caliper jaws, blood, text, border or transparency. Return one opaque square illustration.
 ~~~
+
+#### Risultati del giro
+
+Prompt preventivi nel commit `e6ab854`. Una richiesta per carta, nessun rifiuto o rilancio; originali copiati byte per byte, versioni precedenti conservate. Modello e prompt riscritto non esposti.
+
+##### Cuffie e Testa Bassa — versione 6
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.bound.UnaStrettaEPassa` |
+| promptSha256 | `4da6afb97d9b4816d0513db320ef1dec8f33a27fd73adde3beb63c934a886417` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.bound.UnaStrettaEPassa-5.png`, SHA-256 `a848ecb7ab5aa4f681f08ec0b07253c4d4681e4de9d2ba41ee88fe1a861878cd` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.bound.UnaStrettaEPassa-6.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-ff15c290-e058-40fd-8cb7-e65f098a00ee.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2696491 / `1f08811225ea97d52e339b67dc8cf3fda4b37da939ba6f0a442ec09e277c233c` |
+| Anteprima | [WebP](anteprime/base.gigi.bound.UnaStrettaEPassa-6.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Spranga e colpo leggibili; mani e frammenti minuti, arti distinguibili; tasche non verificabili. |
+| Anomalie visive | Avventore incappucciato impugna la spranga con due mani; impatto e schegge visibili. |
+| Giudizio del proprietario | In attesa. |
+
+##### Chiave da Tredici — versione 5
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.ChiaveDaTredici` |
+| promptSha256 | `68037bfe96a4636ba404165fc8bd931a98788c7247928d4c5e574a2cd900030f` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.ChiaveDaTredici-4.png`, SHA-256 `5e9ca9a1f2ea49c313c31a7dd742efaf7a56af05d353a36043894b8aaeb3a817` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.ChiaveDaTredici-5.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-958ee600-afc0-41ff-87f3-8d980881a11c.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2711282 / `f3f190fea5825ee447eb43140904bb1109078fab26891d0a7086ac09b3b0e488` |
+| Anteprima | [WebP](anteprime/base.gigi.ChiaveDaTredici-5.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Testata e chiave fra i denti leggibili; dita minute, tasche fuori campo. |
+| Anomalie visive | Beppe meno ingombrante; una mano visibile, l’altra fuori scena. Il profilo dell’avventore è in ombra. |
+| Giudizio del proprietario | In attesa. |
+
+##### Preparare il Lavoro — versione 5
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.gigi.ColpoDiChiaveInglese` |
+| promptSha256 | `c2591defc874575fc24924b9711846cebf880c7d82f189172bd01cf6f746122e` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-26 |
+| Allegato unico | `originali/base.gigi.ColpoDiChiaveInglese-4.png`, SHA-256 `0fd29109560e093bda7a84b945d784f0a5068c5dc8be127be51c763b6db966c6` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.gigi.ColpoDiChiaveInglese-5.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a2190c-8df2-7400-b71c-b829418a881e/exec-3fabcf9f-b9c9-4433-86e1-1e3c1a363277.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2477311 / `c8a2cc7f81479ef6fff38afe25daf6f593a9d64e2117c34f264ebac0e7178776` |
+| Anteprima | [WebP](anteprime/base.gigi.ColpoDiChiaveInglese-5.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt preventivo |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Riga e presa sulla testa leggibili; livella e dita minute, arti distinguibili; tasche non verificabili. |
+| Anomalie visive | Riga più larga con livella centrale, una mano la impugna e l’altra tiene la testa. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Nuovo giudizio del proprietario — 26 novembre 2026
+
+> cuffie: ok ce lo facciamo andare bene
+>
+> chiave: non ci siamo, cambiamo completamente scena. facciamo beppe che tira un pugno violento con la chiave stretta nel pugno
+>
+> preparare il lavoro: ancora non mi piace, manteniamo la scena così ma togliamo la riga e facciamo che la mano libera di beppe si tocca la barba, pensieroso
+
+Due richieste, una per carta, con il solo originale della versione precedente. Versioni precedenti conservate; generazione autorizzata mentre SB-34 lavora, verifica delle regole da ripetere quando disponibile. Nessuna decisione o chiusura del lotto.
+
+#### Prompt preventivo — Chiave da Tredici, versione 6
+
+~~~text
+Create a completely new action composition by editing the supplied illustration, keeping the same Beppe: same recognizable face, long thick beard, hair bun, black shirt and tobacco work overalls. In the same dive bar, Beppe delivers a violent straight punch to an anonymous shadowy opponent, with one small realistically proportioned 13 mm combination spanner clenched tightly in his punching fist. Show the punch, fist, impact and wrench clearly: a single coherent short metal spanner with one open end and one ring end, naturally gripped, no doubled or fused parts. The opponent reacts to the blow, with no visible wound or blood. Believable adult proportions and coherent anatomy, with no extra limbs or tools in pockets. Preserve the hand-inked European comic style, warm restrained palette, texture and square framing. No text, border or transparency. Return one opaque square illustration.
+~~~
+
+#### Prompt preventivo — Preparare il Lavoro, versione 6
+
+~~~text
+Edit only the supplied illustration. Preserve the existing scene and composition: Beppe's one hand continues holding the opponent still by the head. Completely remove the ruler and its spirit level. Beppe touches and strokes his own beard thoughtfully with his now-free other hand, looking pensive as he considers the opponent. Make both hands natural, distinct and connected to their respective arms, without extra limbs. Preserve both figures, faces, clothing, bar, warm restrained lighting, hand-inked comic texture and square framing as closely as possible. No measuring tool, tools in Beppe's pockets, blood, text, border or transparency. Return one opaque square illustration.
+~~~
