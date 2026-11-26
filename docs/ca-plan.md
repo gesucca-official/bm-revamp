@@ -5,17 +5,22 @@ Scritto il 20 novembre 2026, a banco fra il proprietario e la regia delle carrie
 regole attive (R00 del [regolamento](game-rules.md)). Il metodo è quello di [orchestrazione-lavoro.md](orchestrazione-lavoro.md); le
 verifiche si scelgono dalla [tabella delle aree](aree-protette.md).
 
-> **Ripartenza** (aggiornata il 21 novembre 2026). La aggiorna chi chiude un blocco e la regia a ogni decisione.
+> **Ripartenza** (aggiornata il 26 novembre 2026). La aggiorna chi chiude un blocco e la regia a ogni decisione.
 >
-> - **In vigore:** confini di [DC1](#decisioni): niente `client-web`, `server`, regolamento e documenti di set fino a C5 e SB-28. Le storie
->   restano nel [serbatoio](design/carriere/README.md), senza valore normativo ([DC4](#decisioni)). Il [prototipo](design/carriere/prototipo.md)
->   (CA-0a) resta il posto dove provare le storie; il formato è il [formato delle carriere 0.1](carriere/formato.md) (CA-0b).
+> - **In vigore:** confini di [DC1](#decisioni): niente `client-web` e `server` fino a C5, SB-30 ed EC-0. Dal 24 novembre 2026 SB-28 è
+>   chiuso (regolamento 2.0, oggi 2.1 col Set Base 1.0.1): regolamento e documenti di set si toccano solo in CA-0e, dopo la proposta
+>   approvata dal proprietario. Le storie restano nel [serbatoio](design/carriere/README.md), senza valore normativo ([DC4](#decisioni)).
+>   Il [prototipo](design/carriere/prototipo.md) (CA-0a) resta il posto dove provare le storie; il formato è il
+>   [formato delle carriere 0.1](carriere/formato.md) (CA-0b).
 > - **In attesa:** nulla.
 > - **Prossimo:** la parte di strumento di CA-0 è finita (CA-0c: `tools/carriere/`; CA-0d: pacchetti versionati con impronte in
->   `tools/carriere/pacchetti/`, [rapporto](reports/ca/ca-0d.md)). CA-0e aspetta SB-28; CA-0f, CA-0g aspettano SB-30, EC-0 e C5.
-> - **Fuori dal piano, nel serbatoio:** le illustrazioni della campagna principale, approvate il 21 novembre 2026
->   ([prompt](design/carriere/prompt-principale.md)), entrate nel prototipo il 21 novembre 2026 (CA-0a: ritratti, sfondi e sagoma del padrone; restano i ripieghi dell'elenco); il secondo giro delle bocche è approvato e adottato
->   ([riga di CA-0a](product-roadmap.md#lavori-anticipati)).
+>   `tools/carriere/pacchetti/`, [rapporto](reports/ca/ca-0d.md)). **CA-0e è sbloccato** (SB-28 chiuso) e si può aprire quando lo decide
+>   il proprietario. CA-0f aspetta SB-30, che nel Set Base viene dopo i lotti di SB-32 e C5, ed EC-0, non ancora partito; CA-0g aspetta C5.
+> - **Fuori dal piano, nel serbatoio:** dialoghi della campagna principale completi e mockup alla 0.3.7 sui dialoghi veri
+>   ([riga](product-roadmap.md#lavori-anticipati)); illustrazioni approvate e adottate dal prototipo il 21 novembre 2026, con i
+>   ripieghi dell'[elenco](design/carriere/illustrazioni.md#campagna-principale) per le espressioni che non si generano; secondo giro delle
+>   bocche adottato. Restano aperti la prova del prototipo su un telefono vero e l'idea, non decisa, di rinominare il nodo F1
+>   ([prossimi passi](design/carriere/principale.md#prossimi-passi)).
 > - **Decisioni da leggere:** DC1–DC4.
 
 ## Obiettivo e chiusura
@@ -47,7 +52,7 @@ contro computer, progressi e achievement salvati lato server. Il tutorial vero �
 | [CA-0b](#ca-0b--formato-delle-carriere-01) | Formato delle carriere 0.1, documento normativo | subito | con proposta | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0b.md), [formato 0.1](carriere/formato.md)) |
 | [CA-0c](#ca-0c--strumento-delle-carriere) | Strumento: convertitore, validazione, controllo del grafo | dopo CA-0b | diretto | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0c.md)) |
 | [CA-0d](#ca-0d--pacchetto-delle-carriere) | Pacchetto JSON con versione e impronte, controllato come `check-rules.py` controlla le carte | dopo CA-0c | diretto | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0d.md)) |
-| CA-0e | Modificatori di incontro nel regolamento, con la precedenza di R00 | dopo SB-28 | con proposta | — |
+| CA-0e | Modificatori di incontro nel regolamento, con la precedenza di R00 | dopo SB-28 | con proposta | Sbloccato (SB-28 chiuso il 24 novembre 2026), da aprire |
 | CA-0f | Motore lato server: progressi, segni, achievement, ricompense protette dal farming | dopo SB-30 ed EC-0 | con proposta | — |
 | CA-0g | Scena di dialogo e bacheca nella shell React, banco della fluidità nel client | dopo C5 | a fasi | — |
 
