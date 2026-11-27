@@ -5205,7 +5205,7 @@ Recompose the single attached Duccio illustration into a completely new scene fo
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Piede sulla seduta distinguibile; spalliera assente, mani e dita minute. |
 | Anomalie visive | Abito blu petrolio. Spalliera assente e suola sulla seduta rossa; due mani di Sergio visibili, una col bicchiere e una sulla spalla dell’avventore, come nella prima versione. Sigaretta conservata. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | tecnica: ok sergio, ma mettiamo l'avventore nuovo in questa versione lasciando sergio come è |
 
 
 #### Esito — Nocche Sbucciate — versione 5
@@ -5226,6 +5226,19 @@ Recompose the single attached Duccio illustration into a completely new scene fo
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Viso e pugni uniti leggibili; lacrime e abrasioni minute. |
 | Anomalie visive | Due pugni a contatto davanti al petto; entrambe le nocche arrossate e abrase. Lacrime sulle guance e denti serrati. Aquila parzialmente tagliata dal bordo inferiore; unico tatuaggio al collo più grande e marcato. Avventore e cocktail assenti. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | nocche: ok |
 
 Verifiche del giro 4: due originali identici byte per byte ai file restituiti; due anteprime WebP 512 × 512, qualità 80; provino a 60 px esaminato. `git diff --check`, `python scripts/check-rules.py` e controllo dei link nel registro verdi. Nessun rifiuto, rilancio o tentativo scartato. In attesa del giudizio sulle due nuove versioni.
+
+
+### Giro di correzione 5 — 27 novembre 2026
+
+Il proprietario: «nocche: ok». Per Tecnica Manipolatoria: «tecnica: ok sergio, ma mettiamo l'avventore nuovo in questa versione lasciando sergio come è». Una richiesta: unico allegato la versione 6, avventore nuovo descritto dal disegno di spalle delle versioni precedenti, Sergio da preservare. Versione 7; tutte le precedenti conservate. Prompt committato prima della generazione.
+
+#### Tecnica Manipolatoria — versione 7
+
+Allegato unico: `originali/base.cesira.bound.Battutina-6.png`.
+
+~~~text
+Edit only the patron on the RIGHT of the single attached Tecnica Manipolatoria illustration for Botte Micidiali. Replace the hunched patron whose face is buried against his shoulder with the newer patron design: an adult man seen in rear three-quarter view, with short dark curly hair, a clearly visible back of the head and nape, wearing a brown herringbone tweed jacket with a natural collar and coherent shoulders. He leans slightly toward Sergio to listen, his face turned away from the viewer and anonymous in shadow, not buried in his own jacket. His visible lower hand rests naturally near the table edge; his other hand stays out of sight, with no extra or detached limbs. Preserve Sergio EXACTLY as in the attached image: face, hair, body, petrol-blue suit, every arm and hand, cigarette, glass, bent leg and shoe resting on top of the round red backless stool. In particular keep Sergio's open hand resting against the patron's shoulder; redraw the patron underneath it without changing that hand. Preserve the stool, table, background, light, square opaque composition and hand-inked European comic style. Do not add a bench, crate, chair back, text, labels or new symbols. No extra arms or hands.
+~~~
