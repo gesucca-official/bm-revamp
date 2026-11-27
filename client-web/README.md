@@ -25,6 +25,10 @@ Esito personale al pannello, indipendente dalla sequenza, anche con movimento ri
 
 ## Avvio locale
 
+**Prima volta, da un clone nuovo:** seguire «Prima installazione» della [guida locale](../docs/setup.md#prima-installazione)
+(toolchain e jar del server: senza `server/target/bm-server-0.0.1-SNAPSHOT.jar` il server non parte). Dopo ogni pull che tocca
+server, regolamento o set, ricostruire il jar (`./scripts/build.ps1 -Task Server -Offline`) e la build del client (`Build`).
+
 Dalla radice del repository, Windows / PowerShell, in due terminali:
 
 ```powershell
@@ -32,15 +36,17 @@ Dalla radice del repository, Windows / PowerShell, in due terminali:
 ```
 
 ```powershell
-# Solo la prima volta (Node isolato condiviso con C0, dipendenze separate):
+# Solo la prima volta (Node isolato condiviso con C0, dipendenze separate).
+# Bootstrap scarica sempre Node 24: se .tools/client-c0/node-v24.13.0-win-x64 c'è già, saltarlo.
 ./client-c0/run.ps1 -Task Bootstrap
-./client-web/run.ps1 -Task Install
+./client-web/run.ps1 -Task Install      # -Offline se .tools/client-c0/npm-cache è già popolata
 ./client-web/run.ps1 -Task Build
+# Ogni volta:
 ./client-web/run.ps1 -Task Serve
 ```
 
 Aprire `http://127.0.0.1:4320` e accedere con un account sintetico della
-[guida locale](../docs/setup.md). `Serve` usa la build di produzione (`vite preview`);
+[guida locale](../docs/setup.md#avvio-locale) (per esempio `devAlice` / `local-alice`). `Serve` usa la build di produzione (`vite preview`);
 `Dev` avvia il server di sviluppo sulla stessa porta. Entrambi ascoltano solo su
 loopback e fanno da proxy come il debug: `/rest` → `/api/rest/v1`, `/ws` →
 `/api/ws/v1` su `127.0.0.1:8080` (variabile `BM_SERVER` per cambiarlo).
@@ -51,6 +57,21 @@ loopback e fanno da proxy come il debug: `/rest` → `/api/rest/v1`, `/ws` →
 che provengono dalla pagina del client stesso (`127.0.0.1:4320` o `localhost:4320`);
 ogni altra origine passa invariata e il server continua a rifiutarla. Il server non
 è modificato. `BM_STOMP_ORIGIN` cambia il valore se il profilo cambia.
+
+### Per chi prova il gioco
+
+1. Nella home «Accedi», poi nome e password di un account sintetico (`devAlice` / `local-alice`; gli altri nella
+   [guida locale](../docs/setup.md#avvio-locale)).
+2. Nell'hub «Gioca»: «Contro il computer», poi **Starter** (Base per imparare, Avanzato per personaggi più complessi) e
+   **Computer** (Facile gioca a caso, Normale segue il proprio personaggio), poi «Gioca». La scelta resta per la partita dopo.
+3. Al tavolo: tocca una carta della mano, poi il bersaglio (un personaggio o un oggetto); la carta si posa vicino al bersaglio,
+   ✓ conferma e × annulla. Una carta legata chiede anche quale carta regolare scartare. Le mosse sono simultanee: il turno si
+   risolve quando tutti hanno scelto, poi parte la sequenza degli effetti («Salta effetti» nel menu ⋯ la accorcia).
+4. La (i) sull'angolo di una carta ne apre il testo completo; le regole sono nella home («Regole»).
+5. Fine partita: «Nuova partita» o «Torna all'hub». Per uscire prima: menu ⋯ → «Abbandona la partita» (è un forfait) e si torna
+   all'hub; «Esci dall'account» nello stesso menu.
+
+Le partite e gli account restano in `server/data/bm.sqlite` fra un avvio e l'altro.
 
 ## Prova su telefono (rete locale)
 

@@ -3,12 +3,12 @@
 26 novembre 2026. Regolamento **2.3** col [Set Base 1.0.4](sets/base.md) (aggiornato la sera dello stesso giorno, dopo SB-30a, SB-34 e CA-0e), [roadmap del client](client-roadmap.md#c5-consegnare-il-client-web-per-i-playtest)
 versione 64. C0–C4 sono chiuse ([piano C4](client-c4-plan.md)). Stato corrente nell'[indice](README.md#filoni-attivi).
 
-> **Ripartenza** (aggiornata il 26 novembre 2026, dopo D1). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 27 novembre 2026, dopo la consegna di C5-1). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** C5 ridotta ([D1](#decisioni-del-proprietario)): regressione completa, un passaggio di correzione, guida di avvio, rapporto. Senza la prova umana C.
-> - **In corso:** nessun blocco.
-> - **Prossimo:** C5-1, consolidamento.
-> - **In attesa:** il via del proprietario a C5-1 (prompt pronto); l'ingresso dei lotti 1–5 di SB-32 nell'atlante aspetta la fine di C5-1.
+> - **In corso:** nessun blocco (C5-1 consegnato il 27 novembre 2026).
+> - **Prossimo:** C5-2 per gli strumenti (R21, R22, R24), se il proprietario lo apre.
+> - **In attesa:** revisione del [rapporto C5-1](reports/client-c5/c5-1.md), domande 1–3. L'ingresso dei lotti 1–5 di SB-32 nell'atlante può partire: C5-1 non lancia più verifiche.
 > - **Decisioni da leggere:** D1; [D16 del piano C4](client-c4-plan.md#decisioni-del-proprietario) (metodo delle verifiche); [D1 della roadmap del prodotto](product-roadmap.md#decisioni-del-proprietario).
 
 ## Obiettivo
@@ -37,7 +37,7 @@ rifà le proprie verifiche (`Size` e quelle grafiche); non riapre C5.
 
 | Blocco | Contenuto | Passo | Stato |
 |---|---|---|---|
-| C5-1 | Consolidamento: matrice completa, attribuzione dei rossi, guida di avvio provata da checkout, rapporto | diretto, con STOP sui blocchi | da avviare |
+| C5-1 | Consolidamento: matrice completa, attribuzione dei rossi, guida di avvio provata da checkout, rapporto | diretto, con STOP sui blocchi | consegnato il 27 novembre 2026, in revisione ([rapporto](reports/client-c5/c5-1.md)) |
 | C5-2 | Correzione dei blocchi emersi in C5-1, un solo passaggio, con controllo mirato | diretto | solo se serve |
 
 ### C5-1 — Consolidamento
@@ -58,6 +58,8 @@ rifà le proprie verifiche (`Size` e quelle grafiche); non riapre C5.
 **Perimetro:** `docs/reports/client-c5/`, `docs/client-c5-plan.md` (riga e sezione del blocco, Ripartenza),
 `client-web/README.md`, `docs/setup.md` (solo la parte di avvio), `docs/reports/rossi-noti.md` (solo voci nuove o chiuse).
 Nessun codice di prodotto: un difetto da correggere è uno STOP.
+
+**Stato (27 novembre 2026): consegnato, in revisione.** Build di `1c3985f`: matrice completa 21/25, 750×292 2/7. Ogni rosso è attribuito: R1 noto, nuovi R21–R25 nel [registro](reports/rossi-noti.md); nessuno STOP. Guida di avvio provata da clone pulito fino a una partita contro il Facile e una contro il Normale, con rientro all'hub; corretti i passi mancanti in `client-web/README.md` e `docs/setup.md`. Proposto C5-2 per gli strumenti (R21, R22, R24). [Rapporto](reports/client-c5/c5-1.md), domande 1–3.
 
 ## Decisioni del proprietario
 

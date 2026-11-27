@@ -35,9 +35,14 @@ certifica un servizio pronto per l'esposizione pubblica.
 
 ## Avvio locale
 
+Il client per giocare (e per i playtest) è il **client web** su `http://127.0.0.1:4320`: avvio e istruzioni per chi
+prova il gioco in [client-web/README.md](../client-web/README.md#avvio-locale). Serve lo stesso server qui sotto; il jar
+va costruito prima («Prima installazione», poi `./scripts/build.ps1 -Task Server -Offline` dopo ogni pull). Il client di
+debug, sotto, resta come riferimento diagnostico.
+
 ```powershell
 ./scripts/dev.ps1 -Task Server -SeedAccounts
-# In un secondo terminale, sempre dalla radice:
+# In un secondo terminale, sempre dalla radice (client di debug):
 ./scripts/dev.ps1 -Task Client
 ```
 
