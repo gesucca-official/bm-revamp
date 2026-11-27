@@ -5099,3 +5099,68 @@ Allegato unico: `originali/base.rocco.NoccheSbucciate-3.png`.
 ~~~text
 Edit the single attached illustration for Botte Micidiali. Correct only Duccio's punching arm so it is unmistakably his anatomical LEFT arm, naturally attached to his own left shoulder on the viewer's right side of his torso. Redraw the shoulder connection, upper arm, elbow, forearm and fist together as one coherent left arm delivering a straight punch toward the patron. Use the natural left elbow and left-hand thumb and knuckle orientation; do not attach a right arm or right hand to his left shoulder. Preserve Duccio's torso orientation and his other, right fist down beside his body. Both fists retain scraped reddened knuckles without blood. Preserve the patron, scene, eagle and single neck tattoo. Preserve the established hand-inked European comic style, square opaque artwork, lighting and palette.  No text, labels, new symbols, flags, extra hands or extra limbs.
 ~~~
+
+
+#### Esito — Tecnica Manipolatoria — versione 5
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.bound.Battutina |
+| promptSha256 | 7471b88fe53b33fdbe2cc7d3a69be96f45433a33d0f08604d2b850d402bcb232 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.bound.Battutina-4.png; SHA-256 a4ad74282c26500b7f2dc865d6bfb1391dbf7a825ad6d923f452ec5818a71489 |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.bound.Battutina-5.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-685d8ddc-0991-4278-a028-106747a59ca8.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2734431 / 8ce170cb7d245337a8a60965558ba59fb9fdfae78abd7cb3d85377269d495ae6 |
+| Anteprima | [WebP](anteprime/base.cesira.bound.Battutina-5.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 3, versione 5 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Panca e cassetta distinguibili; piedi appoggiati visibili, giunti e dita minuti. |
+| Anomalie visive | Abito blu petrolio. Panca di legno e cassetta sotto il piede; sgabello assente. Sigaretta e bicchiere conservati; arti in parte coperti. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Rialziamoci e Partite! — versione 4
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.bound.MiRialzo |
+| promptSha256 | c20e419ca71db87168cd6620fbd352baef5473719fbf27127c1bba53d589c796 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.bound.MiRialzo-3.png; SHA-256 e8949de4e638a1a71ed56b43fe9ba3f7f55ed38e21c39a2d6fbc40c08a37ead3 |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.bound.MiRialzo-4.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-c8efc50f-2ef4-40b2-b6c0-e0723dd0b7e9.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2500785 / f7874bab50179f57cf58a909c07540ef625ab42fe4648a3631e13f11568c25b5 |
+| Anteprima | [WebP](anteprime/base.rocco.bound.MiRialzo-4.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 3, versione 4 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Posa e appoggi leggibili; frammenti del bicchiere troppo minuti per contarli. |
+| Anomalie visive | Aquila e singolo tatuaggio al collo conservati. Due mani negli appoggi precedenti; bicchiere in più frammenti separati, stelo corto e base a terra nella pozza rosa, nessuna scheggia volante. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Nocche Sbucciate — versione 4
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.NoccheSbucciate |
+| promptSha256 | 0135bff7f3c738dbbe89b85905e0113d2405bfc47ef33cf26efe21af3df54957 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.NoccheSbucciate-3.png; SHA-256 08b19803d680bf8c9fc7672f1b18a22c9bd9e023409c4e5735b28a17fceb9c2b |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.NoccheSbucciate-4.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-08f89881-ecd9-4337-99f1-6030d8860f43.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2564028 / 4976c6475b7a180c69abdb8e7eb9ef16ea64dc1b3d5819f5eb0bd4a40e9be957 |
+| Anteprima | [WebP](anteprime/base.rocco.NoccheSbucciate-4.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 3, versione 4 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Pugno e contatto leggibili; orientamento anatomico del braccio non verificabile a 60 px. |
+| Anomalie visive | Aquila e singolo tatuaggio al collo conservati. Due braccia di Duccio visibili; braccio del pugno disteso dalla spalla alla destra dell’immagine, raccordo e orientamento da giudicare alla vista grande. Nocche abrase su entrambe le mani; volto avversario visibile. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+Verifiche del giro 3: tre originali identici byte per byte ai file restituiti; tre anteprime WebP 512 × 512, qualità 80; provino a 60 px esaminato. `git diff --check`, `python scripts/check-rules.py` e controllo dei link nel registro verdi. Nessun rifiuto, rilancio o tentativo scartato. In attesa del giudizio sulle tre nuove versioni.
