@@ -3690,3 +3690,469 @@ Prompt preventivi nel commit `7612c6d`. Una richiesta per carta, nessun rifiuto 
 | Metodo Empirico | `base.gigi.UnaStrettaDiProva` | 1 | [WebP](anteprime/base.gigi.UnaStrettaDiProva.webp) |
 
 Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 512×512 WebP qualità 80. `python scripts/check-rules.py`, sospeso nei giri durante SB-34, è verde alla chiusura. Eccezioni accettate in D218 (3): volto visibile dell’avventore in Chiave da Tredici 6 e Preparare il Lavoro 6. Nessuna integrazione nell’atlante in questo lotto. Nessun comportamento di gioco o atteso modificato.
+
+## Lotto 6 — Sergio e Duccio
+
+[Prompt letterali](lotto-06-sergio-duccio.md), commit `6d0bdae`, verificati invariati. Ventidue generazioni in ordine, una per prompt, con i due allegati indicati e impronte verificate; nessun rifiuto, rilancio o tentativo scartato. Modello e riscrittura non esposti. Prompt senza delimitatori né ritorno finale, SHA-256 su UTF-8 con ritorni LF. Originali copiati byte per byte fuori da git; anteprime WebP 512 × 512, qualità 80. [Pagina di giudizio](giudizio-lotto-06.html). Sandbox non inizializzabile: letture, copie e verifiche tramite escalation.
+
+
+### Messo in Conto
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.cesira.LoMettoInConto` |
+| promptSha256 | `1a74ae1bca88837ae95a6e21da13cf8d76489356559a885102b32e5984d6a000` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/sergio.png`: `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.cesira.LoMettoInConto.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-723d8aaa-ec58-4ede-bea0-ed6aae118fe9.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2852862 / `e0875da8c17cd789e14067c3c9e52b2d5f369e7c185585b02a4c0f50d9264aad` |
+| Anteprima | [WebP](anteprime/base.cesira.LoMettoInConto.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 1, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Sergio e bottiglia visibili; mani e presa minute, barista sullo sfondo. |
+| Anomalie visive | Abito blu petrolio; sigaretta presente nonostante il soggetto non la richieda. Due mani visibili; bottiglietta riconoscibile. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Discutiamone in Privato
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.cesira.bound.NeRiparliamoFuori` |
+| promptSha256 | `0d1efea786286ea3279c07f0a018e2a668e9940635eb0644e141e1555673a69c` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/sergio.png`: `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.cesira.bound.NeRiparliamoFuori.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-db6a99e0-db93-4337-9d82-da84ce35bb6b.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2818659 / `0ace4bb5c59c5c24d887b056634538373d318a4bfd22b469083638988367c08f` |
+| Anteprima | [WebP](anteprime/base.cesira.bound.NeRiparliamoFuori.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 2, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Due figure e gesto leggibili; mani minute, una figura parzialmente fuori campo. |
+| Anomalie visive | Abito blu petrolio; sigaretta visibile. Due mani di Sergio; avversario parzialmente tagliato. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Tecnica Manipolatoria
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.cesira.bound.Battutina` |
+| promptSha256 | `255f20f188b1c0050d2d8b8ae97f0eb307df99d533057a5efbee706b4232a4a5` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/sergio.png`: `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.cesira.bound.Battutina.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-e1fe3683-e32a-428c-9eec-757567fd59cd.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2991540 / `7fc1d86ea6a9a2c1c92ce46c9361d94f79a7b90e6ce789f6b5dfe39979d0f0b7` |
+| Anteprima | [WebP](anteprime/base.cesira.bound.Battutina.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 3, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Due figure vicine e bicchiere distinguibili; mani e dita minute. |
+| Anomalie visive | Abito blu petrolio; sigaretta e bicchiere visibili. Due mani di Sergio, una sulla spalla; dita sovrapposte al bicchiere. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Fare il Vago
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.cesira.bound.FareIlVago` |
+| promptSha256 | `33ffffe990b30efcca939c5efb02018181bd27ac9a47057c9102cc2dcfdee818` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/sergio.png`: `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.cesira.bound.FareIlVago.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-a70ddc90-156b-4c79-873e-ae19cd5fb04d.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2656228 / `8e66ef0876bdbd1e2fe1d166f45b0848de3da193335dba78fc882f343af96a1e` |
+| Anteprima | [WebP](anteprime/base.cesira.bound.FareIlVago.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 4, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Sergio e sedie distinguibili; mano in tasca, dita e dettagli minuti. |
+| Anomalie visive | Abito blu petrolio; sigaretta visibile. Sedie intere in aria; una mano in tasca. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Opportuna Distrazione
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.cesira.OhGuardaLa` |
+| promptSha256 | `f65096deaad55f684a4fbecdfed4cfd1512dd1ef86b5192db53b91c09ce267e4` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/sergio.png`: `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.cesira.OhGuardaLa.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-baead1f9-0e21-48ad-b0c8-06ac87d54747.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2781724 / `c76be3d087577eb3bb3b1a25944eef096202de01b45a7862fd392c2d5deab91b` |
+| Anteprima | [WebP](anteprime/base.cesira.OhGuardaLa.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 5, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Due figure e gesto leggibili; dita e sigaretta minute. |
+| Anomalie visive | Abito blu petrolio; sigaretta sospesa vicino al dito. Due braccia visibili; una mano sulla schiena. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Buon Vecchio Ricatto
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.cesira.Ricatto` |
+| promptSha256 | `bed4534647856cf4ce80dad7781fc0e1e01e6eac7b68e46a4e597f03f198eb4c` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/sergio.png`: `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.cesira.Ricatto.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-24e35f09-4cb9-4356-8c3e-e3f17c06c532.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2900926 / `bd04cc727ad795b0242abdbd612c6f065c29340633c04f318f58ee37aa6610a3` |
+| Anteprima | [WebP](anteprime/base.cesira.Ricatto.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 6, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Telefono e due figure distinguibili; schermo e dita minuti. |
+| Anomalie visive | Abito blu petrolio; sigaretta e telefono visibili, schermo sfocato senza testo leggibile. Due mani visibili. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Copione Già Visto
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.cesira.LoSapevo` |
+| promptSha256 | `f8d77262fd71dfbf4ed926aeec8cfd73d7ceaf045806a63e821244685d516eda` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/sergio.png`: `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.cesira.LoSapevo.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-527fb155-d734-4a74-a540-807c804bced1.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2624459 / `a031213dc9c6d611ff08e26941dc1c299e0403f4cab86367ae9214e9cf75412f` |
+| Anteprima | [WebP](anteprime/base.cesira.LoSapevo.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 7, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Due figure e gesto leggibili; dita minute e arti avversari parzialmente coperti. |
+| Anomalie visive | Abito blu petrolio; sigaretta visibile. Mano aperta sulla testa; due mani avversarie parziali. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Conto Salato
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.cesira.ContoSalato` |
+| promptSha256 | `38296d420f203d82dc4d5586d7f16800aa11bb889d51ae8aafedd320157f0ecd` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/sergio.png`: `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.cesira.ContoSalato.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-961cad59-3122-4e8d-90a6-9fdc66bbd8cb.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2990446 / `282213d8d791bb8bcc4df37a044f337760cbc1d99037a62c92aed44aa4e14926` |
+| Anteprima | [WebP](anteprime/base.cesira.ContoSalato.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 8, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Due figure e carta visibili; mani e segni sulla carta minuti. |
+| Anomalie visive | Abito blu petrolio; sigaretta visibile. Carta avvolta sul volto con segni simili a scrittura; mani visibili. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Segreto di Pulcinella
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.cesira.LoSannoTutti` |
+| promptSha256 | `c703977a44c2480cf8f69f6e64a0ad3f19597863726faf7d4927499fc76dc02d` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/sergio.png`: `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.cesira.LoSannoTutti.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-72c8479e-2e99-4ad7-a4ff-afbf28f54598.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2815070 / `b0c38c8e5ea70d5cf8e9687432261a27054b11d7cadde0ad6f7824c96cdf1aa0` |
+| Anteprima | [WebP](anteprime/base.cesira.LoSannoTutti.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 9, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Due figure in primo piano leggibili; bicchiere e mani minuti. |
+| Anomalie visive | Abito blu petrolio; sigaretta visibile. Bicchiere rovesciato; tre avventori sullo sfondo. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Scherzo Oltre il Limite
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.cesira.Malelingue` |
+| promptSha256 | `e341f59e0a9756a6de1146aba42df38c8cf463a741512dd943bbbad890348c3a` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/sergio.png`: `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.cesira.Malelingue.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-98093c98-9286-415a-98ce-dc6d84ec1078.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2740957 / `bc6e9bd87d65b1c75ac44c34f00152ee56a3c2e0810104ce9afec86f81868b48` |
+| Anteprima | [WebP](anteprime/base.cesira.Malelingue.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 10, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Due figure e segno di impatto leggibili; mani e dita minute. |
+| Anomalie visive | Abito blu petrolio; sigaretta visibile. Segno grafico di impatto; una mano in tasca. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Fiuto per gli Affari
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.cesira.LoRivendo` |
+| promptSha256 | `0a5d66099f2a48cab7484e2e15f438584316dabcb19981c2a076c63fe49a25b7` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/sergio.png`: `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.cesira.LoRivendo.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-ea3aaf3e-e8f7-4d1e-ba02-2eab79237dbe.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2735223 / `a9a439cd1ec81f4424fdb269653c457b3a2263bce8e48ddd28995f4f0310400f` |
+| Anteprima | [WebP](anteprime/base.cesira.LoRivendo.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 11, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Bottiglietta e figure distinguibili; banconote e dita minute. |
+| Anomalie visive | Abito blu petrolio; bottiglietta e banconote visibili, con piccoli segni sulla bottiglia. Mani visibili. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Prima gli Italiani
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.rocco.PrimaIo` |
+| promptSha256 | `2e92b2bb32e3c208f0a1a7bf9971e8b829b3af370e7a538052e708c3248e2d41` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/duccio.png`: `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.rocco.PrimaIo.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-ffc35723-5abc-46f8-9d28-3afee5aa2d46.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2890080 / `28225c15fa2f2143384f55b7fd24324d8c1a0cce63b309a7fe90dea8bda65ac4` |
+| Anteprima | [WebP](anteprime/base.rocco.PrimaIo.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 12, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Duccio e due avventori distinguibili; cocktail e mani minuti. |
+| Anomalie visive | Aquila sulla maglia e un tatuaggio sul collo a punto interrogativo barrato; cocktail rosa. Braccia e mani visibili. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Rinfrescata Arrogante
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.rocco.bound.Colpetto` |
+| promptSha256 | `18258758f34181b9f00b9798d04a4c0b381444be8d286c90c079900626722f8e` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/duccio.png`: `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; 2. `docs/design/carriere/asset/tutorial/sfondi/s1-esterno.webp`: `19f020fe6689b2de7261dfe7c1bcff9608a6509539c7fb5ab18363a85687a1d6` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.rocco.bound.Colpetto.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-987e277a-3206-47d2-b95f-72793fd5a262.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2850250 / `02b3dd2262649217a511668b89fb3404dcc3866684094069030fcff9fb8eed99` |
+| Anteprima | [WebP](anteprime/base.rocco.bound.Colpetto.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 13, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Duccio, fontanella e avversario leggibili; dita e getto minuti. |
+| Anomalie visive | Aquila e un tatuaggio sul collo a punto interrogativo barrato; fontanella riconoscibile. Due braccia di Duccio visibili. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Rialziamoci e Partite!
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.rocco.bound.MiRialzo` |
+| promptSha256 | `92fcace3b0f56ff67dcee3c66639a6a0e27280f54b29b3dda2f7d5f037e98a8a` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/duccio.png`: `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; 2. `docs/design/carriere/asset/tutorial/sfondi/s1-esterno.webp`: `19f020fe6689b2de7261dfe7c1bcff9608a6509539c7fb5ab18363a85687a1d6` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.rocco.bound.MiRialzo.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-fc78961d-c0db-4f45-be97-e9577971fd32.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2954660 / `b728b8387abe1bfbb9ace8e858fd6cdd716057f8348645604984617e56820cdf` |
+| Anteprima | [WebP](anteprime/base.rocco.bound.MiRialzo.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 14, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Duccio in ginocchio distinguibile; cocktail e figure lontane minuti. |
+| Anomalie visive | Aquila e un tatuaggio sul collo a punto interrogativo barrato; cocktail rosa. Mani e arti distinguibili. |
+| Giudizio del proprietario | In attesa. |
+
+
+### (Dis)onore alla Bandiera
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.rocco.bound.AlzoLaVoce` |
+| promptSha256 | `23086084353dee9e1d9474c8252716d5f795e525d4ea8f96a7f5b1355220236f` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/duccio.png`: `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.rocco.bound.AlzoLaVoce.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-1a0f9f39-521a-4952-843a-85f9134e77c3.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2804675 / `c913915ed974da3cb5f1c55ff2adb6711fd4671cdd6df0d9fd2aad8262406321` |
+| Anteprima | [WebP](anteprime/base.rocco.bound.AlzoLaVoce.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 15, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Duccio, bandiera e braccio avversario leggibili; mani minute. |
+| Anomalie visive | Bandiera verde, bianca e rossa senza stemma visibile; aquila parzialmente coperta, tatuaggio non visibile. Due mani sulla stoffa. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Non Mi Hai Fatto Niente
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.rocco.NeHoPreseDiPeggio` |
+| promptSha256 | `515d39bb2697c2051c8a644306bbcf1bd01259b031df7a4c7610099a6a2c877b` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/duccio.png`: `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.rocco.NeHoPreseDiPeggio.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-e74f4924-ca07-4690-99dd-fed1375e3ffd.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2772993 / `d533555284d1dea0057a83fae4389c01c41b051ef25debdf14025891f756459e` |
+| Anteprima | [WebP](anteprime/base.rocco.NeHoPreseDiPeggio.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 16, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Duccio e sagoma avversaria leggibili; pugni minuti. |
+| Anomalie visive | Aquila e un tatuaggio sul collo a punto interrogativo barrato; due pugni visibili, volto e braccia con lividi. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Nocche Sbucciate
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.rocco.NoccheSbucciate` |
+| promptSha256 | `67228f876a86562a754b6f1a100a7cbc848897e43888f1aa1938e09c28123f94` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/duccio.png`: `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.rocco.NoccheSbucciate.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-fb8d6b90-3feb-45c2-8fbd-3b96e48fc2df.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2651971 / `33fa586968d999fc9206cb7dc8c39dd9852e3f955194143e999cbc07607294d0` |
+| Anteprima | [WebP](anteprime/base.rocco.NoccheSbucciate.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 17, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Duccio e avversario leggibili; nocche e mani minute. |
+| Anomalie visive | Aquila e un tatuaggio sul collo a punto interrogativo barrato; due pugni visibili, nocche arrossate. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Stoico come un Busto di Bronzo
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.rocco.Incassare` |
+| promptSha256 | `62fba0469a44ee8a39c06a2707bf14d58a7d8bfa059b8b54e4e9697373d2d41f` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/duccio.png`: `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.rocco.Incassare.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-afafae8d-d017-4946-8a18-ff5a474cd815.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2773896 / `fe54869a54d7eb764a1e802f8428f1c162eb9387178c686c6df7f934d412d120` |
+| Anteprima | [WebP](anteprime/base.rocco.Incassare.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 18, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Duccio, avversario e busto distinguibili; cocktail e mani minuti. |
+| Anomalie visive | Aquila e un tatuaggio sul collo a punto interrogativo barrato; busto su base senza iscrizioni, cocktail rosa. Pugno avversario sulla maglia. |
+| Giudizio del proprietario | In attesa. |
+
+
+### E Allora...?
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.rocco.EAllora` |
+| promptSha256 | `14914f094799345118ca3d9926f13d0bd5366b28a3143f8e7497a9d2dfc60531` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/duccio.png`: `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.rocco.EAllora.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-b01f6371-78f7-49c2-8121-d32fef91e091.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2696933 / `d2c4aa33f27264df3f41ce24f4194b9f312037df160d5db7d52dd427c72cb38f` |
+| Anteprima | [WebP](anteprime/base.rocco.EAllora.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 19, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Duccio e avversario leggibili; pugno e mani minute. |
+| Anomalie visive | Aquila e un tatuaggio sul collo a punto interrogativo barrato; due mani visibili, naso arrossato. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Craniata Patriottica
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.rocco.Capocciata` |
+| promptSha256 | `1e5ef536fe2b71bb85cf22f2127e774cfe1ec72436324454fed8fc32225e779b` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/duccio.png`: `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.rocco.Capocciata.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-e195ba83-837e-42df-b0a4-91628c9acbf7.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 3070432 / `a135f2a26e9fed5164a2a68a05f5490848d5c775dbfb07f42cd6b650ed128d31` |
+| Anteprima | [WebP](anteprime/base.rocco.Capocciata.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 20, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Due figure e testata leggibili; stelle e dita minute. |
+| Anomalie visive | Aquila e un tatuaggio sul collo a punto interrogativo barrato; stelle e spirali grafiche sopra le teste, mani visibili. |
+| Giudizio del proprietario | In attesa. |
+
+
+### La Storia la Scrivono i Vincitori
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.rocco.TeLoSpiegoIo` |
+| promptSha256 | `1005588a503917390d79706c94e797b2027b720fb2b0e1cd049b9d9b09dd238c` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/duccio.png`: `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.rocco.TeLoSpiegoIo.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-114ceb3d-e74c-46cc-8da9-2c109f2297e4.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2935226 / `23df468eb0aa2879d6800e62503bd9d8a9ae868e786a7ca36069ed34d5cffb57` |
+| Anteprima | [WebP](anteprime/base.rocco.TeLoSpiegoIo.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 21, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Due figure e gesto leggibili; cocktail e dita minuti. |
+| Anomalie visive | Aquila e un tatuaggio sul collo a punto interrogativo barrato; cocktail rosa, mani visibili. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Testa Dura
+
+| Campo | Valore |
+|---|---|
+| bindingName | `base.rocco.TestaDura` |
+| promptSha256 | `cee127929797f9beca4c50de2eeb0769f99759655a18b5b979b161babba67030` |
+| tool / model / date | `image_gen.imagegen` / non esposto / 2026-11-27 |
+| Allegati effettivi | 1. `docs/design/set-base/identikit/riferimenti/duccio.png`: `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779`; 2. `docs/design/carriere/asset/tutorial/sfondi/s2-interno.webp`: `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Prompt riscritto | non esposto |
+| source | `originali/base.rocco.TestaDura.png` |
+| File restituito | `C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-a021fdf6-5d30-40b1-b6e6-eb49b08e3403.png` |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2897896 / `2e681022d5f647f9018f7af6ab66416df0dd5508f8b4c431b9a2c6741b8c17bc` |
+| Anteprima | [WebP](anteprime/base.rocco.TestaDura.webp), 512 px, qualità 80 |
+| Associazione | certa: unica risposta al prompt 22, nessuna selezione tra varianti |
+| Tentativi scartati | Nessuno. |
+| Controllo a 60 px | Duccio e tavolo spezzato distinguibili; cocktail e schegge minute. |
+| Anomalie visive | Aquila e un tatuaggio sul collo a punto interrogativo barrato; cocktail rosa, stelle e spirali, tavolo spezzato. |
+| Giudizio del proprietario | In attesa. |
