@@ -3819,7 +3819,7 @@ Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 51
 | Tentativi scartati | Nessuno. |
 | Controllo a 60 px | Telefono e due figure distinguibili; schermo e dita minuti. |
 | Anomalie visive | Abito blu petrolio; sigaretta e telefono visibili, schermo sfocato senza testo leggibile. Due mani visibili. |
-| Giudizio del proprietario | buon vecchio ricatto: ok |
+| Giudizio del proprietario | le altre ok |
 
 
 ### Copione Già Visto
@@ -3924,7 +3924,7 @@ Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 51
 | Tentativi scartati | Nessuno. |
 | Controllo a 60 px | Bottiglietta e figure distinguibili; banconote e dita minute. |
 | Anomalie visive | Abito blu petrolio; bottiglietta e banconote visibili, con piccoli segni sulla bottiglia. Mani visibili. |
-| Giudizio del proprietario | fiuto per gli affari: ok |
+| Giudizio del proprietario | le altre ok |
 
 
 ### Prima gli Italiani
@@ -4008,7 +4008,7 @@ Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 51
 | Tentativi scartati | Nessuno. |
 | Controllo a 60 px | Duccio, bandiera e braccio avversario leggibili; mani minute. |
 | Anomalie visive | Bandiera verde, bianca e rossa senza stemma visibile; aquila parzialmente coperta, tatuaggio non visibile. Due mani sulla stoffa. |
-| Giudizio del proprietario | bandiera: ok |
+| Giudizio del proprietario | le altre ok |
 
 
 ### Non Mi Hai Fatto Niente
@@ -4071,7 +4071,7 @@ Originali scelti verificati presenti in `originali/`, fuori da git; anteprime 51
 | Tentativi scartati | Nessuno. |
 | Controllo a 60 px | Duccio, avversario e busto distinguibili; cocktail e mani minuti. |
 | Anomalie visive | Aquila e un tatuaggio sul collo a punto interrogativo barrato; busto su base senza iscrizioni, cocktail rosa. Pugno avversario sulla maglia. |
-| Giudizio del proprietario | busto: ok |
+| Giudizio del proprietario | le altre ok |
 
 
 ### E Allora...?
@@ -4380,7 +4380,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct Duc
 | Tentativi scartati | Nessuno; versioni precedenti conservate. |
 | Controllo a 60 px | Sergio seduto e rissa sullo sfondo distinguibili; sigaretta visibile. |
 | Anomalie visive | Abito blu petrolio; nessuna bandiera o scritta evidente. Sergio seduto e rissa sullo sfondo distinguibili; sigaretta visibile. |
-| Giudizio del proprietario | fare il vago: ok |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — Opportuna Distrazione — versione 2
@@ -4422,7 +4422,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct Duc
 | Tentativi scartati | Nessuno; versioni precedenti conservate. |
 | Controllo a 60 px | Spinta sulla schiena leggibile; mani minute. |
 | Anomalie visive | Abito blu petrolio; nessuna bandiera o scritta evidente. Spinta sulla schiena leggibile; mani minute. |
-| Giudizio del proprietario | copione già visto: ok |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — Conto Salato — versione 2
@@ -4485,7 +4485,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct Duc
 | Tentativi scartati | Nessuno; versioni precedenti conservate. |
 | Controllo a 60 px | Avventore chino e Sergio leggibili; nessun segno di impatto. |
 | Anomalie visive | Abito blu petrolio; nessuna bandiera o scritta evidente. Avventore chino e Sergio leggibili; nessun segno di impatto. |
-| Giudizio del proprietario | scherzo oltre il limite: ok |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — Prima gli Italiani — versione 2
@@ -4527,7 +4527,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct Duc
 | Tentativi scartati | Nessuno; versioni precedenti conservate. |
 | Controllo a 60 px | Spinta e fontanella leggibili; braccio disteso molto lungo. |
 | Anomalie visive | Aquila e singolo tatuaggio al collo visibili; nessuna bandiera o scritta evidente. Spinta e fontanella leggibili; braccio disteso molto lungo. |
-| Giudizio del proprietario | rinfrescata arrogante: ok |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — Rialziamoci e Partite! — versione 2
@@ -4653,7 +4653,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct Duc
 | Tentativi scartati | Nessuno; versioni precedenti conservate. |
 | Controllo a 60 px | Tavolo rotto a terra leggibile; schegge ferme, occhi minuti. |
 | Anomalie visive | Aquila e singolo tatuaggio al collo visibili; nessuna bandiera o scritta evidente. Tavolo rotto a terra leggibile; schegge ferme, occhi minuti. |
-| Giudizio del proprietario | testa dura: ok |
+| Giudizio del proprietario | le altre ok |
 
 
 ### Ritocco aggiuntivo — Tecnica Manipolatoria, versione 3
@@ -4815,7 +4815,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Sergio e bicchiere basso leggibili; due mani visibili, dita e ghiaccio minuti. |
 | Anomalie visive | Abito blu petrolio. Due mani visibili; bottiglia e mano emergente dalla giacca assenti. Bicchiere basso con ghiaccio. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — Discutiamone in Privato — versione 3
@@ -4836,7 +4836,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Due figure dirette verso la porta distinguibili; volto girato e presa minuti. |
 | Anomalie visive | Abito blu petrolio. Sergio di spalle con volto girato verso l’avventore; due braccia visibili per figura. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — Tecnica Manipolatoria — versione 4
@@ -4857,7 +4857,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Sergio e sgabello di legno leggibili; piede sulla traversa visibile, giunti minuti. |
 | Anomalie visive | Abito blu petrolio. Sgabello di legno con traversa sotto il piede; nessuno schienale. Sigaretta e bicchiere conservati. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | tecnica manipolatoria: lo sgabello è sproporzionato. dobbiamo fare qualcosa di diverso |
 
 
 #### Esito — Opportuna Distrazione — versione 3
@@ -4878,7 +4878,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Presa sulla maglia e gesto leggibili; volto avversario rivolto a destra, dita minute. |
 | Anomalie visive | Abito blu petrolio. Mano chiusa sulla stoffa, braccio che indica sollevato; volto dell’avventore parzialmente riconoscibile. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — Conto Salato — versione 3
@@ -4899,7 +4899,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Carta sul volto e braccio disteso leggibili; orientamento della mano non verificabile a 60 px. |
 | Anomalie visive | Abito blu petrolio. Mano con pollice visibile sulla carta; spalla e orientamento anatomico restano da giudicare alla vista grande. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — Segreto di Pulcinella — versione 3
@@ -4920,7 +4920,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Bocca aperta e mano accanto al viso visibili; palmo e dita minuti. |
 | Anomalie visive | Abito blu petrolio. Bocca aperta con denti visibili, palmo senza nocche interne evidenti; due braccia di Sergio distinguibili. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — Prima gli Italiani — versione 3
@@ -4941,7 +4941,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Avventore a sinistra di spalle distinguibile; mani e pieghe dei pantaloni minute. |
 | Anomalie visive | Aquila, unico tatuaggio al collo e cocktail rosa conservati. Avventore sinistro ridisegnato di spalle; mano di Duccio sulla sua schiena. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — Rialziamoci e Partite! — versione 3
@@ -4962,7 +4962,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Mano sul ginocchio e appoggio a terra leggibili; bicchiere rotto e frammenti minuti. |
 | Anomalie visive | Aquila e unico tatuaggio al collo conservati. Una mano sul ginocchio e una a terra; bicchiere rotto e liquido rosa a terra, nessuna scheggia volante. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | rialziamoci: il bicchiere meglio farntumarlo in più pezzi |
 
 
 #### Esito — Non Mi Hai Fatto Niente — versione 3
@@ -4983,7 +4983,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Duccio e due pugni leggibili; forma interna del tatuaggio troppo minuta. |
 | Anomalie visive | Aquila conservata. Unico tatuaggio nero al collo, ridisegnato con semicerchio destro, tratti interni e punto separato; forma da giudicare. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — Nocche Sbucciate — versione 3
@@ -5004,7 +5004,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Braccio disteso e contatto leggibili; abrasioni su entrambe le mani minute. |
 | Anomalie visive | Aquila e unico tatuaggio al collo conservati. Pugno disteso contro l’avventore; entrambe le mani con nocche rosse e abrase; viso avversario riconoscibile. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | nocche: il braccio che tira il pugno è orientato male rispetto alla figura di duccio, giriamolo come un braccio sinistro |
 
 
 #### Esito — E Allora...? — versione 3
@@ -5025,7 +5025,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Presa sui capelli e mano aperta leggibili; dita e bocca minute. |
 | Anomalie visive | Aquila e unico tatuaggio al collo conservati. Una mano afferra i capelli, l’altra aperta; bocca aperta. Nessun pugno all’impatto. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — Craniata Patriottica — versione 2
@@ -5046,7 +5046,7 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Contatto della testata e rinculo leggibili; stelline assenti, visi minuti. |
 | Anomalie visive | Aquila e unico tatuaggio al collo conservati. Fronti e visi a contatto; braccia e pugni distinguibili; stelle e spirali assenti. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | le altre ok |
 
 
 #### Esito — La Storia la Scrivono i Vincitori — versione 3
@@ -5067,6 +5067,35 @@ Edit the single attached illustration of Duccio for Botte Micidiali. Correct onl
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Gesto verso il petto leggibile; orientamento sinistro della mano non verificabile a 60 px. |
 | Anomalie visive | Aquila, unico tatuaggio al collo e cocktail rosa conservati. Dito sul petto; pollice e dita visibili, orientamento anatomico da giudicare. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | le altre ok |
 
 Verifiche del giro 2: tredici originali confrontati byte per byte con i file restituiti; tredici anteprime WebP 512 × 512, qualità 80; provino a 60 px esaminato. `git diff --check`, `python scripts/check-rules.py` e controllo dei link nel registro verdi. Nessun rifiuto, rilancio o tentativo scartato. Lotto in attesa del giudizio del proprietario.
+
+
+### Giro di correzione 3 — 27 novembre 2026
+
+Il proprietario: «le altre ok». Tre correzioni richieste, giudizi riportati con le sue parole nelle schede. Per Tecnica Manipolatoria si prova una panca del bar con una piccola cassetta come appoggio del piede. Una richiesta per carta, unico allegato la versione corrente; tutte le versioni precedenti conservate. Prompt committati prima delle generazioni.
+
+#### Tecnica Manipolatoria — versione 5
+
+Allegato unico: `originali/base.cesira.bound.Battutina-4.png`.
+
+~~~text
+Edit the single attached illustration for Botte Micidiali. Replace the stool and its foot rung completely with a different, physically plausible seating arrangement. Sergio sits on the existing bar's long low wooden wall bench, sized naturally for an adult, with the seat clearly supporting his pelvis. Remove the tall stool entirely. Keep one foot on the floor and rest the other foot naturally on a small sturdy wooden crate on the floor in front of the bench, with believable leg lengths and bending knees. Recompose only Sergio's lower body and the seating/support area as needed. Preserve the whispering interaction, upper bodies, faces, glass and cigarette. Do not add a chair back behind Sergio or any extra limbs. Preserve the established hand-inked European comic style, square opaque artwork, lighting and palette. Keep Sergio's suit clearly petrol blue, not grey. No text, labels, new symbols, flags, extra hands or extra limbs.
+~~~
+
+#### Rialziamoci e Partite! — versione 4
+
+Allegato unico: `originali/base.rocco.bound.MiRialzo-3.png`.
+
+~~~text
+Edit the single attached illustration for Botte Micidiali. Change only the broken cocktail glass lying on the ground. Replace the large almost-intact bowl and stem with a clearly shattered glass: several separate irregular small pieces of the curved bowl, a short broken stem and a separate broken base, all settled on the ground in the existing small pink spill. No piece should retain an almost complete goblet silhouette. Keep the existing umbrella and cherry and preserve Duccio's pose, both hands, bruises, clothing, single neck tattoo, eagle and the entire rest of the scene. No airborne glass or motion burst. Preserve the established hand-inked European comic style, square opaque artwork, lighting and palette.  No text, labels, new symbols, flags, extra hands or extra limbs.
+~~~
+
+#### Nocche Sbucciate — versione 4
+
+Allegato unico: `originali/base.rocco.NoccheSbucciate-3.png`.
+
+~~~text
+Edit the single attached illustration for Botte Micidiali. Correct only Duccio's punching arm so it is unmistakably his anatomical LEFT arm, naturally attached to his own left shoulder on the viewer's right side of his torso. Redraw the shoulder connection, upper arm, elbow, forearm and fist together as one coherent left arm delivering a straight punch toward the patron. Use the natural left elbow and left-hand thumb and knuckle orientation; do not attach a right arm or right hand to his left shoulder. Preserve Duccio's torso orientation and his other, right fist down beside his body. Both fists retain scraped reddened knuckles without blood. Preserve the patron, scene, eagle and single neck tattoo. Preserve the established hand-inked European comic style, square opaque artwork, lighting and palette.  No text, labels, new symbols, flags, extra hands or extra limbs.
+~~~
