@@ -5119,7 +5119,7 @@ Edit the single attached illustration for Botte Micidiali. Correct only Duccio's
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Panca e cassetta distinguibili; piedi appoggiati visibili, giunti e dita minuti. |
 | Anomalie visive | Abito blu petrolio. Panca di legno e cassetta sotto il piede; sgabello assente. Sigaretta e bicchiere conservati; arti in parte coperti. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | tecnica manipolatoria: non va bene, ripartiamo dalla prima versione e togliamo la spalliera allo sgabello, mettendo il piede di sergio su di esso |
 
 
 #### Esito — Rialziamoci e Partite! — versione 4
@@ -5140,7 +5140,7 @@ Edit the single attached illustration for Botte Micidiali. Correct only Duccio's
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Posa e appoggi leggibili; frammenti del bicchiere troppo minuti per contarli. |
 | Anomalie visive | Aquila e singolo tatuaggio al collo conservati. Due mani negli appoggi precedenti; bicchiere in più frammenti separati, stelo corto e base a terra nella pozza rosa, nessuna scheggia volante. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | rialziamoci: ok |
 
 
 #### Esito — Nocche Sbucciate — versione 4
@@ -5161,6 +5161,27 @@ Edit the single attached illustration for Botte Micidiali. Correct only Duccio's
 | Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
 | Controllo a 60 px | Pugno e contatto leggibili; orientamento anatomico del braccio non verificabile a 60 px. |
 | Anomalie visive | Aquila e singolo tatuaggio al collo conservati. Due braccia di Duccio visibili; braccio del pugno disteso dalla spalla alla destra dell’immagine, raccordo e orientamento da giudicare alla vista grande. Nocche abrase su entrambe le mani; volto avversario visibile. Nessuna bandiera o scritta evidente. |
-| Giudizio del proprietario | In attesa. |
+| Giudizio del proprietario | nocche: non va ancora bene, cambiamo scena, facciamo un primo piano duccio che si picchia le nocche insieme mentre gli lacrimano gli occhi dal dolore, ma si sforza di non farlo vedere |
 
 Verifiche del giro 3: tre originali identici byte per byte ai file restituiti; tre anteprime WebP 512 × 512, qualità 80; provino a 60 px esaminato. `git diff --check`, `python scripts/check-rules.py` e controllo dei link nel registro verdi. Nessun rifiuto, rilancio o tentativo scartato. In attesa del giudizio sulle tre nuove versioni.
+
+
+### Giro di correzione 4 — 27 novembre 2026
+
+Il proprietario: «rialziamoci: ok». Due correzioni richieste, giudizi riportati con le sue parole nelle schede. Tecnica Manipolatoria riparte dalla prima versione, Nocche Sbucciate cambia scena usando la versione corrente come riferimento. Una richiesta per carta, unico allegato quello indicato; tutte le versioni conservate. Prompt committati prima delle generazioni.
+
+#### Tecnica Manipolatoria — versione 6
+
+Allegato unico: `originali/base.cesira.bound.Battutina.png`.
+
+~~~text
+Edit the single attached FIRST version of Tecnica Manipolatoria for Botte Micidiali. Start from this attached composition, not any later arrangement. Remove completely the curved upholstered backrest at the lower left. Keep the existing round red upholstered stool seat, without a backrest, and place Sergio's raised shoe firmly and naturally ON TOP of that seat, so the sole visibly contacts and rests on the seat. Adjust only the bent leg and foot as needed for believable anatomy and support. Do not introduce a bench, crate, second stool or new chair back. Preserve the original whispering interaction, both characters, their upper bodies, faces, hands, cigarette, glass, table, lighting and hand-inked European comic style. Keep Sergio's suit clearly petrol blue, not grey. Exactly two coherent arms and hands per person; no text, labels, new symbols or extra limbs. Square opaque artwork.
+~~~
+
+#### Nocche Sbucciate — versione 5
+
+Allegato unico: `originali/base.rocco.NoccheSbucciate-4.png`.
+
+~~~text
+Recompose the single attached Duccio illustration into a completely new scene for Botte Micidiali, preserving his established identity and the hand-inked European comic style. A tight close-up from the chest upward of Duccio alone: he knocks the knuckles of his two closed fists together directly in front of his chest, with both fists and their point of contact clearly visible. Both hands are naturally connected to his own two arms and shoulders, anatomically coherent; no punching another person. His scraped reddened knuckles hurt: tears well up and run from his eyes, while he stubbornly tries to hide the pain with a forced tough expression, clenched jaw and tense lips. Make the conflict between watery eyes and attempted bravado readable. Duccio is a clearly adult young man, stocky and soft, shaved head with stubbly regrowth, blotchy face and red nose. Preserve his worn black shirt with the cracked white spread-wing eagle and his single stylized question-mark neck tattoo; add no other symbols. Show the dive bar softly behind him, darker and less sharp. Remove the patron and the previous punch scene entirely. No cocktail, blood, text, labels, flags, extra hands or extra limbs. Square opaque illustration, strong silhouette readable at 60 pixels.
+~~~
