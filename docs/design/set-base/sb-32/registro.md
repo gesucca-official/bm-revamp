@@ -4795,3 +4795,278 @@ Allegato unico: `originali/base.rocco.TeLoSpiegoIo-2.png`.
 ~~~text
 Edit the single attached illustration of Duccio for Botte Micidiali. Correct only Duccio's pointing hand. The arm extended toward the patron is his anatomical left arm and must end in a clearly left hand, with left-hand thumb placement, natural wrist and palm orientation. One left index finger touches the patron's chest; remaining fingers curl naturally. Do not put a right hand on this left arm. Preserve the gesture, cocktail, faces, eagle and single neck tattoo. Preserve the hand-inked European comic style, square opaque artwork, palette, lighting and all details not involved in this correction. Preserve Duccio's eagle without surrounding emblems and his single neck tattoo, except where that tattoo is explicitly being corrected. No text, labels, new symbols, flags, extra hands or extra limbs.
 ~~~
+
+
+#### Esito — Messo in Conto — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.LoMettoInConto |
+| promptSha256 | 0d6c1e8afda7db52d8bb1bfd0f0321820c51815cf2087b0d4333a8f2415999b2 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.LoMettoInConto-2.png; SHA-256 83d184f255295756a25c28e9947ef00d5ca0c96e6e48b1e6d209efd4b0b7784d |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.LoMettoInConto-3.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-d0f006a9-cf03-4815-bb09-7e769ce43e9f.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2349032 / c6d3e2da5a4c1cfc0f4cbab77282bc748cf7ae02d247c02b6da4058b630cd3b5 |
+| Anteprima | [WebP](anteprime/base.cesira.LoMettoInConto-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 3 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Sergio e bicchiere basso leggibili; due mani visibili, dita e ghiaccio minuti. |
+| Anomalie visive | Abito blu petrolio. Due mani visibili; bottiglia e mano emergente dalla giacca assenti. Bicchiere basso con ghiaccio. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Discutiamone in Privato — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.bound.NeRiparliamoFuori |
+| promptSha256 | a19fb9c6d084bd1e7e399dae97ebab267bb6dd089806190aab5fa53910621480 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.bound.NeRiparliamoFuori-2.png; SHA-256 62b5dc3e8131643c5f32ed2c781b3e50fa7c0a11c1335954b0d6251bcb30b559 |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.bound.NeRiparliamoFuori-3.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-3a3c6d47-ecfe-4cc0-9557-68f3070f4b51.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2717637 / 2670a1fbe4cfb2a01c18cfb4a0fe103aaa82d708347b407e05d4f571f536de3e |
+| Anteprima | [WebP](anteprime/base.cesira.bound.NeRiparliamoFuori-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 3 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Due figure dirette verso la porta distinguibili; volto girato e presa minuti. |
+| Anomalie visive | Abito blu petrolio. Sergio di spalle con volto girato verso l’avventore; due braccia visibili per figura. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Tecnica Manipolatoria — versione 4
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.bound.Battutina |
+| promptSha256 | ed6cefebc7fd6b1ce77e1f3d5dc41f124b0b877fb9550d4803e89c50a762b57c |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.bound.Battutina-3.png; SHA-256 3cf32191c29b89585889e0727a6bfe75571e601edaed1782cde6f9341806a565 |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.bound.Battutina-4.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-a3f6e3f8-215e-46ed-b8a3-6a637a560e80.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2735913 / a4ad74282c26500b7f2dc865d6bfb1391dbf7a825ad6d923f452ec5818a71489 |
+| Anteprima | [WebP](anteprime/base.cesira.bound.Battutina-4.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 4 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Sergio e sgabello di legno leggibili; piede sulla traversa visibile, giunti minuti. |
+| Anomalie visive | Abito blu petrolio. Sgabello di legno con traversa sotto il piede; nessuno schienale. Sigaretta e bicchiere conservati. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Opportuna Distrazione — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.OhGuardaLa |
+| promptSha256 | 2d1a10f0dd87a816e7fcf4b4f35ea3a1eb95222a6d7aebe67f1b039b5453e399 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.OhGuardaLa-2.png; SHA-256 6f52e010dc01ca3f690fb66bd5b2ea42652f75021961b7f9e764926eaf4a4692 |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.OhGuardaLa-3.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-efa959b8-ad97-419f-9ec2-813ea9804e31.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2452782 / 1f35aa74e5d9eb7925bcf76c85dfc75b5ca4a62020fdeab77562f24757382832 |
+| Anteprima | [WebP](anteprime/base.cesira.OhGuardaLa-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 3 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Presa sulla maglia e gesto leggibili; volto avversario rivolto a destra, dita minute. |
+| Anomalie visive | Abito blu petrolio. Mano chiusa sulla stoffa, braccio che indica sollevato; volto dell’avventore parzialmente riconoscibile. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Conto Salato — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.ContoSalato |
+| promptSha256 | 890ae472eed8c453fd25d7971884c1f518cd65f5f6da55f289721e80f6810cb3 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.ContoSalato-2.png; SHA-256 2a8a2635b1e4423e3593549ce3a6f2fa906172b72c812657b4f655f0e11f9f92 |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.ContoSalato-3.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-aae5d352-ca16-4650-b816-50fc763a2548.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2595775 / fa664b5dc877965af7913ad81de9a9cc4c1012b268a6b2e1879f038fa6aaf2a3 |
+| Anteprima | [WebP](anteprime/base.cesira.ContoSalato-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 3 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Carta sul volto e braccio disteso leggibili; orientamento della mano non verificabile a 60 px. |
+| Anomalie visive | Abito blu petrolio. Mano con pollice visibile sulla carta; spalla e orientamento anatomico restano da giudicare alla vista grande. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Segreto di Pulcinella — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.LoSannoTutti |
+| promptSha256 | ae1ee5f9cfd6f90f2fc54e85ecae5a355c752c30ae5757e2eef650b3efc10fb4 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.LoSannoTutti-2.png; SHA-256 134602e09e8ca5166a7dd2da608dadeb42d75aaa226b5b517dc9eaf99ca960f3 |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.LoSannoTutti-3.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-8fb33ad4-7168-49cc-95b6-ff8aa06e4e7a.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2393003 / 978513b835192e461e4d42511c2d42df348ad870b71e47d18dbfec8778047eab |
+| Anteprima | [WebP](anteprime/base.cesira.LoSannoTutti-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 3 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Bocca aperta e mano accanto al viso visibili; palmo e dita minuti. |
+| Anomalie visive | Abito blu petrolio. Bocca aperta con denti visibili, palmo senza nocche interne evidenti; due braccia di Sergio distinguibili. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Prima gli Italiani — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.PrimaIo |
+| promptSha256 | f6aea35dde24b6e8e4335548b232aede2fb12e97f7b2e0f9a66118ea4ec5f173 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.PrimaIo-2.png; SHA-256 e3caf01f64bd6716b0550d7282cf4bde4c8a3ab81ad7527999a614276b393828 |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.PrimaIo-3.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-2e984cf5-8d4f-4eb5-9a17-82251101bc89.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2795778 / 1f98d7a6039239fe20326ac64ba393d5bee7b575604ee698eee517371bdac429 |
+| Anteprima | [WebP](anteprime/base.rocco.PrimaIo-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 3 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Avventore a sinistra di spalle distinguibile; mani e pieghe dei pantaloni minute. |
+| Anomalie visive | Aquila, unico tatuaggio al collo e cocktail rosa conservati. Avventore sinistro ridisegnato di spalle; mano di Duccio sulla sua schiena. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Rialziamoci e Partite! — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.bound.MiRialzo |
+| promptSha256 | b3fa6a97dfc19d2e63efa9476564de31ad6b1162fa0d3aa5e88cd1377d42d106 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.bound.MiRialzo-2.png; SHA-256 35ffc52d50686eafa074359d0fe215212e22a3271ec387aa6e4c87ca95800e07 |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.bound.MiRialzo-3.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-ffaf4f20-ae0b-45e1-84d2-7ca69b13daf6.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2713619 / e8949de4e638a1a71ed56b43fe9ba3f7f55ed38e21c39a2d6fbc40c08a37ead3 |
+| Anteprima | [WebP](anteprime/base.rocco.bound.MiRialzo-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 3 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Mano sul ginocchio e appoggio a terra leggibili; bicchiere rotto e frammenti minuti. |
+| Anomalie visive | Aquila e unico tatuaggio al collo conservati. Una mano sul ginocchio e una a terra; bicchiere rotto e liquido rosa a terra, nessuna scheggia volante. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Non Mi Hai Fatto Niente — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.NeHoPreseDiPeggio |
+| promptSha256 | 1365fcd2adbe5b26fbbc7ec5285b4a55c9556733519f616f2fb69169519d9187 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.NeHoPreseDiPeggio-2.png; SHA-256 53d1f825a0a09407d36a69b657e1a71827f5c0128ab7589a99bdb913c6adf6e1 |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.NeHoPreseDiPeggio-3.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-e651b19e-6e7f-4566-a098-73956675fa1c.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2616951 / c7879946b0e30104e989f90b63f5e65798c9c8fb40f46eff38125ae252d49d0d |
+| Anteprima | [WebP](anteprime/base.rocco.NeHoPreseDiPeggio-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 3 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Duccio e due pugni leggibili; forma interna del tatuaggio troppo minuta. |
+| Anomalie visive | Aquila conservata. Unico tatuaggio nero al collo, ridisegnato con semicerchio destro, tratti interni e punto separato; forma da giudicare. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Nocche Sbucciate — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.NoccheSbucciate |
+| promptSha256 | c4e13be321be98a12102a2aba69e25d95bb1ba91ff39346ba1d977be7428bc33 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.NoccheSbucciate-2.png; SHA-256 560e0d47e634501f359dfbd92be8b40d17a3e08a11e3729a755f2ab2e0b8d380 |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.NoccheSbucciate-3.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-394aa70a-ce39-4946-9337-c9067be5985f.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2677768 / 08b19803d680bf8c9fc7672f1b18a22c9bd9e023409c4e5735b28a17fceb9c2b |
+| Anteprima | [WebP](anteprime/base.rocco.NoccheSbucciate-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 3 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Braccio disteso e contatto leggibili; abrasioni su entrambe le mani minute. |
+| Anomalie visive | Aquila e unico tatuaggio al collo conservati. Pugno disteso contro l’avventore; entrambe le mani con nocche rosse e abrase; viso avversario riconoscibile. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — E Allora...? — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.EAllora |
+| promptSha256 | 52185230e4d4a12d2e6ea6eaac920852b0ea882fdfdc112b88a9f04e32414c4c |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.EAllora-2.png; SHA-256 719b7f74566ee80f708f8af0a5c2dccccda8e41cda7a49efb200238fdd1af2c9 |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.EAllora-3.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-81772149-a670-4edc-8200-d60787c13973.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2438478 / 31685ad884b49d7b3980aaac93d520c13f2b04fd3b6319c57da94466a6f0f956 |
+| Anteprima | [WebP](anteprime/base.rocco.EAllora-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 3 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Presa sui capelli e mano aperta leggibili; dita e bocca minute. |
+| Anomalie visive | Aquila e unico tatuaggio al collo conservati. Una mano afferra i capelli, l’altra aperta; bocca aperta. Nessun pugno all’impatto. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Craniata Patriottica — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.Capocciata |
+| promptSha256 | 20fecaeafb55c8fc2e37055c12dd4af8e3bded130309f32ee0b7cf802e2cb57c |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.Capocciata.png; SHA-256 a135f2a26e9fed5164a2a68a05f5490848d5c775dbfb07f42cd6b650ed128d31 |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.Capocciata-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-8bb8aa1e-42bb-4775-9028-1c128973a518.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2840053 / b1bf362822f7a8de11163e7a37312bbebc1aab661137abfa9e202b8a19839bca |
+| Anteprima | [WebP](anteprime/base.rocco.Capocciata-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 2 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Contatto della testata e rinculo leggibili; stelline assenti, visi minuti. |
+| Anomalie visive | Aquila e unico tatuaggio al collo conservati. Fronti e visi a contatto; braccia e pugni distinguibili; stelle e spirali assenti. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — La Storia la Scrivono i Vincitori — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.TeLoSpiegoIo |
+| promptSha256 | 265d43868c12af6d66561313bbbb59e1a5d576d3a601adb0ce381987c7edf72f |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.TeLoSpiegoIo-2.png; SHA-256 2afe524c4f81150b49110c2c8259d3ff42ca8e769a70536a7a112cbaaff482eb |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.TeLoSpiegoIo-3.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-174d681d-4fff-4031-9f6e-af39048d0394.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2428029 / 2ccfef4a6579034a22665aa0d76639db5bbdb4c464217ea8a7ab9926d0835e9e |
+| Anteprima | [WebP](anteprime/base.rocco.TeLoSpiegoIo-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 2, versione 3 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Gesto verso il petto leggibile; orientamento sinistro della mano non verificabile a 60 px. |
+| Anomalie visive | Aquila, unico tatuaggio al collo e cocktail rosa conservati. Dito sul petto; pollice e dita visibili, orientamento anatomico da giudicare. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+Verifiche del giro 2: tredici originali confrontati byte per byte con i file restituiti; tredici anteprime WebP 512 × 512, qualità 80; provino a 60 px esaminato. `git diff --check`, `python scripts/check-rules.py` e controllo dei link nel registro verdi. Nessun rifiuto, rilancio o tentativo scartato. Lotto in attesa del giudizio del proprietario.
