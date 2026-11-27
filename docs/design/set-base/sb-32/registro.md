@@ -4663,3 +4663,26 @@ Giudizio del proprietario: «Remove the area marked in the second image from the
 ~~~text
 Edit the single attached illustration. Remove the patron's raised hand and the short forearm immediately below it in the central area, approximately x=620–830 and y=530–800 in the 1254-pixel image, corresponding to the white marked area supplied by the owner. Reconstruct the underlying dark space and clothing naturally. Preserve the patron's lower hand resting near the table, Sergio, his glass and cigarette, both faces, composition, lighting and inked style. Change nothing outside this localized removal. No text or extra limbs.
 ~~~
+
+
+#### Esito — Tecnica Manipolatoria — versione 3
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.bound.Battutina |
+| promptSha256 | 38ab39a3f4066aa143a065b1a974acb71a347ca1c451d86b19a84ca2a8da8baf |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.bound.Battutina-2.png; SHA-256 b0cebd44333fc2424a4f425ffce38daf1f684a2b379a86bf452df38322b7e1d4 |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.bound.Battutina-3.png |
+| File restituito | C:\Users\gesucca\.codex\generated_images\01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8\exec-41e241bf-604d-4cd9-826e-50eb9713a01e.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2746328 / 3cf32191c29b89585889e0727a6bfe75571e601edaed1782cde6f9341806a565 |
+| Anteprima | [WebP](anteprime/base.cesira.bound.Battutina-3.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al ritocco richiesto sulla versione 2 |
+| Tentativi scartati | Nessuno; versioni 1 e 2 conservate. |
+| Controllo a 60 px | Figure e bicchiere leggibili; mano centrale rimossa, mano bassa conservata; dita minute. |
+| Anomalie visive | Abito blu petrolio; bicchiere e sigaretta conservati. Mano centrale assente, altra mano visibile sul bordo del tavolo. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+Verifiche del giro: originali confrontati byte per byte con i file restituiti; anteprime WebP 512 px qualità 80; provino a 60 px esaminato. `git diff --check`, `python scripts/check-rules.py` e controllo link sul registro verdi. Nessun rifiuto o rilancio. Nessuna chiusura del lotto.
