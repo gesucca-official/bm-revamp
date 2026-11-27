@@ -4297,3 +4297,369 @@ Allegato unico: `originali/base.rocco.TestaDura.png`.
 ~~~text
 Edit the single attached illustration of Duccio for Botte Micidiali. Correct Duccio's eyes so both pupils align naturally in one coherent gaze, without strabismus. Show the table as already broken and settled on the ground: remove all airborne splinters, motion streaks and fresh explosion effects around the broken furniture. Preserve Duccio, the cocktail and the static broken pieces. Preserve the established hand-inked European comic style, square opaque composition, bar setting, lighting and character identity. Keep Duccio's single stylized question-mark neck tattoo and the eagle on his shirt; add no other symbols. Do not add text, lettering, labels, logos, flags or extra limbs. Change only what is required by the correction.
 ~~~
+
+
+#### Esito — Messo in Conto — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.LoMettoInConto |
+| promptSha256 | cb5c2ee46015ca4d4cd2fd8bfbcc2a6c620cc16da3a6d502cdd7db44f3add824 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.LoMettoInConto.png; SHA-256 e0875da8c17cd789e14067c3c9e52b2d5f369e7c185585b02a4c0f50d9264aad |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.LoMettoInConto-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-bb1c8213-9672-41f5-8d64-2f5508639217.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2593819 / 83d184f255295756a25c28e9947ef00d5ca0c96e6e48b1e6d209efd4b0b7784d |
+| Anteprima | [WebP](anteprime/base.cesira.LoMettoInConto-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Bottiglia e mani visibili; raccordo del braccio sulla bottiglia ancora poco chiaro. |
+| Anomalie visive | Abito blu petrolio; nessuna bandiera o scritta evidente. Bottiglia e mani visibili; raccordo del braccio sulla bottiglia ancora poco chiaro. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Discutiamone in Privato — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.bound.NeRiparliamoFuori |
+| promptSha256 | 1958536e8477701b05e386ba322eb02e462371ba5977438b289b3c432a736de2 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.bound.NeRiparliamoFuori.png; SHA-256 0ace4bb5c59c5c24d887b056634538373d318a4bfd22b469083638988367c08f |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.bound.NeRiparliamoFuori-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-7b8353d2-cb53-42e5-89f3-17dcaa400f43.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2784733 / 62b5dc3e8131643c5f32ed2c781b3e50fa7c0a11c1335954b0d6251bcb30b559 |
+| Anteprima | [WebP](anteprime/base.cesira.bound.NeRiparliamoFuori-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Presa sul braccio e passo verso la porta leggibili; dita minute. |
+| Anomalie visive | Abito blu petrolio; nessuna bandiera o scritta evidente. Presa sul braccio e passo verso la porta leggibili; dita minute. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Tecnica Manipolatoria — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.bound.Battutina |
+| promptSha256 | 947bb9e4ad8a4da52da2bf582defd16435c60a8c872cff89216072af9c0c2048 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.bound.Battutina.png; SHA-256 7fc1d86ea6a9a2c1c92ce46c9361d94f79a7b90e6ce789f6b5dfe39979d0f0b7 |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.bound.Battutina-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-11254259-d2d8-4b8a-ac2f-75e8d5aa871a.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2897409 / b0cebd44333fc2424a4f425ffce38daf1f684a2b379a86bf452df38322b7e1d4 |
+| Anteprima | [WebP](anteprime/base.cesira.bound.Battutina-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Figure vicine e bicchiere leggibili; mano sollevata centrale visibile. |
+| Anomalie visive | Abito blu petrolio; nessuna bandiera o scritta evidente. Figure vicine e bicchiere leggibili; mano sollevata centrale visibile. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Fare il Vago — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.bound.FareIlVago |
+| promptSha256 | a381d62a0670de53a42244d18a70995165217ee61881f2f5389db186beab4828 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.bound.FareIlVago.png; SHA-256 8e66ef0876bdbd1e2fe1d166f45b0848de3da193335dba78fc882f343af96a1e |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.bound.FareIlVago-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-5546a161-8245-4564-971e-08e60a6db3e6.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2845693 / 9b415ca8cd475438180ad82dc14d49b25e874a1172e3fcb76e639a8c2c2dd3da |
+| Anteprima | [WebP](anteprime/base.cesira.bound.FareIlVago-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Sergio seduto e rissa sullo sfondo distinguibili; sigaretta visibile. |
+| Anomalie visive | Abito blu petrolio; nessuna bandiera o scritta evidente. Sergio seduto e rissa sullo sfondo distinguibili; sigaretta visibile. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Opportuna Distrazione — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.OhGuardaLa |
+| promptSha256 | 601d71c5a7c20ef80a33286adc6cd9a5bdeb8d4d667bdcbbf95ed23e2d14ea34 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.OhGuardaLa.png; SHA-256 c76be3d087577eb3bb3b1a25944eef096202de01b45a7862fd392c2d5deab91b |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.OhGuardaLa-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-cd24aee4-9532-408f-8051-b648ba535c35.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2604873 / 6f52e010dc01ca3f690fb66bd5b2ea42652f75021961b7f9e764926eaf4a4692 |
+| Anteprima | [WebP](anteprime/base.cesira.OhGuardaLa-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Gesto e pugno distinguibili; sigaretta assente. |
+| Anomalie visive | Abito blu petrolio; nessuna bandiera o scritta evidente. Gesto e pugno distinguibili; sigaretta assente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Copione Già Visto — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.LoSapevo |
+| promptSha256 | 488da5ea96baaf5d687e8b060e013391f42c9b204f42670977c8cb3fdf2181a9 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.LoSapevo.png; SHA-256 a031213dc9c6d611ff08e26941dc1c299e0403f4cab86367ae9214e9cf75412f |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.LoSapevo-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-09f9f426-07ee-4bba-9828-b80dc44977da.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2540145 / de5b57372f793c294b7d8e6c42e832e1f311acac70e82bba28be34ed83da5512 |
+| Anteprima | [WebP](anteprime/base.cesira.LoSapevo-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Spinta sulla schiena leggibile; mani minute. |
+| Anomalie visive | Abito blu petrolio; nessuna bandiera o scritta evidente. Spinta sulla schiena leggibile; mani minute. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Conto Salato — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.ContoSalato |
+| promptSha256 | ab903f71f5f965309f91afe6d773fd7f5b59c40b1ce45cefe8e4295f587d4969 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.ContoSalato.png; SHA-256 282213d8d791bb8bcc4df37a044f337760cbc1d99037a62c92aed44aa4e14926 |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.ContoSalato-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-082a520f-6eff-4a4b-865a-5d00c8a436c5.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2841237 / 2a8a2635b1e4423e3593549ce3a6f2fa906172b72c812657b4f655f0e11f9f92 |
+| Anteprima | [WebP](anteprime/base.cesira.ContoSalato-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Carta e contatto leggibili; mani minute. |
+| Anomalie visive | Abito blu petrolio; nessuna bandiera o scritta evidente. Carta e contatto leggibili; mani minute. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Segreto di Pulcinella — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.LoSannoTutti |
+| promptSha256 | 200981217f52b1049462c596c613e81950a350e75b9414a3f3dec80da8a857ca |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.LoSannoTutti.png; SHA-256 b0c38c8e5ea70d5cf8e9687432261a27054b11d7cadde0ad6f7824c96cdf1aa0 |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.LoSannoTutti-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-3da7c70d-da69-4b30-ab69-1fc76784b9ff.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2662539 / 134602e09e8ca5166a7dd2da608dadeb42d75aaa226b5b517dc9eaf99ca960f3 |
+| Anteprima | [WebP](anteprime/base.cesira.LoSannoTutti-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Sussurro e due braccia distinguibili; sigaretta assente. |
+| Anomalie visive | Abito blu petrolio; nessuna bandiera o scritta evidente. Sussurro e due braccia distinguibili; sigaretta assente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Scherzo Oltre il Limite — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.Malelingue |
+| promptSha256 | c62ae8c86972a11e3f79cee0e50c825496486622fd2302d6a952b2cda17741ba |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.Malelingue.png; SHA-256 bc6e9bd87d65b1c75ac44c34f00152ee56a3c2e0810104ce9afec86f81868b48 |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.Malelingue-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-e9b8966d-46bb-4c3f-81e7-cb87036377e3.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2664921 / 248361cc33d2c73618a90d0a07c05b916986ad9103b9d0e24b0fccfbceadb77b |
+| Anteprima | [WebP](anteprime/base.cesira.Malelingue-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Avventore chino e Sergio leggibili; nessun segno di impatto. |
+| Anomalie visive | Abito blu petrolio; nessuna bandiera o scritta evidente. Avventore chino e Sergio leggibili; nessun segno di impatto. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Prima gli Italiani — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.PrimaIo |
+| promptSha256 | 9253f507b1ef39ab5360af0e7fe348272942d59c67b84febaf39b263cae86e43 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.PrimaIo.png; SHA-256 28225c15fa2f2143384f55b7fd24324d8c1a0cce63b309a7fe90dea8bda65ac4 |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.PrimaIo-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-9e8f2700-e4bc-4224-a803-b9ce48e5a79a.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2810304 / e3caf01f64bd6716b0550d7282cf4bde4c8a3ab81ad7527999a614276b393828 |
+| Anteprima | [WebP](anteprime/base.rocco.PrimaIo-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Duccio e avventori distinguibili; mani minute. |
+| Anomalie visive | Aquila e singolo tatuaggio al collo visibili; nessuna bandiera o scritta evidente. Duccio e avventori distinguibili; mani minute. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Rinfrescata Arrogante — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.bound.Colpetto |
+| promptSha256 | 219c443c6a5971a7d0d73bbc62416a86c3f008cc311fd01bff8a24b3cdcf3ebd |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.bound.Colpetto.png; SHA-256 02b3dd2262649217a511668b89fb3404dcc3866684094069030fcff9fb8eed99 |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.bound.Colpetto-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-06a4621e-ee19-406b-9b52-474d261f8372.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2827358 / 9345ec5601658079932b492926735db3d6a06b0a44e8ed2085901db2fb0f6cfd |
+| Anteprima | [WebP](anteprime/base.rocco.bound.Colpetto-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Spinta e fontanella leggibili; braccio disteso molto lungo. |
+| Anomalie visive | Aquila e singolo tatuaggio al collo visibili; nessuna bandiera o scritta evidente. Spinta e fontanella leggibili; braccio disteso molto lungo. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Rialziamoci e Partite! — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.bound.MiRialzo |
+| promptSha256 | 494b39f89352dce30c55d63cb333bdef1782d601cc42144f0055751d476b9af1 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.bound.MiRialzo.png; SHA-256 b728b8387abe1bfbb9ace8e858fd6cdd716057f8348645604984617e56820cdf |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.bound.MiRialzo-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-3fdb54af-4f47-4ab0-9818-d2a587a11219.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2932714 / 35ffc52d50686eafa074359d0fe215212e22a3271ec387aa6e4c87ca95800e07 |
+| Anteprima | [WebP](anteprime/base.rocco.bound.MiRialzo-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Appoggio a terra e ginocchio piegato leggibili; lividi visibili. |
+| Anomalie visive | Aquila e singolo tatuaggio al collo visibili; nessuna bandiera o scritta evidente. Appoggio a terra e ginocchio piegato leggibili; lividi visibili. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Non Mi Hai Fatto Niente — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.NeHoPreseDiPeggio |
+| promptSha256 | 27a6accfb0cf34ca7c04635eff6650c5c47a8f380595ff9db615f365880291ae |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.NeHoPreseDiPeggio.png; SHA-256 d533555284d1dea0057a83fae4389c01c41b051ef25debdf14025891f756459e |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.NeHoPreseDiPeggio-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-46b9ca21-235f-4b28-81b2-bdd40069a06c.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2793796 / 53d1f825a0a09407d36a69b657e1a71827f5c0128ab7589a99bdb913c6adf6e1 |
+| Anteprima | [WebP](anteprime/base.rocco.NeHoPreseDiPeggio-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Avanzata e due mani avversarie visibili; sedia assente. |
+| Anomalie visive | Aquila e singolo tatuaggio al collo visibili; nessuna bandiera o scritta evidente. Tatuaggio diventato punto interrogativo semplice. Avanzata e due mani avversarie visibili; sedia assente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Nocche Sbucciate — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.NoccheSbucciate |
+| promptSha256 | 15db36c08fa5c4f6b879050f27aa402f49c8fe10723110b2176b310bcd8e2fb7 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.NoccheSbucciate.png; SHA-256 33fa586968d999fc9206cb7dc8c39dd9852e3f955194143e999cbc07607294d0 |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.NoccheSbucciate-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-4f7e2198-b673-4a8c-90b4-fed435b8efc3.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2852816 / 560e0d47e634501f359dfbd92be8b40d17a3e08a11e3729a755f2ab2e0b8d380 |
+| Anteprima | [WebP](anteprime/base.rocco.NoccheSbucciate-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Avversario vicino al pugno e rinculo leggibili; volto avversario visibile. |
+| Anomalie visive | Aquila e singolo tatuaggio al collo visibili; nessuna bandiera o scritta evidente. Avversario vicino al pugno e rinculo leggibili; volto avversario visibile. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — E Allora...? — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.EAllora |
+| promptSha256 | 93cffae06b2fc5f0a23120e57e0e430635aea5cab5119c28e93fa84cf7713b94 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.EAllora.png; SHA-256 d2c4aa33f27264df3f41ce24f4194b9f312037df160d5db7d52dd427c72cb38f |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.EAllora-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-2e6af52f-6009-4cdd-bb66-33abec1cd0e7.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2511136 / 719b7f74566ee80f708f8af0a5c2dccccda8e41cda7a49efb200238fdd1af2c9 |
+| Anteprima | [WebP](anteprime/base.rocco.EAllora-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Pugno e contatto leggibili; braccio disteso. |
+| Anomalie visive | Aquila e singolo tatuaggio al collo visibili; nessuna bandiera o scritta evidente. Pugno e contatto leggibili; braccio disteso. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — La Storia la Scrivono i Vincitori — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.TeLoSpiegoIo |
+| promptSha256 | de9a28d14308f2b4bc4cd1e61f0adce4cb111a2b7880d7bda7503254db2d86c4 |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.TeLoSpiegoIo.png; SHA-256 23df468eb0aa2879d6800e62503bd9d8a9ae868e786a7ca36069ed34d5cffb57 |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.TeLoSpiegoIo-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-59c1b91c-24b0-48d5-9f9d-fea860d1f000.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2622226 / 2afe524c4f81150b49110c2c8259d3ff42ca8e769a70536a7a112cbaaff482eb |
+| Anteprima | [WebP](anteprime/base.rocco.TeLoSpiegoIo-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Dito sul petto leggibile; dettagli della mano minuti. |
+| Anomalie visive | Aquila e singolo tatuaggio al collo visibili; nessuna bandiera o scritta evidente. Dito sul petto leggibile; dettagli della mano minuti. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Testa Dura — versione 2
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.TestaDura |
+| promptSha256 | ddc2ac39c3a345106aca7e8656303a87caf7509c5bfc0ebc38b0127c048edb0e |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.TestaDura.png; SHA-256 2e681022d5f647f9018f7af6ab66416df0dd5508f8b4c431b9a2c6741b8c17bc |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.TestaDura-2.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-0b123e0c-fc4c-44e9-b779-b7eb0830b3e6.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2564874 / fb5961cc5f05113d13cc4e0ab1e522240834ac55c36bdf2717b5bbaa9617eab6 |
+| Anteprima | [WebP](anteprime/base.rocco.TestaDura-2.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt di correzione, versione 2 |
+| Tentativi scartati | Nessuno; versioni precedenti conservate. |
+| Controllo a 60 px | Tavolo rotto a terra leggibile; schegge ferme, occhi minuti. |
+| Anomalie visive | Aquila e singolo tatuaggio al collo visibili; nessuna bandiera o scritta evidente. Tavolo rotto a terra leggibile; schegge ferme, occhi minuti. |
+| Giudizio del proprietario | In attesa. |
+
+
+### Ritocco aggiuntivo — Tecnica Manipolatoria, versione 3
+
+Giudizio del proprietario: «Remove the area marked in the second image from the first image». Maschera bianca ricevuta in chat: mano sollevata centrale dell’avventore. Percorso sorgente recuperato eliminando la barra iniziale incompatibile con Windows. Unico allegato operativo: originale della versione 2; la zona della maschera è descritta nel prompt.
+
+~~~text
+Edit the single attached illustration. Remove the patron's raised hand and the short forearm immediately below it in the central area, approximately x=620–830 and y=530–800 in the 1254-pixel image, corresponding to the white marked area supplied by the owner. Reconstruct the underlying dark space and clothing naturally. Preserve the patron's lower hand resting near the table, Sergio, his glass and cigarette, both faces, composition, lighting and inked style. Change nothing outside this localized removal. No text or extra limbs.
+~~~
