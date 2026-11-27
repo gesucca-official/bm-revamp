@@ -5,11 +5,11 @@ versione 64. C0–C4 sono chiuse ([piano C4](client-c4-plan.md)). Stato corrente
 
 > **Ripartenza** (aggiornata il 27 novembre 2026, dopo la consegna di C5-1). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
-> - **In vigore:** C5 ridotta ([D1](#decisioni-del-proprietario)): regressione completa, un passaggio di correzione, guida di avvio, rapporto. Senza la prova umana C.
-> - **In corso:** nessun blocco (C5-1 consegnato il 27 novembre 2026).
-> - **Prossimo:** C5-2 per gli strumenti (R21, R22, R24), se il proprietario lo apre.
-> - **In attesa:** revisione del [rapporto C5-1](reports/client-c5/c5-1.md), domande 1–3. L'ingresso dei lotti 1–5 di SB-32 nell'atlante può partire: C5-1 non lancia più verifiche.
-> - **Decisioni da leggere:** D1; [D16 del piano C4](client-c4-plan.md#decisioni-del-proprietario) (metodo delle verifiche); [D1 della roadmap del prodotto](product-roadmap.md#decisioni-del-proprietario).
+> - **In vigore:** C5 ridotta ([D1](#decisioni-del-proprietario)): regressione completa, un passaggio di correzione, guida di avvio, rapporto. Senza la prova umana C. C5-1 accettato ([D2](#decisioni-del-proprietario)): R23 e R25 sono limiti di 750×292.
+> - **In corso:** nessun blocco.
+> - **Prossimo:** C5-2, correzione degli strumenti per R21, R22 e R24 (con proposta). Poi la chiusura di C5 da parte del proprietario.
+> - **In attesa:** il via del proprietario a C5-2. C5-2 e l'ingresso dei lotti di SB-32 nell'atlante non girano insieme: chi parte prima finisce le sue verifiche.
+> - **Decisioni da leggere:** D2, D1; [D16 del piano C4](client-c4-plan.md#decisioni-del-proprietario) (metodo delle verifiche); [D1 della roadmap del prodotto](product-roadmap.md#decisioni-del-proprietario).
 
 ## Obiettivo
 
@@ -37,8 +37,8 @@ rifà le proprie verifiche (`Size` e quelle grafiche); non riapre C5.
 
 | Blocco | Contenuto | Passo | Stato |
 |---|---|---|---|
-| C5-1 | Consolidamento: matrice completa, attribuzione dei rossi, guida di avvio provata da checkout, rapporto | diretto, con STOP sui blocchi | consegnato il 27 novembre 2026, in revisione ([rapporto](reports/client-c5/c5-1.md)) |
-| C5-2 | Correzione dei blocchi emersi in C5-1, un solo passaggio, con controllo mirato | diretto | solo se serve |
+| C5-1 | Consolidamento: matrice completa, attribuzione dei rossi, guida di avvio provata da checkout, rapporto | diretto, con STOP sui blocchi | **accettato** il 27 novembre 2026 ([D2](#decisioni-del-proprietario), [rapporto](reports/client-c5/c5-1.md)) |
+| C5-2 | Correzione degli strumenti per R21, R22 e R24, un solo passaggio, con controllo mirato | con proposta (strumenti condivisi) | da avviare |
 
 ### C5-1 — Consolidamento
 
@@ -59,10 +59,30 @@ rifà le proprie verifiche (`Size` e quelle grafiche); non riapre C5.
 `client-web/README.md`, `docs/setup.md` (solo la parte di avvio), `docs/reports/rossi-noti.md` (solo voci nuove o chiuse).
 Nessun codice di prodotto: un difetto da correggere è uno STOP.
 
-**Stato (27 novembre 2026): consegnato, in revisione.** Build di `1c3985f`: matrice completa 21/25, 750×292 2/7. Ogni rosso è attribuito: R1 noto, nuovi R21–R25 nel [registro](reports/rossi-noti.md); nessuno STOP. Guida di avvio provata da clone pulito fino a una partita contro il Facile e una contro il Normale, con rientro all'hub; corretti i passi mancanti in `client-web/README.md` e `docs/setup.md`. Proposto C5-2 per gli strumenti (R21, R22, R24). [Rapporto](reports/client-c5/c5-1.md), domande 1–3.
+**Stato (27 novembre 2026): accettato ([D2](#decisioni-del-proprietario)).** Build di `1c3985f`: matrice completa 21/25, 750×292 2/7. Ogni rosso è attribuito: R1 noto, nuovi R21–R25 nel [registro](reports/rossi-noti.md); nessuno STOP. Guida di avvio provata da clone pulito fino a una partita contro il Facile e una contro il Normale, con rientro all'hub; corretti i passi mancanti in `client-web/README.md` e `docs/setup.md`. Proposto C5-2 per gli strumenti (R21, R22, R24). [Rapporto](reports/client-c5/c5-1.md), domande 1–3.
+
+### C5-2 — Correzione degli strumenti
+
+Tre correzioni in `client-web/tools` e `client-web/tests`, decise in [D2](#decisioni-del-proprietario). Nessun codice del client
+che si gioca, del server o delle regole.
+
+- **R21:** `R08a` (regolamento 2.3, CA-0e) entra nelle due liste dell'indice delle regole, `tests/public.test.ts` e
+  `tools/verify-public.mjs`. È l'atteso che segue una modifica deliberata del regolamento, non un allentamento.
+- **R22:** in `verify-layout.mjs`, lo scenario `resize-ffa` gestisce il posto proprio eliminato dopo una mossa. Il ridimensionamento
+  in FFA deve restare provato, non saltato in silenzio.
+- **R24:** in `verify.mjs`, `status-tip` passa il mouse su un gettone raggiungibile (non coperto). Se a 750×292 nessun gettone è
+  raggiungibile, la verifica lo dichiara come limite di R1 e prosegue; alle altre misure resta un errore.
+
+**Proposta** (breve): per ognuna il cambiamento esatto, come si prova che lo strumento vede gli stessi casi, cosa resta errore.
+STOP per la decisione, poi attuazione. **Verifiche:** quelle della tabella delle aree per gli strumenti condivisi (lo strumento sul
+commit di base e su quello nuovo, stessi casi e stessi esiti, differenze spiegate): `Test`, `VerifyPublic` a 1366×768 e 844×390,
+`VerifyLayout` a 1366×768 (più giri di `resize-ffa`, numero dichiarato), `Verify` a 750×292 e a 844×390; più le righe «Sempre».
+Il registro dei rossi chiude R21, R22 e R24; R23 e R25 restano come limiti di 750×292 (D2). Il rapporto ha la sezione per le altre
+macchine; gli strumenti si pushano prima del prossimo blocco che li usa.
 
 ## Decisioni del proprietario
 
 | ID | Decisione | Fonte |
 |---|---|---|
 | D1 | C5 ridotta | 26 novembre 2026, alla proposta della regia («una C5 ridotta, invece di toglierla del tutto: tieni regressione, guida e rapporto; la prova con 4 persone la sostituiscono le partite con gli amici dopo DE-1»). Il proprietario: «C5 ridotta». 1. C5 tiene la regressione completa sul codice corrente, un passaggio di correzione dei blocchi emersi, la guida di avvio e il rapporto dei limiti residui. 2. Esce la prova umana C con quattro persone: le prime partite con gli amici dopo DE-1 fanno da prova umana del client, e i ritorni si correggono dopo (D1 della roadmap del prodotto). 3. O19 si decide dopo quelle partite, non in C5. 4. Gli altri rimandi «dopo C5» restano come sono; la chiusura di C5 continua a sbloccare ST-1, DE-1, EC-0 e CA-0g. 5. `client-debug` resta fino alla chiusura di C5. |
+| D2 | C5-1 accettato, risposte alle domande 1–3 | 27 novembre 2026, alle raccomandazioni della regia sul [rapporto C5-1](reports/client-c5/c5-1.md) (`7c2975c`). Il proprietario: «Sì, come proponi». 1. Si apre C5-2, con proposta, per correggere gli strumenti per R21 (`R08a` nelle due liste dell'indice), R22 (`resize-ffa` con il posto proprio eliminato) e R24 (`Verify` passa il mouse su un gettone raggiungibile; a 750×292, se non ce n'è uno, lo dichiara). 2. R24, per la parte del client, e R25 sono limiti della misura minima, come R1 e R4: vengono dal contenuto (gli starter del Set Base hanno più oggetti per posto), non da codice del client, e D6 del piano C4 non fa di 750×292 un obiettivo. 3. R23 resta una voce nuova accanto a R4. |
