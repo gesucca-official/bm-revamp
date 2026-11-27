@@ -5185,3 +5185,47 @@ Allegato unico: `originali/base.rocco.NoccheSbucciate-4.png`.
 ~~~text
 Recompose the single attached Duccio illustration into a completely new scene for Botte Micidiali, preserving his established identity and the hand-inked European comic style. A tight close-up from the chest upward of Duccio alone: he knocks the knuckles of his two closed fists together directly in front of his chest, with both fists and their point of contact clearly visible. Both hands are naturally connected to his own two arms and shoulders, anatomically coherent; no punching another person. His scraped reddened knuckles hurt: tears well up and run from his eyes, while he stubbornly tries to hide the pain with a forced tough expression, clenched jaw and tense lips. Make the conflict between watery eyes and attempted bravado readable. Duccio is a clearly adult young man, stocky and soft, shaved head with stubbly regrowth, blotchy face and red nose. Preserve his worn black shirt with the cracked white spread-wing eagle and his single stylized question-mark neck tattoo; add no other symbols. Show the dive bar softly behind him, darker and less sharp. Remove the patron and the previous punch scene entirely. No cocktail, blood, text, labels, flags, extra hands or extra limbs. Square opaque illustration, strong silhouette readable at 60 pixels.
 ~~~
+
+
+#### Esito — Tecnica Manipolatoria — versione 6
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.cesira.bound.Battutina |
+| promptSha256 | 99ecbfe8c6eda58addf3affc49a6af52f24e9d5538b14b20c85d07b5681d750f |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.cesira.bound.Battutina.png; SHA-256 7fc1d86ea6a9a2c1c92ce46c9361d94f79a7b90e6ce789f6b5dfe39979d0f0b7 |
+| Prompt riscritto | non esposto |
+| source | originali/base.cesira.bound.Battutina-6.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-b15a6fe1-52b1-4109-8d4c-9b7f0b78c7d0.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2871473 / ec24b696492abefa05a91097a48b90f95f614d72bc6f5be549543fe24dbd1407 |
+| Anteprima | [WebP](anteprime/base.cesira.bound.Battutina-6.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 4, versione 6 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Piede sulla seduta distinguibile; spalliera assente, mani e dita minute. |
+| Anomalie visive | Abito blu petrolio. Spalliera assente e suola sulla seduta rossa; due mani di Sergio visibili, una col bicchiere e una sulla spalla dell’avventore, come nella prima versione. Sigaretta conservata. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+
+#### Esito — Nocche Sbucciate — versione 5
+
+| Campo | Valore |
+|---|---|
+| bindingName | base.rocco.NoccheSbucciate |
+| promptSha256 | f8b70dab24a430103e1ab01361c4afe36f821267fe02c02644cb539bca7870ad |
+| tool / model / date | image_gen.imagegen / non esposto / 2026-11-27 |
+| Allegati effettivi | unico: originali/base.rocco.NoccheSbucciate-4.png; SHA-256 4976c6475b7a180c69abdb8e7eb9ef16ea64dc1b3d5819f5eb0bd4a40e9be957 |
+| Prompt riscritto | non esposto |
+| source | originali/base.rocco.NoccheSbucciate-5.png |
+| File restituito | C:/Users/gesucca/.codex/generated_images/01a21c59-f0e5-7c11-b61d-fb1fa3d1fad8/exec-ac0ee28b-70d0-4b06-9355-65d9383bc3bb.png |
+| sourceWidth / sourceHeight | 1254 / 1254 px |
+| sourceBytes / sourceSha256 | 2796797 / dfed03af89895ab0f199dbf6b8f2ef17e75a2ce791bb4db1292571b865ac2d38 |
+| Anteprima | [WebP](anteprime/base.rocco.NoccheSbucciate-5.webp), 512 px, qualità 80 |
+| Associazione | unica risposta al prompt del giro 4, versione 5 |
+| Tentativi scartati | Nessuno; tutte le versioni precedenti conservate. |
+| Controllo a 60 px | Viso e pugni uniti leggibili; lacrime e abrasioni minute. |
+| Anomalie visive | Due pugni a contatto davanti al petto; entrambe le nocche arrossate e abrase. Lacrime sulle guance e denti serrati. Aquila parzialmente tagliata dal bordo inferiore; unico tatuaggio al collo più grande e marcato. Avventore e cocktail assenti. Nessuna bandiera o scritta evidente. |
+| Giudizio del proprietario | In attesa. |
+
+Verifiche del giro 4: due originali identici byte per byte ai file restituiti; due anteprime WebP 512 × 512, qualità 80; provino a 60 px esaminato. `git diff --check`, `python scripts/check-rules.py` e controllo dei link nel registro verdi. Nessun rifiuto, rilancio o tentativo scartato. In attesa del giudizio sulle due nuove versioni.
